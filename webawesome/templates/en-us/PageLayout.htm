@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="{{ SITE_LOCALE }}" class="wa-cloak wa-{{ userSiteTheme | default(SITE_THEME) }} wa-theme-{{ userWebComponentsTheme | default(WEB_COMPONENTS_THEME) }} ">
+  <head>
+{%- block htmHeadPageLayout %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+{%- block htmMetaPageLayout %}
+{%- if result is defined %}
+    <meta name="og:title" content="{{ result.name | e }}" />
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="{{ STATIC_BASE_URL }}{{ result.pageImageUri }}" />
+{%- if result.pageImageWidth is defined %}
+    <meta name="og:image:width" content="{{ result.pageImageWidth }}" />
+    <meta name="og:image:height" content="{{ result.pageImageHeight }}" />
+    <meta name="og:image:type" content="{{ result.pageImageType }}" />
+{%- endif %}
+{%- if result.pageImageWidth is defined %}
+    <meta name="og:image:alt" content="{{ result.pageImageAlt }}" />
+{%- endif %}
+    <meta name="og:url" content="{{ result.displayPage }}" />
+    <meta name="og:description" content="{{ result.description }}" />
+{%- endif %}
+{%- endblock htmMetaPageLayout %}
+{%- block htmTitlePageLayout %}
+    <title>{{ SITE_DISPLAY_NAME }}</title>
+{%- endblock htmTitlePageLayout %}
+{%- block htmStylesPageLayout %}
+    <link rel="icon" href="{{ STATIC_BASE_URL }}/favicon.svg" />
+    <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.draw.css" />
+    <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.contextmenu.css"/>
+    <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/site.css"/>
+{%- endblock htmStylesPageLayout %}
+    <style>
+{%- block htmStylePageLayout %}{%- endblock htmStylePageLayout %}
+    </style>
+{%- block htmScriptsPageLayout %}
+{%- if FONTAWESOME_KIT is defined %}
+    {{ FONTAWESOME_KIT }}
+{%- endif %}
+    <script type="module">
+
+      function siteSearchInput(event) {
+        var filters = [];
+        if(event.target.value == '')
+          filters.push({ name: 'q', value: '*:*' });
+        else
+          filters.push({ name: 'q', value: event.target.value ? 'objectSuggest:' + event.target.value : '' });
+
+        fetch(
+          '{{ USER_SEARCH_URI if userName is defined else PUBLIC_SEARCH_URI }}?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+          , {
+            headers: {'Content-Type':'application/json; charset=utf-8'}
+          }).then(response => {
+            if(response.ok) {
+              var dropdown = document.querySelector('#siteSearchDropdown');
+              var dropdownMenu = document.querySelector('#siteSearchDropdownMenu');
+              response.json().then(function(body) {
+                dropdownMenu.innerHTML = '';
+                body.list.forEach((o) => {
+                  var menuItem = document.createElement('wa-dropdown-item');
+                  menuItem.innerText = o.objectTitle;
+                  menuItem.setAttribute('data-href', o.displayPage);
+                  dropdownMenu.appendChild(menuItem);
+                  menuItem.addEventListener('click', (event) => window.location.href = event.target.getAttribute('data-href') );
+                });
+                dropdown.active = true;
+              });
+            } else {
+              error(response, event.target);
+            }
+          })
+          .catch(response => error(response, event.target));
+      }
+
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+      ]).then(() => {
+        var input = document.querySelector('#siteSearchInput');
+        var dropdown = document.querySelector('#siteSearchDropdown');
+        input.addEventListener('input', siteSearchInput);
+        input.addEventListener('focus', siteSearchInput);
+        document.body.addEventListener('click', function(event) {
+          if(!dropdown.contains(event.target))
+            dropdown.active = false;
+        });
+        document.body.addEventListener('keyup', (event) => {
+          if (event.key === 'Escape' && dropdown.active)
+            dropdown.active = false;
+        });
+      });
+    </script>
+    {%- if WEB_COMPONENTS_KIT is defined and WEB_COMPONENTS_KIT != '' %}
+    {{ WEB_COMPONENTS_KIT }}
+    {%- else %}
+    <script async src="https://ga.jspm.io/npm:es-module-shims@2.6.2/dist/es-module-shims.js" crossorigin="anonymous"></script>
+    <script type="importmap">
+    {
+      "imports": {
+    "@patternfly/elements/pf-card/pf-card.js": "https://ga.jspm.io/npm:@patternfly/elements@4.2.0/pf-card/pf-card.js"
+      },
+      "scopes": {
+    "https://ga.jspm.io/": {
+    "@lit/reactive-element": "https://ga.jspm.io/npm:@lit/reactive-element@2.1.1/reactive-element.js",
+    "@lit/reactive-element/decorators/": "https://ga.jspm.io/npm:@lit/reactive-element@2.1.1/decorators/",
+    "@patternfly/pfe-core/controllers/slot-controller.js": "https://ga.jspm.io/npm:@patternfly/pfe-core@5.0.4/controllers/slot-controller.js",
+    "lit": "https://ga.jspm.io/npm:lit@3.3.1/index.js",
+    "lit-element/lit-element.js": "https://ga.jspm.io/npm:lit-element@4.2.1/lit-element.js",
+    "lit-html": "https://ga.jspm.io/npm:lit-html@3.3.1/lit-html.js",
+    "lit-html/": "https://ga.jspm.io/npm:lit-html@3.3.1/",
+    "lit/": "https://ga.jspm.io/npm:lit@3.3.1/",
+    "tslib": "https://ga.jspm.io/npm:tslib@2.8.1/tslib.es6.mjs"
+    }
+      }
+    }
+    </script>
+    <script type="module">
+      import "@patternfly/elements/pf-card/pf-card.js";
+    </script>
+    {%- endif %}
+    <script src="{{ STATIC_BASE_URL }}/js/site.js"></script>
+    <script src="{{ STATIC_BASE_URL }}/js/sockjs.js"></script>
+    <script src="{{ STATIC_BASE_URL }}/js/vertx-eventbus.js"></script>
+    <script src="{{ STATIC_BASE_URL }}/js/plotly-2.9.0.min.js"></script>
+    <script src="{{ STATIC_BASE_URL }}/js/leaflet.js"></script>
+    <script src="{{ STATIC_BASE_URL }}/js/leaflet.draw.js"></script>
+    <script src="{{ STATIC_BASE_URL }}/js/leaflet.contextmenu.js"></script>
+    <script src="{{ STATIC_BASE_URL }}/js/moment.js"></script>
+{%- endblock htmScriptsPageLayout %}
+{%- block htmScriptPageLayout %}
+{%- endblock htmScriptPageLayout %}
+{%- endblock htmHeadPageLayout %}
+    <script>
+{%- block websocketPageLayout %}{%- endblock websocketPageLayout %}
+    </script>
+  </head>
+  <body class="wa-body-{{ userFontSize[0:1] }} wa-size-{{ userFontSize[0:1] }} ">
+    {% if WEB_COMPONENTS_PRO == 'true' -%}
+    <wa-page disable-sticky="header">
+    {%- else -%}
+    <div id="site-grid">
+    {%- endif %}
+      <header slot="header">
+        <div class="wa-cluster ">
+          <wa-button size="small" data-toggle-nav variant="brand" label="open menu"{% if WEB_COMPONENTS_PRO == 'false' %} onclick="document.querySelector('#site-aside-left').open = true;"{% endif %}>
+            <i class="{{ FONTAWESOME_STYLE }} fa-bars"></i>
+          </wa-button>
+          <wa-popup placement="bottom-start" id="siteSearchDropdown">
+            <wa-input slot="anchor" placeholder="search" id="siteSearchInput">
+              <i slot="start" class="{{ FONTAWESOME_STYLE }}  fa-magnifying-glass"></i>
+            </wa-input>
+            <div id="siteSearchDropdownMenu" class="site-listbox">
+            </div>
+          </wa-popup>
+          {% if pageSearchFormButtons is defined or pageBreadcrumb is defined -%}
+          {{ pageSearchFormButtons | default('') }}
+          {%- endif %}
+        </div>
+      </header>
+      {% if pageSearchButtons is defined or pageBreadcrumb is defined -%}
+      <header slot="subheader">
+        <div class="wa-cluster ">
+          <div>
+            {{ pageBreadcrumb | default('') }}
+          </div>
+          <div>
+            {{ pageSearchButtons | default('') }}
+          </div>
+        </div>
+      </header>
+      {%- endif %}
+{%- block htmBodyPageLayout %}
+{%- block htmBodyStartPageLayout %}
+      {% if WEB_COMPONENTS_PRO == 'false' -%}
+      <wa-drawer placement="start" id="site-aside-left" class="margin-block-end-1rem ">
+        {%- endif %}
+        <nav{% if WEB_COMPONENTS_PRO == 'true' %} slot="navigation"{% endif %}>
+          <div class="display-flex-center ">
+            <a href="/">
+              <img id="site-aside-left-img-logo" src="{{ STATIC_BASE_URL }}/svg/logo-{{ userSiteTheme | default(SITE_THEME) }}.svg"/>
+            </a>
+          </div>
+          <div class="wa-grid " style="--min-column-size: 15ch; ">
+            <wa-button variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" variant="brand" target="_blank">
+              GitHub
+              <i slot="start" label="View our source code on GitHub" class="fa-brands fa-github fa-2xl"></i>
+            </wa-button>
+            <wa-button variant="brand" href="mailto:{{ MAILING_LIST_EMAIL }}" variant="brand" target="_blank">
+              Email
+              <i slot="start" label="Share with email" class="{{ FONTAWESOME_STYLE }} fa-envelope-open fa-2xl"></i>
+            </wa-button>
+          </div>
+          <div class="wa-stack ">
+            <div>
+{%- if userName is defined %}
+              <wa-details>
+                <div slot="summary" class="wa-stack ">
+                  <wa-tooltip for="siteUserSummary">
+                    <div class="wa-stack ">
+                      <div>
+                        {{ userFullName }}{% if userEmail is defined %} &lt;{{ userEmail | e }}&gt;{% endif %}
+                      </div>
+                    </div>
+                  </wa-tooltip>
+                  <div id="siteUserSummary" class="wa-cluster ">
+                    <wa-avatar label="user"></wa-avatar>
+                    <div>
+                      user: {{ userName | e }}
+                    </div>
+                  </div>
+                </div>
+                <div class="wa-stack ">
+                  <wa-tooltip for="site-button-user-page">see or change your user profile</wa-tooltip>
+                  <wa-tooltip for="site-button-logout" placement="right">log out</wa-tooltip>
+                  <div>
+                    <wa-button id="site-button-user-page" variant="brand" href="{{ SITE_BASE_URL }}{% if userId is defined %}/en-us/edit/user/{{ userId }}{% else %}/en-us/search/user{% endif %}" label="see or change your user profile">
+                      <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-house-user"></i>
+                      <span>my user page</span>
+                    </wa-button>
+                    <wa-button id="site-button-logout" variant="brand" href="{{ logoutUrl }}" label="sign out">
+                      <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-person-from-portal"></i>
+                      <span>log out</span>
+                    </wa-button>
+                  </div>
+                  <wa-details summary="User groups" open="true">
+                    <div class="wa-stack ">
+                      <wa-scroller>
+                          {% for group in userGroups %}
+                          <div>
+                            <a target="_blank" href="{{ AUTH_URL }}/admin/master/console/#/{{ AUTH_REALM | urlencode() }}/clients/{{ AUTH_CLIENT | urlencode() }}/authorization/policy/{{ AUTH_REALM | urlencode() }}-group-{{ group | regex_replace('/?(.*)', '$1') | urlencode() }}/group">
+                              <wa-badge variant="success">
+                                {{ group | e }}
+                              </wa-badge>
+                            </a>
+                          </div>
+                          {% endfor %}
+                      </wa-scroller>
+                    </div>
+                  </wa-details>
+                  <wa-details summary="Current scopes" open="true">
+                    <div class="wa-stack ">
+                      <wa-scroller>
+                        <div>
+                          <wa-tag variant="neutral">{{ pageUri }}</wa-tag>
+                        </div>
+                        <div>
+                          {% for scope in scopes %}
+                          <a target="_blank" href="{{ AUTH_URL }}/admin/master/console/#/{{ AUTH_REALM | urlencode() }}/clients/{{ AUTH_CLIENT | urlencode() }}/authorization/scope/{{ AUTH_REALM | urlencode() }}-{{ scope | urlencode() }}">
+                            <wa-badge variant="success">
+                              {{ scope }}
+                            </wa-badge>
+                          </a>
+                          {% endfor %}
+                        </div>
+                      </wa-scroller>
+                    </div>
+                  </wa-details>
+                </div>
+              </wa-details>
+{%- else %}
+              <wa-button variant="brand" href="{{ SITE_BASE_URL }}/en-us/search/user">
+                <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-person-to-portal"></i> sign in
+              </wa-button>
+{%- endif %}
+            </div>
+            <div>
+              <wa-details summary="menu" open="true">
+                <div class="wa-stack ">
+                  <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-AiTelemetryPlatform" href="{{ SITE_BASE_URL }}/en-us/search/ai-telemetry-platform">
+                    <i slot="start" class="fa-duotone fa-regular fa-chart-fft"></i>
+                    AI Telemetry developers
+                  </wa-button>
+                  <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-SitePage" href="{{ SITE_BASE_URL }}/en-us/search/article">
+                    <i slot="start" class="fa-duotone fa-regular fa-newspaper"></i>
+                    articles
+                  </wa-button>
+                  <wa-button style="width: 100%; " variant="brand" id="site-aside-left-model-button-Project" href="{{ SITE_BASE_URL }}/en-us/search/project">
+                    <i slot="start" class="fa-regular fa-people-line"></i>
+                    projects
+                  </wa-button>
+                </div>
+              </wa-details>
+              </div>
+          </div>
+        </nav>
+      {% if WEB_COMPONENTS_PRO == 'false' -%}
+      </wa-drawer>
+      {% endif %}
+      <main id="site-main" class="wa-stack ">
+        <wa-drawer id="warnings-drawer" label="Warnings">
+          <div id="warnings-drawer-stack" class="wa-stack ">
+          </div>
+        </wa-drawer>
+{%- endblock htmBodyStartPageLayout %}
+{% block htmBodyMiddlePageLayout %}
+        <main slot="main" class="pageContent wa-stack wa-gap-3xl ">
+          put stuff here
+        </main>
+{%- endblock htmBodyMiddlePageLayout %}
+{%- block htmBodyEndPageLayout %}
+        <footer class="no-gradient wa-cluster wa-align-items-center " slot="main-footer">
+          {% if GITHUB_ORG is defined %}
+          <wa-button variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" variant="brand" target="_blank" appearance="filled outlined" class="tile">
+            <div class="wa-cluster" style="gap: 1ch;">
+              <span>This site is</span>
+              <i class="fa-brands fa-github fa-xl"></i>
+              <b>open source</b>
+            </div>
+          </wa-button>
+          {% endif %}
+          <wa-button variant="brand" href="https://computate.org/" variant="brand" target="_blank" id="footer-generated-by" appearance="filled outlined" class="tile">
+            <div class="wa-cluster" style="gap: 1ch;">
+              <span>Generated with </span>
+              <img class="footer-img" style="font-weight: var(--wa-font-weight-bold);" src="{{ STATIC_BASE_URL }}/svg/computate-keys.svg" alt="Computate"/>
+            </div>
+          </wa-button>
+          {% if SITE_POWERED_BY_URL is defined %}
+          <wa-button variant="brand" href="{{ SITE_POWERED_BY_URL }}" variant="brand" target="_blank" id="footer-powered-by" appearance="filled outlined" class="tile">
+            <div class="wa-cluster" style="gap: 1ch;">
+              <span>Powered by </span>
+              <i class="fa-brands fa-redhat fa-xl" style="color: #ff0000;"></i>
+              <b>{{ SITE_POWERED_BY_NAME | e }}</b>
+            </div>
+          </wa-button>
+          {% endif %}
+        </footer>
+      </main>
+    {% if WEB_COMPONENTS_PREFIX == 'wa-' -%}
+    </wa-page>
+    {%- else -%}
+    </div>
+    {% endif %}
+{%- endblock htmBodyEndPageLayout %}
+{%- endblock htmBodyPageLayout %}
+  </body>
+</html>

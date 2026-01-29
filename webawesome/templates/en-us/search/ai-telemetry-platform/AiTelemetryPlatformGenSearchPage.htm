@@ -1,0 +1,392 @@
+{% extends "en-us/PageLayout.htm" %}
+
+{%- block htmTitlePageLayout %}
+{%- block htmTitleAiTelemetryPlatformPage %}
+    <title>{% if resultCount == 0 %}no AI Telemetry developer found{% else %}AI Telemetry developers{% endif %}</title>
+{%- endblock htmTitleAiTelemetryPlatformPage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/ai-telemetry-platform/AiTelemetryPlatform.css"/>
+{%- block htmStylesAiTelemetryPlatformPage %}
+{%- endblock htmStylesAiTelemetryPlatformPage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 2;
+      }
+{{ super() }}
+{%- block htmStyleAiTelemetryPlatformPage %}
+{%- endblock htmStyleAiTelemetryPlatformPage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsAiTelemetryPlatformPage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/ai-telemetry-platform/AiTelemetryPlatform.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/ai-telemetry-platform/AiTelemetryPlatformSearchPage.js"></script>
+{%- endblock htmScriptsAiTelemetryPlatformPage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptAiTelemetryPlatformPage %}
+    <script>
+
+      function jsWebsocketAiTelemetryPlatform(pageId, vars, $response) {
+{%- block jsWebsocketAiTelemetryPlatformPage %}{%- endblock %}
+      }
+
+      function jsTooltipAiTelemetryPlatform(e, feature) {
+{%- block jsTooltipAiTelemetryPlatformPage %}{%- endblock %}
+      }
+
+      function htmTooltipAiTelemetryPlatform(feature, layer) {
+        return `{%- block htmTooltipAiTelemetryPlatformPage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipAiTelemetryPlatformPage %}`;
+      }
+
+      function facetChangeAiTelemetryPlatformSuccess(e) {
+        var l = e.querySelector('.pageForm .listAiTelemetryPlatform')?.value;
+        if(l)
+          window.listAiTelemetryPlatform = JSON.parse(l);
+{% block facetChangeAiTelemetryPlatformSuccess %}{%- endblock facetAiTelemetryPlatformSuccess %}
+      }
+      function facetChangeAiTelemetryPlatformError(e) {
+{% block facetChangeAiTelemetryPlatformError %}{%- endblock facetAiTelemetryPlatformError %}
+      }
+
+      function facetSimpleRangeAiTelemetryPlatformSuccess(e) {
+{% block facetSimpleRangeAiTelemetryPlatformSuccess %}      facetChangeAiTelemetryPlatformSuccess(e);{% endblock facetSimpleRangeAiTelemetryPlatformSuccess %}
+      }
+      function facetSimpleRangeAiTelemetryPlatformError(e) {
+{% block facetSimpleRangeAiTelemetryPlatformError %}      facetChangeAiTelemetryPlatformError(e);{% endblock facetSimpleRangeAiTelemetryPlatformError %}
+      }
+      function facetSimpleRangeAiTelemetryPlatform(e) {
+        facetSimpleRange(e, facetSimpleRangeAiTelemetryPlatformSuccess, facetSimpleRangeAiTelemetryPlatformError);
+      }
+
+      function facetRangeTimeZoneAiTelemetryPlatformSuccess(e) {
+{% block facetRangeTimeZoneAiTelemetryPlatformSuccess %}      facetChangeAiTelemetryPlatformSuccess(e);{% endblock facetRangeTimeZoneAiTelemetryPlatformSuccess %}
+      }
+      function facetRangeTimeZoneAiTelemetryPlatformError(e) {
+{% block facetRangeTimeZoneAiTelemetryPlatformError %}      facetChangeAiTelemetryPlatformError(e);{%- endblock facetRangeTimeZoneAiTelemetryPlatformError %}
+      }
+      function facetRangeTimeZoneAiTelemetryPlatform(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneAiTelemetryPlatformSuccess, facetRangeTimeZoneAiTelemetryPlatformError);
+      }
+
+      function facetRangeGapChangeAiTelemetryPlatformSuccess(e) {
+{% block facetRangeGapChangeAiTelemetryPlatformSuccess %}      facetChangeAiTelemetryPlatformSuccess(e);{% endblock facetRangeGapChangeAiTelemetryPlatformSuccess %}
+      }
+      function facetRangeGapChangeAiTelemetryPlatformError(e) {
+{% block facetRangeGapChangeAiTelemetryPlatformError %}      facetChangeAiTelemetryPlatformError(e);{%- endblock facetRangeGapChangeAiTelemetryPlatformError %}
+      }
+      function facetRangeGapChangeAiTelemetryPlatform(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeAiTelemetryPlatformSuccess, facetRangeGapChangeAiTelemetryPlatformError);
+      }
+
+      function facetRangeStartChangeAiTelemetryPlatformSuccess(e) {
+{% block facetRangeStartChangeAiTelemetryPlatformSuccess %}      facetChangeAiTelemetryPlatformSuccess(e);{% endblock facetRangeStartChangeAiTelemetryPlatformSuccess %}
+      }
+      function facetRangeStartChangeAiTelemetryPlatformError(e) {
+{% block facetRangeStartChangeAiTelemetryPlatformError %}      facetChangeAiTelemetryPlatformError(e);{%- endblock facetRangeStartChangeAiTelemetryPlatformError %}
+      }
+      function facetRangeStartChangeAiTelemetryPlatform(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeAiTelemetryPlatformSuccess, facetRangeStartChangeAiTelemetryPlatformError);
+      }
+
+      function facetRangeEndChangeAiTelemetryPlatformSuccess(e) {
+{% block facetRangeEndChangeAiTelemetryPlatformSuccess %}      facetChangeAiTelemetryPlatformSuccess(e);{% endblock facetRangeEndChangeAiTelemetryPlatformSuccess %}
+      }
+      function facetRangeEndChangeAiTelemetryPlatformError(e) {
+{% block facetRangeEndChangeAiTelemetryPlatformError %}      facetChangeAiTelemetryPlatformError(e);{%- endblock facetRangeEndChangeAiTelemetryPlatformError %}
+      }
+      function facetRangeEndChangeAiTelemetryPlatform(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeAiTelemetryPlatformSuccess, facetRangeEndChangeAiTelemetryPlatformError);
+      }
+    </script>
+    <script type="module">
+{% if DEFAULT_MAP_LOCATION is defined %}
+      window.DEFAULT_MAP_LOCATION = { type: 'Point', coordinates: [ {{ DEFAULT_MAP_LOCATION.coordinates[0] }}, {{ DEFAULT_MAP_LOCATION.coordinates[1] }} ]};
+{% endif %}
+{% if DEFAULT_MAP_ZOOM is defined %}
+      window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{% endif %}
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+
+        var pageId = {% if result.pageId is defined %}{{ result.pageId | tojson }}{% else %}null{% endif %};
+
+        if(pageId == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.pageId is defined %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listAiTelemetryPlatform')?.value;
+        if(l)
+          window.listAiTelemetryPlatform = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneAiTelemetryPlatform);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneAiTelemetryPlatform);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneAiTelemetryPlatform);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeAiTelemetryPlatform);
+        pageGraphAiTelemetryPlatform();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qAiTelemetryPlatform_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('AiTelemetryPlatform', event.target, document.querySelector('#qAiTelemetryPlatformDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qAiTelemetryPlatform_rows')?.addEventListener('change', event => {
+          paramChange('AiTelemetryPlatform', event.target, document.querySelector('#qAiTelemetryPlatformDiv_rows'));
+        });
+
+        document.querySelector('#qAiTelemetryPlatform_start')?.addEventListener('change', event => {
+          paramChange('AiTelemetryPlatform', event.target, document.querySelector('#qAiTelemetryPlatformDiv_start'));
+        });
+
+
+        var submitForm_patchAiTelemetryPlatform = document.querySelector('#htmForm_patchAiTelemetryPlatform')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_patchAiTelemetryPlatform')?.addEventListener('click', event => {
+          event.preventDefault();
+          patchAiTelemetryPlatform(null, document.querySelector('#htmForm_patchAiTelemetryPlatform'), document.querySelector('#htmFormButton_patchAiTelemetryPlatform'), event.target.getAttribute('data-pageId'));
+          return false;
+        });
+
+        var submitForm_postAiTelemetryPlatform = document.querySelector('#htmForm_postAiTelemetryPlatform')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_postAiTelemetryPlatform')?.addEventListener('click', event => {
+          event.preventDefault();
+          postAiTelemetryPlatform(document.querySelector('#htmForm_postAiTelemetryPlatform')
+          , document.querySelector('#htmFormButton_postAiTelemetryPlatform')
+          , (json, target) => {
+            window.location.href = json.editPage;
+          });
+          return false;
+        });
+
+        var submitForm_deleteAiTelemetryPlatform = document.querySelector('#htmForm_deleteAiTelemetryPlatform')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deleteAiTelemetryPlatform')?.addEventListener('click', event => {
+          event.preventDefault();
+          deleteAiTelemetryPlatform(event.target, event.target.getAttribute('data-pageId'));
+          return false;
+        });
+
+        var submitForm_putimportAiTelemetryPlatform = document.querySelector('#htmForm_putimportAiTelemetryPlatform')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_putimportAiTelemetryPlatform')?.addEventListener('click', event => {
+          event.preventDefault();
+          putimportAiTelemetryPlatform(document.querySelector('#htmForm_putimportAiTelemetryPlatform'), document.querySelector('#htmFormButton_putimportAiTelemetryPlatform'));
+          return false;
+        });
+
+        var submitForm_searchpageAiTelemetryPlatform = document.querySelector('#htmForm_searchpageAiTelemetryPlatform')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_searchpageAiTelemetryPlatform')?.addEventListener('click', event => {
+          event.preventDefault();
+          searchpageAiTelemetryPlatform();
+          return false;
+        });
+
+        var submitForm_deletefilterAiTelemetryPlatform = document.querySelector('#htmForm_deletefilterAiTelemetryPlatform')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deletefilterAiTelemetryPlatform')?.addEventListener('click', event => {
+          event.preventDefault();
+          deletefilterAiTelemetryPlatform(event.target);
+          return false;
+        });
+{%- block htmScriptInitAiTelemetryPlatformPage %}{%- endblock htmScriptInitAiTelemetryPlatformPage %}
+      });
+    </script>
+{%- endblock htmScriptAiTelemetryPlatformPage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketAiTelemetryPlatformPage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketAiTelemetryPlatform(websocketAiTelemetryPlatformInner);
+{% endif %}
+{%- endblock websocketAiTelemetryPlatformPage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlAiTelemetryPlatformPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlAiTelemetryPlatformPage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-AiTelemetryPlatform">back to all AI Telemetry developers</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-AiTelemetryPlatform" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-duotone fa-regular fa-chart-fft"></i>
+                  all AI Telemetry developers
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search AI Telemetry developers
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+{{ super() }}
+{%- block htmBodyStartAiTelemetryPlatformPage %}
+{% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformSidebar.htm %}
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-AiTelemetryPlatform">back to all AI Telemetry developers</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-AiTelemetryPlatform" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="fa-duotone fa-regular fa-chart-fft"></i>
+              all AI Telemetry developers
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no AI Telemetry developer found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class="fa-duotone fa-regular fa-chart-fft"></i>
+            </div>
+            <span class="wa-heading-m ">no AI Telemetry developer found</span>
+            <p class="wa-caption-l ">Learn how to become an AI Telemetry platform developer — Providing access control to observability metrics for cloud environments, ACM hubs, OpenShift Clusters, virtual machines, bare metal hardware, and cloud projects. </p>
+{% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformSearchForm.htm %}
+          </div>
+        </div>
+{% else %}
+{% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformSuggestedSearch.htm %}
+          <div class="pageContent ">
+            <form action="/en-us/api/ai-telemetry-platform" id="AiTelemetryPlatformForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="focusId" type="hidden"/>
+              <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+              <input name="listAiTelemetryPlatform" id="listAiTelemetryPlatform" class="listAiTelemetryPlatform"  value='{{ toJsonArrayStringInApostrophes(listAiTelemetryPlatform) }}' type="hidden"/>
+            </form>
+            <div id="site-calendar-box">
+              <div id="site-calendar"><!-- // --></div>
+            </div>
+            <div class="wa-stack wa-gap-m ">
+{% endif %}
+{%- endblock htmBodyStartAiTelemetryPlatformPage %}
+{%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformSearchForm.htm %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleAiTelemetryPlatformPage %}
+{% if resultCount > 0 %}
+              <div class="wa-stack wa-gap-0 ">
+{% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformPaginationButtons.htm %}
+                <div class="card-like-thing background-color-surface-border" id="site-results-grid">
+                  <div>
+                    <wa-dropdown id="htmDropdown-name">
+                      <wa-button variant="brand" slot="trigger" caret>course name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortAiTelemetryPlatform_name'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-AiTelemetryPlatform').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-name-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by course name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortAiTelemetryPlatform_name'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-AiTelemetryPlatform').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-name-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by course name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-description">
+                      <wa-button variant="brand" slot="trigger" caret>course description</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortAiTelemetryPlatform_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-AiTelemetryPlatform').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by course description ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortAiTelemetryPlatform_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-AiTelemetryPlatform').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by course description descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                  </div>
+                  {% for item in listAiTelemetryPlatform%}
+                  <div>
+                    <a href="{{ item.displayPage }}">
+                      <i class="fa-duotone fa-regular fa-chart-fft"></i>
+                      <span>{{ item.name | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.description | e }}</span>
+                    </a>
+                  </div>
+                  {% endfor %}
+              {% if getColumnName is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnDescription is defined %}
+                <div>
+                </div>
+              {% endif %}
+                </div>
+{% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformPaginationButtons.htm %}
+              </div>
+            </div>
+          </div>
+{% endif %}
+{%- endblock htmBodyMiddleAiTelemetryPlatformPage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndAiTelemetryPlatformPage %}
+{%- include en-us/search/ai-telemetry-platform/AiTelemetryPlatformLocation.htm %}
+{%- endblock htmBodyEndAiTelemetryPlatformPage %}
+  {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

@@ -1,0 +1,432 @@
+{% extends "en-us/PageLayout.htm" %}
+
+{%- block htmTitlePageLayout %}
+{%- block htmTitleTimeZonePage %}
+    <title>{% if resultCount == 0 %}no time zone found{% else %}time zones{% endif %}</title>
+{%- endblock htmTitleTimeZonePage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/time-zone/TimeZone.css"/>
+{%- block htmStylesTimeZonePage %}
+{%- endblock htmStylesTimeZonePage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 4;
+      }
+{{ super() }}
+{%- block htmStyleTimeZonePage %}
+{%- endblock htmStyleTimeZonePage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsTimeZonePage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/time-zone/TimeZone.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/time-zone/TimeZoneSearchPage.js"></script>
+{%- endblock htmScriptsTimeZonePage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptTimeZonePage %}
+    <script>
+
+      function jsWebsocketTimeZone(id, vars, $response) {
+{%- block jsWebsocketTimeZonePage %}{%- endblock %}
+      }
+
+      function jsTooltipTimeZone(e, feature) {
+{%- block jsTooltipTimeZonePage %}{%- endblock %}
+      }
+
+      function htmTooltipTimeZone(feature, layer) {
+        return `{%- block htmTooltipTimeZonePage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipTimeZonePage %}`;
+      }
+
+      function facetChangeTimeZoneSuccess(e) {
+        var l = e.querySelector('.pageForm .listTimeZone')?.value;
+        if(l)
+          window.listTimeZone = JSON.parse(l);
+{% block facetChangeTimeZoneSuccess %}{%- endblock facetTimeZoneSuccess %}
+      }
+      function facetChangeTimeZoneError(e) {
+{% block facetChangeTimeZoneError %}{%- endblock facetTimeZoneError %}
+      }
+
+      function facetSimpleRangeTimeZoneSuccess(e) {
+{% block facetSimpleRangeTimeZoneSuccess %}      facetChangeTimeZoneSuccess(e);{% endblock facetSimpleRangeTimeZoneSuccess %}
+      }
+      function facetSimpleRangeTimeZoneError(e) {
+{% block facetSimpleRangeTimeZoneError %}      facetChangeTimeZoneError(e);{% endblock facetSimpleRangeTimeZoneError %}
+      }
+      function facetSimpleRangeTimeZone(e) {
+        facetSimpleRange(e, facetSimpleRangeTimeZoneSuccess, facetSimpleRangeTimeZoneError);
+      }
+
+      function facetRangeTimeZoneTimeZoneSuccess(e) {
+{% block facetRangeTimeZoneTimeZoneSuccess %}      facetChangeTimeZoneSuccess(e);{% endblock facetRangeTimeZoneTimeZoneSuccess %}
+      }
+      function facetRangeTimeZoneTimeZoneError(e) {
+{% block facetRangeTimeZoneTimeZoneError %}      facetChangeTimeZoneError(e);{%- endblock facetRangeTimeZoneTimeZoneError %}
+      }
+      function facetRangeTimeZoneTimeZone(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneTimeZoneSuccess, facetRangeTimeZoneTimeZoneError);
+      }
+
+      function facetRangeGapChangeTimeZoneSuccess(e) {
+{% block facetRangeGapChangeTimeZoneSuccess %}      facetChangeTimeZoneSuccess(e);{% endblock facetRangeGapChangeTimeZoneSuccess %}
+      }
+      function facetRangeGapChangeTimeZoneError(e) {
+{% block facetRangeGapChangeTimeZoneError %}      facetChangeTimeZoneError(e);{%- endblock facetRangeGapChangeTimeZoneError %}
+      }
+      function facetRangeGapChangeTimeZone(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeTimeZoneSuccess, facetRangeGapChangeTimeZoneError);
+      }
+
+      function facetRangeStartChangeTimeZoneSuccess(e) {
+{% block facetRangeStartChangeTimeZoneSuccess %}      facetChangeTimeZoneSuccess(e);{% endblock facetRangeStartChangeTimeZoneSuccess %}
+      }
+      function facetRangeStartChangeTimeZoneError(e) {
+{% block facetRangeStartChangeTimeZoneError %}      facetChangeTimeZoneError(e);{%- endblock facetRangeStartChangeTimeZoneError %}
+      }
+      function facetRangeStartChangeTimeZone(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeTimeZoneSuccess, facetRangeStartChangeTimeZoneError);
+      }
+
+      function facetRangeEndChangeTimeZoneSuccess(e) {
+{% block facetRangeEndChangeTimeZoneSuccess %}      facetChangeTimeZoneSuccess(e);{% endblock facetRangeEndChangeTimeZoneSuccess %}
+      }
+      function facetRangeEndChangeTimeZoneError(e) {
+{% block facetRangeEndChangeTimeZoneError %}      facetChangeTimeZoneError(e);{%- endblock facetRangeEndChangeTimeZoneError %}
+      }
+      function facetRangeEndChangeTimeZone(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeTimeZoneSuccess, facetRangeEndChangeTimeZoneError);
+      }
+    </script>
+    <script type="module">
+{% if DEFAULT_MAP_LOCATION is defined %}
+      window.DEFAULT_MAP_LOCATION = { type: 'Point', coordinates: [ {{ DEFAULT_MAP_LOCATION.coordinates[0] }}, {{ DEFAULT_MAP_LOCATION.coordinates[1] }} ]};
+{% endif %}
+{% if DEFAULT_MAP_ZOOM is defined %}
+      window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{% endif %}
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+
+        var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
+
+        if(id == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.id is defined %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listTimeZone')?.value;
+        if(l)
+          window.listTimeZone = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTimeZone);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTimeZone);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneTimeZone);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeTimeZone);
+        pageGraphTimeZone();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qTimeZone_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('TimeZone', event.target, document.querySelector('#qTimeZoneDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qTimeZone_rows')?.addEventListener('change', event => {
+          paramChange('TimeZone', event.target, document.querySelector('#qTimeZoneDiv_rows'));
+        });
+
+        document.querySelector('#qTimeZone_start')?.addEventListener('change', event => {
+          paramChange('TimeZone', event.target, document.querySelector('#qTimeZoneDiv_start'));
+        });
+
+
+        var submitForm_patchTimeZone = document.querySelector('#htmForm_patchTimeZone')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_patchTimeZone')?.addEventListener('click', event => {
+          event.preventDefault();
+          patchTimeZone(null, document.querySelector('#htmForm_patchTimeZone'), document.querySelector('#htmFormButton_patchTimeZone'), event.target.getAttribute('data-id'));
+          return false;
+        });
+
+        var submitForm_postTimeZone = document.querySelector('#htmForm_postTimeZone')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_postTimeZone')?.addEventListener('click', event => {
+          event.preventDefault();
+          postTimeZone(document.querySelector('#htmForm_postTimeZone')
+          , document.querySelector('#htmFormButton_postTimeZone')
+          , (json, target) => {
+            window.location.href = json.editPage;
+          });
+          return false;
+        });
+
+        var submitForm_deleteTimeZone = document.querySelector('#htmForm_deleteTimeZone')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deleteTimeZone')?.addEventListener('click', event => {
+          event.preventDefault();
+          deleteTimeZone(event.target, event.target.getAttribute('data-id'));
+          return false;
+        });
+
+        var submitForm_putimportTimeZone = document.querySelector('#htmForm_putimportTimeZone')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_putimportTimeZone')?.addEventListener('click', event => {
+          event.preventDefault();
+          putimportTimeZone(document.querySelector('#htmForm_putimportTimeZone'), document.querySelector('#htmFormButton_putimportTimeZone'));
+          return false;
+        });
+
+        var submitForm_searchpageTimeZone = document.querySelector('#htmForm_searchpageTimeZone')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_searchpageTimeZone')?.addEventListener('click', event => {
+          event.preventDefault();
+          searchpageTimeZone();
+          return false;
+        });
+
+        var submitForm_deletefilterTimeZone = document.querySelector('#htmForm_deletefilterTimeZone')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deletefilterTimeZone')?.addEventListener('click', event => {
+          event.preventDefault();
+          deletefilterTimeZone(event.target);
+          return false;
+        });
+{%- block htmScriptInitTimeZonePage %}{%- endblock htmScriptInitTimeZonePage %}
+      });
+    </script>
+{%- endblock htmScriptTimeZonePage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketTimeZonePage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketTimeZone(websocketTimeZoneInner);
+{% endif %}
+{%- endblock websocketTimeZonePage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlTimeZonePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlTimeZonePage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-TimeZone">back to all time zones</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-TimeZone" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-duotone fa-regular fa-globe"></i>
+                  all time zones
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search time zones
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+{{ super() }}
+{%- block htmBodyStartTimeZonePage %}
+{% include en-us/search/time-zone/TimeZoneSidebar.htm %}
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-TimeZone">back to all time zones</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-TimeZone" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="fa-duotone fa-regular fa-globe"></i>
+              all time zones
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no time zone found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class="fa-duotone fa-regular fa-globe"></i>
+            </div>
+            <span class="wa-heading-m ">no time zone found</span>
+            <p class="wa-caption-l ">A timezone</p>
+{% include en-us/search/time-zone/TimeZoneSearchForm.htm %}
+          </div>
+        </div>
+{% else %}
+{% include en-us/search/time-zone/TimeZoneSuggestedSearch.htm %}
+          <div class="pageContent ">
+            <form action="/en-us/api/time-zone" id="TimeZoneForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="focusId" type="hidden"/>
+              <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+              <input name="listTimeZone" id="listTimeZone" class="listTimeZone"  value='{{ toJsonArrayStringInApostrophes(listTimeZone) }}' type="hidden"/>
+            </form>
+            <div id="site-calendar-box">
+              <div id="site-calendar"><!-- // --></div>
+            </div>
+            <div class="wa-stack wa-gap-m ">
+{% endif %}
+{%- endblock htmBodyStartTimeZonePage %}
+{%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/time-zone/TimeZoneSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/time-zone/TimeZoneSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{% include en-us/search/time-zone/TimeZoneSearchForm.htm %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleTimeZonePage %}
+{% if resultCount > 0 %}
+              <div class="wa-stack wa-gap-0 ">
+{% include en-us/search/time-zone/TimeZonePaginationButtons.htm %}
+                <div class="card-like-thing background-color-surface-border" id="site-results-grid">
+                  <div>
+                    <wa-dropdown id="htmDropdown-id">
+                      <wa-button variant="brand" slot="trigger" caret>id</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTimeZone_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TimeZone').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-id-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by id ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTimeZone_id'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TimeZone').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-id-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by id descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-abbreviation">
+                      <wa-button variant="brand" slot="trigger" caret>abbreviation</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTimeZone_abbreviation'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TimeZone').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-abbreviation-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by abbreviation ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTimeZone_abbreviation'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TimeZone').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-abbreviation-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by abbreviation descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-location">
+                      <wa-button variant="brand" slot="trigger" caret>location</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTimeZone_location'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TimeZone').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-location-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by location ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTimeZone_location'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TimeZone').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-location-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by location descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-name">
+                      <wa-button variant="brand" slot="trigger" caret>name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTimeZone_name'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TimeZone').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-name-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTimeZone_name'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TimeZone').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-name-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                  </div>
+                  {% for item in listTimeZone%}
+                  <div>
+                    <a href="{{ item.displayPage }}">
+                      <i class="fa-duotone fa-regular fa-globe"></i>
+                      <span>{{ item.id | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.abbreviation | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.location | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.name | e }}</span>
+                    </a>
+                  </div>
+                  {% endfor %}
+              {% if getColumnId is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnAbbreviation is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnLocation is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnName is defined %}
+                <div>
+                </div>
+              {% endif %}
+                </div>
+{% include en-us/search/time-zone/TimeZonePaginationButtons.htm %}
+              </div>
+            </div>
+          </div>
+{% endif %}
+{%- endblock htmBodyMiddleTimeZonePage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndTimeZonePage %}
+{%- include en-us/search/time-zone/TimeZoneLocation.htm %}
+{%- endblock htmBodyEndTimeZonePage %}
+  {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

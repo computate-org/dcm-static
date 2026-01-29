@@ -1,0 +1,375 @@
+        <div class="htmBodySidebarSiteUserPage ">
+{%- block htmBodySidebarSiteUserPage %}
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleSearch">
+            <div slot="label">
+              <i class="{{ FONTAWESOME_STYLE }} fa-magnifying-glass "></i>
+              search
+            </div>
+            <div>
+              {%- block htmBodySearchSiteUserPage %}
+              <div>
+                {% for key, value in varsQ.items() %}
+                <div>
+                  <div>
+                    <label for="qSiteUser_{{ key }}">{{ value.displayName }}<sup> ({{ value.classSimpleName }})</sup></label>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <wa-input id="qSiteUser_{{ key }}" placeholder="{{ displayName }}" data-var="{{ key }}" autocomplete="off="></wa-input>
+                    <div id="qSiteUserDiv_{{ key }}" class="pageSearchVal "></div>
+                  </div>
+                </div>
+                {% endfor %}
+                <div>
+                  <div>
+                    <label for="qSiteUser_Start">start<sup> (Long)</sup></label>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <wa-input id="qSiteUser_start" placeholder="{{ displayName }}" class="" data-var="start" autocomplete="off=" value="{{ start }}"></wa-input>
+                    <div id="qSiteUserDiv_start" class="pageSearchVal ">start={{ start }}</div>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <label for="qSiteUser_Rows">rows<sup> (Long)</sup></label>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <wa-input id="qSiteUser_rows" placeholder="{{ displayName }}" class="" data-var="rows" autocomplete="off" value="{{ rows }}"></wa-input>
+                    <div id="qSiteUserDiv_rows" class="pageSearchVal ">rows={{ rows }}</div>
+                  </div>
+                </div>
+              </div>
+              {%- endblock htmBodySearchSiteUserPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleFilters">
+            <div slot="label">
+              <span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-filters "></i> filters</span>
+            </div>
+            <div>
+              {%- block htmBodyFiltersSiteUserPage %}
+              <div class="flex flex-column gap-l ">
+                {% for key, value in varsFq.items() %}
+                <div>
+                  <div>
+                    <label for="fqSiteUser_{{ key }}">{{ value.displayName }}<sup> ({{ value.classSimpleName }})</sup></label>
+                    <wa-tooltip for="buttonFacetSiteUser_{{ key }}">see values</wa-tooltip>
+                    <div class="flex round-column pill-smart-border-radius ">
+                      <wa-button variant="brand" id="buttonFacetSiteUser_{{ key }}" data-var="{{ value.var }}" data-clear="{% if value.facetField is defined %}true{% else %}false{% endif %}"><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-list "></i></wa-button>
+                      <wa-input id="fqSiteUser_{{ key }}" placeholder="{{ value.displayName }}" class="" onchange="fqChange('SiteUser', this, facetChangeSiteUserSuccess, facetChangeSiteUserError); " data-var="{{ value.var }}" autocomplete="off=" value="{{ value.val }}"></wa-input>
+                    </div>
+                    <div class="pageSearchVal " id="pageSearchVal-fqSiteUser_{{ key }}">{% if value.val is defined %}fq={{ value.var }}:{{ value.val | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-buttonFacetSiteUser_{{ key }}">{% if value.facetField.var is defined %}facet.field={{ value.facetField.var }}{% endif %}</div>
+                  </div>
+                  <div>
+                    <div class="pageFacetField pageFacetFieldSiteUser_{{ key }} " id="pageFacetFieldSiteUser_{{ key }}">
+                      {% for facetFieldKey, facetFieldValue in value.facetField.counts.items() %}
+                      <div>
+                        <wa-tooltip content="{{ facetFieldValue | e }} site user total with {{ value.facetField.var | e }} &quot;{{ facetFieldKey | e }}&quot;"></wa-tooltip>
+                        <div class="cursor-pointer raised-item " data-class="SiteUser" data-var="{{ value.facetField.var }}" data-val="{{ facetFieldKey }}" onclick="if(document.querySelector('#fqSiteUser_{{ key }}')?.value === '{{ facetFieldKey }}') this.setAttribute('data-val', ''); fqReplace('SiteUser', this, facetChangeSiteUserSuccess, facetChangeSiteUserError); ">{{ facetFieldValue }}: {{ facetFieldKey }}</div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              {%- endblock htmBodyFiltersSiteUserPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleSort">
+            <div slot="label">
+              <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z "></i>
+              sort
+            </div>
+            <div>
+              {%- block htmBodySortSiteUserPage %}
+              <div id="pageSearchVal-pageSort-SiteUser">
+              {% for key, value in varsFq.items() %}
+              {% if defaultSortVars is defined and ((key + ' asc') in defaultSortVars or (key + ' desc') in defaultSortVars) %}
+                  <div class="pageSearchVal pageSearchVal-pageSort-SiteUser pageSearchVal-pageSort-SiteUser-{{ key }} " id="pageSearchVal-pageSort-SiteUser-{{ key }}">{% if defaultSortVars is defined and (key + ' asc') in defaultSortVars %}sort={{ key }} asc{% else %}{% if defaultSortVars is defined and (key + ' desc') in defaultSortVars %}sort={{ key }} desc{% endif %}{% endif %}</div>
+              {% endif %}
+              {% endfor %}
+              </div>
+              <div>
+                {% for key, value in varsFq.items() %}
+                <wa-details
+                    summary="{{ value.displayName | e }}"
+                    class="pageDetailsSort "
+                    id="pageDetailsSortSiteUser_{{ key }}"
+                        data-value="{{ value.var | e }}"
+                        {% if value.sort is defined %}open{% endif %}
+                    >
+                  <wa-select with-clear
+                      orientation="horizontal"
+                      class="pageSelectSort "
+                      id="pageSelectSortSiteUser_{{ key }}"
+                      {% if value.sort is defined %}value="{{ value.sort | e }}"{% endif %}
+                      label={{ value.displayName | tojson }}
+                      size="small"
+                      >
+                    <wa-option value="asc">ascending</wa-option>
+                    <wa-option value="desc">descending</wa-option>
+                  </wa-select>
+                </wa-details>
+                {% endfor %}
+              </div>
+              {%- endblock htmBodySortSiteUserPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleRange">
+            <div slot="label">
+              <span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-calendar-range "></i> range</span>
+            </div>
+            <div>
+              {%- block htmBodyRangeSiteUserPage %}
+              <table>
+                <tr>
+                  <td colspan="2">
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeTimeZone-SiteUser">{% if rangeGap is defined %}var=defaultZoneId:{{ defaultZoneId | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-SiteUser">{% if rangeGap is defined %}facet.range.gap={{ rangeGap | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-SiteUser">{% if rangeStart is defined %}facet.range.start={{ rangeStart | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-SiteUser">{% if rangeEnd is defined %}facet.range.end={{ rangeEnd | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-SiteUser">{% if defaultRangeVar is defined %}facet.range={!tag=r1}{{ defaultRangeVar | urlencode() }}{% endif %}</div>
+                  </td>
+                </tr>
+              </table>
+              <div>
+                <wa-popup placement="bottom-start" id="pageFacetRangeTimeZonePopup">
+                  <wa-input type="text" slot="anchor" placeholder="time zone" label="time zone" hint="The local time zone of this site user. " id="pageFacetRangeTimeZoneInput" data-popup="pageFacetRangeTimeZonePopup" data-list="pageFacetRangeTimeZoneList" data-classSimpleName="SiteUser" autocomplete="off" value="{{ defaultZoneId | e }}" size="medium" appearance="outlined"></wa-input>
+                  <div id="pageFacetRangeTimeZoneList"></div>
+                </wa-popup>
+              </div>
+              <div>
+                <wa-dropdown id="pageFacetSimpleRangeDropdown" data-classSimpleName="SiteUser">
+                  <wa-button slot="trigger" with-caret>simple ranges</wa-button>
+                  <wa-dropdown-item value="last-minutes">
+                    last few minutes
+                    <wa-dropdown-item slot="submenu" value="last-minutes-1-hours">
+                    last 1 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-3-hours">
+                    last 3 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-6-hours">
+                    last 6 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-12-hours">
+                    last 12 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-24-hours">
+                    last 24 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-2-days">
+                    last 2 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-7-days">
+                    last 7 days
+                    </wa-dropdown-item>
+                  </wa-dropdown-item>
+                  <wa-dropdown-item value="last-hours">
+                    last few hours
+                    <wa-dropdown-item slot="submenu" value="last-hours-1-hours">
+                    last 1 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-3-hours">
+                    last 3 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-6-hours">
+                    last 6 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-12-hours">
+                    last 12 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-24-hours">
+                    last 24 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-2-days">
+                    last 2 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-7-days">
+                    last 7 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-30-days">
+                    last 30 days
+                    </wa-dropdown-item>
+                  </wa-dropdown-item>
+                  <wa-dropdown-item value="last-days">
+                    last few days
+                    <wa-dropdown-item slot="submenu" value="last-days-1-days">
+                    last 1 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-days-2-days">
+                    last 2 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-days-7-days">
+                    last 7 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-days-30-days">
+                    last 30 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-days-90-days">
+                    last 90 days
+                    </wa-dropdown-item>
+                  </wa-dropdown-item>
+                </wa-dropdown>
+              </div>
+              <table>
+                <tr class="">
+                  <td class="">
+                    <span>Range Gap</span>
+                  </td>
+                  <td class="">
+                    <wa-select name="facet.range.gap" id="pageSearchVal-pageFacetRangeGap-SiteUser-input" onchange="facetRangeGapChangeSiteUser('SiteUser', this); ">
+                      <wa-option value="+1YEAR"{% if defaultRangeGap == '+1YEAR' %} selected="selected"{% else %}{% endif %}>Year</wa-option>
+                      <wa-option value="+1MONTH"{% if defaultRangeGap == '+1MONTH' %} selected="selected"{% else %}{% endif %}>Month</wa-option>
+                      <wa-option value="+1WEEK"{% if defaultRangeGap == '+1WEEK' %} selected="selected"{% else %}{% endif %}>Week</wa-option>
+                      <wa-option value="+1DAY"{% if defaultRangeGap == '+1DAY' %} selected="selected"{% else %}{% endif %}>Day</wa-option>
+                      <wa-option value="+1HOUR"{% if defaultRangeGap == '+1HOUR' %} selected="selected"{% else %}{% if defaultRangeGap is defined %}{% else %} selected="selected"{% endif %}{% endif %}>Hour</wa-option>
+                      <wa-option value="+1MINUTE"{% if defaultRangeGap == '+1MINUTE' %} selected="selected"{% else %}{% endif %}>Minute</wa-option>
+                      <wa-option value="+1SECOND"{% if defaultRangeGap == '+1SECOND' %} selected="selected"{% else %}{% endif %}>Second</wa-option>
+                    </wa-select>
+                  </td>
+                </tr>
+                <tr class="">
+                  <td class="" colspan="2">
+                    <span>Range Start ({{ formatZonedDateTime(defaultRangeStart, "VV", defaultLocaleId, defaultZoneId) }})</span>
+                  </td>
+                </tr>
+                <tr class="">
+                  <td class="" colspan="2">
+                    <span><wa-input type="datetime-local" name="facetRangeStart" id="pageSearchVal-pageFacetRangeStart-SiteUser-input" value="{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeStartChangeSiteUser('SiteUser', this, '{{ defaultZoneId }}'); "></wa-input></span>
+                  </td>
+                </tr>
+                <tr class="">
+                  <td class="" colspan="2">
+                    <span>Range End ({{ formatZonedDateTime(defaultRangeStart, "VV", defaultLocaleId, defaultZoneId) }})</span>
+                  </td>
+                </tr>
+                <tr class="">
+                  <td class="" colspan="2">
+                    <span><wa-input type="datetime-local" name="facetRangeEnd" id="pageSearchVal-pageFacetRangeEnd-SiteUser-input" value="{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeEndChangeSiteUser('SiteUser', this, '{{ defaultZoneId }}'); "></wa-input></span>
+                  </td>
+                </tr>
+              </table>
+              <wa-radio-group id="pageFacetRangeSiteUser">                {% for key, value in varsRange.items() %}
+                <wa-radio name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeSiteUser_{{ key }}" value="{{ value.var }}"{% if defaultRangeVar == var %} checked="checked"{% endif %}>{{ value.displayName }}</wa-radio>
+                {% endfor %}
+              </wa-radio-group>
+              {%- endblock htmBodyRangeSiteUserPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarTogglePivot">
+            <div slot="label">
+              <span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-table-pivot "></i> pivot</span>
+            </div>
+            <div>
+              {%- block htmBodyPivotSiteUserPage %}
+              <div style="display: none; " id="pageSearchVal-PivotSiteUserHidden">
+                {% for item in defaultPivotVars %}
+                  <div class="pageSearchVal-PivotSiteUserHidden " id="pageSearchVal-PivotSiteUserHidden_{{ item }}">{{ item }}</div>
+                {% endfor %}
+              </div>
+              <div id="pageSearchVal-PivotSiteUser">
+                {% if defaultPivotVars is defined and defaultPivotVars.length > 0 %}
+                  <div class="pageSearchVal pageSearchVal-PivotSiteUser " id="pageSearchVal-PivotSiteUser_1">facet.pivot={!range=r1}{% for item in defaultPivotVars %}{% if loop.index > 0 %},{% endif %}{{ item }}{% endfor %}</div>
+                {% endif %}
+              </div>
+              {% for key, value in varsFq.items() %}
+              <div>
+                <wa-checkbox name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotSiteUser_{{ key }}" value="{{ value.var }}"{% if pivot is defined %} checked="checked"{% endif %}>{{ value.displayName }}</wa-checkbox>
+              </div>
+              {% endfor %}
+              {%- endblock htmBodyPivotSiteUserPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleFieldList">
+            <div slot="label">
+              <span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-list-ul "></i> field list</span>
+            </div>
+            <div>
+{%- block htmBodyFieldListSiteUserPage %}
+              <div style="display: none; " id="pageSearchVal-FieldListSiteUserHidden">
+                {% for item in defaultFieldListVars %}
+                  <div class="pageSearchVal-FieldListSiteUserHidden " id="pageSearchVal-FieldListSiteUserHidden_{{ item }}">{{ item }}</div>
+                {% endfor %}
+              </div>
+              {% if defaultFieldListVars is defined and defaultFieldListVars.length > 0 %}
+              <div id="pageSearchVal-FieldListSiteUser">
+                {% if defaultFieldListVars is defined %}
+                  <div class="pageSearchVal pageSearchVal-FieldListSiteUser " id="pageSearchVal-FieldListSiteUser_1">fl={% for item in defaultFieldListVars %}{% if loop.index > 0 %},{% endif %}{{ item }}{% endfor %}</div>
+                {% endif %}
+              </div>
+              {% endif %}
+              {% for key, value in varsFq.items() %}
+              <div>
+                <wa-checkbox name="pageFieldList" class="pageFieldList " id="pageFieldListSiteUser_{{ key }}" value="{{ value.var }}"{% if fieldList is defined %} checked="checked"{% endif %} onclick="facetFieldListChange('SiteUser', value); ">{{ value.displayName }}</wa-checkbox>
+              </div>
+                {% endfor %}
+{%- endblock htmBodyFieldListSiteUserPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleStats">
+            <div slot="label">
+              <i class="{{ FONTAWESOME_STYLE }} fa-chart-candlestick "></i>
+              stats
+            </div>
+            <div>
+{%- block htmBodyStatsSiteUserPage %}
+              <div style="display: none; " id="pageSearchVal-StatsSiteUserHidden">
+                {% for item in defaultStatsVars %}
+                  <div class="pageSearchVal-StatsSiteUserHidden " id="pageSearchVal-StatsSiteUserHidden_{{ item }}">{{ item }}</div>
+                {% endfor %}
+              </div>
+              <div id="pageSearchVal-StatsSiteUser">
+                {% if defaultStatsVars is defined %}
+                  {% for item in defaultStatsVars %}
+                    <div class="pageSearchVal pageSearchVal-StatsSiteUser_{{ item }} " id="pageSearchVal-StatsSiteUser_{{ item }}">stats.field={{ item }}                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+              <div>
+                {% for key, value in varsFq.items() %}
+                  {% if value.enableStats is defined %}
+                    <wa-details
+                        summary="{{ value.displayName | e }}"
+                        class="pageStats "
+                        id="pageStatsSiteUser_{{ key }}"
+                        data-value="{{ value.var | e }}"
+                        {% if value.stats is defined %}open{% endif %}
+                        >
+                      <div class="wa-stack pageStatsField pageStatsFieldSiteUser_{{ key }} " id="pageStatsFieldSiteUser_{{ key }}">
+                        {% if value.stats is defined %}
+                          {% for itemKey, itemValue in value.stats.items() %}
+                            {% if itemKey == 'name' %}{% else %}
+                              <div
+                                   class="wa-split "
+                                   data-class="SiteUser"
+                                   data-var="{{ itemKey }}"
+                                   data-val="{{ itemValue }}"
+                                  >
+                                <span>{{ itemKey | e }}</span>
+                                <span>{{ itemValue | e }}</span>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                      </div>
+                    </wa-details>
+                  {% endif %}
+                {% endfor %}
+              </div>
+{%- endblock htmBodyStatsSiteUserPage %}
+            </div>
+          </wa-drawer>
+{%- endblock htmBodySidebarSiteUserPage %}
+        </div>

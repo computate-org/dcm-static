@@ -1,0 +1,345 @@
+{% extends "en-us/PageLayout.htm" %}
+{%- block htmTitlePageLayout %}
+{%- block htmTitleSitePagePage %}
+    <title>{{ result.objectTitle }}</title>
+{%- endblock htmTitleSitePagePage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/article/SitePage.css"/>
+{%- block htmStylesSitePagePage %}
+{%- endblock htmStylesSitePagePage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 2;
+      }
+{{ super() }}
+{%- block htmStyleSitePagePage %}
+{%- endblock htmStyleSitePagePage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsSitePagePage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/article/SitePage.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/article/SitePageSearchPage.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/article/SitePageEditPage.js"></script>
+{%- endblock htmScriptsSitePagePage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptSitePagePage %}
+    <script>
+
+      function jsWebsocketSitePage(pageId, vars, $response) {
+{%- block jsWebsocketSitePagePage %}{%- endblock %}
+      }
+
+      function jsTooltipSitePage(e, feature) {
+{%- block jsTooltipSitePagePage %}{%- endblock %}
+      }
+
+      function htmTooltipSitePage(feature, layer) {
+        return `{%- block htmTooltipSitePagePage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipSitePagePage %}`;
+      }
+
+      function facetChangeSitePageSuccess(e) {
+        var l = e.querySelector('.pageForm .listSitePage')?.value;
+        if(l)
+          window.listSitePage = JSON.parse(l);
+{% block facetChangeSitePageSuccess %}{%- endblock facetSitePageSuccess %}
+      }
+      function facetChangeSitePageError(e) {
+{% block facetChangeSitePageError %}{%- endblock facetSitePageError %}
+      }
+
+      function facetSimpleRangeSitePageSuccess(e) {
+{% block facetSimpleRangeSitePageSuccess %}      facetChangeSitePageSuccess(e);{% endblock facetSimpleRangeSitePageSuccess %}
+      }
+      function facetSimpleRangeSitePageError(e) {
+{% block facetSimpleRangeSitePageError %}      facetChangeSitePageError(e);{% endblock facetSimpleRangeSitePageError %}
+      }
+      function facetSimpleRangeSitePage(e) {
+        facetSimpleRange(e, facetSimpleRangeSitePageSuccess, facetSimpleRangeSitePageError);
+      }
+
+      function facetRangeTimeZoneSitePageSuccess(e) {
+{% block facetRangeTimeZoneSitePageSuccess %}      facetChangeSitePageSuccess(e);{% endblock facetRangeTimeZoneSitePageSuccess %}
+      }
+      function facetRangeTimeZoneSitePageError(e) {
+{% block facetRangeTimeZoneSitePageError %}      facetChangeSitePageError(e);{%- endblock facetRangeTimeZoneSitePageError %}
+      }
+      function facetRangeTimeZoneSitePage(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneSitePageSuccess, facetRangeTimeZoneSitePageError);
+      }
+
+      function facetRangeGapChangeSitePageSuccess(e) {
+{% block facetRangeGapChangeSitePageSuccess %}      facetChangeSitePageSuccess(e);{% endblock facetRangeGapChangeSitePageSuccess %}
+      }
+      function facetRangeGapChangeSitePageError(e) {
+{% block facetRangeGapChangeSitePageError %}      facetChangeSitePageError(e);{%- endblock facetRangeGapChangeSitePageError %}
+      }
+      function facetRangeGapChangeSitePage(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeSitePageSuccess, facetRangeGapChangeSitePageError);
+      }
+
+      function facetRangeStartChangeSitePageSuccess(e) {
+{% block facetRangeStartChangeSitePageSuccess %}      facetChangeSitePageSuccess(e);{% endblock facetRangeStartChangeSitePageSuccess %}
+      }
+      function facetRangeStartChangeSitePageError(e) {
+{% block facetRangeStartChangeSitePageError %}      facetChangeSitePageError(e);{%- endblock facetRangeStartChangeSitePageError %}
+      }
+      function facetRangeStartChangeSitePage(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeSitePageSuccess, facetRangeStartChangeSitePageError);
+      }
+
+      function facetRangeEndChangeSitePageSuccess(e) {
+{% block facetRangeEndChangeSitePageSuccess %}      facetChangeSitePageSuccess(e);{% endblock facetRangeEndChangeSitePageSuccess %}
+      }
+      function facetRangeEndChangeSitePageError(e) {
+{% block facetRangeEndChangeSitePageError %}      facetChangeSitePageError(e);{%- endblock facetRangeEndChangeSitePageError %}
+      }
+      function facetRangeEndChangeSitePage(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeSitePageSuccess, facetRangeEndChangeSitePageError);
+      }
+    </script>
+    <script type="module">
+{% if DEFAULT_MAP_LOCATION is defined %}
+      window.DEFAULT_MAP_LOCATION = { type: 'Point', coordinates: [ {{ DEFAULT_MAP_LOCATION.coordinates[0] }}, {{ DEFAULT_MAP_LOCATION.coordinates[1] }} ]};
+{% endif %}
+{% if DEFAULT_MAP_ZOOM is defined %}
+      window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{% endif %}
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+
+        var pageId = {% if result.pageId is defined %}{{ result.pageId | tojson }}{% else %}null{% endif %};
+
+        if(pageId == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.pageId is defined %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listSitePage')?.value;
+        if(l)
+          window.listSitePage = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneSitePage);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneSitePage);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneSitePage);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeSitePage);
+        pageGraphSitePage();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qSitePage_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('SitePage', event.target, document.querySelector('#qSitePageDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qSitePage_rows')?.addEventListener('change', event => {
+          paramChange('SitePage', event.target, document.querySelector('#qSitePageDiv_rows'));
+        });
+
+        document.querySelector('#qSitePage_start')?.addEventListener('change', event => {
+          paramChange('SitePage', event.target, document.querySelector('#qSitePageDiv_start'));
+        });
+
+
+        var submitForm_patchSitePage = document.querySelector('#htmForm_patchSitePage')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_patchSitePage')?.addEventListener('click', event => {
+          event.preventDefault();
+          patchSitePage(null, document.querySelector('#htmForm_patchSitePage'), document.querySelector('#htmFormButton_patchSitePage'), event.target.getAttribute('data-pageId'));
+          return false;
+        });
+
+        var submitForm_postSitePage = document.querySelector('#htmForm_postSitePage')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_postSitePage')?.addEventListener('click', event => {
+          event.preventDefault();
+          postSitePage(document.querySelector('#htmForm_postSitePage')
+          , document.querySelector('#htmFormButton_postSitePage')
+          , (json, target) => {
+            window.location.href = json.editPage;
+          });
+          return false;
+        });
+
+        var submitForm_putimportSitePage = document.querySelector('#htmForm_putimportSitePage')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_putimportSitePage')?.addEventListener('click', event => {
+          event.preventDefault();
+          putimportSitePage(document.querySelector('#htmForm_putimportSitePage'), document.querySelector('#htmFormButton_putimportSitePage'));
+          return false;
+        });
+
+        var submitForm_deleteSitePage = document.querySelector('#htmForm_deleteSitePage')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deleteSitePage')?.addEventListener('click', event => {
+          event.preventDefault();
+          deleteSitePage(event.target, event.target.getAttribute('data-pageId'));
+          return false;
+        });
+
+        var submitForm_searchpageSitePage = document.querySelector('#htmForm_searchpageSitePage')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_searchpageSitePage')?.addEventListener('click', event => {
+          event.preventDefault();
+          searchpageSitePage();
+          return false;
+        });
+
+        var submitForm_deletefilterSitePage = document.querySelector('#htmForm_deletefilterSitePage')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deletefilterSitePage')?.addEventListener('click', event => {
+          event.preventDefault();
+          deletefilterSitePage(event.target);
+          return false;
+        });
+{%- block htmScriptInitSitePagePage %}{%- endblock htmScriptInitSitePagePage %}
+      });
+    </script>
+{%- endblock htmScriptSitePagePage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketSitePagePage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketSitePage(websocketSitePageInner);
+{% endif %}
+{%- endblock websocketSitePagePage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlSitePagePage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlSitePagePage %}
+
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/article/SitePageSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/article/SitePageSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-SitePage">back to all articles</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-SitePage" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-duotone fa-regular fa-newspaper"></i>
+                  all articles
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  an article
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+    {{ super() }}
+{%- block htmBodyStartSitePagePage %}
+{% if resultCount > 0 %}
+          <div class="wa-flank ">
+            <h1 class="Page_objectTitle"><i class="fa-duotone fa-regular fa-newspaper"></i> {{ result.objectTitle | e }}</h1>
+          </div>
+{% endif %}
+{% include en-us/search/article/SitePageSearchForm.htm %}
+{%- endblock htmBodyStartSitePagePage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleSitePagePage %}
+{%- include en-us/search/article/SitePageSidebar.htm %}
+        <div class="pageContent ">
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-SitePage">back to all articles</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-SitePage" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="fa-duotone fa-regular fa-newspaper"></i>
+              all articles
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no article found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class="fa-duotone fa-regular fa-newspaper"></i>
+            </div>
+            <span class="wa-heading-m ">no article found</span>
+            <p class="wa-caption-l ">Read the latest articles to learn more</p>
+{% include en-us/search/article/SitePageSearchForm.htm %}
+          </div>
+        </div>
+{% else %}
+{%- include en-us/search/article/SitePageSuggestedSearch.htm %}
+{% endif %}
+{%- block htmFormSitePagePage %}
+          <form action="/en-us/api/article" id="SitePageForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+{% if result.pageId is defined %}
+            <input name="pageId" class="valuePageId" type="hidden" value="{{ result.pageId }}"/>
+            {% endif %}
+            <input name="focusId" type="hidden"/>
+            <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+            <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
+            <input name="listSitePage" id="listSitePage" class="listSitePage"  value='{{ toJsonArrayStringInApostrophes(listSitePage) }}' type="hidden"/>
+          </form>
+          {{ htmForm_searchpageSitePage() }}
+{%- endblock htmFormSitePagePage %}
+        </div>
+{%- endblock htmBodyMiddleSitePagePage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndSitePagePage %}
+{%- include en-us/search/article/SitePageLocation.htm %}
+{%- endblock htmBodyEndSitePagePage %}
+      {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

@@ -1,0 +1,28 @@
+
+          <div class="wa-split ">
+            <wa-tooltip for="PaginationButtonsPrevious" placement="top">Show the previous results. </wa-tooltip>
+            <wa-tooltip for="PaginationButtonsDecrease" placement="top">Show half the results. </wa-tooltip>
+            <wa-tooltip for="PaginationButtonsIncrease" placement="top">Show double the results. </wa-tooltip>
+            <wa-tooltip for="PaginationButtonsNext" placement="top">Show the next results. </wa-tooltip>
+            <div class="wa-caption-l ">{{ pagination.startNum }} – {{ pagination.endNum }} of {{ pagination.foundNum }} time zones</div>
+            <wa-scroller>
+              <wa-button-group size="small" class="no-gradient wa-cluster wa-gap-xs " id="htmPaginationButtons">
+                <wa-button id="PaginationButtonsPrevious" variant="brand"{% if pagination.pagePrevious is defined %} href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}"{% else %} disabled{% endif %}>
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-square-left "></i>
+                  previous
+                </wa-button>
+                <wa-button id="PaginationButtonsDecrease" variant="brand"{% if pagination.rowsPrevious >= pagination['1L'] %} href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsPrevious }}"{% else %} disabled{% endif %}>
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-minus-square "></i>
+                  less
+                </wa-button>
+                <wa-button id="PaginationButtonsIncrease" variant="brand" href="{{pageUri}}?start={{pagination.start}}&amp;rows={{ pagination.rowsNext }}">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-plus-square "></i>
+                  more
+                </wa-button>
+                <wa-button id="PaginationButtonsNext" variant="brand"{% if pagination.pageNext is defined %} href="{{pageUri}}?start={{pagination.pageNext.start}}&amp;rows={{pagination.rows}}"{% else %} disabled{% endif %}>
+                  next
+                  <i slot="suffix" class="{{ FONTAWESOME_STYLE }} fa-arrow-square-right "></i>
+                </wa-button>
+              </wa-button-group>
+            </wa-scroller>
+          </div>
