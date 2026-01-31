@@ -24,7 +24,7 @@ async function websocketProject(success) {
       $header.setAttribute('class', 'w3-container fa- ');
       $header.setAttribute('id', 'header-' + projectResource);
       var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-people-line"></i>';
+      iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-people-line"></i>';
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
@@ -785,7 +785,7 @@ function suggestProjectObjectSuggest($formFilters, $list, target) {
     if($list) {
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
-        var $i = document.querySelector('<i class="fa-regular fa-people-line"></i>');
+        var $i = document.querySelector('<i class="fa-duotone fa-regular fa-people-line"></i>');
         var $span = document.createElement('span');
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
