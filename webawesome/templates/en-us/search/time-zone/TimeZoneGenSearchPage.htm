@@ -292,7 +292,6 @@
             </div>
             <span class="wa-heading-m ">no time zone found</span>
             <p class="wa-caption-l ">A timezone</p>
-{% include en-us/search/time-zone/TimeZoneSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -308,6 +307,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/time-zone/TimeZoneSearchForm.htm %}
 {%- endblock htmBodyStartTimeZonePage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -320,7 +320,6 @@
 {% include en-us/search/time-zone/TimeZoneSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/time-zone/TimeZoneSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleTimeZonePage %}

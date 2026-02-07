@@ -292,7 +292,6 @@
             </div>
             <span class="wa-heading-m ">no article found</span>
             <p class="wa-caption-l ">Read the latest articles to learn more</p>
-{% include en-us/search/article/SitePageSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -308,6 +307,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/article/SitePageSearchForm.htm %}
 {%- endblock htmBodyStartSitePagePage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -320,7 +320,6 @@
 {% include en-us/search/article/SitePageSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/article/SitePageSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleSitePagePage %}

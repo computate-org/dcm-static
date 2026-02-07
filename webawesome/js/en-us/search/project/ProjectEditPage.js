@@ -151,7 +151,7 @@ Promise.all([
             const valid = form.checkValidity();
             if(valid) {
               patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
-                  , 'setPodsRestarting', event.currentTarget.value.replace('[','').replace(']','').split(/[ ,]+/)
+                  , 'setPodsRestarting', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
                   , event.currentTarget
                   , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
@@ -193,7 +193,7 @@ Promise.all([
             const valid = form.checkValidity();
             if(valid) {
               patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
-                  , 'setPodsTerminating', event.currentTarget.value.replace('[','').replace(']','').split(/[ ,]+/)
+                  , 'setPodsTerminating', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
                   , event.currentTarget
                   , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
@@ -235,7 +235,7 @@ Promise.all([
             const valid = form.checkValidity();
             if(valid) {
               patchProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'projectResource:' + event.currentTarget.getAttribute('data-projectResource') }]
-                  , 'setFullPvcs', event.currentTarget.value.replace('[','').replace(']','').split(/[ ,]+/)
+                  , 'setFullPvcs', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
                   , event.currentTarget
                   , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }

@@ -18,6 +18,12 @@ function removeGlow($input, jqXhr) {
 }
 
 function addError($input, jqXhr) {
+  jqXhr.json().then((json) => {
+    addErrorJson($input, jqXhr, json);
+  });
+}
+
+function addErrorJson($input, jqXhr, json) {
   if($input) {
     $input.classList.remove('glowSuccess');
     $input.classList.add('glowError');
@@ -26,9 +32,7 @@ function addError($input, jqXhr) {
       $input.parentNode.querySelector('.alertPopup').setAttribute('variant', 'danger');
       $input.parentNode.querySelector('.alertPopup').innerText = jqXhr.status + ' ' + jqXhr.statusText;
       $input.parentNode.active = true;
-      jqXhr.json().then((json) => {
-        $input.parentNode.querySelector('.alertPopup').innerText += " " + JSON.stringify(json);
-      })
+      $input.parentNode.querySelector('.alertPopup').innerText += " " + JSON.stringify(json);
     }
   }
 }

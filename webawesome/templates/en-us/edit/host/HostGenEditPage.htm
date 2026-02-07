@@ -1,0 +1,346 @@
+{% extends "en-us/PageLayout.htm" %}
+{%- block htmTitlePageLayout %}
+{%- block htmTitleHostPage %}
+    <title>{{ result.objectTitle }}</title>
+{%- endblock htmTitleHostPage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/host/Host.css"/>
+{%- block htmStylesHostPage %}
+{%- endblock htmStylesHostPage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 2;
+      }
+{{ super() }}
+{%- block htmStyleHostPage %}
+{%- endblock htmStyleHostPage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsHostPage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/host/Host.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host/HostSearchPage.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host/HostEditPage.js"></script>
+{%- endblock htmScriptsHostPage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptHostPage %}
+    <script>
+
+      function jsWebsocketHost(hostName, vars, $response) {
+{%- block jsWebsocketHostPage %}{%- endblock %}
+      }
+
+      function jsTooltipHost(e, feature) {
+{%- block jsTooltipHostPage %}{%- endblock %}
+      }
+
+      function htmTooltipHost(feature, layer) {
+        return `{%- block htmTooltipHostPage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipHostPage %}`;
+      }
+
+      function facetChangeHostSuccess(e) {
+        var l = e.querySelector('.pageForm .listHost')?.value;
+        if(l)
+          window.listHost = JSON.parse(l);
+{% block facetChangeHostSuccess %}{%- endblock facetHostSuccess %}
+      }
+      function facetChangeHostError(e) {
+{% block facetChangeHostError %}{%- endblock facetHostError %}
+      }
+
+      function facetSimpleRangeHostSuccess(e) {
+{% block facetSimpleRangeHostSuccess %}      facetChangeHostSuccess(e);{% endblock facetSimpleRangeHostSuccess %}
+      }
+      function facetSimpleRangeHostError(e) {
+{% block facetSimpleRangeHostError %}      facetChangeHostError(e);{% endblock facetSimpleRangeHostError %}
+      }
+      function facetSimpleRangeHost(e) {
+        facetSimpleRange(e, facetSimpleRangeHostSuccess, facetSimpleRangeHostError);
+      }
+
+      function facetRangeTimeZoneHostSuccess(e) {
+{% block facetRangeTimeZoneHostSuccess %}      facetChangeHostSuccess(e);{% endblock facetRangeTimeZoneHostSuccess %}
+      }
+      function facetRangeTimeZoneHostError(e) {
+{% block facetRangeTimeZoneHostError %}      facetChangeHostError(e);{%- endblock facetRangeTimeZoneHostError %}
+      }
+      function facetRangeTimeZoneHost(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneHostSuccess, facetRangeTimeZoneHostError);
+      }
+
+      function facetRangeGapChangeHostSuccess(e) {
+{% block facetRangeGapChangeHostSuccess %}      facetChangeHostSuccess(e);{% endblock facetRangeGapChangeHostSuccess %}
+      }
+      function facetRangeGapChangeHostError(e) {
+{% block facetRangeGapChangeHostError %}      facetChangeHostError(e);{%- endblock facetRangeGapChangeHostError %}
+      }
+      function facetRangeGapChangeHost(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeHostSuccess, facetRangeGapChangeHostError);
+      }
+
+      function facetRangeStartChangeHostSuccess(e) {
+{% block facetRangeStartChangeHostSuccess %}      facetChangeHostSuccess(e);{% endblock facetRangeStartChangeHostSuccess %}
+      }
+      function facetRangeStartChangeHostError(e) {
+{% block facetRangeStartChangeHostError %}      facetChangeHostError(e);{%- endblock facetRangeStartChangeHostError %}
+      }
+      function facetRangeStartChangeHost(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeHostSuccess, facetRangeStartChangeHostError);
+      }
+
+      function facetRangeEndChangeHostSuccess(e) {
+{% block facetRangeEndChangeHostSuccess %}      facetChangeHostSuccess(e);{% endblock facetRangeEndChangeHostSuccess %}
+      }
+      function facetRangeEndChangeHostError(e) {
+{% block facetRangeEndChangeHostError %}      facetChangeHostError(e);{%- endblock facetRangeEndChangeHostError %}
+      }
+      function facetRangeEndChangeHost(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeHostSuccess, facetRangeEndChangeHostError);
+      }
+    </script>
+    <script type="module">
+{% if DEFAULT_MAP_LOCATION is defined %}
+      window.DEFAULT_MAP_LOCATION = { type: 'Point', coordinates: [ {{ DEFAULT_MAP_LOCATION.coordinates[0] }}, {{ DEFAULT_MAP_LOCATION.coordinates[1] }} ]};
+{% endif %}
+{% if DEFAULT_MAP_ZOOM is defined %}
+      window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{% endif %}
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+
+        var hostName = {% if result.hostName is defined %}{{ result.hostName | tojson }}{% else %}null{% endif %};
+
+        if(hostName == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.hostName is defined %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listHost')?.value;
+        if(l)
+          window.listHost = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneHost);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneHost);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneHost);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeHost);
+        pageGraphHost();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qHost_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('Host', event.target, document.querySelector('#qHostDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qHost_rows')?.addEventListener('change', event => {
+          paramChange('Host', event.target, document.querySelector('#qHostDiv_rows'));
+        });
+
+        document.querySelector('#qHost_start')?.addEventListener('change', event => {
+          paramChange('Host', event.target, document.querySelector('#qHostDiv_start'));
+        });
+
+
+        var submitForm_patchHost = document.querySelector('#htmForm_patchHost')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_patchHost')?.addEventListener('click', event => {
+          event.preventDefault();
+          patchHost(null, document.querySelector('#htmForm_patchHost'), document.querySelector('#htmFormButton_patchHost'), event.target.getAttribute('data-hostName'));
+          return false;
+        });
+
+        var submitForm_postHost = document.querySelector('#htmForm_postHost')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_postHost')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHost(document.querySelector('#htmForm_postHost')
+          , document.querySelector('#htmFormButton_postHost')
+          , (json, target) => {
+            window.location.href = json.editPage;
+          });
+          return false;
+        });
+
+        var submitForm_deleteHost = document.querySelector('#htmForm_deleteHost')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deleteHost')?.addEventListener('click', event => {
+          event.preventDefault();
+          deleteHost(event.target, event.target.getAttribute('data-hostName'));
+          return false;
+        });
+
+        var submitForm_putimportHost = document.querySelector('#htmForm_putimportHost')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_putimportHost')?.addEventListener('click', event => {
+          event.preventDefault();
+          putimportHost(document.querySelector('#htmForm_putimportHost'), document.querySelector('#htmFormButton_putimportHost'));
+          return false;
+        });
+
+        var submitForm_searchpageHost = document.querySelector('#htmForm_searchpageHost')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_searchpageHost')?.addEventListener('click', event => {
+          event.preventDefault();
+          searchpageHost();
+          return false;
+        });
+
+        var submitForm_deletefilterHost = document.querySelector('#htmForm_deletefilterHost')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deletefilterHost')?.addEventListener('click', event => {
+          event.preventDefault();
+          deletefilterHost(event.target);
+          return false;
+        });
+{%- block htmScriptInitHostPage %}{%- endblock htmScriptInitHostPage %}
+      });
+    </script>
+{%- endblock htmScriptHostPage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketHostPage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketHost(websocketHostInner);
+{% endif %}
+{%- endblock websocketHostPage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlHostPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlHostPage %}
+
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/host/HostSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/host/HostSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-Host">back to all hosts</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-Host" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-duotone fa-regular fa-server"></i>
+                  all hosts
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  a host
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+    {{ super() }}
+{%- block htmBodyStartHostPage %}
+{% if resultCount > 0 %}
+          <div class="wa-flank ">
+            <h1 class="Page_objectTitle"><i class="fa-duotone fa-regular fa-server"></i> {{ result.objectTitle | e }}</h1>
+          </div>
+{% endif %}
+{% include en-us/search/host/HostSearchForm.htm %}
+{%- endblock htmBodyStartHostPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleHostPage %}
+{%- include en-us/search/host/HostSidebar.htm %}
+        <div class="pageContent ">
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-Host">back to all hosts</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-Host" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="fa-duotone fa-regular fa-server"></i>
+              all hosts
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no host found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class="fa-duotone fa-regular fa-server"></i>
+            </div>
+            <span class="wa-heading-m ">no host found</span>
+            <p class="wa-caption-l ">A managed host computer. </p>
+          </div>
+        </div>
+{% else %}
+{%- include en-us/search/host/HostSuggestedSearch.htm %}
+{% endif %}
+{%- block htmFormHostPage %}
+          <form action="/en-us/api/host" id="HostForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+{% if result.hostName is defined %}
+            <input name="hostName" class="valueHostName" type="hidden" value="{{ result.hostName }}"/>
+            {% endif %}
+            <input name="focusId" type="hidden"/>
+            <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+            <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
+            <input name="listHost" id="listHost" class="listHost"  value='{{ toJsonArrayStringInApostrophes(listHost) }}' type="hidden"/>
+          </form>
+{%- if resultCount >= 1 %}
+          {{ htmForm_searchpageHost() }}
+{% endif -%}
+{%- endblock htmFormHostPage %}
+        </div>
+{%- endblock htmBodyMiddleHostPage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndHostPage %}
+{%- include en-us/search/host/HostLocation.htm %}
+{%- endblock htmBodyEndHostPage %}
+      {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

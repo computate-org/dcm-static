@@ -1,0 +1,36 @@
+          <wa-scroller>
+            <wa-button-group class="no-gradient" id="htmSearchButtons">
+              {% if solrId is not defined %}
+              <wa-button class="SearchButtons_Search SearchButtons_Search_Host " variant="brand" onclick="document.querySelector('#siteSidebarToggleSearch').open = true; ">
+                <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-magnifying-glass hover-box-shadow "></i> 
+                search
+              </wa-button>
+              {% endif %}
+              {% if solrId is not defined %}
+              <wa-button class="SearchButtons_Filters SearchButtons_Filters_Host " variant="brand" onclick="document.querySelector('#siteSidebarToggleFilters').open = true; ">
+                <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-filters hover-box-shadow "></i> 
+                filters
+              </wa-button>
+              {% endif %}
+              {% if solrId is not defined %}
+              <wa-button class="SearchButtons_Sort SearchButtons_Sort_Host " variant="brand" onclick="document.querySelector('#siteSidebarToggleSort').open = true; ">
+                <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z hover-box-shadow "></i> 
+                sort
+              </wa-button>
+              {% endif %}
+              <wa-button class="SearchButtons_Range SearchButtons_Range_Host " variant="brand" onclick="document.querySelector('#siteSidebarToggleRange').open = true; ">
+                <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-calendar-range hover-box-shadow "></i> 
+                range
+              </wa-button>
+              {% if solrId is not defined %}
+              <wa-button class="SearchButtons_Stats SearchButtons_Stats_Host " variant="brand" onclick="document.querySelector('#siteSidebarToggleStats').open = true; ">
+                <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-chart-candlestick hover-box-shadow "></i> 
+                stats
+              </wa-button>
+              {% endif %}
+              <wa-button class="SearchButtons_Api SearchButtons_Api_Host " variant="brand" href="{{ apiUri }}{% if result.hostName is defined %}/{{ result.hostName }}{% else %}{{ queryStr }}{% endif %}">
+                <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-brackets-curly hover-box-shadow "></i> 
+                API
+              </wa-button>
+            </wa-button-group>
+          </wa-scroller>

@@ -315,7 +315,6 @@
             </div>
             <span class="wa-heading-m ">no time zone found</span>
             <p class="wa-caption-l ">A timezone</p>
-{% include en-us/search/time-zone/TimeZoneSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -331,7 +330,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listTimeZone" id="listTimeZone" class="listTimeZone"  value='{{ toJsonArrayStringInApostrophes(listTimeZone) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageTimeZone() }}
+{% endif -%}
 {%- endblock htmFormTimeZonePage %}
         </div>
 {%- endblock htmBodyMiddleTimeZonePage %}

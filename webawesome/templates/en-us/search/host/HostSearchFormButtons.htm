@@ -1,0 +1,65 @@
+
+{%- macro htmButton_patchHost() %}<wa-button variant="brand" id="htmButton_patchHost" data-hostName={{ result.hostName | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+
+{%- macro htmButton_postHost() %}<wa-button variant="brand" id="htmButton_postHost" data-hostName={{ result.hostName | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deleteHost() %}<wa-button variant="brand" id="htmButton_deleteHost" data-hostName={{ result.hostName | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+
+{%- macro htmButton_putimportHost() %}<wa-button variant="brand" id="htmButton_putimportHost" data-hostName={{ result.hostName | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deletefilterHost() %}<wa-button variant="brand" id="htmButton_deletefilterHost" data-hostName={{ result.hostName | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+          <div id="htmSearchForm">
+            <wa-scroller>
+              <wa-button-group>
+{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {% if "PATCH" in scopes %}
+    {% if resultCount >= 1 %}
+                <wa-button variant="brand" id="refreshThisHostGenPage"
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'hostName:{{ result.hostName }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisHostGenPage')); }, function() { addError(document.querySelector('#refreshThisHostGenPage')); }); return false; ">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  refresh
+                </wa-button>
+    {% endif %}
+    {% if resultCount > 0 %}
+                <wa-button variant="brand" id="refreshAllHostGenPage{{ result.hostName | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllHostGenPage{{ result.hostName | e }}')); }, function() { addError(document.querySelector('#refreshAllHostGenPage{{ result.hostName | e }}')); }); "
+                    >
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  refresh all 
+                </wa-button>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{%- if 'PATCH' in scopes %}
+  {%- if resultCount > 0 %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_patchHost() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmButton_postHost() }}
+  {%- else %}
+    {{ htmButton_postHost() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is defined %}
+    {{ htmButton_deleteHost() }}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmButton_putimportHost() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is not defined %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_deletefilterHost() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+
+              </wa-button-group>
+            </wa-scroller>
+          </div>

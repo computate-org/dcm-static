@@ -1,0 +1,375 @@
+        <div class="htmBodySidebarHostPage ">
+{%- block htmBodySidebarHostPage %}
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleSearch">
+            <div slot="label">
+              <i class="{{ FONTAWESOME_STYLE }} fa-magnifying-glass "></i>
+              search
+            </div>
+            <div>
+              {%- block htmBodySearchHostPage %}
+              <div>
+                {% for key, value in varsQ.items() %}
+                <div>
+                  <div>
+                    <label for="qHost_{{ key }}">{{ value.displayName }}<sup> ({{ value.classSimpleName }})</sup></label>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <wa-input id="qHost_{{ key }}" placeholder="{{ displayName }}" data-var="{{ key }}" autocomplete="off="></wa-input>
+                    <div id="qHostDiv_{{ key }}" class="pageSearchVal "></div>
+                  </div>
+                </div>
+                {% endfor %}
+                <div>
+                  <div>
+                    <label for="qHost_Start">start<sup> (Long)</sup></label>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <wa-input id="qHost_start" placeholder="{{ displayName }}" class="" data-var="start" autocomplete="off=" value="{{ start }}"></wa-input>
+                    <div id="qHostDiv_start" class="pageSearchVal ">start={{ start }}</div>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <label for="qHost_Rows">rows<sup> (Long)</sup></label>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <wa-input id="qHost_rows" placeholder="{{ displayName }}" class="" data-var="rows" autocomplete="off" value="{{ rows }}"></wa-input>
+                    <div id="qHostDiv_rows" class="pageSearchVal ">rows={{ rows }}</div>
+                  </div>
+                </div>
+              </div>
+              {%- endblock htmBodySearchHostPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleFilters">
+            <div slot="label">
+              <span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-filters "></i> filters</span>
+            </div>
+            <div>
+              {%- block htmBodyFiltersHostPage %}
+              <div class="flex flex-column gap-l ">
+                {% for key, value in varsFq.items() %}
+                <div>
+                  <div>
+                    <label for="fqHost_{{ key }}">{{ value.displayName }}<sup> ({{ value.classSimpleName }})</sup></label>
+                    <wa-tooltip for="buttonFacetHost_{{ key }}">see values</wa-tooltip>
+                    <div class="flex round-column pill-smart-border-radius ">
+                      <wa-button variant="brand" id="buttonFacetHost_{{ key }}" data-var="{{ value.var }}" data-clear="{% if value.facetField is defined %}true{% else %}false{% endif %}"><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-list "></i></wa-button>
+                      <wa-input id="fqHost_{{ key }}" placeholder="{{ value.displayName }}" class="" onchange="fqChange('Host', this, facetChangeHostSuccess, facetChangeHostError); " data-var="{{ value.var }}" autocomplete="off=" value="{{ value.val }}"></wa-input>
+                    </div>
+                    <div class="pageSearchVal " id="pageSearchVal-fqHost_{{ key }}">{% if value.val is defined %}fq={{ value.var }}:{{ value.val | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-buttonFacetHost_{{ key }}">{% if value.facetField.var is defined %}facet.field={{ value.facetField.var }}{% endif %}</div>
+                  </div>
+                  <div>
+                    <div class="pageFacetField pageFacetFieldHost_{{ key }} " id="pageFacetFieldHost_{{ key }}">
+                      {% for facetFieldKey, facetFieldValue in value.facetField.counts.items() %}
+                      <div>
+                        <wa-tooltip content="{{ facetFieldValue | e }} host total with {{ value.facetField.var | e }} &quot;{{ facetFieldKey | e }}&quot;"></wa-tooltip>
+                        <div class="cursor-pointer raised-item " data-class="Host" data-var="{{ value.facetField.var }}" data-val="{{ facetFieldKey }}" onclick="if(document.querySelector('#fqHost_{{ key }}')?.value === '{{ facetFieldKey }}') this.setAttribute('data-val', ''); fqReplace('Host', this, facetChangeHostSuccess, facetChangeHostError); ">{{ facetFieldValue }}: {{ facetFieldKey }}</div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              {%- endblock htmBodyFiltersHostPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleSort">
+            <div slot="label">
+              <i class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z "></i>
+              sort
+            </div>
+            <div>
+              {%- block htmBodySortHostPage %}
+              <div id="pageSearchVal-pageSort-Host">
+              {% for key, value in varsFq.items() %}
+              {% if defaultSortVars is defined and ((key + ' asc') in defaultSortVars or (key + ' desc') in defaultSortVars) %}
+                  <div class="pageSearchVal pageSearchVal-pageSort-Host pageSearchVal-pageSort-Host-{{ key }} " id="pageSearchVal-pageSort-Host-{{ key }}">{% if defaultSortVars is defined and (key + ' asc') in defaultSortVars %}sort={{ key }} asc{% else %}{% if defaultSortVars is defined and (key + ' desc') in defaultSortVars %}sort={{ key }} desc{% endif %}{% endif %}</div>
+              {% endif %}
+              {% endfor %}
+              </div>
+              <div>
+                {% for key, value in varsFq.items() %}
+                <wa-details
+                    summary="{{ value.displayName | e }}"
+                    class="pageDetailsSort "
+                    id="pageDetailsSortHost_{{ key }}"
+                        data-value="{{ value.var | e }}"
+                        {% if value.sort is defined %}open{% endif %}
+                    >
+                  <wa-select with-clear
+                      orientation="horizontal"
+                      class="pageSelectSort "
+                      id="pageSelectSortHost_{{ key }}"
+                      {% if value.sort is defined %}value="{{ value.sort | e }}"{% endif %}
+                      label={{ value.displayName | tojson }}
+                      size="small"
+                      >
+                    <wa-option value="asc">ascending</wa-option>
+                    <wa-option value="desc">descending</wa-option>
+                  </wa-select>
+                </wa-details>
+                {% endfor %}
+              </div>
+              {%- endblock htmBodySortHostPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleRange">
+            <div slot="label">
+              <span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-calendar-range "></i> range</span>
+            </div>
+            <div>
+              {%- block htmBodyRangeHostPage %}
+              <table>
+                <tr>
+                  <td colspan="2">
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeTimeZone-Host">{% if rangeGap is defined %}var=defaultZoneId:{{ defaultZoneId | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeGap-Host">{% if rangeGap is defined %}facet.range.gap={{ rangeGap | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeStart-Host">{% if rangeStart is defined %}facet.range.start={{ rangeStart | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeEnd-Host">{% if rangeEnd is defined %}facet.range.end={{ rangeEnd | urlencode() }}{% endif %}</div>
+                    <div class="pageSearchVal " id="pageSearchVal-pageFacetRangeVar-Host">{% if defaultRangeVar is defined %}facet.range={!tag=r1}{{ defaultRangeVar | urlencode() }}{% endif %}</div>
+                  </td>
+                </tr>
+              </table>
+              <div>
+                <wa-popup placement="bottom-start" id="pageFacetRangeTimeZonePopup">
+                  <wa-input type="text" slot="anchor" placeholder="time zone" label="time zone" hint="The local time zone of this host. " id="pageFacetRangeTimeZoneInput" data-popup="pageFacetRangeTimeZonePopup" data-list="pageFacetRangeTimeZoneList" data-classSimpleName="Host" autocomplete="off" value="{{ defaultZoneId | e }}" size="medium" appearance="outlined"></wa-input>
+                  <div id="pageFacetRangeTimeZoneList"></div>
+                </wa-popup>
+              </div>
+              <div>
+                <wa-dropdown id="pageFacetSimpleRangeDropdown" data-classSimpleName="Host">
+                  <wa-button slot="trigger" with-caret>simple ranges</wa-button>
+                  <wa-dropdown-item value="last-minutes">
+                    last few minutes
+                    <wa-dropdown-item slot="submenu" value="last-minutes-1-hours">
+                    last 1 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-3-hours">
+                    last 3 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-6-hours">
+                    last 6 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-12-hours">
+                    last 12 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-24-hours">
+                    last 24 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-2-days">
+                    last 2 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-minutes-7-days">
+                    last 7 days
+                    </wa-dropdown-item>
+                  </wa-dropdown-item>
+                  <wa-dropdown-item value="last-hours">
+                    last few hours
+                    <wa-dropdown-item slot="submenu" value="last-hours-1-hours">
+                    last 1 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-3-hours">
+                    last 3 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-6-hours">
+                    last 6 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-12-hours">
+                    last 12 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-24-hours">
+                    last 24 hours
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-2-days">
+                    last 2 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-7-days">
+                    last 7 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-hours-30-days">
+                    last 30 days
+                    </wa-dropdown-item>
+                  </wa-dropdown-item>
+                  <wa-dropdown-item value="last-days">
+                    last few days
+                    <wa-dropdown-item slot="submenu" value="last-days-1-days">
+                    last 1 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-days-2-days">
+                    last 2 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-days-7-days">
+                    last 7 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-days-30-days">
+                    last 30 days
+                    </wa-dropdown-item>
+                    <wa-dropdown-item slot="submenu" value="last-days-90-days">
+                    last 90 days
+                    </wa-dropdown-item>
+                  </wa-dropdown-item>
+                </wa-dropdown>
+              </div>
+              <table>
+                <tr class="">
+                  <td class="">
+                    <span>Range Gap</span>
+                  </td>
+                  <td class="">
+                    <wa-select name="facet.range.gap" id="pageSearchVal-pageFacetRangeGap-Host-input" onchange="facetRangeGapChangeHost('Host', this); ">
+                      <wa-option value="+1YEAR"{% if defaultRangeGap == '+1YEAR' %} selected="selected"{% else %}{% endif %}>Year</wa-option>
+                      <wa-option value="+1MONTH"{% if defaultRangeGap == '+1MONTH' %} selected="selected"{% else %}{% endif %}>Month</wa-option>
+                      <wa-option value="+1WEEK"{% if defaultRangeGap == '+1WEEK' %} selected="selected"{% else %}{% endif %}>Week</wa-option>
+                      <wa-option value="+1DAY"{% if defaultRangeGap == '+1DAY' %} selected="selected"{% else %}{% endif %}>Day</wa-option>
+                      <wa-option value="+1HOUR"{% if defaultRangeGap == '+1HOUR' %} selected="selected"{% else %}{% if defaultRangeGap is defined %}{% else %} selected="selected"{% endif %}{% endif %}>Hour</wa-option>
+                      <wa-option value="+1MINUTE"{% if defaultRangeGap == '+1MINUTE' %} selected="selected"{% else %}{% endif %}>Minute</wa-option>
+                      <wa-option value="+1SECOND"{% if defaultRangeGap == '+1SECOND' %} selected="selected"{% else %}{% endif %}>Second</wa-option>
+                    </wa-select>
+                  </td>
+                </tr>
+                <tr class="">
+                  <td class="" colspan="2">
+                    <span>Range Start ({{ formatZonedDateTime(defaultRangeStart, "VV", defaultLocaleId, defaultZoneId) }})</span>
+                  </td>
+                </tr>
+                <tr class="">
+                  <td class="" colspan="2">
+                    <span><wa-input type="datetime-local" name="facetRangeStart" id="pageSearchVal-pageFacetRangeStart-Host-input" value="{{ formatZonedDateTime(defaultRangeStart, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeStartChangeHost('Host', this, '{{ defaultZoneId }}'); "></wa-input></span>
+                  </td>
+                </tr>
+                <tr class="">
+                  <td class="" colspan="2">
+                    <span>Range End ({{ formatZonedDateTime(defaultRangeStart, "VV", defaultLocaleId, defaultZoneId) }})</span>
+                  </td>
+                </tr>
+                <tr class="">
+                  <td class="" colspan="2">
+                    <span><wa-input type="datetime-local" name="facetRangeEnd" id="pageSearchVal-pageFacetRangeEnd-Host-input" value="{{ formatZonedDateTime(defaultRangeEnd, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) }}" onchange="facetRangeEndChangeHost('Host', this, '{{ defaultZoneId }}'); "></wa-input></span>
+                  </td>
+                </tr>
+              </table>
+              <wa-radio-group id="pageFacetRangeHost">                {% for key, value in varsRange.items() %}
+                <wa-radio name="pageFacetRange" class="pageFacetRange " id="pageFacetRangeHost_{{ key }}" value="{{ value.var }}"{% if defaultRangeVar == var %} checked="checked"{% endif %}>{{ value.displayName }}</wa-radio>
+                {% endfor %}
+              </wa-radio-group>
+              {%- endblock htmBodyRangeHostPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarTogglePivot">
+            <div slot="label">
+              <span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-table-pivot "></i> pivot</span>
+            </div>
+            <div>
+              {%- block htmBodyPivotHostPage %}
+              <div style="display: none; " id="pageSearchVal-PivotHostHidden">
+                {% for item in defaultPivotVars %}
+                  <div class="pageSearchVal-PivotHostHidden " id="pageSearchVal-PivotHostHidden_{{ item }}">{{ item }}</div>
+                {% endfor %}
+              </div>
+              <div id="pageSearchVal-PivotHost">
+                {% if defaultPivotVars is defined and defaultPivotVars.length > 0 %}
+                  <div class="pageSearchVal pageSearchVal-PivotHost " id="pageSearchVal-PivotHost_1">facet.pivot={!range=r1}{% for item in defaultPivotVars %}{% if loop.index > 0 %},{% endif %}{{ item }}{% endfor %}</div>
+                {% endif %}
+              </div>
+              {% for key, value in varsFq.items() %}
+              <div>
+                <wa-checkbox name="pageFacetPivot" class="pageFacetPivot " id="pageFacetPivotHost_{{ key }}" value="{{ value.var }}"{% if pivot is defined %} checked="checked"{% endif %}>{{ value.displayName }}</wa-checkbox>
+              </div>
+              {% endfor %}
+              {%- endblock htmBodyPivotHostPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleFieldList">
+            <div slot="label">
+              <span>
+              <i class="{{ FONTAWESOME_STYLE }} fa-list-ul "></i> field list</span>
+            </div>
+            <div>
+{%- block htmBodyFieldListHostPage %}
+              <div style="display: none; " id="pageSearchVal-FieldListHostHidden">
+                {% for item in defaultFieldListVars %}
+                  <div class="pageSearchVal-FieldListHostHidden " id="pageSearchVal-FieldListHostHidden_{{ item }}">{{ item }}</div>
+                {% endfor %}
+              </div>
+              {% if defaultFieldListVars is defined and defaultFieldListVars.length > 0 %}
+              <div id="pageSearchVal-FieldListHost">
+                {% if defaultFieldListVars is defined %}
+                  <div class="pageSearchVal pageSearchVal-FieldListHost " id="pageSearchVal-FieldListHost_1">fl={% for item in defaultFieldListVars %}{% if loop.index > 0 %},{% endif %}{{ item }}{% endfor %}</div>
+                {% endif %}
+              </div>
+              {% endif %}
+              {% for key, value in varsFq.items() %}
+              <div>
+                <wa-checkbox name="pageFieldList" class="pageFieldList " id="pageFieldListHost_{{ key }}" value="{{ value.var }}"{% if fieldList is defined %} checked="checked"{% endif %} onclick="facetFieldListChange('Host', value); ">{{ value.displayName }}</wa-checkbox>
+              </div>
+                {% endfor %}
+{%- endblock htmBodyFieldListHostPage %}
+            </div>
+          </wa-drawer>
+          <wa-drawer with-header light-dismiss placement="end" id="siteSidebarToggleStats">
+            <div slot="label">
+              <i class="{{ FONTAWESOME_STYLE }} fa-chart-candlestick "></i>
+              stats
+            </div>
+            <div>
+{%- block htmBodyStatsHostPage %}
+              <div style="display: none; " id="pageSearchVal-StatsHostHidden">
+                {% for item in defaultStatsVars %}
+                  <div class="pageSearchVal-StatsHostHidden " id="pageSearchVal-StatsHostHidden_{{ item }}">{{ item }}</div>
+                {% endfor %}
+              </div>
+              <div id="pageSearchVal-StatsHost">
+                {% if defaultStatsVars is defined %}
+                  {% for item in defaultStatsVars %}
+                    <div class="pageSearchVal pageSearchVal-StatsHost_{{ item }} " id="pageSearchVal-StatsHost_{{ item }}">stats.field={{ item }}                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+              <div>
+                {% for key, value in varsFq.items() %}
+                  {% if value.enableStats is defined %}
+                    <wa-details
+                        summary="{{ value.displayName | e }}"
+                        class="pageStats "
+                        id="pageStatsHost_{{ key }}"
+                        data-value="{{ value.var | e }}"
+                        {% if value.stats is defined %}open{% endif %}
+                        >
+                      <div class="wa-stack pageStatsField pageStatsFieldHost_{{ key }} " id="pageStatsFieldHost_{{ key }}">
+                        {% if value.stats is defined %}
+                          {% for itemKey, itemValue in value.stats.items() %}
+                            {% if itemKey == 'name' %}{% else %}
+                              <div
+                                   class="wa-split "
+                                   data-class="Host"
+                                   data-var="{{ itemKey }}"
+                                   data-val="{{ itemValue }}"
+                                  >
+                                <span>{{ itemKey | e }}</span>
+                                <span>{{ itemValue | e }}</span>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                      </div>
+                    </wa-details>
+                  {% endif %}
+                {% endfor %}
+              </div>
+{%- endblock htmBodyStatsHostPage %}
+            </div>
+          </wa-drawer>
+{%- endblock htmBodySidebarHostPage %}
+        </div>

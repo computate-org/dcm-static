@@ -487,7 +487,7 @@ Promise.all([
             const valid = form.checkValidity();
             if(valid) {
               patchSitePageVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
-                  , 'setLabels', event.currentTarget.value.replace('[','').replace(']','').split(/[ ,]+/)
+                  , 'setLabels', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
                   , event.currentTarget
                   , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }

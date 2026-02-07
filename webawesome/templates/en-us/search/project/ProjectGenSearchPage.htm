@@ -292,7 +292,6 @@
             </div>
             <span class="wa-heading-m ">no project found</span>
             <p class="wa-caption-l ">A research project using AI and GPUs</p>
-{% include en-us/search/project/ProjectSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -308,6 +307,7 @@
             </div>
             <div class="wa-stack wa-gap-m ">
 {% endif %}
+{% include en-us/search/project/ProjectSearchForm.htm %}
 {%- endblock htmBodyStartProjectPage %}
 {%- endblock htmBodyStartPageLayout %}
 {%- if pageSearchButtons is not defined %}
@@ -320,7 +320,6 @@
 {% include en-us/search/project/ProjectSearchFormButtons.htm %}
 {%- endset pageSearchFormButtons %}
 {%- endif %}
-{% include en-us/search/project/ProjectSearchForm.htm %}
 
 {%- block htmBodyMiddlePageLayout %}
 {%- block htmBodyMiddleProjectPage %}

@@ -315,7 +315,6 @@
             </div>
             <span class="wa-heading-m ">no AI Telemetry developer found</span>
             <p class="wa-caption-l ">Learn how to become an AI Telemetry platform developer — Providing access control to observability metrics for cloud environments, ACM hubs, OpenShift Clusters, virtual machines, bare metal hardware, and cloud projects. </p>
-{% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformSearchForm.htm %}
           </div>
         </div>
 {% else %}
@@ -331,7 +330,9 @@
             <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
             <input name="listAiTelemetryPlatform" id="listAiTelemetryPlatform" class="listAiTelemetryPlatform"  value='{{ toJsonArrayStringInApostrophes(listAiTelemetryPlatform) }}' type="hidden"/>
           </form>
+{%- if resultCount >= 1 %}
           {{ htmForm_searchpageAiTelemetryPlatform() }}
+{% endif -%}
 {%- endblock htmFormAiTelemetryPlatformPage %}
         </div>
 {%- endblock htmBodyMiddleAiTelemetryPlatformPage %}
