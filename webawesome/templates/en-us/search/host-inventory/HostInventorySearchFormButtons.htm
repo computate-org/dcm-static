@@ -1,0 +1,65 @@
+
+{%- macro htmButton_patchHostInventory() %}<wa-button variant="brand" id="htmButton_patchHostInventory"  data-dialog="open patchHostInventoryDialog" data-inventoryName={{ result.inventoryName | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+
+{%- macro htmButton_postHostInventory() %}<wa-button variant="brand" id="htmButton_postHostInventory"  data-dialog="open postHostInventoryDialog" data-inventoryName={{ result.inventoryName | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deleteHostInventory() %}<wa-button variant="brand" id="htmButton_deleteHostInventory" data-inventoryName={{ result.inventoryName | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+
+{%- macro htmButton_putimportHostInventory() %}<wa-button variant="brand" id="htmButton_putimportHostInventory"  data-dialog="open putimportHostInventoryDialog" data-inventoryName={{ result.inventoryName | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deletefilterHostInventory() %}<wa-button variant="brand" id="htmButton_deletefilterHostInventory" data-inventoryName={{ result.inventoryName | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+          <div id="htmSearchForm">
+            <wa-scroller>
+              <wa-button-group>
+{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {% if "PATCH" in scopes %}
+    {% if resultCount >= 1 %}
+                <wa-button variant="brand" id="refreshThisHostInventoryGenPage"
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'inventoryName:{{ result.inventoryName }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisHostInventoryGenPage')); }, function() { addError(document.querySelector('#refreshThisHostInventoryGenPage')); }); return false; ">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  refresh
+                </wa-button>
+    {% endif %}
+    {% if resultCount > 0 %}
+                <wa-button variant="brand" id="refreshAllHostInventoryGenPage{{ result.inventoryName | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllHostInventoryGenPage{{ result.inventoryName | e }}')); }, function() { addError(document.querySelector('#refreshAllHostInventoryGenPage{{ result.inventoryName | e }}')); }); "
+                    >
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  refresh all 
+                </wa-button>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{%- if 'PATCH' in scopes %}
+  {%- if resultCount > 0 %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_patchHostInventory() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmButton_postHostInventory() }}
+  {%- else %}
+    {{ htmButton_postHostInventory() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is defined %}
+    {{ htmButton_deleteHostInventory() }}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmButton_putimportHostInventory() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is not defined %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_deletefilterHostInventory() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+
+              </wa-button-group>
+            </wa-scroller>
+          </div>

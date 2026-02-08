@@ -14,7 +14,7 @@
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 2;
+        --site-results-number-of-columns: 3;
       }
 {{ super() }}
 {%- block htmStyleHostPage %}
@@ -27,6 +27,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/host/Host.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host/HostSearchPage.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host/HostEditPage.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
 {%- endblock htmScriptsHostPage %}
 {%- endblock htmScriptsPageLayout %}
 
@@ -145,6 +146,32 @@
           if(o)
             window.result = JSON.parse(o);
         {% if result.hostName is defined %}
+          function relate_tenantResource(event) {
+            suggestHostTenantResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , window.result.hostName
+                , window.result.tenantResource
+                , true
+                );
+          }
+          document.querySelector('#POST_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#Page_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          {% if "PATCH" in scopes %}
+          suggestHostTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostTenantResource_Page'), window.result.hostName, window.result.tenantResource, true);
+          {% else %}
+          {% if "GET" in scopes %}
+          suggestHostTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostTenantResource_Page'), window.result.hostName, window.result.tenantResource, true);
+          {% else %}
+          suggestHostTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostTenantResource_Page'), window.result.hostName, window.result.tenantResource, false);
+          {% endif %}
+          {% endif %}
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listHost')?.value;

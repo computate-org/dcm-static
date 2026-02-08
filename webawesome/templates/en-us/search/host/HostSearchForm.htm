@@ -153,6 +153,59 @@
 {%- macro htmArchivedHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputTenantResourceHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_tenantResource">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{classApiMethodMethod}}_tenantResource_clear"
+                        class="label-on-left classApiMethodMethod}}_tenantResource_clear tenantResource_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="tenant auth resource"
+                      label="tenant auth resource"
+                      hint="The unique authorization resource for the tenant for multi-tenancy"
+                      class="label-on-left {{classApiMethodMethod}}_tenantResource valueObjectSuggest suggestTenantResource "
+                      name="setTenantResource"
+                      id="{{classApiMethodMethod}}_tenantResource"
+                      data-list="listHostTenantResource_{{classApiMethodMethod}}"
+                      autocomplete="off"
+                      value="{{result.tenantResource | e }}"
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmTenantResourceHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputTenantResourceHostPage(authForWrite=authForWrite, authForRead=authForRead) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a tenant to this host
+                </div>
+                <ul class="label-on-left-ul " id="listHostTenantResource_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  <button
+                       id="{{classApiMethodMethod}}_tenantResource_add"
+                       onclick="this.classList.add('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postTenantVals({ tenantResource: '{{ result.hostName }}' }, this, function(response, target) { document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').disabled = false; document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').innerHTML = 'add a tenant'; }, this, function(response, target) { addError(document.querySelector('#{{classApiMethodMethod}}tenantResource')); });"
+                      >add a tenant</button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
 {%- macro inputHostNameHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_hostName">
@@ -189,6 +242,42 @@
 
 {%- macro htmHostNameHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputHostNameHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputInventoryNameHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_inventoryName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] inventory name"
+                      label="inventory name"
+                      hint="The unique authorization resource for the host for multi-tenancy"
+                      id="{{classApiMethodMethod}}_inventoryName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-hostName={{ result.hostName | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryName setInventoryName classHost inputHost{{ result.hostName }}InventoryName "
+                      name="setInventoryName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryName setInventoryName classHost inputHost{{ result.hostName }}InventoryName "
+                      name="setInventoryName"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryName valueInventoryName classHost inputHost{{ result.hostName }}InventoryName "
+                      name="inventoryName"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.inventoryName | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmInventoryNameHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputInventoryNameHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputEventSubscriptionsHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -246,12 +335,32 @@
               <div class="grid-with-subgrid-2col ">
 
               {%- if "PATCH" in scopes %}
+                {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
                 {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
                   {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmInventoryNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
@@ -291,12 +400,32 @@
               <div class="grid-with-subgrid-2col ">
 
               {%- if "POST" in scopes %}
+                {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
                 {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
                   {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmInventoryNameHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
@@ -417,12 +546,32 @@
               <div class="grid-with-subgrid-2col ">
 
               {%- if "PATCH" in scopes %}
+                {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
                 {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
                   {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmInventoryNameHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 

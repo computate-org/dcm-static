@@ -1,0 +1,590 @@
+{%- macro inputPkHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_pk">
+  {%- endif %}
+                  <wa-input
+                      readonly
+                      placeholder="[Long] primary key"
+                      label="primary key"
+                      type="number"
+                      hint="The primary key of this object in the database"
+                      id="{{classApiMethodMethod}}_pk"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-inventoryName={{ result.inventoryName | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHostInventory inputHostInventory{{ result.inventoryName }}Pk "
+                      name="setPk"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHostInventory inputHostInventory{{ result.inventoryName }}Pk "
+                      name="setPk"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_pk valuePk classHostInventory inputHostInventory{{ result.inventoryName }}Pk "
+                      name="pk"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.pk | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPkHostInventoryPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPkHostInventoryPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_created">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A created timestamp for this record in the database"
+                      label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left {{classApiMethodMethod}}_created datetimepicker setCreated classHostInventory inputHostInventory{{ result.inventoryName }}Created "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="{{classApiMethodMethod}}_created"
+                      value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {%- if 'Page' == classApiMethodMethod %}
+  {%- endif %}
+                      data-inventoryName={{ result.inventoryName | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedHostInventoryPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedHostInventoryPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputModifiedHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_modified">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A modified timestamp for this record in the database"
+                      label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left {{classApiMethodMethod}}_modified datetimepicker setModified classHostInventory inputHostInventory{{ result.inventoryName }}Modified "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="{{classApiMethodMethod}}_modified"
+                      value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {%- if 'Page' == classApiMethodMethod %}
+  {%- endif %}
+                      data-inventoryName={{ result.inventoryName | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmModifiedHostInventoryPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputModifiedHostInventoryPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputArchivedHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_archived">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-button variant="brand"
+                      id="{{classApiMethodMethod}}_archived"
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+                      class="label-on-left {{classApiMethodMethod}}_archived classHostInventory inputHostInventory{{ result.inventoryName }}Archived "
+                      name="setArchived"
+                      data-inventoryName={{ result.inventoryName | tojson }}
+                      data-val="{{ result.archived | e }}"
+                      >archive</wa-button>
+  {%- else %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-checkbox
+                      id="{{classApiMethodMethod}}_archived"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="{{classApiMethodMethod}}_archived"
+  {%- endif %}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_archived classHostInventory inputHostInventory{{ result.inventoryName }}Archived "
+                      name="setArchived"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_archived classHostInventory inputHostInventory{{ result.inventoryName }}Archived "
+                      name="setArchived"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_archived setArchived valueArchived classHostInventory inputHostInventory{{ result.inventoryName }}Archived "
+                      name="setArchived"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.archived == true %}
+                      checked
+    {%- endif %}
+                      data-inventoryName={{ result.inventoryName | tojson }}
+                      >archive</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmArchivedHostInventoryPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputArchivedHostInventoryPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputInventoryNameHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_inventoryName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] inventory name"
+                      label="inventory name"
+                      hint="The name of the inventory in AAP. "
+                      required
+                      id="{{classApiMethodMethod}}_inventoryName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-inventoryName={{ result.inventoryName | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryName setInventoryName classHostInventory inputHostInventory{{ result.inventoryName }}InventoryName "
+                      name="setInventoryName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryName setInventoryName classHostInventory inputHostInventory{{ result.inventoryName }}InventoryName "
+                      name="setInventoryName"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryName valueInventoryName classHostInventory inputHostInventory{{ result.inventoryName }}InventoryName "
+                      name="inventoryName"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.inventoryName | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmInventoryNameHostInventoryPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputInventoryNameHostInventoryPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputInventoryDescriptionHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_inventoryDescription">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] inventory description"
+                      label="inventory description"
+                      hint="The description of the inventory in AAP. "
+                      required
+                      id="{{classApiMethodMethod}}_inventoryDescription"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-inventoryName={{ result.inventoryName | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryDescription setInventoryDescription classHostInventory inputHostInventory{{ result.inventoryName }}InventoryDescription "
+                      name="setInventoryDescription"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryDescription setInventoryDescription classHostInventory inputHostInventory{{ result.inventoryName }}InventoryDescription "
+                      name="setInventoryDescription"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryDescription valueInventoryDescription classHostInventory inputHostInventory{{ result.inventoryName }}InventoryDescription "
+                      name="inventoryDescription"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.inventoryDescription | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmInventoryDescriptionHostInventoryPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputInventoryDescriptionHostInventoryPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputTenantResourceHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_tenantResource">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{classApiMethodMethod}}_tenantResource_clear"
+                        class="label-on-left classApiMethodMethod}}_tenantResource_clear tenantResource_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="tenant auth resource"
+                      label="tenant auth resource"
+                      hint="The unique authorization resource for the tenant for multi-tenancy"
+                      class="label-on-left {{classApiMethodMethod}}_tenantResource valueObjectSuggest suggestTenantResource "
+                      name="setTenantResource"
+                      id="{{classApiMethodMethod}}_tenantResource"
+                      data-list="listHostInventoryTenantResource_{{classApiMethodMethod}}"
+                      autocomplete="off"
+                      value="{{result.tenantResource | e }}"
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmTenantResourceHostInventoryPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputTenantResourceHostInventoryPage(authForWrite=authForWrite, authForRead=authForRead) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a tenant to this host inventory
+                </div>
+                <ul class="label-on-left-ul " id="listHostInventoryTenantResource_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  <button
+                       id="{{classApiMethodMethod}}_tenantResource_add"
+                       onclick="this.classList.add('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postTenantVals({ tenantResource: '{{ result.inventoryName }}' }, this, function(response, target) { document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').disabled = false; document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').innerHTML = 'add a tenant'; }, this, function(response, target) { addError(document.querySelector('#{{classApiMethodMethod}}tenantResource')); });"
+                      >add a tenant</button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+
+{%- macro htmFormButton_patchHostInventory() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_patchHostInventory" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_patchHostInventory"
+                >Modify host inventory</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_patchHostInventory"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_patchHostInventory() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHostInventoryDialog" label="Modify host inventory">
+          <form id="htmForm_patchHostInventory" class="round-row primary-smart-border-radius ">
+            <wa-details open class="HtmRow" id="inventory-details">
+              <div slot="summary">
+                <span>inventory details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+
+              {%- if "PATCH" in scopes %}
+                {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+              </div>
+            </wa-details>
+            <wa-details open class="HtmRow" id="relations">
+              <div slot="summary">
+                <span>relations</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+
+              {%- if "PATCH" in scopes %}
+                {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+              </div>
+            </wa-details>
+          </form>
+          {{ htmFormButton_patchHostInventory() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_postHostInventory() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_postHostInventory" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_postHostInventory"
+                >Create a host inventory</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_postHostInventory"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_postHostInventory() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="postHostInventoryDialog" label="Create a host inventory">
+          <form id="htmForm_postHostInventory" class="round-row primary-smart-border-radius ">
+            <div>You can override any default values below: </div>
+            <wa-details open class="HtmRow" id="inventory-details">
+              <div slot="summary">
+                <span>inventory details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+
+              {%- if "POST" in scopes %}
+                {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+              </div>
+            </wa-details>
+            <wa-details open class="HtmRow" id="relations">
+              <div slot="summary">
+                <span>relations</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+
+              {%- if "POST" in scopes %}
+                {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+              </div>
+            </wa-details>
+          </form>
+          {{ htmFormButton_postHostInventory() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_deleteHostInventory() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deleteHostInventory" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deleteHostInventory"
+                >Delete host inventory</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deleteHostInventory"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deleteHostInventory() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteHostInventoryDialog" label="Delete host inventory">
+          <form id="htmForm_deleteHostInventory" class="round-row primary-smart-border-radius ">
+          </form>
+          {{ htmFormButton_deleteHostInventory() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_putimportHostInventory() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_putimportHostInventory" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_putimportHostInventory"
+                >Import a host inventories</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_putimportHostInventory"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_putimportHostInventory() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportHostInventoryDialog" label="Import a host inventories">
+          <form id="htmForm_putimportHostInventory" class="round-row primary-smart-border-radius ">
+            <div>
+              <wa-textarea
+                  class="PUTImport_searchList "
+                  style="height: 300px; "
+                  placeholder="{ 'searchList': [ { 'inventoryName': ... , 'saves': [ ... ] }, ... ] }"
+                  >
+              </wa-textarea>
+            </div>
+          </form>
+          {{ htmFormButton_putimportHostInventory() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmForm_searchpageHostInventory() %}
+        <div with-header with-footer style="--width: 50vw; " id="searchpageHostInventoryDialog" label="Search a host inventories">
+          <div id="htmForm_searchpageHostInventory" class="round-row primary-smart-border-radius ">
+            <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
+              <div slot="summary">
+                <span>primary key, ID, created, modified, archive details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+
+              {%- if "PATCH" in scopes %}
+                {{ htmPkHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmPkHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmPkHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmCreatedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmCreatedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmCreatedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmModifiedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmModifiedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmModifiedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+              </div>
+              <div class="grid-with-subgrid-2col ">
+
+              {%- if "PATCH" in scopes %}
+                {{ htmArchivedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmArchivedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmArchivedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+              </div>
+            </wa-details>
+            <wa-details open class="HtmRow" id="inventory-details">
+              <div slot="summary">
+                <span>inventory details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+
+              {%- if "PATCH" in scopes %}
+                {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+              </div>
+            </wa-details>
+            <wa-details open class="HtmRow" id="relations">
+              <div slot="summary">
+                <span>relations</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+
+              {%- if "PATCH" in scopes %}
+                {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+              </div>
+            </wa-details>
+          </div>
+        </div>
+{%- endmacro %}
+
+{%- macro htmFormButton_deletefilterHostInventory() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterHostInventory" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deletefilterHostInventory"
+                >Delete host inventory</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deletefilterHostInventory"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deletefilterHostInventory() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterHostInventoryDialog" label="Delete host inventory">
+          <form id="htmForm_deletefilterHostInventory" class="round-row primary-smart-border-radius ">
+          </form>
+          {{ htmFormButton_deletefilterHostInventory() }}
+        </wa-dialog>
+{%- endmacro %}
+{%- if 'DELETE' in scopes %}
+    {{ htmForm_patchHostInventory() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_postHostInventory() }}
+  {%- else %}
+    {{ htmForm_postHostInventory() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_deleteHostInventory() }}
+  {%- else %}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmForm_putimportHostInventory() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_deletefilterHostInventory() }}
+  {%- else %}
+  {%- endif %}
+{%- endif %}

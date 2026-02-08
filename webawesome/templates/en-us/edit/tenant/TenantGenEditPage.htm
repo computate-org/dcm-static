@@ -1,0 +1,346 @@
+{% extends "en-us/PageLayout.htm" %}
+{%- block htmTitlePageLayout %}
+{%- block htmTitleTenantPage %}
+    <title>{{ result.objectTitle }}</title>
+{%- endblock htmTitleTenantPage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/tenant/Tenant.css"/>
+{%- block htmStylesTenantPage %}
+{%- endblock htmStylesTenantPage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 2;
+      }
+{{ super() }}
+{%- block htmStyleTenantPage %}
+{%- endblock htmStyleTenantPage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsTenantPage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/tenant/TenantSearchPage.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/tenant/TenantEditPage.js"></script>
+{%- endblock htmScriptsTenantPage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptTenantPage %}
+    <script>
+
+      function jsWebsocketTenant(tenantId, vars, $response) {
+{%- block jsWebsocketTenantPage %}{%- endblock %}
+      }
+
+      function jsTooltipTenant(e, feature) {
+{%- block jsTooltipTenantPage %}{%- endblock %}
+      }
+
+      function htmTooltipTenant(feature, layer) {
+        return `{%- block htmTooltipTenantPage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipTenantPage %}`;
+      }
+
+      function facetChangeTenantSuccess(e) {
+        var l = e.querySelector('.pageForm .listTenant')?.value;
+        if(l)
+          window.listTenant = JSON.parse(l);
+{% block facetChangeTenantSuccess %}{%- endblock facetTenantSuccess %}
+      }
+      function facetChangeTenantError(e) {
+{% block facetChangeTenantError %}{%- endblock facetTenantError %}
+      }
+
+      function facetSimpleRangeTenantSuccess(e) {
+{% block facetSimpleRangeTenantSuccess %}      facetChangeTenantSuccess(e);{% endblock facetSimpleRangeTenantSuccess %}
+      }
+      function facetSimpleRangeTenantError(e) {
+{% block facetSimpleRangeTenantError %}      facetChangeTenantError(e);{% endblock facetSimpleRangeTenantError %}
+      }
+      function facetSimpleRangeTenant(e) {
+        facetSimpleRange(e, facetSimpleRangeTenantSuccess, facetSimpleRangeTenantError);
+      }
+
+      function facetRangeTimeZoneTenantSuccess(e) {
+{% block facetRangeTimeZoneTenantSuccess %}      facetChangeTenantSuccess(e);{% endblock facetRangeTimeZoneTenantSuccess %}
+      }
+      function facetRangeTimeZoneTenantError(e) {
+{% block facetRangeTimeZoneTenantError %}      facetChangeTenantError(e);{%- endblock facetRangeTimeZoneTenantError %}
+      }
+      function facetRangeTimeZoneTenant(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneTenantSuccess, facetRangeTimeZoneTenantError);
+      }
+
+      function facetRangeGapChangeTenantSuccess(e) {
+{% block facetRangeGapChangeTenantSuccess %}      facetChangeTenantSuccess(e);{% endblock facetRangeGapChangeTenantSuccess %}
+      }
+      function facetRangeGapChangeTenantError(e) {
+{% block facetRangeGapChangeTenantError %}      facetChangeTenantError(e);{%- endblock facetRangeGapChangeTenantError %}
+      }
+      function facetRangeGapChangeTenant(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeTenantSuccess, facetRangeGapChangeTenantError);
+      }
+
+      function facetRangeStartChangeTenantSuccess(e) {
+{% block facetRangeStartChangeTenantSuccess %}      facetChangeTenantSuccess(e);{% endblock facetRangeStartChangeTenantSuccess %}
+      }
+      function facetRangeStartChangeTenantError(e) {
+{% block facetRangeStartChangeTenantError %}      facetChangeTenantError(e);{%- endblock facetRangeStartChangeTenantError %}
+      }
+      function facetRangeStartChangeTenant(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeTenantSuccess, facetRangeStartChangeTenantError);
+      }
+
+      function facetRangeEndChangeTenantSuccess(e) {
+{% block facetRangeEndChangeTenantSuccess %}      facetChangeTenantSuccess(e);{% endblock facetRangeEndChangeTenantSuccess %}
+      }
+      function facetRangeEndChangeTenantError(e) {
+{% block facetRangeEndChangeTenantError %}      facetChangeTenantError(e);{%- endblock facetRangeEndChangeTenantError %}
+      }
+      function facetRangeEndChangeTenant(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeTenantSuccess, facetRangeEndChangeTenantError);
+      }
+    </script>
+    <script type="module">
+{% if DEFAULT_MAP_LOCATION is defined %}
+      window.DEFAULT_MAP_LOCATION = { type: 'Point', coordinates: [ {{ DEFAULT_MAP_LOCATION.coordinates[0] }}, {{ DEFAULT_MAP_LOCATION.coordinates[1] }} ]};
+{% endif %}
+{% if DEFAULT_MAP_ZOOM is defined %}
+      window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{% endif %}
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+
+        var tenantId = {% if result.tenantId is defined %}{{ result.tenantId | tojson }}{% else %}null{% endif %};
+
+        if(tenantId == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.tenantId is defined %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listTenant')?.value;
+        if(l)
+          window.listTenant = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTenant);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTenant);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneTenant);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeTenant);
+        pageGraphTenant();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qTenant_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('Tenant', event.target, document.querySelector('#qTenantDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qTenant_rows')?.addEventListener('change', event => {
+          paramChange('Tenant', event.target, document.querySelector('#qTenantDiv_rows'));
+        });
+
+        document.querySelector('#qTenant_start')?.addEventListener('change', event => {
+          paramChange('Tenant', event.target, document.querySelector('#qTenantDiv_start'));
+        });
+
+
+        var submitForm_patchTenant = document.querySelector('#htmForm_patchTenant')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_patchTenant')?.addEventListener('click', event => {
+          event.preventDefault();
+          patchTenant(null, document.querySelector('#htmForm_patchTenant'), document.querySelector('#htmFormButton_patchTenant'), event.target.getAttribute('data-tenantId'));
+          return false;
+        });
+
+        var submitForm_postTenant = document.querySelector('#htmForm_postTenant')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+          event.preventDefault();
+          postTenant(document.querySelector('#htmForm_postTenant')
+          , document.querySelector('#htmFormButton_postTenant')
+          , (json, target) => {
+            window.location.href = json.editPage;
+          });
+          return false;
+        });
+
+        var submitForm_deleteTenant = document.querySelector('#htmForm_deleteTenant')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deleteTenant')?.addEventListener('click', event => {
+          event.preventDefault();
+          deleteTenant(event.target, event.target.getAttribute('data-tenantId'));
+          return false;
+        });
+
+        var submitForm_putimportTenant = document.querySelector('#htmForm_putimportTenant')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_putimportTenant')?.addEventListener('click', event => {
+          event.preventDefault();
+          putimportTenant(document.querySelector('#htmForm_putimportTenant'), document.querySelector('#htmFormButton_putimportTenant'));
+          return false;
+        });
+
+        var submitForm_searchpageTenant = document.querySelector('#htmForm_searchpageTenant')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_searchpageTenant')?.addEventListener('click', event => {
+          event.preventDefault();
+          searchpageTenant();
+          return false;
+        });
+
+        var submitForm_deletefilterTenant = document.querySelector('#htmForm_deletefilterTenant')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deletefilterTenant')?.addEventListener('click', event => {
+          event.preventDefault();
+          deletefilterTenant(event.target);
+          return false;
+        });
+{%- block htmScriptInitTenantPage %}{%- endblock htmScriptInitTenantPage %}
+      });
+    </script>
+{%- endblock htmScriptTenantPage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketTenantPage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketTenant(websocketTenantInner);
+{% endif %}
+{%- endblock websocketTenantPage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlTenantPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlTenantPage %}
+
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/tenant/TenantSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/tenant/TenantSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-Tenant">back to all tenants</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-Tenant" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-regular fa-buildings"></i>
+                  all tenants
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  a tenant
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+    {{ super() }}
+{%- block htmBodyStartTenantPage %}
+{% if resultCount > 0 %}
+          <div class="wa-flank ">
+            <h1 class="Page_objectTitle"><i class="fa-regular fa-buildings"></i> {{ result.objectTitle | e }}</h1>
+          </div>
+{% endif %}
+{% include en-us/search/tenant/TenantSearchForm.htm %}
+{%- endblock htmBodyStartTenantPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleTenantPage %}
+{%- include en-us/search/tenant/TenantSidebar.htm %}
+        <div class="pageContent ">
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-Tenant">back to all tenants</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-Tenant" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="fa-regular fa-buildings"></i>
+              all tenants
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no tenant found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class="fa-regular fa-buildings"></i>
+            </div>
+            <span class="wa-heading-m ">no tenant found</span>
+            <p class="wa-caption-l ">Tenants are separate organizations sharing the same cloud resources. </p>
+          </div>
+        </div>
+{% else %}
+{%- include en-us/search/tenant/TenantSuggestedSearch.htm %}
+{% endif %}
+{%- block htmFormTenantPage %}
+          <form action="/en-us/api/tenant" id="TenantForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+{% if result.tenantId is defined %}
+            <input name="tenantId" class="valueTenantId" type="hidden" value="{{ result.tenantId }}"/>
+            {% endif %}
+            <input name="focusId" type="hidden"/>
+            <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+            <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
+            <input name="listTenant" id="listTenant" class="listTenant"  value='{{ toJsonArrayStringInApostrophes(listTenant) }}' type="hidden"/>
+          </form>
+{%- if resultCount >= 1 %}
+          {{ htmForm_searchpageTenant() }}
+{% endif -%}
+{%- endblock htmFormTenantPage %}
+        </div>
+{%- endblock htmBodyMiddleTenantPage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndTenantPage %}
+{%- include en-us/search/tenant/TenantLocation.htm %}
+{%- endblock htmBodyEndTenantPage %}
+      {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

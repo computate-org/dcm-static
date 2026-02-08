@@ -1,49 +1,49 @@
 
-async function websocketHost(success) {
+async function websocketTenant(success) {
   window.eventBus.onopen = function () {
 
-    window.eventBus.registerHandler('websocketHost', function (error, message) {
+    window.eventBus.registerHandler('websocketTenant', function (error, message) {
       var json = JSON.parse(message['body']);
-      var hostName = json['id'];
+      var tenantId = json['id'];
       var solrIds = json['solrIds'];
       var empty = json['empty'];
       var numFound = parseInt(json['numFound']);
       var numPATCH = parseInt(json['numPATCH']);
       var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
       var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + hostName + ' ');
-      $box.setAttribute('id', 'box-' + hostName);
+      $box.setAttribute('class', 'w3-quarter box-' + tenantId + ' ');
+      $box.setAttribute('id', 'box-' + tenantId);
       $box.setAttribute('data-numPATCH', numPATCH);
       var $margin = document.createElement('div');
       $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + hostName);
+      $margin.setAttribute('id', 'margin-' + tenantId);
       var $card = document.createElement('div');
       $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + hostName);
+      $card.setAttribute('id', 'card-' + tenantId);
       var $header = document.createElement('div');
       $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + hostName);
+      $header.setAttribute('id', 'header-' + tenantId);
       var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-server"></i>';
+      iTemplate.innerHTML = '<i class="fa-regular fa-buildings"></i>';
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
-      $headerSpan.innerText = 'modify hosts in ' + json.timeRemaining;
+      $headerSpan.innerText = 'modify tenants in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + hostName + '");');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + tenantId + '");');
       $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + hostName);
+      $x.setAttribute('id', 'x-' + tenantId);
       var $body = document.createElement('div');
       $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + hostName);
+      $body.setAttribute('id', 'text-' + tenantId);
       var $bar = document.createElement('div');
       $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + hostName);
+      $bar.setAttribute('id', 'bar-' + tenantId);
       var $progress = document.createElement('div');
       $progress.setAttribute('class', 'w3- ');
       $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + hostName);
+      $progress.setAttribute('id', 'progress-' + tenantId);
       $progress.innerText = numPATCH + '/' + numFound;
       $card.append($header);
       $header.append($i);
@@ -55,24 +55,24 @@ async function websocketHost(success) {
       $box.append($margin);
       $margin.append($card);
       if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + hostName);
+        var $old_box = document.querySelector('.box-' + tenantId);
       } else {
-        document.querySelector('.box-' + hostName)?.remove();
+        document.querySelector('.box-' + tenantId)?.remove();
       }
-      if(hostName) {
+      if(tenantId) {
         if(success)
           success(json);
       }
     });
   }
 }
-async function websocketHostInner(apiRequest) {
-  var hostName = apiRequest['id'];
+async function websocketTenantInner(apiRequest) {
+  var tenantId = apiRequest['id'];
   var classes = apiRequest['classes'];
   var vars = apiRequest['vars'];
   var empty = apiRequest['empty'];
 
-  if(hostName != null && vars.length > 0) {
+  if(tenantId != null && vars.length > 0) {
     var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
     var uri = location.pathname + queryParams;
     fetch(uri).then(response => {
@@ -82,10 +82,10 @@ async function websocketHostInner(apiRequest) {
         var inputCreated = null;
         var inputModified = null;
         var inputArchived = null;
-        var inputTenantResource = null;
-        var inputHostName = null;
-        var inputInventoryName = null;
-        var inputEventSubscriptions = null;
+        var inputTenantName = null;
+        var inputTenantId = null;
+        var inputDescription = null;
+        var inputPageId = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -100,7 +100,9 @@ async function websocketHostInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
-        var inputHostResource = null;
+        var inputTenantResource = null;
+        var inputHubId = null;
+        var inputClusterName = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -110,14 +112,14 @@ async function websocketHostInner(apiRequest) {
           inputModified = $response.querySelector('.Page_modified');
         if(vars.includes('archived'))
           inputArchived = $response.querySelector('.Page_archived');
-        if(vars.includes('tenantResource'))
-          inputTenantResource = $response.querySelector('.Page_tenantResource');
-        if(vars.includes('hostName'))
-          inputHostName = $response.querySelector('.Page_hostName');
-        if(vars.includes('inventoryName'))
-          inputInventoryName = $response.querySelector('.Page_inventoryName');
-        if(vars.includes('eventSubscriptions'))
-          inputEventSubscriptions = $response.querySelector('.Page_eventSubscriptions');
+        if(vars.includes('tenantName'))
+          inputTenantName = $response.querySelector('.Page_tenantName');
+        if(vars.includes('tenantId'))
+          inputTenantId = $response.querySelector('.Page_tenantId');
+        if(vars.includes('description'))
+          inputDescription = $response.querySelector('.Page_description');
+        if(vars.includes('pageId'))
+          inputPageId = $response.querySelector('.Page_pageId');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -146,12 +148,16 @@ async function websocketHostInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
-        if(vars.includes('hostResource'))
-          inputHostResource = $response.querySelector('.Page_hostResource');
+        if(vars.includes('tenantResource'))
+          inputTenantResource = $response.querySelector('.Page_tenantResource');
+        if(vars.includes('hubId'))
+          inputHubId = $response.querySelector('.Page_hubId');
+        if(vars.includes('clusterName'))
+          inputClusterName = $response.querySelector('.Page_clusterName');
 
-        jsWebsocketHost(hostName, vars, $response);
+        jsWebsocketTenant(tenantId, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
-        window.listHost = JSON.parse($response.querySelector('.pageForm .listHost')?.value);
+        window.listTenant = JSON.parse($response.querySelector('.pageForm .listTenant')?.value);
 
 
         if(inputPk) {
@@ -194,44 +200,44 @@ async function websocketHostInner(apiRequest) {
           addGlow(document.querySelector('.Page_archived'));
         }
 
-        if(inputTenantResource) {
-          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
+        if(inputTenantName) {
+          document.querySelectorAll('.Page_tenantName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputTenantResource.getAttribute('value');
+              item.value = inputTenantName.getAttribute('value');
             else
-              item.textContent = inputTenantResource.textContent;
+              item.textContent = inputTenantName.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantResource'));
+          addGlow(document.querySelector('.Page_tenantName'));
         }
 
-        if(inputHostName) {
-          document.querySelectorAll('.Page_hostName').forEach((item, index) => {
+        if(inputTenantId) {
+          document.querySelectorAll('.Page_tenantId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputHostName.getAttribute('value');
+              item.value = inputTenantId.getAttribute('value');
             else
-              item.textContent = inputHostName.textContent;
+              item.textContent = inputTenantId.textContent;
           });
-          addGlow(document.querySelector('.Page_hostName'));
+          addGlow(document.querySelector('.Page_tenantId'));
         }
 
-        if(inputInventoryName) {
-          document.querySelectorAll('.Page_inventoryName').forEach((item, index) => {
+        if(inputDescription) {
+          document.querySelectorAll('.Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputInventoryName.getAttribute('value');
+              item.value = inputDescription.getAttribute('value');
             else
-              item.textContent = inputInventoryName.textContent;
+              item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryName'));
+          addGlow(document.querySelector('.Page_description'));
         }
 
-        if(inputEventSubscriptions) {
-          document.querySelectorAll('.Page_eventSubscriptions').forEach((item, index) => {
+        if(inputPageId) {
+          document.querySelectorAll('.Page_pageId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputEventSubscriptions.getAttribute('value');
+              item.value = inputPageId.getAttribute('value');
             else
-              item.textContent = inputEventSubscriptions.textContent;
+              item.textContent = inputPageId.textContent;
           });
-          addGlow(document.querySelector('.Page_eventSubscriptions'));
+          addGlow(document.querySelector('.Page_pageId'));
         }
 
         if(inputClassCanonicalName) {
@@ -374,23 +380,43 @@ async function websocketHostInner(apiRequest) {
           addGlow(document.querySelector('.Page_solrId'));
         }
 
-        if(inputHostResource) {
-          document.querySelectorAll('.Page_hostResource').forEach((item, index) => {
+        if(inputTenantResource) {
+          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputHostResource.getAttribute('value');
+              item.value = inputTenantResource.getAttribute('value');
             else
-              item.textContent = inputHostResource.textContent;
+              item.textContent = inputTenantResource.textContent;
           });
-          addGlow(document.querySelector('.Page_hostResource'));
+          addGlow(document.querySelector('.Page_tenantResource'));
         }
 
-          pageGraphHost();
+        if(inputHubId) {
+          document.querySelectorAll('.Page_hubId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputHubId.getAttribute('value');
+            else
+              item.textContent = inputHubId.textContent;
+          });
+          addGlow(document.querySelector('.Page_hubId'));
+        }
+
+        if(inputClusterName) {
+          document.querySelectorAll('.Page_clusterName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputClusterName.getAttribute('value');
+            else
+              item.textContent = inputClusterName.textContent;
+          });
+          addGlow(document.querySelector('.Page_clusterName'));
+        }
+
+          pageGraphTenant();
       });
     });
   }
 }
 
-function pageGraphHost(apiRequest) {
+function pageGraphTenant(apiRequest) {
   var r = document.querySelector('.pageForm .pageResponse')?.value;
   if(r) {
     var json = JSON.parse(r);
@@ -422,7 +448,7 @@ function pageGraphHost(apiRequest) {
         var data = [];
         var layout = {};
         if(range) {
-          layout['title'] = 'hosts';
+          layout['title'] = 'tenants';
           layout['xaxis'] = {
             title: rangeVarFq.displayName
           }
@@ -485,7 +511,7 @@ function pageGraphHost(apiRequest) {
               data.push(trace);
             });
           }
-          Plotly.react('htmBodyGraphHostPage', data, layout);
+          Plotly.react('htmBodyGraphTenantPage', data, layout);
         }
       }
     }
@@ -493,8 +519,8 @@ function pageGraphHost(apiRequest) {
 }
 
 function animateStats() {
-  document.querySelector('#pageSearchVal-fqHost_time').innerText = '';
-  searchPage('Host', function() {
+  document.querySelector('#pageSearchVal-fqTenant_time').innerText = '';
+  searchPage('Tenant', function() {
     let speedRate = parseFloat(document.querySelector('#animateStatsSpeed')?.value) * 1000;
     let xStep = parseFloat(document.querySelector('#animateStatsStep')?.value);
     let xMin = parseFloat(document.querySelector('#animateStatsMin')?.value);
@@ -506,26 +532,26 @@ function animateStats() {
       if (x > xMax || x < 0) {
         clearInterval(animateInterval);
       }
-      document.querySelector('#fqHost_time').value = x;
-      document.querySelector('#fqHost_time').onchange();
-      searchPage('Host');
+      document.querySelector('#fqTenant_time').value = x;
+      document.querySelector('#fqTenant_time').onchange();
+      searchPage('Tenant');
     }, speedRate);
   });
 }
 
 // Search //
 
-async function searchHost($formFilters, success, error) {
-  var filters = searchHostFilters($formFilters);
+async function searchTenant($formFilters, success, error) {
+  var filters = searchTenantFilters($formFilters);
   if(success == null)
     success = function( data, textStatus, jQxhr ) {};
   if(error == null)
     error = function( jqXhr, target2 ) {};
 
-  searchHostVals(filters, target, success, error);
+  searchTenantVals(filters, target, success, error);
 }
 
-function searchHostFilters($formFilters) {
+function searchTenantFilters($formFilters) {
   var filters = [];
   if($formFilters) {
 
@@ -551,21 +577,21 @@ function searchHostFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+    var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
+    if(filterTenantName != null && filterTenantName !== '')
+      filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
 
-    var filterHostName = $formFilters.querySelector('.valueHostName')?.value;
-    if(filterHostName != null && filterHostName !== '')
-      filters.push({ name: 'fq', value: 'hostName:' + filterHostName });
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
-    var filterInventoryName = $formFilters.querySelector('.valueInventoryName')?.value;
-    if(filterInventoryName != null && filterInventoryName !== '')
-      filters.push({ name: 'fq', value: 'inventoryName:' + filterInventoryName });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
-    var filterEventSubscriptions = $formFilters.querySelector('.valueEventSubscriptions')?.value;
-    if(filterEventSubscriptions != null && filterEventSubscriptions !== '')
-      filters.push({ name: 'fq', value: 'eventSubscriptions:' + filterEventSubscriptions });
+    var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
+    if(filterPageId != null && filterPageId !== '')
+      filters.push({ name: 'fq', value: 'pageId:' + filterPageId });
 
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
@@ -623,18 +649,25 @@ function searchHostFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
-    var filterHostResource = $formFilters.querySelector('.valueHostResource')?.value;
-    if(filterHostResource != null && filterHostResource !== '')
-      filters.push({ name: 'fq', value: 'hostResource:' + filterHostResource });
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+
+    var filterHubId = $formFilters.querySelector('.valueHubId')?.value;
+    if(filterHubId != null && filterHubId !== '')
+      filters.push({ name: 'fq', value: 'hubId:' + filterHubId });
+
+    var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
+    if(filterClusterName != null && filterClusterName !== '')
+      filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
   }
   return filters;
 }
 
-function searchHostVals(filters, target, success, error) {
-
+function searchTenantVals(filters, target, success, error) {
 
   fetch(
-    '/en-us/api/host?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    '/en-us/api/tenant?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -649,60 +682,12 @@ function searchHostVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestHostTenantResource(filters, $list, hostName = null, tenantResource = null, relate=true, target) {
+function suggestTenantObjectSuggest($formFilters, $list, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
-        var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="fa-regular fa-buildings"></i>';
-        var $i = iTemplate.content;
-        var $span = document.createElement('span');
-        $span.setAttribute('class', '');
-        $span.innerText = o['objectTitle'];
-        var $a = document.createElement('a');
-        $a.setAttribute('href', o['editPage']);
-        $a.append($i);
-        $a.append($span);
-        var val = o['tenantResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(hostName.toString()) : val == tenantResource);
-        var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + hostName + '_tenantResource_' + o['tenantResource']);
-        $input.setAttribute('name', 'tenantResource');
-        $input.setAttribute('value', o['tenantResource']);
-        $input.setAttribute('class', 'valueTenantResource ');
-        if(hostName != null) {
-          $input.addEventListener('change', function(event) {
-            patchHostVals([{ name: 'fq', value: 'hostName:' + hostName }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
-                , target
-                , function(response, target) {
-                  addGlow(target);
-                  suggestHostTenantResource(filters, $list, hostName, o['tenantResource'], relate, target);
-                }
-                , function(response, target) { addError(target); }
-            );
-          });
-        }
-        if(checked)
-          $input.setAttribute('checked', 'checked');
-        var $li = document.createElement('li');
-        if(relate)
-          $li.append($input);
-        $li.append($a);
-        $list.append($li);
-      });
-    }
-  };
-  error = function( jqXhr, target2 ) {};
-  searchTenantVals(filters, target, success, error);
-}
-
-function suggestHostObjectSuggest($formFilters, $list, target) {
-  success = function( data, textStatus, jQxhr ) {
-    if($list) {
-      $list.innerHTML = '';
-      data['list'].forEach((o, i) => {
-        var $i = document.querySelector('<i class="fa-duotone fa-regular fa-server"></i>');
+        var $i = document.querySelector('<i class="fa-regular fa-buildings"></i>');
         var $span = document.createElement('span');
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
@@ -716,14 +701,14 @@ function suggestHostObjectSuggest($formFilters, $list, target) {
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchHostVals($formFilters, target, success, error);
+  searchTenantVals($formFilters, target, success, error);
 }
 
 // GET //
 
-async function getHost(pk) {
+async function getTenant(pk) {
   fetch(
-    '/en-us/api/host/' + hostName
+    '/en-us/api/tenant/' + tenantId
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -740,8 +725,8 @@ async function getHost(pk) {
 
 // PATCH //
 
-async function patchHost($formFilters, $formValues, target, hostName, success, error) {
-  var filters = patchHostFilters($formFilters);
+async function patchTenant($formFilters, $formValues, target, tenantId, success, error) {
+  var filters = patchTenantFilters($formFilters);
 
   var vals = {};
 
@@ -800,45 +785,53 @@ async function patchHost($formFilters, $formValues, target, hostName, success, e
   if(removeArchived != null && removeArchived !== '')
     vals['removeArchived'] = removeArchived;
 
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['setTenantResource'] = valueTenantResource;
+  var valueTenantName = $formValues.querySelector('.valueTenantName')?.value;
+  var removeTenantName = $formValues.querySelector('.removeTenantName')?.value === 'true';
+  var setTenantName = removeTenantName ? null : $formValues.querySelector('.setTenantName')?.value;
+  var addTenantName = $formValues.querySelector('.addTenantName')?.value;
+  if(removeTenantName || setTenantName != null && setTenantName !== '')
+    vals['setTenantName'] = setTenantName;
+  if(addTenantName != null && addTenantName !== '')
+    vals['addTenantName'] = addTenantName;
+  var removeTenantName = $formValues.querySelector('.removeTenantName')?.value;
+  if(removeTenantName != null && removeTenantName !== '')
+    vals['removeTenantName'] = removeTenantName;
 
-  var valueHostName = $formValues.querySelector('.valueHostName')?.value;
-  var removeHostName = $formValues.querySelector('.removeHostName')?.value === 'true';
-  var setHostName = removeHostName ? null : $formValues.querySelector('.setHostName')?.value;
-  var addHostName = $formValues.querySelector('.addHostName')?.value;
-  if(removeHostName || setHostName != null && setHostName !== '')
-    vals['setHostName'] = setHostName;
-  if(addHostName != null && addHostName !== '')
-    vals['addHostName'] = addHostName;
-  var removeHostName = $formValues.querySelector('.removeHostName')?.value;
-  if(removeHostName != null && removeHostName !== '')
-    vals['removeHostName'] = removeHostName;
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value === 'true';
+  var setTenantId = removeTenantId ? null : $formValues.querySelector('.setTenantId')?.value;
+  var addTenantId = $formValues.querySelector('.addTenantId')?.value;
+  if(removeTenantId || setTenantId != null && setTenantId !== '')
+    vals['setTenantId'] = setTenantId;
+  if(addTenantId != null && addTenantId !== '')
+    vals['addTenantId'] = addTenantId;
+  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value;
+  if(removeTenantId != null && removeTenantId !== '')
+    vals['removeTenantId'] = removeTenantId;
 
-  var valueInventoryName = $formValues.querySelector('.valueInventoryName')?.value;
-  var removeInventoryName = $formValues.querySelector('.removeInventoryName')?.value === 'true';
-  var setInventoryName = removeInventoryName ? null : $formValues.querySelector('.setInventoryName')?.value;
-  var addInventoryName = $formValues.querySelector('.addInventoryName')?.value;
-  if(removeInventoryName || setInventoryName != null && setInventoryName !== '')
-    vals['setInventoryName'] = setInventoryName;
-  if(addInventoryName != null && addInventoryName !== '')
-    vals['addInventoryName'] = addInventoryName;
-  var removeInventoryName = $formValues.querySelector('.removeInventoryName')?.value;
-  if(removeInventoryName != null && removeInventoryName !== '')
-    vals['removeInventoryName'] = removeInventoryName;
+  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
+  var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
+  var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
+  var addDescription = $formValues.querySelector('.addDescription')?.value;
+  if(removeDescription || setDescription != null && setDescription !== '')
+    vals['setDescription'] = setDescription;
+  if(addDescription != null && addDescription !== '')
+    vals['addDescription'] = addDescription;
+  var removeDescription = $formValues.querySelector('.removeDescription')?.value;
+  if(removeDescription != null && removeDescription !== '')
+    vals['removeDescription'] = removeDescription;
 
-  var valueEventSubscriptions = $formValues.querySelector('.valueEventSubscriptions')?.value;
-  var removeEventSubscriptions = $formValues.querySelector('.removeEventSubscriptions')?.value === 'true';
-  var setEventSubscriptions = removeEventSubscriptions ? null : $formValues.querySelector('.setEventSubscriptions')?.value;
-  var addEventSubscriptions = $formValues.querySelector('.addEventSubscriptions')?.value;
-  if(removeEventSubscriptions || setEventSubscriptions != null && setEventSubscriptions !== '')
-    vals['setEventSubscriptions'] = JSON.parse(setEventSubscriptions);
-  if(addEventSubscriptions != null && addEventSubscriptions !== '')
-    vals['addEventSubscriptions'] = addEventSubscriptions;
-  var removeEventSubscriptions = $formValues.querySelector('.removeEventSubscriptions')?.value;
-  if(removeEventSubscriptions != null && removeEventSubscriptions !== '')
-    vals['removeEventSubscriptions'] = removeEventSubscriptions;
+  var valuePageId = $formValues.querySelector('.valuePageId')?.value;
+  var removePageId = $formValues.querySelector('.removePageId')?.value === 'true';
+  var setPageId = removePageId ? null : $formValues.querySelector('.setPageId')?.value;
+  var addPageId = $formValues.querySelector('.addPageId')?.value;
+  if(removePageId || setPageId != null && setPageId !== '')
+    vals['setPageId'] = setPageId;
+  if(addPageId != null && addPageId !== '')
+    vals['addPageId'] = addPageId;
+  var removePageId = $formValues.querySelector('.removePageId')?.value;
+  if(removePageId != null && removePageId !== '')
+    vals['removePageId'] = removePageId;
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
@@ -924,22 +917,46 @@ async function patchHost($formFilters, $formValues, target, hostName, success, e
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
-  var valueHostResource = $formValues.querySelector('.valueHostResource')?.value;
-  var removeHostResource = $formValues.querySelector('.removeHostResource')?.value === 'true';
-  var setHostResource = removeHostResource ? null : $formValues.querySelector('.setHostResource')?.value;
-  var addHostResource = $formValues.querySelector('.addHostResource')?.value;
-  if(removeHostResource || setHostResource != null && setHostResource !== '')
-    vals['setHostResource'] = setHostResource;
-  if(addHostResource != null && addHostResource !== '')
-    vals['addHostResource'] = addHostResource;
-  var removeHostResource = $formValues.querySelector('.removeHostResource')?.value;
-  if(removeHostResource != null && removeHostResource !== '')
-    vals['removeHostResource'] = removeHostResource;
+  var valueTenantResource = $formValues.querySelector('.valueTenantResource')?.value;
+  var removeTenantResource = $formValues.querySelector('.removeTenantResource')?.value === 'true';
+  var setTenantResource = removeTenantResource ? null : $formValues.querySelector('.setTenantResource')?.value;
+  var addTenantResource = $formValues.querySelector('.addTenantResource')?.value;
+  if(removeTenantResource || setTenantResource != null && setTenantResource !== '')
+    vals['setTenantResource'] = setTenantResource;
+  if(addTenantResource != null && addTenantResource !== '')
+    vals['addTenantResource'] = addTenantResource;
+  var removeTenantResource = $formValues.querySelector('.removeTenantResource')?.value;
+  if(removeTenantResource != null && removeTenantResource !== '')
+    vals['removeTenantResource'] = removeTenantResource;
 
-  patchHostVals(hostName == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'hostName:' + hostName}], vals, target, success, error);
+  var valueHubId = $formValues.querySelector('.valueHubId')?.value;
+  var removeHubId = $formValues.querySelector('.removeHubId')?.value === 'true';
+  var setHubId = removeHubId ? null : $formValues.querySelector('.setHubId')?.value;
+  var addHubId = $formValues.querySelector('.addHubId')?.value;
+  if(removeHubId || setHubId != null && setHubId !== '')
+    vals['setHubId'] = setHubId;
+  if(addHubId != null && addHubId !== '')
+    vals['addHubId'] = addHubId;
+  var removeHubId = $formValues.querySelector('.removeHubId')?.value;
+  if(removeHubId != null && removeHubId !== '')
+    vals['removeHubId'] = removeHubId;
+
+  var valueClusterName = $formValues.querySelector('.valueClusterName')?.value;
+  var removeClusterName = $formValues.querySelector('.removeClusterName')?.value === 'true';
+  var setClusterName = removeClusterName ? null : $formValues.querySelector('.setClusterName')?.value;
+  var addClusterName = $formValues.querySelector('.addClusterName')?.value;
+  if(removeClusterName || setClusterName != null && setClusterName !== '')
+    vals['setClusterName'] = setClusterName;
+  if(addClusterName != null && addClusterName !== '')
+    vals['addClusterName'] = addClusterName;
+  var removeClusterName = $formValues.querySelector('.removeClusterName')?.value;
+  if(removeClusterName != null && removeClusterName !== '')
+    vals['removeClusterName'] = removeClusterName;
+
+  patchTenantVals(tenantId == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'tenantId:' + tenantId}], vals, target, success, error);
 }
 
-function patchHostFilters($formFilters) {
+function patchTenantFilters($formFilters) {
   var filters = [];
   if($formFilters) {
     filters.push({ name: 'softCommit', value: 'true' });
@@ -966,21 +983,21 @@ function patchHostFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+    var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
+    if(filterTenantName != null && filterTenantName !== '')
+      filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
 
-    var filterHostName = $formFilters.querySelector('.valueHostName')?.value;
-    if(filterHostName != null && filterHostName !== '')
-      filters.push({ name: 'fq', value: 'hostName:' + filterHostName });
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
-    var filterInventoryName = $formFilters.querySelector('.valueInventoryName')?.value;
-    if(filterInventoryName != null && filterInventoryName !== '')
-      filters.push({ name: 'fq', value: 'inventoryName:' + filterInventoryName });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
-    var filterEventSubscriptions = $formFilters.querySelector('.valueEventSubscriptions')?.value;
-    if(filterEventSubscriptions != null && filterEventSubscriptions !== '')
-      filters.push({ name: 'fq', value: 'eventSubscriptions:' + filterEventSubscriptions });
+    var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
+    if(filterPageId != null && filterPageId !== '')
+      filters.push({ name: 'fq', value: 'pageId:' + filterPageId });
 
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
@@ -1038,22 +1055,30 @@ function patchHostFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
-    var filterHostResource = $formFilters.querySelector('.valueHostResource')?.value;
-    if(filterHostResource != null && filterHostResource !== '')
-      filters.push({ name: 'fq', value: 'hostResource:' + filterHostResource });
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+
+    var filterHubId = $formFilters.querySelector('.valueHubId')?.value;
+    if(filterHubId != null && filterHubId !== '')
+      filters.push({ name: 'fq', value: 'hubId:' + filterHubId });
+
+    var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
+    if(filterClusterName != null && filterClusterName !== '')
+      filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
   }
   return filters;
 }
 
-function patchHostVal(filters, v, val, target, success, error) {
+function patchTenantVal(filters, v, val, target, success, error) {
   var vals = {};
   vals[v] = val;
-  patchHostVals(filters, vals, target, success, error);
+  patchTenantVals(filters, vals, target, success, error);
 }
 
-function patchHostVals(filters, vals, target, success, error) {
+function patchTenantVals(filters, vals, target, success, error) {
   fetch(
-    '/en-us/api/host?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    '/en-us/api/tenant?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'PATCH'
@@ -1072,7 +1097,7 @@ function patchHostVals(filters, vals, target, success, error) {
 
 // POST //
 
-async function postHost($formValues, target, success, error) {
+async function postTenant($formValues, target, success, error) {
   var vals = {};
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
@@ -1120,21 +1145,21 @@ async function postHost($formValues, target, success, error) {
   if(valueArchived != null && valueArchived !== '')
     vals['archived'] = valueArchived == 'true';
 
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['tenantResource'] = valueTenantResource;
+  var valueTenantName = $formValues.querySelector('.valueTenantName')?.value;
+  if(valueTenantName != null && valueTenantName !== '')
+    vals['tenantName'] = valueTenantName;
 
-  var valueHostName = $formValues.querySelector('.valueHostName')?.value;
-  if(valueHostName != null && valueHostName !== '')
-    vals['hostName'] = valueHostName;
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  if(valueTenantId != null && valueTenantId !== '')
+    vals['tenantId'] = valueTenantId;
 
-  var valueInventoryName = $formValues.querySelector('.valueInventoryName')?.value;
-  if(valueInventoryName != null && valueInventoryName !== '')
-    vals['inventoryName'] = valueInventoryName;
+  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
+  if(valueDescription != null && valueDescription !== '')
+    vals['description'] = valueDescription;
 
-  var valueEventSubscriptions = $formValues.querySelector('.valueEventSubscriptions')?.value;
-  if(valueEventSubscriptions != null && valueEventSubscriptions !== '')
-    vals['eventSubscriptions'] = JSON.parse(valueEventSubscriptions);
+  var valuePageId = $formValues.querySelector('.valuePageId')?.value;
+  if(valuePageId != null && valuePageId !== '')
+    vals['pageId'] = valuePageId;
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
@@ -1164,12 +1189,20 @@ async function postHost($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
-  var valueHostResource = $formValues.querySelector('.valueHostResource')?.value;
-  if(valueHostResource != null && valueHostResource !== '')
-    vals['hostResource'] = valueHostResource;
+  var valueTenantResource = $formValues.querySelector('.valueTenantResource')?.value;
+  if(valueTenantResource != null && valueTenantResource !== '')
+    vals['tenantResource'] = valueTenantResource;
+
+  var valueHubId = $formValues.querySelector('.valueHubId')?.value;
+  if(valueHubId != null && valueHubId !== '')
+    vals['hubId'] = valueHubId;
+
+  var valueClusterName = $formValues.querySelector('.valueClusterName')?.value;
+  if(valueClusterName != null && valueClusterName !== '')
+    vals['clusterName'] = valueClusterName;
 
   fetch(
-    '/en-us/api/host'
+    '/en-us/api/tenant'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'POST'
@@ -1186,9 +1219,9 @@ async function postHost($formValues, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function postHostVals(vals, target, success, error) {
+function postTenantVals(vals, target, success, error) {
   fetch(
-    '/en-us/api/host'
+    '/en-us/api/tenant'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'POST'
@@ -1207,7 +1240,7 @@ function postHostVals(vals, target, success, error) {
 
 // DELETE //
 
-async function deleteHost(target, hostName, success, error) {
+async function deleteTenant(target, tenantId, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1239,7 +1272,7 @@ async function deleteHost(target, hostName, success, error) {
   }
 
   fetch(
-    '/en-us/api/host/' + encodeURIComponent(hostName)
+    '/en-us/api/tenant/' + encodeURIComponent(tenantId)
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -1255,15 +1288,15 @@ async function deleteHost(target, hostName, success, error) {
 
 // PUTImport //
 
-async function putimportHost($formValues, target, hostName, success, error) {
+async function putimportTenant($formValues, target, tenantId, success, error) {
   var json = $formValues.querySelector('.PUTImport_searchList')?.value;
   if(json != null && json !== '')
-    putimportHostVals(JSON.parse(json), target, success, error);
+    putimportTenantVals(JSON.parse(json), target, success, error);
 }
 
-function putimportHostVals(json, target, success, error) {
+function putimportTenantVals(json, target, success, error) {
   fetch(
-    '/en-us/api/host-import'
+    '/en-us/api/tenant-import'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'PUT'
@@ -1282,7 +1315,7 @@ function putimportHostVals(json, target, success, error) {
 
 // DELETEFilter //
 
-async function deletefilterHost(target, success, error) {
+async function deletefilterTenant(target, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1314,7 +1347,7 @@ async function deletefilterHost(target, success, error) {
   }
 
   fetch(
-    '/en-us/api/host'
+    '/en-us/api/tenant'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
