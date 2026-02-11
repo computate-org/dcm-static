@@ -1,0 +1,448 @@
+{% extends "en-us/PageLayout.htm" %}
+
+{%- block htmTitlePageLayout %}
+{%- block htmTitleHostCheckPage %}
+    <title>{% if resultCount == 0 %}no host check found{% else %}host checks{% endif %}</title>
+{%- endblock htmTitleHostCheckPage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/host-check/HostCheck.css"/>
+{%- block htmStylesHostCheckPage %}
+{%- endblock htmStylesHostCheckPage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 4;
+      }
+{{ super() }}
+{%- block htmStyleHostCheckPage %}
+{%- endblock htmStyleHostCheckPage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsHostCheckPage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/host-check/HostCheck.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-check/HostCheckSearchPage.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+{%- endblock htmScriptsHostCheckPage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptHostCheckPage %}
+    <script>
+
+      function jsWebsocketHostCheck(checkName, vars, $response) {
+{%- block jsWebsocketHostCheckPage %}{%- endblock %}
+      }
+
+      function jsTooltipHostCheck(e, feature) {
+{%- block jsTooltipHostCheckPage %}{%- endblock %}
+      }
+
+      function htmTooltipHostCheck(feature, layer) {
+        return `{%- block htmTooltipHostCheckPage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipHostCheckPage %}`;
+      }
+
+      function facetChangeHostCheckSuccess(e) {
+        var l = e.querySelector('.pageForm .listHostCheck')?.value;
+        if(l)
+          window.listHostCheck = JSON.parse(l);
+{% block facetChangeHostCheckSuccess %}{%- endblock facetHostCheckSuccess %}
+      }
+      function facetChangeHostCheckError(e) {
+{% block facetChangeHostCheckError %}{%- endblock facetHostCheckError %}
+      }
+
+      function facetSimpleRangeHostCheckSuccess(e) {
+{% block facetSimpleRangeHostCheckSuccess %}      facetChangeHostCheckSuccess(e);{% endblock facetSimpleRangeHostCheckSuccess %}
+      }
+      function facetSimpleRangeHostCheckError(e) {
+{% block facetSimpleRangeHostCheckError %}      facetChangeHostCheckError(e);{% endblock facetSimpleRangeHostCheckError %}
+      }
+      function facetSimpleRangeHostCheck(e) {
+        facetSimpleRange(e, facetSimpleRangeHostCheckSuccess, facetSimpleRangeHostCheckError);
+      }
+
+      function facetRangeTimeZoneHostCheckSuccess(e) {
+{% block facetRangeTimeZoneHostCheckSuccess %}      facetChangeHostCheckSuccess(e);{% endblock facetRangeTimeZoneHostCheckSuccess %}
+      }
+      function facetRangeTimeZoneHostCheckError(e) {
+{% block facetRangeTimeZoneHostCheckError %}      facetChangeHostCheckError(e);{%- endblock facetRangeTimeZoneHostCheckError %}
+      }
+      function facetRangeTimeZoneHostCheck(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneHostCheckSuccess, facetRangeTimeZoneHostCheckError);
+      }
+
+      function facetRangeGapChangeHostCheckSuccess(e) {
+{% block facetRangeGapChangeHostCheckSuccess %}      facetChangeHostCheckSuccess(e);{% endblock facetRangeGapChangeHostCheckSuccess %}
+      }
+      function facetRangeGapChangeHostCheckError(e) {
+{% block facetRangeGapChangeHostCheckError %}      facetChangeHostCheckError(e);{%- endblock facetRangeGapChangeHostCheckError %}
+      }
+      function facetRangeGapChangeHostCheck(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeHostCheckSuccess, facetRangeGapChangeHostCheckError);
+      }
+
+      function facetRangeStartChangeHostCheckSuccess(e) {
+{% block facetRangeStartChangeHostCheckSuccess %}      facetChangeHostCheckSuccess(e);{% endblock facetRangeStartChangeHostCheckSuccess %}
+      }
+      function facetRangeStartChangeHostCheckError(e) {
+{% block facetRangeStartChangeHostCheckError %}      facetChangeHostCheckError(e);{%- endblock facetRangeStartChangeHostCheckError %}
+      }
+      function facetRangeStartChangeHostCheck(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeHostCheckSuccess, facetRangeStartChangeHostCheckError);
+      }
+
+      function facetRangeEndChangeHostCheckSuccess(e) {
+{% block facetRangeEndChangeHostCheckSuccess %}      facetChangeHostCheckSuccess(e);{% endblock facetRangeEndChangeHostCheckSuccess %}
+      }
+      function facetRangeEndChangeHostCheckError(e) {
+{% block facetRangeEndChangeHostCheckError %}      facetChangeHostCheckError(e);{%- endblock facetRangeEndChangeHostCheckError %}
+      }
+      function facetRangeEndChangeHostCheck(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeHostCheckSuccess, facetRangeEndChangeHostCheckError);
+      }
+    </script>
+    <script type="module">
+{% if DEFAULT_MAP_LOCATION is defined %}
+      window.DEFAULT_MAP_LOCATION = { type: 'Point', coordinates: [ {{ DEFAULT_MAP_LOCATION.coordinates[0] }}, {{ DEFAULT_MAP_LOCATION.coordinates[1] }} ]};
+{% endif %}
+{% if DEFAULT_MAP_ZOOM is defined %}
+      window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{% endif %}
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+
+        var checkName = {% if result.checkName is defined %}{{ result.checkName | tojson }}{% else %}null{% endif %};
+
+          function relate_tenantResource(event) {
+            suggestHostCheckTenantResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#POST_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
+        if(checkName == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.checkName is defined %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listHostCheck')?.value;
+        if(l)
+          window.listHostCheck = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneHostCheck);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneHostCheck);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneHostCheck);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeHostCheck);
+        pageGraphHostCheck();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qHostCheck_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('HostCheck', event.target, document.querySelector('#qHostCheckDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qHostCheck_rows')?.addEventListener('change', event => {
+          paramChange('HostCheck', event.target, document.querySelector('#qHostCheckDiv_rows'));
+        });
+
+        document.querySelector('#qHostCheck_start')?.addEventListener('change', event => {
+          paramChange('HostCheck', event.target, document.querySelector('#qHostCheckDiv_start'));
+        });
+
+
+        var submitForm_patchHostCheck = document.querySelector('#htmForm_patchHostCheck')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_patchHostCheck')?.addEventListener('click', event => {
+          event.preventDefault();
+          patchHostCheck(null, document.querySelector('#htmForm_patchHostCheck'), document.querySelector('#htmFormButton_patchHostCheck'), event.target.getAttribute('data-checkName'));
+          return false;
+        });
+
+        var submitForm_postHostCheck = document.querySelector('#htmForm_postHostCheck')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_postHostCheck')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHostCheck(document.querySelector('#htmForm_postHostCheck')
+          , document.querySelector('#htmFormButton_postHostCheck')
+          , (json, target) => {
+            window.location.href = json.editPage;
+          });
+          return false;
+        });
+
+        var submitForm_deleteHostCheck = document.querySelector('#htmForm_deleteHostCheck')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deleteHostCheck')?.addEventListener('click', event => {
+          event.preventDefault();
+          deleteHostCheck(event.target, event.target.getAttribute('data-checkName'));
+          return false;
+        });
+
+        var submitForm_putimportHostCheck = document.querySelector('#htmForm_putimportHostCheck')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_putimportHostCheck')?.addEventListener('click', event => {
+          event.preventDefault();
+          putimportHostCheck(document.querySelector('#htmForm_putimportHostCheck'), document.querySelector('#htmFormButton_putimportHostCheck'));
+          return false;
+        });
+
+        var submitForm_searchpageHostCheck = document.querySelector('#htmForm_searchpageHostCheck')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_searchpageHostCheck')?.addEventListener('click', event => {
+          event.preventDefault();
+          searchpageHostCheck();
+          return false;
+        });
+
+        var submitForm_deletefilterHostCheck = document.querySelector('#htmForm_deletefilterHostCheck')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deletefilterHostCheck')?.addEventListener('click', event => {
+          event.preventDefault();
+          deletefilterHostCheck(event.target);
+          return false;
+        });
+{%- block htmScriptInitHostCheckPage %}{%- endblock htmScriptInitHostCheckPage %}
+      });
+    </script>
+{%- endblock htmScriptHostCheckPage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketHostCheckPage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketHostCheck(websocketHostCheckInner);
+{% endif %}
+{%- endblock websocketHostCheckPage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlHostCheckPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlHostCheckPage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-HostCheck">back to all host checks</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-HostCheck" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-duotone fa-regular fa-box-check"></i>
+                  all host checks
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search host checks
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+{{ super() }}
+{%- block htmBodyStartHostCheckPage %}
+{% include en-us/search/host-check/HostCheckSidebar.htm %}
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-HostCheck">back to all host checks</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-HostCheck" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="fa-duotone fa-regular fa-box-check"></i>
+              all host checks
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no host check found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class="fa-duotone fa-regular fa-box-check"></i>
+            </div>
+            <span class="wa-heading-m ">no host check found</span>
+            <p class="wa-caption-l ">A check to be performed on a computer. </p>
+          </div>
+        </div>
+{% else %}
+{% include en-us/search/host-check/HostCheckSuggestedSearch.htm %}
+          <div class="pageContent ">
+            <form action="/en-us/api/host-check" id="HostCheckForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="focusId" type="hidden"/>
+              <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+              <input name="listHostCheck" id="listHostCheck" class="listHostCheck"  value='{{ toJsonArrayStringInApostrophes(listHostCheck) }}' type="hidden"/>
+            </form>
+            <div id="site-calendar-box">
+              <div id="site-calendar"><!-- // --></div>
+            </div>
+            <div class="wa-stack wa-gap-m ">
+{% endif %}
+{% include en-us/search/host-check/HostCheckSearchForm.htm %}
+{%- endblock htmBodyStartHostCheckPage %}
+{%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/host-check/HostCheckSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/host-check/HostCheckSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleHostCheckPage %}
+{% if resultCount > 0 %}
+              <div class="wa-stack wa-gap-0 ">
+{% include en-us/search/host-check/HostCheckPaginationButtons.htm %}
+                <div class="card-like-thing background-color-surface-border" id="site-results-grid">
+                  <div>
+                    <wa-dropdown id="htmDropdown-tenantResource">
+                      <wa-button variant="brand" slot="trigger" caret>tenant</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_tenantResource'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantResource-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by tenant ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_tenantResource'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantResource-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by tenant descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-checkName">
+                      <wa-button variant="brand" slot="trigger" caret>check name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_checkName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-checkName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by check name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_checkName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-checkName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by check name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-eventSubscriptions">
+                      <wa-button variant="brand" slot="trigger" caret>event subscriptions</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_eventSubscriptions'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-eventSubscriptions-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by event subscriptions ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_eventSubscriptions'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-eventSubscriptions-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by event subscriptions descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-eventHandlers">
+                      <wa-button variant="brand" slot="trigger" caret>event handlers</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_eventHandlers'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-eventHandlers-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by event handlers ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_eventHandlers'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-eventHandlers-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by event handlers descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                  </div>
+                  {% for item in listHostCheck%}
+                  <div>
+                    <a href="{{ item.displayPage }}">
+                      <i class="fa-duotone fa-regular fa-box-check"></i>
+                      <span>{{ item.tenantResource | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.checkName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.eventSubscriptions | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.eventHandlers | e }}</span>
+                    </a>
+                  </div>
+                  {% endfor %}
+              {% if getColumnTenantResource is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnCheckName is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnEventSubscriptions is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnEventHandlers is defined %}
+                <div>
+                </div>
+              {% endif %}
+                </div>
+{% include en-us/search/host-check/HostCheckPaginationButtons.htm %}
+              </div>
+            </div>
+          </div>
+{% endif %}
+{%- endblock htmBodyMiddleHostCheckPage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndHostCheckPage %}
+{%- include en-us/search/host-check/HostCheckLocation.htm %}
+{%- endblock htmBodyEndHostCheckPage %}
+  {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

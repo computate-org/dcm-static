@@ -15,7 +15,7 @@
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 4;
+        --site-results-number-of-columns: 5;
       }
 {{ super() }}
 {%- block htmStyleHostPage %}
@@ -388,6 +388,19 @@
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-ipAddress">
+                      <wa-button variant="brand" slot="trigger" caret>IP address</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHost_ipAddress'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Host').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-ipAddress-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by IP address ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHost_ipAddress'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Host').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-ipAddress-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by IP address descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                     <wa-dropdown id="htmDropdown-hostDescription">
                       <wa-button variant="brand" slot="trigger" caret>host description</wa-button>
                       <wa-menu>
@@ -425,6 +438,9 @@
                       <span>{{ item.hostName | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
+                      <span>{{ item.ipAddress | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
                       <span>{{ item.hostDescription | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
@@ -437,6 +453,10 @@
                 </div>
               {% endif %}
               {% if getColumnHostName is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnIpAddress is defined %}
                 <div>
                 </div>
               {% endif %}

@@ -1,49 +1,49 @@
 
-async function websocketHost(success) {
+async function websocketHostCheck(success) {
   window.eventBus.onopen = function () {
 
-    window.eventBus.registerHandler('websocketHost', function (error, message) {
+    window.eventBus.registerHandler('websocketHostCheck', function (error, message) {
       var json = JSON.parse(message['body']);
-      var hostResource = json['id'];
+      var checkName = json['id'];
       var solrIds = json['solrIds'];
       var empty = json['empty'];
       var numFound = parseInt(json['numFound']);
       var numPATCH = parseInt(json['numPATCH']);
       var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
       var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + hostResource + ' ');
-      $box.setAttribute('id', 'box-' + hostResource);
+      $box.setAttribute('class', 'w3-quarter box-' + checkName + ' ');
+      $box.setAttribute('id', 'box-' + checkName);
       $box.setAttribute('data-numPATCH', numPATCH);
       var $margin = document.createElement('div');
       $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + hostResource);
+      $margin.setAttribute('id', 'margin-' + checkName);
       var $card = document.createElement('div');
       $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + hostResource);
+      $card.setAttribute('id', 'card-' + checkName);
       var $header = document.createElement('div');
       $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + hostResource);
+      $header.setAttribute('id', 'header-' + checkName);
       var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-server"></i>';
+      iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-box-check"></i>';
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
-      $headerSpan.innerText = 'modify hosts in ' + json.timeRemaining;
+      $headerSpan.innerText = 'modify host checks in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + hostResource + '");');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + checkName + '");');
       $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + hostResource);
+      $x.setAttribute('id', 'x-' + checkName);
       var $body = document.createElement('div');
       $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + hostResource);
+      $body.setAttribute('id', 'text-' + checkName);
       var $bar = document.createElement('div');
       $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + hostResource);
+      $bar.setAttribute('id', 'bar-' + checkName);
       var $progress = document.createElement('div');
       $progress.setAttribute('class', 'w3- ');
       $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + hostResource);
+      $progress.setAttribute('id', 'progress-' + checkName);
       $progress.innerText = numPATCH + '/' + numFound;
       $card.append($header);
       $header.append($i);
@@ -55,24 +55,24 @@ async function websocketHost(success) {
       $box.append($margin);
       $margin.append($card);
       if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + hostResource);
+        var $old_box = document.querySelector('.box-' + checkName);
       } else {
-        document.querySelector('.box-' + hostResource)?.remove();
+        document.querySelector('.box-' + checkName)?.remove();
       }
-      if(hostResource) {
+      if(checkName) {
         if(success)
           success(json);
       }
     });
   }
 }
-async function websocketHostInner(apiRequest) {
-  var hostResource = apiRequest['id'];
+async function websocketHostCheckInner(apiRequest) {
+  var checkName = apiRequest['id'];
   var classes = apiRequest['classes'];
   var vars = apiRequest['vars'];
   var empty = apiRequest['empty'];
 
-  if(hostResource != null && vars.length > 0) {
+  if(checkName != null && vars.length > 0) {
     var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
     var uri = location.pathname + queryParams;
     fetch(uri).then(response => {
@@ -83,11 +83,13 @@ async function websocketHostInner(apiRequest) {
         var inputModified = null;
         var inputArchived = null;
         var inputTenantResource = null;
-        var inputInventoryResource = null;
-        var inputHostName = null;
-        var inputIpAddress = null;
-        var inputHostDescription = null;
+        var inputCheckName = null;
+        var inputCheckNamespace = null;
+        var inputCheckCommand = null;
+        var inputCheckInterval = null;
+        var inputCheckPublished = null;
         var inputEventSubscriptions = null;
+        var inputEventHandlers = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -102,11 +104,6 @@ async function websocketHostInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
-        var inputAapHostId = null;
-        var inputHostId = null;
-        var inputHostResource = null;
-        var inputAapInventoryId = null;
-        var inputInventoryName = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -118,16 +115,20 @@ async function websocketHostInner(apiRequest) {
           inputArchived = $response.querySelector('.Page_archived');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.Page_tenantResource');
-        if(vars.includes('inventoryResource'))
-          inputInventoryResource = $response.querySelector('.Page_inventoryResource');
-        if(vars.includes('hostName'))
-          inputHostName = $response.querySelector('.Page_hostName');
-        if(vars.includes('ipAddress'))
-          inputIpAddress = $response.querySelector('.Page_ipAddress');
-        if(vars.includes('hostDescription'))
-          inputHostDescription = $response.querySelector('.Page_hostDescription');
+        if(vars.includes('checkName'))
+          inputCheckName = $response.querySelector('.Page_checkName');
+        if(vars.includes('checkNamespace'))
+          inputCheckNamespace = $response.querySelector('.Page_checkNamespace');
+        if(vars.includes('checkCommand'))
+          inputCheckCommand = $response.querySelector('.Page_checkCommand');
+        if(vars.includes('checkInterval'))
+          inputCheckInterval = $response.querySelector('.Page_checkInterval');
+        if(vars.includes('checkPublished'))
+          inputCheckPublished = $response.querySelector('.Page_checkPublished');
         if(vars.includes('eventSubscriptions'))
           inputEventSubscriptions = $response.querySelector('.Page_eventSubscriptions');
+        if(vars.includes('eventHandlers'))
+          inputEventHandlers = $response.querySelector('.Page_eventHandlers');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -156,20 +157,10 @@ async function websocketHostInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
-        if(vars.includes('aapHostId'))
-          inputAapHostId = $response.querySelector('.Page_aapHostId');
-        if(vars.includes('hostId'))
-          inputHostId = $response.querySelector('.Page_hostId');
-        if(vars.includes('hostResource'))
-          inputHostResource = $response.querySelector('.Page_hostResource');
-        if(vars.includes('aapInventoryId'))
-          inputAapInventoryId = $response.querySelector('.Page_aapInventoryId');
-        if(vars.includes('inventoryName'))
-          inputInventoryName = $response.querySelector('.Page_inventoryName');
 
-        jsWebsocketHost(hostResource, vars, $response);
+        jsWebsocketHostCheck(checkName, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
-        window.listHost = JSON.parse($response.querySelector('.pageForm .listHost')?.value);
+        window.listHostCheck = JSON.parse($response.querySelector('.pageForm .listHostCheck')?.value);
 
 
         if(inputPk) {
@@ -222,44 +213,54 @@ async function websocketHostInner(apiRequest) {
           addGlow(document.querySelector('.Page_tenantResource'));
         }
 
-        if(inputInventoryResource) {
-          document.querySelectorAll('.Page_inventoryResource').forEach((item, index) => {
+        if(inputCheckName) {
+          document.querySelectorAll('.Page_checkName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputInventoryResource.getAttribute('value');
+              item.value = inputCheckName.getAttribute('value');
             else
-              item.textContent = inputInventoryResource.textContent;
+              item.textContent = inputCheckName.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryResource'));
+          addGlow(document.querySelector('.Page_checkName'));
         }
 
-        if(inputHostName) {
-          document.querySelectorAll('.Page_hostName').forEach((item, index) => {
+        if(inputCheckNamespace) {
+          document.querySelectorAll('.Page_checkNamespace').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputHostName.getAttribute('value');
+              item.value = inputCheckNamespace.getAttribute('value');
             else
-              item.textContent = inputHostName.textContent;
+              item.textContent = inputCheckNamespace.textContent;
           });
-          addGlow(document.querySelector('.Page_hostName'));
+          addGlow(document.querySelector('.Page_checkNamespace'));
         }
 
-        if(inputIpAddress) {
-          document.querySelectorAll('.Page_ipAddress').forEach((item, index) => {
+        if(inputCheckCommand) {
+          document.querySelectorAll('.Page_checkCommand').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputIpAddress.getAttribute('value');
+              item.value = inputCheckCommand.getAttribute('value');
             else
-              item.textContent = inputIpAddress.textContent;
+              item.textContent = inputCheckCommand.textContent;
           });
-          addGlow(document.querySelector('.Page_ipAddress'));
+          addGlow(document.querySelector('.Page_checkCommand'));
         }
 
-        if(inputHostDescription) {
-          document.querySelectorAll('.Page_hostDescription').forEach((item, index) => {
+        if(inputCheckInterval) {
+          document.querySelectorAll('.Page_checkInterval').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputHostDescription.getAttribute('value');
+              item.value = inputCheckInterval.getAttribute('value');
             else
-              item.textContent = inputHostDescription.textContent;
+              item.textContent = inputCheckInterval.textContent;
           });
-          addGlow(document.querySelector('.Page_hostDescription'));
+          addGlow(document.querySelector('.Page_checkInterval'));
+        }
+
+        if(inputCheckPublished) {
+          document.querySelectorAll('.Page_checkPublished').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputCheckPublished.getAttribute('value');
+            else
+              item.textContent = inputCheckPublished.textContent;
+          });
+          addGlow(document.querySelector('.Page_checkPublished'));
         }
 
         if(inputEventSubscriptions) {
@@ -270,6 +271,16 @@ async function websocketHostInner(apiRequest) {
               item.textContent = inputEventSubscriptions.textContent;
           });
           addGlow(document.querySelector('.Page_eventSubscriptions'));
+        }
+
+        if(inputEventHandlers) {
+          document.querySelectorAll('.Page_eventHandlers').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputEventHandlers.getAttribute('value');
+            else
+              item.textContent = inputEventHandlers.textContent;
+          });
+          addGlow(document.querySelector('.Page_eventHandlers'));
         }
 
         if(inputClassCanonicalName) {
@@ -412,63 +423,13 @@ async function websocketHostInner(apiRequest) {
           addGlow(document.querySelector('.Page_solrId'));
         }
 
-        if(inputAapHostId) {
-          document.querySelectorAll('.Page_aapHostId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapHostId.getAttribute('value');
-            else
-              item.textContent = inputAapHostId.textContent;
-          });
-          addGlow(document.querySelector('.Page_aapHostId'));
-        }
-
-        if(inputHostId) {
-          document.querySelectorAll('.Page_hostId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputHostId.getAttribute('value');
-            else
-              item.textContent = inputHostId.textContent;
-          });
-          addGlow(document.querySelector('.Page_hostId'));
-        }
-
-        if(inputHostResource) {
-          document.querySelectorAll('.Page_hostResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputHostResource.getAttribute('value');
-            else
-              item.textContent = inputHostResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_hostResource'));
-        }
-
-        if(inputAapInventoryId) {
-          document.querySelectorAll('.Page_aapInventoryId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapInventoryId.getAttribute('value');
-            else
-              item.textContent = inputAapInventoryId.textContent;
-          });
-          addGlow(document.querySelector('.Page_aapInventoryId'));
-        }
-
-        if(inputInventoryName) {
-          document.querySelectorAll('.Page_inventoryName').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputInventoryName.getAttribute('value');
-            else
-              item.textContent = inputInventoryName.textContent;
-          });
-          addGlow(document.querySelector('.Page_inventoryName'));
-        }
-
-          pageGraphHost();
+          pageGraphHostCheck();
       });
     });
   }
 }
 
-function pageGraphHost(apiRequest) {
+function pageGraphHostCheck(apiRequest) {
   var r = document.querySelector('.pageForm .pageResponse')?.value;
   if(r) {
     var json = JSON.parse(r);
@@ -500,7 +461,7 @@ function pageGraphHost(apiRequest) {
         var data = [];
         var layout = {};
         if(range) {
-          layout['title'] = 'hosts';
+          layout['title'] = 'host checks';
           layout['xaxis'] = {
             title: rangeVarFq.displayName
           }
@@ -563,7 +524,7 @@ function pageGraphHost(apiRequest) {
               data.push(trace);
             });
           }
-          Plotly.react('htmBodyGraphHostPage', data, layout);
+          Plotly.react('htmBodyGraphHostCheckPage', data, layout);
         }
       }
     }
@@ -571,8 +532,8 @@ function pageGraphHost(apiRequest) {
 }
 
 function animateStats() {
-  document.querySelector('#pageSearchVal-fqHost_time').innerText = '';
-  searchPage('Host', function() {
+  document.querySelector('#pageSearchVal-fqHostCheck_time').innerText = '';
+  searchPage('HostCheck', function() {
     let speedRate = parseFloat(document.querySelector('#animateStatsSpeed')?.value) * 1000;
     let xStep = parseFloat(document.querySelector('#animateStatsStep')?.value);
     let xMin = parseFloat(document.querySelector('#animateStatsMin')?.value);
@@ -584,26 +545,26 @@ function animateStats() {
       if (x > xMax || x < 0) {
         clearInterval(animateInterval);
       }
-      document.querySelector('#fqHost_time').value = x;
-      document.querySelector('#fqHost_time').onchange();
-      searchPage('Host');
+      document.querySelector('#fqHostCheck_time').value = x;
+      document.querySelector('#fqHostCheck_time').onchange();
+      searchPage('HostCheck');
     }, speedRate);
   });
 }
 
 // Search //
 
-async function searchHost($formFilters, success, error) {
-  var filters = searchHostFilters($formFilters);
+async function searchHostCheck($formFilters, success, error) {
+  var filters = searchHostCheckFilters($formFilters);
   if(success == null)
     success = function( data, textStatus, jQxhr ) {};
   if(error == null)
     error = function( jqXhr, target2 ) {};
 
-  searchHostVals(filters, target, success, error);
+  searchHostCheckVals(filters, target, success, error);
 }
 
-function searchHostFilters($formFilters) {
+function searchHostCheckFilters($formFilters) {
   var filters = [];
   if($formFilters) {
 
@@ -633,25 +594,39 @@ function searchHostFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
-    var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
-    if(filterInventoryResource != null && filterInventoryResource !== '')
-      filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
+    var filterCheckName = $formFilters.querySelector('.valueCheckName')?.value;
+    if(filterCheckName != null && filterCheckName !== '')
+      filters.push({ name: 'fq', value: 'checkName:' + filterCheckName });
 
-    var filterHostName = $formFilters.querySelector('.valueHostName')?.value;
-    if(filterHostName != null && filterHostName !== '')
-      filters.push({ name: 'fq', value: 'hostName:' + filterHostName });
+    var filterCheckNamespace = $formFilters.querySelector('.valueCheckNamespace')?.value;
+    if(filterCheckNamespace != null && filterCheckNamespace !== '')
+      filters.push({ name: 'fq', value: 'checkNamespace:' + filterCheckNamespace });
 
-    var filterIpAddress = $formFilters.querySelector('.valueIpAddress')?.value;
-    if(filterIpAddress != null && filterIpAddress !== '')
-      filters.push({ name: 'fq', value: 'ipAddress:' + filterIpAddress });
+    var filterCheckCommand = $formFilters.querySelector('.valueCheckCommand')?.value;
+    if(filterCheckCommand != null && filterCheckCommand !== '')
+      filters.push({ name: 'fq', value: 'checkCommand:' + filterCheckCommand });
 
-    var filterHostDescription = $formFilters.querySelector('.valueHostDescription')?.value;
-    if(filterHostDescription != null && filterHostDescription !== '')
-      filters.push({ name: 'fq', value: 'hostDescription:' + filterHostDescription });
+    var filterCheckInterval = $formFilters.querySelector('.valueCheckInterval')?.value;
+    if(filterCheckInterval != null && filterCheckInterval !== '')
+      filters.push({ name: 'fq', value: 'checkInterval:' + filterCheckInterval });
+
+    var $filterCheckPublishedCheckbox = $formFilters.querySelector('input.valueCheckPublished[type = "checkbox"]');
+    var $filterCheckPublishedSelect = $formFilters.querySelector('select.valueCheckPublished');
+    var filterCheckPublished = $filterCheckPublishedSelect.length ? $filterCheckPublishedSelect.value : $filterCheckPublishedCheckbox.checked;
+    var filterCheckPublishedSelectVal = $formFilters.querySelector('select.filterCheckPublished')?.value;
+    var filterCheckPublished = null;
+    if(filterCheckPublishedSelectVal !== '')
+      filterCheckPublished = filterCheckPublishedSelectVal == 'true';
+    if(filterCheckPublished != null && filterCheckPublished === true)
+      filters.push({ name: 'fq', value: 'checkPublished:' + filterCheckPublished });
 
     var filterEventSubscriptions = $formFilters.querySelector('.valueEventSubscriptions')?.value;
     if(filterEventSubscriptions != null && filterEventSubscriptions !== '')
       filters.push({ name: 'fq', value: 'eventSubscriptions:' + filterEventSubscriptions });
+
+    var filterEventHandlers = $formFilters.querySelector('.valueEventHandlers')?.value;
+    if(filterEventHandlers != null && filterEventHandlers !== '')
+      filters.push({ name: 'fq', value: 'eventHandlers:' + filterEventHandlers });
 
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
@@ -708,35 +683,15 @@ function searchHostFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterAapHostId = $formFilters.querySelector('.valueAapHostId')?.value;
-    if(filterAapHostId != null && filterAapHostId !== '')
-      filters.push({ name: 'fq', value: 'aapHostId:' + filterAapHostId });
-
-    var filterHostId = $formFilters.querySelector('.valueHostId')?.value;
-    if(filterHostId != null && filterHostId !== '')
-      filters.push({ name: 'fq', value: 'hostId:' + filterHostId });
-
-    var filterHostResource = $formFilters.querySelector('.valueHostResource')?.value;
-    if(filterHostResource != null && filterHostResource !== '')
-      filters.push({ name: 'fq', value: 'hostResource:' + filterHostResource });
-
-    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
-    if(filterAapInventoryId != null && filterAapInventoryId !== '')
-      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
-
-    var filterInventoryName = $formFilters.querySelector('.valueInventoryName')?.value;
-    if(filterInventoryName != null && filterInventoryName !== '')
-      filters.push({ name: 'fq', value: 'inventoryName:' + filterInventoryName });
   }
   return filters;
 }
 
-function searchHostVals(filters, target, success, error) {
+function searchHostCheckVals(filters, target, success, error) {
 
 
   fetch(
-    '/en-us/api/host?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    '/en-us/api/host-check?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -751,7 +706,7 @@ function searchHostVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestHostTenantResource(filters, $list, hostResource = null, tenantResource = null, relate=true, target) {
+function suggestHostCheckTenantResource(filters, $list, checkName = null, tenantResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -767,19 +722,19 @@ function suggestHostTenantResource(filters, $list, hostResource = null, tenantRe
         $a.append($i);
         $a.append($span);
         var val = o['tenantResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(hostResource.toString()) : val == tenantResource);
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(checkName.toString()) : val == tenantResource);
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + hostResource + '_tenantResource_' + o['tenantResource']);
+        $input.setAttribute('id', 'GET_tenantResource_' + checkName + '_tenantResource_' + o['tenantResource']);
         $input.setAttribute('name', 'tenantResource');
         $input.setAttribute('value', o['tenantResource']);
         $input.setAttribute('class', 'valueTenantResource ');
-        if(hostResource != null) {
+        if(checkName != null) {
           $input.addEventListener('change', function(event) {
-            patchHostVals([{ name: 'fq', value: 'hostResource:' + hostResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+            patchHostCheckVals([{ name: 'fq', value: 'checkName:' + checkName }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostTenantResource(filters, $list, hostResource, o['tenantResource'], relate, target);
+                  suggestHostCheckTenantResource(filters, $list, checkName, o['tenantResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -799,60 +754,12 @@ function suggestHostTenantResource(filters, $list, hostResource = null, tenantRe
   searchTenantVals(filters, target, success, error);
 }
 
-function suggestHostInventoryResource(filters, $list, hostResource = null, inventoryResource = null, relate=true, target) {
+function suggestHostCheckObjectSuggest($formFilters, $list, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
-        var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-network-wired"></i>';
-        var $i = iTemplate.content;
-        var $span = document.createElement('span');
-        $span.setAttribute('class', '');
-        $span.innerText = o['objectTitle'];
-        var $a = document.createElement('a');
-        $a.setAttribute('href', o['editPage']);
-        $a.append($i);
-        $a.append($span);
-        var val = o['inventoryResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(hostResource.toString()) : val == inventoryResource);
-        var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_inventoryResource_' + hostResource + '_inventoryResource_' + o['inventoryResource']);
-        $input.setAttribute('name', 'inventoryResource');
-        $input.setAttribute('value', o['inventoryResource']);
-        $input.setAttribute('class', 'valueInventoryResource ');
-        if(hostResource != null) {
-          $input.addEventListener('change', function(event) {
-            patchHostVals([{ name: 'fq', value: 'hostResource:' + hostResource }], { [(event.target.checked ? 'set' : 'remove') + 'InventoryResource']: o['inventoryResource'] }
-                , target
-                , function(response, target) {
-                  addGlow(target);
-                  suggestHostInventoryResource(filters, $list, hostResource, o['inventoryResource'], relate, target);
-                }
-                , function(response, target) { addError(target); }
-            );
-          });
-        }
-        if(checked)
-          $input.setAttribute('checked', 'checked');
-        var $li = document.createElement('li');
-        if(relate)
-          $li.append($input);
-        $li.append($a);
-        $list.append($li);
-      });
-    }
-  };
-  error = function( jqXhr, target2 ) {};
-  searchHostInventoryVals(filters, target, success, error);
-}
-
-function suggestHostObjectSuggest($formFilters, $list, target) {
-  success = function( data, textStatus, jQxhr ) {
-    if($list) {
-      $list.innerHTML = '';
-      data['list'].forEach((o, i) => {
-        var $i = document.querySelector('<i class="fa-duotone fa-regular fa-server"></i>');
+        var $i = document.querySelector('<i class="fa-duotone fa-regular fa-box-check"></i>');
         var $span = document.createElement('span');
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
@@ -866,14 +773,14 @@ function suggestHostObjectSuggest($formFilters, $list, target) {
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchHostVals($formFilters, target, success, error);
+  searchHostCheckVals($formFilters, target, success, error);
 }
 
 // GET //
 
-async function getHost(pk) {
+async function getHostCheck(pk) {
   fetch(
-    '/en-us/api/host/' + hostResource
+    '/en-us/api/host-check/' + checkName
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -890,8 +797,8 @@ async function getHost(pk) {
 
 // PATCH //
 
-async function patchHost($formFilters, $formValues, target, hostResource, success, error) {
-  var filters = patchHostFilters($formFilters);
+async function patchHostCheck($formFilters, $formValues, target, checkName, success, error) {
+  var filters = patchHostCheckFilters($formFilters);
 
   var vals = {};
 
@@ -954,45 +861,72 @@ async function patchHost($formFilters, $formValues, target, hostResource, succes
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['setTenantResource'] = valueTenantResource;
 
-  var valueInventoryResource = (Array.from($formValues.querySelectorAll('.valueInventoryResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueInventoryResource != null && valueInventoryResource !== '')
-    vals['setInventoryResource'] = valueInventoryResource;
+  var valueCheckName = $formValues.querySelector('.valueCheckName')?.value;
+  var removeCheckName = $formValues.querySelector('.removeCheckName')?.value === 'true';
+  var setCheckName = removeCheckName ? null : $formValues.querySelector('.setCheckName')?.value;
+  var addCheckName = $formValues.querySelector('.addCheckName')?.value;
+  if(removeCheckName || setCheckName != null && setCheckName !== '')
+    vals['setCheckName'] = setCheckName;
+  if(addCheckName != null && addCheckName !== '')
+    vals['addCheckName'] = addCheckName;
+  var removeCheckName = $formValues.querySelector('.removeCheckName')?.value;
+  if(removeCheckName != null && removeCheckName !== '')
+    vals['removeCheckName'] = removeCheckName;
 
-  var valueHostName = $formValues.querySelector('.valueHostName')?.value;
-  var removeHostName = $formValues.querySelector('.removeHostName')?.value === 'true';
-  var setHostName = removeHostName ? null : $formValues.querySelector('.setHostName')?.value;
-  var addHostName = $formValues.querySelector('.addHostName')?.value;
-  if(removeHostName || setHostName != null && setHostName !== '')
-    vals['setHostName'] = setHostName;
-  if(addHostName != null && addHostName !== '')
-    vals['addHostName'] = addHostName;
-  var removeHostName = $formValues.querySelector('.removeHostName')?.value;
-  if(removeHostName != null && removeHostName !== '')
-    vals['removeHostName'] = removeHostName;
+  var valueCheckNamespace = $formValues.querySelector('.valueCheckNamespace')?.value;
+  var removeCheckNamespace = $formValues.querySelector('.removeCheckNamespace')?.value === 'true';
+  var setCheckNamespace = removeCheckNamespace ? null : $formValues.querySelector('.setCheckNamespace')?.value;
+  var addCheckNamespace = $formValues.querySelector('.addCheckNamespace')?.value;
+  if(removeCheckNamespace || setCheckNamespace != null && setCheckNamespace !== '')
+    vals['setCheckNamespace'] = setCheckNamespace;
+  if(addCheckNamespace != null && addCheckNamespace !== '')
+    vals['addCheckNamespace'] = addCheckNamespace;
+  var removeCheckNamespace = $formValues.querySelector('.removeCheckNamespace')?.value;
+  if(removeCheckNamespace != null && removeCheckNamespace !== '')
+    vals['removeCheckNamespace'] = removeCheckNamespace;
 
-  var valueIpAddress = $formValues.querySelector('.valueIpAddress')?.value;
-  var removeIpAddress = $formValues.querySelector('.removeIpAddress')?.value === 'true';
-  var setIpAddress = removeIpAddress ? null : $formValues.querySelector('.setIpAddress')?.value;
-  var addIpAddress = $formValues.querySelector('.addIpAddress')?.value;
-  if(removeIpAddress || setIpAddress != null && setIpAddress !== '')
-    vals['setIpAddress'] = setIpAddress;
-  if(addIpAddress != null && addIpAddress !== '')
-    vals['addIpAddress'] = addIpAddress;
-  var removeIpAddress = $formValues.querySelector('.removeIpAddress')?.value;
-  if(removeIpAddress != null && removeIpAddress !== '')
-    vals['removeIpAddress'] = removeIpAddress;
+  var valueCheckCommand = $formValues.querySelector('.valueCheckCommand')?.value;
+  var removeCheckCommand = $formValues.querySelector('.removeCheckCommand')?.value === 'true';
+  var setCheckCommand = removeCheckCommand ? null : $formValues.querySelector('.setCheckCommand')?.value;
+  var addCheckCommand = $formValues.querySelector('.addCheckCommand')?.value;
+  if(removeCheckCommand || setCheckCommand != null && setCheckCommand !== '')
+    vals['setCheckCommand'] = setCheckCommand;
+  if(addCheckCommand != null && addCheckCommand !== '')
+    vals['addCheckCommand'] = addCheckCommand;
+  var removeCheckCommand = $formValues.querySelector('.removeCheckCommand')?.value;
+  if(removeCheckCommand != null && removeCheckCommand !== '')
+    vals['removeCheckCommand'] = removeCheckCommand;
 
-  var valueHostDescription = $formValues.querySelector('.valueHostDescription')?.value;
-  var removeHostDescription = $formValues.querySelector('.removeHostDescription')?.value === 'true';
-  var setHostDescription = removeHostDescription ? null : $formValues.querySelector('.setHostDescription')?.value;
-  var addHostDescription = $formValues.querySelector('.addHostDescription')?.value;
-  if(removeHostDescription || setHostDescription != null && setHostDescription !== '')
-    vals['setHostDescription'] = setHostDescription;
-  if(addHostDescription != null && addHostDescription !== '')
-    vals['addHostDescription'] = addHostDescription;
-  var removeHostDescription = $formValues.querySelector('.removeHostDescription')?.value;
-  if(removeHostDescription != null && removeHostDescription !== '')
-    vals['removeHostDescription'] = removeHostDescription;
+  var valueCheckInterval = $formValues.querySelector('.valueCheckInterval')?.value;
+  var removeCheckInterval = $formValues.querySelector('.removeCheckInterval')?.value === 'true';
+  var setCheckInterval = removeCheckInterval ? null : $formValues.querySelector('.setCheckInterval')?.value;
+  var addCheckInterval = $formValues.querySelector('.addCheckInterval')?.value;
+  if(removeCheckInterval || setCheckInterval != null && setCheckInterval !== '')
+    vals['setCheckInterval'] = setCheckInterval;
+  if(addCheckInterval != null && addCheckInterval !== '')
+    vals['addCheckInterval'] = addCheckInterval;
+  var removeCheckInterval = $formValues.querySelector('.removeCheckInterval')?.value;
+  if(removeCheckInterval != null && removeCheckInterval !== '')
+    vals['removeCheckInterval'] = removeCheckInterval;
+
+  var valueCheckPublished = $formValues.querySelector('.valueCheckPublished')?.value;
+  var removeCheckPublished = $formValues.querySelector('.removeCheckPublished')?.value === 'true';
+  if(valueCheckPublished != null)
+    valueCheckPublished = valueCheckPublished === 'true';
+  var valueCheckPublishedSelectVal = $formValues.querySelector('select.setCheckPublished')?.value;
+  if(valueCheckPublishedSelectVal != null)
+    valueCheckPublishedSelectVal = valueCheckPublishedSelectVal === 'true';
+  if(valueCheckPublishedSelectVal != null && valueCheckPublishedSelectVal !== '')
+    valueCheckPublished = valueCheckPublishedSelectVal == 'true';
+  var setCheckPublished = removeCheckPublished ? null : valueCheckPublished;
+  var addCheckPublished = $formValues.querySelector('.addCheckPublished')?.checked;
+  if(removeCheckPublished || setCheckPublished != null && setCheckPublished !== '')
+    vals['setCheckPublished'] = setCheckPublished;
+  if(addCheckPublished != null && addCheckPublished !== '')
+    vals['addCheckPublished'] = addCheckPublished;
+  var removeCheckPublished = $formValues.querySelector('.removeCheckPublished')?.checked;
+  if(removeCheckPublished != null && removeCheckPublished !== '')
+    vals['removeCheckPublished'] = removeCheckPublished;
 
   var valueEventSubscriptions = $formValues.querySelector('.valueEventSubscriptions')?.value;
   var removeEventSubscriptions = $formValues.querySelector('.removeEventSubscriptions')?.value === 'true';
@@ -1005,6 +939,18 @@ async function patchHost($formFilters, $formValues, target, hostResource, succes
   var removeEventSubscriptions = $formValues.querySelector('.removeEventSubscriptions')?.value;
   if(removeEventSubscriptions != null && removeEventSubscriptions !== '')
     vals['removeEventSubscriptions'] = removeEventSubscriptions;
+
+  var valueEventHandlers = $formValues.querySelector('.valueEventHandlers')?.value;
+  var removeEventHandlers = $formValues.querySelector('.removeEventHandlers')?.value === 'true';
+  var setEventHandlers = removeEventHandlers ? null : $formValues.querySelector('.setEventHandlers')?.value;
+  var addEventHandlers = $formValues.querySelector('.addEventHandlers')?.value;
+  if(removeEventHandlers || setEventHandlers != null && setEventHandlers !== '')
+    vals['setEventHandlers'] = JSON.parse(setEventHandlers);
+  if(addEventHandlers != null && addEventHandlers !== '')
+    vals['addEventHandlers'] = addEventHandlers;
+  var removeEventHandlers = $formValues.querySelector('.removeEventHandlers')?.value;
+  if(removeEventHandlers != null && removeEventHandlers !== '')
+    vals['removeEventHandlers'] = removeEventHandlers;
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
@@ -1090,70 +1036,10 @@ async function patchHost($formFilters, $formValues, target, hostResource, succes
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
-  var valueAapHostId = $formValues.querySelector('.valueAapHostId')?.value;
-  var removeAapHostId = $formValues.querySelector('.removeAapHostId')?.value === 'true';
-  var setAapHostId = removeAapHostId ? null : $formValues.querySelector('.setAapHostId')?.value;
-  var addAapHostId = $formValues.querySelector('.addAapHostId')?.value;
-  if(removeAapHostId || setAapHostId != null && setAapHostId !== '')
-    vals['setAapHostId'] = setAapHostId;
-  if(addAapHostId != null && addAapHostId !== '')
-    vals['addAapHostId'] = addAapHostId;
-  var removeAapHostId = $formValues.querySelector('.removeAapHostId')?.value;
-  if(removeAapHostId != null && removeAapHostId !== '')
-    vals['removeAapHostId'] = removeAapHostId;
-
-  var valueHostId = $formValues.querySelector('.valueHostId')?.value;
-  var removeHostId = $formValues.querySelector('.removeHostId')?.value === 'true';
-  var setHostId = removeHostId ? null : $formValues.querySelector('.setHostId')?.value;
-  var addHostId = $formValues.querySelector('.addHostId')?.value;
-  if(removeHostId || setHostId != null && setHostId !== '')
-    vals['setHostId'] = setHostId;
-  if(addHostId != null && addHostId !== '')
-    vals['addHostId'] = addHostId;
-  var removeHostId = $formValues.querySelector('.removeHostId')?.value;
-  if(removeHostId != null && removeHostId !== '')
-    vals['removeHostId'] = removeHostId;
-
-  var valueHostResource = $formValues.querySelector('.valueHostResource')?.value;
-  var removeHostResource = $formValues.querySelector('.removeHostResource')?.value === 'true';
-  var setHostResource = removeHostResource ? null : $formValues.querySelector('.setHostResource')?.value;
-  var addHostResource = $formValues.querySelector('.addHostResource')?.value;
-  if(removeHostResource || setHostResource != null && setHostResource !== '')
-    vals['setHostResource'] = setHostResource;
-  if(addHostResource != null && addHostResource !== '')
-    vals['addHostResource'] = addHostResource;
-  var removeHostResource = $formValues.querySelector('.removeHostResource')?.value;
-  if(removeHostResource != null && removeHostResource !== '')
-    vals['removeHostResource'] = removeHostResource;
-
-  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
-  var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value === 'true';
-  var setAapInventoryId = removeAapInventoryId ? null : $formValues.querySelector('.setAapInventoryId')?.value;
-  var addAapInventoryId = $formValues.querySelector('.addAapInventoryId')?.value;
-  if(removeAapInventoryId || setAapInventoryId != null && setAapInventoryId !== '')
-    vals['setAapInventoryId'] = setAapInventoryId;
-  if(addAapInventoryId != null && addAapInventoryId !== '')
-    vals['addAapInventoryId'] = addAapInventoryId;
-  var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value;
-  if(removeAapInventoryId != null && removeAapInventoryId !== '')
-    vals['removeAapInventoryId'] = removeAapInventoryId;
-
-  var valueInventoryName = $formValues.querySelector('.valueInventoryName')?.value;
-  var removeInventoryName = $formValues.querySelector('.removeInventoryName')?.value === 'true';
-  var setInventoryName = removeInventoryName ? null : $formValues.querySelector('.setInventoryName')?.value;
-  var addInventoryName = $formValues.querySelector('.addInventoryName')?.value;
-  if(removeInventoryName || setInventoryName != null && setInventoryName !== '')
-    vals['setInventoryName'] = setInventoryName;
-  if(addInventoryName != null && addInventoryName !== '')
-    vals['addInventoryName'] = addInventoryName;
-  var removeInventoryName = $formValues.querySelector('.removeInventoryName')?.value;
-  if(removeInventoryName != null && removeInventoryName !== '')
-    vals['removeInventoryName'] = removeInventoryName;
-
-  patchHostVals(hostResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'hostResource:' + hostResource}], vals, target, success, error);
+  patchHostCheckVals(checkName == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'checkName:' + checkName}], vals, target, success, error);
 }
 
-function patchHostFilters($formFilters) {
+function patchHostCheckFilters($formFilters) {
   var filters = [];
   if($formFilters) {
     filters.push({ name: 'softCommit', value: 'true' });
@@ -1184,25 +1070,39 @@ function patchHostFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
-    var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
-    if(filterInventoryResource != null && filterInventoryResource !== '')
-      filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
+    var filterCheckName = $formFilters.querySelector('.valueCheckName')?.value;
+    if(filterCheckName != null && filterCheckName !== '')
+      filters.push({ name: 'fq', value: 'checkName:' + filterCheckName });
 
-    var filterHostName = $formFilters.querySelector('.valueHostName')?.value;
-    if(filterHostName != null && filterHostName !== '')
-      filters.push({ name: 'fq', value: 'hostName:' + filterHostName });
+    var filterCheckNamespace = $formFilters.querySelector('.valueCheckNamespace')?.value;
+    if(filterCheckNamespace != null && filterCheckNamespace !== '')
+      filters.push({ name: 'fq', value: 'checkNamespace:' + filterCheckNamespace });
 
-    var filterIpAddress = $formFilters.querySelector('.valueIpAddress')?.value;
-    if(filterIpAddress != null && filterIpAddress !== '')
-      filters.push({ name: 'fq', value: 'ipAddress:' + filterIpAddress });
+    var filterCheckCommand = $formFilters.querySelector('.valueCheckCommand')?.value;
+    if(filterCheckCommand != null && filterCheckCommand !== '')
+      filters.push({ name: 'fq', value: 'checkCommand:' + filterCheckCommand });
 
-    var filterHostDescription = $formFilters.querySelector('.valueHostDescription')?.value;
-    if(filterHostDescription != null && filterHostDescription !== '')
-      filters.push({ name: 'fq', value: 'hostDescription:' + filterHostDescription });
+    var filterCheckInterval = $formFilters.querySelector('.valueCheckInterval')?.value;
+    if(filterCheckInterval != null && filterCheckInterval !== '')
+      filters.push({ name: 'fq', value: 'checkInterval:' + filterCheckInterval });
+
+    var $filterCheckPublishedCheckbox = $formFilters.querySelector('input.valueCheckPublished[type = "checkbox"]');
+    var $filterCheckPublishedSelect = $formFilters.querySelector('select.valueCheckPublished');
+    var filterCheckPublished = $filterCheckPublishedSelect.length ? $filterCheckPublishedSelect.value : $filterCheckPublishedCheckbox.checked;
+    var filterCheckPublishedSelectVal = $formFilters.querySelector('select.filterCheckPublished')?.value;
+    var filterCheckPublished = null;
+    if(filterCheckPublishedSelectVal !== '')
+      filterCheckPublished = filterCheckPublishedSelectVal == 'true';
+    if(filterCheckPublished != null && filterCheckPublished === true)
+      filters.push({ name: 'fq', value: 'checkPublished:' + filterCheckPublished });
 
     var filterEventSubscriptions = $formFilters.querySelector('.valueEventSubscriptions')?.value;
     if(filterEventSubscriptions != null && filterEventSubscriptions !== '')
       filters.push({ name: 'fq', value: 'eventSubscriptions:' + filterEventSubscriptions });
+
+    var filterEventHandlers = $formFilters.querySelector('.valueEventHandlers')?.value;
+    if(filterEventHandlers != null && filterEventHandlers !== '')
+      filters.push({ name: 'fq', value: 'eventHandlers:' + filterEventHandlers });
 
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
@@ -1259,39 +1159,19 @@ function patchHostFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
-
-    var filterAapHostId = $formFilters.querySelector('.valueAapHostId')?.value;
-    if(filterAapHostId != null && filterAapHostId !== '')
-      filters.push({ name: 'fq', value: 'aapHostId:' + filterAapHostId });
-
-    var filterHostId = $formFilters.querySelector('.valueHostId')?.value;
-    if(filterHostId != null && filterHostId !== '')
-      filters.push({ name: 'fq', value: 'hostId:' + filterHostId });
-
-    var filterHostResource = $formFilters.querySelector('.valueHostResource')?.value;
-    if(filterHostResource != null && filterHostResource !== '')
-      filters.push({ name: 'fq', value: 'hostResource:' + filterHostResource });
-
-    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
-    if(filterAapInventoryId != null && filterAapInventoryId !== '')
-      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
-
-    var filterInventoryName = $formFilters.querySelector('.valueInventoryName')?.value;
-    if(filterInventoryName != null && filterInventoryName !== '')
-      filters.push({ name: 'fq', value: 'inventoryName:' + filterInventoryName });
   }
   return filters;
 }
 
-function patchHostVal(filters, v, val, target, success, error) {
+function patchHostCheckVal(filters, v, val, target, success, error) {
   var vals = {};
   vals[v] = val;
-  patchHostVals(filters, vals, target, success, error);
+  patchHostCheckVals(filters, vals, target, success, error);
 }
 
-function patchHostVals(filters, vals, target, success, error) {
+function patchHostCheckVals(filters, vals, target, success, error) {
   fetch(
-    '/en-us/api/host?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    '/en-us/api/host-check?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'PATCH'
@@ -1310,7 +1190,7 @@ function patchHostVals(filters, vals, target, success, error) {
 
 // POST //
 
-async function postHost($formValues, target, success, error) {
+async function postHostCheck($formValues, target, success, error) {
   var vals = {};
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
@@ -1362,25 +1242,33 @@ async function postHost($formValues, target, success, error) {
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['tenantResource'] = valueTenantResource;
 
-  var valueInventoryResource = (Array.from($formValues.querySelectorAll('.valueInventoryResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueInventoryResource != null && valueInventoryResource !== '')
-    vals['inventoryResource'] = valueInventoryResource;
+  var valueCheckName = $formValues.querySelector('.valueCheckName')?.value;
+  if(valueCheckName != null && valueCheckName !== '')
+    vals['checkName'] = valueCheckName;
 
-  var valueHostName = $formValues.querySelector('.valueHostName')?.value;
-  if(valueHostName != null && valueHostName !== '')
-    vals['hostName'] = valueHostName;
+  var valueCheckNamespace = $formValues.querySelector('.valueCheckNamespace')?.value;
+  if(valueCheckNamespace != null && valueCheckNamespace !== '')
+    vals['checkNamespace'] = valueCheckNamespace;
 
-  var valueIpAddress = $formValues.querySelector('.valueIpAddress')?.value;
-  if(valueIpAddress != null && valueIpAddress !== '')
-    vals['ipAddress'] = valueIpAddress;
+  var valueCheckCommand = $formValues.querySelector('.valueCheckCommand')?.value;
+  if(valueCheckCommand != null && valueCheckCommand !== '')
+    vals['checkCommand'] = valueCheckCommand;
 
-  var valueHostDescription = $formValues.querySelector('.valueHostDescription')?.value;
-  if(valueHostDescription != null && valueHostDescription !== '')
-    vals['hostDescription'] = valueHostDescription;
+  var valueCheckInterval = $formValues.querySelector('.valueCheckInterval')?.value;
+  if(valueCheckInterval != null && valueCheckInterval !== '')
+    vals['checkInterval'] = valueCheckInterval;
+
+  var valueCheckPublished = $formValues.querySelector('.valueCheckPublished')?.value;
+  if(valueCheckPublished != null && valueCheckPublished !== '')
+    vals['checkPublished'] = valueCheckPublished == 'true';
 
   var valueEventSubscriptions = $formValues.querySelector('.valueEventSubscriptions')?.value;
   if(valueEventSubscriptions != null && valueEventSubscriptions !== '')
     vals['eventSubscriptions'] = JSON.parse(valueEventSubscriptions);
+
+  var valueEventHandlers = $formValues.querySelector('.valueEventHandlers')?.value;
+  if(valueEventHandlers != null && valueEventHandlers !== '')
+    vals['eventHandlers'] = JSON.parse(valueEventHandlers);
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
@@ -1410,28 +1298,8 @@ async function postHost($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
-  var valueAapHostId = $formValues.querySelector('.valueAapHostId')?.value;
-  if(valueAapHostId != null && valueAapHostId !== '')
-    vals['aapHostId'] = valueAapHostId;
-
-  var valueHostId = $formValues.querySelector('.valueHostId')?.value;
-  if(valueHostId != null && valueHostId !== '')
-    vals['hostId'] = valueHostId;
-
-  var valueHostResource = $formValues.querySelector('.valueHostResource')?.value;
-  if(valueHostResource != null && valueHostResource !== '')
-    vals['hostResource'] = valueHostResource;
-
-  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
-  if(valueAapInventoryId != null && valueAapInventoryId !== '')
-    vals['aapInventoryId'] = valueAapInventoryId;
-
-  var valueInventoryName = $formValues.querySelector('.valueInventoryName')?.value;
-  if(valueInventoryName != null && valueInventoryName !== '')
-    vals['inventoryName'] = valueInventoryName;
-
   fetch(
-    '/en-us/api/host'
+    '/en-us/api/host-check'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'POST'
@@ -1448,9 +1316,9 @@ async function postHost($formValues, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function postHostVals(vals, target, success, error) {
+function postHostCheckVals(vals, target, success, error) {
   fetch(
-    '/en-us/api/host'
+    '/en-us/api/host-check'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'POST'
@@ -1469,7 +1337,7 @@ function postHostVals(vals, target, success, error) {
 
 // DELETE //
 
-async function deleteHost(target, hostResource, success, error) {
+async function deleteHostCheck(target, checkName, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1501,7 +1369,7 @@ async function deleteHost(target, hostResource, success, error) {
   }
 
   fetch(
-    '/en-us/api/host/' + encodeURIComponent(hostResource)
+    '/en-us/api/host-check/' + encodeURIComponent(checkName)
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -1517,15 +1385,15 @@ async function deleteHost(target, hostResource, success, error) {
 
 // PUTImport //
 
-async function putimportHost($formValues, target, hostResource, success, error) {
+async function putimportHostCheck($formValues, target, checkName, success, error) {
   var json = $formValues.querySelector('.PUTImport_searchList')?.value;
   if(json != null && json !== '')
-    putimportHostVals(JSON.parse(json), target, success, error);
+    putimportHostCheckVals(JSON.parse(json), target, success, error);
 }
 
-function putimportHostVals(json, target, success, error) {
+function putimportHostCheckVals(json, target, success, error) {
   fetch(
-    '/en-us/api/host-import'
+    '/en-us/api/host-check-import'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'PUT'
@@ -1544,7 +1412,7 @@ function putimportHostVals(json, target, success, error) {
 
 // DELETEFilter //
 
-async function deletefilterHost(target, success, error) {
+async function deletefilterHostCheck(target, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1576,7 +1444,7 @@ async function deletefilterHost(target, success, error) {
   }
 
   fetch(
-    '/en-us/api/host'
+    '/en-us/api/host-check'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'

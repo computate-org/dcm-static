@@ -88,6 +88,17 @@ Promise.all([
     facetStatsChange('Host', 'hostName', false);
   });
 
+  document.querySelector('#pageSelectSortHost_ipAddress')?.addEventListener('change', (event) => {
+    sort('Host', 'ipAddress', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_ipAddress')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'ipAddress', true);
+  });
+  document.querySelector('#pageStatsHost_ipAddress')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'ipAddress', false);
+  });
+
   document.querySelector('#pageSelectSortHost_hostDescription')?.addEventListener('change', (event) => {
     sort('Host', 'hostDescription', event.currentTarget.value);
   });
