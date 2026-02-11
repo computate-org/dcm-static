@@ -35,7 +35,7 @@
 {%- block htmScriptHostInventoryPage %}
     <script>
 
-      function jsWebsocketHostInventory(inventoryName, vars, $response) {
+      function jsWebsocketHostInventory(inventoryResource, vars, $response) {
 {%- block jsWebsocketHostInventoryPage %}{%- endblock %}
       }
 
@@ -126,9 +126,9 @@
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
-        var inventoryName = {% if result.inventoryName is defined %}{{ result.inventoryName | tojson }}{% else %}null{% endif %};
+        var inventoryResource = {% if result.inventoryResource is defined %}{{ result.inventoryResource | tojson }}{% else %}null{% endif %};
 
-        if(inventoryName == null) {
+        if(inventoryResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
             document.querySelector('#site-results-grid').classList.add('grid-mode-details');
@@ -145,14 +145,14 @@
           var o = document.querySelector('.pageForm .result')?.value;
           if(o)
             window.result = JSON.parse(o);
-        {% if result.inventoryName is defined %}
+        {% if result.inventoryResource is defined %}
           function relate_tenantResource(event) {
             suggestHostInventoryTenantResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.inventoryName
+                , window.result.inventoryResource
                 , window.result.tenantResource
                 , true
                 );
@@ -164,12 +164,12 @@
           document.querySelector('#Page_tenantResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
           {% if "PATCH" in scopes %}
-          suggestHostInventoryTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostInventoryTenantResource_Page'), window.result.inventoryName, window.result.tenantResource, true);
+          suggestHostInventoryTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostInventoryTenantResource_Page'), window.result.inventoryResource, window.result.tenantResource, true);
           {% else %}
           {% if "GET" in scopes %}
-          suggestHostInventoryTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostInventoryTenantResource_Page'), window.result.inventoryName, window.result.tenantResource, true);
+          suggestHostInventoryTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostInventoryTenantResource_Page'), window.result.inventoryResource, window.result.tenantResource, true);
           {% else %}
-          suggestHostInventoryTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostInventoryTenantResource_Page'), window.result.inventoryName, window.result.tenantResource, false);
+          suggestHostInventoryTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostInventoryTenantResource_Page'), window.result.inventoryResource, window.result.tenantResource, false);
           {% endif %}
           {% endif %}
         {% endif %}
@@ -208,7 +208,7 @@
         });
         document.querySelector('#htmFormButton_patchHostInventory')?.addEventListener('click', event => {
           event.preventDefault();
-          patchHostInventory(null, document.querySelector('#htmForm_patchHostInventory'), document.querySelector('#htmFormButton_patchHostInventory'), event.target.getAttribute('data-inventoryName'));
+          patchHostInventory(null, document.querySelector('#htmForm_patchHostInventory'), document.querySelector('#htmFormButton_patchHostInventory'), event.target.getAttribute('data-inventoryResource'));
           return false;
         });
 
@@ -232,7 +232,7 @@
         });
         document.querySelector('#htmFormButton_deleteHostInventory')?.addEventListener('click', event => {
           event.preventDefault();
-          deleteHostInventory(event.target, event.target.getAttribute('data-inventoryName'));
+          deleteHostInventory(event.target, event.target.getAttribute('data-inventoryResource'));
           return false;
         });
 
@@ -295,11 +295,11 @@
 {%- endif %}
 {%- if pageBreadcrumb is not defined %}
 {%- set pageBreadcrumb %}
-              <wa-tooltip for="return-to-HostInventory">back to all a host inventories</wa-tooltip>
+              <wa-tooltip for="return-to-HostInventory">back to all host inventories</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-HostInventory" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
                   <i class="fa-duotone fa-regular fa-network-wired"></i>
-                  all a host inventories
+                  all host inventories
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
                   a host inventory
@@ -326,11 +326,11 @@
         <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
-          <wa-tooltip for="return-to-HostInventory">back to all a host inventories</wa-tooltip></wa-tooltip>
+          <wa-tooltip for="return-to-HostInventory">back to all host inventories</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-HostInventory" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
               <i class="fa-duotone fa-regular fa-network-wired"></i>
-              all a host inventories
+              all host inventories
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
               no host inventory found
@@ -349,8 +349,8 @@
 {% endif %}
 {%- block htmFormHostInventoryPage %}
           <form action="/en-us/api/host-inventory" id="HostInventoryForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
-{% if result.inventoryName is defined %}
-            <input name="inventoryName" class="valueInventoryName" type="hidden" value="{{ result.inventoryName }}"/>
+{% if result.inventoryResource is defined %}
+            <input name="inventoryResource" class="valueInventoryResource" type="hidden" value="{{ result.inventoryResource }}"/>
             {% endif %}
             <input name="focusId" type="hidden"/>
             <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>

@@ -4,46 +4,46 @@ async function websocketHostInventory(success) {
 
     window.eventBus.registerHandler('websocketHostInventory', function (error, message) {
       var json = JSON.parse(message['body']);
-      var inventoryName = json['id'];
+      var inventoryResource = json['id'];
       var solrIds = json['solrIds'];
       var empty = json['empty'];
       var numFound = parseInt(json['numFound']);
       var numPATCH = parseInt(json['numPATCH']);
       var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
       var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + inventoryName + ' ');
-      $box.setAttribute('id', 'box-' + inventoryName);
+      $box.setAttribute('class', 'w3-quarter box-' + inventoryResource + ' ');
+      $box.setAttribute('id', 'box-' + inventoryResource);
       $box.setAttribute('data-numPATCH', numPATCH);
       var $margin = document.createElement('div');
       $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + inventoryName);
+      $margin.setAttribute('id', 'margin-' + inventoryResource);
       var $card = document.createElement('div');
       $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + inventoryName);
+      $card.setAttribute('id', 'card-' + inventoryResource);
       var $header = document.createElement('div');
       $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + inventoryName);
+      $header.setAttribute('id', 'header-' + inventoryResource);
       var iTemplate = document.createElement('template');
       iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-network-wired"></i>';
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
-      $headerSpan.innerText = 'modify a host inventories in ' + json.timeRemaining;
+      $headerSpan.innerText = 'modify host inventories in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + inventoryName + '");');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + inventoryResource + '");');
       $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + inventoryName);
+      $x.setAttribute('id', 'x-' + inventoryResource);
       var $body = document.createElement('div');
       $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + inventoryName);
+      $body.setAttribute('id', 'text-' + inventoryResource);
       var $bar = document.createElement('div');
       $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + inventoryName);
+      $bar.setAttribute('id', 'bar-' + inventoryResource);
       var $progress = document.createElement('div');
       $progress.setAttribute('class', 'w3- ');
       $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + inventoryName);
+      $progress.setAttribute('id', 'progress-' + inventoryResource);
       $progress.innerText = numPATCH + '/' + numFound;
       $card.append($header);
       $header.append($i);
@@ -55,11 +55,11 @@ async function websocketHostInventory(success) {
       $box.append($margin);
       $margin.append($card);
       if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + inventoryName);
+        var $old_box = document.querySelector('.box-' + inventoryResource);
       } else {
-        document.querySelector('.box-' + inventoryName)?.remove();
+        document.querySelector('.box-' + inventoryResource)?.remove();
       }
-      if(inventoryName) {
+      if(inventoryResource) {
         if(success)
           success(json);
       }
@@ -67,12 +67,12 @@ async function websocketHostInventory(success) {
   }
 }
 async function websocketHostInventoryInner(apiRequest) {
-  var inventoryName = apiRequest['id'];
+  var inventoryResource = apiRequest['id'];
   var classes = apiRequest['classes'];
   var vars = apiRequest['vars'];
   var empty = apiRequest['empty'];
 
-  if(inventoryName != null && vars.length > 0) {
+  if(inventoryResource != null && vars.length > 0) {
     var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
     var uri = location.pathname + queryParams;
     fetch(uri).then(response => {
@@ -84,6 +84,7 @@ async function websocketHostInventoryInner(apiRequest) {
         var inputArchived = null;
         var inputInventoryName = null;
         var inputInventoryDescription = null;
+        var inputInventoryKind = null;
         var inputTenantResource = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
@@ -100,8 +101,9 @@ async function websocketHostInventoryInner(apiRequest) {
         var inputObjectText = null;
         var inputSolrId = null;
         var inputInventoryId = null;
+        var inputInventoryResource = null;
+        var inputAapInventoryId = null;
         var inputInventoryOrganizationId = null;
-        var inputInventoryKind = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -115,6 +117,8 @@ async function websocketHostInventoryInner(apiRequest) {
           inputInventoryName = $response.querySelector('.Page_inventoryName');
         if(vars.includes('inventoryDescription'))
           inputInventoryDescription = $response.querySelector('.Page_inventoryDescription');
+        if(vars.includes('inventoryKind'))
+          inputInventoryKind = $response.querySelector('.Page_inventoryKind');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.Page_tenantResource');
         if(vars.includes('classCanonicalName'))
@@ -147,12 +151,14 @@ async function websocketHostInventoryInner(apiRequest) {
           inputSolrId = $response.querySelector('.Page_solrId');
         if(vars.includes('inventoryId'))
           inputInventoryId = $response.querySelector('.Page_inventoryId');
+        if(vars.includes('inventoryResource'))
+          inputInventoryResource = $response.querySelector('.Page_inventoryResource');
+        if(vars.includes('aapInventoryId'))
+          inputAapInventoryId = $response.querySelector('.Page_aapInventoryId');
         if(vars.includes('inventoryOrganizationId'))
           inputInventoryOrganizationId = $response.querySelector('.Page_inventoryOrganizationId');
-        if(vars.includes('inventoryKind'))
-          inputInventoryKind = $response.querySelector('.Page_inventoryKind');
 
-        jsWebsocketHostInventory(inventoryName, vars, $response);
+        jsWebsocketHostInventory(inventoryResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listHostInventory = JSON.parse($response.querySelector('.pageForm .listHostInventory')?.value);
 
@@ -215,6 +221,16 @@ async function websocketHostInventoryInner(apiRequest) {
               item.textContent = inputInventoryDescription.textContent;
           });
           addGlow(document.querySelector('.Page_inventoryDescription'));
+        }
+
+        if(inputInventoryKind) {
+          document.querySelectorAll('.Page_inventoryKind').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputInventoryKind.getAttribute('value');
+            else
+              item.textContent = inputInventoryKind.textContent;
+          });
+          addGlow(document.querySelector('.Page_inventoryKind'));
         }
 
         if(inputTenantResource) {
@@ -377,6 +393,26 @@ async function websocketHostInventoryInner(apiRequest) {
           addGlow(document.querySelector('.Page_inventoryId'));
         }
 
+        if(inputInventoryResource) {
+          document.querySelectorAll('.Page_inventoryResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputInventoryResource.getAttribute('value');
+            else
+              item.textContent = inputInventoryResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_inventoryResource'));
+        }
+
+        if(inputAapInventoryId) {
+          document.querySelectorAll('.Page_aapInventoryId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapInventoryId.getAttribute('value');
+            else
+              item.textContent = inputAapInventoryId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapInventoryId'));
+        }
+
         if(inputInventoryOrganizationId) {
           document.querySelectorAll('.Page_inventoryOrganizationId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -385,16 +421,6 @@ async function websocketHostInventoryInner(apiRequest) {
               item.textContent = inputInventoryOrganizationId.textContent;
           });
           addGlow(document.querySelector('.Page_inventoryOrganizationId'));
-        }
-
-        if(inputInventoryKind) {
-          document.querySelectorAll('.Page_inventoryKind').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputInventoryKind.getAttribute('value');
-            else
-              item.textContent = inputInventoryKind.textContent;
-          });
-          addGlow(document.querySelector('.Page_inventoryKind'));
         }
 
           pageGraphHostInventory();
@@ -435,7 +461,7 @@ function pageGraphHostInventory(apiRequest) {
         var data = [];
         var layout = {};
         if(range) {
-          layout['title'] = 'a host inventories';
+          layout['title'] = 'host inventories';
           layout['xaxis'] = {
             title: rangeVarFq.displayName
           }
@@ -572,6 +598,10 @@ function searchHostInventoryFilters($formFilters) {
     if(filterInventoryDescription != null && filterInventoryDescription !== '')
       filters.push({ name: 'fq', value: 'inventoryDescription:' + filterInventoryDescription });
 
+    var filterInventoryKind = $formFilters.querySelector('.valueInventoryKind')?.value;
+    if(filterInventoryKind != null && filterInventoryKind !== '')
+      filters.push({ name: 'fq', value: 'inventoryKind:' + filterInventoryKind });
+
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
@@ -636,13 +666,17 @@ function searchHostInventoryFilters($formFilters) {
     if(filterInventoryId != null && filterInventoryId !== '')
       filters.push({ name: 'fq', value: 'inventoryId:' + filterInventoryId });
 
+    var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
+    if(filterInventoryResource != null && filterInventoryResource !== '')
+      filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
+
+    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
+    if(filterAapInventoryId != null && filterAapInventoryId !== '')
+      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
+
     var filterInventoryOrganizationId = $formFilters.querySelector('.valueInventoryOrganizationId')?.value;
     if(filterInventoryOrganizationId != null && filterInventoryOrganizationId !== '')
       filters.push({ name: 'fq', value: 'inventoryOrganizationId:' + filterInventoryOrganizationId });
-
-    var filterInventoryKind = $formFilters.querySelector('.valueInventoryKind')?.value;
-    if(filterInventoryKind != null && filterInventoryKind !== '')
-      filters.push({ name: 'fq', value: 'inventoryKind:' + filterInventoryKind });
   }
   return filters;
 }
@@ -666,7 +700,7 @@ function searchHostInventoryVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestHostInventoryTenantResource(filters, $list, inventoryName = null, tenantResource = null, relate=true, target) {
+function suggestHostInventoryTenantResource(filters, $list, inventoryResource = null, tenantResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -682,19 +716,19 @@ function suggestHostInventoryTenantResource(filters, $list, inventoryName = null
         $a.append($i);
         $a.append($span);
         var val = o['tenantResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(inventoryName.toString()) : val == tenantResource);
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(inventoryResource.toString()) : val == tenantResource);
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + inventoryName + '_tenantResource_' + o['tenantResource']);
+        $input.setAttribute('id', 'GET_tenantResource_' + inventoryResource + '_tenantResource_' + o['tenantResource']);
         $input.setAttribute('name', 'tenantResource');
         $input.setAttribute('value', o['tenantResource']);
         $input.setAttribute('class', 'valueTenantResource ');
-        if(inventoryName != null) {
+        if(inventoryResource != null) {
           $input.addEventListener('change', function(event) {
-            patchHostInventoryVals([{ name: 'fq', value: 'inventoryName:' + inventoryName }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+            patchHostInventoryVals([{ name: 'fq', value: 'inventoryResource:' + inventoryResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostInventoryTenantResource(filters, $list, inventoryName, o['tenantResource'], relate, target);
+                  suggestHostInventoryTenantResource(filters, $list, inventoryResource, o['tenantResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -740,7 +774,7 @@ function suggestHostInventoryObjectSuggest($formFilters, $list, target) {
 
 async function getHostInventory(pk) {
   fetch(
-    '/en-us/api/host-inventory/' + inventoryName
+    '/en-us/api/host-inventory/' + inventoryResource
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -757,7 +791,7 @@ async function getHostInventory(pk) {
 
 // PATCH //
 
-async function patchHostInventory($formFilters, $formValues, target, inventoryName, success, error) {
+async function patchHostInventory($formFilters, $formValues, target, inventoryResource, success, error) {
   var filters = patchHostInventoryFilters($formFilters);
 
   var vals = {};
@@ -840,6 +874,18 @@ async function patchHostInventory($formFilters, $formValues, target, inventoryNa
   var removeInventoryDescription = $formValues.querySelector('.removeInventoryDescription')?.value;
   if(removeInventoryDescription != null && removeInventoryDescription !== '')
     vals['removeInventoryDescription'] = removeInventoryDescription;
+
+  var valueInventoryKind = $formValues.querySelector('.valueInventoryKind')?.value;
+  var removeInventoryKind = $formValues.querySelector('.removeInventoryKind')?.value === 'true';
+  var setInventoryKind = removeInventoryKind ? null : $formValues.querySelector('.setInventoryKind')?.value;
+  var addInventoryKind = $formValues.querySelector('.addInventoryKind')?.value;
+  if(removeInventoryKind || setInventoryKind != null && setInventoryKind !== '')
+    vals['setInventoryKind'] = setInventoryKind;
+  if(addInventoryKind != null && addInventoryKind !== '')
+    vals['addInventoryKind'] = addInventoryKind;
+  var removeInventoryKind = $formValues.querySelector('.removeInventoryKind')?.value;
+  if(removeInventoryKind != null && removeInventoryKind !== '')
+    vals['removeInventoryKind'] = removeInventoryKind;
 
   var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
@@ -941,6 +987,30 @@ async function patchHostInventory($formFilters, $formValues, target, inventoryNa
   if(removeInventoryId != null && removeInventoryId !== '')
     vals['removeInventoryId'] = removeInventoryId;
 
+  var valueInventoryResource = $formValues.querySelector('.valueInventoryResource')?.value;
+  var removeInventoryResource = $formValues.querySelector('.removeInventoryResource')?.value === 'true';
+  var setInventoryResource = removeInventoryResource ? null : $formValues.querySelector('.setInventoryResource')?.value;
+  var addInventoryResource = $formValues.querySelector('.addInventoryResource')?.value;
+  if(removeInventoryResource || setInventoryResource != null && setInventoryResource !== '')
+    vals['setInventoryResource'] = setInventoryResource;
+  if(addInventoryResource != null && addInventoryResource !== '')
+    vals['addInventoryResource'] = addInventoryResource;
+  var removeInventoryResource = $formValues.querySelector('.removeInventoryResource')?.value;
+  if(removeInventoryResource != null && removeInventoryResource !== '')
+    vals['removeInventoryResource'] = removeInventoryResource;
+
+  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
+  var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value === 'true';
+  var setAapInventoryId = removeAapInventoryId ? null : $formValues.querySelector('.setAapInventoryId')?.value;
+  var addAapInventoryId = $formValues.querySelector('.addAapInventoryId')?.value;
+  if(removeAapInventoryId || setAapInventoryId != null && setAapInventoryId !== '')
+    vals['setAapInventoryId'] = setAapInventoryId;
+  if(addAapInventoryId != null && addAapInventoryId !== '')
+    vals['addAapInventoryId'] = addAapInventoryId;
+  var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value;
+  if(removeAapInventoryId != null && removeAapInventoryId !== '')
+    vals['removeAapInventoryId'] = removeAapInventoryId;
+
   var valueInventoryOrganizationId = $formValues.querySelector('.valueInventoryOrganizationId')?.value;
   var removeInventoryOrganizationId = $formValues.querySelector('.removeInventoryOrganizationId')?.value === 'true';
   var setInventoryOrganizationId = removeInventoryOrganizationId ? null : $formValues.querySelector('.setInventoryOrganizationId')?.value;
@@ -953,19 +1023,7 @@ async function patchHostInventory($formFilters, $formValues, target, inventoryNa
   if(removeInventoryOrganizationId != null && removeInventoryOrganizationId !== '')
     vals['removeInventoryOrganizationId'] = removeInventoryOrganizationId;
 
-  var valueInventoryKind = $formValues.querySelector('.valueInventoryKind')?.value;
-  var removeInventoryKind = $formValues.querySelector('.removeInventoryKind')?.value === 'true';
-  var setInventoryKind = removeInventoryKind ? null : $formValues.querySelector('.setInventoryKind')?.value;
-  var addInventoryKind = $formValues.querySelector('.addInventoryKind')?.value;
-  if(removeInventoryKind || setInventoryKind != null && setInventoryKind !== '')
-    vals['setInventoryKind'] = setInventoryKind;
-  if(addInventoryKind != null && addInventoryKind !== '')
-    vals['addInventoryKind'] = addInventoryKind;
-  var removeInventoryKind = $formValues.querySelector('.removeInventoryKind')?.value;
-  if(removeInventoryKind != null && removeInventoryKind !== '')
-    vals['removeInventoryKind'] = removeInventoryKind;
-
-  patchHostInventoryVals(inventoryName == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'inventoryName:' + inventoryName}], vals, target, success, error);
+  patchHostInventoryVals(inventoryResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'inventoryResource:' + inventoryResource}], vals, target, success, error);
 }
 
 function patchHostInventoryFilters($formFilters) {
@@ -1002,6 +1060,10 @@ function patchHostInventoryFilters($formFilters) {
     var filterInventoryDescription = $formFilters.querySelector('.valueInventoryDescription')?.value;
     if(filterInventoryDescription != null && filterInventoryDescription !== '')
       filters.push({ name: 'fq', value: 'inventoryDescription:' + filterInventoryDescription });
+
+    var filterInventoryKind = $formFilters.querySelector('.valueInventoryKind')?.value;
+    if(filterInventoryKind != null && filterInventoryKind !== '')
+      filters.push({ name: 'fq', value: 'inventoryKind:' + filterInventoryKind });
 
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
@@ -1067,13 +1129,17 @@ function patchHostInventoryFilters($formFilters) {
     if(filterInventoryId != null && filterInventoryId !== '')
       filters.push({ name: 'fq', value: 'inventoryId:' + filterInventoryId });
 
+    var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
+    if(filterInventoryResource != null && filterInventoryResource !== '')
+      filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
+
+    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
+    if(filterAapInventoryId != null && filterAapInventoryId !== '')
+      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
+
     var filterInventoryOrganizationId = $formFilters.querySelector('.valueInventoryOrganizationId')?.value;
     if(filterInventoryOrganizationId != null && filterInventoryOrganizationId !== '')
       filters.push({ name: 'fq', value: 'inventoryOrganizationId:' + filterInventoryOrganizationId });
-
-    var filterInventoryKind = $formFilters.querySelector('.valueInventoryKind')?.value;
-    if(filterInventoryKind != null && filterInventoryKind !== '')
-      filters.push({ name: 'fq', value: 'inventoryKind:' + filterInventoryKind });
   }
   return filters;
 }
@@ -1161,6 +1227,10 @@ async function postHostInventory($formValues, target, success, error) {
   if(valueInventoryDescription != null && valueInventoryDescription !== '')
     vals['inventoryDescription'] = valueInventoryDescription;
 
+  var valueInventoryKind = $formValues.querySelector('.valueInventoryKind')?.value;
+  if(valueInventoryKind != null && valueInventoryKind !== '')
+    vals['inventoryKind'] = valueInventoryKind;
+
   var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['tenantResource'] = valueTenantResource;
@@ -1197,13 +1267,17 @@ async function postHostInventory($formValues, target, success, error) {
   if(valueInventoryId != null && valueInventoryId !== '')
     vals['inventoryId'] = valueInventoryId;
 
+  var valueInventoryResource = $formValues.querySelector('.valueInventoryResource')?.value;
+  if(valueInventoryResource != null && valueInventoryResource !== '')
+    vals['inventoryResource'] = valueInventoryResource;
+
+  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
+  if(valueAapInventoryId != null && valueAapInventoryId !== '')
+    vals['aapInventoryId'] = valueAapInventoryId;
+
   var valueInventoryOrganizationId = $formValues.querySelector('.valueInventoryOrganizationId')?.value;
   if(valueInventoryOrganizationId != null && valueInventoryOrganizationId !== '')
     vals['inventoryOrganizationId'] = valueInventoryOrganizationId;
-
-  var valueInventoryKind = $formValues.querySelector('.valueInventoryKind')?.value;
-  if(valueInventoryKind != null && valueInventoryKind !== '')
-    vals['inventoryKind'] = valueInventoryKind;
 
   fetch(
     '/en-us/api/host-inventory'
@@ -1244,7 +1318,7 @@ function postHostInventoryVals(vals, target, success, error) {
 
 // DELETE //
 
-async function deleteHostInventory(target, inventoryName, success, error) {
+async function deleteHostInventory(target, inventoryResource, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1276,7 +1350,7 @@ async function deleteHostInventory(target, inventoryName, success, error) {
   }
 
   fetch(
-    '/en-us/api/host-inventory/' + encodeURIComponent(inventoryName)
+    '/en-us/api/host-inventory/' + encodeURIComponent(inventoryResource)
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -1292,7 +1366,7 @@ async function deleteHostInventory(target, inventoryName, success, error) {
 
 // PUTImport //
 
-async function putimportHostInventory($formValues, target, inventoryName, success, error) {
+async function putimportHostInventory($formValues, target, inventoryResource, success, error) {
   var json = $formValues.querySelector('.PUTImport_searchList')?.value;
   if(json != null && json !== '')
     putimportHostInventoryVals(JSON.parse(json), target, success, error);

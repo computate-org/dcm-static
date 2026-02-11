@@ -4,25 +4,25 @@ async function websocketHost(success) {
 
     window.eventBus.registerHandler('websocketHost', function (error, message) {
       var json = JSON.parse(message['body']);
-      var hostName = json['id'];
+      var hostResource = json['id'];
       var solrIds = json['solrIds'];
       var empty = json['empty'];
       var numFound = parseInt(json['numFound']);
       var numPATCH = parseInt(json['numPATCH']);
       var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
       var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + hostName + ' ');
-      $box.setAttribute('id', 'box-' + hostName);
+      $box.setAttribute('class', 'w3-quarter box-' + hostResource + ' ');
+      $box.setAttribute('id', 'box-' + hostResource);
       $box.setAttribute('data-numPATCH', numPATCH);
       var $margin = document.createElement('div');
       $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + hostName);
+      $margin.setAttribute('id', 'margin-' + hostResource);
       var $card = document.createElement('div');
       $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + hostName);
+      $card.setAttribute('id', 'card-' + hostResource);
       var $header = document.createElement('div');
       $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + hostName);
+      $header.setAttribute('id', 'header-' + hostResource);
       var iTemplate = document.createElement('template');
       iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-server"></i>';
       var $i = iTemplate.content;
@@ -31,19 +31,19 @@ async function websocketHost(success) {
       $headerSpan.innerText = 'modify hosts in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + hostName + '");');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + hostResource + '");');
       $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + hostName);
+      $x.setAttribute('id', 'x-' + hostResource);
       var $body = document.createElement('div');
       $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + hostName);
+      $body.setAttribute('id', 'text-' + hostResource);
       var $bar = document.createElement('div');
       $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + hostName);
+      $bar.setAttribute('id', 'bar-' + hostResource);
       var $progress = document.createElement('div');
       $progress.setAttribute('class', 'w3- ');
       $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + hostName);
+      $progress.setAttribute('id', 'progress-' + hostResource);
       $progress.innerText = numPATCH + '/' + numFound;
       $card.append($header);
       $header.append($i);
@@ -55,11 +55,11 @@ async function websocketHost(success) {
       $box.append($margin);
       $margin.append($card);
       if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + hostName);
+        var $old_box = document.querySelector('.box-' + hostResource);
       } else {
-        document.querySelector('.box-' + hostName)?.remove();
+        document.querySelector('.box-' + hostResource)?.remove();
       }
-      if(hostName) {
+      if(hostResource) {
         if(success)
           success(json);
       }
@@ -67,12 +67,12 @@ async function websocketHost(success) {
   }
 }
 async function websocketHostInner(apiRequest) {
-  var hostName = apiRequest['id'];
+  var hostResource = apiRequest['id'];
   var classes = apiRequest['classes'];
   var vars = apiRequest['vars'];
   var empty = apiRequest['empty'];
 
-  if(hostName != null && vars.length > 0) {
+  if(hostResource != null && vars.length > 0) {
     var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
     var uri = location.pathname + queryParams;
     fetch(uri).then(response => {
@@ -83,8 +83,9 @@ async function websocketHostInner(apiRequest) {
         var inputModified = null;
         var inputArchived = null;
         var inputTenantResource = null;
+        var inputInventoryResource = null;
         var inputHostName = null;
-        var inputInventoryName = null;
+        var inputHostDescription = null;
         var inputEventSubscriptions = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
@@ -100,7 +101,11 @@ async function websocketHostInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputAapHostId = null;
+        var inputHostId = null;
         var inputHostResource = null;
+        var inputAapInventoryId = null;
+        var inputInventoryName = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -112,10 +117,12 @@ async function websocketHostInner(apiRequest) {
           inputArchived = $response.querySelector('.Page_archived');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.Page_tenantResource');
+        if(vars.includes('inventoryResource'))
+          inputInventoryResource = $response.querySelector('.Page_inventoryResource');
         if(vars.includes('hostName'))
           inputHostName = $response.querySelector('.Page_hostName');
-        if(vars.includes('inventoryName'))
-          inputInventoryName = $response.querySelector('.Page_inventoryName');
+        if(vars.includes('hostDescription'))
+          inputHostDescription = $response.querySelector('.Page_hostDescription');
         if(vars.includes('eventSubscriptions'))
           inputEventSubscriptions = $response.querySelector('.Page_eventSubscriptions');
         if(vars.includes('classCanonicalName'))
@@ -146,10 +153,18 @@ async function websocketHostInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
+        if(vars.includes('aapHostId'))
+          inputAapHostId = $response.querySelector('.Page_aapHostId');
+        if(vars.includes('hostId'))
+          inputHostId = $response.querySelector('.Page_hostId');
         if(vars.includes('hostResource'))
           inputHostResource = $response.querySelector('.Page_hostResource');
+        if(vars.includes('aapInventoryId'))
+          inputAapInventoryId = $response.querySelector('.Page_aapInventoryId');
+        if(vars.includes('inventoryName'))
+          inputInventoryName = $response.querySelector('.Page_inventoryName');
 
-        jsWebsocketHost(hostName, vars, $response);
+        jsWebsocketHost(hostResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listHost = JSON.parse($response.querySelector('.pageForm .listHost')?.value);
 
@@ -204,6 +219,16 @@ async function websocketHostInner(apiRequest) {
           addGlow(document.querySelector('.Page_tenantResource'));
         }
 
+        if(inputInventoryResource) {
+          document.querySelectorAll('.Page_inventoryResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputInventoryResource.getAttribute('value');
+            else
+              item.textContent = inputInventoryResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_inventoryResource'));
+        }
+
         if(inputHostName) {
           document.querySelectorAll('.Page_hostName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -214,14 +239,14 @@ async function websocketHostInner(apiRequest) {
           addGlow(document.querySelector('.Page_hostName'));
         }
 
-        if(inputInventoryName) {
-          document.querySelectorAll('.Page_inventoryName').forEach((item, index) => {
+        if(inputHostDescription) {
+          document.querySelectorAll('.Page_hostDescription').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputInventoryName.getAttribute('value');
+              item.value = inputHostDescription.getAttribute('value');
             else
-              item.textContent = inputInventoryName.textContent;
+              item.textContent = inputHostDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryName'));
+          addGlow(document.querySelector('.Page_hostDescription'));
         }
 
         if(inputEventSubscriptions) {
@@ -374,6 +399,26 @@ async function websocketHostInner(apiRequest) {
           addGlow(document.querySelector('.Page_solrId'));
         }
 
+        if(inputAapHostId) {
+          document.querySelectorAll('.Page_aapHostId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapHostId.getAttribute('value');
+            else
+              item.textContent = inputAapHostId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapHostId'));
+        }
+
+        if(inputHostId) {
+          document.querySelectorAll('.Page_hostId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputHostId.getAttribute('value');
+            else
+              item.textContent = inputHostId.textContent;
+          });
+          addGlow(document.querySelector('.Page_hostId'));
+        }
+
         if(inputHostResource) {
           document.querySelectorAll('.Page_hostResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -382,6 +427,26 @@ async function websocketHostInner(apiRequest) {
               item.textContent = inputHostResource.textContent;
           });
           addGlow(document.querySelector('.Page_hostResource'));
+        }
+
+        if(inputAapInventoryId) {
+          document.querySelectorAll('.Page_aapInventoryId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapInventoryId.getAttribute('value');
+            else
+              item.textContent = inputAapInventoryId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapInventoryId'));
+        }
+
+        if(inputInventoryName) {
+          document.querySelectorAll('.Page_inventoryName').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputInventoryName.getAttribute('value');
+            else
+              item.textContent = inputInventoryName.textContent;
+          });
+          addGlow(document.querySelector('.Page_inventoryName'));
         }
 
           pageGraphHost();
@@ -555,13 +620,17 @@ function searchHostFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
+    var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
+    if(filterInventoryResource != null && filterInventoryResource !== '')
+      filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
+
     var filterHostName = $formFilters.querySelector('.valueHostName')?.value;
     if(filterHostName != null && filterHostName !== '')
       filters.push({ name: 'fq', value: 'hostName:' + filterHostName });
 
-    var filterInventoryName = $formFilters.querySelector('.valueInventoryName')?.value;
-    if(filterInventoryName != null && filterInventoryName !== '')
-      filters.push({ name: 'fq', value: 'inventoryName:' + filterInventoryName });
+    var filterHostDescription = $formFilters.querySelector('.valueHostDescription')?.value;
+    if(filterHostDescription != null && filterHostDescription !== '')
+      filters.push({ name: 'fq', value: 'hostDescription:' + filterHostDescription });
 
     var filterEventSubscriptions = $formFilters.querySelector('.valueEventSubscriptions')?.value;
     if(filterEventSubscriptions != null && filterEventSubscriptions !== '')
@@ -623,9 +692,25 @@ function searchHostFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterAapHostId = $formFilters.querySelector('.valueAapHostId')?.value;
+    if(filterAapHostId != null && filterAapHostId !== '')
+      filters.push({ name: 'fq', value: 'aapHostId:' + filterAapHostId });
+
+    var filterHostId = $formFilters.querySelector('.valueHostId')?.value;
+    if(filterHostId != null && filterHostId !== '')
+      filters.push({ name: 'fq', value: 'hostId:' + filterHostId });
+
     var filterHostResource = $formFilters.querySelector('.valueHostResource')?.value;
     if(filterHostResource != null && filterHostResource !== '')
       filters.push({ name: 'fq', value: 'hostResource:' + filterHostResource });
+
+    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
+    if(filterAapInventoryId != null && filterAapInventoryId !== '')
+      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
+
+    var filterInventoryName = $formFilters.querySelector('.valueInventoryName')?.value;
+    if(filterInventoryName != null && filterInventoryName !== '')
+      filters.push({ name: 'fq', value: 'inventoryName:' + filterInventoryName });
   }
   return filters;
 }
@@ -649,7 +734,7 @@ function searchHostVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestHostTenantResource(filters, $list, hostName = null, tenantResource = null, relate=true, target) {
+function suggestHostTenantResource(filters, $list, hostResource = null, tenantResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -665,19 +750,19 @@ function suggestHostTenantResource(filters, $list, hostName = null, tenantResour
         $a.append($i);
         $a.append($span);
         var val = o['tenantResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(hostName.toString()) : val == tenantResource);
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(hostResource.toString()) : val == tenantResource);
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + hostName + '_tenantResource_' + o['tenantResource']);
+        $input.setAttribute('id', 'GET_tenantResource_' + hostResource + '_tenantResource_' + o['tenantResource']);
         $input.setAttribute('name', 'tenantResource');
         $input.setAttribute('value', o['tenantResource']);
         $input.setAttribute('class', 'valueTenantResource ');
-        if(hostName != null) {
+        if(hostResource != null) {
           $input.addEventListener('change', function(event) {
-            patchHostVals([{ name: 'fq', value: 'hostName:' + hostName }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+            patchHostVals([{ name: 'fq', value: 'hostResource:' + hostResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostTenantResource(filters, $list, hostName, o['tenantResource'], relate, target);
+                  suggestHostTenantResource(filters, $list, hostResource, o['tenantResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -695,6 +780,54 @@ function suggestHostTenantResource(filters, $list, hostName = null, tenantResour
   };
   error = function( jqXhr, target2 ) {};
   searchTenantVals(filters, target, success, error);
+}
+
+function suggestHostInventoryResource(filters, $list, hostResource = null, inventoryResource = null, relate=true, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-network-wired"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['inventoryResource'];
+        var checked = val == null ? false : (Array.isArray(val) ? val.includes(hostResource.toString()) : val == inventoryResource);
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_inventoryResource_' + hostResource + '_inventoryResource_' + o['inventoryResource']);
+        $input.setAttribute('name', 'inventoryResource');
+        $input.setAttribute('value', o['inventoryResource']);
+        $input.setAttribute('class', 'valueInventoryResource ');
+        if(hostResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchHostVals([{ name: 'fq', value: 'hostResource:' + hostResource }], { [(event.target.checked ? 'set' : 'remove') + 'InventoryResource']: o['inventoryResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestHostInventoryResource(filters, $list, hostResource, o['inventoryResource'], relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  searchHostInventoryVals(filters, target, success, error);
 }
 
 function suggestHostObjectSuggest($formFilters, $list, target) {
@@ -723,7 +856,7 @@ function suggestHostObjectSuggest($formFilters, $list, target) {
 
 async function getHost(pk) {
   fetch(
-    '/en-us/api/host/' + hostName
+    '/en-us/api/host/' + hostResource
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -740,7 +873,7 @@ async function getHost(pk) {
 
 // PATCH //
 
-async function patchHost($formFilters, $formValues, target, hostName, success, error) {
+async function patchHost($formFilters, $formValues, target, hostResource, success, error) {
   var filters = patchHostFilters($formFilters);
 
   var vals = {};
@@ -804,6 +937,10 @@ async function patchHost($formFilters, $formValues, target, hostName, success, e
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['setTenantResource'] = valueTenantResource;
 
+  var valueInventoryResource = (Array.from($formValues.querySelectorAll('.valueInventoryResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueInventoryResource != null && valueInventoryResource !== '')
+    vals['setInventoryResource'] = valueInventoryResource;
+
   var valueHostName = $formValues.querySelector('.valueHostName')?.value;
   var removeHostName = $formValues.querySelector('.removeHostName')?.value === 'true';
   var setHostName = removeHostName ? null : $formValues.querySelector('.setHostName')?.value;
@@ -816,17 +953,17 @@ async function patchHost($formFilters, $formValues, target, hostName, success, e
   if(removeHostName != null && removeHostName !== '')
     vals['removeHostName'] = removeHostName;
 
-  var valueInventoryName = $formValues.querySelector('.valueInventoryName')?.value;
-  var removeInventoryName = $formValues.querySelector('.removeInventoryName')?.value === 'true';
-  var setInventoryName = removeInventoryName ? null : $formValues.querySelector('.setInventoryName')?.value;
-  var addInventoryName = $formValues.querySelector('.addInventoryName')?.value;
-  if(removeInventoryName || setInventoryName != null && setInventoryName !== '')
-    vals['setInventoryName'] = setInventoryName;
-  if(addInventoryName != null && addInventoryName !== '')
-    vals['addInventoryName'] = addInventoryName;
-  var removeInventoryName = $formValues.querySelector('.removeInventoryName')?.value;
-  if(removeInventoryName != null && removeInventoryName !== '')
-    vals['removeInventoryName'] = removeInventoryName;
+  var valueHostDescription = $formValues.querySelector('.valueHostDescription')?.value;
+  var removeHostDescription = $formValues.querySelector('.removeHostDescription')?.value === 'true';
+  var setHostDescription = removeHostDescription ? null : $formValues.querySelector('.setHostDescription')?.value;
+  var addHostDescription = $formValues.querySelector('.addHostDescription')?.value;
+  if(removeHostDescription || setHostDescription != null && setHostDescription !== '')
+    vals['setHostDescription'] = setHostDescription;
+  if(addHostDescription != null && addHostDescription !== '')
+    vals['addHostDescription'] = addHostDescription;
+  var removeHostDescription = $formValues.querySelector('.removeHostDescription')?.value;
+  if(removeHostDescription != null && removeHostDescription !== '')
+    vals['removeHostDescription'] = removeHostDescription;
 
   var valueEventSubscriptions = $formValues.querySelector('.valueEventSubscriptions')?.value;
   var removeEventSubscriptions = $formValues.querySelector('.removeEventSubscriptions')?.value === 'true';
@@ -924,6 +1061,30 @@ async function patchHost($formFilters, $formValues, target, hostName, success, e
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
+  var valueAapHostId = $formValues.querySelector('.valueAapHostId')?.value;
+  var removeAapHostId = $formValues.querySelector('.removeAapHostId')?.value === 'true';
+  var setAapHostId = removeAapHostId ? null : $formValues.querySelector('.setAapHostId')?.value;
+  var addAapHostId = $formValues.querySelector('.addAapHostId')?.value;
+  if(removeAapHostId || setAapHostId != null && setAapHostId !== '')
+    vals['setAapHostId'] = setAapHostId;
+  if(addAapHostId != null && addAapHostId !== '')
+    vals['addAapHostId'] = addAapHostId;
+  var removeAapHostId = $formValues.querySelector('.removeAapHostId')?.value;
+  if(removeAapHostId != null && removeAapHostId !== '')
+    vals['removeAapHostId'] = removeAapHostId;
+
+  var valueHostId = $formValues.querySelector('.valueHostId')?.value;
+  var removeHostId = $formValues.querySelector('.removeHostId')?.value === 'true';
+  var setHostId = removeHostId ? null : $formValues.querySelector('.setHostId')?.value;
+  var addHostId = $formValues.querySelector('.addHostId')?.value;
+  if(removeHostId || setHostId != null && setHostId !== '')
+    vals['setHostId'] = setHostId;
+  if(addHostId != null && addHostId !== '')
+    vals['addHostId'] = addHostId;
+  var removeHostId = $formValues.querySelector('.removeHostId')?.value;
+  if(removeHostId != null && removeHostId !== '')
+    vals['removeHostId'] = removeHostId;
+
   var valueHostResource = $formValues.querySelector('.valueHostResource')?.value;
   var removeHostResource = $formValues.querySelector('.removeHostResource')?.value === 'true';
   var setHostResource = removeHostResource ? null : $formValues.querySelector('.setHostResource')?.value;
@@ -936,7 +1097,31 @@ async function patchHost($formFilters, $formValues, target, hostName, success, e
   if(removeHostResource != null && removeHostResource !== '')
     vals['removeHostResource'] = removeHostResource;
 
-  patchHostVals(hostName == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'hostName:' + hostName}], vals, target, success, error);
+  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
+  var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value === 'true';
+  var setAapInventoryId = removeAapInventoryId ? null : $formValues.querySelector('.setAapInventoryId')?.value;
+  var addAapInventoryId = $formValues.querySelector('.addAapInventoryId')?.value;
+  if(removeAapInventoryId || setAapInventoryId != null && setAapInventoryId !== '')
+    vals['setAapInventoryId'] = setAapInventoryId;
+  if(addAapInventoryId != null && addAapInventoryId !== '')
+    vals['addAapInventoryId'] = addAapInventoryId;
+  var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value;
+  if(removeAapInventoryId != null && removeAapInventoryId !== '')
+    vals['removeAapInventoryId'] = removeAapInventoryId;
+
+  var valueInventoryName = $formValues.querySelector('.valueInventoryName')?.value;
+  var removeInventoryName = $formValues.querySelector('.removeInventoryName')?.value === 'true';
+  var setInventoryName = removeInventoryName ? null : $formValues.querySelector('.setInventoryName')?.value;
+  var addInventoryName = $formValues.querySelector('.addInventoryName')?.value;
+  if(removeInventoryName || setInventoryName != null && setInventoryName !== '')
+    vals['setInventoryName'] = setInventoryName;
+  if(addInventoryName != null && addInventoryName !== '')
+    vals['addInventoryName'] = addInventoryName;
+  var removeInventoryName = $formValues.querySelector('.removeInventoryName')?.value;
+  if(removeInventoryName != null && removeInventoryName !== '')
+    vals['removeInventoryName'] = removeInventoryName;
+
+  patchHostVals(hostResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'hostResource:' + hostResource}], vals, target, success, error);
 }
 
 function patchHostFilters($formFilters) {
@@ -970,13 +1155,17 @@ function patchHostFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
+    var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
+    if(filterInventoryResource != null && filterInventoryResource !== '')
+      filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
+
     var filterHostName = $formFilters.querySelector('.valueHostName')?.value;
     if(filterHostName != null && filterHostName !== '')
       filters.push({ name: 'fq', value: 'hostName:' + filterHostName });
 
-    var filterInventoryName = $formFilters.querySelector('.valueInventoryName')?.value;
-    if(filterInventoryName != null && filterInventoryName !== '')
-      filters.push({ name: 'fq', value: 'inventoryName:' + filterInventoryName });
+    var filterHostDescription = $formFilters.querySelector('.valueHostDescription')?.value;
+    if(filterHostDescription != null && filterHostDescription !== '')
+      filters.push({ name: 'fq', value: 'hostDescription:' + filterHostDescription });
 
     var filterEventSubscriptions = $formFilters.querySelector('.valueEventSubscriptions')?.value;
     if(filterEventSubscriptions != null && filterEventSubscriptions !== '')
@@ -1038,9 +1227,25 @@ function patchHostFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterAapHostId = $formFilters.querySelector('.valueAapHostId')?.value;
+    if(filterAapHostId != null && filterAapHostId !== '')
+      filters.push({ name: 'fq', value: 'aapHostId:' + filterAapHostId });
+
+    var filterHostId = $formFilters.querySelector('.valueHostId')?.value;
+    if(filterHostId != null && filterHostId !== '')
+      filters.push({ name: 'fq', value: 'hostId:' + filterHostId });
+
     var filterHostResource = $formFilters.querySelector('.valueHostResource')?.value;
     if(filterHostResource != null && filterHostResource !== '')
       filters.push({ name: 'fq', value: 'hostResource:' + filterHostResource });
+
+    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
+    if(filterAapInventoryId != null && filterAapInventoryId !== '')
+      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
+
+    var filterInventoryName = $formFilters.querySelector('.valueInventoryName')?.value;
+    if(filterInventoryName != null && filterInventoryName !== '')
+      filters.push({ name: 'fq', value: 'inventoryName:' + filterInventoryName });
   }
   return filters;
 }
@@ -1124,13 +1329,17 @@ async function postHost($formValues, target, success, error) {
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['tenantResource'] = valueTenantResource;
 
+  var valueInventoryResource = (Array.from($formValues.querySelectorAll('.valueInventoryResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueInventoryResource != null && valueInventoryResource !== '')
+    vals['inventoryResource'] = valueInventoryResource;
+
   var valueHostName = $formValues.querySelector('.valueHostName')?.value;
   if(valueHostName != null && valueHostName !== '')
     vals['hostName'] = valueHostName;
 
-  var valueInventoryName = $formValues.querySelector('.valueInventoryName')?.value;
-  if(valueInventoryName != null && valueInventoryName !== '')
-    vals['inventoryName'] = valueInventoryName;
+  var valueHostDescription = $formValues.querySelector('.valueHostDescription')?.value;
+  if(valueHostDescription != null && valueHostDescription !== '')
+    vals['hostDescription'] = valueHostDescription;
 
   var valueEventSubscriptions = $formValues.querySelector('.valueEventSubscriptions')?.value;
   if(valueEventSubscriptions != null && valueEventSubscriptions !== '')
@@ -1164,9 +1373,25 @@ async function postHost($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
+  var valueAapHostId = $formValues.querySelector('.valueAapHostId')?.value;
+  if(valueAapHostId != null && valueAapHostId !== '')
+    vals['aapHostId'] = valueAapHostId;
+
+  var valueHostId = $formValues.querySelector('.valueHostId')?.value;
+  if(valueHostId != null && valueHostId !== '')
+    vals['hostId'] = valueHostId;
+
   var valueHostResource = $formValues.querySelector('.valueHostResource')?.value;
   if(valueHostResource != null && valueHostResource !== '')
     vals['hostResource'] = valueHostResource;
+
+  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
+  if(valueAapInventoryId != null && valueAapInventoryId !== '')
+    vals['aapInventoryId'] = valueAapInventoryId;
+
+  var valueInventoryName = $formValues.querySelector('.valueInventoryName')?.value;
+  if(valueInventoryName != null && valueInventoryName !== '')
+    vals['inventoryName'] = valueInventoryName;
 
   fetch(
     '/en-us/api/host'
@@ -1207,7 +1432,7 @@ function postHostVals(vals, target, success, error) {
 
 // DELETE //
 
-async function deleteHost(target, hostName, success, error) {
+async function deleteHost(target, hostResource, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1239,7 +1464,7 @@ async function deleteHost(target, hostName, success, error) {
   }
 
   fetch(
-    '/en-us/api/host/' + encodeURIComponent(hostName)
+    '/en-us/api/host/' + encodeURIComponent(hostResource)
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -1255,7 +1480,7 @@ async function deleteHost(target, hostName, success, error) {
 
 // PUTImport //
 
-async function putimportHost($formValues, target, hostName, success, error) {
+async function putimportHost($formValues, target, hostResource, success, error) {
   var json = $formValues.querySelector('.PUTImport_searchList')?.value;
   if(json != null && json !== '')
     putimportHostVals(JSON.parse(json), target, success, error);

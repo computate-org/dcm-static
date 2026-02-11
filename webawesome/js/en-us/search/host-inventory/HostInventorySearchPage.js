@@ -77,6 +77,17 @@ Promise.all([
     facetStatsChange('HostInventory', 'inventoryDescription', false);
   });
 
+  document.querySelector('#pageSelectSortHostInventory_inventoryKind')?.addEventListener('change', (event) => {
+    sort('HostInventory', 'inventoryKind', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostInventory_inventoryKind')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostInventory', 'inventoryKind', true);
+  });
+  document.querySelector('#pageStatsHostInventory_inventoryKind')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostInventory', 'inventoryKind', false);
+  });
+
   document.querySelector('#pageSelectSortHostInventory_tenantResource')?.addEventListener('change', (event) => {
     sort('HostInventory', 'tenantResource', event.currentTarget.value);
   });
@@ -253,6 +264,28 @@ Promise.all([
     facetStatsChange('HostInventory', 'inventoryId', false);
   });
 
+  document.querySelector('#pageSelectSortHostInventory_inventoryResource')?.addEventListener('change', (event) => {
+    sort('HostInventory', 'inventoryResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostInventory_inventoryResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostInventory', 'inventoryResource', true);
+  });
+  document.querySelector('#pageStatsHostInventory_inventoryResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostInventory', 'inventoryResource', false);
+  });
+
+  document.querySelector('#pageSelectSortHostInventory_aapInventoryId')?.addEventListener('change', (event) => {
+    sort('HostInventory', 'aapInventoryId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostInventory_aapInventoryId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostInventory', 'aapInventoryId', true);
+  });
+  document.querySelector('#pageStatsHostInventory_aapInventoryId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostInventory', 'aapInventoryId', false);
+  });
+
   document.querySelector('#pageSelectSortHostInventory_inventoryOrganizationId')?.addEventListener('change', (event) => {
     sort('HostInventory', 'inventoryOrganizationId', event.currentTarget.value);
   });
@@ -262,17 +295,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsHostInventory_inventoryOrganizationId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('HostInventory', 'inventoryOrganizationId', false);
-  });
-
-  document.querySelector('#pageSelectSortHostInventory_inventoryKind')?.addEventListener('change', (event) => {
-    sort('HostInventory', 'inventoryKind', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHostInventory_inventoryKind')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('HostInventory', 'inventoryKind', true);
-  });
-  document.querySelector('#pageStatsHostInventory_inventoryKind')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('HostInventory', 'inventoryKind', false);
   });
           document.querySelector('#fqHostInventory_created')?.addEventListener('change', (event) => {
             fqChange('HostInventory', event.currentTarget, facetChangeHostInventorySuccess, facetChangeHostInventoryError);
@@ -387,10 +409,10 @@ Promise.all([
   document.querySelector('#htmButton_deleteHostInventory')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
-      var inventoryName =  event.currentTarget.getAttribute('data-inventoryName');
+      var inventoryResource =  event.currentTarget.getAttribute('data-inventoryResource');
       deleteHostInventory(
           event.currentTarget
-          , inventoryName
+          , inventoryResource
           , function(response, target) { addGlow(target); }
           , function(response, target) { addError(target); }
           );

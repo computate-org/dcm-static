@@ -10,15 +10,15 @@
                       hint="The primary key of this object in the database"
                       id="{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
-                      data-hostName={{ result.hostName | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHost inputHost{{ result.hostName }}Pk "
+                      data-hostResource={{ result.hostResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHost inputHost{{ result.hostResource }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHost inputHost{{ result.hostName }}Pk "
+                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHost inputHost{{ result.hostResource }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_pk valuePk classHost inputHost{{ result.hostName }}Pk "
+                      class="label-on-left {{classApiMethodMethod}}_pk valuePk classHost inputHost{{ result.hostResource }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -44,14 +44,14 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{classApiMethodMethod}}_created datetimepicker setCreated classHost inputHost{{ result.hostName }}Created "
+                      class="label-on-left {{classApiMethodMethod}}_created datetimepicker setCreated classHost inputHost{{ result.hostResource }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="{{classApiMethodMethod}}_created"
                       value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
   {%- if 'Page' == classApiMethodMethod %}
   {%- endif %}
-                      data-hostName={{ result.hostName | tojson }}
+                      data-hostResource={{ result.hostResource | tojson }}
                       data-zone="{{ defaultZoneId }}"
                       >
                   </wa-input>
@@ -72,14 +72,14 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{classApiMethodMethod}}_modified datetimepicker setModified classHost inputHost{{ result.hostName }}Modified "
+                      class="label-on-left {{classApiMethodMethod}}_modified datetimepicker setModified classHost inputHost{{ result.hostResource }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="{{classApiMethodMethod}}_modified"
                       value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
   {%- if 'Page' == classApiMethodMethod %}
   {%- endif %}
-                      data-hostName={{ result.hostName | tojson }}
+                      data-hostResource={{ result.hostResource | tojson }}
                       data-zone="{{ defaultZoneId }}"
                       >
                   </wa-input>
@@ -101,9 +101,9 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{classApiMethodMethod}}_archived classHost inputHost{{ result.hostName }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived classHost inputHost{{ result.hostResource }}Archived "
                       name="setArchived"
-                      data-hostName={{ result.hostName | tojson }}
+                      data-hostResource={{ result.hostResource | tojson }}
                       data-val="{{ result.archived | e }}"
                       >archive</wa-button>
   {%- else %}
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_archived classHost inputHost{{ result.hostName }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived classHost inputHost{{ result.hostResource }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_archived classHost inputHost{{ result.hostName }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived classHost inputHost{{ result.hostResource }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_archived setArchived valueArchived classHost inputHost{{ result.hostName }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived setArchived valueArchived classHost inputHost{{ result.hostResource }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -135,7 +135,7 @@
     {%- if result.archived == true %}
                       checked
     {%- endif %}
-                      data-hostName={{ result.hostName | tojson }}
+                      data-hostResource={{ result.hostResource | tojson }}
                       >archive</wa-checkbox>
   {%- else %}
                       >
@@ -170,8 +170,8 @@
   {%- endif %}
                   <wa-input
                       type="text"
-                      placeholder="tenant auth resource"
-                      label="tenant auth resource"
+                      placeholder="tenant"
+                      label="tenant"
                       hint="The unique authorization resource for the tenant for multi-tenancy"
                       class="label-on-left {{classApiMethodMethod}}_tenantResource valueObjectSuggest suggestTenantResource "
                       name="setTenantResource"
@@ -200,8 +200,61 @@
                 <div>
                   <button
                        id="{{classApiMethodMethod}}_tenantResource_add"
-                       onclick="this.classList.add('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postTenantVals({ tenantResource: '{{ result.hostName }}' }, this, function(response, target) { document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').disabled = false; document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').innerHTML = 'add a tenant'; }, this, function(response, target) { addError(document.querySelector('#{{classApiMethodMethod}}tenantResource')); });"
+                       onclick="this.classList.add('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postTenantVals({ tenantResource: '{{ result.hostResource }}' }, this, function(response, target) { document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').disabled = false; document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').innerHTML = 'add a tenant'; }, this, function(response, target) { addError(document.querySelector('#{{classApiMethodMethod}}tenantResource')); });"
                       >add a tenant</button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+{%- macro inputInventoryResourceHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_inventoryResource">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{classApiMethodMethod}}_inventoryResource_clear"
+                        class="label-on-left classApiMethodMethod}}_inventoryResource_clear inventoryResource_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="inventory"
+                      label="inventory"
+                      hint="The unique authorization resource for the inventory for multi-tenancy"
+                      class="label-on-left {{classApiMethodMethod}}_inventoryResource valueObjectSuggest suggestInventoryResource "
+                      name="setInventoryResource"
+                      id="{{classApiMethodMethod}}_inventoryResource"
+                      data-list="listHostInventoryResource_{{classApiMethodMethod}}"
+                      autocomplete="off"
+                      value="{{result.inventoryResource | e }}"
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmInventoryResourceHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputInventoryResourceHostPage(authForWrite=authForWrite, authForRead=authForRead) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a host inventory to this host
+                </div>
+                <ul class="label-on-left-ul " id="listHostInventoryResource_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  <button
+                       id="{{classApiMethodMethod}}_inventoryResource_add"
+                       onclick="this.classList.add('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postHostInventoryVals({ inventoryResource: '{{ result.hostResource }}' }, this, function(response, target) { document.querySelector('#{{classApiMethodMethod}}_inventoryResource_add').disabled = false; document.querySelector('#{{classApiMethodMethod}}_inventoryResource_add').innerHTML = 'add a host inventory'; }, this, function(response, target) { addError(document.querySelector('#{{classApiMethodMethod}}inventoryResource')); });"
+                      >add a host inventory</button>
                   </div>
                 {%- endif %}
                 {%- endif %}
@@ -218,15 +271,15 @@
                       required
                       id="{{classApiMethodMethod}}_hostName"
   {%- if "Page" == classApiMethodMethod %}
-                      data-hostName={{ result.hostName | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_hostName setHostName classHost inputHost{{ result.hostName }}HostName "
+                      data-hostResource={{ result.hostResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_hostName setHostName classHost inputHost{{ result.hostResource }}HostName "
                       name="setHostName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_hostName setHostName classHost inputHost{{ result.hostName }}HostName "
+                      class="label-on-left {{classApiMethodMethod}}_hostName setHostName classHost inputHost{{ result.hostResource }}HostName "
                       name="setHostName"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_hostName valueHostName classHost inputHost{{ result.hostName }}HostName "
+                      class="label-on-left {{classApiMethodMethod}}_hostName valueHostName classHost inputHost{{ result.hostResource }}HostName "
                       name="hostName"
     {%- endif %}
   {%- endif %}
@@ -243,31 +296,31 @@
 {%- macro htmHostNameHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputHostNameHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputInventoryNameHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputHostDescriptionHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_inventoryName">
+                <form class="subgrid-2col " id="PageForm_hostDescription">
   {%- endif %}
                   <wa-input
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[String] inventory name"
-                      label="inventory name"
-                      hint="The unique authorization resource for the host for multi-tenancy"
-                      id="{{classApiMethodMethod}}_inventoryName"
+                      placeholder="[String] host description"
+                      label="host description"
+                      hint="The description of the host in AAP. "
+                      id="{{classApiMethodMethod}}_hostDescription"
   {%- if "Page" == classApiMethodMethod %}
-                      data-hostName={{ result.hostName | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_inventoryName setInventoryName classHost inputHost{{ result.hostName }}InventoryName "
-                      name="setInventoryName"
+                      data-hostResource={{ result.hostResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_hostDescription setHostDescription classHost inputHost{{ result.hostResource }}HostDescription "
+                      name="setHostDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_inventoryName setInventoryName classHost inputHost{{ result.hostName }}InventoryName "
-                      name="setInventoryName"
+                      class="label-on-left {{classApiMethodMethod}}_hostDescription setHostDescription classHost inputHost{{ result.hostResource }}HostDescription "
+                      name="setHostDescription"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_inventoryName valueInventoryName classHost inputHost{{ result.hostName }}InventoryName "
-                      name="inventoryName"
+                      class="label-on-left {{classApiMethodMethod}}_hostDescription valueHostDescription classHost inputHost{{ result.hostResource }}HostDescription "
+                      name="hostDescription"
     {%- endif %}
   {%- endif %}
   {%- if "Page" == classApiMethodMethod %}
-                      value="{{result.inventoryName | e }}"
+                      value="{{result.hostDescription | e }}"
   {%- endif %}
                       ></wa-input>
 
@@ -276,8 +329,8 @@
   {%- endif %}
 {%- endmacro %}
 
-{%- macro htmInventoryNameHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputInventoryNameHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- macro htmHostDescriptionHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputHostDescriptionHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputEventSubscriptionsHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -290,15 +343,15 @@
                       hint="The list of event subscriptions the host subscribes to. "
                       id="{{classApiMethodMethod}}_eventSubscriptions"
   {%- if "Page" == classApiMethodMethod %}
-                      data-hostName={{ result.hostName | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHost inputHost{{ result.hostName }}EventSubscriptions "
+                      data-hostResource={{ result.hostResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHost inputHost{{ result.hostResource }}EventSubscriptions "
                       name="setEventSubscriptions"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHost inputHost{{ result.hostName }}EventSubscriptions "
+                      class="label-on-left {{classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHost inputHost{{ result.hostResource }}EventSubscriptions "
                       name="setEventSubscriptions"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_eventSubscriptions valueEventSubscriptions classHost inputHost{{ result.hostName }}EventSubscriptions "
+                      class="label-on-left {{classApiMethodMethod}}_eventSubscriptions valueEventSubscriptions classHost inputHost{{ result.hostResource }}EventSubscriptions "
                       name="eventSubscriptions"
     {%- endif %}
   {%- endif %}
@@ -345,6 +398,16 @@
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
                 {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
@@ -355,12 +418,12 @@
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
-                {{ htmInventoryNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
-                  {{ htmInventoryNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                  {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
-                  {{ htmInventoryNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                  {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
@@ -410,6 +473,16 @@
               {%- endif %}
 
               {%- if "POST" in scopes %}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "POST" in scopes %}
                 {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
@@ -420,12 +493,12 @@
               {%- endif %}
 
               {%- if "POST" in scopes %}
-                {{ htmInventoryNameHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
-                  {{ htmInventoryNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                  {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
-                  {{ htmInventoryNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                  {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 
@@ -478,7 +551,7 @@
               <wa-textarea
                   class="PUTImport_searchList "
                   style="height: 300px; "
-                  placeholder="{ 'searchList': [ { 'hostName': ... , 'saves': [ ... ] }, ... ] }"
+                  placeholder="{ 'searchList': [ { 'hostResource': ... , 'saves': [ ... ] }, ... ] }"
                   >
               </wa-textarea>
             </div>
@@ -556,6 +629,16 @@
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
                 {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
@@ -566,12 +649,12 @@
               {%- endif %}
 
               {%- if "PATCH" in scopes %}
-                {{ htmInventoryNameHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
               {%- else %}
                 {%- if "GET" in scopes %}
-                  {{ htmInventoryNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                  {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
-                  {{ htmInventoryNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                  {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
 

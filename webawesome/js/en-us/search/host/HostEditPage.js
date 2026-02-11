@@ -20,7 +20,7 @@ Promise.all([
               var t = moment(t3);
               if(t) {
                 var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']';
-                patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+                patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                     , 'setCreated', s
                     , event.currentTarget
                     , function(response, target) { addGlow(target); }
@@ -44,7 +44,7 @@ Promise.all([
             if(valid) {
               var confirmResponse = confirm('Are you sure you want to archive that?'); 
               if(confirmResponse) { 
-                patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+                patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                     , 'setArchived', !(event.currentTarget.getAttribute('data-val') === 'true')
                     , event.currentTarget
                     , function(response, target) { addGlow(target); }
@@ -66,7 +66,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_hostName');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                   , 'setHostName', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -82,24 +82,24 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH inventoryName
-          document.querySelector('#Page_inventoryName')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_inventoryName');
+          // PATCH hostDescription
+          document.querySelector('#Page_hostDescription')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_hostDescription');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
-                  , 'setInventoryName', event.currentTarget.value
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
+                  , 'setHostDescription', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#Page_inventoryName')?.addEventListener('focus', (event) => {
+          document.querySelector('#Page_hostDescription')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_inventoryName')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_inventoryName');
+          document.querySelector('#Page_hostDescription')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_hostDescription');
             const valid = form.reportValidity();
           });
 
@@ -108,7 +108,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_eventSubscriptions');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                   , 'setEventSubscriptions', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
                   , event.currentTarget
                   , function(response, target) { addGlow(target); }
@@ -129,7 +129,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_sessionId');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                   , 'setSessionId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -150,7 +150,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_userKey');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                   , 'setUserKey', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -171,7 +171,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                   , 'setObjectTitle', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -192,7 +192,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                   , 'setDisplayPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -213,7 +213,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                   , 'setEditPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -234,7 +234,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                   , 'setUserPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -255,7 +255,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_download');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                   , 'setDownload', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -271,12 +271,54 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH aapHostId
+          document.querySelector('#Page_aapHostId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapHostId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
+                  , 'setAapHostId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_aapHostId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_aapHostId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapHostId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH hostId
+          document.querySelector('#Page_hostId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_hostId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
+                  , 'setHostId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_hostId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_hostId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_hostId');
+            const valid = form.reportValidity();
+          });
+
           // PATCH hostResource
           document.querySelector('#Page_hostResource')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_hostResource');
             const valid = form.checkValidity();
             if(valid) {
-              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostName:' + event.currentTarget.getAttribute('data-hostName') }]
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
                   , 'setHostResource', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -289,6 +331,48 @@ Promise.all([
           });
           document.querySelector('#Page_hostResource')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_hostResource');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH aapInventoryId
+          document.querySelector('#Page_aapInventoryId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapInventoryId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
+                  , 'setAapInventoryId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_aapInventoryId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_aapInventoryId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapInventoryId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH inventoryName
+          document.querySelector('#Page_inventoryName')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_inventoryName');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
+                  , 'setInventoryName', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_inventoryName')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_inventoryName')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_inventoryName');
             const valid = form.reportValidity();
           });
 });

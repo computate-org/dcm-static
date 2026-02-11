@@ -10,15 +10,15 @@
                       hint="The primary key of this object in the database"
                       id="{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
-                      data-inventoryName={{ result.inventoryName | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHostInventory inputHostInventory{{ result.inventoryName }}Pk "
+                      data-inventoryResource={{ result.inventoryResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHostInventory inputHostInventory{{ result.inventoryResource }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHostInventory inputHostInventory{{ result.inventoryName }}Pk "
+                      class="label-on-left {{classApiMethodMethod}}_pk setPk classHostInventory inputHostInventory{{ result.inventoryResource }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_pk valuePk classHostInventory inputHostInventory{{ result.inventoryName }}Pk "
+                      class="label-on-left {{classApiMethodMethod}}_pk valuePk classHostInventory inputHostInventory{{ result.inventoryResource }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -44,14 +44,14 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{classApiMethodMethod}}_created datetimepicker setCreated classHostInventory inputHostInventory{{ result.inventoryName }}Created "
+                      class="label-on-left {{classApiMethodMethod}}_created datetimepicker setCreated classHostInventory inputHostInventory{{ result.inventoryResource }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="{{classApiMethodMethod}}_created"
                       value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
   {%- if 'Page' == classApiMethodMethod %}
   {%- endif %}
-                      data-inventoryName={{ result.inventoryName | tojson }}
+                      data-inventoryResource={{ result.inventoryResource | tojson }}
                       data-zone="{{ defaultZoneId }}"
                       >
                   </wa-input>
@@ -72,14 +72,14 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{classApiMethodMethod}}_modified datetimepicker setModified classHostInventory inputHostInventory{{ result.inventoryName }}Modified "
+                      class="label-on-left {{classApiMethodMethod}}_modified datetimepicker setModified classHostInventory inputHostInventory{{ result.inventoryResource }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="{{classApiMethodMethod}}_modified"
                       value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
   {%- if 'Page' == classApiMethodMethod %}
   {%- endif %}
-                      data-inventoryName={{ result.inventoryName | tojson }}
+                      data-inventoryResource={{ result.inventoryResource | tojson }}
                       data-zone="{{ defaultZoneId }}"
                       >
                   </wa-input>
@@ -101,9 +101,9 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{classApiMethodMethod}}_archived classHostInventory inputHostInventory{{ result.inventoryName }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived classHostInventory inputHostInventory{{ result.inventoryResource }}Archived "
                       name="setArchived"
-                      data-inventoryName={{ result.inventoryName | tojson }}
+                      data-inventoryResource={{ result.inventoryResource | tojson }}
                       data-val="{{ result.archived | e }}"
                       >archive</wa-button>
   {%- else %}
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_archived classHostInventory inputHostInventory{{ result.inventoryName }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived classHostInventory inputHostInventory{{ result.inventoryResource }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_archived classHostInventory inputHostInventory{{ result.inventoryName }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived classHostInventory inputHostInventory{{ result.inventoryResource }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_archived setArchived valueArchived classHostInventory inputHostInventory{{ result.inventoryName }}Archived "
+                      class="label-on-left {{classApiMethodMethod}}_archived setArchived valueArchived classHostInventory inputHostInventory{{ result.inventoryResource }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -135,7 +135,7 @@
     {%- if result.archived == true %}
                       checked
     {%- endif %}
-                      data-inventoryName={{ result.inventoryName | tojson }}
+                      data-inventoryResource={{ result.inventoryResource | tojson }}
                       >archive</wa-checkbox>
   {%- else %}
                       >
@@ -162,18 +162,17 @@
                       placeholder="[String] inventory name"
                       label="inventory name"
                       hint="The name of the inventory in AAP. "
-                      required
                       id="{{classApiMethodMethod}}_inventoryName"
   {%- if "Page" == classApiMethodMethod %}
-                      data-inventoryName={{ result.inventoryName | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_inventoryName setInventoryName classHostInventory inputHostInventory{{ result.inventoryName }}InventoryName "
+                      data-inventoryResource={{ result.inventoryResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryName setInventoryName classHostInventory inputHostInventory{{ result.inventoryResource }}InventoryName "
                       name="setInventoryName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_inventoryName setInventoryName classHostInventory inputHostInventory{{ result.inventoryName }}InventoryName "
+                      class="label-on-left {{classApiMethodMethod}}_inventoryName setInventoryName classHostInventory inputHostInventory{{ result.inventoryResource }}InventoryName "
                       name="setInventoryName"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_inventoryName valueInventoryName classHostInventory inputHostInventory{{ result.inventoryName }}InventoryName "
+                      class="label-on-left {{classApiMethodMethod}}_inventoryName valueInventoryName classHostInventory inputHostInventory{{ result.inventoryResource }}InventoryName "
                       name="inventoryName"
     {%- endif %}
   {%- endif %}
@@ -199,18 +198,17 @@
                       placeholder="[String] inventory description"
                       label="inventory description"
                       hint="The description of the inventory in AAP. "
-                      required
                       id="{{classApiMethodMethod}}_inventoryDescription"
   {%- if "Page" == classApiMethodMethod %}
-                      data-inventoryName={{ result.inventoryName | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_inventoryDescription setInventoryDescription classHostInventory inputHostInventory{{ result.inventoryName }}InventoryDescription "
+                      data-inventoryResource={{ result.inventoryResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryDescription setInventoryDescription classHostInventory inputHostInventory{{ result.inventoryResource }}InventoryDescription "
                       name="setInventoryDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_inventoryDescription setInventoryDescription classHostInventory inputHostInventory{{ result.inventoryName }}InventoryDescription "
+                      class="label-on-left {{classApiMethodMethod}}_inventoryDescription setInventoryDescription classHostInventory inputHostInventory{{ result.inventoryResource }}InventoryDescription "
                       name="setInventoryDescription"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_inventoryDescription valueInventoryDescription classHostInventory inputHostInventory{{ result.inventoryName }}InventoryDescription "
+                      class="label-on-left {{classApiMethodMethod}}_inventoryDescription valueInventoryDescription classHostInventory inputHostInventory{{ result.inventoryResource }}InventoryDescription "
                       name="inventoryDescription"
     {%- endif %}
   {%- endif %}
@@ -226,6 +224,42 @@
 
 {%- macro htmInventoryDescriptionHostInventoryPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputInventoryDescriptionHostInventoryPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputInventoryKindHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_inventoryKind">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] AAP kind"
+                      label="AAP kind"
+                      hint="The Ansible Automation Platform kind of the inventory (&quot;&quot;, &quot;smart&quot;, &quot;constructed&quot;). "
+                      id="{{classApiMethodMethod}}_inventoryKind"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-inventoryResource={{ result.inventoryResource | tojson }}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryKind setInventoryKind classHostInventory inputHostInventory{{ result.inventoryResource }}InventoryKind "
+                      name="setInventoryKind"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryKind setInventoryKind classHostInventory inputHostInventory{{ result.inventoryResource }}InventoryKind "
+                      name="setInventoryKind"
+    {%- else %}
+                      class="label-on-left {{classApiMethodMethod}}_inventoryKind valueInventoryKind classHostInventory inputHostInventory{{ result.inventoryResource }}InventoryKind "
+                      name="inventoryKind"
+    {%- endif %}
+  {%- endif %}
+  {%- if "Page" == classApiMethodMethod %}
+                      value="{{result.inventoryKind | e }}"
+  {%- endif %}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmInventoryKindHostInventoryPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputInventoryKindHostInventoryPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputTenantResourceHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -274,7 +308,7 @@
                 <div>
                   <button
                        id="{{classApiMethodMethod}}_tenantResource_add"
-                       onclick="this.classList.add('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postTenantVals({ tenantResource: '{{ result.inventoryName }}' }, this, function(response, target) { document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').disabled = false; document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').innerHTML = 'add a tenant'; }, this, function(response, target) { addError(document.querySelector('#{{classApiMethodMethod}}tenantResource')); });"
+                       onclick="this.classList.add('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postTenantVals({ tenantResource: '{{ result.inventoryResource }}' }, this, function(response, target) { document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').disabled = false; document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').innerHTML = 'add a tenant'; }, this, function(response, target) { addError(document.querySelector('#{{classApiMethodMethod}}tenantResource')); });"
                       >add a tenant</button>
                   </div>
                 {%- endif %}
@@ -316,6 +350,16 @@
                   {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>
@@ -380,6 +424,16 @@
                   {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
+
+              {%- if "POST" in scopes %}
+                {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
               </div>
             </wa-details>
             <wa-details open class="HtmRow" id="relations">
@@ -425,19 +479,19 @@
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportHostInventory" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_putimportHostInventory"
-                >Import a host inventories</wa-button>
+                >Import host inventories</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_putimportHostInventory"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_putimportHostInventory() %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportHostInventoryDialog" label="Import a host inventories">
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportHostInventoryDialog" label="Import host inventories">
           <form id="htmForm_putimportHostInventory" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
                   class="PUTImport_searchList "
                   style="height: 300px; "
-                  placeholder="{ 'searchList': [ { 'inventoryName': ... , 'saves': [ ... ] }, ... ] }"
+                  placeholder="{ 'searchList': [ { 'inventoryResource': ... , 'saves': [ ... ] }, ... ] }"
                   >
               </wa-textarea>
             </div>
@@ -447,7 +501,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageHostInventory() %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageHostInventoryDialog" label="Search a host inventories">
+        <div with-header with-footer style="--width: 50vw; " id="searchpageHostInventoryDialog" label="Search host inventories">
           <div id="htmForm_searchpageHostInventory" class="round-row primary-smart-border-radius ">
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
@@ -521,6 +575,16 @@
                   {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {%- else %}
                   {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+              {%- endif %}
+
+              {%- if "PATCH" in scopes %}
+                {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+              {%- else %}
+                {%- if "GET" in scopes %}
+                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {%- else %}
+                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
               {%- endif %}
               </div>

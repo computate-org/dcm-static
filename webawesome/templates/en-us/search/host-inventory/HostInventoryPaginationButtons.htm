@@ -4,7 +4,7 @@
             <wa-tooltip for="PaginationButtonsDecrease" placement="top">Show half the results. </wa-tooltip>
             <wa-tooltip for="PaginationButtonsIncrease" placement="top">Show double the results. </wa-tooltip>
             <wa-tooltip for="PaginationButtonsNext" placement="top">Show the next results. </wa-tooltip>
-            <div class="wa-caption-l ">{{ pagination.startNum }} – {{ pagination.endNum }} of {{ pagination.foundNum }} a host inventories</div>
+            <div class="wa-caption-l ">{{ pagination.startNum }} – {{ pagination.endNum }} of {{ pagination.foundNum }} host inventories</div>
             <wa-scroller>
               <wa-button-group size="small" class="no-gradient wa-cluster wa-gap-xs " id="htmPaginationButtons">
                 <wa-button id="PaginationButtonsPrevious" variant="brand"{% if pagination.pagePrevious is defined %} href="{{pageUri}}?start={{pagination.pagePrevious.start}}&amp;rows={{pagination.rows}}"{% else %} disabled{% endif %}>
