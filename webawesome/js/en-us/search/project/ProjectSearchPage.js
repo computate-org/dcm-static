@@ -648,14 +648,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchProject')?.addEventListener('click', (event) => {
-    document.querySelector('#patchProjectDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postProject')?.addEventListener('click', (event) => {
-    document.querySelector('#postProjectDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteProject')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -667,14 +659,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportProject')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportProjectDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageProject')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageProjectDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterProject')?.addEventListener('click', (event) => {
