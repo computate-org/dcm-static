@@ -733,7 +733,7 @@ function suggestTenantHostInventoryIds(filters, $list, tenantResource = null, ho
         $a.append($i);
         $a.append($span);
         var val = o['tenantResource'];
-        var checked = val == null ? false : (val === tenantResource.toString());
+        var checked = val == null ? false : (hostInventoryIds != null && val === hostInventoryIds.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_hostInventoryIds_' + tenantResource + '_tenantResource_' + o['tenantResource']);
         $input.setAttribute('name', 'tenantResource');

@@ -313,27 +313,6 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH jobTemplateId
-          document.querySelector('#Page_jobTemplateId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_jobTemplateId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
-                  , 'setJobTemplateId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_jobTemplateId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_jobTemplateId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_jobTemplateId');
-            const valid = form.reportValidity();
-          });
-
           // PATCH aapOrganizationId
           document.querySelector('#Page_aapOrganizationId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_aapOrganizationId');
@@ -352,27 +331,6 @@ Promise.all([
           });
           document.querySelector('#Page_aapOrganizationId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_aapOrganizationId');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH aapInventoryId
-          document.querySelector('#Page_aapInventoryId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_aapInventoryId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
-                  , 'setAapInventoryId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_aapInventoryId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_aapInventoryId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_aapInventoryId');
             const valid = form.reportValidity();
           });
 
@@ -415,6 +373,48 @@ Promise.all([
           });
           document.querySelector('#Page_aapTemplateId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_aapTemplateId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH jobTemplateId
+          document.querySelector('#Page_jobTemplateId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_jobTemplateId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+                  , 'setJobTemplateId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_jobTemplateId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_jobTemplateId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_jobTemplateId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH aapInventoryId
+          document.querySelector('#Page_aapInventoryId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapInventoryId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+                  , 'setAapInventoryId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_aapInventoryId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_aapInventoryId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapInventoryId');
             const valid = form.reportValidity();
           });
 });

@@ -28,6 +28,7 @@
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventorySearchPage.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventoryEditPage.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/host/Host.js"></script>
 {%- endblock htmScriptsHostInventoryPage %}
 {%- endblock htmScriptsPageLayout %}
 
@@ -170,6 +171,32 @@
           suggestHostInventoryTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostInventoryTenantResource_Page'), window.result.inventoryResource, window.result.tenantResource, true);
           {% else %}
           suggestHostInventoryTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostInventoryTenantResource_Page'), window.result.inventoryResource, window.result.tenantResource, false);
+          {% endif %}
+          {% endif %}
+          function relate_hostInventoryIds(event) {
+            suggestHostInventoryHostInventoryIds(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ] : [{%- if result.hostInventoryIds is defined %}{'name':'fq','value':'inventoryResource:{{ result.hostInventoryIds }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , window.result.inventoryResource
+                , window.result.hostInventoryIds
+                , true
+                );
+          }
+          document.querySelector('#POST_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#POST_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#PATCH_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#PATCH_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#Page_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#Page_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          {% if "PATCH" in scopes %}
+          suggestHostInventoryHostInventoryIds([{'name':'fq','value':'inventoryResource:' + window.result.hostInventoryIds}], document.querySelector('#listHostInventoryHostInventoryIds_Page'), window.result.inventoryResource, window.result.hostInventoryIds, true);
+          {% else %}
+          {% if "GET" in scopes %}
+          suggestHostInventoryHostInventoryIds([{'name':'fq','value':'inventoryResource:' + window.result.hostInventoryIds}], document.querySelector('#listHostInventoryHostInventoryIds_Page'), window.result.inventoryResource, window.result.hostInventoryIds, true);
+          {% else %}
+          suggestHostInventoryHostInventoryIds([{'name':'fq','value':'inventoryResource:' + window.result.hostInventoryIds}], document.querySelector('#listHostInventoryHostInventoryIds_Page'), window.result.inventoryResource, window.result.hostInventoryIds, false);
           {% endif %}
           {% endif %}
         {% endif %}

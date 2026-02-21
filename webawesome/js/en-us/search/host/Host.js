@@ -82,7 +82,6 @@ async function websocketHostInner(apiRequest) {
         var inputCreated = null;
         var inputModified = null;
         var inputArchived = null;
-        var inputTenantResource = null;
         var inputInventoryResource = null;
         var inputHostName = null;
         var inputIpAddress = null;
@@ -102,6 +101,8 @@ async function websocketHostInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputTenantResource = null;
+        var inputAapOrganizationId = null;
         var inputAapHostId = null;
         var inputHostId = null;
         var inputHostResource = null;
@@ -116,8 +117,6 @@ async function websocketHostInner(apiRequest) {
           inputModified = $response.querySelector('.Page_modified');
         if(vars.includes('archived'))
           inputArchived = $response.querySelector('.Page_archived');
-        if(vars.includes('tenantResource'))
-          inputTenantResource = $response.querySelector('.Page_tenantResource');
         if(vars.includes('inventoryResource'))
           inputInventoryResource = $response.querySelector('.Page_inventoryResource');
         if(vars.includes('hostName'))
@@ -156,6 +155,10 @@ async function websocketHostInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
+        if(vars.includes('tenantResource'))
+          inputTenantResource = $response.querySelector('.Page_tenantResource');
+        if(vars.includes('aapOrganizationId'))
+          inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
         if(vars.includes('aapHostId'))
           inputAapHostId = $response.querySelector('.Page_aapHostId');
         if(vars.includes('hostId'))
@@ -210,16 +213,6 @@ async function websocketHostInner(apiRequest) {
               item.textContent = inputArchived.textContent;
           });
           addGlow(document.querySelector('.Page_archived'));
-        }
-
-        if(inputTenantResource) {
-          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantResource.getAttribute('value');
-            else
-              item.textContent = inputTenantResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_tenantResource'));
         }
 
         if(inputInventoryResource) {
@@ -410,6 +403,26 @@ async function websocketHostInner(apiRequest) {
               item.textContent = inputSolrId.textContent;
           });
           addGlow(document.querySelector('.Page_solrId'));
+        }
+
+        if(inputTenantResource) {
+          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantResource.getAttribute('value');
+            else
+              item.textContent = inputTenantResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_tenantResource'));
+        }
+
+        if(inputAapOrganizationId) {
+          document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapOrganizationId.getAttribute('value');
+            else
+              item.textContent = inputAapOrganizationId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapOrganizationId'));
         }
 
         if(inputAapHostId) {
@@ -629,10 +642,6 @@ function searchHostFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
-
     var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
     if(filterInventoryResource != null && filterInventoryResource !== '')
       filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
@@ -709,6 +718,14 @@ function searchHostFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
     var filterAapHostId = $formFilters.querySelector('.valueAapHostId')?.value;
     if(filterAapHostId != null && filterAapHostId !== '')
       filters.push({ name: 'fq', value: 'aapHostId:' + filterAapHostId });
@@ -763,11 +780,12 @@ function suggestHostTenantResource(filters, $list, hostResource = null, tenantRe
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['tenantResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(hostResource.toString()) : val == tenantResource);
+        var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_tenantResource_' + hostResource + '_tenantResource_' + o['tenantResource']);
         $input.setAttribute('name', 'tenantResource');
@@ -811,11 +829,12 @@ function suggestHostInventoryResource(filters, $list, hostResource = null, inven
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['inventoryResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(hostResource.toString()) : val == inventoryResource);
+        var checked = val == null ? false : (inventoryResource != null && val === inventoryResource.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_inventoryResource_' + hostResource + '_inventoryResource_' + o['inventoryResource']);
         $input.setAttribute('name', 'inventoryResource');
@@ -949,10 +968,6 @@ async function patchHost($formFilters, $formValues, target, hostResource, succes
   var removeArchived = $formValues.querySelector('.removeArchived')?.checked;
   if(removeArchived != null && removeArchived !== '')
     vals['removeArchived'] = removeArchived;
-
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['setTenantResource'] = valueTenantResource;
 
   var valueInventoryResource = (Array.from($formValues.querySelectorAll('.valueInventoryResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueInventoryResource != null && valueInventoryResource !== '')
@@ -1090,6 +1105,22 @@ async function patchHost($formFilters, $formValues, target, hostResource, succes
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
+  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueTenantResource != null && valueTenantResource !== '')
+    vals['setTenantResource'] = valueTenantResource;
+
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
+  var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
+  var addAapOrganizationId = $formValues.querySelector('.addAapOrganizationId')?.value;
+  if(removeAapOrganizationId || setAapOrganizationId != null && setAapOrganizationId !== '')
+    vals['setAapOrganizationId'] = setAapOrganizationId;
+  if(addAapOrganizationId != null && addAapOrganizationId !== '')
+    vals['addAapOrganizationId'] = addAapOrganizationId;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
+  if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
+    vals['removeAapOrganizationId'] = removeAapOrganizationId;
+
   var valueAapHostId = $formValues.querySelector('.valueAapHostId')?.value;
   var removeAapHostId = $formValues.querySelector('.removeAapHostId')?.value === 'true';
   var setAapHostId = removeAapHostId ? null : $formValues.querySelector('.setAapHostId')?.value;
@@ -1180,10 +1211,6 @@ function patchHostFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
-
     var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
     if(filterInventoryResource != null && filterInventoryResource !== '')
       filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
@@ -1259,6 +1286,14 @@ function patchHostFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
 
     var filterAapHostId = $formFilters.querySelector('.valueAapHostId')?.value;
     if(filterAapHostId != null && filterAapHostId !== '')
@@ -1358,10 +1393,6 @@ async function postHost($formValues, target, success, error) {
   if(valueArchived != null && valueArchived !== '')
     vals['archived'] = valueArchived == 'true';
 
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['tenantResource'] = valueTenantResource;
-
   var valueInventoryResource = (Array.from($formValues.querySelectorAll('.valueInventoryResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueInventoryResource != null && valueInventoryResource !== '')
     vals['inventoryResource'] = valueInventoryResource;
@@ -1409,6 +1440,14 @@ async function postHost($formValues, target, success, error) {
   var valueDownload = $formValues.querySelector('.valueDownload')?.value;
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
+
+  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueTenantResource != null && valueTenantResource !== '')
+    vals['tenantResource'] = valueTenantResource;
+
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
+    vals['aapOrganizationId'] = valueAapOrganizationId;
 
   var valueAapHostId = $formValues.querySelector('.valueAapHostId')?.value;
   if(valueAapHostId != null && valueAapHostId !== '')

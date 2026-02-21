@@ -104,11 +104,11 @@ async function websocketJobTemplateInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
-        var inputJobTemplateId = null;
         var inputAapOrganizationId = null;
-        var inputAapInventoryId = null;
         var inputAapProjectId = null;
         var inputAapTemplateId = null;
+        var inputJobTemplateId = null;
+        var inputAapInventoryId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -162,16 +162,16 @@ async function websocketJobTemplateInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
-        if(vars.includes('jobTemplateId'))
-          inputJobTemplateId = $response.querySelector('.Page_jobTemplateId');
         if(vars.includes('aapOrganizationId'))
           inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
-        if(vars.includes('aapInventoryId'))
-          inputAapInventoryId = $response.querySelector('.Page_aapInventoryId');
         if(vars.includes('aapProjectId'))
           inputAapProjectId = $response.querySelector('.Page_aapProjectId');
         if(vars.includes('aapTemplateId'))
           inputAapTemplateId = $response.querySelector('.Page_aapTemplateId');
+        if(vars.includes('jobTemplateId'))
+          inputJobTemplateId = $response.querySelector('.Page_jobTemplateId');
+        if(vars.includes('aapInventoryId'))
+          inputAapInventoryId = $response.querySelector('.Page_aapInventoryId');
 
         jsWebsocketJobTemplate(jobTemplateId, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -438,16 +438,6 @@ async function websocketJobTemplateInner(apiRequest) {
           addGlow(document.querySelector('.Page_solrId'));
         }
 
-        if(inputJobTemplateId) {
-          document.querySelectorAll('.Page_jobTemplateId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputJobTemplateId.getAttribute('value');
-            else
-              item.textContent = inputJobTemplateId.textContent;
-          });
-          addGlow(document.querySelector('.Page_jobTemplateId'));
-        }
-
         if(inputAapOrganizationId) {
           document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -456,16 +446,6 @@ async function websocketJobTemplateInner(apiRequest) {
               item.textContent = inputAapOrganizationId.textContent;
           });
           addGlow(document.querySelector('.Page_aapOrganizationId'));
-        }
-
-        if(inputAapInventoryId) {
-          document.querySelectorAll('.Page_aapInventoryId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapInventoryId.getAttribute('value');
-            else
-              item.textContent = inputAapInventoryId.textContent;
-          });
-          addGlow(document.querySelector('.Page_aapInventoryId'));
         }
 
         if(inputAapProjectId) {
@@ -486,6 +466,26 @@ async function websocketJobTemplateInner(apiRequest) {
               item.textContent = inputAapTemplateId.textContent;
           });
           addGlow(document.querySelector('.Page_aapTemplateId'));
+        }
+
+        if(inputJobTemplateId) {
+          document.querySelectorAll('.Page_jobTemplateId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputJobTemplateId.getAttribute('value');
+            else
+              item.textContent = inputJobTemplateId.textContent;
+          });
+          addGlow(document.querySelector('.Page_jobTemplateId'));
+        }
+
+        if(inputAapInventoryId) {
+          document.querySelectorAll('.Page_aapInventoryId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapInventoryId.getAttribute('value');
+            else
+              item.textContent = inputAapInventoryId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapInventoryId'));
         }
 
           pageGraphJobTemplate();
@@ -743,17 +743,9 @@ function searchJobTemplateFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
-    var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
-    if(filterJobTemplateId != null && filterJobTemplateId !== '')
-      filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
-
     var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
     if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
       filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
-
-    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
-    if(filterAapInventoryId != null && filterAapInventoryId !== '')
-      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
 
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
@@ -762,6 +754,14 @@ function searchJobTemplateFilters($formFilters) {
     var filterAapTemplateId = $formFilters.querySelector('.valueAapTemplateId')?.value;
     if(filterAapTemplateId != null && filterAapTemplateId !== '')
       filters.push({ name: 'fq', value: 'aapTemplateId:' + filterAapTemplateId });
+
+    var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
+    if(filterJobTemplateId != null && filterJobTemplateId !== '')
+      filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
+
+    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
+    if(filterAapInventoryId != null && filterAapInventoryId !== '')
+      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
   }
   return filters;
 }
@@ -797,11 +797,12 @@ function suggestJobTemplateTenantResource(filters, $list, jobTemplateId = null, 
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['tenantResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(jobTemplateId.toString()) : val == tenantResource);
+        var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_tenantResource_' + jobTemplateId + '_tenantResource_' + o['tenantResource']);
         $input.setAttribute('name', 'tenantResource');
@@ -845,11 +846,12 @@ function suggestJobTemplateInventoryResource(filters, $list, jobTemplateId = nul
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['inventoryResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(jobTemplateId.toString()) : val == inventoryResource);
+        var checked = val == null ? false : (inventoryResource != null && val === inventoryResource.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_inventoryResource_' + jobTemplateId + '_inventoryResource_' + o['inventoryResource']);
         $input.setAttribute('name', 'inventoryResource');
@@ -893,11 +895,12 @@ function suggestJobTemplateAnsibleProjectId(filters, $list, jobTemplateId = null
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['ansibleProjectId'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(jobTemplateId.toString()) : val == ansibleProjectId);
+        var checked = val == null ? false : (ansibleProjectId != null && val === ansibleProjectId.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_ansibleProjectId_' + jobTemplateId + '_ansibleProjectId_' + o['ansibleProjectId']);
         $input.setAttribute('name', 'ansibleProjectId');
@@ -1188,18 +1191,6 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateId
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
-  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
-  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value === 'true';
-  var setJobTemplateId = removeJobTemplateId ? null : $formValues.querySelector('.setJobTemplateId')?.value;
-  var addJobTemplateId = $formValues.querySelector('.addJobTemplateId')?.value;
-  if(removeJobTemplateId || setJobTemplateId != null && setJobTemplateId !== '')
-    vals['setJobTemplateId'] = setJobTemplateId;
-  if(addJobTemplateId != null && addJobTemplateId !== '')
-    vals['addJobTemplateId'] = addJobTemplateId;
-  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value;
-  if(removeJobTemplateId != null && removeJobTemplateId !== '')
-    vals['removeJobTemplateId'] = removeJobTemplateId;
-
   var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
   var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
   var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
@@ -1211,18 +1202,6 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateId
   var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
   if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
     vals['removeAapOrganizationId'] = removeAapOrganizationId;
-
-  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
-  var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value === 'true';
-  var setAapInventoryId = removeAapInventoryId ? null : $formValues.querySelector('.setAapInventoryId')?.value;
-  var addAapInventoryId = $formValues.querySelector('.addAapInventoryId')?.value;
-  if(removeAapInventoryId || setAapInventoryId != null && setAapInventoryId !== '')
-    vals['setAapInventoryId'] = setAapInventoryId;
-  if(addAapInventoryId != null && addAapInventoryId !== '')
-    vals['addAapInventoryId'] = addAapInventoryId;
-  var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value;
-  if(removeAapInventoryId != null && removeAapInventoryId !== '')
-    vals['removeAapInventoryId'] = removeAapInventoryId;
 
   var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
   var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value === 'true';
@@ -1247,6 +1226,30 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateId
   var removeAapTemplateId = $formValues.querySelector('.removeAapTemplateId')?.value;
   if(removeAapTemplateId != null && removeAapTemplateId !== '')
     vals['removeAapTemplateId'] = removeAapTemplateId;
+
+  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
+  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value === 'true';
+  var setJobTemplateId = removeJobTemplateId ? null : $formValues.querySelector('.setJobTemplateId')?.value;
+  var addJobTemplateId = $formValues.querySelector('.addJobTemplateId')?.value;
+  if(removeJobTemplateId || setJobTemplateId != null && setJobTemplateId !== '')
+    vals['setJobTemplateId'] = setJobTemplateId;
+  if(addJobTemplateId != null && addJobTemplateId !== '')
+    vals['addJobTemplateId'] = addJobTemplateId;
+  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value;
+  if(removeJobTemplateId != null && removeJobTemplateId !== '')
+    vals['removeJobTemplateId'] = removeJobTemplateId;
+
+  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
+  var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value === 'true';
+  var setAapInventoryId = removeAapInventoryId ? null : $formValues.querySelector('.setAapInventoryId')?.value;
+  var addAapInventoryId = $formValues.querySelector('.addAapInventoryId')?.value;
+  if(removeAapInventoryId || setAapInventoryId != null && setAapInventoryId !== '')
+    vals['setAapInventoryId'] = setAapInventoryId;
+  if(addAapInventoryId != null && addAapInventoryId !== '')
+    vals['addAapInventoryId'] = addAapInventoryId;
+  var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value;
+  if(removeAapInventoryId != null && removeAapInventoryId !== '')
+    vals['removeAapInventoryId'] = removeAapInventoryId;
 
   patchJobTemplateVals(jobTemplateId == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'jobTemplateId:' + jobTemplateId}], vals, target, success, error);
 }
@@ -1366,17 +1369,9 @@ function patchJobTemplateFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
-    var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
-    if(filterJobTemplateId != null && filterJobTemplateId !== '')
-      filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
-
     var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
     if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
       filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
-
-    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
-    if(filterAapInventoryId != null && filterAapInventoryId !== '')
-      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
 
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
@@ -1385,6 +1380,14 @@ function patchJobTemplateFilters($formFilters) {
     var filterAapTemplateId = $formFilters.querySelector('.valueAapTemplateId')?.value;
     if(filterAapTemplateId != null && filterAapTemplateId !== '')
       filters.push({ name: 'fq', value: 'aapTemplateId:' + filterAapTemplateId });
+
+    var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
+    if(filterJobTemplateId != null && filterJobTemplateId !== '')
+      filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
+
+    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
+    if(filterAapInventoryId != null && filterAapInventoryId !== '')
+      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
   }
   return filters;
 }
@@ -1524,17 +1527,9 @@ async function postJobTemplate($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
-  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
-  if(valueJobTemplateId != null && valueJobTemplateId !== '')
-    vals['jobTemplateId'] = valueJobTemplateId;
-
   var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
   if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
     vals['aapOrganizationId'] = valueAapOrganizationId;
-
-  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
-  if(valueAapInventoryId != null && valueAapInventoryId !== '')
-    vals['aapInventoryId'] = valueAapInventoryId;
 
   var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
   if(valueAapProjectId != null && valueAapProjectId !== '')
@@ -1543,6 +1538,14 @@ async function postJobTemplate($formValues, target, success, error) {
   var valueAapTemplateId = $formValues.querySelector('.valueAapTemplateId')?.value;
   if(valueAapTemplateId != null && valueAapTemplateId !== '')
     vals['aapTemplateId'] = valueAapTemplateId;
+
+  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
+  if(valueJobTemplateId != null && valueJobTemplateId !== '')
+    vals['jobTemplateId'] = valueJobTemplateId;
+
+  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
+  if(valueAapInventoryId != null && valueAapInventoryId !== '')
+    vals['aapInventoryId'] = valueAapInventoryId;
 
   fetch(
     '/en-us/api/job-template'

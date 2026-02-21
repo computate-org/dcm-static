@@ -153,59 +153,6 @@
 {%- macro htmArchivedHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputTenantResourceHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
-  {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_tenantResource">
-  {%- endif %}
-  {%- if 'PUTCopy' == classApiMethodMethod %}
-                  <div>
-                    <wa-checkbox 
-                        id="{{classApiMethodMethod}}_tenantResource_clear"
-                        class="label-on-left classApiMethodMethod}}_tenantResource_clear tenantResource_clear "
-                        hint="clear"
-                        >
-                      clear
-                    </wa-checkbox>
-                  </div>
-  {%- endif %}
-                  <wa-input
-                      type="text"
-                      placeholder="tenant"
-                      label="tenant"
-                      hint="The unique authorization resource for the tenant for multi-tenancy"
-                      class="label-on-left {{classApiMethodMethod}}_tenantResource valueObjectSuggest suggestTenantResource "
-                      name="setTenantResource"
-                      id="{{classApiMethodMethod}}_tenantResource"
-                      data-list="listHostTenantResource_{{classApiMethodMethod}}"
-                      autocomplete="off"
-                      value="{{result.tenantResource | e }}"
-                  >
-              </wa-input>
-
-  {%- if 'Page' == classApiMethodMethod %}
-                </form>
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro htmTenantResourceHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputTenantResourceHostPage(authForWrite=authForWrite, authForRead=authForRead) }}
-                <div class="label-on-left-ul-label ">
-                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
-                  relate a tenant to this host
-                </div>
-                <ul class="label-on-left-ul " id="listHostTenantResource_{{classApiMethodMethod}}">
-                </ul>
-                {%- if authForReadBool == true %}
-                {% if 'Page' == classApiMethodMethod %}
-                <div>
-                  <button
-                       id="{{classApiMethodMethod}}_tenantResource_add"
-                       onclick="this.classList.add('w3-disabled'); this.disabled = true; this.innerHTML = 'Sending…'; postTenantVals({ tenantResource: '{{ result.hostResource }}' }, this, function(response, target) { document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').disabled = false; document.querySelector('#{{classApiMethodMethod}}_tenantResource_add').innerHTML = 'add a tenant'; }, this, function(response, target) { addError(document.querySelector('#{{classApiMethodMethod}}tenantResource')); });"
-                      >add a tenant</button>
-                  </div>
-                {%- endif %}
-                {%- endif %}
-{%- endmacro %}
 {%- macro inputInventoryResourceHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_inventoryResource">
@@ -419,21 +366,11 @@
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHostDialog" label="Modify host">
           <form id="htmForm_patchHost" class="round-row primary-smart-border-radius ">
 
-            <wa-details open class="HtmRow" id="host-details">
+            <wa-details open class="HtmRow" id="inventory-details">
               <div slot="summary">
-                <span>host details</span>
+                <span>inventory details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-                {% if "PATCH" in scopes -%}
-                {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {% else -%}
-                {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
-                {%- endif %}
-                {%- endif %}
-
                 {% if "PATCH" in scopes -%}
                 {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
                 {% else -%}
@@ -443,7 +380,9 @@
                 {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
+              </div>
 
+              <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
                 {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
                 {% else -%}
@@ -473,7 +412,14 @@
                 {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
+              </div>
+            </wa-details>
 
+            <wa-details open class="HtmRow" id="relationships">
+              <div slot="summary">
+                <span>relationships</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
                 {% else -%}
@@ -504,21 +450,11 @@
           <form id="htmForm_postHost" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
-            <wa-details open class="HtmRow" id="host-details">
+            <wa-details open class="HtmRow" id="inventory-details">
               <div slot="summary">
-                <span>host details</span>
+                <span>inventory details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-                {% if "POST" in scopes -%}
-                {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {% else -%}
-                {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
-                {%- endif %}
-                {%- endif %}
-
                 {% if "POST" in scopes -%}
                 {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
                 {% else -%}
@@ -528,7 +464,9 @@
                 {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
+              </div>
 
+              <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
                 {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
                 {% else -%}
@@ -558,7 +496,14 @@
                 {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
+              </div>
+            </wa-details>
 
+            <wa-details open class="HtmRow" id="relationships">
+              <div slot="summary">
+                <span>relationships</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
                 {% else -%}
@@ -670,21 +615,11 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="host-details">
+            <wa-details open class="HtmRow" id="inventory-details">
               <div slot="summary">
-                <span>host details</span>
+                <span>inventory details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-                {% if "PATCH" in scopes -%}
-                {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {% else -%}
-                {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
-                {%- endif %}
-                {%- endif %}
-
                 {% if "PATCH" in scopes -%}
                 {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
                 {% else -%}
@@ -694,7 +629,9 @@
                 {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
+              </div>
 
+              <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
                 {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
                 {% else -%}
@@ -724,7 +661,14 @@
                 {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
+              </div>
+            </wa-details>
 
+            <wa-details open class="HtmRow" id="relationships">
+              <div slot="summary">
+                <span>relationships</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
                 {% else -%}

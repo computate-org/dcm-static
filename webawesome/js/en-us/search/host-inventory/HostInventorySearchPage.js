@@ -55,6 +55,17 @@ Promise.all([
     facetStatsChange('HostInventory', 'archived', false);
   });
 
+  document.querySelector('#pageSelectSortHostInventory_tenantResource')?.addEventListener('change', (event) => {
+    sort('HostInventory', 'tenantResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostInventory_tenantResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostInventory', 'tenantResource', true);
+  });
+  document.querySelector('#pageStatsHostInventory_tenantResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostInventory', 'tenantResource', false);
+  });
+
   document.querySelector('#pageSelectSortHostInventory_inventoryName')?.addEventListener('change', (event) => {
     sort('HostInventory', 'inventoryName', event.currentTarget.value);
   });
@@ -88,15 +99,15 @@ Promise.all([
     facetStatsChange('HostInventory', 'inventoryKind', false);
   });
 
-  document.querySelector('#pageSelectSortHostInventory_tenantResource')?.addEventListener('change', (event) => {
-    sort('HostInventory', 'tenantResource', event.currentTarget.value);
+  document.querySelector('#pageSelectSortHostInventory_hostInventoryIds')?.addEventListener('change', (event) => {
+    sort('HostInventory', 'hostInventoryIds', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsHostInventory_tenantResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('HostInventory', 'tenantResource', true);
+  document.querySelector('#pageStatsHostInventory_hostInventoryIds')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostInventory', 'hostInventoryIds', true);
   });
-  document.querySelector('#pageStatsHostInventory_tenantResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('HostInventory', 'tenantResource', false);
+  document.querySelector('#pageStatsHostInventory_hostInventoryIds')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostInventory', 'hostInventoryIds', false);
   });
 
   document.querySelector('#pageSelectSortHostInventory_classCanonicalName')?.addEventListener('change', (event) => {

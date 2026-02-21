@@ -297,17 +297,6 @@ Promise.all([
     facetStatsChange('JobTemplate', 'solrId', false);
   });
 
-  document.querySelector('#pageSelectSortJobTemplate_jobTemplateId')?.addEventListener('change', (event) => {
-    sort('JobTemplate', 'jobTemplateId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsJobTemplate_jobTemplateId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('JobTemplate', 'jobTemplateId', true);
-  });
-  document.querySelector('#pageStatsJobTemplate_jobTemplateId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('JobTemplate', 'jobTemplateId', false);
-  });
-
   document.querySelector('#pageSelectSortJobTemplate_aapOrganizationId')?.addEventListener('change', (event) => {
     sort('JobTemplate', 'aapOrganizationId', event.currentTarget.value);
   });
@@ -317,17 +306,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsJobTemplate_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('JobTemplate', 'aapOrganizationId', false);
-  });
-
-  document.querySelector('#pageSelectSortJobTemplate_aapInventoryId')?.addEventListener('change', (event) => {
-    sort('JobTemplate', 'aapInventoryId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsJobTemplate_aapInventoryId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('JobTemplate', 'aapInventoryId', true);
-  });
-  document.querySelector('#pageStatsJobTemplate_aapInventoryId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('JobTemplate', 'aapInventoryId', false);
   });
 
   document.querySelector('#pageSelectSortJobTemplate_aapProjectId')?.addEventListener('change', (event) => {
@@ -350,6 +328,28 @@ Promise.all([
   });
   document.querySelector('#pageStatsJobTemplate_aapTemplateId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('JobTemplate', 'aapTemplateId', false);
+  });
+
+  document.querySelector('#pageSelectSortJobTemplate_jobTemplateId')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'jobTemplateId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_jobTemplateId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'jobTemplateId', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_jobTemplateId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'jobTemplateId', false);
+  });
+
+  document.querySelector('#pageSelectSortJobTemplate_aapInventoryId')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'aapInventoryId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_aapInventoryId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'aapInventoryId', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_aapInventoryId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'aapInventoryId', false);
   });
           document.querySelector('#fqJobTemplate_created')?.addEventListener('change', (event) => {
             fqChange('JobTemplate', event.currentTarget, facetChangeJobTemplateSuccess, facetChangeJobTemplateError);

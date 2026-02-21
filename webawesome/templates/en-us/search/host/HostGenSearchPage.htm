@@ -15,7 +15,7 @@
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 5;
+        --site-results-number-of-columns: 4;
       }
 {{ super() }}
 {%- block htmStyleHostPage %}
@@ -129,22 +129,6 @@
 
         var hostResource = {% if result.hostResource is defined %}{{ result.hostResource | tojson }}{% else %}null{% endif %};
 
-          function relate_tenantResource(event) {
-            suggestHostTenantResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , null
-                , null
-                , true
-                , this
-                );
-          }
-          document.querySelector('#POST_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
           function relate_inventoryResource(event) {
             suggestHostInventoryResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
@@ -161,6 +145,22 @@
           document.querySelector('#POST_inventoryResource')?.addEventListener('focus', relate_inventoryResource);
           document.querySelector('#PATCH_inventoryResource')?.addEventListener('input', relate_inventoryResource);
           document.querySelector('#PATCH_inventoryResource')?.addEventListener('focus', relate_inventoryResource);
+          function relate_tenantResource(event) {
+            suggestHostTenantResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#POST_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
         if(hostResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -362,19 +362,6 @@
 {% include en-us/search/host/HostPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
-                    <wa-dropdown id="htmDropdown-tenantResource">
-                      <wa-button variant="brand" slot="trigger" caret>tenant</wa-button>
-                      <wa-menu>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHost_tenantResource'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Host').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantResource-asc">
-                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                          sort by tenant ascending
-                        </wa-menu-item>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHost_tenantResource'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Host').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantResource-desc">
-                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                          sort by tenant descending
-                        </wa-menu-item>
-                      </wa-menu>
-                    </wa-dropdown>
                     <wa-dropdown id="htmDropdown-hostName">
                       <wa-button variant="brand" slot="trigger" caret>Fully Qualified Domain Name</wa-button>
                       <wa-menu>
@@ -432,9 +419,6 @@
                   <div>
                     <a href="{{ item.displayPage }}">
                       <i class="fa-duotone fa-regular fa-server"></i>
-                      <span>{{ item.tenantResource | e }}</span>
-                    </a>
-                    <a href="{{ item.displayPage }}">
                       <span>{{ item.hostName | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
@@ -448,10 +432,6 @@
                     </a>
                   </div>
                   {% endfor %}
-              {% if getColumnTenantResource is defined %}
-                <div>
-                </div>
-              {% endif %}
               {% if getColumnHostName is defined %}
                 <div>
                 </div>

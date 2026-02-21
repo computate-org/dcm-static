@@ -55,17 +55,6 @@ Promise.all([
     facetStatsChange('Host', 'archived', false);
   });
 
-  document.querySelector('#pageSelectSortHost_tenantResource')?.addEventListener('change', (event) => {
-    sort('Host', 'tenantResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'tenantResource', true);
-  });
-  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'tenantResource', false);
-  });
-
   document.querySelector('#pageSelectSortHost_inventoryResource')?.addEventListener('change', (event) => {
     sort('Host', 'inventoryResource', event.currentTarget.value);
   });
@@ -273,6 +262,28 @@ Promise.all([
   });
   document.querySelector('#pageStatsHost_solrId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Host', 'solrId', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_tenantResource')?.addEventListener('change', (event) => {
+    sort('Host', 'tenantResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'tenantResource', true);
+  });
+  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'tenantResource', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_aapOrganizationId')?.addEventListener('change', (event) => {
+    sort('Host', 'aapOrganizationId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_aapOrganizationId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'aapOrganizationId', true);
+  });
+  document.querySelector('#pageStatsHost_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'aapOrganizationId', false);
   });
 
   document.querySelector('#pageSelectSortHost_aapHostId')?.addEventListener('change', (event) => {

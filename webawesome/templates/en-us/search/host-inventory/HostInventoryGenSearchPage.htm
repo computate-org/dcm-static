@@ -28,6 +28,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventorySearchPage.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/host/Host.js"></script>
 {%- endblock htmScriptsHostInventoryPage %}
 {%- endblock htmScriptsPageLayout %}
 
@@ -144,6 +145,22 @@
           document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          function relate_hostInventoryIds(event) {
+            suggestHostInventoryHostInventoryIds(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ] : [{%- if result.hostInventoryIds is defined %}{'name':'fq','value':'inventoryResource:{{ result.hostInventoryIds }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#POST_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#POST_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#PATCH_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#PATCH_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
         if(inventoryResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
