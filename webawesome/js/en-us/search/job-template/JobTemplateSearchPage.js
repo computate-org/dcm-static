@@ -110,6 +110,17 @@ Promise.all([
     facetStatsChange('JobTemplate', 'jobType', false);
   });
 
+  document.querySelector('#pageSelectSortJobTemplate_organizationId')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'organizationId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_organizationId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'organizationId', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_organizationId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'organizationId', false);
+  });
+
   document.querySelector('#pageSelectSortJobTemplate_ansibleProjectId')?.addEventListener('change', (event) => {
     sort('JobTemplate', 'ansibleProjectId', event.currentTarget.value);
   });
@@ -119,6 +130,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsJobTemplate_ansibleProjectId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('JobTemplate', 'ansibleProjectId', false);
+  });
+
+  document.querySelector('#pageSelectSortJobTemplate_ansiblePlaybook')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'ansiblePlaybook', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_ansiblePlaybook')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'ansiblePlaybook', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_ansiblePlaybook')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'ansiblePlaybook', false);
   });
 
   document.querySelector('#pageSelectSortJobTemplate_classCanonicalName')?.addEventListener('change', (event) => {
@@ -274,6 +296,61 @@ Promise.all([
   document.querySelector('#pageStatsJobTemplate_solrId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('JobTemplate', 'solrId', false);
   });
+
+  document.querySelector('#pageSelectSortJobTemplate_jobTemplateId')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'jobTemplateId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_jobTemplateId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'jobTemplateId', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_jobTemplateId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'jobTemplateId', false);
+  });
+
+  document.querySelector('#pageSelectSortJobTemplate_aapOrganizationId')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'aapOrganizationId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_aapOrganizationId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'aapOrganizationId', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'aapOrganizationId', false);
+  });
+
+  document.querySelector('#pageSelectSortJobTemplate_aapInventoryId')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'aapInventoryId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_aapInventoryId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'aapInventoryId', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_aapInventoryId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'aapInventoryId', false);
+  });
+
+  document.querySelector('#pageSelectSortJobTemplate_aapProjectId')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'aapProjectId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_aapProjectId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'aapProjectId', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_aapProjectId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'aapProjectId', false);
+  });
+
+  document.querySelector('#pageSelectSortJobTemplate_aapTemplateId')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'aapTemplateId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_aapTemplateId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'aapTemplateId', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_aapTemplateId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'aapTemplateId', false);
+  });
           document.querySelector('#fqJobTemplate_created')?.addEventListener('change', (event) => {
             fqChange('JobTemplate', event.currentTarget, facetChangeJobTemplateSuccess, facetChangeJobTemplateError);
           });
@@ -387,10 +464,10 @@ Promise.all([
   document.querySelector('#htmButton_deleteJobTemplate')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
-      var jobTemplateName =  event.currentTarget.getAttribute('data-jobTemplateName');
+      var jobTemplateId =  event.currentTarget.getAttribute('data-jobTemplateId');
       deleteJobTemplate(
           event.currentTarget
-          , jobTemplateName
+          , jobTemplateId
           , function(response, target) { addGlow(target); }
           , function(response, target) { addError(target); }
           );

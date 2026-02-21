@@ -521,14 +521,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchTenant')?.addEventListener('click', (event) => {
-    document.querySelector('#patchTenantDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postTenant')?.addEventListener('click', (event) => {
-    document.querySelector('#postTenantDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteTenant')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -540,14 +532,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportTenant')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportTenantDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageTenant')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageTenantDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterTenant')?.addEventListener('click', (event) => {

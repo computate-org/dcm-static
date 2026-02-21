@@ -414,8 +414,6 @@
                 </div>
 {% include en-us/search/host-inventory/HostInventoryPaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleHostInventoryPage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -423,6 +421,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndHostInventoryPage %}
 {%- include en-us/search/host-inventory/HostInventoryLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndHostInventoryPage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

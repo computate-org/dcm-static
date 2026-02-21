@@ -1,11 +1,11 @@
 
-{%- macro htmButton_patchTenant() %}<wa-button variant="brand" id="htmButton_patchTenant" data-tenantId={{ result.tenantId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchTenant() %}<wa-button variant="brand" id="htmButton_patchTenant"  data-dialog="open patchTenantDialog" data-tenantId={{ result.tenantId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
-{%- macro htmButton_postTenant() %}<wa-button variant="brand" id="htmButton_postTenant" data-tenantId={{ result.tenantId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postTenant() %}<wa-button variant="brand" id="htmButton_postTenant"  data-dialog="open postTenantDialog" data-tenantId={{ result.tenantId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmButton_deleteTenant() %}<wa-button variant="brand" id="htmButton_deleteTenant" data-tenantId={{ result.tenantId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
-{%- macro htmButton_putimportTenant() %}<wa-button variant="brand" id="htmButton_putimportTenant" data-tenantId={{ result.tenantId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportTenant() %}<wa-button variant="brand" id="htmButton_putimportTenant"  data-dialog="open putimportTenantDialog" data-tenantId={{ result.tenantId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmButton_deletefilterTenant() %}<wa-button variant="brand" id="htmButton_deletefilterTenant" data-tenantId={{ result.tenantId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
           <div id="htmSearchForm">

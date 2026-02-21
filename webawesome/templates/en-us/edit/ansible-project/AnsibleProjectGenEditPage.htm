@@ -1,0 +1,400 @@
+{% extends "en-us/PageLayout.htm" %}
+{%- block htmTitlePageLayout %}
+{%- block htmTitleAnsibleProjectPage %}
+    <title>{{ result.objectTitle }}</title>
+{%- endblock htmTitleAnsibleProjectPage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/ansible-project/AnsibleProject.css"/>
+{%- block htmStylesAnsibleProjectPage %}
+{%- endblock htmStylesAnsibleProjectPage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 3;
+      }
+{{ super() }}
+{%- block htmStyleAnsibleProjectPage %}
+{%- endblock htmStyleAnsibleProjectPage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsAnsibleProjectPage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProjectSearchPage.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProjectEditPage.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/job-template/JobTemplate.js"></script>
+{%- endblock htmScriptsAnsibleProjectPage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptAnsibleProjectPage %}
+    <script>
+
+      function jsWebsocketAnsibleProject(ansibleProjectId, vars, $response) {
+{%- block jsWebsocketAnsibleProjectPage %}{%- endblock %}
+      }
+
+      function jsTooltipAnsibleProject(e, feature) {
+{%- block jsTooltipAnsibleProjectPage %}{%- endblock %}
+      }
+
+      function htmTooltipAnsibleProject(feature, layer) {
+        return `{%- block htmTooltipAnsibleProjectPage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipAnsibleProjectPage %}`;
+      }
+
+      function facetChangeAnsibleProjectSuccess(e) {
+        var l = e.querySelector('.pageForm .listAnsibleProject')?.value;
+        if(l)
+          window.listAnsibleProject = JSON.parse(l);
+{% block facetChangeAnsibleProjectSuccess %}{%- endblock facetAnsibleProjectSuccess %}
+      }
+      function facetChangeAnsibleProjectError(e) {
+{% block facetChangeAnsibleProjectError %}{%- endblock facetAnsibleProjectError %}
+      }
+
+      function facetSimpleRangeAnsibleProjectSuccess(e) {
+{% block facetSimpleRangeAnsibleProjectSuccess %}      facetChangeAnsibleProjectSuccess(e);{% endblock facetSimpleRangeAnsibleProjectSuccess %}
+      }
+      function facetSimpleRangeAnsibleProjectError(e) {
+{% block facetSimpleRangeAnsibleProjectError %}      facetChangeAnsibleProjectError(e);{% endblock facetSimpleRangeAnsibleProjectError %}
+      }
+      function facetSimpleRangeAnsibleProject(e) {
+        facetSimpleRange(e, facetSimpleRangeAnsibleProjectSuccess, facetSimpleRangeAnsibleProjectError);
+      }
+
+      function facetRangeTimeZoneAnsibleProjectSuccess(e) {
+{% block facetRangeTimeZoneAnsibleProjectSuccess %}      facetChangeAnsibleProjectSuccess(e);{% endblock facetRangeTimeZoneAnsibleProjectSuccess %}
+      }
+      function facetRangeTimeZoneAnsibleProjectError(e) {
+{% block facetRangeTimeZoneAnsibleProjectError %}      facetChangeAnsibleProjectError(e);{%- endblock facetRangeTimeZoneAnsibleProjectError %}
+      }
+      function facetRangeTimeZoneAnsibleProject(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneAnsibleProjectSuccess, facetRangeTimeZoneAnsibleProjectError);
+      }
+
+      function facetRangeGapChangeAnsibleProjectSuccess(e) {
+{% block facetRangeGapChangeAnsibleProjectSuccess %}      facetChangeAnsibleProjectSuccess(e);{% endblock facetRangeGapChangeAnsibleProjectSuccess %}
+      }
+      function facetRangeGapChangeAnsibleProjectError(e) {
+{% block facetRangeGapChangeAnsibleProjectError %}      facetChangeAnsibleProjectError(e);{%- endblock facetRangeGapChangeAnsibleProjectError %}
+      }
+      function facetRangeGapChangeAnsibleProject(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeAnsibleProjectSuccess, facetRangeGapChangeAnsibleProjectError);
+      }
+
+      function facetRangeStartChangeAnsibleProjectSuccess(e) {
+{% block facetRangeStartChangeAnsibleProjectSuccess %}      facetChangeAnsibleProjectSuccess(e);{% endblock facetRangeStartChangeAnsibleProjectSuccess %}
+      }
+      function facetRangeStartChangeAnsibleProjectError(e) {
+{% block facetRangeStartChangeAnsibleProjectError %}      facetChangeAnsibleProjectError(e);{%- endblock facetRangeStartChangeAnsibleProjectError %}
+      }
+      function facetRangeStartChangeAnsibleProject(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeAnsibleProjectSuccess, facetRangeStartChangeAnsibleProjectError);
+      }
+
+      function facetRangeEndChangeAnsibleProjectSuccess(e) {
+{% block facetRangeEndChangeAnsibleProjectSuccess %}      facetChangeAnsibleProjectSuccess(e);{% endblock facetRangeEndChangeAnsibleProjectSuccess %}
+      }
+      function facetRangeEndChangeAnsibleProjectError(e) {
+{% block facetRangeEndChangeAnsibleProjectError %}      facetChangeAnsibleProjectError(e);{%- endblock facetRangeEndChangeAnsibleProjectError %}
+      }
+      function facetRangeEndChangeAnsibleProject(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeAnsibleProjectSuccess, facetRangeEndChangeAnsibleProjectError);
+      }
+    </script>
+    <script type="module">
+{% if DEFAULT_MAP_LOCATION is defined %}
+      window.DEFAULT_MAP_LOCATION = { type: 'Point', coordinates: [ {{ DEFAULT_MAP_LOCATION.coordinates[0] }}, {{ DEFAULT_MAP_LOCATION.coordinates[1] }} ]};
+{% endif %}
+{% if DEFAULT_MAP_ZOOM is defined %}
+      window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{% endif %}
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+
+        var ansibleProjectId = {% if result.ansibleProjectId is defined %}{{ result.ansibleProjectId | tojson }}{% else %}null{% endif %};
+
+        if(ansibleProjectId == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.ansibleProjectId is defined %}
+          function relate_tenantResource(event) {
+            suggestAnsibleProjectTenantResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , window.result.ansibleProjectId
+                , window.result.tenantResource
+                , true
+                );
+          }
+          document.querySelector('#POST_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#Page_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          {% if "PATCH" in scopes %}
+          suggestAnsibleProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listAnsibleProjectTenantResource_Page'), window.result.ansibleProjectId, window.result.tenantResource, true);
+          {% else %}
+          {% if "GET" in scopes %}
+          suggestAnsibleProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listAnsibleProjectTenantResource_Page'), window.result.ansibleProjectId, window.result.tenantResource, true);
+          {% else %}
+          suggestAnsibleProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listAnsibleProjectTenantResource_Page'), window.result.ansibleProjectId, window.result.tenantResource, false);
+          {% endif %}
+          {% endif %}
+          function relate_jobTemplateIds(event) {
+            suggestAnsibleProjectJobTemplateIds(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectId,pk,editPage,objectTitle' } ] : [{%- if result.jobTemplateIds is defined %}{'name':'fq','value':'ansibleProjectId:{{ result.jobTemplateIds }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , window.result.ansibleProjectId
+                , window.result.jobTemplateIds
+                , true
+                );
+          }
+          document.querySelector('#POST_jobTemplateIds')?.addEventListener('input', relate_jobTemplateIds);
+          document.querySelector('#POST_jobTemplateIds')?.addEventListener('focus', relate_jobTemplateIds);
+          document.querySelector('#PATCH_jobTemplateIds')?.addEventListener('input', relate_jobTemplateIds);
+          document.querySelector('#PATCH_jobTemplateIds')?.addEventListener('focus', relate_jobTemplateIds);
+          document.querySelector('#Page_jobTemplateIds')?.addEventListener('input', relate_jobTemplateIds);
+          document.querySelector('#Page_jobTemplateIds')?.addEventListener('focus', relate_jobTemplateIds);
+          {% if "PATCH" in scopes %}
+          suggestAnsibleProjectJobTemplateIds([{'name':'fq','value':'ansibleProjectId:' + window.result.jobTemplateIds}], document.querySelector('#listAnsibleProjectJobTemplateIds_Page'), window.result.ansibleProjectId, window.result.jobTemplateIds, true);
+          {% else %}
+          {% if "GET" in scopes %}
+          suggestAnsibleProjectJobTemplateIds([{'name':'fq','value':'ansibleProjectId:' + window.result.jobTemplateIds}], document.querySelector('#listAnsibleProjectJobTemplateIds_Page'), window.result.ansibleProjectId, window.result.jobTemplateIds, true);
+          {% else %}
+          suggestAnsibleProjectJobTemplateIds([{'name':'fq','value':'ansibleProjectId:' + window.result.jobTemplateIds}], document.querySelector('#listAnsibleProjectJobTemplateIds_Page'), window.result.ansibleProjectId, window.result.jobTemplateIds, false);
+          {% endif %}
+          {% endif %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listAnsibleProject')?.value;
+        if(l)
+          window.listAnsibleProject = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneAnsibleProject);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneAnsibleProject);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneAnsibleProject);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeAnsibleProject);
+        pageGraphAnsibleProject();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qAnsibleProject_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('AnsibleProject', event.target, document.querySelector('#qAnsibleProjectDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qAnsibleProject_rows')?.addEventListener('change', event => {
+          paramChange('AnsibleProject', event.target, document.querySelector('#qAnsibleProjectDiv_rows'));
+        });
+
+        document.querySelector('#qAnsibleProject_start')?.addEventListener('change', event => {
+          paramChange('AnsibleProject', event.target, document.querySelector('#qAnsibleProjectDiv_start'));
+        });
+
+
+        var submitForm_patchAnsibleProject = document.querySelector('#htmForm_patchAnsibleProject')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_patchAnsibleProject')?.addEventListener('click', event => {
+          event.preventDefault();
+          patchAnsibleProject(null, document.querySelector('#htmForm_patchAnsibleProject'), document.querySelector('#htmFormButton_patchAnsibleProject'), event.target.getAttribute('data-ansibleProjectId'));
+          return false;
+        });
+
+        var submitForm_postAnsibleProject = document.querySelector('#htmForm_postAnsibleProject')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_postAnsibleProject')?.addEventListener('click', event => {
+          event.preventDefault();
+          postAnsibleProject(document.querySelector('#htmForm_postAnsibleProject')
+          , document.querySelector('#htmFormButton_postAnsibleProject')
+          , (json, target) => {
+            window.location.href = json.editPage;
+          });
+          return false;
+        });
+
+        var submitForm_deleteAnsibleProject = document.querySelector('#htmForm_deleteAnsibleProject')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deleteAnsibleProject')?.addEventListener('click', event => {
+          event.preventDefault();
+          deleteAnsibleProject(event.target, event.target.getAttribute('data-ansibleProjectId'));
+          return false;
+        });
+
+        var submitForm_putimportAnsibleProject = document.querySelector('#htmForm_putimportAnsibleProject')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_putimportAnsibleProject')?.addEventListener('click', event => {
+          event.preventDefault();
+          putimportAnsibleProject(document.querySelector('#htmForm_putimportAnsibleProject'), document.querySelector('#htmFormButton_putimportAnsibleProject'));
+          return false;
+        });
+
+        var submitForm_searchpageAnsibleProject = document.querySelector('#htmForm_searchpageAnsibleProject')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_searchpageAnsibleProject')?.addEventListener('click', event => {
+          event.preventDefault();
+          searchpageAnsibleProject();
+          return false;
+        });
+
+        var submitForm_deletefilterAnsibleProject = document.querySelector('#htmForm_deletefilterAnsibleProject')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deletefilterAnsibleProject')?.addEventListener('click', event => {
+          event.preventDefault();
+          deletefilterAnsibleProject(event.target);
+          return false;
+        });
+{%- block htmScriptInitAnsibleProjectPage %}{%- endblock htmScriptInitAnsibleProjectPage %}
+      });
+    </script>
+{%- endblock htmScriptAnsibleProjectPage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketAnsibleProjectPage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketAnsibleProject(websocketAnsibleProjectInner);
+{% endif %}
+{%- endblock websocketAnsibleProjectPage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlAnsibleProjectPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlAnsibleProjectPage %}
+
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/ansible-project/AnsibleProjectSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/ansible-project/AnsibleProjectSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-AnsibleProject">back to all ansible projects</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-AnsibleProject" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="fa-duotone fa-regular fa-excavator"></i>
+                  all ansible projects
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  a ansible project
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+    {{ super() }}
+{%- block htmBodyStartAnsibleProjectPage %}
+{% if resultCount > 0 %}
+          <div class="wa-flank ">
+            <h1 class="Page_objectTitle"><i class="fa-duotone fa-regular fa-excavator"></i> {{ result.objectTitle | e }}</h1>
+          </div>
+{% endif %}
+{% include en-us/search/ansible-project/AnsibleProjectSearchForm.htm %}
+{%- endblock htmBodyStartAnsibleProjectPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleAnsibleProjectPage %}
+{%- include en-us/search/ansible-project/AnsibleProjectSidebar.htm %}
+        <div class="pageContent ">
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-AnsibleProject">back to all ansible projects</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-AnsibleProject" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="fa-duotone fa-regular fa-excavator"></i>
+              all ansible projects
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no ansible project found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class="fa-duotone fa-regular fa-excavator"></i>
+            </div>
+            <span class="wa-heading-m ">no ansible project found</span>
+            <p class="wa-caption-l ">A ansible project to be run on a computer in Ansible Automation Platform. </p>
+          </div>
+        </div>
+{% else %}
+{%- include en-us/search/ansible-project/AnsibleProjectSuggestedSearch.htm %}
+{% endif %}
+{%- block htmFormAnsibleProjectPage %}
+          <form action="/en-us/api/ansible-project" id="AnsibleProjectForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+{% if result.ansibleProjectId is defined %}
+            <input name="ansibleProjectId" class="valueAnsibleProjectId" type="hidden" value="{{ result.ansibleProjectId }}"/>
+            {% endif %}
+            <input name="focusId" type="hidden"/>
+            <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+            <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
+            <input name="listAnsibleProject" id="listAnsibleProject" class="listAnsibleProject"  value='{{ toJsonArrayStringInApostrophes(listAnsibleProject) }}' type="hidden"/>
+          </form>
+{%- if resultCount >= 1 %}
+          {{ htmForm_searchpageAnsibleProject() }}
+{% endif -%}
+{%- endblock htmFormAnsibleProjectPage %}
+        </div>
+{%- endblock htmBodyMiddleAnsibleProjectPage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndAnsibleProjectPage %}
+{%- include en-us/search/ansible-project/AnsibleProjectLocation.htm %}
+{%- endblock htmBodyEndAnsibleProjectPage %}
+      {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

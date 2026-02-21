@@ -377,8 +377,6 @@
                 </div>
 {% include en-us/search/tenant/TenantPaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleTenantPage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -386,6 +384,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndTenantPage %}
 {%- include en-us/search/tenant/TenantLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndTenantPage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

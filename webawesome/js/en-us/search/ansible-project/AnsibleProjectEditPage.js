@@ -20,7 +20,7 @@ Promise.all([
               var t = moment(t3);
               if(t) {
                 var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']';
-                patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+                patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                     , 'setCreated', s
                     , event.currentTarget
                     , function(response, target) { addGlow(target); }
@@ -44,7 +44,7 @@ Promise.all([
             if(valid) {
               var confirmResponse = confirm('Are you sure you want to archive that?'); 
               if(confirmResponse) { 
-                patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+                patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                     , 'setArchived', !(event.currentTarget.getAttribute('data-val') === 'true')
                     , event.currentTarget
                     , function(response, target) { addGlow(target); }
@@ -61,75 +61,12 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH jobTemplateName
-          document.querySelector('#Page_jobTemplateName')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_jobTemplateName');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
-                  , 'setJobTemplateName', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_jobTemplateName')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_jobTemplateName')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_jobTemplateName');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH jobTemplateDescription
-          document.querySelector('#Page_jobTemplateDescription')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_jobTemplateDescription');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
-                  , 'setJobTemplateDescription', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_jobTemplateDescription')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_jobTemplateDescription')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_jobTemplateDescription');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH jobType
-          document.querySelector('#Page_jobType')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_jobType');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
-                  , 'setJobType', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_jobType')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_jobType')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_jobType');
-            const valid = form.reportValidity();
-          });
-
           // PATCH organizationId
           document.querySelector('#Page_organizationId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_organizationId');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                   , 'setOrganizationId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -145,24 +82,108 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH ansiblePlaybook
-          document.querySelector('#Page_ansiblePlaybook')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_ansiblePlaybook');
+          // PATCH sourceControlType
+          document.querySelector('#Page_sourceControlType')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_sourceControlType');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
-                  , 'setAnsiblePlaybook', event.currentTarget.value
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
+                  , 'setSourceControlType', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#Page_ansiblePlaybook')?.addEventListener('focus', (event) => {
+          document.querySelector('#Page_sourceControlType')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_ansiblePlaybook')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_ansiblePlaybook');
+          document.querySelector('#Page_sourceControlType')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_sourceControlType');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH sourceControlUrl
+          document.querySelector('#Page_sourceControlUrl')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_sourceControlUrl');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
+                  , 'setSourceControlUrl', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_sourceControlUrl')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_sourceControlUrl')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_sourceControlUrl');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH ansibleProjectDescription
+          document.querySelector('#Page_ansibleProjectDescription')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_ansibleProjectDescription');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
+                  , 'setAnsibleProjectDescription', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_ansibleProjectDescription')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_ansibleProjectDescription')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_ansibleProjectDescription');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH sourceControlBranch
+          document.querySelector('#Page_sourceControlBranch')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_sourceControlBranch');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
+                  , 'setSourceControlBranch', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_sourceControlBranch')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_sourceControlBranch')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_sourceControlBranch');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH ansibleProjectName
+          document.querySelector('#Page_ansibleProjectName')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_ansibleProjectName');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
+                  , 'setAnsibleProjectName', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_ansibleProjectName')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_ansibleProjectName')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_ansibleProjectName');
             const valid = form.reportValidity();
           });
 
@@ -171,7 +192,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_sessionId');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                   , 'setSessionId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -192,7 +213,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_userKey');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                   , 'setUserKey', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -213,7 +234,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                   , 'setObjectTitle', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -234,7 +255,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                   , 'setDisplayPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -255,7 +276,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                   , 'setEditPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -276,7 +297,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                   , 'setUserPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -297,7 +318,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_download');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                   , 'setDownload', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -313,33 +334,12 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH jobTemplateId
-          document.querySelector('#Page_jobTemplateId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_jobTemplateId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
-                  , 'setJobTemplateId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_jobTemplateId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_jobTemplateId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_jobTemplateId');
-            const valid = form.reportValidity();
-          });
-
           // PATCH aapOrganizationId
           document.querySelector('#Page_aapOrganizationId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_aapOrganizationId');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                   , 'setAapOrganizationId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -355,24 +355,24 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH aapInventoryId
-          document.querySelector('#Page_aapInventoryId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_aapInventoryId');
+          // PATCH ansibleProjectId
+          document.querySelector('#Page_ansibleProjectId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_ansibleProjectId');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
-                  , 'setAapInventoryId', event.currentTarget.value
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
+                  , 'setAnsibleProjectId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#Page_aapInventoryId')?.addEventListener('focus', (event) => {
+          document.querySelector('#Page_ansibleProjectId')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_aapInventoryId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_aapInventoryId');
+          document.querySelector('#Page_ansibleProjectId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_ansibleProjectId');
             const valid = form.reportValidity();
           });
 
@@ -381,7 +381,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_aapProjectId');
             const valid = form.checkValidity();
             if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectId:' + event.currentTarget.getAttribute('data-ansibleProjectId') }]
                   , 'setAapProjectId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -394,27 +394,6 @@ Promise.all([
           });
           document.querySelector('#Page_aapProjectId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_aapProjectId');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH aapTemplateId
-          document.querySelector('#Page_aapTemplateId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_aapTemplateId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateId:' + event.currentTarget.getAttribute('data-jobTemplateId') }]
-                  , 'setAapTemplateId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_aapTemplateId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_aapTemplateId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_aapTemplateId');
             const valid = form.reportValidity();
           });
 });
