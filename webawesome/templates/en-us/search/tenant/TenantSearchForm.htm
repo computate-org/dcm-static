@@ -162,6 +162,7 @@
                       placeholder="[String] tenant name"
                       label="tenant name"
                       hint="The name of this tenant"
+                      required
                       id="{{classApiMethodMethod}}_tenantName"
   {%- if "Page" == classApiMethodMethod %}
                       data-tenantId={{ result.tenantId | tojson }}
@@ -225,31 +226,31 @@
 {%- macro htmTenantIdTenantPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputTenantIdTenantPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputDescriptionTenantPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputTenantDescriptionTenantPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_description">
+                <form class="subgrid-2col " id="PageForm_tenantDescription">
   {%- endif %}
                   <wa-input
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] description"
                       label="description"
                       hint="A description of this tenant"
-                      id="{{classApiMethodMethod}}_description"
+                      id="{{classApiMethodMethod}}_tenantDescription"
   {%- if "Page" == classApiMethodMethod %}
                       data-tenantId={{ result.tenantId | tojson }}
-                      class="label-on-left {{classApiMethodMethod}}_description setDescription classTenant inputTenant{{ result.tenantId }}Description "
-                      name="setDescription"
+                      class="label-on-left {{classApiMethodMethod}}_tenantDescription setTenantDescription classTenant inputTenant{{ result.tenantId }}TenantDescription "
+                      name="setTenantDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{classApiMethodMethod}}_description setDescription classTenant inputTenant{{ result.tenantId }}Description "
-                      name="setDescription"
+                      class="label-on-left {{classApiMethodMethod}}_tenantDescription setTenantDescription classTenant inputTenant{{ result.tenantId }}TenantDescription "
+                      name="setTenantDescription"
     {%- else %}
-                      class="label-on-left {{classApiMethodMethod}}_description valueDescription classTenant inputTenant{{ result.tenantId }}Description "
-                      name="description"
+                      class="label-on-left {{classApiMethodMethod}}_tenantDescription valueTenantDescription classTenant inputTenant{{ result.tenantId }}TenantDescription "
+                      name="tenantDescription"
     {%- endif %}
   {%- endif %}
   {%- if "Page" == classApiMethodMethod %}
-                      value="{{result.description | e }}"
+                      value="{{result.tenantDescription | e }}"
   {%- endif %}
                       ></wa-input>
 
@@ -258,8 +259,8 @@
   {%- endif %}
 {%- endmacro %}
 
-{%- macro htmDescriptionTenantPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputDescriptionTenantPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- macro htmTenantDescriptionTenantPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputTenantDescriptionTenantPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputPageIdTenantPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -310,58 +311,58 @@
 {%- macro htmForm_patchTenant() %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchTenantDialog" label="Modify tenant">
           <form id="htmForm_patchTenant" class="round-row primary-smart-border-radius ">
+
             <wa-details open class="HtmRow" id="tenant-details">
               <div slot="summary">
                 <span>tenant details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmTenantNameTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantNameTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantNameTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantNameTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantNameTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmTenantIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
-                {{ htmDescriptionTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmDescriptionTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmDescriptionTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantDescriptionTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantDescriptionTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantDescriptionTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
+
             <wa-details open class="HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmPageIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmPageIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmPageIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPageIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPageIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
           </form>
@@ -382,58 +383,58 @@
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postTenantDialog" label="Create a tenant">
           <form id="htmForm_postTenant" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
+
             <wa-details open class="HtmRow" id="tenant-details">
               <div slot="summary">
                 <span>tenant details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmTenantNameTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantNameTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantNameTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantNameTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantNameTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmTenantIdTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "POST" in scopes %}
-                {{ htmDescriptionTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmDescriptionTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmDescriptionTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% if "POST" in scopes -%}
+                {{ htmTenantDescriptionTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantDescriptionTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantDescriptionTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
+
             <wa-details open class="HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmPageIdTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmPageIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmPageIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPageIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPageIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
           </form>
@@ -486,107 +487,107 @@
 {%- macro htmForm_searchpageTenant() %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageTenantDialog" label="Search tenants">
           <div id="htmForm_searchpageTenant" class="round-row primary-smart-border-radius ">
+
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
                 <span>primary key, ID, created, modified, archive details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmPkTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmPkTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmPkTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPkTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmCreatedTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmCreatedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmCreatedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmCreatedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmModifiedTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmModifiedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmModifiedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmModifiedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
-              <div class="grid-with-subgrid-2col ">
 
-              {%- if "PATCH" in scopes %}
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
                 {{ htmArchivedTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmArchivedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmArchivedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmArchivedTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
+
             <wa-details open class="HtmRow" id="tenant-details">
               <div slot="summary">
                 <span>tenant details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmTenantNameTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantNameTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantNameTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantNameTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantNameTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmTenantIdTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
-                {{ htmDescriptionTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmDescriptionTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmDescriptionTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantDescriptionTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantDescriptionTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantDescriptionTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
+
             <wa-details open class="HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmPageIdTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmPageIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmPageIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPageIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPageIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
           </div>

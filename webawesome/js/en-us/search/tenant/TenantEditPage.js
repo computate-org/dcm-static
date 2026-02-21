@@ -103,24 +103,24 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH description
-          document.querySelector('#Page_description')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_description');
+          // PATCH tenantDescription
+          document.querySelector('#Page_tenantDescription')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_tenantDescription');
             const valid = form.checkValidity();
             if(valid) {
               patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
-                  , 'setDescription', event.currentTarget.value
+                  , 'setTenantDescription', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#Page_description')?.addEventListener('focus', (event) => {
+          document.querySelector('#Page_tenantDescription')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_description')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_description');
+          document.querySelector('#Page_tenantDescription')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_tenantDescription');
             const valid = form.reportValidity();
           });
 
@@ -352,6 +352,27 @@ Promise.all([
           });
           document.querySelector('#Page_clusterName')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_clusterName');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH aapOrganizationId
+          document.querySelector('#Page_aapOrganizationId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapOrganizationId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+                  , 'setAapOrganizationId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_aapOrganizationId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_aapOrganizationId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapOrganizationId');
             const valid = form.reportValidity();
           });
 });

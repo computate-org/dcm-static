@@ -84,7 +84,7 @@ async function websocketTenantInner(apiRequest) {
         var inputArchived = null;
         var inputTenantName = null;
         var inputTenantId = null;
-        var inputDescription = null;
+        var inputTenantDescription = null;
         var inputPageId = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
@@ -103,6 +103,7 @@ async function websocketTenantInner(apiRequest) {
         var inputTenantResource = null;
         var inputHubId = null;
         var inputClusterName = null;
+        var inputAapOrganizationId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -116,8 +117,8 @@ async function websocketTenantInner(apiRequest) {
           inputTenantName = $response.querySelector('.Page_tenantName');
         if(vars.includes('tenantId'))
           inputTenantId = $response.querySelector('.Page_tenantId');
-        if(vars.includes('description'))
-          inputDescription = $response.querySelector('.Page_description');
+        if(vars.includes('tenantDescription'))
+          inputTenantDescription = $response.querySelector('.Page_tenantDescription');
         if(vars.includes('pageId'))
           inputPageId = $response.querySelector('.Page_pageId');
         if(vars.includes('classCanonicalName'))
@@ -154,6 +155,8 @@ async function websocketTenantInner(apiRequest) {
           inputHubId = $response.querySelector('.Page_hubId');
         if(vars.includes('clusterName'))
           inputClusterName = $response.querySelector('.Page_clusterName');
+        if(vars.includes('aapOrganizationId'))
+          inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
 
         jsWebsocketTenant(tenantId, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -220,14 +223,14 @@ async function websocketTenantInner(apiRequest) {
           addGlow(document.querySelector('.Page_tenantId'));
         }
 
-        if(inputDescription) {
-          document.querySelectorAll('.Page_description').forEach((item, index) => {
+        if(inputTenantDescription) {
+          document.querySelectorAll('.Page_tenantDescription').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputDescription.getAttribute('value');
+              item.value = inputTenantDescription.getAttribute('value');
             else
-              item.textContent = inputDescription.textContent;
+              item.textContent = inputTenantDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_description'));
+          addGlow(document.querySelector('.Page_tenantDescription'));
         }
 
         if(inputPageId) {
@@ -410,6 +413,16 @@ async function websocketTenantInner(apiRequest) {
           addGlow(document.querySelector('.Page_clusterName'));
         }
 
+        if(inputAapOrganizationId) {
+          document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapOrganizationId.getAttribute('value');
+            else
+              item.textContent = inputAapOrganizationId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapOrganizationId'));
+        }
+
           pageGraphTenant();
       });
     });
@@ -585,9 +598,9 @@ function searchTenantFilters($formFilters) {
     if(filterTenantId != null && filterTenantId !== '')
       filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
-    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
-    if(filterDescription != null && filterDescription !== '')
-      filters.push({ name: 'fq', value: 'description:' + filterDescription });
+    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
+    if(filterTenantDescription != null && filterTenantDescription !== '')
+      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
 
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
@@ -660,6 +673,10 @@ function searchTenantFilters($formFilters) {
     var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
   }
   return filters;
 }
@@ -809,17 +826,17 @@ async function patchTenant($formFilters, $formValues, target, tenantId, success,
   if(removeTenantId != null && removeTenantId !== '')
     vals['removeTenantId'] = removeTenantId;
 
-  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
-  var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
-  var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
-  var addDescription = $formValues.querySelector('.addDescription')?.value;
-  if(removeDescription || setDescription != null && setDescription !== '')
-    vals['setDescription'] = setDescription;
-  if(addDescription != null && addDescription !== '')
-    vals['addDescription'] = addDescription;
-  var removeDescription = $formValues.querySelector('.removeDescription')?.value;
-  if(removeDescription != null && removeDescription !== '')
-    vals['removeDescription'] = removeDescription;
+  var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
+  var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value === 'true';
+  var setTenantDescription = removeTenantDescription ? null : $formValues.querySelector('.setTenantDescription')?.value;
+  var addTenantDescription = $formValues.querySelector('.addTenantDescription')?.value;
+  if(removeTenantDescription || setTenantDescription != null && setTenantDescription !== '')
+    vals['setTenantDescription'] = setTenantDescription;
+  if(addTenantDescription != null && addTenantDescription !== '')
+    vals['addTenantDescription'] = addTenantDescription;
+  var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value;
+  if(removeTenantDescription != null && removeTenantDescription !== '')
+    vals['removeTenantDescription'] = removeTenantDescription;
 
   var valuePageId = $formValues.querySelector('.valuePageId')?.value;
   var removePageId = $formValues.querySelector('.removePageId')?.value === 'true';
@@ -953,6 +970,18 @@ async function patchTenant($formFilters, $formValues, target, tenantId, success,
   if(removeClusterName != null && removeClusterName !== '')
     vals['removeClusterName'] = removeClusterName;
 
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
+  var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
+  var addAapOrganizationId = $formValues.querySelector('.addAapOrganizationId')?.value;
+  if(removeAapOrganizationId || setAapOrganizationId != null && setAapOrganizationId !== '')
+    vals['setAapOrganizationId'] = setAapOrganizationId;
+  if(addAapOrganizationId != null && addAapOrganizationId !== '')
+    vals['addAapOrganizationId'] = addAapOrganizationId;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
+  if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
+    vals['removeAapOrganizationId'] = removeAapOrganizationId;
+
   patchTenantVals(tenantId == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'tenantId:' + tenantId}], vals, target, success, error);
 }
 
@@ -991,9 +1020,9 @@ function patchTenantFilters($formFilters) {
     if(filterTenantId != null && filterTenantId !== '')
       filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
-    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
-    if(filterDescription != null && filterDescription !== '')
-      filters.push({ name: 'fq', value: 'description:' + filterDescription });
+    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
+    if(filterTenantDescription != null && filterTenantDescription !== '')
+      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
 
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
@@ -1066,6 +1095,10 @@ function patchTenantFilters($formFilters) {
     var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
   }
   return filters;
 }
@@ -1153,9 +1186,9 @@ async function postTenant($formValues, target, success, error) {
   if(valueTenantId != null && valueTenantId !== '')
     vals['tenantId'] = valueTenantId;
 
-  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
-  if(valueDescription != null && valueDescription !== '')
-    vals['description'] = valueDescription;
+  var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
+  if(valueTenantDescription != null && valueTenantDescription !== '')
+    vals['tenantDescription'] = valueTenantDescription;
 
   var valuePageId = $formValues.querySelector('.valuePageId')?.value;
   if(valuePageId != null && valuePageId !== '')
@@ -1200,6 +1233,10 @@ async function postTenant($formValues, target, success, error) {
   var valueClusterName = $formValues.querySelector('.valueClusterName')?.value;
   if(valueClusterName != null && valueClusterName !== '')
     vals['clusterName'] = valueClusterName;
+
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
+    vals['aapOrganizationId'] = valueAapOrganizationId;
 
   fetch(
     '/en-us/api/tenant'

@@ -341,14 +341,14 @@
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
-                    <wa-dropdown id="htmDropdown-description">
+                    <wa-dropdown id="htmDropdown-tenantDescription">
                       <wa-button variant="brand" slot="trigger" caret>description</wa-button>
                       <wa-menu>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenant_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Tenant').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenant_tenantDescription'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Tenant').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantDescription-asc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                           sort by description ascending
                         </wa-menu-item>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenant_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Tenant').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenant_tenantDescription'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Tenant').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantDescription-desc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                           sort by description descending
                         </wa-menu-item>
@@ -362,7 +362,7 @@
                       <span>{{ item.tenantName | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
-                      <span>{{ item.description | e }}</span>
+                      <span>{{ item.tenantDescription | e }}</span>
                     </a>
                   </div>
                   {% endfor %}
@@ -370,7 +370,7 @@
                 <div>
                 </div>
               {% endif %}
-              {% if getColumnDescription is defined %}
+              {% if getColumnTenantDescription is defined %}
                 <div>
                 </div>
               {% endif %}
