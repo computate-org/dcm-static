@@ -757,7 +757,7 @@ function suggestAnsibleProjectTenantResource(filters, $list, ansibleProjectId = 
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
         var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="fa-regular fa-buildings"></i>';
+        iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-buildings"></i>';
         var $i = iTemplate.content;
         var $span = document.createElement('span');
         $span.setAttribute('class', '');

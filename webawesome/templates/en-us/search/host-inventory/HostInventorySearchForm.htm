@@ -327,58 +327,58 @@
 {%- macro htmForm_patchHostInventory() %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHostInventoryDialog" label="Modify host inventory">
           <form id="htmForm_patchHostInventory" class="round-row primary-smart-border-radius ">
+
             <wa-details open class="HtmRow" id="inventory-details">
               <div slot="summary">
                 <span>inventory details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
+
             <wa-details open class="HtmRow" id="relations">
               <div slot="summary">
                 <span>relations</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
           </form>
@@ -399,58 +399,58 @@
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postHostInventoryDialog" label="Create a host inventory">
           <form id="htmForm_postHostInventory" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
+
             <wa-details open class="HtmRow" id="inventory-details">
               <div slot="summary">
                 <span>inventory details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
+
             <wa-details open class="HtmRow" id="relations">
               <div slot="summary">
                 <span>relations</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
           </form>
@@ -503,107 +503,107 @@
 {%- macro htmForm_searchpageHostInventory() %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageHostInventoryDialog" label="Search host inventories">
           <div id="htmForm_searchpageHostInventory" class="round-row primary-smart-border-radius ">
+
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
                 <span>primary key, ID, created, modified, archive details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmPkHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmPkHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmPkHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPkHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmCreatedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmCreatedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmCreatedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmCreatedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmModifiedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmModifiedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmModifiedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmModifiedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
-              <div class="grid-with-subgrid-2col ">
 
-              {%- if "PATCH" in scopes %}
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
                 {{ htmArchivedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmArchivedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmArchivedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmArchivedHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
+
             <wa-details open class="HtmRow" id="inventory-details">
               <div slot="summary">
                 <span>inventory details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryNameHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryDescriptionHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryKindHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
+
             <wa-details open class="HtmRow" id="relations">
               <div slot="summary">
                 <span>relations</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
           </div>

@@ -418,71 +418,71 @@
 {%- macro htmForm_patchHost() %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHostDialog" label="Modify host">
           <form id="htmForm_patchHost" class="round-row primary-smart-border-radius ">
+
             <wa-details open class="HtmRow" id="host-details">
               <div slot="summary">
                 <span>host details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
           </form>
@@ -503,71 +503,71 @@
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postHostDialog" label="Create a host">
           <form id="htmForm_postHost" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
+
             <wa-details open class="HtmRow" id="host-details">
               <div slot="summary">
                 <span>host details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "POST" in scopes %}
+                {% if "POST" in scopes -%}
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
           </form>
@@ -620,120 +620,120 @@
 {%- macro htmForm_searchpageHost() %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageHostDialog" label="Search hosts">
           <div id="htmForm_searchpageHost" class="round-row primary-smart-border-radius ">
+
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
                 <span>primary key, ID, created, modified, archive details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
-              <div class="grid-with-subgrid-2col ">
 
-              {%- if "PATCH" in scopes %}
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
                 {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
+
             <wa-details open class="HtmRow" id="host-details">
               <div slot="summary">
                 <span>host details</span>
               </div>
               <div class="grid-with-subgrid-2col ">
-
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTenantResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
 
-              {%- if "PATCH" in scopes %}
+                {% if "PATCH" in scopes -%}
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
-              {%- else %}
-                {%- if "GET" in scopes %}
-                  {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
-                {%- else %}
-                  {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
-              {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
           </div>

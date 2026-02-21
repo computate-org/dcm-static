@@ -20,7 +20,7 @@ Promise.all([
               var t = moment(t3);
               if(t) {
                 var s = t.tz(timeZone).format('YYYY-MM-DDTHH:mm:ss.000') + '[' + timeZone + ']';
-                patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+                patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                     , 'setCreated', s
                     , event.currentTarget
                     , function(response, target) { addGlow(target); }
@@ -44,7 +44,7 @@ Promise.all([
             if(valid) {
               var confirmResponse = confirm('Are you sure you want to archive that?'); 
               if(confirmResponse) { 
-                patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+                patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                     , 'setArchived', !(event.currentTarget.getAttribute('data-val') === 'true')
                     , event.currentTarget
                     , function(response, target) { addGlow(target); }
@@ -66,7 +66,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_tenantName');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setTenantName', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -87,7 +87,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_tenantId');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setTenantId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -108,7 +108,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_tenantDescription');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setTenantDescription', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -129,7 +129,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_pageId');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setPageId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -150,7 +150,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_sessionId');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setSessionId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -171,7 +171,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_userKey');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setUserKey', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -192,7 +192,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setObjectTitle', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -213,7 +213,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setDisplayPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -234,7 +234,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setEditPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -255,7 +255,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setUserPage', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -276,7 +276,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_download');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setDownload', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -297,7 +297,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_tenantResource');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setTenantResource', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -318,7 +318,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_hubId');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setHubId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -339,7 +339,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_clusterName');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setClusterName', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
@@ -360,7 +360,7 @@ Promise.all([
             const form = document.querySelector('#PageForm_aapOrganizationId');
             const valid = form.checkValidity();
             if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantId:' + event.currentTarget.getAttribute('data-tenantId') }]
+              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
                   , 'setAapOrganizationId', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }

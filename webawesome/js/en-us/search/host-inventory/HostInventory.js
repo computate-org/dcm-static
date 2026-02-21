@@ -100,10 +100,11 @@ async function websocketHostInventoryInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputTenantId = null;
+        var inputAapOrganizationId = null;
         var inputInventoryId = null;
         var inputInventoryResource = null;
         var inputAapInventoryId = null;
-        var inputInventoryOrganizationId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -149,14 +150,16 @@ async function websocketHostInventoryInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
+        if(vars.includes('tenantId'))
+          inputTenantId = $response.querySelector('.Page_tenantId');
+        if(vars.includes('aapOrganizationId'))
+          inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
         if(vars.includes('inventoryId'))
           inputInventoryId = $response.querySelector('.Page_inventoryId');
         if(vars.includes('inventoryResource'))
           inputInventoryResource = $response.querySelector('.Page_inventoryResource');
         if(vars.includes('aapInventoryId'))
           inputAapInventoryId = $response.querySelector('.Page_aapInventoryId');
-        if(vars.includes('inventoryOrganizationId'))
-          inputInventoryOrganizationId = $response.querySelector('.Page_inventoryOrganizationId');
 
         jsWebsocketHostInventory(inventoryResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -383,6 +386,26 @@ async function websocketHostInventoryInner(apiRequest) {
           addGlow(document.querySelector('.Page_solrId'));
         }
 
+        if(inputTenantId) {
+          document.querySelectorAll('.Page_tenantId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantId.getAttribute('value');
+            else
+              item.textContent = inputTenantId.textContent;
+          });
+          addGlow(document.querySelector('.Page_tenantId'));
+        }
+
+        if(inputAapOrganizationId) {
+          document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapOrganizationId.getAttribute('value');
+            else
+              item.textContent = inputAapOrganizationId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapOrganizationId'));
+        }
+
         if(inputInventoryId) {
           document.querySelectorAll('.Page_inventoryId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -411,16 +434,6 @@ async function websocketHostInventoryInner(apiRequest) {
               item.textContent = inputAapInventoryId.textContent;
           });
           addGlow(document.querySelector('.Page_aapInventoryId'));
-        }
-
-        if(inputInventoryOrganizationId) {
-          document.querySelectorAll('.Page_inventoryOrganizationId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputInventoryOrganizationId.getAttribute('value');
-            else
-              item.textContent = inputInventoryOrganizationId.textContent;
-          });
-          addGlow(document.querySelector('.Page_inventoryOrganizationId'));
         }
 
           pageGraphHostInventory();
@@ -662,6 +675,14 @@ function searchHostInventoryFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
     var filterInventoryId = $formFilters.querySelector('.valueInventoryId')?.value;
     if(filterInventoryId != null && filterInventoryId !== '')
       filters.push({ name: 'fq', value: 'inventoryId:' + filterInventoryId });
@@ -673,10 +694,6 @@ function searchHostInventoryFilters($formFilters) {
     var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
     if(filterAapInventoryId != null && filterAapInventoryId !== '')
       filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
-
-    var filterInventoryOrganizationId = $formFilters.querySelector('.valueInventoryOrganizationId')?.value;
-    if(filterInventoryOrganizationId != null && filterInventoryOrganizationId !== '')
-      filters.push({ name: 'fq', value: 'inventoryOrganizationId:' + filterInventoryOrganizationId });
   }
   return filters;
 }
@@ -706,17 +723,18 @@ function suggestHostInventoryTenantResource(filters, $list, inventoryResource = 
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
         var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="fa-regular fa-buildings"></i>';
+        iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-buildings"></i>';
         var $i = iTemplate.content;
         var $span = document.createElement('span');
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['tenantResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(inventoryResource.toString()) : val == tenantResource);
+        var checked = val == null ? false : (val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_tenantResource_' + inventoryResource + '_tenantResource_' + o['tenantResource']);
         $input.setAttribute('name', 'tenantResource');
@@ -975,6 +993,30 @@ async function patchHostInventory($formFilters, $formValues, target, inventoryRe
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value === 'true';
+  var setTenantId = removeTenantId ? null : $formValues.querySelector('.setTenantId')?.value;
+  var addTenantId = $formValues.querySelector('.addTenantId')?.value;
+  if(removeTenantId || setTenantId != null && setTenantId !== '')
+    vals['setTenantId'] = setTenantId;
+  if(addTenantId != null && addTenantId !== '')
+    vals['addTenantId'] = addTenantId;
+  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value;
+  if(removeTenantId != null && removeTenantId !== '')
+    vals['removeTenantId'] = removeTenantId;
+
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
+  var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
+  var addAapOrganizationId = $formValues.querySelector('.addAapOrganizationId')?.value;
+  if(removeAapOrganizationId || setAapOrganizationId != null && setAapOrganizationId !== '')
+    vals['setAapOrganizationId'] = setAapOrganizationId;
+  if(addAapOrganizationId != null && addAapOrganizationId !== '')
+    vals['addAapOrganizationId'] = addAapOrganizationId;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
+  if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
+    vals['removeAapOrganizationId'] = removeAapOrganizationId;
+
   var valueInventoryId = $formValues.querySelector('.valueInventoryId')?.value;
   var removeInventoryId = $formValues.querySelector('.removeInventoryId')?.value === 'true';
   var setInventoryId = removeInventoryId ? null : $formValues.querySelector('.setInventoryId')?.value;
@@ -1010,18 +1052,6 @@ async function patchHostInventory($formFilters, $formValues, target, inventoryRe
   var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value;
   if(removeAapInventoryId != null && removeAapInventoryId !== '')
     vals['removeAapInventoryId'] = removeAapInventoryId;
-
-  var valueInventoryOrganizationId = $formValues.querySelector('.valueInventoryOrganizationId')?.value;
-  var removeInventoryOrganizationId = $formValues.querySelector('.removeInventoryOrganizationId')?.value === 'true';
-  var setInventoryOrganizationId = removeInventoryOrganizationId ? null : $formValues.querySelector('.setInventoryOrganizationId')?.value;
-  var addInventoryOrganizationId = $formValues.querySelector('.addInventoryOrganizationId')?.value;
-  if(removeInventoryOrganizationId || setInventoryOrganizationId != null && setInventoryOrganizationId !== '')
-    vals['setInventoryOrganizationId'] = setInventoryOrganizationId;
-  if(addInventoryOrganizationId != null && addInventoryOrganizationId !== '')
-    vals['addInventoryOrganizationId'] = addInventoryOrganizationId;
-  var removeInventoryOrganizationId = $formValues.querySelector('.removeInventoryOrganizationId')?.value;
-  if(removeInventoryOrganizationId != null && removeInventoryOrganizationId !== '')
-    vals['removeInventoryOrganizationId'] = removeInventoryOrganizationId;
 
   patchHostInventoryVals(inventoryResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'inventoryResource:' + inventoryResource}], vals, target, success, error);
 }
@@ -1125,6 +1155,14 @@ function patchHostInventoryFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
     var filterInventoryId = $formFilters.querySelector('.valueInventoryId')?.value;
     if(filterInventoryId != null && filterInventoryId !== '')
       filters.push({ name: 'fq', value: 'inventoryId:' + filterInventoryId });
@@ -1136,10 +1174,6 @@ function patchHostInventoryFilters($formFilters) {
     var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
     if(filterAapInventoryId != null && filterAapInventoryId !== '')
       filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
-
-    var filterInventoryOrganizationId = $formFilters.querySelector('.valueInventoryOrganizationId')?.value;
-    if(filterInventoryOrganizationId != null && filterInventoryOrganizationId !== '')
-      filters.push({ name: 'fq', value: 'inventoryOrganizationId:' + filterInventoryOrganizationId });
   }
   return filters;
 }
@@ -1263,6 +1297,14 @@ async function postHostInventory($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  if(valueTenantId != null && valueTenantId !== '')
+    vals['tenantId'] = valueTenantId;
+
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
+    vals['aapOrganizationId'] = valueAapOrganizationId;
+
   var valueInventoryId = $formValues.querySelector('.valueInventoryId')?.value;
   if(valueInventoryId != null && valueInventoryId !== '')
     vals['inventoryId'] = valueInventoryId;
@@ -1274,10 +1316,6 @@ async function postHostInventory($formValues, target, success, error) {
   var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
   if(valueAapInventoryId != null && valueAapInventoryId !== '')
     vals['aapInventoryId'] = valueAapInventoryId;
-
-  var valueInventoryOrganizationId = $formValues.querySelector('.valueInventoryOrganizationId')?.value;
-  if(valueInventoryOrganizationId != null && valueInventoryOrganizationId !== '')
-    vals['inventoryOrganizationId'] = valueInventoryOrganizationId;
 
   fetch(
     '/en-us/api/host-inventory'

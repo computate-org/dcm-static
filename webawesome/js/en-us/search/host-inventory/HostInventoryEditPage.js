@@ -271,6 +271,48 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH tenantId
+          document.querySelector('#Page_tenantId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_tenantId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostInventoryVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'inventoryResource:' + event.currentTarget.getAttribute('data-inventoryResource') }]
+                  , 'setTenantId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_tenantId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_tenantId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_tenantId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH aapOrganizationId
+          document.querySelector('#Page_aapOrganizationId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapOrganizationId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostInventoryVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'inventoryResource:' + event.currentTarget.getAttribute('data-inventoryResource') }]
+                  , 'setAapOrganizationId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Page_aapOrganizationId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Page_aapOrganizationId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapOrganizationId');
+            const valid = form.reportValidity();
+          });
+
           // PATCH inventoryId
           document.querySelector('#Page_inventoryId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_inventoryId');
@@ -331,27 +373,6 @@ Promise.all([
           });
           document.querySelector('#Page_aapInventoryId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_aapInventoryId');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH inventoryOrganizationId
-          document.querySelector('#Page_inventoryOrganizationId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_inventoryOrganizationId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchHostInventoryVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'inventoryResource:' + event.currentTarget.getAttribute('data-inventoryResource') }]
-                  , 'setInventoryOrganizationId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Page_inventoryOrganizationId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Page_inventoryOrganizationId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_inventoryOrganizationId');
             const valid = form.reportValidity();
           });
 });

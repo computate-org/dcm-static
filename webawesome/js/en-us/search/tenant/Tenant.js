@@ -4,46 +4,46 @@ async function websocketTenant(success) {
 
     window.eventBus.registerHandler('websocketTenant', function (error, message) {
       var json = JSON.parse(message['body']);
-      var tenantId = json['id'];
+      var tenantResource = json['id'];
       var solrIds = json['solrIds'];
       var empty = json['empty'];
       var numFound = parseInt(json['numFound']);
       var numPATCH = parseInt(json['numPATCH']);
       var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
       var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + tenantId + ' ');
-      $box.setAttribute('id', 'box-' + tenantId);
+      $box.setAttribute('class', 'w3-quarter box-' + tenantResource + ' ');
+      $box.setAttribute('id', 'box-' + tenantResource);
       $box.setAttribute('data-numPATCH', numPATCH);
       var $margin = document.createElement('div');
       $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + tenantId);
+      $margin.setAttribute('id', 'margin-' + tenantResource);
       var $card = document.createElement('div');
       $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + tenantId);
+      $card.setAttribute('id', 'card-' + tenantResource);
       var $header = document.createElement('div');
       $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + tenantId);
+      $header.setAttribute('id', 'header-' + tenantResource);
       var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-regular fa-buildings"></i>';
+      iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-buildings"></i>';
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
       $headerSpan.innerText = 'modify tenants in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + tenantId + '");');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + tenantResource + '");');
       $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + tenantId);
+      $x.setAttribute('id', 'x-' + tenantResource);
       var $body = document.createElement('div');
       $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + tenantId);
+      $body.setAttribute('id', 'text-' + tenantResource);
       var $bar = document.createElement('div');
       $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + tenantId);
+      $bar.setAttribute('id', 'bar-' + tenantResource);
       var $progress = document.createElement('div');
       $progress.setAttribute('class', 'w3- ');
       $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + tenantId);
+      $progress.setAttribute('id', 'progress-' + tenantResource);
       $progress.innerText = numPATCH + '/' + numFound;
       $card.append($header);
       $header.append($i);
@@ -55,11 +55,11 @@ async function websocketTenant(success) {
       $box.append($margin);
       $margin.append($card);
       if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + tenantId);
+        var $old_box = document.querySelector('.box-' + tenantResource);
       } else {
-        document.querySelector('.box-' + tenantId)?.remove();
+        document.querySelector('.box-' + tenantResource)?.remove();
       }
-      if(tenantId) {
+      if(tenantResource) {
         if(success)
           success(json);
       }
@@ -67,12 +67,12 @@ async function websocketTenant(success) {
   }
 }
 async function websocketTenantInner(apiRequest) {
-  var tenantId = apiRequest['id'];
+  var tenantResource = apiRequest['id'];
   var classes = apiRequest['classes'];
   var vars = apiRequest['vars'];
   var empty = apiRequest['empty'];
 
-  if(tenantId != null && vars.length > 0) {
+  if(tenantResource != null && vars.length > 0) {
     var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
     var uri = location.pathname + queryParams;
     fetch(uri).then(response => {
@@ -85,6 +85,7 @@ async function websocketTenantInner(apiRequest) {
         var inputTenantName = null;
         var inputTenantId = null;
         var inputTenantDescription = null;
+        var inputHostInventoryIds = null;
         var inputPageId = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
@@ -119,6 +120,8 @@ async function websocketTenantInner(apiRequest) {
           inputTenantId = $response.querySelector('.Page_tenantId');
         if(vars.includes('tenantDescription'))
           inputTenantDescription = $response.querySelector('.Page_tenantDescription');
+        if(vars.includes('hostInventoryIds'))
+          inputHostInventoryIds = $response.querySelector('.Page_hostInventoryIds');
         if(vars.includes('pageId'))
           inputPageId = $response.querySelector('.Page_pageId');
         if(vars.includes('classCanonicalName'))
@@ -158,7 +161,7 @@ async function websocketTenantInner(apiRequest) {
         if(vars.includes('aapOrganizationId'))
           inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
 
-        jsWebsocketTenant(tenantId, vars, $response);
+        jsWebsocketTenant(tenantResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listTenant = JSON.parse($response.querySelector('.pageForm .listTenant')?.value);
 
@@ -231,6 +234,16 @@ async function websocketTenantInner(apiRequest) {
               item.textContent = inputTenantDescription.textContent;
           });
           addGlow(document.querySelector('.Page_tenantDescription'));
+        }
+
+        if(inputHostInventoryIds) {
+          document.querySelectorAll('.Page_hostInventoryIds').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputHostInventoryIds.getAttribute('value');
+            else
+              item.textContent = inputHostInventoryIds.textContent;
+          });
+          addGlow(document.querySelector('.Page_hostInventoryIds'));
         }
 
         if(inputPageId) {
@@ -602,6 +615,10 @@ function searchTenantFilters($formFilters) {
     if(filterTenantDescription != null && filterTenantDescription !== '')
       filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
 
+    var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
+    if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
+      filters.push({ name: 'fq', value: 'hostInventoryIds:' + filterHostInventoryIds });
+
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
       filters.push({ name: 'fq', value: 'pageId:' + filterPageId });
@@ -699,12 +716,61 @@ function searchTenantVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
+function suggestTenantHostInventoryIds(filters, $list, tenantResource = null, hostInventoryIds = null, relate=true, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-network-wired"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['tenantResource'];
+        var checked = val == null ? false : (val === tenantResource.toString());
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_hostInventoryIds_' + tenantResource + '_tenantResource_' + o['tenantResource']);
+        $input.setAttribute('name', 'tenantResource');
+        $input.setAttribute('value', o['tenantResource']);
+        $input.setAttribute('class', 'valueHostInventoryIds ');
+        if(tenantResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchTenantVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o['tenantResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestTenantHostInventoryIds(filters, $list, tenantResource, o['tenantResource'], relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  searchHostInventoryVals(filters, target, success, error);
+}
+
 function suggestTenantObjectSuggest($formFilters, $list, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
-        var $i = document.querySelector('<i class="fa-regular fa-buildings"></i>');
+        var $i = document.querySelector('<i class="fa-duotone fa-regular fa-buildings"></i>');
         var $span = document.createElement('span');
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
@@ -725,7 +791,7 @@ function suggestTenantObjectSuggest($formFilters, $list, target) {
 
 async function getTenant(pk) {
   fetch(
-    '/en-us/api/tenant/' + tenantId
+    '/en-us/api/tenant/' + tenantResource
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -742,7 +808,7 @@ async function getTenant(pk) {
 
 // PATCH //
 
-async function patchTenant($formFilters, $formValues, target, tenantId, success, error) {
+async function patchTenant($formFilters, $formValues, target, tenantResource, success, error) {
   var filters = patchTenantFilters($formFilters);
 
   var vals = {};
@@ -837,6 +903,10 @@ async function patchTenant($formFilters, $formValues, target, tenantId, success,
   var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value;
   if(removeTenantDescription != null && removeTenantDescription !== '')
     vals['removeTenantDescription'] = removeTenantDescription;
+
+  var valueHostInventoryIds = (Array.from($formValues.querySelectorAll('.valueHostInventoryIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueHostInventoryIds != null && valueHostInventoryIds !== '')
+    vals['addHostInventoryIds'] = valueHostInventoryIds;
 
   var valuePageId = $formValues.querySelector('.valuePageId')?.value;
   var removePageId = $formValues.querySelector('.removePageId')?.value === 'true';
@@ -982,7 +1052,7 @@ async function patchTenant($formFilters, $formValues, target, tenantId, success,
   if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
     vals['removeAapOrganizationId'] = removeAapOrganizationId;
 
-  patchTenantVals(tenantId == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'tenantId:' + tenantId}], vals, target, success, error);
+  patchTenantVals(tenantResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'tenantResource:' + tenantResource}], vals, target, success, error);
 }
 
 function patchTenantFilters($formFilters) {
@@ -1023,6 +1093,10 @@ function patchTenantFilters($formFilters) {
     var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
     if(filterTenantDescription != null && filterTenantDescription !== '')
       filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
+
+    var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
+    if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
+      filters.push({ name: 'fq', value: 'hostInventoryIds:' + filterHostInventoryIds });
 
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
@@ -1190,6 +1264,13 @@ async function postTenant($formValues, target, success, error) {
   if(valueTenantDescription != null && valueTenantDescription !== '')
     vals['tenantDescription'] = valueTenantDescription;
 
+  var valueHostInventoryIds = [];
+  $formValues.querySelectorAll('input.valueHostInventoryIds:checked').forEach(function(index) {
+    valueHostInventoryIds.push(this.value);
+  });
+  if(valueHostInventoryIds.length > 0)
+    vals['hostInventoryIds'] = valueHostInventoryIds;
+
   var valuePageId = $formValues.querySelector('.valuePageId')?.value;
   if(valuePageId != null && valuePageId !== '')
     vals['pageId'] = valuePageId;
@@ -1277,7 +1358,7 @@ function postTenantVals(vals, target, success, error) {
 
 // DELETE //
 
-async function deleteTenant(target, tenantId, success, error) {
+async function deleteTenant(target, tenantResource, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1309,7 +1390,7 @@ async function deleteTenant(target, tenantId, success, error) {
   }
 
   fetch(
-    '/en-us/api/tenant/' + encodeURIComponent(tenantId)
+    '/en-us/api/tenant/' + encodeURIComponent(tenantResource)
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -1325,7 +1406,7 @@ async function deleteTenant(target, tenantId, success, error) {
 
 // PUTImport //
 
-async function putimportTenant($formValues, target, tenantId, success, error) {
+async function putimportTenant($formValues, target, tenantResource, success, error) {
   var json = $formValues.querySelector('.PUTImport_searchList')?.value;
   if(json != null && json !== '')
     putimportTenantVals(JSON.parse(json), target, success, error);

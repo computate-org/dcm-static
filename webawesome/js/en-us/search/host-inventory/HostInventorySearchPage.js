@@ -253,6 +253,28 @@ Promise.all([
     facetStatsChange('HostInventory', 'solrId', false);
   });
 
+  document.querySelector('#pageSelectSortHostInventory_tenantId')?.addEventListener('change', (event) => {
+    sort('HostInventory', 'tenantId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostInventory_tenantId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostInventory', 'tenantId', true);
+  });
+  document.querySelector('#pageStatsHostInventory_tenantId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostInventory', 'tenantId', false);
+  });
+
+  document.querySelector('#pageSelectSortHostInventory_aapOrganizationId')?.addEventListener('change', (event) => {
+    sort('HostInventory', 'aapOrganizationId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostInventory_aapOrganizationId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostInventory', 'aapOrganizationId', true);
+  });
+  document.querySelector('#pageStatsHostInventory_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostInventory', 'aapOrganizationId', false);
+  });
+
   document.querySelector('#pageSelectSortHostInventory_inventoryId')?.addEventListener('change', (event) => {
     sort('HostInventory', 'inventoryId', event.currentTarget.value);
   });
@@ -284,17 +306,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsHostInventory_aapInventoryId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('HostInventory', 'aapInventoryId', false);
-  });
-
-  document.querySelector('#pageSelectSortHostInventory_inventoryOrganizationId')?.addEventListener('change', (event) => {
-    sort('HostInventory', 'inventoryOrganizationId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHostInventory_inventoryOrganizationId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('HostInventory', 'inventoryOrganizationId', true);
-  });
-  document.querySelector('#pageStatsHostInventory_inventoryOrganizationId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('HostInventory', 'inventoryOrganizationId', false);
   });
           document.querySelector('#fqHostInventory_created')?.addEventListener('change', (event) => {
             fqChange('HostInventory', event.currentTarget, facetChangeHostInventorySuccess, facetChangeHostInventoryError);
@@ -402,6 +413,24 @@ Promise.all([
             facetRangeStartChange('HostInventory', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndHostInventory_download')?.addEventListener('change', (event) => {
+            facetRangeEndChange('HostInventory', event.currentTarget);
+          });
+          document.querySelector('#fqHostInventory_tenantId')?.addEventListener('change', (event) => {
+            fqChange('HostInventory', event.currentTarget, facetChangeHostInventorySuccess, facetChangeHostInventoryError);
+          });
+          document.querySelector('#buttonFacetHostInventory_tenantId')?.addEventListener('click', (event) => {
+            facetFieldChange('HostInventory', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotHostInventory_tenantId')?.addEventListener('change', (event) => {
+            facetPivotChange('HostInventory', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapHostInventory_tenantId')?.addEventListener('change', (event) => {
+            facetRangeGapChange('HostInventory', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartHostInventory_tenantId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('HostInventory', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndHostInventory_tenantId')?.addEventListener('change', (event) => {
             facetRangeEndChange('HostInventory', event.currentTarget);
           });
 });

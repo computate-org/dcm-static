@@ -27,6 +27,7 @@
 {%- block htmScriptsTenantPage %}
     <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/tenant/TenantSearchPage.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
 {%- endblock htmScriptsTenantPage %}
 {%- endblock htmScriptsPageLayout %}
 
@@ -34,7 +35,7 @@
 {%- block htmScriptTenantPage %}
     <script>
 
-      function jsWebsocketTenant(tenantId, vars, $response) {
+      function jsWebsocketTenant(tenantResource, vars, $response) {
 {%- block jsWebsocketTenantPage %}{%- endblock %}
       }
 
@@ -125,9 +126,25 @@
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
-        var tenantId = {% if result.tenantId is defined %}{{ result.tenantId | tojson }}{% else %}null{% endif %};
+        var tenantResource = {% if result.tenantResource is defined %}{{ result.tenantResource | tojson }}{% else %}null{% endif %};
 
-        if(tenantId == null) {
+          function relate_hostInventoryIds(event) {
+            suggestTenantHostInventoryIds(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.hostInventoryIds is defined %}{'name':'fq','value':'tenantResource:{{ result.hostInventoryIds }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#POST_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#POST_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#PATCH_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#PATCH_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+        if(tenantResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
             document.querySelector('#site-results-grid').classList.add('grid-mode-details');
@@ -144,7 +161,7 @@
           var o = document.querySelector('.pageForm .result')?.value;
           if(o)
             window.result = JSON.parse(o);
-        {% if result.tenantId is defined %}
+        {% if result.tenantResource is defined %}
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listTenant')?.value;
@@ -181,7 +198,7 @@
         });
         document.querySelector('#htmFormButton_patchTenant')?.addEventListener('click', event => {
           event.preventDefault();
-          patchTenant(null, document.querySelector('#htmForm_patchTenant'), document.querySelector('#htmFormButton_patchTenant'), event.target.getAttribute('data-tenantId'));
+          patchTenant(null, document.querySelector('#htmForm_patchTenant'), document.querySelector('#htmFormButton_patchTenant'), event.target.getAttribute('data-tenantResource'));
           return false;
         });
 
@@ -205,7 +222,7 @@
         });
         document.querySelector('#htmFormButton_deleteTenant')?.addEventListener('click', event => {
           event.preventDefault();
-          deleteTenant(event.target, event.target.getAttribute('data-tenantId'));
+          deleteTenant(event.target, event.target.getAttribute('data-tenantResource'));
           return false;
         });
 
@@ -260,7 +277,7 @@
               <wa-tooltip for="return-to-Tenant">back to all tenants</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-Tenant" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-regular fa-buildings"></i>
+                  <i class="fa-duotone fa-regular fa-buildings"></i>
                   all tenants
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -279,7 +296,7 @@
           <wa-tooltip for="return-to-Tenant">back to all tenants</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-Tenant" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-regular fa-buildings"></i>
+              <i class="fa-duotone fa-regular fa-buildings"></i>
               all tenants
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -288,7 +305,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-regular fa-buildings"></i>
+              <i class="fa-duotone fa-regular fa-buildings"></i>
             </div>
             <span class="wa-heading-m ">no tenant found</span>
             <p class="wa-caption-l ">Tenants are separate organizations sharing the same cloud resources. </p>
@@ -358,7 +375,7 @@
                   {% for item in listTenant%}
                   <div>
                     <a href="{{ item.displayPage }}">
-                      <i class="fa-regular fa-buildings"></i>
+                      <i class="fa-duotone fa-regular fa-buildings"></i>
                       <span>{{ item.tenantName | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">

@@ -88,6 +88,17 @@ Promise.all([
     facetStatsChange('Tenant', 'tenantDescription', false);
   });
 
+  document.querySelector('#pageSelectSortTenant_hostInventoryIds')?.addEventListener('change', (event) => {
+    sort('Tenant', 'hostInventoryIds', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenant_hostInventoryIds')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Tenant', 'hostInventoryIds', true);
+  });
+  document.querySelector('#pageStatsTenant_hostInventoryIds')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Tenant', 'hostInventoryIds', false);
+  });
+
   document.querySelector('#pageSelectSortTenant_pageId')?.addEventListener('change', (event) => {
     sort('Tenant', 'pageId', event.currentTarget.value);
   });
@@ -535,10 +546,10 @@ Promise.all([
   document.querySelector('#htmButton_deleteTenant')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
-      var tenantId =  event.currentTarget.getAttribute('data-tenantId');
+      var tenantResource =  event.currentTarget.getAttribute('data-tenantResource');
       deleteTenant(
           event.currentTarget
-          , tenantId
+          , tenantResource
           , function(response, target) { addGlow(target); }
           , function(response, target) { addError(target); }
           );
