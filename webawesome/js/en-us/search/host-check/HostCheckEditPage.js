@@ -82,6 +82,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH checkDescription
+          document.querySelector('#HostCheck_Page_checkDescription')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_checkDescription');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostCheckVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'checkName:' + event.currentTarget.getAttribute('data-checkName') }]
+                  , 'setCheckDescription', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#HostCheck_Page_checkDescription')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#HostCheck_Page_checkDescription')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_checkDescription');
+            const valid = form.reportValidity();
+          });
+
           // PATCH checkNamespace
           document.querySelector('#HostCheck_Page_checkNamespace')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_checkNamespace');
@@ -352,6 +373,90 @@ Promise.all([
           });
           document.querySelector('#HostCheck_Page_download')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_download');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH tenantId
+          document.querySelector('#HostCheck_Page_tenantId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_tenantId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostCheckVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'checkName:' + event.currentTarget.getAttribute('data-checkName') }]
+                  , 'setTenantId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#HostCheck_Page_tenantId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#HostCheck_Page_tenantId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_tenantId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH aapOrganizationId
+          document.querySelector('#HostCheck_Page_aapOrganizationId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapOrganizationId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostCheckVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'checkName:' + event.currentTarget.getAttribute('data-checkName') }]
+                  , 'setAapOrganizationId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#HostCheck_Page_aapOrganizationId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#HostCheck_Page_aapOrganizationId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapOrganizationId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH jobTemplateId
+          document.querySelector('#HostCheck_Page_jobTemplateId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_jobTemplateId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostCheckVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'checkName:' + event.currentTarget.getAttribute('data-checkName') }]
+                  , 'setJobTemplateId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#HostCheck_Page_jobTemplateId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#HostCheck_Page_jobTemplateId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_jobTemplateId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH aapTemplateId
+          document.querySelector('#HostCheck_Page_aapTemplateId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapTemplateId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostCheckVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'checkName:' + event.currentTarget.getAttribute('data-checkName') }]
+                  , 'setAapTemplateId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#HostCheck_Page_aapTemplateId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#HostCheck_Page_aapTemplateId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapTemplateId');
             const valid = form.reportValidity();
           });
 });

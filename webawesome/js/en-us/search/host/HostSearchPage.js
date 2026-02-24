@@ -275,6 +275,17 @@ Promise.all([
     facetStatsChange('Host', 'tenantResource', false);
   });
 
+  document.querySelector('#pageSelectSortHost_tenantId')?.addEventListener('change', (event) => {
+    sort('Host', 'tenantId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_tenantId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'tenantId', true);
+  });
+  document.querySelector('#pageStatsHost_tenantId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'tenantId', false);
+  });
+
   document.querySelector('#pageSelectSortHost_aapOrganizationId')?.addEventListener('change', (event) => {
     sort('Host', 'aapOrganizationId', event.currentTarget.value);
   });

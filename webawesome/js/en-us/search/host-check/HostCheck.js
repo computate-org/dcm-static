@@ -83,7 +83,9 @@ async function websocketHostCheckInner(apiRequest) {
         var inputModified = null;
         var inputArchived = null;
         var inputTenantResource = null;
+        var inputJobTemplateResource = null;
         var inputCheckName = null;
+        var inputCheckDescription = null;
         var inputCheckNamespace = null;
         var inputCheckCommand = null;
         var inputCheckInterval = null;
@@ -104,6 +106,10 @@ async function websocketHostCheckInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputTenantId = null;
+        var inputAapOrganizationId = null;
+        var inputJobTemplateId = null;
+        var inputAapTemplateId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -115,8 +121,12 @@ async function websocketHostCheckInner(apiRequest) {
           inputArchived = $response.querySelector('.Page_archived');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.Page_tenantResource');
+        if(vars.includes('jobTemplateResource'))
+          inputJobTemplateResource = $response.querySelector('.Page_jobTemplateResource');
         if(vars.includes('checkName'))
           inputCheckName = $response.querySelector('.Page_checkName');
+        if(vars.includes('checkDescription'))
+          inputCheckDescription = $response.querySelector('.Page_checkDescription');
         if(vars.includes('checkNamespace'))
           inputCheckNamespace = $response.querySelector('.Page_checkNamespace');
         if(vars.includes('checkCommand'))
@@ -157,6 +167,14 @@ async function websocketHostCheckInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
+        if(vars.includes('tenantId'))
+          inputTenantId = $response.querySelector('.Page_tenantId');
+        if(vars.includes('aapOrganizationId'))
+          inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
+        if(vars.includes('jobTemplateId'))
+          inputJobTemplateId = $response.querySelector('.Page_jobTemplateId');
+        if(vars.includes('aapTemplateId'))
+          inputAapTemplateId = $response.querySelector('.Page_aapTemplateId');
 
         jsWebsocketHostCheck(checkName, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -213,6 +231,16 @@ async function websocketHostCheckInner(apiRequest) {
           addGlow(document.querySelector('.Page_tenantResource'));
         }
 
+        if(inputJobTemplateResource) {
+          document.querySelectorAll('.Page_jobTemplateResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputJobTemplateResource.getAttribute('value');
+            else
+              item.textContent = inputJobTemplateResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_jobTemplateResource'));
+        }
+
         if(inputCheckName) {
           document.querySelectorAll('.Page_checkName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -221,6 +249,16 @@ async function websocketHostCheckInner(apiRequest) {
               item.textContent = inputCheckName.textContent;
           });
           addGlow(document.querySelector('.Page_checkName'));
+        }
+
+        if(inputCheckDescription) {
+          document.querySelectorAll('.Page_checkDescription').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputCheckDescription.getAttribute('value');
+            else
+              item.textContent = inputCheckDescription.textContent;
+          });
+          addGlow(document.querySelector('.Page_checkDescription'));
         }
 
         if(inputCheckNamespace) {
@@ -423,6 +461,46 @@ async function websocketHostCheckInner(apiRequest) {
           addGlow(document.querySelector('.Page_solrId'));
         }
 
+        if(inputTenantId) {
+          document.querySelectorAll('.Page_tenantId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantId.getAttribute('value');
+            else
+              item.textContent = inputTenantId.textContent;
+          });
+          addGlow(document.querySelector('.Page_tenantId'));
+        }
+
+        if(inputAapOrganizationId) {
+          document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapOrganizationId.getAttribute('value');
+            else
+              item.textContent = inputAapOrganizationId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapOrganizationId'));
+        }
+
+        if(inputJobTemplateId) {
+          document.querySelectorAll('.Page_jobTemplateId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputJobTemplateId.getAttribute('value');
+            else
+              item.textContent = inputJobTemplateId.textContent;
+          });
+          addGlow(document.querySelector('.Page_jobTemplateId'));
+        }
+
+        if(inputAapTemplateId) {
+          document.querySelectorAll('.Page_aapTemplateId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapTemplateId.getAttribute('value');
+            else
+              item.textContent = inputAapTemplateId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapTemplateId'));
+        }
+
           pageGraphHostCheck();
       });
     });
@@ -594,9 +672,17 @@ function searchHostCheckFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
+    var filterJobTemplateResource = $formFilters.querySelector('.valueJobTemplateResource')?.value;
+    if(filterJobTemplateResource != null && filterJobTemplateResource !== '')
+      filters.push({ name: 'fq', value: 'jobTemplateResource:' + filterJobTemplateResource });
+
     var filterCheckName = $formFilters.querySelector('.valueCheckName')?.value;
     if(filterCheckName != null && filterCheckName !== '')
       filters.push({ name: 'fq', value: 'checkName:' + filterCheckName });
+
+    var filterCheckDescription = $formFilters.querySelector('.valueCheckDescription')?.value;
+    if(filterCheckDescription != null && filterCheckDescription !== '')
+      filters.push({ name: 'fq', value: 'checkDescription:' + filterCheckDescription });
 
     var filterCheckNamespace = $formFilters.querySelector('.valueCheckNamespace')?.value;
     if(filterCheckNamespace != null && filterCheckNamespace !== '')
@@ -683,6 +769,22 @@ function searchHostCheckFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
+    var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
+    if(filterJobTemplateId != null && filterJobTemplateId !== '')
+      filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
+
+    var filterAapTemplateId = $formFilters.querySelector('.valueAapTemplateId')?.value;
+    if(filterAapTemplateId != null && filterAapTemplateId !== '')
+      filters.push({ name: 'fq', value: 'aapTemplateId:' + filterAapTemplateId });
   }
   return filters;
 }
@@ -753,6 +855,55 @@ function suggestHostCheckTenantResource(filters, $list, checkName = null, tenant
   };
   error = function( jqXhr, target2 ) {};
   searchTenantVals(filters, target, success, error);
+}
+
+function suggestHostCheckJobTemplateResource(filters, $list, checkName = null, jobTemplateResource = null, relate=true, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-excavator"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['jobTemplateResource'];
+        var checked = val == null ? false : (jobTemplateResource != null && val === jobTemplateResource.toString());
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_jobTemplateResource_' + checkName + '_jobTemplateResource_' + o['jobTemplateResource']);
+        $input.setAttribute('name', 'jobTemplateResource');
+        $input.setAttribute('value', o['jobTemplateResource']);
+        $input.setAttribute('class', 'valueJobTemplateResource ');
+        if(checkName != null) {
+          $input.addEventListener('change', function(event) {
+            patchHostCheckVals([{ name: 'fq', value: 'checkName:' + checkName }], { [(event.target.checked ? 'set' : 'remove') + 'JobTemplateResource']: o['jobTemplateResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestHostCheckJobTemplateResource(filters, $list, checkName, o['jobTemplateResource'], relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  searchJobTemplateVals(filters, target, success, error);
 }
 
 function suggestHostCheckObjectSuggest($formFilters, $list, target) {
@@ -862,6 +1013,10 @@ async function patchHostCheck($formFilters, $formValues, target, checkName, succ
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['setTenantResource'] = valueTenantResource;
 
+  var valueJobTemplateResource = (Array.from($formValues.querySelectorAll('.valueJobTemplateResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueJobTemplateResource != null && valueJobTemplateResource !== '')
+    vals['setJobTemplateResource'] = valueJobTemplateResource;
+
   var valueCheckName = $formValues.querySelector('.valueCheckName')?.value;
   var removeCheckName = $formValues.querySelector('.removeCheckName')?.value === 'true';
   var setCheckName = removeCheckName ? null : $formValues.querySelector('.setCheckName')?.value;
@@ -873,6 +1028,18 @@ async function patchHostCheck($formFilters, $formValues, target, checkName, succ
   var removeCheckName = $formValues.querySelector('.removeCheckName')?.value;
   if(removeCheckName != null && removeCheckName !== '')
     vals['removeCheckName'] = removeCheckName;
+
+  var valueCheckDescription = $formValues.querySelector('.valueCheckDescription')?.value;
+  var removeCheckDescription = $formValues.querySelector('.removeCheckDescription')?.value === 'true';
+  var setCheckDescription = removeCheckDescription ? null : $formValues.querySelector('.setCheckDescription')?.value;
+  var addCheckDescription = $formValues.querySelector('.addCheckDescription')?.value;
+  if(removeCheckDescription || setCheckDescription != null && setCheckDescription !== '')
+    vals['setCheckDescription'] = setCheckDescription;
+  if(addCheckDescription != null && addCheckDescription !== '')
+    vals['addCheckDescription'] = addCheckDescription;
+  var removeCheckDescription = $formValues.querySelector('.removeCheckDescription')?.value;
+  if(removeCheckDescription != null && removeCheckDescription !== '')
+    vals['removeCheckDescription'] = removeCheckDescription;
 
   var valueCheckNamespace = $formValues.querySelector('.valueCheckNamespace')?.value;
   var removeCheckNamespace = $formValues.querySelector('.removeCheckNamespace')?.value === 'true';
@@ -1037,6 +1204,54 @@ async function patchHostCheck($formFilters, $formValues, target, checkName, succ
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value === 'true';
+  var setTenantId = removeTenantId ? null : $formValues.querySelector('.setTenantId')?.value;
+  var addTenantId = $formValues.querySelector('.addTenantId')?.value;
+  if(removeTenantId || setTenantId != null && setTenantId !== '')
+    vals['setTenantId'] = setTenantId;
+  if(addTenantId != null && addTenantId !== '')
+    vals['addTenantId'] = addTenantId;
+  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value;
+  if(removeTenantId != null && removeTenantId !== '')
+    vals['removeTenantId'] = removeTenantId;
+
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
+  var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
+  var addAapOrganizationId = $formValues.querySelector('.addAapOrganizationId')?.value;
+  if(removeAapOrganizationId || setAapOrganizationId != null && setAapOrganizationId !== '')
+    vals['setAapOrganizationId'] = setAapOrganizationId;
+  if(addAapOrganizationId != null && addAapOrganizationId !== '')
+    vals['addAapOrganizationId'] = addAapOrganizationId;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
+  if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
+    vals['removeAapOrganizationId'] = removeAapOrganizationId;
+
+  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
+  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value === 'true';
+  var setJobTemplateId = removeJobTemplateId ? null : $formValues.querySelector('.setJobTemplateId')?.value;
+  var addJobTemplateId = $formValues.querySelector('.addJobTemplateId')?.value;
+  if(removeJobTemplateId || setJobTemplateId != null && setJobTemplateId !== '')
+    vals['setJobTemplateId'] = setJobTemplateId;
+  if(addJobTemplateId != null && addJobTemplateId !== '')
+    vals['addJobTemplateId'] = addJobTemplateId;
+  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value;
+  if(removeJobTemplateId != null && removeJobTemplateId !== '')
+    vals['removeJobTemplateId'] = removeJobTemplateId;
+
+  var valueAapTemplateId = $formValues.querySelector('.valueAapTemplateId')?.value;
+  var removeAapTemplateId = $formValues.querySelector('.removeAapTemplateId')?.value === 'true';
+  var setAapTemplateId = removeAapTemplateId ? null : $formValues.querySelector('.setAapTemplateId')?.value;
+  var addAapTemplateId = $formValues.querySelector('.addAapTemplateId')?.value;
+  if(removeAapTemplateId || setAapTemplateId != null && setAapTemplateId !== '')
+    vals['setAapTemplateId'] = setAapTemplateId;
+  if(addAapTemplateId != null && addAapTemplateId !== '')
+    vals['addAapTemplateId'] = addAapTemplateId;
+  var removeAapTemplateId = $formValues.querySelector('.removeAapTemplateId')?.value;
+  if(removeAapTemplateId != null && removeAapTemplateId !== '')
+    vals['removeAapTemplateId'] = removeAapTemplateId;
+
   patchHostCheckVals(checkName == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'checkName:' + checkName}], vals, target, success, error);
 }
 
@@ -1071,9 +1286,17 @@ function patchHostCheckFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
+    var filterJobTemplateResource = $formFilters.querySelector('.valueJobTemplateResource')?.value;
+    if(filterJobTemplateResource != null && filterJobTemplateResource !== '')
+      filters.push({ name: 'fq', value: 'jobTemplateResource:' + filterJobTemplateResource });
+
     var filterCheckName = $formFilters.querySelector('.valueCheckName')?.value;
     if(filterCheckName != null && filterCheckName !== '')
       filters.push({ name: 'fq', value: 'checkName:' + filterCheckName });
+
+    var filterCheckDescription = $formFilters.querySelector('.valueCheckDescription')?.value;
+    if(filterCheckDescription != null && filterCheckDescription !== '')
+      filters.push({ name: 'fq', value: 'checkDescription:' + filterCheckDescription });
 
     var filterCheckNamespace = $formFilters.querySelector('.valueCheckNamespace')?.value;
     if(filterCheckNamespace != null && filterCheckNamespace !== '')
@@ -1160,6 +1383,22 @@ function patchHostCheckFilters($formFilters) {
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
+    var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
+    if(filterJobTemplateId != null && filterJobTemplateId !== '')
+      filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
+
+    var filterAapTemplateId = $formFilters.querySelector('.valueAapTemplateId')?.value;
+    if(filterAapTemplateId != null && filterAapTemplateId !== '')
+      filters.push({ name: 'fq', value: 'aapTemplateId:' + filterAapTemplateId });
   }
   return filters;
 }
@@ -1243,9 +1482,17 @@ async function postHostCheck($formValues, target, success, error) {
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['tenantResource'] = valueTenantResource;
 
+  var valueJobTemplateResource = (Array.from($formValues.querySelectorAll('.valueJobTemplateResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueJobTemplateResource != null && valueJobTemplateResource !== '')
+    vals['jobTemplateResource'] = valueJobTemplateResource;
+
   var valueCheckName = $formValues.querySelector('.valueCheckName')?.value;
   if(valueCheckName != null && valueCheckName !== '')
     vals['checkName'] = valueCheckName;
+
+  var valueCheckDescription = $formValues.querySelector('.valueCheckDescription')?.value;
+  if(valueCheckDescription != null && valueCheckDescription !== '')
+    vals['checkDescription'] = valueCheckDescription;
 
   var valueCheckNamespace = $formValues.querySelector('.valueCheckNamespace')?.value;
   if(valueCheckNamespace != null && valueCheckNamespace !== '')
@@ -1298,6 +1545,22 @@ async function postHostCheck($formValues, target, success, error) {
   var valueDownload = $formValues.querySelector('.valueDownload')?.value;
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
+
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  if(valueTenantId != null && valueTenantId !== '')
+    vals['tenantId'] = valueTenantId;
+
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
+    vals['aapOrganizationId'] = valueAapOrganizationId;
+
+  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
+  if(valueJobTemplateId != null && valueJobTemplateId !== '')
+    vals['jobTemplateId'] = valueJobTemplateId;
+
+  var valueAapTemplateId = $formValues.querySelector('.valueAapTemplateId')?.value;
+  if(valueAapTemplateId != null && valueAapTemplateId !== '')
+    vals['aapTemplateId'] = valueAapTemplateId;
 
   fetch(
     '/en-us/api/host-check'

@@ -66,6 +66,17 @@ Promise.all([
     facetStatsChange('HostCheck', 'tenantResource', false);
   });
 
+  document.querySelector('#pageSelectSortHostCheck_jobTemplateResource')?.addEventListener('change', (event) => {
+    sort('HostCheck', 'jobTemplateResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCheck_jobTemplateResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCheck', 'jobTemplateResource', true);
+  });
+  document.querySelector('#pageStatsHostCheck_jobTemplateResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCheck', 'jobTemplateResource', false);
+  });
+
   document.querySelector('#pageSelectSortHostCheck_checkName')?.addEventListener('change', (event) => {
     sort('HostCheck', 'checkName', event.currentTarget.value);
   });
@@ -75,6 +86,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsHostCheck_checkName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('HostCheck', 'checkName', false);
+  });
+
+  document.querySelector('#pageSelectSortHostCheck_checkDescription')?.addEventListener('change', (event) => {
+    sort('HostCheck', 'checkDescription', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCheck_checkDescription')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCheck', 'checkDescription', true);
+  });
+  document.querySelector('#pageStatsHostCheck_checkDescription')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCheck', 'checkDescription', false);
   });
 
   document.querySelector('#pageSelectSortHostCheck_checkNamespace')?.addEventListener('change', (event) => {
@@ -295,6 +317,50 @@ Promise.all([
   });
   document.querySelector('#pageStatsHostCheck_solrId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('HostCheck', 'solrId', false);
+  });
+
+  document.querySelector('#pageSelectSortHostCheck_tenantId')?.addEventListener('change', (event) => {
+    sort('HostCheck', 'tenantId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCheck_tenantId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCheck', 'tenantId', true);
+  });
+  document.querySelector('#pageStatsHostCheck_tenantId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCheck', 'tenantId', false);
+  });
+
+  document.querySelector('#pageSelectSortHostCheck_aapOrganizationId')?.addEventListener('change', (event) => {
+    sort('HostCheck', 'aapOrganizationId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCheck_aapOrganizationId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCheck', 'aapOrganizationId', true);
+  });
+  document.querySelector('#pageStatsHostCheck_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCheck', 'aapOrganizationId', false);
+  });
+
+  document.querySelector('#pageSelectSortHostCheck_jobTemplateId')?.addEventListener('change', (event) => {
+    sort('HostCheck', 'jobTemplateId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCheck_jobTemplateId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCheck', 'jobTemplateId', true);
+  });
+  document.querySelector('#pageStatsHostCheck_jobTemplateId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCheck', 'jobTemplateId', false);
+  });
+
+  document.querySelector('#pageSelectSortHostCheck_aapTemplateId')?.addEventListener('change', (event) => {
+    sort('HostCheck', 'aapTemplateId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCheck_aapTemplateId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCheck', 'aapTemplateId', true);
+  });
+  document.querySelector('#pageStatsHostCheck_aapTemplateId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCheck', 'aapTemplateId', false);
   });
           document.querySelector('#fqHostCheck_created')?.addEventListener('change', (event) => {
             fqChange('HostCheck', event.currentTarget, facetChangeHostCheckSuccess, facetChangeHostCheckError);

@@ -286,6 +286,17 @@ Promise.all([
     facetStatsChange('JobTemplate', 'tenantResource', false);
   });
 
+  document.querySelector('#pageSelectSortJobTemplate_tenantId')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'tenantId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_tenantId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'tenantId', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_tenantId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'tenantId', false);
+  });
+
   document.querySelector('#pageSelectSortJobTemplate_aapOrganizationId')?.addEventListener('change', (event) => {
     sort('JobTemplate', 'aapOrganizationId', event.currentTarget.value);
   });

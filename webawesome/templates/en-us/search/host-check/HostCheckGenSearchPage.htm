@@ -15,7 +15,7 @@
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 4;
+        --site-results-number-of-columns: 6;
       }
 {{ super() }}
 {%- block htmStyleHostCheckPage %}
@@ -28,6 +28,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/host-check/HostCheck.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-check/HostCheckSearchPage.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/job-template/JobTemplate.js"></script>
 {%- endblock htmScriptsHostCheckPage %}
 {%- endblock htmScriptsPageLayout %}
 
@@ -144,6 +145,22 @@
           document.querySelector('#HostCheck_POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#HostCheck_PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#HostCheck_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          function relate_jobTemplateResource(event) {
+            suggestHostCheckJobTemplateResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,jobTemplateResource,pk,editPage,objectTitle' } ] : [{%- if result.jobTemplateResource is defined %}{'name':'fq','value':'jobTemplateResource:{{ result.jobTemplateResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#HostCheck_POST_jobTemplateResource')?.addEventListener('input', relate_jobTemplateResource);
+          document.querySelector('#HostCheck_POST_jobTemplateResource')?.addEventListener('focus', relate_jobTemplateResource);
+          document.querySelector('#HostCheck_PATCH_jobTemplateResource')?.addEventListener('input', relate_jobTemplateResource);
+          document.querySelector('#HostCheck_PATCH_jobTemplateResource')?.addEventListener('focus', relate_jobTemplateResource);
         if(checkName == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -264,6 +281,15 @@
                 addGlow(target);
               });
         });
+
+        document.querySelector('#htmFormButton_postJobTemplate')?.addEventListener('click', event => {
+          event.preventDefault();
+          postJobTemplate(document.querySelector('#htmForm_postJobTemplate')
+              , document.querySelector('#htmFormButton_postJobTemplate')
+              , (json, target) => {
+                addGlow(target);
+              });
+        });
 {%- block htmScriptInitHostCheckPage %}{%- endblock htmScriptInitHostCheckPage %}
       });
     </script>
@@ -367,6 +393,19 @@
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-jobTemplateResource">
+                      <wa-button variant="brand" slot="trigger" caret>job template</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_jobTemplateResource'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-jobTemplateResource-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by job template ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_jobTemplateResource'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-jobTemplateResource-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by job template descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                     <wa-dropdown id="htmDropdown-checkName">
                       <wa-button variant="brand" slot="trigger" caret>check name</wa-button>
                       <wa-menu>
@@ -377,6 +416,19 @@
                         <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_checkName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-checkName-desc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                           sort by check name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-checkDescription">
+                      <wa-button variant="brand" slot="trigger" caret>check description</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_checkDescription'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-checkDescription-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by check description ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHostCheck_checkDescription'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-HostCheck').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-checkDescription-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by check description descending
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
@@ -414,7 +466,13 @@
                       <span>{{ item.tenantResource | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
+                      <span>{{ item.jobTemplateResource | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
                       <span>{{ item.checkName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.checkDescription | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
                       <span>{{ item.eventSubscriptions | e }}</span>
@@ -428,7 +486,15 @@
                 <div>
                 </div>
               {% endif %}
+              {% if getColumnJobTemplateResource is defined %}
+                <div>
+                </div>
+              {% endif %}
               {% if getColumnCheckName is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnCheckDescription is defined %}
                 <div>
                 </div>
               {% endif %}
