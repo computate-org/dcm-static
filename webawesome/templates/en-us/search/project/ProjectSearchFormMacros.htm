@@ -1,0 +1,1036 @@
+{%- macro inputPkProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_pk">
+  {%- endif %}
+                  <wa-input
+                      readonly
+                      placeholder="[Long] primary key"
+                      label="primary key"
+                      type="number"
+                      hint="The primary key of this object in the database"
+                      id="Project_{{classApiMethodMethod}}_pk"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{Project_classApiMethodMethod}}_pk setPk classProject inputProject{{ result.projectResource }}Pk "
+                      name="setPk"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_pk setPk classProject inputProject{{ result.projectResource }}Pk "
+                      name="setPk"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_pk valuePk classProject inputProject{{ result.projectResource }}Pk "
+                      name="pk"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.pk | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPkProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPkProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_created">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A created timestamp for this record in the database"
+                      label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left {{Project_classApiMethodMethod}}_created datetimepicker setCreated classProject inputProject{{ result.projectResource }}Created "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="Project_{{classApiMethodMethod}}_created"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputModifiedProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_modified">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A modified timestamp for this record in the database"
+                      label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left {{Project_classApiMethodMethod}}_modified datetimepicker setModified classProject inputProject{{ result.projectResource }}Modified "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="Project_{{classApiMethodMethod}}_modified"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmModifiedProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputModifiedProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputArchivedProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_archived">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-button variant="brand"
+                      id="Project_{{classApiMethodMethod}}_archived"
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+                      class="label-on-left {{Project_classApiMethodMethod}}_archived classProject inputProject{{ result.projectResource }}Archived "
+                      name="setArchived"
+                      data-projectResource={{ result.projectResource | tojson }}
+                      data-val="{{ result.archived | e }}"
+                      >archive</wa-button>
+  {%- else %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="Project_{{classApiMethodMethod}}_archived"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="Project_{{classApiMethodMethod}}_archived"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_archived classProject inputProject{{ result.projectResource }}Archived "
+                      name="setArchived"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_archived classProject inputProject{{ result.projectResource }}Archived "
+                      name="setArchived"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_archived setArchived valueArchived classProject inputProject{{ result.projectResource }}Archived "
+                      name="setArchived"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.archived == true %}
+                      checked
+    {%- endif %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      >archive</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmArchivedProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputArchivedProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputProjectNameProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_projectName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] project name"
+                      label="project name"
+                      hint="The name of this project"
+                      id="Project_{{classApiMethodMethod}}_projectName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{Project_classApiMethodMethod}}_projectName setProjectName classProject inputProject{{ result.projectResource }}ProjectName "
+                      name="setProjectName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_projectName setProjectName classProject inputProject{{ result.projectResource }}ProjectName "
+                      name="setProjectName"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_projectName valueProjectName classProject inputProject{{ result.projectResource }}ProjectName "
+                      name="projectName"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.projectName | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmProjectNameProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputProjectNameProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputDescriptionProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_description">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] description"
+                      label="description"
+                      hint="A description of this project"
+                      id="Project_{{classApiMethodMethod}}_description"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{Project_classApiMethodMethod}}_description setDescription classProject inputProject{{ result.projectResource }}Description "
+                      name="setDescription"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_description setDescription classProject inputProject{{ result.projectResource }}Description "
+                      name="setDescription"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_description valueDescription classProject inputProject{{ result.projectResource }}Description "
+                      name="description"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.description | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmDescriptionProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDescriptionProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputGpuEnabledProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_gpuEnabled">
+  {%- endif %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="Project_{{classApiMethodMethod}}_gpuEnabled"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="Project_{{classApiMethodMethod}}_gpuEnabled"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="GPU enabled"
+                      label="GPU enabled"
+                      hint="Whether GPUs are enabled for this project. "
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_gpuEnabled classProject inputProject{{ result.projectResource }}GpuEnabled "
+                      name="setGpuEnabled"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_gpuEnabled classProject inputProject{{ result.projectResource }}GpuEnabled "
+                      name="setGpuEnabled"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_gpuEnabled setGpuEnabled valueGpuEnabled classProject inputProject{{ result.projectResource }}GpuEnabled "
+                      name="setGpuEnabled"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.gpuEnabled == true %}
+                      checked
+    {%- endif %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      >GPU enabled</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmGpuEnabledProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputGpuEnabledProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputPodRestartCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_podRestartCount">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[Integer] pod restarts"
+                      label="pod restarts"
+                      type="number"
+                      hint="The number of pod restarts in this project. "
+                      id="Project_{{classApiMethodMethod}}_podRestartCount"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podRestartCount setPodRestartCount classProject inputProject{{ result.projectResource }}PodRestartCount "
+                      name="setPodRestartCount"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podRestartCount setPodRestartCount classProject inputProject{{ result.projectResource }}PodRestartCount "
+                      name="setPodRestartCount"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podRestartCount valuePodRestartCount classProject inputProject{{ result.projectResource }}PodRestartCount "
+                      name="podRestartCount"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.podRestartCount | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPodRestartCountProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPodRestartCountProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputPodsRestartingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_podsRestarting">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] pods restarting"
+                      label="pods restarting"
+                      hint="The names of the pods restarting in this project. "
+                      id="Project_{{classApiMethodMethod}}_podsRestarting"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podsRestarting setPodsRestarting classProject inputProject{{ result.projectResource }}PodsRestarting "
+                      name="setPodsRestarting"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podsRestarting setPodsRestarting classProject inputProject{{ result.projectResource }}PodsRestarting "
+                      name="setPodsRestarting"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podsRestarting valuePodsRestarting classProject inputProject{{ result.projectResource }}PodsRestarting "
+                      name="podsRestarting"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.podsRestarting) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPodsRestartingProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPodsRestartingProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputPodTerminatingCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_podTerminatingCount">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[Integer] pods terminating"
+                      label="pods terminating"
+                      type="number"
+                      hint="The number of pods terminating in this project. "
+                      id="Project_{{classApiMethodMethod}}_podTerminatingCount"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podTerminatingCount setPodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
+                      name="setPodTerminatingCount"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podTerminatingCount setPodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
+                      name="setPodTerminatingCount"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podTerminatingCount valuePodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
+                      name="podTerminatingCount"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.podTerminatingCount | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPodTerminatingCountProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPodTerminatingCountProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputPodsTerminatingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_podsTerminating">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] pods terminating"
+                      label="pods terminating"
+                      hint="The names of the pods terminating in this project. "
+                      id="Project_{{classApiMethodMethod}}_podsTerminating"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podsTerminating setPodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
+                      name="setPodsTerminating"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podsTerminating setPodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
+                      name="setPodsTerminating"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_podsTerminating valuePodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
+                      name="podsTerminating"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.podsTerminating) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPodsTerminatingProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPodsTerminatingProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputFullPvcsCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_fullPvcsCount">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[Integer] Full PVCs count"
+                      label="Full PVCs count"
+                      type="number"
+                      hint="The number of persistent volume claims that are running out of disk space in this project. "
+                      id="Project_{{classApiMethodMethod}}_fullPvcsCount"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcsCount setFullPvcsCount classProject inputProject{{ result.projectResource }}FullPvcsCount "
+                      name="setFullPvcsCount"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcsCount setFullPvcsCount classProject inputProject{{ result.projectResource }}FullPvcsCount "
+                      name="setFullPvcsCount"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcsCount valueFullPvcsCount classProject inputProject{{ result.projectResource }}FullPvcsCount "
+                      name="fullPvcsCount"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.fullPvcsCount | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmFullPvcsCountProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputFullPvcsCountProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputFullPvcsProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_fullPvcs">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] pods restarting"
+                      label="pods restarting"
+                      hint="The names of the persistent volume claims that are running out of disk space in this project. "
+                      id="Project_{{classApiMethodMethod}}_fullPvcs"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcs setFullPvcs classProject inputProject{{ result.projectResource }}FullPvcs "
+                      name="setFullPvcs"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcs setFullPvcs classProject inputProject{{ result.projectResource }}FullPvcs "
+                      name="setFullPvcs"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcs valueFullPvcs classProject inputProject{{ result.projectResource }}FullPvcs "
+                      name="fullPvcs"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.fullPvcs) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmFullPvcsProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputFullPvcsProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputNamespaceTerminatingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_namespaceTerminating">
+  {%- endif %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="Project_{{classApiMethodMethod}}_namespaceTerminating"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="Project_{{classApiMethodMethod}}_namespaceTerminating"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="namespace terminating"
+                      label="namespace terminating"
+                      hint="Whether namespace is stuck in terminating status. "
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_namespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
+                      name="setNamespaceTerminating"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_namespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
+                      name="setNamespaceTerminating"
+    {%- else %}
+                      class="label-on-left {{Project_classApiMethodMethod}}_namespaceTerminating setNamespaceTerminating valueNamespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
+                      name="setNamespaceTerminating"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.namespaceTerminating == true %}
+                      checked
+    {%- endif %}
+                      data-projectResource={{ result.projectResource | tojson }}
+                      >namespace terminating</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmNamespaceTerminatingProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputNamespaceTerminatingProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+
+{%- macro htmFormButton_patchProject() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_patchProject" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_patchProject"
+                >Modify project</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_patchProject"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_patchProject() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchProjectDialog" label="Modify project">
+          <form id="htmForm_patchProject" class="round-row primary-smart-border-radius ">
+
+            <wa-details open class="HtmRow" id="project-details">
+              <div slot="summary">
+                <span>project details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="HtmRow" id="health-checks">
+              <div slot="summary">
+                <span>health checks</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </form>
+          {{ htmFormButton_patchProject() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_postProject() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_postProject" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_postProject"
+                >Create an project</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_postProject"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_postProject() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="postProjectDialog" label="Create an project">
+          <form id="htmForm_postProject" class="round-row primary-smart-border-radius ">
+            <div>You can override any default values below: </div>
+
+            <wa-details open class="HtmRow" id="project-details">
+              <div slot="summary">
+                <span>project details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="HtmRow" id="health-checks">
+              <div slot="summary">
+                <span>health checks</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </form>
+          {{ htmFormButton_postProject() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_deleteProject() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deleteProject" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deleteProject"
+                >Delete project</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deleteProject"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deleteProject() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteProjectDialog" label="Delete project">
+          <form id="htmForm_deleteProject" class="round-row primary-smart-border-radius ">
+          </form>
+          {{ htmFormButton_deleteProject() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_putimportProject() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_putimportProject" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_putimportProject"
+                >Import projects</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_putimportProject"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_putimportProject() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportProjectDialog" label="Import projects">
+          <form id="htmForm_putimportProject" class="round-row primary-smart-border-radius ">
+            <div>
+              <wa-textarea
+                  class="PUTImport_searchList "
+                  style="height: 300px; "
+                  placeholder="{ 'searchList': [ { 'projectResource': ... , 'saves': [ ... ] }, ... ] }"
+                  >
+              </wa-textarea>
+            </div>
+          </form>
+          {{ htmFormButton_putimportProject() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmForm_searchpageProject() %}
+        <div with-header with-footer style="--width: 50vw; " id="searchpageProjectDialog" label="Search projects">
+          <div id="htmForm_searchpageProject" class="round-row primary-smart-border-radius ">
+
+            <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
+              <div slot="summary">
+                <span>primary key, ID, created, modified, archive details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmPkProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPkProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmCreatedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmModifiedProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmModifiedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmArchivedProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmArchivedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="HtmRow" id="project-details">
+              <div slot="summary">
+                <span>project details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="HtmRow" id="health-checks">
+              <div slot="summary">
+                <span>health checks</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </div>
+        </div>
+{%- endmacro %}
+
+{%- macro htmFormButton_deletefilterProject() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterProject" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deletefilterProject"
+                >Delete project</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deletefilterProject"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deletefilterProject() %}
+        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterProjectDialog" label="Delete project">
+          <form id="htmForm_deletefilterProject" class="round-row primary-smart-border-radius ">
+          </form>
+          {{ htmFormButton_deletefilterProject() }}
+        </wa-dialog>
+{%- endmacro %}

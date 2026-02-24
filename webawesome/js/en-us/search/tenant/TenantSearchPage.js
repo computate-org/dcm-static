@@ -99,6 +99,17 @@ Promise.all([
     facetStatsChange('Tenant', 'hostInventoryIds', false);
   });
 
+  document.querySelector('#pageSelectSortTenant_ansibleProjectIds')?.addEventListener('change', (event) => {
+    sort('Tenant', 'ansibleProjectIds', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenant_ansibleProjectIds')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Tenant', 'ansibleProjectIds', true);
+  });
+  document.querySelector('#pageStatsTenant_ansibleProjectIds')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Tenant', 'ansibleProjectIds', false);
+  });
+
   document.querySelector('#pageSelectSortTenant_pageId')?.addEventListener('change', (event) => {
     sort('Tenant', 'pageId', event.currentTarget.value);
   });

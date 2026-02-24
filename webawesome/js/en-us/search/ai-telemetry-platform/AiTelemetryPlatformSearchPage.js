@@ -627,14 +627,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchAiTelemetryPlatform')?.addEventListener('click', (event) => {
-    document.querySelector('#patchAiTelemetryPlatformDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postAiTelemetryPlatform')?.addEventListener('click', (event) => {
-    document.querySelector('#postAiTelemetryPlatformDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteAiTelemetryPlatform')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -646,14 +638,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_putimportAiTelemetryPlatform')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportAiTelemetryPlatformDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageAiTelemetryPlatform')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageAiTelemetryPlatformDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterAiTelemetryPlatform')?.addEventListener('click', (event) => {

@@ -28,6 +28,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/tenant/TenantSearchPage.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
 {%- endblock htmScriptsTenantPage %}
 {%- endblock htmScriptsPageLayout %}
 
@@ -130,7 +131,7 @@
 
           function relate_hostInventoryIds(event) {
             suggestTenantHostInventoryIds(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.hostInventoryIds is defined %}{'name':'fq','value':'tenantResource:{{ result.hostInventoryIds }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
@@ -140,10 +141,26 @@
                 , this
                 );
           }
-          document.querySelector('#POST_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
-          document.querySelector('#POST_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
-          document.querySelector('#PATCH_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
-          document.querySelector('#PATCH_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#Tenant_POST_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#Tenant_POST_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#Tenant_PATCH_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#Tenant_PATCH_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          function relate_ansibleProjectIds(event) {
+            suggestTenantAnsibleProjectIds(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.ansibleProjectIds is defined %}{'name':'fq','value':'tenantResource:{{ result.ansibleProjectIds }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
         if(tenantResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -254,6 +271,24 @@
           event.preventDefault();
           deletefilterTenant(event.target);
           return false;
+        });
+
+        document.querySelector('#htmFormButton_postHostInventory')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHostInventory(document.querySelector('#htmForm_postHostInventory')
+              , document.querySelector('#htmFormButton_postHostInventory')
+              , (json, target) => {
+                addGlow(target);
+              });
+        });
+
+        document.querySelector('#htmFormButton_postAnsibleProject')?.addEventListener('click', event => {
+          event.preventDefault();
+          postAnsibleProject(document.querySelector('#htmForm_postAnsibleProject')
+              , document.querySelector('#htmFormButton_postAnsibleProject')
+              , (json, target) => {
+                addGlow(target);
+              });
         });
 {%- block htmScriptInitTenantPage %}{%- endblock htmScriptInitTenantPage %}
       });

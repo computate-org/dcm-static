@@ -347,8 +347,6 @@
                 </div>
 {% include en-us/search/user/SiteUserPaginationButtons.htm %}
               </div>
-            </div>
-          </div>
 {% endif %}
 {%- endblock htmBodyMiddleSiteUserPage %}
 {%- endblock htmBodyMiddlePageLayout %}
@@ -356,6 +354,8 @@
 {%- block htmBodyEndPageLayout %}
 {%- block htmBodyEndSiteUserPage %}
 {%- include en-us/search/user/SiteUserLocation.htm %}
+            </div>
+          </div>
 {%- endblock htmBodyEndSiteUserPage %}
   {{ super() }}
 {%- endblock htmBodyEndPageLayout %}

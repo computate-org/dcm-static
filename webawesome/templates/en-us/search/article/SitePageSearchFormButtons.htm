@@ -1,9 +1,9 @@
 
-{%- macro htmButton_patchSitePage() %}<wa-button variant="brand" id="htmButton_patchSitePage" data-pageId={{ result.pageId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchSitePage() %}<wa-button variant="brand" id="htmButton_patchSitePage"  data-dialog="open patchSitePageDialog" data-pageId={{ result.pageId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
-{%- macro htmButton_postSitePage() %}<wa-button variant="brand" id="htmButton_postSitePage" data-pageId={{ result.pageId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postSitePage() %}<wa-button variant="brand" id="htmButton_postSitePage"  data-dialog="open postSitePageDialog" data-pageId={{ result.pageId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
-{%- macro htmButton_putimportSitePage() %}<wa-button variant="brand" id="htmButton_putimportSitePage" data-pageId={{ result.pageId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportSitePage() %}<wa-button variant="brand" id="htmButton_putimportSitePage"  data-dialog="open putimportSitePageDialog" data-pageId={{ result.pageId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmButton_deleteSitePage() %}<wa-button variant="brand" id="htmButton_deleteSitePage" data-pageId={{ result.pageId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 

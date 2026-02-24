@@ -1,11 +1,11 @@
 
-{%- macro htmButton_patchTimeZone() %}<wa-button variant="brand" id="htmButton_patchTimeZone" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchTimeZone() %}<wa-button variant="brand" id="htmButton_patchTimeZone"  data-dialog="open patchTimeZoneDialog" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
-{%- macro htmButton_postTimeZone() %}<wa-button variant="brand" id="htmButton_postTimeZone" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postTimeZone() %}<wa-button variant="brand" id="htmButton_postTimeZone"  data-dialog="open postTimeZoneDialog" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
 {%- macro htmButton_deleteTimeZone() %}<wa-button variant="brand" id="htmButton_deleteTimeZone" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
-{%- macro htmButton_putimportTimeZone() %}<wa-button variant="brand" id="htmButton_putimportTimeZone" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportTimeZone() %}<wa-button variant="brand" id="htmButton_putimportTimeZone"  data-dialog="open putimportTimeZoneDialog" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
 {%- macro htmButton_deletefilterTimeZone() %}<wa-button variant="brand" id="htmButton_deletefilterTimeZone" data-id={{ result.id | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
           <div id="htmSearchForm">

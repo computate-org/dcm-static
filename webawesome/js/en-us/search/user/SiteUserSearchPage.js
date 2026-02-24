@@ -460,15 +460,3 @@ Promise.all([
             facetRangeEndChange('SiteUser', event.currentTarget);
           });
 });
-
-  document.querySelector('#htmButton_patchSiteUser')?.addEventListener('click', (event) => {
-    document.querySelector('#patchSiteUserDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postSiteUser')?.addEventListener('click', (event) => {
-    document.querySelector('#postSiteUserDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_searchpageSiteUser')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageSiteUserDialog').open = true;
-  });

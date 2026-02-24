@@ -66,17 +66,6 @@ Promise.all([
     facetStatsChange('AnsibleProject', 'tenantResource', false);
   });
 
-  document.querySelector('#pageSelectSortAnsibleProject_organizationId')?.addEventListener('change', (event) => {
-    sort('AnsibleProject', 'organizationId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsAnsibleProject_organizationId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AnsibleProject', 'organizationId', true);
-  });
-  document.querySelector('#pageStatsAnsibleProject_organizationId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AnsibleProject', 'organizationId', false);
-  });
-
   document.querySelector('#pageSelectSortAnsibleProject_sourceControlType')?.addEventListener('change', (event) => {
     sort('AnsibleProject', 'sourceControlType', event.currentTarget.value);
   });
@@ -121,15 +110,15 @@ Promise.all([
     facetStatsChange('AnsibleProject', 'sourceControlBranch', false);
   });
 
-  document.querySelector('#pageSelectSortAnsibleProject_jobTemplateIds')?.addEventListener('change', (event) => {
-    sort('AnsibleProject', 'jobTemplateIds', event.currentTarget.value);
+  document.querySelector('#pageSelectSortAnsibleProject_jobTemplateResources')?.addEventListener('change', (event) => {
+    sort('AnsibleProject', 'jobTemplateResources', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsAnsibleProject_jobTemplateIds')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AnsibleProject', 'jobTemplateIds', true);
+  document.querySelector('#pageStatsAnsibleProject_jobTemplateResources')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AnsibleProject', 'jobTemplateResources', true);
   });
-  document.querySelector('#pageStatsAnsibleProject_jobTemplateIds')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AnsibleProject', 'jobTemplateIds', false);
+  document.querySelector('#pageStatsAnsibleProject_jobTemplateResources')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AnsibleProject', 'jobTemplateResources', false);
   });
 
   document.querySelector('#pageSelectSortAnsibleProject_ansibleProjectName')?.addEventListener('change', (event) => {
@@ -297,6 +286,17 @@ Promise.all([
     facetStatsChange('AnsibleProject', 'solrId', false);
   });
 
+  document.querySelector('#pageSelectSortAnsibleProject_tenantId')?.addEventListener('change', (event) => {
+    sort('AnsibleProject', 'tenantId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsAnsibleProject_tenantId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AnsibleProject', 'tenantId', true);
+  });
+  document.querySelector('#pageStatsAnsibleProject_tenantId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AnsibleProject', 'tenantId', false);
+  });
+
   document.querySelector('#pageSelectSortAnsibleProject_aapOrganizationId')?.addEventListener('change', (event) => {
     sort('AnsibleProject', 'aapOrganizationId', event.currentTarget.value);
   });
@@ -317,6 +317,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsAnsibleProject_ansibleProjectId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('AnsibleProject', 'ansibleProjectId', false);
+  });
+
+  document.querySelector('#pageSelectSortAnsibleProject_ansibleProjectResource')?.addEventListener('change', (event) => {
+    sort('AnsibleProject', 'ansibleProjectResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsAnsibleProject_ansibleProjectResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AnsibleProject', 'ansibleProjectResource', true);
+  });
+  document.querySelector('#pageStatsAnsibleProject_ansibleProjectResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AnsibleProject', 'ansibleProjectResource', false);
   });
 
   document.querySelector('#pageSelectSortAnsibleProject_aapProjectId')?.addEventListener('change', (event) => {
@@ -437,15 +448,33 @@ Promise.all([
           document.querySelector('#pageFacetRangeEndAnsibleProject_download')?.addEventListener('change', (event) => {
             facetRangeEndChange('AnsibleProject', event.currentTarget);
           });
+          document.querySelector('#fqAnsibleProject_tenantId')?.addEventListener('change', (event) => {
+            fqChange('AnsibleProject', event.currentTarget, facetChangeAnsibleProjectSuccess, facetChangeAnsibleProjectError);
+          });
+          document.querySelector('#buttonFacetAnsibleProject_tenantId')?.addEventListener('click', (event) => {
+            facetFieldChange('AnsibleProject', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotAnsibleProject_tenantId')?.addEventListener('change', (event) => {
+            facetPivotChange('AnsibleProject', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapAnsibleProject_tenantId')?.addEventListener('change', (event) => {
+            facetRangeGapChange('AnsibleProject', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartAnsibleProject_tenantId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('AnsibleProject', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndAnsibleProject_tenantId')?.addEventListener('change', (event) => {
+            facetRangeEndChange('AnsibleProject', event.currentTarget);
+          });
 });
 
   document.querySelector('#htmButton_deleteAnsibleProject')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
-      var ansibleProjectId =  event.currentTarget.getAttribute('data-ansibleProjectId');
+      var ansibleProjectResource =  event.currentTarget.getAttribute('data-ansibleProjectResource');
       deleteAnsibleProject(
           event.currentTarget
-          , ansibleProjectId
+          , ansibleProjectResource
           , function(response, target) { addGlow(target); }
           , function(response, target) { addError(target); }
           );

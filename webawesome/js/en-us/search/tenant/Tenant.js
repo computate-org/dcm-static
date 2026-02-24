@@ -86,6 +86,7 @@ async function websocketTenantInner(apiRequest) {
         var inputTenantId = null;
         var inputTenantDescription = null;
         var inputHostInventoryIds = null;
+        var inputAnsibleProjectIds = null;
         var inputPageId = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
@@ -122,6 +123,8 @@ async function websocketTenantInner(apiRequest) {
           inputTenantDescription = $response.querySelector('.Page_tenantDescription');
         if(vars.includes('hostInventoryIds'))
           inputHostInventoryIds = $response.querySelector('.Page_hostInventoryIds');
+        if(vars.includes('ansibleProjectIds'))
+          inputAnsibleProjectIds = $response.querySelector('.Page_ansibleProjectIds');
         if(vars.includes('pageId'))
           inputPageId = $response.querySelector('.Page_pageId');
         if(vars.includes('classCanonicalName'))
@@ -244,6 +247,16 @@ async function websocketTenantInner(apiRequest) {
               item.textContent = inputHostInventoryIds.textContent;
           });
           addGlow(document.querySelector('.Page_hostInventoryIds'));
+        }
+
+        if(inputAnsibleProjectIds) {
+          document.querySelectorAll('.Page_ansibleProjectIds').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAnsibleProjectIds.getAttribute('value');
+            else
+              item.textContent = inputAnsibleProjectIds.textContent;
+          });
+          addGlow(document.querySelector('.Page_ansibleProjectIds'));
         }
 
         if(inputPageId) {
@@ -619,6 +632,10 @@ function searchTenantFilters($formFilters) {
     if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
       filters.push({ name: 'fq', value: 'hostInventoryIds:' + filterHostInventoryIds });
 
+    var filterAnsibleProjectIds = $formFilters.querySelector('.valueAnsibleProjectIds')?.value;
+    if(filterAnsibleProjectIds != null && filterAnsibleProjectIds !== '')
+      filters.push({ name: 'fq', value: 'ansibleProjectIds:' + filterAnsibleProjectIds });
+
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
       filters.push({ name: 'fq', value: 'pageId:' + filterPageId });
@@ -765,6 +782,55 @@ function suggestTenantHostInventoryIds(filters, $list, tenantResource = null, ho
   searchHostInventoryVals(filters, target, success, error);
 }
 
+function suggestTenantAnsibleProjectIds(filters, $list, tenantResource = null, ansibleProjectIds = null, relate=true, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-excavator"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var val = o['tenantResource'];
+        var checked = val == null ? false : (ansibleProjectIds != null && val === ansibleProjectIds.toString());
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_ansibleProjectIds_' + tenantResource + '_tenantResource_' + o['tenantResource']);
+        $input.setAttribute('name', 'tenantResource');
+        $input.setAttribute('value', o['tenantResource']);
+        $input.setAttribute('class', 'valueAnsibleProjectIds ');
+        if(tenantResource != null) {
+          $input.addEventListener('change', function(event) {
+            patchTenantVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'AnsibleProjectIds']: o['tenantResource'] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestTenantAnsibleProjectIds(filters, $list, tenantResource, o['tenantResource'], relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  searchAnsibleProjectVals(filters, target, success, error);
+}
+
 function suggestTenantObjectSuggest($formFilters, $list, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
@@ -907,6 +973,10 @@ async function patchTenant($formFilters, $formValues, target, tenantResource, su
   var valueHostInventoryIds = (Array.from($formValues.querySelectorAll('.valueHostInventoryIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHostInventoryIds != null && valueHostInventoryIds !== '')
     vals['addHostInventoryIds'] = valueHostInventoryIds;
+
+  var valueAnsibleProjectIds = (Array.from($formValues.querySelectorAll('.valueAnsibleProjectIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueAnsibleProjectIds != null && valueAnsibleProjectIds !== '')
+    vals['addAnsibleProjectIds'] = valueAnsibleProjectIds;
 
   var valuePageId = $formValues.querySelector('.valuePageId')?.value;
   var removePageId = $formValues.querySelector('.removePageId')?.value === 'true';
@@ -1098,6 +1168,10 @@ function patchTenantFilters($formFilters) {
     if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
       filters.push({ name: 'fq', value: 'hostInventoryIds:' + filterHostInventoryIds });
 
+    var filterAnsibleProjectIds = $formFilters.querySelector('.valueAnsibleProjectIds')?.value;
+    if(filterAnsibleProjectIds != null && filterAnsibleProjectIds !== '')
+      filters.push({ name: 'fq', value: 'ansibleProjectIds:' + filterAnsibleProjectIds });
+
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
       filters.push({ name: 'fq', value: 'pageId:' + filterPageId });
@@ -1270,6 +1344,13 @@ async function postTenant($formValues, target, success, error) {
   });
   if(valueHostInventoryIds.length > 0)
     vals['hostInventoryIds'] = valueHostInventoryIds;
+
+  var valueAnsibleProjectIds = [];
+  $formValues.querySelectorAll('input.valueAnsibleProjectIds:checked').forEach(function(index) {
+    valueAnsibleProjectIds.push(this.value);
+  });
+  if(valueAnsibleProjectIds.length > 0)
+    vals['ansibleProjectIds'] = valueAnsibleProjectIds;
 
   var valuePageId = $formValues.querySelector('.valuePageId')?.value;
   if(valuePageId != null && valuePageId !== '')

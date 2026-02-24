@@ -8,7 +8,7 @@ Promise.all([
     ]).then(() => {
 
           // PATCH created
-          document.querySelector('#Page_created')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_created')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_created');
             const valid = form.checkValidity();
             if(valid) {
@@ -29,16 +29,16 @@ Promise.all([
               }
             }
           });
-          document.querySelector('#Page_created')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_created')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_created')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_created')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_created');
             const valid = form.reportValidity();
           });
 
           // PATCH archived
-          document.querySelector('#Page_archived')?.addEventListener('click', (event) => {
+          document.querySelector('#HostCheck_Page_archived')?.addEventListener('click', (event) => {
             const form = document.querySelector('#PageForm_archived');
             const valid = form.checkValidity();
             if(valid) {
@@ -53,16 +53,16 @@ Promise.all([
               }
             }
           });
-          document.querySelector('#Page_archived')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_archived')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_archived')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_archived')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_archived');
             const valid = form.reportValidity();
           });
 
           // PATCH checkName
-          document.querySelector('#Page_checkName')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_checkName')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_checkName');
             const valid = form.checkValidity();
             if(valid) {
@@ -74,16 +74,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_checkName')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_checkName')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_checkName')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_checkName')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_checkName');
             const valid = form.reportValidity();
           });
 
           // PATCH checkNamespace
-          document.querySelector('#Page_checkNamespace')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_checkNamespace')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_checkNamespace');
             const valid = form.checkValidity();
             if(valid) {
@@ -95,16 +95,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_checkNamespace')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_checkNamespace')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_checkNamespace')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_checkNamespace')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_checkNamespace');
             const valid = form.reportValidity();
           });
 
           // PATCH checkCommand
-          document.querySelector('#Page_checkCommand')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_checkCommand')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_checkCommand');
             const valid = form.checkValidity();
             if(valid) {
@@ -116,16 +116,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_checkCommand')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_checkCommand')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_checkCommand')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_checkCommand')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_checkCommand');
             const valid = form.reportValidity();
           });
 
           // PATCH checkInterval
-          document.querySelector('#Page_checkInterval')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_checkInterval')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_checkInterval');
             const valid = form.checkValidity();
             if(valid) {
@@ -137,16 +137,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_checkInterval')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_checkInterval')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_checkInterval')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_checkInterval')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_checkInterval');
             const valid = form.reportValidity();
           });
 
           // PATCH checkPublished
-          document.querySelector('#Page_checkPublished')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_checkPublished')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_checkPublished');
             const valid = form.checkValidity();
             if(valid) {
@@ -158,16 +158,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_checkPublished')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_checkPublished')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_checkPublished')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_checkPublished')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_checkPublished');
             const valid = form.reportValidity();
           });
 
           // PATCH eventSubscriptions
-          document.querySelector('#Page_eventSubscriptions')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_eventSubscriptions')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_eventSubscriptions');
             const valid = form.checkValidity();
             if(valid) {
@@ -179,16 +179,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_eventSubscriptions')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_eventSubscriptions')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_eventSubscriptions')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_eventSubscriptions')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_eventSubscriptions');
             const valid = form.reportValidity();
           });
 
           // PATCH eventHandlers
-          document.querySelector('#Page_eventHandlers')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_eventHandlers')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_eventHandlers');
             const valid = form.checkValidity();
             if(valid) {
@@ -200,16 +200,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_eventHandlers')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_eventHandlers')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_eventHandlers')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_eventHandlers')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_eventHandlers');
             const valid = form.reportValidity();
           });
 
           // PATCH sessionId
-          document.querySelector('#Page_sessionId')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_sessionId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_sessionId');
             const valid = form.checkValidity();
             if(valid) {
@@ -221,16 +221,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_sessionId')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_sessionId')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_sessionId')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_sessionId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_sessionId');
             const valid = form.reportValidity();
           });
 
           // PATCH userKey
-          document.querySelector('#Page_userKey')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_userKey')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_userKey');
             const valid = form.checkValidity();
             if(valid) {
@@ -242,16 +242,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_userKey')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_userKey')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_userKey')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_userKey')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_userKey');
             const valid = form.reportValidity();
           });
 
           // PATCH objectTitle
-          document.querySelector('#Page_objectTitle')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_objectTitle')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.checkValidity();
             if(valid) {
@@ -263,16 +263,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_objectTitle')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_objectTitle')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_objectTitle')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_objectTitle')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.reportValidity();
           });
 
           // PATCH displayPage
-          document.querySelector('#Page_displayPage')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_displayPage')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.checkValidity();
             if(valid) {
@@ -284,16 +284,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_displayPage')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_displayPage')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_displayPage')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_displayPage')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.reportValidity();
           });
 
           // PATCH editPage
-          document.querySelector('#Page_editPage')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_editPage')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.checkValidity();
             if(valid) {
@@ -305,16 +305,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_editPage')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_editPage')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_editPage')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_editPage')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.reportValidity();
           });
 
           // PATCH userPage
-          document.querySelector('#Page_userPage')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_userPage')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.checkValidity();
             if(valid) {
@@ -326,16 +326,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_userPage')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_userPage')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_userPage')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_userPage')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.reportValidity();
           });
 
           // PATCH download
-          document.querySelector('#Page_download')?.addEventListener('change', (event) => {
+          document.querySelector('#HostCheck_Page_download')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_download');
             const valid = form.checkValidity();
             if(valid) {
@@ -347,10 +347,10 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_download')?.addEventListener('focus', (event) => {
+          document.querySelector('#HostCheck_Page_download')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_download')?.addEventListener('blur', (event) => {
+          document.querySelector('#HostCheck_Page_download')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_download');
             const valid = form.reportValidity();
           });

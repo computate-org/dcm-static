@@ -8,7 +8,7 @@ Promise.all([
     ]).then(() => {
 
           // PATCH created
-          document.querySelector('#Page_created')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_created')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_created');
             const valid = form.checkValidity();
             if(valid) {
@@ -29,16 +29,16 @@ Promise.all([
               }
             }
           });
-          document.querySelector('#Page_created')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_created')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_created')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_created')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_created');
             const valid = form.reportValidity();
           });
 
           // PATCH archived
-          document.querySelector('#Page_archived')?.addEventListener('click', (event) => {
+          document.querySelector('#TimeZone_Page_archived')?.addEventListener('click', (event) => {
             const form = document.querySelector('#PageForm_archived');
             const valid = form.checkValidity();
             if(valid) {
@@ -53,16 +53,16 @@ Promise.all([
               }
             }
           });
-          document.querySelector('#Page_archived')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_archived')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_archived')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_archived')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_archived');
             const valid = form.reportValidity();
           });
 
           // PATCH abbreviation
-          document.querySelector('#Page_abbreviation')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_abbreviation')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_abbreviation');
             const valid = form.checkValidity();
             if(valid) {
@@ -74,16 +74,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_abbreviation')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_abbreviation')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_abbreviation')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_abbreviation')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_abbreviation');
             const valid = form.reportValidity();
           });
 
           // PATCH location
-          document.querySelector('#Page_location')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_location')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_location');
             const valid = form.checkValidity();
             if(valid) {
@@ -95,16 +95,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_location')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_location')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_location')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_location')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_location');
             const valid = form.reportValidity();
           });
 
           // PATCH name
-          document.querySelector('#Page_name')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_name')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_name');
             const valid = form.checkValidity();
             if(valid) {
@@ -116,16 +116,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_name')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_name')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_name')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_name')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_name');
             const valid = form.reportValidity();
           });
 
           // PATCH id
-          document.querySelector('#Page_id')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_id')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_id');
             const valid = form.checkValidity();
             if(valid) {
@@ -137,16 +137,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_id')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_id')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_id')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_id')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_id');
             const valid = form.reportValidity();
           });
 
           // PATCH displayPage
-          document.querySelector('#Page_displayPage')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_displayPage')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.checkValidity();
             if(valid) {
@@ -158,16 +158,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_displayPage')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_displayPage')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_displayPage')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_displayPage')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_displayPage');
             const valid = form.reportValidity();
           });
 
           // PATCH objectTitle
-          document.querySelector('#Page_objectTitle')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_objectTitle')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.checkValidity();
             if(valid) {
@@ -179,16 +179,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_objectTitle')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_objectTitle')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_objectTitle')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_objectTitle')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_objectTitle');
             const valid = form.reportValidity();
           });
 
           // PATCH editPage
-          document.querySelector('#Page_editPage')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_editPage')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.checkValidity();
             if(valid) {
@@ -200,16 +200,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_editPage')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_editPage')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_editPage')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_editPage')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_editPage');
             const valid = form.reportValidity();
           });
 
           // PATCH userPage
-          document.querySelector('#Page_userPage')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_userPage')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.checkValidity();
             if(valid) {
@@ -221,16 +221,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_userPage')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_userPage')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_userPage')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_userPage')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_userPage');
             const valid = form.reportValidity();
           });
 
           // PATCH download
-          document.querySelector('#Page_download')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_download')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_download');
             const valid = form.checkValidity();
             if(valid) {
@@ -242,16 +242,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_download')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_download')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_download')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_download')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_download');
             const valid = form.reportValidity();
           });
 
           // PATCH solrId
-          document.querySelector('#Page_solrId')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_solrId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_solrId');
             const valid = form.checkValidity();
             if(valid) {
@@ -263,16 +263,16 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_solrId')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_solrId')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_solrId')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_solrId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_solrId');
             const valid = form.reportValidity();
           });
 
           // PATCH displayName
-          document.querySelector('#Page_displayName')?.addEventListener('change', (event) => {
+          document.querySelector('#TimeZone_Page_displayName')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_displayName');
             const valid = form.checkValidity();
             if(valid) {
@@ -284,10 +284,10 @@ Promise.all([
                   );
             }
           });
-          document.querySelector('#Page_displayName')?.addEventListener('focus', (event) => {
+          document.querySelector('#TimeZone_Page_displayName')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#Page_displayName')?.addEventListener('blur', (event) => {
+          document.querySelector('#TimeZone_Page_displayName')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_displayName');
             const valid = form.reportValidity();
           });

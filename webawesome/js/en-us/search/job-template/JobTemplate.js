@@ -4,25 +4,25 @@ async function websocketJobTemplate(success) {
 
     window.eventBus.registerHandler('websocketJobTemplate', function (error, message) {
       var json = JSON.parse(message['body']);
-      var jobTemplateId = json['id'];
+      var jobTemplateResource = json['id'];
       var solrIds = json['solrIds'];
       var empty = json['empty'];
       var numFound = parseInt(json['numFound']);
       var numPATCH = parseInt(json['numPATCH']);
       var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
       var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + jobTemplateId + ' ');
-      $box.setAttribute('id', 'box-' + jobTemplateId);
+      $box.setAttribute('class', 'w3-quarter box-' + jobTemplateResource + ' ');
+      $box.setAttribute('id', 'box-' + jobTemplateResource);
       $box.setAttribute('data-numPATCH', numPATCH);
       var $margin = document.createElement('div');
       $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + jobTemplateId);
+      $margin.setAttribute('id', 'margin-' + jobTemplateResource);
       var $card = document.createElement('div');
       $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + jobTemplateId);
+      $card.setAttribute('id', 'card-' + jobTemplateResource);
       var $header = document.createElement('div');
       $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + jobTemplateId);
+      $header.setAttribute('id', 'header-' + jobTemplateResource);
       var iTemplate = document.createElement('template');
       iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-excavator"></i>';
       var $i = iTemplate.content;
@@ -31,19 +31,19 @@ async function websocketJobTemplate(success) {
       $headerSpan.innerText = 'modify job templates in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + jobTemplateId + '");');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + jobTemplateResource + '");');
       $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + jobTemplateId);
+      $x.setAttribute('id', 'x-' + jobTemplateResource);
       var $body = document.createElement('div');
       $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + jobTemplateId);
+      $body.setAttribute('id', 'text-' + jobTemplateResource);
       var $bar = document.createElement('div');
       $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + jobTemplateId);
+      $bar.setAttribute('id', 'bar-' + jobTemplateResource);
       var $progress = document.createElement('div');
       $progress.setAttribute('class', 'w3- ');
       $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + jobTemplateId);
+      $progress.setAttribute('id', 'progress-' + jobTemplateResource);
       $progress.innerText = numPATCH + '/' + numFound;
       $card.append($header);
       $header.append($i);
@@ -55,11 +55,11 @@ async function websocketJobTemplate(success) {
       $box.append($margin);
       $margin.append($card);
       if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + jobTemplateId);
+        var $old_box = document.querySelector('.box-' + jobTemplateResource);
       } else {
-        document.querySelector('.box-' + jobTemplateId)?.remove();
+        document.querySelector('.box-' + jobTemplateResource)?.remove();
       }
-      if(jobTemplateId) {
+      if(jobTemplateResource) {
         if(success)
           success(json);
       }
@@ -67,12 +67,12 @@ async function websocketJobTemplate(success) {
   }
 }
 async function websocketJobTemplateInner(apiRequest) {
-  var jobTemplateId = apiRequest['id'];
+  var jobTemplateResource = apiRequest['id'];
   var classes = apiRequest['classes'];
   var vars = apiRequest['vars'];
   var empty = apiRequest['empty'];
 
-  if(jobTemplateId != null && vars.length > 0) {
+  if(jobTemplateResource != null && vars.length > 0) {
     var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
     var uri = location.pathname + queryParams;
     fetch(uri).then(response => {
@@ -82,14 +82,12 @@ async function websocketJobTemplateInner(apiRequest) {
         var inputCreated = null;
         var inputModified = null;
         var inputArchived = null;
-        var inputTenantResource = null;
         var inputInventoryResource = null;
+        var inputAnsibleProjectResource = null;
+        var inputAnsiblePlaybook = null;
         var inputJobTemplateName = null;
         var inputJobTemplateDescription = null;
         var inputJobType = null;
-        var inputOrganizationId = null;
-        var inputAnsibleProjectId = null;
-        var inputAnsiblePlaybook = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -104,11 +102,13 @@ async function websocketJobTemplateInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputTenantResource = null;
         var inputAapOrganizationId = null;
-        var inputAapProjectId = null;
-        var inputAapTemplateId = null;
-        var inputJobTemplateId = null;
         var inputAapInventoryId = null;
+        var inputAapProjectId = null;
+        var inputJobTemplateId = null;
+        var inputJobTemplateResource = null;
+        var inputAapTemplateId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -118,22 +118,18 @@ async function websocketJobTemplateInner(apiRequest) {
           inputModified = $response.querySelector('.Page_modified');
         if(vars.includes('archived'))
           inputArchived = $response.querySelector('.Page_archived');
-        if(vars.includes('tenantResource'))
-          inputTenantResource = $response.querySelector('.Page_tenantResource');
         if(vars.includes('inventoryResource'))
           inputInventoryResource = $response.querySelector('.Page_inventoryResource');
+        if(vars.includes('ansibleProjectResource'))
+          inputAnsibleProjectResource = $response.querySelector('.Page_ansibleProjectResource');
+        if(vars.includes('ansiblePlaybook'))
+          inputAnsiblePlaybook = $response.querySelector('.Page_ansiblePlaybook');
         if(vars.includes('jobTemplateName'))
           inputJobTemplateName = $response.querySelector('.Page_jobTemplateName');
         if(vars.includes('jobTemplateDescription'))
           inputJobTemplateDescription = $response.querySelector('.Page_jobTemplateDescription');
         if(vars.includes('jobType'))
           inputJobType = $response.querySelector('.Page_jobType');
-        if(vars.includes('organizationId'))
-          inputOrganizationId = $response.querySelector('.Page_organizationId');
-        if(vars.includes('ansibleProjectId'))
-          inputAnsibleProjectId = $response.querySelector('.Page_ansibleProjectId');
-        if(vars.includes('ansiblePlaybook'))
-          inputAnsiblePlaybook = $response.querySelector('.Page_ansiblePlaybook');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -162,18 +158,22 @@ async function websocketJobTemplateInner(apiRequest) {
           inputObjectText = $response.querySelector('.Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Page_solrId');
+        if(vars.includes('tenantResource'))
+          inputTenantResource = $response.querySelector('.Page_tenantResource');
         if(vars.includes('aapOrganizationId'))
           inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
-        if(vars.includes('aapProjectId'))
-          inputAapProjectId = $response.querySelector('.Page_aapProjectId');
-        if(vars.includes('aapTemplateId'))
-          inputAapTemplateId = $response.querySelector('.Page_aapTemplateId');
-        if(vars.includes('jobTemplateId'))
-          inputJobTemplateId = $response.querySelector('.Page_jobTemplateId');
         if(vars.includes('aapInventoryId'))
           inputAapInventoryId = $response.querySelector('.Page_aapInventoryId');
+        if(vars.includes('aapProjectId'))
+          inputAapProjectId = $response.querySelector('.Page_aapProjectId');
+        if(vars.includes('jobTemplateId'))
+          inputJobTemplateId = $response.querySelector('.Page_jobTemplateId');
+        if(vars.includes('jobTemplateResource'))
+          inputJobTemplateResource = $response.querySelector('.Page_jobTemplateResource');
+        if(vars.includes('aapTemplateId'))
+          inputAapTemplateId = $response.querySelector('.Page_aapTemplateId');
 
-        jsWebsocketJobTemplate(jobTemplateId, vars, $response);
+        jsWebsocketJobTemplate(jobTemplateResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listJobTemplate = JSON.parse($response.querySelector('.pageForm .listJobTemplate')?.value);
 
@@ -218,16 +218,6 @@ async function websocketJobTemplateInner(apiRequest) {
           addGlow(document.querySelector('.Page_archived'));
         }
 
-        if(inputTenantResource) {
-          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantResource.getAttribute('value');
-            else
-              item.textContent = inputTenantResource.textContent;
-          });
-          addGlow(document.querySelector('.Page_tenantResource'));
-        }
-
         if(inputInventoryResource) {
           document.querySelectorAll('.Page_inventoryResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -236,6 +226,26 @@ async function websocketJobTemplateInner(apiRequest) {
               item.textContent = inputInventoryResource.textContent;
           });
           addGlow(document.querySelector('.Page_inventoryResource'));
+        }
+
+        if(inputAnsibleProjectResource) {
+          document.querySelectorAll('.Page_ansibleProjectResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAnsibleProjectResource.getAttribute('value');
+            else
+              item.textContent = inputAnsibleProjectResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_ansibleProjectResource'));
+        }
+
+        if(inputAnsiblePlaybook) {
+          document.querySelectorAll('.Page_ansiblePlaybook').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAnsiblePlaybook.getAttribute('value');
+            else
+              item.textContent = inputAnsiblePlaybook.textContent;
+          });
+          addGlow(document.querySelector('.Page_ansiblePlaybook'));
         }
 
         if(inputJobTemplateName) {
@@ -266,36 +276,6 @@ async function websocketJobTemplateInner(apiRequest) {
               item.textContent = inputJobType.textContent;
           });
           addGlow(document.querySelector('.Page_jobType'));
-        }
-
-        if(inputOrganizationId) {
-          document.querySelectorAll('.Page_organizationId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputOrganizationId.getAttribute('value');
-            else
-              item.textContent = inputOrganizationId.textContent;
-          });
-          addGlow(document.querySelector('.Page_organizationId'));
-        }
-
-        if(inputAnsibleProjectId) {
-          document.querySelectorAll('.Page_ansibleProjectId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAnsibleProjectId.getAttribute('value');
-            else
-              item.textContent = inputAnsibleProjectId.textContent;
-          });
-          addGlow(document.querySelector('.Page_ansibleProjectId'));
-        }
-
-        if(inputAnsiblePlaybook) {
-          document.querySelectorAll('.Page_ansiblePlaybook').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAnsiblePlaybook.getAttribute('value');
-            else
-              item.textContent = inputAnsiblePlaybook.textContent;
-          });
-          addGlow(document.querySelector('.Page_ansiblePlaybook'));
         }
 
         if(inputClassCanonicalName) {
@@ -438,6 +418,16 @@ async function websocketJobTemplateInner(apiRequest) {
           addGlow(document.querySelector('.Page_solrId'));
         }
 
+        if(inputTenantResource) {
+          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantResource.getAttribute('value');
+            else
+              item.textContent = inputTenantResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_tenantResource'));
+        }
+
         if(inputAapOrganizationId) {
           document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -446,6 +436,16 @@ async function websocketJobTemplateInner(apiRequest) {
               item.textContent = inputAapOrganizationId.textContent;
           });
           addGlow(document.querySelector('.Page_aapOrganizationId'));
+        }
+
+        if(inputAapInventoryId) {
+          document.querySelectorAll('.Page_aapInventoryId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapInventoryId.getAttribute('value');
+            else
+              item.textContent = inputAapInventoryId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapInventoryId'));
         }
 
         if(inputAapProjectId) {
@@ -458,16 +458,6 @@ async function websocketJobTemplateInner(apiRequest) {
           addGlow(document.querySelector('.Page_aapProjectId'));
         }
 
-        if(inputAapTemplateId) {
-          document.querySelectorAll('.Page_aapTemplateId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapTemplateId.getAttribute('value');
-            else
-              item.textContent = inputAapTemplateId.textContent;
-          });
-          addGlow(document.querySelector('.Page_aapTemplateId'));
-        }
-
         if(inputJobTemplateId) {
           document.querySelectorAll('.Page_jobTemplateId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -478,14 +468,24 @@ async function websocketJobTemplateInner(apiRequest) {
           addGlow(document.querySelector('.Page_jobTemplateId'));
         }
 
-        if(inputAapInventoryId) {
-          document.querySelectorAll('.Page_aapInventoryId').forEach((item, index) => {
+        if(inputJobTemplateResource) {
+          document.querySelectorAll('.Page_jobTemplateResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
-              item.value = inputAapInventoryId.getAttribute('value');
+              item.value = inputJobTemplateResource.getAttribute('value');
             else
-              item.textContent = inputAapInventoryId.textContent;
+              item.textContent = inputJobTemplateResource.textContent;
           });
-          addGlow(document.querySelector('.Page_aapInventoryId'));
+          addGlow(document.querySelector('.Page_jobTemplateResource'));
+        }
+
+        if(inputAapTemplateId) {
+          document.querySelectorAll('.Page_aapTemplateId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapTemplateId.getAttribute('value');
+            else
+              item.textContent = inputAapTemplateId.textContent;
+          });
+          addGlow(document.querySelector('.Page_aapTemplateId'));
         }
 
           pageGraphJobTemplate();
@@ -655,13 +655,17 @@ function searchJobTemplateFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
-
     var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
     if(filterInventoryResource != null && filterInventoryResource !== '')
       filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
+
+    var filterAnsibleProjectResource = $formFilters.querySelector('.valueAnsibleProjectResource')?.value;
+    if(filterAnsibleProjectResource != null && filterAnsibleProjectResource !== '')
+      filters.push({ name: 'fq', value: 'ansibleProjectResource:' + filterAnsibleProjectResource });
+
+    var filterAnsiblePlaybook = $formFilters.querySelector('.valueAnsiblePlaybook')?.value;
+    if(filterAnsiblePlaybook != null && filterAnsiblePlaybook !== '')
+      filters.push({ name: 'fq', value: 'ansiblePlaybook:' + filterAnsiblePlaybook });
 
     var filterJobTemplateName = $formFilters.querySelector('.valueJobTemplateName')?.value;
     if(filterJobTemplateName != null && filterJobTemplateName !== '')
@@ -674,18 +678,6 @@ function searchJobTemplateFilters($formFilters) {
     var filterJobType = $formFilters.querySelector('.valueJobType')?.value;
     if(filterJobType != null && filterJobType !== '')
       filters.push({ name: 'fq', value: 'jobType:' + filterJobType });
-
-    var filterOrganizationId = $formFilters.querySelector('.valueOrganizationId')?.value;
-    if(filterOrganizationId != null && filterOrganizationId !== '')
-      filters.push({ name: 'fq', value: 'organizationId:' + filterOrganizationId });
-
-    var filterAnsibleProjectId = $formFilters.querySelector('.valueAnsibleProjectId')?.value;
-    if(filterAnsibleProjectId != null && filterAnsibleProjectId !== '')
-      filters.push({ name: 'fq', value: 'ansibleProjectId:' + filterAnsibleProjectId });
-
-    var filterAnsiblePlaybook = $formFilters.querySelector('.valueAnsiblePlaybook')?.value;
-    if(filterAnsiblePlaybook != null && filterAnsiblePlaybook !== '')
-      filters.push({ name: 'fq', value: 'ansiblePlaybook:' + filterAnsiblePlaybook });
 
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
@@ -743,25 +735,33 @@ function searchJobTemplateFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+
     var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
     if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
       filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
+    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
+    if(filterAapInventoryId != null && filterAapInventoryId !== '')
+      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
 
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
       filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
 
-    var filterAapTemplateId = $formFilters.querySelector('.valueAapTemplateId')?.value;
-    if(filterAapTemplateId != null && filterAapTemplateId !== '')
-      filters.push({ name: 'fq', value: 'aapTemplateId:' + filterAapTemplateId });
-
     var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
     if(filterJobTemplateId != null && filterJobTemplateId !== '')
       filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
 
-    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
-    if(filterAapInventoryId != null && filterAapInventoryId !== '')
-      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
+    var filterJobTemplateResource = $formFilters.querySelector('.valueJobTemplateResource')?.value;
+    if(filterJobTemplateResource != null && filterJobTemplateResource !== '')
+      filters.push({ name: 'fq', value: 'jobTemplateResource:' + filterJobTemplateResource });
+
+    var filterAapTemplateId = $formFilters.querySelector('.valueAapTemplateId')?.value;
+    if(filterAapTemplateId != null && filterAapTemplateId !== '')
+      filters.push({ name: 'fq', value: 'aapTemplateId:' + filterAapTemplateId });
   }
   return filters;
 }
@@ -785,7 +785,7 @@ function searchJobTemplateVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestJobTemplateTenantResource(filters, $list, jobTemplateId = null, tenantResource = null, relate=true, target) {
+function suggestJobTemplateTenantResource(filters, $list, jobTemplateResource = null, tenantResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -804,17 +804,17 @@ function suggestJobTemplateTenantResource(filters, $list, jobTemplateId = null, 
         var val = o['tenantResource'];
         var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + jobTemplateId + '_tenantResource_' + o['tenantResource']);
+        $input.setAttribute('id', 'GET_tenantResource_' + jobTemplateResource + '_tenantResource_' + o['tenantResource']);
         $input.setAttribute('name', 'tenantResource');
         $input.setAttribute('value', o['tenantResource']);
         $input.setAttribute('class', 'valueTenantResource ');
-        if(jobTemplateId != null) {
+        if(jobTemplateResource != null) {
           $input.addEventListener('change', function(event) {
-            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateId:' + jobTemplateId }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateResource:' + jobTemplateResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestJobTemplateTenantResource(filters, $list, jobTemplateId, o['tenantResource'], relate, target);
+                  suggestJobTemplateTenantResource(filters, $list, jobTemplateResource, o['tenantResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -834,7 +834,7 @@ function suggestJobTemplateTenantResource(filters, $list, jobTemplateId = null, 
   searchTenantVals(filters, target, success, error);
 }
 
-function suggestJobTemplateInventoryResource(filters, $list, jobTemplateId = null, inventoryResource = null, relate=true, target) {
+function suggestJobTemplateInventoryResource(filters, $list, jobTemplateResource = null, inventoryResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -853,17 +853,17 @@ function suggestJobTemplateInventoryResource(filters, $list, jobTemplateId = nul
         var val = o['inventoryResource'];
         var checked = val == null ? false : (inventoryResource != null && val === inventoryResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_inventoryResource_' + jobTemplateId + '_inventoryResource_' + o['inventoryResource']);
+        $input.setAttribute('id', 'GET_inventoryResource_' + jobTemplateResource + '_inventoryResource_' + o['inventoryResource']);
         $input.setAttribute('name', 'inventoryResource');
         $input.setAttribute('value', o['inventoryResource']);
         $input.setAttribute('class', 'valueInventoryResource ');
-        if(jobTemplateId != null) {
+        if(jobTemplateResource != null) {
           $input.addEventListener('change', function(event) {
-            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateId:' + jobTemplateId }], { [(event.target.checked ? 'set' : 'remove') + 'InventoryResource']: o['inventoryResource'] }
+            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateResource:' + jobTemplateResource }], { [(event.target.checked ? 'set' : 'remove') + 'InventoryResource']: o['inventoryResource'] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestJobTemplateInventoryResource(filters, $list, jobTemplateId, o['inventoryResource'], relate, target);
+                  suggestJobTemplateInventoryResource(filters, $list, jobTemplateResource, o['inventoryResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -883,7 +883,7 @@ function suggestJobTemplateInventoryResource(filters, $list, jobTemplateId = nul
   searchHostInventoryVals(filters, target, success, error);
 }
 
-function suggestJobTemplateAnsibleProjectId(filters, $list, jobTemplateId = null, ansibleProjectId = null, relate=true, target) {
+function suggestJobTemplateAnsibleProjectResource(filters, $list, jobTemplateResource = null, ansibleProjectResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -899,20 +899,20 @@ function suggestJobTemplateAnsibleProjectId(filters, $list, jobTemplateId = null
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['ansibleProjectId'];
-        var checked = val == null ? false : (ansibleProjectId != null && val === ansibleProjectId.toString());
+        var val = o['ansibleProjectResource'];
+        var checked = val == null ? false : (ansibleProjectResource != null && val === ansibleProjectResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_ansibleProjectId_' + jobTemplateId + '_ansibleProjectId_' + o['ansibleProjectId']);
-        $input.setAttribute('name', 'ansibleProjectId');
-        $input.setAttribute('value', o['ansibleProjectId']);
-        $input.setAttribute('class', 'valueAnsibleProjectId ');
-        if(jobTemplateId != null) {
+        $input.setAttribute('id', 'GET_ansibleProjectResource_' + jobTemplateResource + '_ansibleProjectResource_' + o['ansibleProjectResource']);
+        $input.setAttribute('name', 'ansibleProjectResource');
+        $input.setAttribute('value', o['ansibleProjectResource']);
+        $input.setAttribute('class', 'valueAnsibleProjectResource ');
+        if(jobTemplateResource != null) {
           $input.addEventListener('change', function(event) {
-            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateId:' + jobTemplateId }], { [(event.target.checked ? 'set' : 'remove') + 'AnsibleProjectId']: o['ansibleProjectId'] }
+            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateResource:' + jobTemplateResource }], { [(event.target.checked ? 'set' : 'remove') + 'AnsibleProjectResource']: o['ansibleProjectResource'] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestJobTemplateAnsibleProjectId(filters, $list, jobTemplateId, o['ansibleProjectId'], relate, target);
+                  suggestJobTemplateAnsibleProjectResource(filters, $list, jobTemplateResource, o['ansibleProjectResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -958,7 +958,7 @@ function suggestJobTemplateObjectSuggest($formFilters, $list, target) {
 
 async function getJobTemplate(pk) {
   fetch(
-    '/en-us/api/job-template/' + jobTemplateId
+    '/en-us/api/job-template/' + jobTemplateResource
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -975,7 +975,7 @@ async function getJobTemplate(pk) {
 
 // PATCH //
 
-async function patchJobTemplate($formFilters, $formValues, target, jobTemplateId, success, error) {
+async function patchJobTemplate($formFilters, $formValues, target, jobTemplateResource, success, error) {
   var filters = patchJobTemplateFilters($formFilters);
 
   var vals = {};
@@ -1035,13 +1035,25 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateId
   if(removeArchived != null && removeArchived !== '')
     vals['removeArchived'] = removeArchived;
 
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['setTenantResource'] = valueTenantResource;
-
   var valueInventoryResource = (Array.from($formValues.querySelectorAll('.valueInventoryResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueInventoryResource != null && valueInventoryResource !== '')
     vals['setInventoryResource'] = valueInventoryResource;
+
+  var valueAnsibleProjectResource = (Array.from($formValues.querySelectorAll('.valueAnsibleProjectResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueAnsibleProjectResource != null && valueAnsibleProjectResource !== '')
+    vals['setAnsibleProjectResource'] = valueAnsibleProjectResource;
+
+  var valueAnsiblePlaybook = $formValues.querySelector('.valueAnsiblePlaybook')?.value;
+  var removeAnsiblePlaybook = $formValues.querySelector('.removeAnsiblePlaybook')?.value === 'true';
+  var setAnsiblePlaybook = removeAnsiblePlaybook ? null : $formValues.querySelector('.setAnsiblePlaybook')?.value;
+  var addAnsiblePlaybook = $formValues.querySelector('.addAnsiblePlaybook')?.value;
+  if(removeAnsiblePlaybook || setAnsiblePlaybook != null && setAnsiblePlaybook !== '')
+    vals['setAnsiblePlaybook'] = setAnsiblePlaybook;
+  if(addAnsiblePlaybook != null && addAnsiblePlaybook !== '')
+    vals['addAnsiblePlaybook'] = addAnsiblePlaybook;
+  var removeAnsiblePlaybook = $formValues.querySelector('.removeAnsiblePlaybook')?.value;
+  if(removeAnsiblePlaybook != null && removeAnsiblePlaybook !== '')
+    vals['removeAnsiblePlaybook'] = removeAnsiblePlaybook;
 
   var valueJobTemplateName = $formValues.querySelector('.valueJobTemplateName')?.value;
   var removeJobTemplateName = $formValues.querySelector('.removeJobTemplateName')?.value === 'true';
@@ -1078,34 +1090,6 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateId
   var removeJobType = $formValues.querySelector('.removeJobType')?.value;
   if(removeJobType != null && removeJobType !== '')
     vals['removeJobType'] = removeJobType;
-
-  var valueOrganizationId = $formValues.querySelector('.valueOrganizationId')?.value;
-  var removeOrganizationId = $formValues.querySelector('.removeOrganizationId')?.value === 'true';
-  var setOrganizationId = removeOrganizationId ? null : $formValues.querySelector('.setOrganizationId')?.value;
-  var addOrganizationId = $formValues.querySelector('.addOrganizationId')?.value;
-  if(removeOrganizationId || setOrganizationId != null && setOrganizationId !== '')
-    vals['setOrganizationId'] = setOrganizationId;
-  if(addOrganizationId != null && addOrganizationId !== '')
-    vals['addOrganizationId'] = addOrganizationId;
-  var removeOrganizationId = $formValues.querySelector('.removeOrganizationId')?.value;
-  if(removeOrganizationId != null && removeOrganizationId !== '')
-    vals['removeOrganizationId'] = removeOrganizationId;
-
-  var valueAnsibleProjectId = (Array.from($formValues.querySelectorAll('.valueAnsibleProjectId')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueAnsibleProjectId != null && valueAnsibleProjectId !== '')
-    vals['setAnsibleProjectId'] = valueAnsibleProjectId;
-
-  var valueAnsiblePlaybook = $formValues.querySelector('.valueAnsiblePlaybook')?.value;
-  var removeAnsiblePlaybook = $formValues.querySelector('.removeAnsiblePlaybook')?.value === 'true';
-  var setAnsiblePlaybook = removeAnsiblePlaybook ? null : $formValues.querySelector('.setAnsiblePlaybook')?.value;
-  var addAnsiblePlaybook = $formValues.querySelector('.addAnsiblePlaybook')?.value;
-  if(removeAnsiblePlaybook || setAnsiblePlaybook != null && setAnsiblePlaybook !== '')
-    vals['setAnsiblePlaybook'] = setAnsiblePlaybook;
-  if(addAnsiblePlaybook != null && addAnsiblePlaybook !== '')
-    vals['addAnsiblePlaybook'] = addAnsiblePlaybook;
-  var removeAnsiblePlaybook = $formValues.querySelector('.removeAnsiblePlaybook')?.value;
-  if(removeAnsiblePlaybook != null && removeAnsiblePlaybook !== '')
-    vals['removeAnsiblePlaybook'] = removeAnsiblePlaybook;
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
@@ -1191,6 +1175,10 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateId
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
+  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueTenantResource != null && valueTenantResource !== '')
+    vals['setTenantResource'] = valueTenantResource;
+
   var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
   var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
   var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
@@ -1202,42 +1190,6 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateId
   var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
   if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
     vals['removeAapOrganizationId'] = removeAapOrganizationId;
-
-  var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
-  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value === 'true';
-  var setAapProjectId = removeAapProjectId ? null : $formValues.querySelector('.setAapProjectId')?.value;
-  var addAapProjectId = $formValues.querySelector('.addAapProjectId')?.value;
-  if(removeAapProjectId || setAapProjectId != null && setAapProjectId !== '')
-    vals['setAapProjectId'] = setAapProjectId;
-  if(addAapProjectId != null && addAapProjectId !== '')
-    vals['addAapProjectId'] = addAapProjectId;
-  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value;
-  if(removeAapProjectId != null && removeAapProjectId !== '')
-    vals['removeAapProjectId'] = removeAapProjectId;
-
-  var valueAapTemplateId = $formValues.querySelector('.valueAapTemplateId')?.value;
-  var removeAapTemplateId = $formValues.querySelector('.removeAapTemplateId')?.value === 'true';
-  var setAapTemplateId = removeAapTemplateId ? null : $formValues.querySelector('.setAapTemplateId')?.value;
-  var addAapTemplateId = $formValues.querySelector('.addAapTemplateId')?.value;
-  if(removeAapTemplateId || setAapTemplateId != null && setAapTemplateId !== '')
-    vals['setAapTemplateId'] = setAapTemplateId;
-  if(addAapTemplateId != null && addAapTemplateId !== '')
-    vals['addAapTemplateId'] = addAapTemplateId;
-  var removeAapTemplateId = $formValues.querySelector('.removeAapTemplateId')?.value;
-  if(removeAapTemplateId != null && removeAapTemplateId !== '')
-    vals['removeAapTemplateId'] = removeAapTemplateId;
-
-  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
-  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value === 'true';
-  var setJobTemplateId = removeJobTemplateId ? null : $formValues.querySelector('.setJobTemplateId')?.value;
-  var addJobTemplateId = $formValues.querySelector('.addJobTemplateId')?.value;
-  if(removeJobTemplateId || setJobTemplateId != null && setJobTemplateId !== '')
-    vals['setJobTemplateId'] = setJobTemplateId;
-  if(addJobTemplateId != null && addJobTemplateId !== '')
-    vals['addJobTemplateId'] = addJobTemplateId;
-  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value;
-  if(removeJobTemplateId != null && removeJobTemplateId !== '')
-    vals['removeJobTemplateId'] = removeJobTemplateId;
 
   var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
   var removeAapInventoryId = $formValues.querySelector('.removeAapInventoryId')?.value === 'true';
@@ -1251,7 +1203,55 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateId
   if(removeAapInventoryId != null && removeAapInventoryId !== '')
     vals['removeAapInventoryId'] = removeAapInventoryId;
 
-  patchJobTemplateVals(jobTemplateId == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'jobTemplateId:' + jobTemplateId}], vals, target, success, error);
+  var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
+  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value === 'true';
+  var setAapProjectId = removeAapProjectId ? null : $formValues.querySelector('.setAapProjectId')?.value;
+  var addAapProjectId = $formValues.querySelector('.addAapProjectId')?.value;
+  if(removeAapProjectId || setAapProjectId != null && setAapProjectId !== '')
+    vals['setAapProjectId'] = setAapProjectId;
+  if(addAapProjectId != null && addAapProjectId !== '')
+    vals['addAapProjectId'] = addAapProjectId;
+  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value;
+  if(removeAapProjectId != null && removeAapProjectId !== '')
+    vals['removeAapProjectId'] = removeAapProjectId;
+
+  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
+  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value === 'true';
+  var setJobTemplateId = removeJobTemplateId ? null : $formValues.querySelector('.setJobTemplateId')?.value;
+  var addJobTemplateId = $formValues.querySelector('.addJobTemplateId')?.value;
+  if(removeJobTemplateId || setJobTemplateId != null && setJobTemplateId !== '')
+    vals['setJobTemplateId'] = setJobTemplateId;
+  if(addJobTemplateId != null && addJobTemplateId !== '')
+    vals['addJobTemplateId'] = addJobTemplateId;
+  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value;
+  if(removeJobTemplateId != null && removeJobTemplateId !== '')
+    vals['removeJobTemplateId'] = removeJobTemplateId;
+
+  var valueJobTemplateResource = $formValues.querySelector('.valueJobTemplateResource')?.value;
+  var removeJobTemplateResource = $formValues.querySelector('.removeJobTemplateResource')?.value === 'true';
+  var setJobTemplateResource = removeJobTemplateResource ? null : $formValues.querySelector('.setJobTemplateResource')?.value;
+  var addJobTemplateResource = $formValues.querySelector('.addJobTemplateResource')?.value;
+  if(removeJobTemplateResource || setJobTemplateResource != null && setJobTemplateResource !== '')
+    vals['setJobTemplateResource'] = setJobTemplateResource;
+  if(addJobTemplateResource != null && addJobTemplateResource !== '')
+    vals['addJobTemplateResource'] = addJobTemplateResource;
+  var removeJobTemplateResource = $formValues.querySelector('.removeJobTemplateResource')?.value;
+  if(removeJobTemplateResource != null && removeJobTemplateResource !== '')
+    vals['removeJobTemplateResource'] = removeJobTemplateResource;
+
+  var valueAapTemplateId = $formValues.querySelector('.valueAapTemplateId')?.value;
+  var removeAapTemplateId = $formValues.querySelector('.removeAapTemplateId')?.value === 'true';
+  var setAapTemplateId = removeAapTemplateId ? null : $formValues.querySelector('.setAapTemplateId')?.value;
+  var addAapTemplateId = $formValues.querySelector('.addAapTemplateId')?.value;
+  if(removeAapTemplateId || setAapTemplateId != null && setAapTemplateId !== '')
+    vals['setAapTemplateId'] = setAapTemplateId;
+  if(addAapTemplateId != null && addAapTemplateId !== '')
+    vals['addAapTemplateId'] = addAapTemplateId;
+  var removeAapTemplateId = $formValues.querySelector('.removeAapTemplateId')?.value;
+  if(removeAapTemplateId != null && removeAapTemplateId !== '')
+    vals['removeAapTemplateId'] = removeAapTemplateId;
+
+  patchJobTemplateVals(jobTemplateResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'jobTemplateResource:' + jobTemplateResource}], vals, target, success, error);
 }
 
 function patchJobTemplateFilters($formFilters) {
@@ -1281,13 +1281,17 @@ function patchJobTemplateFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
-
     var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
     if(filterInventoryResource != null && filterInventoryResource !== '')
       filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
+
+    var filterAnsibleProjectResource = $formFilters.querySelector('.valueAnsibleProjectResource')?.value;
+    if(filterAnsibleProjectResource != null && filterAnsibleProjectResource !== '')
+      filters.push({ name: 'fq', value: 'ansibleProjectResource:' + filterAnsibleProjectResource });
+
+    var filterAnsiblePlaybook = $formFilters.querySelector('.valueAnsiblePlaybook')?.value;
+    if(filterAnsiblePlaybook != null && filterAnsiblePlaybook !== '')
+      filters.push({ name: 'fq', value: 'ansiblePlaybook:' + filterAnsiblePlaybook });
 
     var filterJobTemplateName = $formFilters.querySelector('.valueJobTemplateName')?.value;
     if(filterJobTemplateName != null && filterJobTemplateName !== '')
@@ -1300,18 +1304,6 @@ function patchJobTemplateFilters($formFilters) {
     var filterJobType = $formFilters.querySelector('.valueJobType')?.value;
     if(filterJobType != null && filterJobType !== '')
       filters.push({ name: 'fq', value: 'jobType:' + filterJobType });
-
-    var filterOrganizationId = $formFilters.querySelector('.valueOrganizationId')?.value;
-    if(filterOrganizationId != null && filterOrganizationId !== '')
-      filters.push({ name: 'fq', value: 'organizationId:' + filterOrganizationId });
-
-    var filterAnsibleProjectId = $formFilters.querySelector('.valueAnsibleProjectId')?.value;
-    if(filterAnsibleProjectId != null && filterAnsibleProjectId !== '')
-      filters.push({ name: 'fq', value: 'ansibleProjectId:' + filterAnsibleProjectId });
-
-    var filterAnsiblePlaybook = $formFilters.querySelector('.valueAnsiblePlaybook')?.value;
-    if(filterAnsiblePlaybook != null && filterAnsiblePlaybook !== '')
-      filters.push({ name: 'fq', value: 'ansiblePlaybook:' + filterAnsiblePlaybook });
 
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
@@ -1369,25 +1361,33 @@ function patchJobTemplateFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+
     var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
     if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
       filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
+    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
+    if(filterAapInventoryId != null && filterAapInventoryId !== '')
+      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
 
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
       filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
 
-    var filterAapTemplateId = $formFilters.querySelector('.valueAapTemplateId')?.value;
-    if(filterAapTemplateId != null && filterAapTemplateId !== '')
-      filters.push({ name: 'fq', value: 'aapTemplateId:' + filterAapTemplateId });
-
     var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
     if(filterJobTemplateId != null && filterJobTemplateId !== '')
       filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
 
-    var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
-    if(filterAapInventoryId != null && filterAapInventoryId !== '')
-      filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
+    var filterJobTemplateResource = $formFilters.querySelector('.valueJobTemplateResource')?.value;
+    if(filterJobTemplateResource != null && filterJobTemplateResource !== '')
+      filters.push({ name: 'fq', value: 'jobTemplateResource:' + filterJobTemplateResource });
+
+    var filterAapTemplateId = $formFilters.querySelector('.valueAapTemplateId')?.value;
+    if(filterAapTemplateId != null && filterAapTemplateId !== '')
+      filters.push({ name: 'fq', value: 'aapTemplateId:' + filterAapTemplateId });
   }
   return filters;
 }
@@ -1467,13 +1467,17 @@ async function postJobTemplate($formValues, target, success, error) {
   if(valueArchived != null && valueArchived !== '')
     vals['archived'] = valueArchived == 'true';
 
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['tenantResource'] = valueTenantResource;
-
   var valueInventoryResource = (Array.from($formValues.querySelectorAll('.valueInventoryResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueInventoryResource != null && valueInventoryResource !== '')
     vals['inventoryResource'] = valueInventoryResource;
+
+  var valueAnsibleProjectResource = (Array.from($formValues.querySelectorAll('.valueAnsibleProjectResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueAnsibleProjectResource != null && valueAnsibleProjectResource !== '')
+    vals['ansibleProjectResource'] = valueAnsibleProjectResource;
+
+  var valueAnsiblePlaybook = $formValues.querySelector('.valueAnsiblePlaybook')?.value;
+  if(valueAnsiblePlaybook != null && valueAnsiblePlaybook !== '')
+    vals['ansiblePlaybook'] = valueAnsiblePlaybook;
 
   var valueJobTemplateName = $formValues.querySelector('.valueJobTemplateName')?.value;
   if(valueJobTemplateName != null && valueJobTemplateName !== '')
@@ -1486,18 +1490,6 @@ async function postJobTemplate($formValues, target, success, error) {
   var valueJobType = $formValues.querySelector('.valueJobType')?.value;
   if(valueJobType != null && valueJobType !== '')
     vals['jobType'] = valueJobType;
-
-  var valueOrganizationId = $formValues.querySelector('.valueOrganizationId')?.value;
-  if(valueOrganizationId != null && valueOrganizationId !== '')
-    vals['organizationId'] = valueOrganizationId;
-
-  var valueAnsibleProjectId = (Array.from($formValues.querySelectorAll('.valueAnsibleProjectId')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueAnsibleProjectId != null && valueAnsibleProjectId !== '')
-    vals['ansibleProjectId'] = valueAnsibleProjectId;
-
-  var valueAnsiblePlaybook = $formValues.querySelector('.valueAnsiblePlaybook')?.value;
-  if(valueAnsiblePlaybook != null && valueAnsiblePlaybook !== '')
-    vals['ansiblePlaybook'] = valueAnsiblePlaybook;
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')
@@ -1527,25 +1519,33 @@ async function postJobTemplate($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
+  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueTenantResource != null && valueTenantResource !== '')
+    vals['tenantResource'] = valueTenantResource;
+
   var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
   if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
     vals['aapOrganizationId'] = valueAapOrganizationId;
+
+  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
+  if(valueAapInventoryId != null && valueAapInventoryId !== '')
+    vals['aapInventoryId'] = valueAapInventoryId;
 
   var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
   if(valueAapProjectId != null && valueAapProjectId !== '')
     vals['aapProjectId'] = valueAapProjectId;
 
-  var valueAapTemplateId = $formValues.querySelector('.valueAapTemplateId')?.value;
-  if(valueAapTemplateId != null && valueAapTemplateId !== '')
-    vals['aapTemplateId'] = valueAapTemplateId;
-
   var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
   if(valueJobTemplateId != null && valueJobTemplateId !== '')
     vals['jobTemplateId'] = valueJobTemplateId;
 
-  var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
-  if(valueAapInventoryId != null && valueAapInventoryId !== '')
-    vals['aapInventoryId'] = valueAapInventoryId;
+  var valueJobTemplateResource = $formValues.querySelector('.valueJobTemplateResource')?.value;
+  if(valueJobTemplateResource != null && valueJobTemplateResource !== '')
+    vals['jobTemplateResource'] = valueJobTemplateResource;
+
+  var valueAapTemplateId = $formValues.querySelector('.valueAapTemplateId')?.value;
+  if(valueAapTemplateId != null && valueAapTemplateId !== '')
+    vals['aapTemplateId'] = valueAapTemplateId;
 
   fetch(
     '/en-us/api/job-template'
@@ -1586,7 +1586,7 @@ function postJobTemplateVals(vals, target, success, error) {
 
 // DELETE //
 
-async function deleteJobTemplate(target, jobTemplateId, success, error) {
+async function deleteJobTemplate(target, jobTemplateResource, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1618,7 +1618,7 @@ async function deleteJobTemplate(target, jobTemplateId, success, error) {
   }
 
   fetch(
-    '/en-us/api/job-template/' + encodeURIComponent(jobTemplateId)
+    '/en-us/api/job-template/' + encodeURIComponent(jobTemplateResource)
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -1634,7 +1634,7 @@ async function deleteJobTemplate(target, jobTemplateId, success, error) {
 
 // PUTImport //
 
-async function putimportJobTemplate($formValues, target, jobTemplateId, success, error) {
+async function putimportJobTemplate($formValues, target, jobTemplateResource, success, error) {
   var json = $formValues.querySelector('.PUTImport_searchList')?.value;
   if(json != null && json !== '')
     putimportJobTemplateVals(JSON.parse(json), target, success, error);

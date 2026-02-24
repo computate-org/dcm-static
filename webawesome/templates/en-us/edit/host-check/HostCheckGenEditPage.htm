@@ -148,21 +148,23 @@
         {% if result.checkName is defined %}
           function relate_tenantResource(event) {
             suggestHostCheckTenantResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , window.result.checkName
-                , window.result.tenantResource
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.checkName : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
                 , true
                 );
           }
-          document.querySelector('#POST_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#Page_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#HostCheck_POST_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#HostCheck_POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#HostCheck_PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#HostCheck_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#HostCheck_Page_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#HostCheck_Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#Tenant_POST_checkName')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#Tenant_POST_checkName')?.addEventListener('focus', relate_tenantResource);
           {% if "PATCH" in scopes %}
           suggestHostCheckTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostCheckTenantResource_Page'), window.result.checkName, window.result.tenantResource, true);
           {% else %}
@@ -264,6 +266,15 @@
           event.preventDefault();
           deletefilterHostCheck(event.target);
           return false;
+        });
+
+        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+          event.preventDefault();
+          postTenant(document.querySelector('#htmForm_postTenant')
+              , document.querySelector('#htmFormButton_postTenant')
+              , (json, target) => {
+                addGlow(target);
+              });
         });
 {%- block htmScriptInitHostCheckPage %}{%- endblock htmScriptInitHostCheckPage %}
       });

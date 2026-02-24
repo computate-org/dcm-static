@@ -28,7 +28,7 @@
                 stats
               </wa-button>
               {% endif %}
-              <wa-button class="SearchButtons_Api SearchButtons_Api_JobTemplate " variant="brand" href="{{ apiUri }}{% if result.jobTemplateId is defined %}/{{ result.jobTemplateId }}{% else %}{{ queryStr }}{% endif %}">
+              <wa-button class="SearchButtons_Api SearchButtons_Api_JobTemplate " variant="brand" href="{{ apiUri }}{% if result.jobTemplateResource is defined %}/{{ result.jobTemplateResource }}{% else %}{{ queryStr }}{% endif %}">
                 <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-brackets-curly hover-box-shadow "></i> 
                 API
               </wa-button>

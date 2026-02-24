@@ -1,7 +1,7 @@
 
-{%- macro htmButton_patchSiteUser() %}<wa-button variant="brand" id="htmButton_patchSiteUser" data-userId={{ result.userId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchSiteUser() %}<wa-button variant="brand" id="htmButton_patchSiteUser"  data-dialog="open patchSiteUserDialog" data-userId={{ result.userId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
-{%- macro htmButton_postSiteUser() %}<wa-button variant="brand" id="htmButton_postSiteUser" data-userId={{ result.userId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postSiteUser() %}<wa-button variant="brand" id="htmButton_postSiteUser"  data-dialog="open postSiteUserDialog" data-userId={{ result.userId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
           <div id="htmSearchForm">
             <wa-scroller>
               <wa-button-group>

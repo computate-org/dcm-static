@@ -1,13 +1,13 @@
 
-{%- macro htmButton_patchJobTemplate() %}<wa-button variant="brand" id="htmButton_patchJobTemplate"  data-dialog="open patchJobTemplateDialog" data-jobTemplateId={{ result.jobTemplateId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchJobTemplate() %}<wa-button variant="brand" id="htmButton_patchJobTemplate"  data-dialog="open patchJobTemplateDialog" data-jobTemplateResource={{ result.jobTemplateResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
-{%- macro htmButton_postJobTemplate() %}<wa-button variant="brand" id="htmButton_postJobTemplate"  data-dialog="open postJobTemplateDialog" data-jobTemplateId={{ result.jobTemplateId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postJobTemplate() %}<wa-button variant="brand" id="htmButton_postJobTemplate"  data-dialog="open postJobTemplateDialog" data-jobTemplateResource={{ result.jobTemplateResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
-{%- macro htmButton_deleteJobTemplate() %}<wa-button variant="brand" id="htmButton_deleteJobTemplate" data-jobTemplateId={{ result.jobTemplateId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deleteJobTemplate() %}<wa-button variant="brand" id="htmButton_deleteJobTemplate" data-jobTemplateResource={{ result.jobTemplateResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
-{%- macro htmButton_putimportJobTemplate() %}<wa-button variant="brand" id="htmButton_putimportJobTemplate"  data-dialog="open putimportJobTemplateDialog" data-jobTemplateId={{ result.jobTemplateId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportJobTemplate() %}<wa-button variant="brand" id="htmButton_putimportJobTemplate"  data-dialog="open putimportJobTemplateDialog" data-jobTemplateResource={{ result.jobTemplateResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
-{%- macro htmButton_deletefilterJobTemplate() %}<wa-button variant="brand" id="htmButton_deletefilterJobTemplate" data-jobTemplateId={{ result.jobTemplateId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deletefilterJobTemplate() %}<wa-button variant="brand" id="htmButton_deletefilterJobTemplate" data-jobTemplateResource={{ result.jobTemplateResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
           <div id="htmSearchForm">
             <wa-scroller>
               <wa-button-group>
@@ -15,14 +15,14 @@
   {% if "PATCH" in scopes %}
     {% if resultCount >= 1 %}
                 <wa-button variant="brand" id="refreshThisJobTemplateGenPage"
-                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'jobTemplateId:{{ result.jobTemplateId }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisJobTemplateGenPage')); }, function() { addError(document.querySelector('#refreshThisJobTemplateGenPage')); }); return false; ">
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'jobTemplateResource:{{ result.jobTemplateResource }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisJobTemplateGenPage')); }, function() { addError(document.querySelector('#refreshThisJobTemplateGenPage')); }); return false; ">
                   <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
                   refresh
                 </wa-button>
     {% endif %}
     {% if resultCount > 0 %}
-                <wa-button variant="brand" id="refreshAllJobTemplateGenPage{{ result.jobTemplateId | e }}"
-                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllJobTemplateGenPage{{ result.jobTemplateId | e }}')); }, function() { addError(document.querySelector('#refreshAllJobTemplateGenPage{{ result.jobTemplateId | e }}')); }); "
+                <wa-button variant="brand" id="refreshAllJobTemplateGenPage{{ result.jobTemplateResource | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllJobTemplateGenPage{{ result.jobTemplateResource | e }}')); }, function() { addError(document.querySelector('#refreshAllJobTemplateGenPage{{ result.jobTemplateResource | e }}')); }); "
                     >
                   <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
                   refresh all 

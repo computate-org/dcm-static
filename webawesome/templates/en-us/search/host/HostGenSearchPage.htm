@@ -131,7 +131,7 @@
 
           function relate_inventoryResource(event) {
             suggestHostInventoryResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ] : [{%- if result.inventoryResource is defined %}{'name':'fq','value':'inventoryResource:{{ result.inventoryResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
@@ -141,13 +141,13 @@
                 , this
                 );
           }
-          document.querySelector('#POST_inventoryResource')?.addEventListener('input', relate_inventoryResource);
-          document.querySelector('#POST_inventoryResource')?.addEventListener('focus', relate_inventoryResource);
-          document.querySelector('#PATCH_inventoryResource')?.addEventListener('input', relate_inventoryResource);
-          document.querySelector('#PATCH_inventoryResource')?.addEventListener('focus', relate_inventoryResource);
+          document.querySelector('#Host_POST_inventoryResource')?.addEventListener('input', relate_inventoryResource);
+          document.querySelector('#Host_POST_inventoryResource')?.addEventListener('focus', relate_inventoryResource);
+          document.querySelector('#Host_PATCH_inventoryResource')?.addEventListener('input', relate_inventoryResource);
+          document.querySelector('#Host_PATCH_inventoryResource')?.addEventListener('focus', relate_inventoryResource);
           function relate_tenantResource(event) {
             suggestHostTenantResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + event.target.value }
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
@@ -157,10 +157,10 @@
                 , this
                 );
           }
-          document.querySelector('#POST_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#Host_POST_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#Host_POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#Host_PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#Host_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
         if(hostResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -271,6 +271,24 @@
           event.preventDefault();
           deletefilterHost(event.target);
           return false;
+        });
+
+        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+          event.preventDefault();
+          postTenant(document.querySelector('#htmForm_postTenant')
+              , document.querySelector('#htmFormButton_postTenant')
+              , (json, target) => {
+                addGlow(target);
+              });
+        });
+
+        document.querySelector('#htmFormButton_postHostInventory')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHostInventory(document.querySelector('#htmForm_postHostInventory')
+              , document.querySelector('#htmFormButton_postHostInventory')
+              , (json, target) => {
+                addGlow(target);
+              });
         });
 {%- block htmScriptInitHostPage %}{%- endblock htmScriptInitHostPage %}
       });

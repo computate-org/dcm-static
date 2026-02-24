@@ -584,18 +584,6 @@ Promise.all([
           });
 });
 
-  document.querySelector('#htmButton_patchSitePage')?.addEventListener('click', (event) => {
-    document.querySelector('#patchSitePageDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_postSitePage')?.addEventListener('click', (event) => {
-    document.querySelector('#postSitePageDialog').open = true;
-  });
-
-  document.querySelector('#htmButton_putimportSitePage')?.addEventListener('click', (event) => {
-    document.querySelector('#putimportSitePageDialog').open = true;
-  });
-
   document.querySelector('#htmButton_deleteSitePage')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
@@ -607,10 +595,6 @@ Promise.all([
           , function(response, target) { addError(target); }
           );
     }
-  });
-
-  document.querySelector('#htmButton_searchpageSitePage')?.addEventListener('click', (event) => {
-    document.querySelector('#searchpageSitePageDialog').open = true;
   });
 
   document.querySelector('#htmButton_deletefilterSitePage')?.addEventListener('click', (event) => {

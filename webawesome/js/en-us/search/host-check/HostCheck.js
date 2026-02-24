@@ -718,11 +718,12 @@ function suggestHostCheckTenantResource(filters, $list, checkName = null, tenant
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
         var $a = document.createElement('a');
+        $a.setAttribute('target', '_blank');
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
         var val = o['tenantResource'];
-        var checked = val == null ? false : (Array.isArray(val) ? val.includes(checkName.toString()) : val == tenantResource);
+        var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
         $input.setAttribute('id', 'GET_tenantResource_' + checkName + '_tenantResource_' + o['tenantResource']);
         $input.setAttribute('name', 'tenantResource');
