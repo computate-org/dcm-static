@@ -362,6 +362,28 @@ Promise.all([
   document.querySelector('#pageStatsHostCheck_aapTemplateId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('HostCheck', 'aapTemplateId', false);
   });
+
+  document.querySelector('#pageSelectSortHostCheck_checkId')?.addEventListener('change', (event) => {
+    sort('HostCheck', 'checkId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCheck_checkId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCheck', 'checkId', true);
+  });
+  document.querySelector('#pageStatsHostCheck_checkId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCheck', 'checkId', false);
+  });
+
+  document.querySelector('#pageSelectSortHostCheck_checkResource')?.addEventListener('change', (event) => {
+    sort('HostCheck', 'checkResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCheck_checkResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCheck', 'checkResource', true);
+  });
+  document.querySelector('#pageStatsHostCheck_checkResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCheck', 'checkResource', false);
+  });
           document.querySelector('#fqHostCheck_created')?.addEventListener('change', (event) => {
             fqChange('HostCheck', event.currentTarget, facetChangeHostCheckSuccess, facetChangeHostCheckError);
           });
@@ -475,10 +497,10 @@ Promise.all([
   document.querySelector('#htmButton_deleteHostCheck')?.addEventListener('click', (event) => {
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
-      var checkName =  event.currentTarget.getAttribute('data-checkName');
+      var checkResource =  event.currentTarget.getAttribute('data-checkResource');
       deleteHostCheck(
           event.currentTarget
-          , checkName
+          , checkResource
           , function(response, target) { addGlow(target); }
           , function(response, target) { addError(target); }
           );

@@ -36,7 +36,7 @@
 {%- block htmScriptHostCheckPage %}
     <script>
 
-      function jsWebsocketHostCheck(checkName, vars, $response) {
+      function jsWebsocketHostCheck(checkResource, vars, $response) {
 {%- block jsWebsocketHostCheckPage %}{%- endblock %}
       }
 
@@ -127,7 +127,7 @@
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
-        var checkName = {% if result.checkName is defined %}{{ result.checkName | tojson }}{% else %}null{% endif %};
+        var checkResource = {% if result.checkResource is defined %}{{ result.checkResource | tojson }}{% else %}null{% endif %};
 
           function relate_tenantResource(event) {
             suggestHostCheckTenantResource(
@@ -161,7 +161,7 @@
           document.querySelector('#HostCheck_POST_jobTemplateResource')?.addEventListener('focus', relate_jobTemplateResource);
           document.querySelector('#HostCheck_PATCH_jobTemplateResource')?.addEventListener('input', relate_jobTemplateResource);
           document.querySelector('#HostCheck_PATCH_jobTemplateResource')?.addEventListener('focus', relate_jobTemplateResource);
-        if(checkName == null) {
+        if(checkResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
             document.querySelector('#site-results-grid').classList.add('grid-mode-details');
@@ -178,7 +178,7 @@
           var o = document.querySelector('.pageForm .result')?.value;
           if(o)
             window.result = JSON.parse(o);
-        {% if result.checkName is defined %}
+        {% if result.checkResource is defined %}
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listHostCheck')?.value;
@@ -215,7 +215,7 @@
         });
         document.querySelector('#htmFormButton_patchHostCheck')?.addEventListener('click', event => {
           event.preventDefault();
-          patchHostCheck(null, document.querySelector('#htmForm_patchHostCheck'), document.querySelector('#htmFormButton_patchHostCheck'), event.target.getAttribute('data-checkName'));
+          patchHostCheck(null, document.querySelector('#htmForm_patchHostCheck'), document.querySelector('#htmFormButton_patchHostCheck'), event.target.getAttribute('data-checkResource'));
           return false;
         });
 
@@ -239,7 +239,7 @@
         });
         document.querySelector('#htmFormButton_deleteHostCheck')?.addEventListener('click', event => {
           event.preventDefault();
-          deleteHostCheck(event.target, event.target.getAttribute('data-checkName'));
+          deleteHostCheck(event.target, event.target.getAttribute('data-checkResource'));
           return false;
         });
 

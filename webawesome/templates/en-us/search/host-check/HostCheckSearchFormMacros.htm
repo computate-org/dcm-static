@@ -10,15 +10,15 @@
                       hint="The primary key of this object in the database"
                       id="HostCheck_{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
-                      data-checkName={{ result.checkName | tojson }}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_pk setPk classHostCheck inputHostCheck{{ result.checkName }}Pk "
+                      data-checkResource={{ result.checkResource | tojson }}
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_pk setPk classHostCheck inputHostCheck{{ result.checkResource }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_pk setPk classHostCheck inputHostCheck{{ result.checkName }}Pk "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_pk setPk classHostCheck inputHostCheck{{ result.checkResource }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_pk valuePk classHostCheck inputHostCheck{{ result.checkName }}Pk "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_pk valuePk classHostCheck inputHostCheck{{ result.checkResource }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -44,14 +44,14 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_created datetimepicker setCreated classHostCheck inputHostCheck{{ result.checkName }}Created "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_created datetimepicker setCreated classHostCheck inputHostCheck{{ result.checkResource }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="HostCheck_{{classApiMethodMethod}}_created"
   {% if 'Page' == classApiMethodMethod -%}
                       value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
   {% endif -%}
-                      data-checkName={{ result.checkName | tojson }}
+                      data-checkResource={{ result.checkResource | tojson }}
                       data-zone="{{ defaultZoneId }}"
                       >
                   </wa-input>
@@ -72,14 +72,14 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_modified datetimepicker setModified classHostCheck inputHostCheck{{ result.checkName }}Modified "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_modified datetimepicker setModified classHostCheck inputHostCheck{{ result.checkResource }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="HostCheck_{{classApiMethodMethod}}_modified"
   {% if 'Page' == classApiMethodMethod -%}
                       value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
   {% endif -%}
-                      data-checkName={{ result.checkName | tojson }}
+                      data-checkResource={{ result.checkResource | tojson }}
                       data-zone="{{ defaultZoneId }}"
                       >
                   </wa-input>
@@ -101,9 +101,9 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_archived classHostCheck inputHostCheck{{ result.checkName }}Archived "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_archived classHostCheck inputHostCheck{{ result.checkResource }}Archived "
                       name="setArchived"
-                      data-checkName={{ result.checkName | tojson }}
+                      data-checkResource={{ result.checkResource | tojson }}
                       data-val="{{ result.archived | e }}"
                       >archive</wa-button>
   {%- else %}
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_archived classHostCheck inputHostCheck{{ result.checkName }}Archived "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_archived classHostCheck inputHostCheck{{ result.checkResource }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_archived classHostCheck inputHostCheck{{ result.checkName }}Archived "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_archived classHostCheck inputHostCheck{{ result.checkResource }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_archived setArchived valueArchived classHostCheck inputHostCheck{{ result.checkName }}Archived "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_archived setArchived valueArchived classHostCheck inputHostCheck{{ result.checkResource }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -135,7 +135,7 @@
     {%- if result.archived == true %}
                       checked
     {%- endif %}
-                      data-checkName={{ result.checkName | tojson }}
+                      data-checkResource={{ result.checkResource | tojson }}
                       >archive</wa-checkbox>
   {%- else %}
                       >
@@ -275,15 +275,15 @@
                       required
                       id="HostCheck_{{classApiMethodMethod}}_checkName"
   {%- if "Page" == classApiMethodMethod %}
-                      data-checkName={{ result.checkName | tojson }}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkName setCheckName classHostCheck inputHostCheck{{ result.checkName }}CheckName "
+                      data-checkResource={{ result.checkResource | tojson }}
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkName setCheckName classHostCheck inputHostCheck{{ result.checkResource }}CheckName "
                       name="setCheckName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkName setCheckName classHostCheck inputHostCheck{{ result.checkName }}CheckName "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkName setCheckName classHostCheck inputHostCheck{{ result.checkResource }}CheckName "
                       name="setCheckName"
     {%- else %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkName valueCheckName classHostCheck inputHostCheck{{ result.checkName }}CheckName "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkName valueCheckName classHostCheck inputHostCheck{{ result.checkResource }}CheckName "
                       name="checkName"
     {%- endif %}
   {%- endif %}
@@ -311,15 +311,15 @@
                       hint="The descrition of the host check. "
                       id="HostCheck_{{classApiMethodMethod}}_checkDescription"
   {%- if "Page" == classApiMethodMethod %}
-                      data-checkName={{ result.checkName | tojson }}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkDescription setCheckDescription classHostCheck inputHostCheck{{ result.checkName }}CheckDescription "
+                      data-checkResource={{ result.checkResource | tojson }}
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkDescription setCheckDescription classHostCheck inputHostCheck{{ result.checkResource }}CheckDescription "
                       name="setCheckDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkDescription setCheckDescription classHostCheck inputHostCheck{{ result.checkName }}CheckDescription "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkDescription setCheckDescription classHostCheck inputHostCheck{{ result.checkResource }}CheckDescription "
                       name="setCheckDescription"
     {%- else %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkDescription valueCheckDescription classHostCheck inputHostCheck{{ result.checkName }}CheckDescription "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkDescription valueCheckDescription classHostCheck inputHostCheck{{ result.checkResource }}CheckDescription "
                       name="checkDescription"
     {%- endif %}
   {%- endif %}
@@ -347,15 +347,15 @@
                       hint="The namespace of the host check. "
                       id="HostCheck_{{classApiMethodMethod}}_checkNamespace"
   {%- if "Page" == classApiMethodMethod %}
-                      data-checkName={{ result.checkName | tojson }}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkNamespace setCheckNamespace classHostCheck inputHostCheck{{ result.checkName }}CheckNamespace "
+                      data-checkResource={{ result.checkResource | tojson }}
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkNamespace setCheckNamespace classHostCheck inputHostCheck{{ result.checkResource }}CheckNamespace "
                       name="setCheckNamespace"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkNamespace setCheckNamespace classHostCheck inputHostCheck{{ result.checkName }}CheckNamespace "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkNamespace setCheckNamespace classHostCheck inputHostCheck{{ result.checkResource }}CheckNamespace "
                       name="setCheckNamespace"
     {%- else %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkNamespace valueCheckNamespace classHostCheck inputHostCheck{{ result.checkName }}CheckNamespace "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkNamespace valueCheckNamespace classHostCheck inputHostCheck{{ result.checkResource }}CheckNamespace "
                       name="checkNamespace"
     {%- endif %}
   {%- endif %}
@@ -383,15 +383,15 @@
                       hint="The bash command to run during the check. "
                       id="HostCheck_{{classApiMethodMethod}}_checkCommand"
   {%- if "Page" == classApiMethodMethod %}
-                      data-checkName={{ result.checkName | tojson }}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkCommand setCheckCommand classHostCheck inputHostCheck{{ result.checkName }}CheckCommand "
+                      data-checkResource={{ result.checkResource | tojson }}
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkCommand setCheckCommand classHostCheck inputHostCheck{{ result.checkResource }}CheckCommand "
                       name="setCheckCommand"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkCommand setCheckCommand classHostCheck inputHostCheck{{ result.checkName }}CheckCommand "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkCommand setCheckCommand classHostCheck inputHostCheck{{ result.checkResource }}CheckCommand "
                       name="setCheckCommand"
     {%- else %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkCommand valueCheckCommand classHostCheck inputHostCheck{{ result.checkName }}CheckCommand "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkCommand valueCheckCommand classHostCheck inputHostCheck{{ result.checkResource }}CheckCommand "
                       name="checkCommand"
     {%- endif %}
   {%- endif %}
@@ -420,15 +420,15 @@
                       hint="The check interval in seconds. "
                       id="HostCheck_{{classApiMethodMethod}}_checkInterval"
   {%- if "Page" == classApiMethodMethod %}
-                      data-checkName={{ result.checkName | tojson }}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkInterval setCheckInterval classHostCheck inputHostCheck{{ result.checkName }}CheckInterval "
+                      data-checkResource={{ result.checkResource | tojson }}
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkInterval setCheckInterval classHostCheck inputHostCheck{{ result.checkResource }}CheckInterval "
                       name="setCheckInterval"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkInterval setCheckInterval classHostCheck inputHostCheck{{ result.checkName }}CheckInterval "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkInterval setCheckInterval classHostCheck inputHostCheck{{ result.checkResource }}CheckInterval "
                       name="setCheckInterval"
     {%- else %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkInterval valueCheckInterval classHostCheck inputHostCheck{{ result.checkName }}CheckInterval "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkInterval valueCheckInterval classHostCheck inputHostCheck{{ result.checkResource }}CheckInterval "
                       name="checkInterval"
     {%- endif %}
   {%- endif %}
@@ -462,14 +462,14 @@
                       label="check published"
                       hint="When disabled the check will not be executed unless explicitly queued. "
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkPublished classHostCheck inputHostCheck{{ result.checkName }}CheckPublished "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkPublished classHostCheck inputHostCheck{{ result.checkResource }}CheckPublished "
                       name="setCheckPublished"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkPublished classHostCheck inputHostCheck{{ result.checkName }}CheckPublished "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkPublished classHostCheck inputHostCheck{{ result.checkResource }}CheckPublished "
                       name="setCheckPublished"
     {%- else %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkPublished setCheckPublished valueCheckPublished classHostCheck inputHostCheck{{ result.checkName }}CheckPublished "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_checkPublished setCheckPublished valueCheckPublished classHostCheck inputHostCheck{{ result.checkResource }}CheckPublished "
                       name="setCheckPublished"
     {%- endif %}
   {%- endif %}
@@ -477,7 +477,7 @@
     {%- if result.checkPublished == true %}
                       checked
     {%- endif %}
-                      data-checkName={{ result.checkName | tojson }}
+                      data-checkResource={{ result.checkResource | tojson }}
                       >check published</wa-checkbox>
   {%- else %}
                       >
@@ -502,18 +502,18 @@
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[List] event subscriptions"
                       label="event subscriptions"
-                      hint="The list of event subscriptions the host subscribes to. "
+                      hint="The list of event subscriptions the host check subscribes to. "
                       id="HostCheck_{{classApiMethodMethod}}_eventSubscriptions"
   {%- if "Page" == classApiMethodMethod %}
-                      data-checkName={{ result.checkName | tojson }}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHostCheck inputHostCheck{{ result.checkName }}EventSubscriptions "
+                      data-checkResource={{ result.checkResource | tojson }}
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHostCheck inputHostCheck{{ result.checkResource }}EventSubscriptions "
                       name="setEventSubscriptions"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHostCheck inputHostCheck{{ result.checkName }}EventSubscriptions "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHostCheck inputHostCheck{{ result.checkResource }}EventSubscriptions "
                       name="setEventSubscriptions"
     {%- else %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventSubscriptions valueEventSubscriptions classHostCheck inputHostCheck{{ result.checkName }}EventSubscriptions "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventSubscriptions valueEventSubscriptions classHostCheck inputHostCheck{{ result.checkResource }}EventSubscriptions "
                       name="eventSubscriptions"
     {%- endif %}
   {%- endif %}
@@ -541,15 +541,15 @@
                       hint="The list of event handlers the host subscribes to. "
                       id="HostCheck_{{classApiMethodMethod}}_eventHandlers"
   {%- if "Page" == classApiMethodMethod %}
-                      data-checkName={{ result.checkName | tojson }}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventHandlers setEventHandlers classHostCheck inputHostCheck{{ result.checkName }}EventHandlers "
+                      data-checkResource={{ result.checkResource | tojson }}
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventHandlers setEventHandlers classHostCheck inputHostCheck{{ result.checkResource }}EventHandlers "
                       name="setEventHandlers"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventHandlers setEventHandlers classHostCheck inputHostCheck{{ result.checkName }}EventHandlers "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventHandlers setEventHandlers classHostCheck inputHostCheck{{ result.checkResource }}EventHandlers "
                       name="setEventHandlers"
     {%- else %}
-                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventHandlers valueEventHandlers classHostCheck inputHostCheck{{ result.checkName }}EventHandlers "
+                      class="label-on-left {{HostCheck_classApiMethodMethod}}_eventHandlers valueEventHandlers classHostCheck inputHostCheck{{ result.checkResource }}EventHandlers "
                       name="eventHandlers"
     {%- endif %}
   {%- endif %}
@@ -877,7 +877,7 @@
               <wa-textarea
                   class="PUTImport_searchList "
                   style="height: 300px; "
-                  placeholder="{ 'searchList': [ { 'checkName': ... , 'saves': [ ... ] }, ... ] }"
+                  placeholder="{ 'searchList': [ { 'checkResource': ... , 'saves': [ ... ] }, ... ] }"
                   >
               </wa-textarea>
             </div>

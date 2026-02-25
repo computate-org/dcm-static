@@ -4,25 +4,25 @@ async function websocketHostCheck(success) {
 
     window.eventBus.registerHandler('websocketHostCheck', function (error, message) {
       var json = JSON.parse(message['body']);
-      var checkName = json['id'];
+      var checkResource = json['id'];
       var solrIds = json['solrIds'];
       var empty = json['empty'];
       var numFound = parseInt(json['numFound']);
       var numPATCH = parseInt(json['numPATCH']);
       var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
       var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + checkName + ' ');
-      $box.setAttribute('id', 'box-' + checkName);
+      $box.setAttribute('class', 'w3-quarter box-' + checkResource + ' ');
+      $box.setAttribute('id', 'box-' + checkResource);
       $box.setAttribute('data-numPATCH', numPATCH);
       var $margin = document.createElement('div');
       $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + checkName);
+      $margin.setAttribute('id', 'margin-' + checkResource);
       var $card = document.createElement('div');
       $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + checkName);
+      $card.setAttribute('id', 'card-' + checkResource);
       var $header = document.createElement('div');
       $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + checkName);
+      $header.setAttribute('id', 'header-' + checkResource);
       var iTemplate = document.createElement('template');
       iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-box-check"></i>';
       var $i = iTemplate.content;
@@ -31,19 +31,19 @@ async function websocketHostCheck(success) {
       $headerSpan.innerText = 'modify host checks in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + checkName + '");');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + checkResource + '");');
       $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + checkName);
+      $x.setAttribute('id', 'x-' + checkResource);
       var $body = document.createElement('div');
       $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + checkName);
+      $body.setAttribute('id', 'text-' + checkResource);
       var $bar = document.createElement('div');
       $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + checkName);
+      $bar.setAttribute('id', 'bar-' + checkResource);
       var $progress = document.createElement('div');
       $progress.setAttribute('class', 'w3- ');
       $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + checkName);
+      $progress.setAttribute('id', 'progress-' + checkResource);
       $progress.innerText = numPATCH + '/' + numFound;
       $card.append($header);
       $header.append($i);
@@ -55,11 +55,11 @@ async function websocketHostCheck(success) {
       $box.append($margin);
       $margin.append($card);
       if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + checkName);
+        var $old_box = document.querySelector('.box-' + checkResource);
       } else {
-        document.querySelector('.box-' + checkName)?.remove();
+        document.querySelector('.box-' + checkResource)?.remove();
       }
-      if(checkName) {
+      if(checkResource) {
         if(success)
           success(json);
       }
@@ -67,12 +67,12 @@ async function websocketHostCheck(success) {
   }
 }
 async function websocketHostCheckInner(apiRequest) {
-  var checkName = apiRequest['id'];
+  var checkResource = apiRequest['id'];
   var classes = apiRequest['classes'];
   var vars = apiRequest['vars'];
   var empty = apiRequest['empty'];
 
-  if(checkName != null && vars.length > 0) {
+  if(checkResource != null && vars.length > 0) {
     var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
     var uri = location.pathname + queryParams;
     fetch(uri).then(response => {
@@ -110,6 +110,8 @@ async function websocketHostCheckInner(apiRequest) {
         var inputAapOrganizationId = null;
         var inputJobTemplateId = null;
         var inputAapTemplateId = null;
+        var inputCheckId = null;
+        var inputCheckResource = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Page_pk');
@@ -175,8 +177,12 @@ async function websocketHostCheckInner(apiRequest) {
           inputJobTemplateId = $response.querySelector('.Page_jobTemplateId');
         if(vars.includes('aapTemplateId'))
           inputAapTemplateId = $response.querySelector('.Page_aapTemplateId');
+        if(vars.includes('checkId'))
+          inputCheckId = $response.querySelector('.Page_checkId');
+        if(vars.includes('checkResource'))
+          inputCheckResource = $response.querySelector('.Page_checkResource');
 
-        jsWebsocketHostCheck(checkName, vars, $response);
+        jsWebsocketHostCheck(checkResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listHostCheck = JSON.parse($response.querySelector('.pageForm .listHostCheck')?.value);
 
@@ -501,6 +507,26 @@ async function websocketHostCheckInner(apiRequest) {
           addGlow(document.querySelector('.Page_aapTemplateId'));
         }
 
+        if(inputCheckId) {
+          document.querySelectorAll('.Page_checkId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputCheckId.getAttribute('value');
+            else
+              item.textContent = inputCheckId.textContent;
+          });
+          addGlow(document.querySelector('.Page_checkId'));
+        }
+
+        if(inputCheckResource) {
+          document.querySelectorAll('.Page_checkResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputCheckResource.getAttribute('value');
+            else
+              item.textContent = inputCheckResource.textContent;
+          });
+          addGlow(document.querySelector('.Page_checkResource'));
+        }
+
           pageGraphHostCheck();
       });
     });
@@ -785,6 +811,14 @@ function searchHostCheckFilters($formFilters) {
     var filterAapTemplateId = $formFilters.querySelector('.valueAapTemplateId')?.value;
     if(filterAapTemplateId != null && filterAapTemplateId !== '')
       filters.push({ name: 'fq', value: 'aapTemplateId:' + filterAapTemplateId });
+
+    var filterCheckId = $formFilters.querySelector('.valueCheckId')?.value;
+    if(filterCheckId != null && filterCheckId !== '')
+      filters.push({ name: 'fq', value: 'checkId:' + filterCheckId });
+
+    var filterCheckResource = $formFilters.querySelector('.valueCheckResource')?.value;
+    if(filterCheckResource != null && filterCheckResource !== '')
+      filters.push({ name: 'fq', value: 'checkResource:' + filterCheckResource });
   }
   return filters;
 }
@@ -808,7 +842,7 @@ function searchHostCheckVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestHostCheckTenantResource(filters, $list, checkName = null, tenantResource = null, relate=true, target) {
+function suggestHostCheckTenantResource(filters, $list, checkResource = null, tenantResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -827,17 +861,17 @@ function suggestHostCheckTenantResource(filters, $list, checkName = null, tenant
         var val = o['tenantResource'];
         var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + checkName + '_tenantResource_' + o['tenantResource']);
+        $input.setAttribute('id', 'GET_tenantResource_' + checkResource + '_tenantResource_' + o['tenantResource']);
         $input.setAttribute('name', 'tenantResource');
         $input.setAttribute('value', o['tenantResource']);
         $input.setAttribute('class', 'valueTenantResource ');
-        if(checkName != null) {
+        if(checkResource != null) {
           $input.addEventListener('change', function(event) {
-            patchHostCheckVals([{ name: 'fq', value: 'checkName:' + checkName }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+            patchHostCheckVals([{ name: 'fq', value: 'checkResource:' + checkResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostCheckTenantResource(filters, $list, checkName, o['tenantResource'], relate, target);
+                  suggestHostCheckTenantResource(filters, $list, checkResource, o['tenantResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -857,7 +891,7 @@ function suggestHostCheckTenantResource(filters, $list, checkName = null, tenant
   searchTenantVals(filters, target, success, error);
 }
 
-function suggestHostCheckJobTemplateResource(filters, $list, checkName = null, jobTemplateResource = null, relate=true, target) {
+function suggestHostCheckJobTemplateResource(filters, $list, checkResource = null, jobTemplateResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -876,17 +910,17 @@ function suggestHostCheckJobTemplateResource(filters, $list, checkName = null, j
         var val = o['jobTemplateResource'];
         var checked = val == null ? false : (jobTemplateResource != null && val === jobTemplateResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_jobTemplateResource_' + checkName + '_jobTemplateResource_' + o['jobTemplateResource']);
+        $input.setAttribute('id', 'GET_jobTemplateResource_' + checkResource + '_jobTemplateResource_' + o['jobTemplateResource']);
         $input.setAttribute('name', 'jobTemplateResource');
         $input.setAttribute('value', o['jobTemplateResource']);
         $input.setAttribute('class', 'valueJobTemplateResource ');
-        if(checkName != null) {
+        if(checkResource != null) {
           $input.addEventListener('change', function(event) {
-            patchHostCheckVals([{ name: 'fq', value: 'checkName:' + checkName }], { [(event.target.checked ? 'set' : 'remove') + 'JobTemplateResource']: o['jobTemplateResource'] }
+            patchHostCheckVals([{ name: 'fq', value: 'checkResource:' + checkResource }], { [(event.target.checked ? 'set' : 'remove') + 'JobTemplateResource']: o['jobTemplateResource'] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostCheckJobTemplateResource(filters, $list, checkName, o['jobTemplateResource'], relate, target);
+                  suggestHostCheckJobTemplateResource(filters, $list, checkResource, o['jobTemplateResource'], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -932,7 +966,7 @@ function suggestHostCheckObjectSuggest($formFilters, $list, target) {
 
 async function getHostCheck(pk) {
   fetch(
-    '/en-us/api/host-check/' + checkName
+    '/en-us/api/host-check/' + checkResource
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -949,7 +983,7 @@ async function getHostCheck(pk) {
 
 // PATCH //
 
-async function patchHostCheck($formFilters, $formValues, target, checkName, success, error) {
+async function patchHostCheck($formFilters, $formValues, target, checkResource, success, error) {
   var filters = patchHostCheckFilters($formFilters);
 
   var vals = {};
@@ -1252,7 +1286,31 @@ async function patchHostCheck($formFilters, $formValues, target, checkName, succ
   if(removeAapTemplateId != null && removeAapTemplateId !== '')
     vals['removeAapTemplateId'] = removeAapTemplateId;
 
-  patchHostCheckVals(checkName == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'checkName:' + checkName}], vals, target, success, error);
+  var valueCheckId = $formValues.querySelector('.valueCheckId')?.value;
+  var removeCheckId = $formValues.querySelector('.removeCheckId')?.value === 'true';
+  var setCheckId = removeCheckId ? null : $formValues.querySelector('.setCheckId')?.value;
+  var addCheckId = $formValues.querySelector('.addCheckId')?.value;
+  if(removeCheckId || setCheckId != null && setCheckId !== '')
+    vals['setCheckId'] = setCheckId;
+  if(addCheckId != null && addCheckId !== '')
+    vals['addCheckId'] = addCheckId;
+  var removeCheckId = $formValues.querySelector('.removeCheckId')?.value;
+  if(removeCheckId != null && removeCheckId !== '')
+    vals['removeCheckId'] = removeCheckId;
+
+  var valueCheckResource = $formValues.querySelector('.valueCheckResource')?.value;
+  var removeCheckResource = $formValues.querySelector('.removeCheckResource')?.value === 'true';
+  var setCheckResource = removeCheckResource ? null : $formValues.querySelector('.setCheckResource')?.value;
+  var addCheckResource = $formValues.querySelector('.addCheckResource')?.value;
+  if(removeCheckResource || setCheckResource != null && setCheckResource !== '')
+    vals['setCheckResource'] = setCheckResource;
+  if(addCheckResource != null && addCheckResource !== '')
+    vals['addCheckResource'] = addCheckResource;
+  var removeCheckResource = $formValues.querySelector('.removeCheckResource')?.value;
+  if(removeCheckResource != null && removeCheckResource !== '')
+    vals['removeCheckResource'] = removeCheckResource;
+
+  patchHostCheckVals(checkResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'checkResource:' + checkResource}], vals, target, success, error);
 }
 
 function patchHostCheckFilters($formFilters) {
@@ -1399,6 +1457,14 @@ function patchHostCheckFilters($formFilters) {
     var filterAapTemplateId = $formFilters.querySelector('.valueAapTemplateId')?.value;
     if(filterAapTemplateId != null && filterAapTemplateId !== '')
       filters.push({ name: 'fq', value: 'aapTemplateId:' + filterAapTemplateId });
+
+    var filterCheckId = $formFilters.querySelector('.valueCheckId')?.value;
+    if(filterCheckId != null && filterCheckId !== '')
+      filters.push({ name: 'fq', value: 'checkId:' + filterCheckId });
+
+    var filterCheckResource = $formFilters.querySelector('.valueCheckResource')?.value;
+    if(filterCheckResource != null && filterCheckResource !== '')
+      filters.push({ name: 'fq', value: 'checkResource:' + filterCheckResource });
   }
   return filters;
 }
@@ -1562,6 +1628,14 @@ async function postHostCheck($formValues, target, success, error) {
   if(valueAapTemplateId != null && valueAapTemplateId !== '')
     vals['aapTemplateId'] = valueAapTemplateId;
 
+  var valueCheckId = $formValues.querySelector('.valueCheckId')?.value;
+  if(valueCheckId != null && valueCheckId !== '')
+    vals['checkId'] = valueCheckId;
+
+  var valueCheckResource = $formValues.querySelector('.valueCheckResource')?.value;
+  if(valueCheckResource != null && valueCheckResource !== '')
+    vals['checkResource'] = valueCheckResource;
+
   fetch(
     '/en-us/api/host-check'
     , {
@@ -1601,7 +1675,7 @@ function postHostCheckVals(vals, target, success, error) {
 
 // DELETE //
 
-async function deleteHostCheck(target, checkName, success, error) {
+async function deleteHostCheck(target, checkResource, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1633,7 +1707,7 @@ async function deleteHostCheck(target, checkName, success, error) {
   }
 
   fetch(
-    '/en-us/api/host-check/' + encodeURIComponent(checkName)
+    '/en-us/api/host-check/' + encodeURIComponent(checkResource)
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -1649,7 +1723,7 @@ async function deleteHostCheck(target, checkName, success, error) {
 
 // PUTImport //
 
-async function putimportHostCheck($formValues, target, checkName, success, error) {
+async function putimportHostCheck($formValues, target, checkResource, success, error) {
   var json = $formValues.querySelector('.PUTImport_searchList')?.value;
   if(json != null && json !== '')
     putimportHostCheckVals(JSON.parse(json), target, success, error);

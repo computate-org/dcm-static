@@ -411,6 +411,42 @@
 {%- macro htmJobTypeJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputJobTypeJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputExtraVarsJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_extraVars">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[JsonObject] extra vars"
+                      label="extra vars"
+                      hint="The extra vars of the job template. "
+                      id="JobTemplate_{{classApiMethodMethod}}_extraVars"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-jobTemplateResource={{ result.jobTemplateResource | tojson }}
+                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_extraVars setExtraVars classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}ExtraVars "
+                      name="setExtraVars"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_extraVars setExtraVars classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}ExtraVars "
+                      name="setExtraVars"
+    {%- else %}
+                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_extraVars valueExtraVars classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}ExtraVars "
+                      name="extraVars"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonObjectString(result.extraVars) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmExtraVarsJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputExtraVarsJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 
 {%- macro htmFormButton_patchJobTemplate() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchJobTemplate" duration="5000" closable class="wa-header-l ">
@@ -501,6 +537,16 @@
                 {{ htmJobTypeJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
                 {% else -%}
                 {{ htmJobTypeJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -600,6 +646,16 @@
                 {{ htmJobTypeJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {% else -%}
                 {{ htmJobTypeJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -780,6 +836,16 @@
                 {{ htmJobTypeJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {% else -%}
                 {{ htmJobTypeJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
               </div>

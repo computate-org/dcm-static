@@ -88,6 +88,7 @@ async function websocketJobTemplateInner(apiRequest) {
         var inputJobTemplateName = null;
         var inputJobTemplateDescription = null;
         var inputJobType = null;
+        var inputExtraVars = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -131,6 +132,8 @@ async function websocketJobTemplateInner(apiRequest) {
           inputJobTemplateDescription = $response.querySelector('.Page_jobTemplateDescription');
         if(vars.includes('jobType'))
           inputJobType = $response.querySelector('.Page_jobType');
+        if(vars.includes('extraVars'))
+          inputExtraVars = $response.querySelector('.Page_extraVars');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -279,6 +282,16 @@ async function websocketJobTemplateInner(apiRequest) {
               item.textContent = inputJobType.textContent;
           });
           addGlow(document.querySelector('.Page_jobType'));
+        }
+
+        if(inputExtraVars) {
+          document.querySelectorAll('.Page_extraVars').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputExtraVars.getAttribute('value');
+            else
+              item.textContent = inputExtraVars.textContent;
+          });
+          addGlow(document.querySelector('.Page_extraVars'));
         }
 
         if(inputClassCanonicalName) {
@@ -691,6 +704,10 @@ function searchJobTemplateFilters($formFilters) {
     var filterJobType = $formFilters.querySelector('.valueJobType')?.value;
     if(filterJobType != null && filterJobType !== '')
       filters.push({ name: 'fq', value: 'jobType:' + filterJobType });
+
+    var filterExtraVars = $formFilters.querySelector('.valueExtraVars')?.value;
+    if(filterExtraVars != null && filterExtraVars !== '')
+      filters.push({ name: 'fq', value: 'extraVars:' + filterExtraVars });
 
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
@@ -1108,6 +1125,18 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateRe
   if(removeJobType != null && removeJobType !== '')
     vals['removeJobType'] = removeJobType;
 
+  var valueExtraVars = $formValues.querySelector('.valueExtraVars')?.value;
+  var removeExtraVars = $formValues.querySelector('.removeExtraVars')?.value === 'true';
+  var setExtraVars = removeExtraVars ? null : $formValues.querySelector('.setExtraVars')?.value;
+  var addExtraVars = $formValues.querySelector('.addExtraVars')?.value;
+  if(removeExtraVars || setExtraVars != null && setExtraVars !== '')
+    vals['setExtraVars'] = JSON.parse(setExtraVars);
+  if(addExtraVars != null && addExtraVars !== '')
+    vals['addExtraVars'] = addExtraVars;
+  var removeExtraVars = $formValues.querySelector('.removeExtraVars')?.value;
+  if(removeExtraVars != null && removeExtraVars !== '')
+    vals['removeExtraVars'] = removeExtraVars;
+
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -1334,6 +1363,10 @@ function patchJobTemplateFilters($formFilters) {
     if(filterJobType != null && filterJobType !== '')
       filters.push({ name: 'fq', value: 'jobType:' + filterJobType });
 
+    var filterExtraVars = $formFilters.querySelector('.valueExtraVars')?.value;
+    if(filterExtraVars != null && filterExtraVars !== '')
+      filters.push({ name: 'fq', value: 'extraVars:' + filterExtraVars });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -1523,6 +1556,10 @@ async function postJobTemplate($formValues, target, success, error) {
   var valueJobType = $formValues.querySelector('.valueJobType')?.value;
   if(valueJobType != null && valueJobType !== '')
     vals['jobType'] = valueJobType;
+
+  var valueExtraVars = $formValues.querySelector('.valueExtraVars')?.value;
+  if(valueExtraVars != null && valueExtraVars !== '')
+    vals['extraVars'] = JSON.parse(valueExtraVars);
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')

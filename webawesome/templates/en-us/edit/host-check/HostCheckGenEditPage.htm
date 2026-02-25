@@ -36,7 +36,7 @@
 {%- block htmScriptHostCheckPage %}
     <script>
 
-      function jsWebsocketHostCheck(checkName, vars, $response) {
+      function jsWebsocketHostCheck(checkResource, vars, $response) {
 {%- block jsWebsocketHostCheckPage %}{%- endblock %}
       }
 
@@ -127,9 +127,9 @@
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
 
-        var checkName = {% if result.checkName is defined %}{{ result.checkName | tojson }}{% else %}null{% endif %};
+        var checkResource = {% if result.checkResource is defined %}{{ result.checkResource | tojson }}{% else %}null{% endif %};
 
-        if(checkName == null) {
+        if(checkResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
             document.querySelector('#site-results-grid').classList.add('grid-mode-details');
@@ -146,14 +146,14 @@
           var o = document.querySelector('.pageForm .result')?.value;
           if(o)
             window.result = JSON.parse(o);
-        {% if result.checkName is defined %}
+        {% if result.checkResource is defined %}
           function relate_tenantResource(event) {
             suggestHostCheckTenantResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.checkName : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.checkResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
                 , true
                 );
@@ -164,15 +164,15 @@
           document.querySelector('#HostCheck_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#HostCheck_Page_tenantResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#HostCheck_Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#Tenant_POST_checkName')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#Tenant_POST_checkName')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#Tenant_POST_checkResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#Tenant_POST_checkResource')?.addEventListener('focus', relate_tenantResource);
           {% if "PATCH" in scopes %}
-          suggestHostCheckTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostCheckTenantResource_Page'), window.result.checkName, window.result.tenantResource, true);
+          suggestHostCheckTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostCheckTenantResource_Page'), window.result.checkResource, window.result.tenantResource, true);
           {% else %}
           {% if "GET" in scopes %}
-          suggestHostCheckTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostCheckTenantResource_Page'), window.result.checkName, window.result.tenantResource, true);
+          suggestHostCheckTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostCheckTenantResource_Page'), window.result.checkResource, window.result.tenantResource, true);
           {% else %}
-          suggestHostCheckTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostCheckTenantResource_Page'), window.result.checkName, window.result.tenantResource, false);
+          suggestHostCheckTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostCheckTenantResource_Page'), window.result.checkResource, window.result.tenantResource, false);
           {% endif %}
           {% endif %}
           function relate_jobTemplateResource(event) {
@@ -181,7 +181,7 @@
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,jobTemplateResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.checkName : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.checkResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.jobTemplateResource : null
                 , true
                 );
@@ -192,15 +192,15 @@
           document.querySelector('#HostCheck_PATCH_jobTemplateResource')?.addEventListener('focus', relate_jobTemplateResource);
           document.querySelector('#HostCheck_Page_jobTemplateResource')?.addEventListener('input', relate_jobTemplateResource);
           document.querySelector('#HostCheck_Page_jobTemplateResource')?.addEventListener('focus', relate_jobTemplateResource);
-          document.querySelector('#JobTemplate_POST_checkName')?.addEventListener('input', relate_jobTemplateResource);
-          document.querySelector('#JobTemplate_POST_checkName')?.addEventListener('focus', relate_jobTemplateResource);
+          document.querySelector('#JobTemplate_POST_checkResource')?.addEventListener('input', relate_jobTemplateResource);
+          document.querySelector('#JobTemplate_POST_checkResource')?.addEventListener('focus', relate_jobTemplateResource);
           {% if "PATCH" in scopes %}
-          suggestHostCheckJobTemplateResource([{'name':'fq','value':'jobTemplateResource:' + window.result.jobTemplateResource}], document.querySelector('#listHostCheckJobTemplateResource_Page'), window.result.checkName, window.result.jobTemplateResource, true);
+          suggestHostCheckJobTemplateResource([{'name':'fq','value':'jobTemplateResource:' + window.result.jobTemplateResource}], document.querySelector('#listHostCheckJobTemplateResource_Page'), window.result.checkResource, window.result.jobTemplateResource, true);
           {% else %}
           {% if "GET" in scopes %}
-          suggestHostCheckJobTemplateResource([{'name':'fq','value':'jobTemplateResource:' + window.result.jobTemplateResource}], document.querySelector('#listHostCheckJobTemplateResource_Page'), window.result.checkName, window.result.jobTemplateResource, true);
+          suggestHostCheckJobTemplateResource([{'name':'fq','value':'jobTemplateResource:' + window.result.jobTemplateResource}], document.querySelector('#listHostCheckJobTemplateResource_Page'), window.result.checkResource, window.result.jobTemplateResource, true);
           {% else %}
-          suggestHostCheckJobTemplateResource([{'name':'fq','value':'jobTemplateResource:' + window.result.jobTemplateResource}], document.querySelector('#listHostCheckJobTemplateResource_Page'), window.result.checkName, window.result.jobTemplateResource, false);
+          suggestHostCheckJobTemplateResource([{'name':'fq','value':'jobTemplateResource:' + window.result.jobTemplateResource}], document.querySelector('#listHostCheckJobTemplateResource_Page'), window.result.checkResource, window.result.jobTemplateResource, false);
           {% endif %}
           {% endif %}
         {% endif %}
@@ -239,7 +239,7 @@
         });
         document.querySelector('#htmFormButton_patchHostCheck')?.addEventListener('click', event => {
           event.preventDefault();
-          patchHostCheck(null, document.querySelector('#htmForm_patchHostCheck'), document.querySelector('#htmFormButton_patchHostCheck'), event.target.getAttribute('data-checkName'));
+          patchHostCheck(null, document.querySelector('#htmForm_patchHostCheck'), document.querySelector('#htmFormButton_patchHostCheck'), event.target.getAttribute('data-checkResource'));
           return false;
         });
 
@@ -263,7 +263,7 @@
         });
         document.querySelector('#htmFormButton_deleteHostCheck')?.addEventListener('click', event => {
           event.preventDefault();
-          deleteHostCheck(event.target, event.target.getAttribute('data-checkName'));
+          deleteHostCheck(event.target, event.target.getAttribute('data-checkResource'));
           return false;
         });
 
@@ -398,8 +398,8 @@
 {% endif %}
 {%- block htmFormHostCheckPage %}
           <form action="/en-us/api/host-check" id="HostCheckForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
-{% if result.checkName is defined %}
-            <input name="checkName" class="valueCheckName" type="hidden" value="{{ result.checkName }}"/>
+{% if result.checkResource is defined %}
+            <input name="checkResource" class="valueCheckResource" type="hidden" value="{{ result.checkResource }}"/>
             {% endif %}
             <input name="focusId" type="hidden"/>
             <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
