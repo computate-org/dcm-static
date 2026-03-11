@@ -114,73 +114,73 @@ async function websocketHostCheckInner(apiRequest) {
         var inputCheckResource = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.HostCheck_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.HostCheck_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.HostCheck_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.HostCheck_Page_archived');
         if(vars.includes('tenantResource'))
-          inputTenantResource = $response.querySelector('.Page_tenantResource');
+          inputTenantResource = $response.querySelector('.HostCheck_Page_tenantResource');
         if(vars.includes('jobTemplateResource'))
-          inputJobTemplateResource = $response.querySelector('.Page_jobTemplateResource');
+          inputJobTemplateResource = $response.querySelector('.HostCheck_Page_jobTemplateResource');
         if(vars.includes('checkName'))
-          inputCheckName = $response.querySelector('.Page_checkName');
+          inputCheckName = $response.querySelector('.HostCheck_Page_checkName');
         if(vars.includes('checkDescription'))
-          inputCheckDescription = $response.querySelector('.Page_checkDescription');
+          inputCheckDescription = $response.querySelector('.HostCheck_Page_checkDescription');
         if(vars.includes('checkNamespace'))
-          inputCheckNamespace = $response.querySelector('.Page_checkNamespace');
+          inputCheckNamespace = $response.querySelector('.HostCheck_Page_checkNamespace');
         if(vars.includes('checkCommand'))
-          inputCheckCommand = $response.querySelector('.Page_checkCommand');
+          inputCheckCommand = $response.querySelector('.HostCheck_Page_checkCommand');
         if(vars.includes('checkInterval'))
-          inputCheckInterval = $response.querySelector('.Page_checkInterval');
+          inputCheckInterval = $response.querySelector('.HostCheck_Page_checkInterval');
         if(vars.includes('checkPublished'))
-          inputCheckPublished = $response.querySelector('.Page_checkPublished');
+          inputCheckPublished = $response.querySelector('.HostCheck_Page_checkPublished');
         if(vars.includes('eventSubscriptions'))
-          inputEventSubscriptions = $response.querySelector('.Page_eventSubscriptions');
+          inputEventSubscriptions = $response.querySelector('.HostCheck_Page_eventSubscriptions');
         if(vars.includes('eventHandlers'))
-          inputEventHandlers = $response.querySelector('.Page_eventHandlers');
+          inputEventHandlers = $response.querySelector('.HostCheck_Page_eventHandlers');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.HostCheck_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.HostCheck_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.HostCheck_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.HostCheck_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.HostCheck_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.HostCheck_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.HostCheck_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.HostCheck_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.HostCheck_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.HostCheck_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.HostCheck_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.HostCheck_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.HostCheck_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.HostCheck_Page_solrId');
         if(vars.includes('tenantId'))
-          inputTenantId = $response.querySelector('.Page_tenantId');
+          inputTenantId = $response.querySelector('.HostCheck_Page_tenantId');
         if(vars.includes('aapOrganizationId'))
-          inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
+          inputAapOrganizationId = $response.querySelector('.HostCheck_Page_aapOrganizationId');
         if(vars.includes('jobTemplateId'))
-          inputJobTemplateId = $response.querySelector('.Page_jobTemplateId');
+          inputJobTemplateId = $response.querySelector('.HostCheck_Page_jobTemplateId');
         if(vars.includes('aapTemplateId'))
-          inputAapTemplateId = $response.querySelector('.Page_aapTemplateId');
+          inputAapTemplateId = $response.querySelector('.HostCheck_Page_aapTemplateId');
         if(vars.includes('checkId'))
-          inputCheckId = $response.querySelector('.Page_checkId');
+          inputCheckId = $response.querySelector('.HostCheck_Page_checkId');
         if(vars.includes('checkResource'))
-          inputCheckResource = $response.querySelector('.Page_checkResource');
+          inputCheckResource = $response.querySelector('.HostCheck_Page_checkResource');
 
         jsWebsocketHostCheck(checkResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -188,343 +188,343 @@ async function websocketHostCheckInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.HostCheck_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.HostCheck_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.HostCheck_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.HostCheck_Page_archived'));
         }
 
         if(inputTenantResource) {
-          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_tenantResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
               item.textContent = inputTenantResource.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantResource'));
+          addGlow(document.querySelector('.HostCheck_Page_tenantResource'));
         }
 
         if(inputJobTemplateResource) {
-          document.querySelectorAll('.Page_jobTemplateResource').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_jobTemplateResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateResource.getAttribute('value');
             else
               item.textContent = inputJobTemplateResource.textContent;
           });
-          addGlow(document.querySelector('.Page_jobTemplateResource'));
+          addGlow(document.querySelector('.HostCheck_Page_jobTemplateResource'));
         }
 
         if(inputCheckName) {
-          document.querySelectorAll('.Page_checkName').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_checkName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCheckName.getAttribute('value');
             else
               item.textContent = inputCheckName.textContent;
           });
-          addGlow(document.querySelector('.Page_checkName'));
+          addGlow(document.querySelector('.HostCheck_Page_checkName'));
         }
 
         if(inputCheckDescription) {
-          document.querySelectorAll('.Page_checkDescription').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_checkDescription').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCheckDescription.getAttribute('value');
             else
               item.textContent = inputCheckDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_checkDescription'));
+          addGlow(document.querySelector('.HostCheck_Page_checkDescription'));
         }
 
         if(inputCheckNamespace) {
-          document.querySelectorAll('.Page_checkNamespace').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_checkNamespace').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCheckNamespace.getAttribute('value');
             else
               item.textContent = inputCheckNamespace.textContent;
           });
-          addGlow(document.querySelector('.Page_checkNamespace'));
+          addGlow(document.querySelector('.HostCheck_Page_checkNamespace'));
         }
 
         if(inputCheckCommand) {
-          document.querySelectorAll('.Page_checkCommand').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_checkCommand').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCheckCommand.getAttribute('value');
             else
               item.textContent = inputCheckCommand.textContent;
           });
-          addGlow(document.querySelector('.Page_checkCommand'));
+          addGlow(document.querySelector('.HostCheck_Page_checkCommand'));
         }
 
         if(inputCheckInterval) {
-          document.querySelectorAll('.Page_checkInterval').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_checkInterval').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCheckInterval.getAttribute('value');
             else
               item.textContent = inputCheckInterval.textContent;
           });
-          addGlow(document.querySelector('.Page_checkInterval'));
+          addGlow(document.querySelector('.HostCheck_Page_checkInterval'));
         }
 
         if(inputCheckPublished) {
-          document.querySelectorAll('.Page_checkPublished').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_checkPublished').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCheckPublished.getAttribute('value');
             else
               item.textContent = inputCheckPublished.textContent;
           });
-          addGlow(document.querySelector('.Page_checkPublished'));
+          addGlow(document.querySelector('.HostCheck_Page_checkPublished'));
         }
 
         if(inputEventSubscriptions) {
-          document.querySelectorAll('.Page_eventSubscriptions').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_eventSubscriptions').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEventSubscriptions.getAttribute('value');
             else
               item.textContent = inputEventSubscriptions.textContent;
           });
-          addGlow(document.querySelector('.Page_eventSubscriptions'));
+          addGlow(document.querySelector('.HostCheck_Page_eventSubscriptions'));
         }
 
         if(inputEventHandlers) {
-          document.querySelectorAll('.Page_eventHandlers').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_eventHandlers').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEventHandlers.getAttribute('value');
             else
               item.textContent = inputEventHandlers.textContent;
           });
-          addGlow(document.querySelector('.Page_eventHandlers'));
+          addGlow(document.querySelector('.HostCheck_Page_eventHandlers'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.HostCheck_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.HostCheck_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.HostCheck_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.HostCheck_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.HostCheck_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.HostCheck_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.HostCheck_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.HostCheck_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.HostCheck_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.HostCheck_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.HostCheck_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.HostCheck_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.HostCheck_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.HostCheck_Page_solrId'));
         }
 
         if(inputTenantId) {
-          document.querySelectorAll('.Page_tenantId').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_tenantId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantId.getAttribute('value');
             else
               item.textContent = inputTenantId.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantId'));
+          addGlow(document.querySelector('.HostCheck_Page_tenantId'));
         }
 
         if(inputAapOrganizationId) {
-          document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_aapOrganizationId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapOrganizationId.getAttribute('value');
             else
               item.textContent = inputAapOrganizationId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapOrganizationId'));
+          addGlow(document.querySelector('.HostCheck_Page_aapOrganizationId'));
         }
 
         if(inputJobTemplateId) {
-          document.querySelectorAll('.Page_jobTemplateId').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_jobTemplateId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateId.getAttribute('value');
             else
               item.textContent = inputJobTemplateId.textContent;
           });
-          addGlow(document.querySelector('.Page_jobTemplateId'));
+          addGlow(document.querySelector('.HostCheck_Page_jobTemplateId'));
         }
 
         if(inputAapTemplateId) {
-          document.querySelectorAll('.Page_aapTemplateId').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_aapTemplateId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapTemplateId.getAttribute('value');
             else
               item.textContent = inputAapTemplateId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapTemplateId'));
+          addGlow(document.querySelector('.HostCheck_Page_aapTemplateId'));
         }
 
         if(inputCheckId) {
-          document.querySelectorAll('.Page_checkId').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_checkId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCheckId.getAttribute('value');
             else
               item.textContent = inputCheckId.textContent;
           });
-          addGlow(document.querySelector('.Page_checkId'));
+          addGlow(document.querySelector('.HostCheck_Page_checkId'));
         }
 
         if(inputCheckResource) {
-          document.querySelectorAll('.Page_checkResource').forEach((item, index) => {
+          document.querySelectorAll('.HostCheck_Page_checkResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCheckResource.getAttribute('value');
             else
               item.textContent = inputCheckResource.textContent;
           });
-          addGlow(document.querySelector('.Page_checkResource'));
+          addGlow(document.querySelector('.HostCheck_Page_checkResource'));
         }
 
           pageGraphHostCheck();
@@ -858,23 +858,34 @@ function suggestHostCheckTenantResource(filters, $list, checkResource = null, te
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['tenantResource'];
+        var inputVar = 'tenantResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + checkResource + '_tenantResource_' + o['tenantResource']);
-        $input.setAttribute('name', 'tenantResource');
-        $input.setAttribute('value', o['tenantResource']);
+        $input.setAttribute('id', 'GET_tenantResource_' + checkResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueTenantResource ');
         if(checkResource != null) {
           $input.addEventListener('change', function(event) {
-            patchHostCheckVals([{ name: 'fq', value: 'checkResource:' + checkResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchHostCheckVals([{ name: 'fq', value: 'checkResource:' + checkResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostCheckTenantResource(filters, $list, checkResource, o['tenantResource'], relate, target);
+                  suggestHostCheckTenantResource(filters, $list, checkResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -888,7 +899,9 @@ function suggestHostCheckTenantResource(filters, $list, checkResource = null, te
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchTenantVals(filters, target, success, error);
+  if (typeof searchTenantVals === 'function') {
+    searchTenantVals(filters, target, success, error);
+  }
 }
 
 function suggestHostCheckJobTemplateResource(filters, $list, checkResource = null, jobTemplateResource = null, relate=true, target) {
@@ -907,23 +920,34 @@ function suggestHostCheckJobTemplateResource(filters, $list, checkResource = nul
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['jobTemplateResource'];
+        var inputVar = 'jobTemplateResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (jobTemplateResource != null && val === jobTemplateResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_jobTemplateResource_' + checkResource + '_jobTemplateResource_' + o['jobTemplateResource']);
-        $input.setAttribute('name', 'jobTemplateResource');
-        $input.setAttribute('value', o['jobTemplateResource']);
+        $input.setAttribute('id', 'GET_jobTemplateResource_' + checkResource + '_jobTemplateResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueJobTemplateResource ');
         if(checkResource != null) {
           $input.addEventListener('change', function(event) {
-            patchHostCheckVals([{ name: 'fq', value: 'checkResource:' + checkResource }], { [(event.target.checked ? 'set' : 'remove') + 'JobTemplateResource']: o['jobTemplateResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchHostCheckVals([{ name: 'fq', value: 'checkResource:' + checkResource }], { [(event.target.checked ? 'set' : 'remove') + 'JobTemplateResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostCheckJobTemplateResource(filters, $list, checkResource, o['jobTemplateResource'], relate, target);
+                  suggestHostCheckJobTemplateResource(filters, $list, checkResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -937,7 +961,9 @@ function suggestHostCheckJobTemplateResource(filters, $list, checkResource = nul
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchJobTemplateVals(filters, target, success, error);
+  if (typeof searchJobTemplateVals === 'function') {
+    searchJobTemplateVals(filters, target, success, error);
+  }
 }
 
 function suggestHostCheckObjectSuggest($formFilters, $list, target) {

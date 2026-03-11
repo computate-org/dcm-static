@@ -108,61 +108,61 @@ async function websocketHostInventoryInner(apiRequest) {
         var inputAapInventoryId = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.HostInventory_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.HostInventory_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.HostInventory_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.HostInventory_Page_archived');
         if(vars.includes('tenantResource'))
-          inputTenantResource = $response.querySelector('.Page_tenantResource');
+          inputTenantResource = $response.querySelector('.HostInventory_Page_tenantResource');
         if(vars.includes('inventoryName'))
-          inputInventoryName = $response.querySelector('.Page_inventoryName');
+          inputInventoryName = $response.querySelector('.HostInventory_Page_inventoryName');
         if(vars.includes('inventoryDescription'))
-          inputInventoryDescription = $response.querySelector('.Page_inventoryDescription');
+          inputInventoryDescription = $response.querySelector('.HostInventory_Page_inventoryDescription');
         if(vars.includes('inventoryKind'))
-          inputInventoryKind = $response.querySelector('.Page_inventoryKind');
+          inputInventoryKind = $response.querySelector('.HostInventory_Page_inventoryKind');
         if(vars.includes('hostInventoryIds'))
-          inputHostInventoryIds = $response.querySelector('.Page_hostInventoryIds');
+          inputHostInventoryIds = $response.querySelector('.HostInventory_Page_hostInventoryIds');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.HostInventory_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.HostInventory_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.HostInventory_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.HostInventory_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.HostInventory_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.HostInventory_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.HostInventory_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.HostInventory_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.HostInventory_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.HostInventory_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.HostInventory_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.HostInventory_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.HostInventory_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.HostInventory_Page_solrId');
         if(vars.includes('tenantId'))
-          inputTenantId = $response.querySelector('.Page_tenantId');
+          inputTenantId = $response.querySelector('.HostInventory_Page_tenantId');
         if(vars.includes('aapOrganizationId'))
-          inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
+          inputAapOrganizationId = $response.querySelector('.HostInventory_Page_aapOrganizationId');
         if(vars.includes('inventoryId'))
-          inputInventoryId = $response.querySelector('.Page_inventoryId');
+          inputInventoryId = $response.querySelector('.HostInventory_Page_inventoryId');
         if(vars.includes('inventoryResource'))
-          inputInventoryResource = $response.querySelector('.Page_inventoryResource');
+          inputInventoryResource = $response.querySelector('.HostInventory_Page_inventoryResource');
         if(vars.includes('aapInventoryId'))
-          inputAapInventoryId = $response.querySelector('.Page_aapInventoryId');
+          inputAapInventoryId = $response.querySelector('.HostInventory_Page_aapInventoryId');
 
         jsWebsocketHostInventory(inventoryResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -170,283 +170,283 @@ async function websocketHostInventoryInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.HostInventory_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.HostInventory_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.HostInventory_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.HostInventory_Page_archived'));
         }
 
         if(inputTenantResource) {
-          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_tenantResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
               item.textContent = inputTenantResource.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantResource'));
+          addGlow(document.querySelector('.HostInventory_Page_tenantResource'));
         }
 
         if(inputInventoryName) {
-          document.querySelectorAll('.Page_inventoryName').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_inventoryName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryName.getAttribute('value');
             else
               item.textContent = inputInventoryName.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryName'));
+          addGlow(document.querySelector('.HostInventory_Page_inventoryName'));
         }
 
         if(inputInventoryDescription) {
-          document.querySelectorAll('.Page_inventoryDescription').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_inventoryDescription').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryDescription.getAttribute('value');
             else
               item.textContent = inputInventoryDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryDescription'));
+          addGlow(document.querySelector('.HostInventory_Page_inventoryDescription'));
         }
 
         if(inputInventoryKind) {
-          document.querySelectorAll('.Page_inventoryKind').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_inventoryKind').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryKind.getAttribute('value');
             else
               item.textContent = inputInventoryKind.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryKind'));
+          addGlow(document.querySelector('.HostInventory_Page_inventoryKind'));
         }
 
         if(inputHostInventoryIds) {
-          document.querySelectorAll('.Page_hostInventoryIds').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_hostInventoryIds').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHostInventoryIds.getAttribute('value');
             else
               item.textContent = inputHostInventoryIds.textContent;
           });
-          addGlow(document.querySelector('.Page_hostInventoryIds'));
+          addGlow(document.querySelector('.HostInventory_Page_hostInventoryIds'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.HostInventory_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.HostInventory_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.HostInventory_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.HostInventory_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.HostInventory_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.HostInventory_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.HostInventory_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.HostInventory_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.HostInventory_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.HostInventory_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.HostInventory_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.HostInventory_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.HostInventory_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.HostInventory_Page_solrId'));
         }
 
         if(inputTenantId) {
-          document.querySelectorAll('.Page_tenantId').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_tenantId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantId.getAttribute('value');
             else
               item.textContent = inputTenantId.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantId'));
+          addGlow(document.querySelector('.HostInventory_Page_tenantId'));
         }
 
         if(inputAapOrganizationId) {
-          document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_aapOrganizationId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapOrganizationId.getAttribute('value');
             else
               item.textContent = inputAapOrganizationId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapOrganizationId'));
+          addGlow(document.querySelector('.HostInventory_Page_aapOrganizationId'));
         }
 
         if(inputInventoryId) {
-          document.querySelectorAll('.Page_inventoryId').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_inventoryId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryId.getAttribute('value');
             else
               item.textContent = inputInventoryId.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryId'));
+          addGlow(document.querySelector('.HostInventory_Page_inventoryId'));
         }
 
         if(inputInventoryResource) {
-          document.querySelectorAll('.Page_inventoryResource').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_inventoryResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryResource.getAttribute('value');
             else
               item.textContent = inputInventoryResource.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryResource'));
+          addGlow(document.querySelector('.HostInventory_Page_inventoryResource'));
         }
 
         if(inputAapInventoryId) {
-          document.querySelectorAll('.Page_aapInventoryId').forEach((item, index) => {
+          document.querySelectorAll('.HostInventory_Page_aapInventoryId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapInventoryId.getAttribute('value');
             else
               item.textContent = inputAapInventoryId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapInventoryId'));
+          addGlow(document.querySelector('.HostInventory_Page_aapInventoryId'));
         }
 
           pageGraphHostInventory();
@@ -750,23 +750,34 @@ function suggestHostInventoryTenantResource(filters, $list, inventoryResource = 
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['tenantResource'];
+        var inputVar = 'tenantResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + inventoryResource + '_tenantResource_' + o['tenantResource']);
-        $input.setAttribute('name', 'tenantResource');
-        $input.setAttribute('value', o['tenantResource']);
+        $input.setAttribute('id', 'GET_tenantResource_' + inventoryResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueTenantResource ');
         if(inventoryResource != null) {
           $input.addEventListener('change', function(event) {
-            patchHostInventoryVals([{ name: 'fq', value: 'inventoryResource:' + inventoryResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchHostInventoryVals([{ name: 'fq', value: 'inventoryResource:' + inventoryResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostInventoryTenantResource(filters, $list, inventoryResource, o['tenantResource'], relate, target);
+                  suggestHostInventoryTenantResource(filters, $list, inventoryResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -780,7 +791,9 @@ function suggestHostInventoryTenantResource(filters, $list, inventoryResource = 
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchTenantVals(filters, target, success, error);
+  if (typeof searchTenantVals === 'function') {
+    searchTenantVals(filters, target, success, error);
+  }
 }
 
 function suggestHostInventoryHostInventoryIds(filters, $list, inventoryResource = null, hostInventoryIds = null, relate=true, target) {
@@ -799,23 +812,33 @@ function suggestHostInventoryHostInventoryIds(filters, $list, inventoryResource 
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['inventoryResource'];
+        var inputVar = 'inventoryResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (hostInventoryIds != null && val === hostInventoryIds.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hostInventoryIds_' + inventoryResource + '_inventoryResource_' + o['inventoryResource']);
-        $input.setAttribute('name', 'inventoryResource');
-        $input.setAttribute('value', o['inventoryResource']);
+        $input.setAttribute('id', 'GET_hostInventoryIds_' + inventoryResource + '_inventoryResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueHostInventoryIds ');
         if(inventoryResource != null) {
           $input.addEventListener('change', function(event) {
-            patchHostInventoryVals([{ name: 'fq', value: 'inventoryResource:' + inventoryResource }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o['inventoryResource'] }
+            patchHostInventoryVals([{ name: 'fq', value: 'inventoryResource:' + inventoryResource }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostInventoryHostInventoryIds(filters, $list, inventoryResource, o['inventoryResource'], relate, target);
+                  suggestHostInventoryHostInventoryIds(filters, $list, inventoryResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -829,7 +852,9 @@ function suggestHostInventoryHostInventoryIds(filters, $list, inventoryResource 
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchHostVals(filters, target, success, error);
+  if (typeof searchHostVals === 'function') {
+    searchHostVals(filters, target, success, error);
+  }
 }
 
 function suggestHostInventoryObjectSuggest($formFilters, $list, target) {

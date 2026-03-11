@@ -112,69 +112,69 @@ async function websocketHostInner(apiRequest) {
         var inputInventoryName = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.Host_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.Host_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.Host_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.Host_Page_archived');
         if(vars.includes('inventoryResource'))
-          inputInventoryResource = $response.querySelector('.Page_inventoryResource');
+          inputInventoryResource = $response.querySelector('.Host_Page_inventoryResource');
         if(vars.includes('hostName'))
-          inputHostName = $response.querySelector('.Page_hostName');
+          inputHostName = $response.querySelector('.Host_Page_hostName');
         if(vars.includes('ipAddress'))
-          inputIpAddress = $response.querySelector('.Page_ipAddress');
+          inputIpAddress = $response.querySelector('.Host_Page_ipAddress');
         if(vars.includes('hostDescription'))
-          inputHostDescription = $response.querySelector('.Page_hostDescription');
+          inputHostDescription = $response.querySelector('.Host_Page_hostDescription');
         if(vars.includes('eventSubscriptions'))
-          inputEventSubscriptions = $response.querySelector('.Page_eventSubscriptions');
+          inputEventSubscriptions = $response.querySelector('.Host_Page_eventSubscriptions');
         if(vars.includes('tags'))
-          inputTags = $response.querySelector('.Page_tags');
+          inputTags = $response.querySelector('.Host_Page_tags');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.Host_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.Host_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.Host_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.Host_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.Host_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.Host_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.Host_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.Host_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.Host_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.Host_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.Host_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.Host_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.Host_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.Host_Page_solrId');
         if(vars.includes('tenantResource'))
-          inputTenantResource = $response.querySelector('.Page_tenantResource');
+          inputTenantResource = $response.querySelector('.Host_Page_tenantResource');
         if(vars.includes('tenantId'))
-          inputTenantId = $response.querySelector('.Page_tenantId');
+          inputTenantId = $response.querySelector('.Host_Page_tenantId');
         if(vars.includes('aapOrganizationId'))
-          inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
+          inputAapOrganizationId = $response.querySelector('.Host_Page_aapOrganizationId');
         if(vars.includes('aapHostId'))
-          inputAapHostId = $response.querySelector('.Page_aapHostId');
+          inputAapHostId = $response.querySelector('.Host_Page_aapHostId');
         if(vars.includes('hostId'))
-          inputHostId = $response.querySelector('.Page_hostId');
+          inputHostId = $response.querySelector('.Host_Page_hostId');
         if(vars.includes('hostResource'))
-          inputHostResource = $response.querySelector('.Page_hostResource');
+          inputHostResource = $response.querySelector('.Host_Page_hostResource');
         if(vars.includes('aapInventoryId'))
-          inputAapInventoryId = $response.querySelector('.Page_aapInventoryId');
+          inputAapInventoryId = $response.querySelector('.Host_Page_aapInventoryId');
         if(vars.includes('inventoryName'))
-          inputInventoryName = $response.querySelector('.Page_inventoryName');
+          inputInventoryName = $response.querySelector('.Host_Page_inventoryName');
 
         jsWebsocketHost(hostResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -182,323 +182,323 @@ async function websocketHostInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.Host_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.Host_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.Host_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.Host_Page_archived'));
         }
 
         if(inputInventoryResource) {
-          document.querySelectorAll('.Page_inventoryResource').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_inventoryResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryResource.getAttribute('value');
             else
               item.textContent = inputInventoryResource.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryResource'));
+          addGlow(document.querySelector('.Host_Page_inventoryResource'));
         }
 
         if(inputHostName) {
-          document.querySelectorAll('.Page_hostName').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_hostName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHostName.getAttribute('value');
             else
               item.textContent = inputHostName.textContent;
           });
-          addGlow(document.querySelector('.Page_hostName'));
+          addGlow(document.querySelector('.Host_Page_hostName'));
         }
 
         if(inputIpAddress) {
-          document.querySelectorAll('.Page_ipAddress').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_ipAddress').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputIpAddress.getAttribute('value');
             else
               item.textContent = inputIpAddress.textContent;
           });
-          addGlow(document.querySelector('.Page_ipAddress'));
+          addGlow(document.querySelector('.Host_Page_ipAddress'));
         }
 
         if(inputHostDescription) {
-          document.querySelectorAll('.Page_hostDescription').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_hostDescription').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHostDescription.getAttribute('value');
             else
               item.textContent = inputHostDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_hostDescription'));
+          addGlow(document.querySelector('.Host_Page_hostDescription'));
         }
 
         if(inputEventSubscriptions) {
-          document.querySelectorAll('.Page_eventSubscriptions').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_eventSubscriptions').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEventSubscriptions.getAttribute('value');
             else
               item.textContent = inputEventSubscriptions.textContent;
           });
-          addGlow(document.querySelector('.Page_eventSubscriptions'));
+          addGlow(document.querySelector('.Host_Page_eventSubscriptions'));
         }
 
         if(inputTags) {
-          document.querySelectorAll('.Page_tags').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_tags').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTags.getAttribute('value');
             else
               item.textContent = inputTags.textContent;
           });
-          addGlow(document.querySelector('.Page_tags'));
+          addGlow(document.querySelector('.Host_Page_tags'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.Host_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.Host_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.Host_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.Host_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.Host_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.Host_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.Host_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.Host_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.Host_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.Host_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.Host_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.Host_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.Host_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.Host_Page_solrId'));
         }
 
         if(inputTenantResource) {
-          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_tenantResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
               item.textContent = inputTenantResource.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantResource'));
+          addGlow(document.querySelector('.Host_Page_tenantResource'));
         }
 
         if(inputTenantId) {
-          document.querySelectorAll('.Page_tenantId').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_tenantId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantId.getAttribute('value');
             else
               item.textContent = inputTenantId.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantId'));
+          addGlow(document.querySelector('.Host_Page_tenantId'));
         }
 
         if(inputAapOrganizationId) {
-          document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_aapOrganizationId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapOrganizationId.getAttribute('value');
             else
               item.textContent = inputAapOrganizationId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapOrganizationId'));
+          addGlow(document.querySelector('.Host_Page_aapOrganizationId'));
         }
 
         if(inputAapHostId) {
-          document.querySelectorAll('.Page_aapHostId').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_aapHostId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapHostId.getAttribute('value');
             else
               item.textContent = inputAapHostId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapHostId'));
+          addGlow(document.querySelector('.Host_Page_aapHostId'));
         }
 
         if(inputHostId) {
-          document.querySelectorAll('.Page_hostId').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_hostId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHostId.getAttribute('value');
             else
               item.textContent = inputHostId.textContent;
           });
-          addGlow(document.querySelector('.Page_hostId'));
+          addGlow(document.querySelector('.Host_Page_hostId'));
         }
 
         if(inputHostResource) {
-          document.querySelectorAll('.Page_hostResource').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_hostResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHostResource.getAttribute('value');
             else
               item.textContent = inputHostResource.textContent;
           });
-          addGlow(document.querySelector('.Page_hostResource'));
+          addGlow(document.querySelector('.Host_Page_hostResource'));
         }
 
         if(inputAapInventoryId) {
-          document.querySelectorAll('.Page_aapInventoryId').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_aapInventoryId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapInventoryId.getAttribute('value');
             else
               item.textContent = inputAapInventoryId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapInventoryId'));
+          addGlow(document.querySelector('.Host_Page_aapInventoryId'));
         }
 
         if(inputInventoryName) {
-          document.querySelectorAll('.Page_inventoryName').forEach((item, index) => {
+          document.querySelectorAll('.Host_Page_inventoryName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryName.getAttribute('value');
             else
               item.textContent = inputInventoryName.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryName'));
+          addGlow(document.querySelector('.Host_Page_inventoryName'));
         }
 
           pageGraphHost();
@@ -818,23 +818,34 @@ function suggestHostTenantResource(filters, $list, hostResource = null, tenantRe
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['tenantResource'];
+        var inputVar = 'tenantResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + hostResource + '_tenantResource_' + o['tenantResource']);
-        $input.setAttribute('name', 'tenantResource');
-        $input.setAttribute('value', o['tenantResource']);
+        $input.setAttribute('id', 'GET_tenantResource_' + hostResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueTenantResource ');
         if(hostResource != null) {
           $input.addEventListener('change', function(event) {
-            patchHostVals([{ name: 'fq', value: 'hostResource:' + hostResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchHostVals([{ name: 'fq', value: 'hostResource:' + hostResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostTenantResource(filters, $list, hostResource, o['tenantResource'], relate, target);
+                  suggestHostTenantResource(filters, $list, hostResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -848,7 +859,9 @@ function suggestHostTenantResource(filters, $list, hostResource = null, tenantRe
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchTenantVals(filters, target, success, error);
+  if (typeof searchTenantVals === 'function') {
+    searchTenantVals(filters, target, success, error);
+  }
 }
 
 function suggestHostInventoryResource(filters, $list, hostResource = null, inventoryResource = null, relate=true, target) {
@@ -867,23 +880,34 @@ function suggestHostInventoryResource(filters, $list, hostResource = null, inven
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['inventoryResource'];
+        var inputVar = 'inventoryResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (inventoryResource != null && val === inventoryResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_inventoryResource_' + hostResource + '_inventoryResource_' + o['inventoryResource']);
-        $input.setAttribute('name', 'inventoryResource');
-        $input.setAttribute('value', o['inventoryResource']);
+        $input.setAttribute('id', 'GET_inventoryResource_' + hostResource + '_inventoryResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueInventoryResource ');
         if(hostResource != null) {
           $input.addEventListener('change', function(event) {
-            patchHostVals([{ name: 'fq', value: 'hostResource:' + hostResource }], { [(event.target.checked ? 'set' : 'remove') + 'InventoryResource']: o['inventoryResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchHostVals([{ name: 'fq', value: 'hostResource:' + hostResource }], { [(event.target.checked ? 'set' : 'remove') + 'InventoryResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestHostInventoryResource(filters, $list, hostResource, o['inventoryResource'], relate, target);
+                  suggestHostInventoryResource(filters, $list, hostResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -897,7 +921,9 @@ function suggestHostInventoryResource(filters, $list, hostResource = null, inven
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchHostInventoryVals(filters, target, success, error);
+  if (typeof searchHostInventoryVals === 'function') {
+    searchHostInventoryVals(filters, target, success, error);
+  }
 }
 
 function suggestHostObjectSuggest($formFilters, $list, target) {

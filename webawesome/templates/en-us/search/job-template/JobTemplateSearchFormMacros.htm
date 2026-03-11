@@ -1,4 +1,4 @@
-{%- macro inputPkJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPkJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pk">
   {%- endif %}
@@ -11,14 +11,14 @@
                       id="JobTemplate_{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-jobTemplateResource={{ result.jobTemplateResource | tojson }}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_pk setPk classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Pk "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_pk setPk classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_pk setPk classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Pk "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_pk setPk classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_pk valuePk classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Pk "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_pk valuePk classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -35,7 +35,7 @@
 {%- macro htmPkJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPkJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCreatedJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -44,7 +44,7 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_created datetimepicker setCreated classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Created "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_created datetimepicker setCreated classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="JobTemplate_{{classApiMethodMethod}}_created"
@@ -63,7 +63,7 @@
 {%- macro htmCreatedJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputModifiedJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -72,7 +72,7 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_modified datetimepicker setModified classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Modified "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_modified datetimepicker setModified classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="JobTemplate_{{classApiMethodMethod}}_modified"
@@ -91,7 +91,7 @@
 {%- macro htmModifiedJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputArchivedJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -101,7 +101,7 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_archived classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Archived "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_archived classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Archived "
                       name="setArchived"
                       data-jobTemplateResource={{ result.jobTemplateResource | tojson }}
                       data-val="{{ result.archived | e }}"
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_archived classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Archived "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_archived classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_archived classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Archived "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_archived classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_archived setArchived valueArchived classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Archived "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_archived setArchived valueArchived classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -153,14 +153,14 @@
 {%- macro htmArchivedJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputInventoryResourceJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputInventoryResourceJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_inventoryResource">
   {%- endif %}
   {%- if 'PUTCopy' == classApiMethodMethod %}
                   <div>
                     <wa-checkbox 
-                        id="JobTemplate_{{classApiMethodMethod}}_inventoryResource_clear"
+                        id="{{ idPrefix }}JobTemplate_{{classApiMethodMethod}}_inventoryResource{{ idSuffix }}_clear"
                         class="label-on-left JobTemplate_classApiMethodMethod}}_inventoryResource_clear inventoryResource_clear "
                         hint="clear"
                         >
@@ -173,13 +173,13 @@
                       placeholder="inventory"
                       label="inventory"
                       hint="The unique authorization resource for the inventory for multi-tenancy"
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_inventoryResource valueObjectSuggest suggestInventoryResource "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_inventoryResource valueObjectSuggest suggestInventoryResource "
                       name="setInventoryResource"
-                      id="JobTemplate_{{classApiMethodMethod}}_inventoryResource"
+                      id="{{ idPrefix }}JobTemplate_{{classApiMethodMethod}}_inventoryResource{{ idSuffix }}"
                       data-list="listJobTemplateInventoryResource_{{classApiMethodMethod}}"
                       data-method="{{classApiMethodMethod}}"
                       autocomplete="off"
-  {% if 'Page' == classApiMethodMethod -%}
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
                       value="{{result.inventoryResource | e }}"
   {% endif -%}
                   >
@@ -191,7 +191,7 @@
 {%- endmacro %}
 
 {%- macro htmInventoryResourceJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputInventoryResourceJobTemplatePage(authForWrite=authForWrite, authForRead=authForRead) }}
+                {{ inputInventoryResourceJobTemplatePage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate a host inventory to this job template
@@ -201,21 +201,23 @@
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postHostInventory() }}                  <wa-button
+                  {{ htmForm_postHostInventory(idSuffix='_JobTemplate_POST_inventoryResource') }}
+                  <wa-button
                        id="JobTemplate_{{classApiMethodMethod}}_inventoryResource_add"
-                       data-dialog="open postHostInventoryDialog"                      >add a host inventory</wa-button>
+                       data-dialog="open postHostInventoryDialog"
+                      >add a host inventory</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputAnsibleProjectResourceJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputAnsibleProjectResourceJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_ansibleProjectResource">
   {%- endif %}
   {%- if 'PUTCopy' == classApiMethodMethod %}
                   <div>
                     <wa-checkbox 
-                        id="JobTemplate_{{classApiMethodMethod}}_ansibleProjectResource_clear"
+                        id="{{ idPrefix }}JobTemplate_{{classApiMethodMethod}}_ansibleProjectResource{{ idSuffix }}_clear"
                         class="label-on-left JobTemplate_classApiMethodMethod}}_ansibleProjectResource_clear ansibleProjectResource_clear "
                         hint="clear"
                         >
@@ -228,13 +230,13 @@
                       placeholder="Ansible project"
                       label="Ansible project"
                       hint="The Ansible project containing the playbook for this Job Template. "
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_ansibleProjectResource valueObjectSuggest suggestAnsibleProjectResource "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_ansibleProjectResource valueObjectSuggest suggestAnsibleProjectResource "
                       name="setAnsibleProjectResource"
-                      id="JobTemplate_{{classApiMethodMethod}}_ansibleProjectResource"
+                      id="{{ idPrefix }}JobTemplate_{{classApiMethodMethod}}_ansibleProjectResource{{ idSuffix }}"
                       data-list="listJobTemplateAnsibleProjectResource_{{classApiMethodMethod}}"
                       data-method="{{classApiMethodMethod}}"
                       autocomplete="off"
-  {% if 'Page' == classApiMethodMethod -%}
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
                       value="{{result.ansibleProjectResource | e }}"
   {% endif -%}
                   >
@@ -246,7 +248,7 @@
 {%- endmacro %}
 
 {%- macro htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputAnsibleProjectResourceJobTemplatePage(authForWrite=authForWrite, authForRead=authForRead) }}
+                {{ inputAnsibleProjectResourceJobTemplatePage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate a ansible project to this job template
@@ -256,14 +258,16 @@
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postAnsibleProject() }}                  <wa-button
+                  {{ htmForm_postAnsibleProject(idSuffix='_JobTemplate_POST_ansibleProjectResource') }}
+                  <wa-button
                        id="JobTemplate_{{classApiMethodMethod}}_ansibleProjectResource_add"
-                       data-dialog="open postAnsibleProjectDialog"                      >add a ansible project</wa-button>
+                       data-dialog="open postAnsibleProjectDialog"
+                      >add a ansible project</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputAnsiblePlaybookJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputAnsiblePlaybookJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_ansiblePlaybook">
   {%- endif %}
@@ -276,14 +280,14 @@
                       id="JobTemplate_{{classApiMethodMethod}}_ansiblePlaybook"
   {%- if "Page" == classApiMethodMethod %}
                       data-jobTemplateResource={{ result.jobTemplateResource | tojson }}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_ansiblePlaybook setAnsiblePlaybook classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AnsiblePlaybook "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_ansiblePlaybook setAnsiblePlaybook classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AnsiblePlaybook "
                       name="setAnsiblePlaybook"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_ansiblePlaybook setAnsiblePlaybook classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AnsiblePlaybook "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_ansiblePlaybook setAnsiblePlaybook classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AnsiblePlaybook "
                       name="setAnsiblePlaybook"
     {%- else %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_ansiblePlaybook valueAnsiblePlaybook classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AnsiblePlaybook "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_ansiblePlaybook valueAnsiblePlaybook classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AnsiblePlaybook "
                       name="ansiblePlaybook"
     {%- endif %}
   {%- endif %}
@@ -300,7 +304,7 @@
 {%- macro htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputAnsiblePlaybookJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputJobTemplateNameJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputJobTemplateNameJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_jobTemplateName">
   {%- endif %}
@@ -312,14 +316,14 @@
                       id="JobTemplate_{{classApiMethodMethod}}_jobTemplateName"
   {%- if "Page" == classApiMethodMethod %}
                       data-jobTemplateResource={{ result.jobTemplateResource | tojson }}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_jobTemplateName setJobTemplateName classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateName "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_jobTemplateName setJobTemplateName classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateName "
                       name="setJobTemplateName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_jobTemplateName setJobTemplateName classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateName "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_jobTemplateName setJobTemplateName classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateName "
                       name="setJobTemplateName"
     {%- else %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_jobTemplateName valueJobTemplateName classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateName "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_jobTemplateName valueJobTemplateName classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateName "
                       name="jobTemplateName"
     {%- endif %}
   {%- endif %}
@@ -336,7 +340,7 @@
 {%- macro htmJobTemplateNameJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputJobTemplateNameJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputJobTemplateDescriptionJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputJobTemplateDescriptionJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_jobTemplateDescription">
   {%- endif %}
@@ -348,14 +352,14 @@
                       id="JobTemplate_{{classApiMethodMethod}}_jobTemplateDescription"
   {%- if "Page" == classApiMethodMethod %}
                       data-jobTemplateResource={{ result.jobTemplateResource | tojson }}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_jobTemplateDescription setJobTemplateDescription classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateDescription "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_jobTemplateDescription setJobTemplateDescription classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateDescription "
                       name="setJobTemplateDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_jobTemplateDescription setJobTemplateDescription classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateDescription "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_jobTemplateDescription setJobTemplateDescription classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateDescription "
                       name="setJobTemplateDescription"
     {%- else %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_jobTemplateDescription valueJobTemplateDescription classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateDescription "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_jobTemplateDescription valueJobTemplateDescription classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobTemplateDescription "
                       name="jobTemplateDescription"
     {%- endif %}
   {%- endif %}
@@ -372,7 +376,7 @@
 {%- macro htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputJobTemplateDescriptionJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputJobTypeJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputJobTypeJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_jobType">
   {%- endif %}
@@ -384,14 +388,14 @@
                       id="JobTemplate_{{classApiMethodMethod}}_jobType"
   {%- if "Page" == classApiMethodMethod %}
                       data-jobTemplateResource={{ result.jobTemplateResource | tojson }}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_jobType setJobType classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobType "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_jobType setJobType classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobType "
                       name="setJobType"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_jobType setJobType classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobType "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_jobType setJobType classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobType "
                       name="setJobType"
     {%- else %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_jobType valueJobType classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobType "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_jobType valueJobType classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}JobType "
                       name="jobType"
     {%- endif %}
   {%- endif %}
@@ -411,7 +415,7 @@
 {%- macro htmJobTypeJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputJobTypeJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputExtraVarsJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputExtraVarsJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_extraVars">
   {%- endif %}
@@ -423,14 +427,14 @@
                       id="JobTemplate_{{classApiMethodMethod}}_extraVars"
   {%- if "Page" == classApiMethodMethod %}
                       data-jobTemplateResource={{ result.jobTemplateResource | tojson }}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_extraVars setExtraVars classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}ExtraVars "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_extraVars setExtraVars classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}ExtraVars "
                       name="setExtraVars"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_extraVars setExtraVars classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}ExtraVars "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_extraVars setExtraVars classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}ExtraVars "
                       name="setExtraVars"
     {%- else %}
-                      class="label-on-left {{JobTemplate_classApiMethodMethod}}_extraVars valueExtraVars classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}ExtraVars "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_extraVars valueExtraVars classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}ExtraVars "
                       name="extraVars"
     {%- endif %}
   {%- endif %}
@@ -457,7 +461,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchJobTemplate() %}
+{%- macro htmForm_patchJobTemplate(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchJobTemplateDialog" label="Modify job template">
           <form id="htmForm_patchJobTemplate" class="round-row primary-smart-border-radius ">
 
@@ -467,12 +471,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -484,12 +488,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -501,52 +505,52 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -565,7 +569,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postJobTemplate() %}
+{%- macro htmForm_postJobTemplate(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postJobTemplateDialog" label="Create a job template">
           <form id="htmForm_postJobTemplate" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -576,12 +580,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -593,12 +597,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -610,52 +614,52 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -674,7 +678,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deleteJobTemplate() %}
+{%- macro htmForm_deleteJobTemplate(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteJobTemplateDialog" label="Delete job template">
           <form id="htmForm_deleteJobTemplate" class="round-row primary-smart-border-radius ">
           </form>
@@ -691,7 +695,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_putimportJobTemplate() %}
+{%- macro htmForm_putimportJobTemplate(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportJobTemplateDialog" label="Import job templates">
           <form id="htmForm_putimportJobTemplate" class="round-row primary-smart-border-radius ">
             <div>
@@ -707,7 +711,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageJobTemplate() %}
+{%- macro htmForm_searchpageJobTemplate(idSuffix='') %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageJobTemplateDialog" label="Search job templates">
           <div id="htmForm_searchpageJobTemplate" class="round-row primary-smart-border-radius ">
 
@@ -717,44 +721,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPkJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPkJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPkJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPkJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPkJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPkJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmCreatedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCreatedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCreatedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCreatedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCreatedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCreatedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmModifiedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmModifiedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmModifiedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmModifiedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmModifiedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmModifiedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmArchivedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmArchivedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmArchivedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmArchivedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmArchivedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmArchivedJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -766,12 +770,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -783,12 +787,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAnsibleProjectResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -800,52 +804,52 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmJobTemplateNameJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmJobTemplateDescriptionJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmJobTypeJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -863,7 +867,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deletefilterJobTemplate() %}
+{%- macro htmForm_deletefilterJobTemplate(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterJobTemplateDialog" label="Delete job template">
           <form id="htmForm_deletefilterJobTemplate" class="round-row primary-smart-border-radius ">
           </form>

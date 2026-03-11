@@ -151,11 +151,12 @@
             suggestHostInventoryResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,inventoryResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.hostResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.inventoryResource : null
                 , true
+                , event.target
                 );
           }
           document.querySelector('#Host_POST_inventoryResource')?.addEventListener('input', relate_inventoryResource);
@@ -166,17 +167,19 @@
           document.querySelector('#Host_Page_inventoryResource')?.addEventListener('focus', relate_inventoryResource);
           document.querySelector('#HostInventory_POST_hostResource')?.addEventListener('input', relate_inventoryResource);
           document.querySelector('#HostInventory_POST_hostResource')?.addEventListener('focus', relate_inventoryResource);
-          {% if "PATCH" in scopes %}
-          suggestHostInventoryResource([{'name':'fq','value':'inventoryResource:' + window.result.inventoryResource}], document.querySelector('#listHostInventoryResource_Page'), window.result.hostResource, window.result.inventoryResource, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestHostInventoryResource([{'name':'fq','value':'inventoryResource:' + window.result.inventoryResource}], document.querySelector('#listHostInventoryResource_Page'), window.result.hostResource, window.result.inventoryResource, true);
-          {% else %}
-          suggestHostInventoryResource([{'name':'fq','value':'inventoryResource:' + window.result.inventoryResource}], document.querySelector('#listHostInventoryResource_Page'), window.result.hostResource, window.result.inventoryResource, false);
-          {% endif %}
-          {% endif %}
-          function relate_tenantResource(event) {
-            suggestHostTenantResource(
+          if(window.result.inventoryResource) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestHostInventoryResource([{'name':'fq','value':'inventoryResource:' + window.result.inventoryResource}], document.querySelector('#listHostInventoryResource_Page'), window.result.hostResource, window.result.inventoryResource, true, document.getElementById('Host_Page_inventoryResource'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestHostInventoryResource([{'name':'fq','value':'inventoryResource:' + window.result.inventoryResource}], document.querySelector('#listHostInventoryResource_Page'), window.result.hostResource, window.result.inventoryResource, true, document.getElementById('Host_Page_inventoryResource'));
+          {% else -%}
+            {{'  '}}suggestHostInventoryResource([{'name':'fq','value':'inventoryResource:' + window.result.inventoryResource}], document.querySelector('#listHostInventoryResource_Page'), window.result.hostResource, window.result.inventoryResource, false, document.getElementById('Host_Page_inventoryResource'));
+          {% endif -%}
+          {% endif -%}
+          }
+          function HostInventory_POST_tenantResource_Host_POST_inventoryResource(event) {
+            suggestHostInventoryTenantResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
@@ -184,6 +187,35 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.hostResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
                 , true
+                , document.querySelector('#HostInventory_POST_tenantResource_Host_POST_inventoryResource')
+                );
+          }
+          document.querySelector('#HostInventory_POST_tenantResource_Host_POST_inventoryResource')?.addEventListener('input', HostInventory_POST_tenantResource_Host_POST_inventoryResource);
+          document.querySelector('#HostInventory_POST_tenantResource_Host_POST_inventoryResource')?.addEventListener('focus', HostInventory_POST_tenantResource_Host_POST_inventoryResource);
+          function HostInventory_POST_hostInventoryIds_Host_POST_inventoryResource(event) {
+            suggestHostInventoryHostInventoryIds(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,hostResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
+                , true
+                , document.querySelector('#HostInventory_POST_hostInventoryIds_Host_POST_inventoryResource')
+                );
+          }
+          document.querySelector('#HostInventory_POST_hostInventoryIds_Host_POST_inventoryResource')?.addEventListener('input', HostInventory_POST_hostInventoryIds_Host_POST_inventoryResource);
+          document.querySelector('#HostInventory_POST_hostInventoryIds_Host_POST_inventoryResource')?.addEventListener('focus', HostInventory_POST_hostInventoryIds_Host_POST_inventoryResource);
+          function relate_tenantResource(event) {
+            suggestHostTenantResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , true
+                , event.target
                 );
           }
           document.querySelector('#Host_POST_tenantResource')?.addEventListener('input', relate_tenantResource);
@@ -194,15 +226,45 @@
           document.querySelector('#Host_Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#Tenant_POST_hostResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#Tenant_POST_hostResource')?.addEventListener('focus', relate_tenantResource);
-          {% if "PATCH" in scopes %}
-          suggestHostTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostTenantResource_Page'), window.result.hostResource, window.result.tenantResource, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestHostTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostTenantResource_Page'), window.result.hostResource, window.result.tenantResource, true);
-          {% else %}
-          suggestHostTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostTenantResource_Page'), window.result.hostResource, window.result.tenantResource, false);
-          {% endif %}
-          {% endif %}
+          if(window.result.tenantResource) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestHostTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostTenantResource_Page'), window.result.hostResource, window.result.tenantResource, true, document.getElementById('Host_Page_tenantResource'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestHostTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostTenantResource_Page'), window.result.hostResource, window.result.tenantResource, true, document.getElementById('Host_Page_tenantResource'));
+          {% else -%}
+            {{'  '}}suggestHostTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostTenantResource_Page'), window.result.hostResource, window.result.tenantResource, false, document.getElementById('Host_Page_tenantResource'));
+          {% endif -%}
+          {% endif -%}
+          }
+          function Tenant_POST_hostInventoryIds_Host_POST_tenantResource(event) {
+            suggestTenantHostInventoryIds(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
+                , true
+                , document.querySelector('#Tenant_POST_hostInventoryIds_Host_POST_tenantResource')
+                );
+          }
+          document.querySelector('#Tenant_POST_hostInventoryIds_Host_POST_tenantResource')?.addEventListener('input', Tenant_POST_hostInventoryIds_Host_POST_tenantResource);
+          document.querySelector('#Tenant_POST_hostInventoryIds_Host_POST_tenantResource')?.addEventListener('focus', Tenant_POST_hostInventoryIds_Host_POST_tenantResource);
+          function Tenant_POST_ansibleProjectIds_Host_POST_tenantResource(event) {
+            suggestTenantAnsibleProjectIds(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
+                , true
+                , document.querySelector('#Tenant_POST_ansibleProjectIds_Host_POST_tenantResource')
+                );
+          }
+          document.querySelector('#Tenant_POST_ansibleProjectIds_Host_POST_tenantResource')?.addEventListener('input', Tenant_POST_ansibleProjectIds_Host_POST_tenantResource);
+          document.querySelector('#Tenant_POST_ansibleProjectIds_Host_POST_tenantResource')?.addEventListener('focus', Tenant_POST_ansibleProjectIds_Host_POST_tenantResource);
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listHost')?.value;
@@ -303,6 +365,8 @@
               , document.querySelector('#htmFormButton_postTenant')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 
@@ -312,6 +376,8 @@
               , document.querySelector('#htmFormButton_postHostInventory')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 {%- block htmScriptInitHostPage %}{%- endblock htmScriptInitHostPage %}

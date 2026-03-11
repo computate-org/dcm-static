@@ -1,4 +1,4 @@
-{%- macro inputPkHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPkHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pk">
   {%- endif %}
@@ -11,14 +11,14 @@
                       id="Host_{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-hostResource={{ result.hostResource | tojson }}
-                      class="label-on-left {{Host_classApiMethodMethod}}_pk setPk classHost inputHost{{ result.hostResource }}Pk "
+                      class="label-on-left Host_{{classApiMethodMethod}}_pk setPk classHost inputHost{{ result.hostResource }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_pk setPk classHost inputHost{{ result.hostResource }}Pk "
+                      class="label-on-left Host_{{classApiMethodMethod}}_pk setPk classHost inputHost{{ result.hostResource }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_pk valuePk classHost inputHost{{ result.hostResource }}Pk "
+                      class="label-on-left Host_{{classApiMethodMethod}}_pk valuePk classHost inputHost{{ result.hostResource }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -35,7 +35,7 @@
 {%- macro htmPkHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPkHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCreatedHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -44,7 +44,7 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{Host_classApiMethodMethod}}_created datetimepicker setCreated classHost inputHost{{ result.hostResource }}Created "
+                      class="label-on-left Host_{{classApiMethodMethod}}_created datetimepicker setCreated classHost inputHost{{ result.hostResource }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="Host_{{classApiMethodMethod}}_created"
@@ -63,7 +63,7 @@
 {%- macro htmCreatedHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputModifiedHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -72,7 +72,7 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{Host_classApiMethodMethod}}_modified datetimepicker setModified classHost inputHost{{ result.hostResource }}Modified "
+                      class="label-on-left Host_{{classApiMethodMethod}}_modified datetimepicker setModified classHost inputHost{{ result.hostResource }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="Host_{{classApiMethodMethod}}_modified"
@@ -91,7 +91,7 @@
 {%- macro htmModifiedHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputArchivedHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -101,7 +101,7 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{Host_classApiMethodMethod}}_archived classHost inputHost{{ result.hostResource }}Archived "
+                      class="label-on-left Host_{{classApiMethodMethod}}_archived classHost inputHost{{ result.hostResource }}Archived "
                       name="setArchived"
                       data-hostResource={{ result.hostResource | tojson }}
                       data-val="{{ result.archived | e }}"
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_archived classHost inputHost{{ result.hostResource }}Archived "
+                      class="label-on-left Host_{{classApiMethodMethod}}_archived classHost inputHost{{ result.hostResource }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_archived classHost inputHost{{ result.hostResource }}Archived "
+                      class="label-on-left Host_{{classApiMethodMethod}}_archived classHost inputHost{{ result.hostResource }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_archived setArchived valueArchived classHost inputHost{{ result.hostResource }}Archived "
+                      class="label-on-left Host_{{classApiMethodMethod}}_archived setArchived valueArchived classHost inputHost{{ result.hostResource }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -153,14 +153,14 @@
 {%- macro htmArchivedHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputInventoryResourceHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputInventoryResourceHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_inventoryResource">
   {%- endif %}
   {%- if 'PUTCopy' == classApiMethodMethod %}
                   <div>
                     <wa-checkbox 
-                        id="Host_{{classApiMethodMethod}}_inventoryResource_clear"
+                        id="{{ idPrefix }}Host_{{classApiMethodMethod}}_inventoryResource{{ idSuffix }}_clear"
                         class="label-on-left Host_classApiMethodMethod}}_inventoryResource_clear inventoryResource_clear "
                         hint="clear"
                         >
@@ -173,13 +173,13 @@
                       placeholder="inventory"
                       label="inventory"
                       hint="The unique authorization resource for the inventory for multi-tenancy"
-                      class="label-on-left {{Host_classApiMethodMethod}}_inventoryResource valueObjectSuggest suggestInventoryResource "
+                      class="label-on-left Host_{{classApiMethodMethod}}_inventoryResource valueObjectSuggest suggestInventoryResource "
                       name="setInventoryResource"
-                      id="Host_{{classApiMethodMethod}}_inventoryResource"
+                      id="{{ idPrefix }}Host_{{classApiMethodMethod}}_inventoryResource{{ idSuffix }}"
                       data-list="listHostInventoryResource_{{classApiMethodMethod}}"
                       data-method="{{classApiMethodMethod}}"
                       autocomplete="off"
-  {% if 'Page' == classApiMethodMethod -%}
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
                       value="{{result.inventoryResource | e }}"
   {% endif -%}
                   >
@@ -191,7 +191,7 @@
 {%- endmacro %}
 
 {%- macro htmInventoryResourceHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputInventoryResourceHostPage(authForWrite=authForWrite, authForRead=authForRead) }}
+                {{ inputInventoryResourceHostPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate a host inventory to this host
@@ -201,14 +201,16 @@
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postHostInventory() }}                  <wa-button
+                  {{ htmForm_postHostInventory(idSuffix='_Host_POST_inventoryResource') }}
+                  <wa-button
                        id="Host_{{classApiMethodMethod}}_inventoryResource_add"
-                       data-dialog="open postHostInventoryDialog"                      >add a host inventory</wa-button>
+                       data-dialog="open postHostInventoryDialog"
+                      >add a host inventory</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputHostNameHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputHostNameHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_hostName">
   {%- endif %}
@@ -221,14 +223,14 @@
                       id="Host_{{classApiMethodMethod}}_hostName"
   {%- if "Page" == classApiMethodMethod %}
                       data-hostResource={{ result.hostResource | tojson }}
-                      class="label-on-left {{Host_classApiMethodMethod}}_hostName setHostName classHost inputHost{{ result.hostResource }}HostName "
+                      class="label-on-left Host_{{classApiMethodMethod}}_hostName setHostName classHost inputHost{{ result.hostResource }}HostName "
                       name="setHostName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_hostName setHostName classHost inputHost{{ result.hostResource }}HostName "
+                      class="label-on-left Host_{{classApiMethodMethod}}_hostName setHostName classHost inputHost{{ result.hostResource }}HostName "
                       name="setHostName"
     {%- else %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_hostName valueHostName classHost inputHost{{ result.hostResource }}HostName "
+                      class="label-on-left Host_{{classApiMethodMethod}}_hostName valueHostName classHost inputHost{{ result.hostResource }}HostName "
                       name="hostName"
     {%- endif %}
   {%- endif %}
@@ -245,7 +247,7 @@
 {%- macro htmHostNameHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputHostNameHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputIpAddressHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputIpAddressHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_ipAddress">
   {%- endif %}
@@ -258,14 +260,14 @@
                       id="Host_{{classApiMethodMethod}}_ipAddress"
   {%- if "Page" == classApiMethodMethod %}
                       data-hostResource={{ result.hostResource | tojson }}
-                      class="label-on-left {{Host_classApiMethodMethod}}_ipAddress setIpAddress classHost inputHost{{ result.hostResource }}IpAddress "
+                      class="label-on-left Host_{{classApiMethodMethod}}_ipAddress setIpAddress classHost inputHost{{ result.hostResource }}IpAddress "
                       name="setIpAddress"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_ipAddress setIpAddress classHost inputHost{{ result.hostResource }}IpAddress "
+                      class="label-on-left Host_{{classApiMethodMethod}}_ipAddress setIpAddress classHost inputHost{{ result.hostResource }}IpAddress "
                       name="setIpAddress"
     {%- else %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_ipAddress valueIpAddress classHost inputHost{{ result.hostResource }}IpAddress "
+                      class="label-on-left Host_{{classApiMethodMethod}}_ipAddress valueIpAddress classHost inputHost{{ result.hostResource }}IpAddress "
                       name="ipAddress"
     {%- endif %}
   {%- endif %}
@@ -282,7 +284,7 @@
 {%- macro htmIpAddressHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputIpAddressHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputHostDescriptionHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputHostDescriptionHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_hostDescription">
   {%- endif %}
@@ -294,14 +296,14 @@
                       id="Host_{{classApiMethodMethod}}_hostDescription"
   {%- if "Page" == classApiMethodMethod %}
                       data-hostResource={{ result.hostResource | tojson }}
-                      class="label-on-left {{Host_classApiMethodMethod}}_hostDescription setHostDescription classHost inputHost{{ result.hostResource }}HostDescription "
+                      class="label-on-left Host_{{classApiMethodMethod}}_hostDescription setHostDescription classHost inputHost{{ result.hostResource }}HostDescription "
                       name="setHostDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_hostDescription setHostDescription classHost inputHost{{ result.hostResource }}HostDescription "
+                      class="label-on-left Host_{{classApiMethodMethod}}_hostDescription setHostDescription classHost inputHost{{ result.hostResource }}HostDescription "
                       name="setHostDescription"
     {%- else %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_hostDescription valueHostDescription classHost inputHost{{ result.hostResource }}HostDescription "
+                      class="label-on-left Host_{{classApiMethodMethod}}_hostDescription valueHostDescription classHost inputHost{{ result.hostResource }}HostDescription "
                       name="hostDescription"
     {%- endif %}
   {%- endif %}
@@ -318,7 +320,7 @@
 {%- macro htmHostDescriptionHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputHostDescriptionHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputEventSubscriptionsHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputEventSubscriptionsHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_eventSubscriptions">
   {%- endif %}
@@ -330,14 +332,14 @@
                       id="Host_{{classApiMethodMethod}}_eventSubscriptions"
   {%- if "Page" == classApiMethodMethod %}
                       data-hostResource={{ result.hostResource | tojson }}
-                      class="label-on-left {{Host_classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHost inputHost{{ result.hostResource }}EventSubscriptions "
+                      class="label-on-left Host_{{classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHost inputHost{{ result.hostResource }}EventSubscriptions "
                       name="setEventSubscriptions"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHost inputHost{{ result.hostResource }}EventSubscriptions "
+                      class="label-on-left Host_{{classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHost inputHost{{ result.hostResource }}EventSubscriptions "
                       name="setEventSubscriptions"
     {%- else %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_eventSubscriptions valueEventSubscriptions classHost inputHost{{ result.hostResource }}EventSubscriptions "
+                      class="label-on-left Host_{{classApiMethodMethod}}_eventSubscriptions valueEventSubscriptions classHost inputHost{{ result.hostResource }}EventSubscriptions "
                       name="eventSubscriptions"
     {%- endif %}
   {%- endif %}
@@ -354,7 +356,7 @@
 {%- macro htmEventSubscriptionsHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputEventSubscriptionsHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputTagsHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputTagsHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_tags">
   {%- endif %}
@@ -366,14 +368,14 @@
                       id="Host_{{classApiMethodMethod}}_tags"
   {%- if "Page" == classApiMethodMethod %}
                       data-hostResource={{ result.hostResource | tojson }}
-                      class="label-on-left {{Host_classApiMethodMethod}}_tags setTags classHost inputHost{{ result.hostResource }}Tags "
+                      class="label-on-left Host_{{classApiMethodMethod}}_tags setTags classHost inputHost{{ result.hostResource }}Tags "
                       name="setTags"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_tags setTags classHost inputHost{{ result.hostResource }}Tags "
+                      class="label-on-left Host_{{classApiMethodMethod}}_tags setTags classHost inputHost{{ result.hostResource }}Tags "
                       name="setTags"
     {%- else %}
-                      class="label-on-left {{Host_classApiMethodMethod}}_tags valueTags classHost inputHost{{ result.hostResource }}Tags "
+                      class="label-on-left Host_{{classApiMethodMethod}}_tags valueTags classHost inputHost{{ result.hostResource }}Tags "
                       name="tags"
     {%- endif %}
   {%- endif %}
@@ -400,7 +402,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchHost() %}
+{%- macro htmForm_patchHost(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHostDialog" label="Modify host">
           <form id="htmForm_patchHost" class="round-row primary-smart-border-radius ">
 
@@ -410,44 +412,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHostNameHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmIpAddressHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -459,22 +461,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmTagsHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmTagsHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTagsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmTagsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTagsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmTagsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -493,7 +495,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postHost() %}
+{%- macro htmForm_postHost(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postHostDialog" label="Create a host">
           <form id="htmForm_postHost" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -504,44 +506,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHostNameHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmIpAddressHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -553,22 +555,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmTagsHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmTagsHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTagsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmTagsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTagsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmTagsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -587,7 +589,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deleteHost() %}
+{%- macro htmForm_deleteHost(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteHostDialog" label="Delete host">
           <form id="htmForm_deleteHost" class="round-row primary-smart-border-radius ">
           </form>
@@ -604,7 +606,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_putimportHost() %}
+{%- macro htmForm_putimportHost(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportHostDialog" label="Import hosts">
           <form id="htmForm_putimportHost" class="round-row primary-smart-border-radius ">
             <div>
@@ -620,7 +622,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageHost() %}
+{%- macro htmForm_searchpageHost(idSuffix='') %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageHostDialog" label="Search hosts">
           <div id="htmForm_searchpageHost" class="round-row primary-smart-border-radius ">
 
@@ -630,44 +632,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPkHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCreatedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmModifiedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmArchivedHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -679,44 +681,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmInventoryResourceHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHostNameHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmIpAddressHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmHostDescriptionHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -728,22 +730,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmTagsHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmTagsHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTagsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmTagsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTagsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmTagsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -761,7 +763,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deletefilterHost() %}
+{%- macro htmForm_deletefilterHost(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterHostDialog" label="Delete host">
           <form id="htmForm_deletefilterHost" class="round-row primary-smart-border-radius ">
           </form>

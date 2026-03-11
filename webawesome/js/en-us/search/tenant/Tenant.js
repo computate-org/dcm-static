@@ -108,61 +108,61 @@ async function websocketTenantInner(apiRequest) {
         var inputAapOrganizationId = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.Tenant_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.Tenant_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.Tenant_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.Tenant_Page_archived');
         if(vars.includes('tenantName'))
-          inputTenantName = $response.querySelector('.Page_tenantName');
+          inputTenantName = $response.querySelector('.Tenant_Page_tenantName');
         if(vars.includes('tenantId'))
-          inputTenantId = $response.querySelector('.Page_tenantId');
+          inputTenantId = $response.querySelector('.Tenant_Page_tenantId');
         if(vars.includes('tenantDescription'))
-          inputTenantDescription = $response.querySelector('.Page_tenantDescription');
+          inputTenantDescription = $response.querySelector('.Tenant_Page_tenantDescription');
         if(vars.includes('hostInventoryIds'))
-          inputHostInventoryIds = $response.querySelector('.Page_hostInventoryIds');
+          inputHostInventoryIds = $response.querySelector('.Tenant_Page_hostInventoryIds');
         if(vars.includes('ansibleProjectIds'))
-          inputAnsibleProjectIds = $response.querySelector('.Page_ansibleProjectIds');
+          inputAnsibleProjectIds = $response.querySelector('.Tenant_Page_ansibleProjectIds');
         if(vars.includes('pageId'))
-          inputPageId = $response.querySelector('.Page_pageId');
+          inputPageId = $response.querySelector('.Tenant_Page_pageId');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.Tenant_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.Tenant_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.Tenant_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.Tenant_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.Tenant_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.Tenant_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.Tenant_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.Tenant_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.Tenant_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.Tenant_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.Tenant_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.Tenant_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.Tenant_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.Tenant_Page_solrId');
         if(vars.includes('tenantResource'))
-          inputTenantResource = $response.querySelector('.Page_tenantResource');
+          inputTenantResource = $response.querySelector('.Tenant_Page_tenantResource');
         if(vars.includes('hubId'))
-          inputHubId = $response.querySelector('.Page_hubId');
+          inputHubId = $response.querySelector('.Tenant_Page_hubId');
         if(vars.includes('clusterName'))
-          inputClusterName = $response.querySelector('.Page_clusterName');
+          inputClusterName = $response.querySelector('.Tenant_Page_clusterName');
         if(vars.includes('aapOrganizationId'))
-          inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
+          inputAapOrganizationId = $response.querySelector('.Tenant_Page_aapOrganizationId');
 
         jsWebsocketTenant(tenantResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -170,283 +170,283 @@ async function websocketTenantInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.Tenant_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.Tenant_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.Tenant_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.Tenant_Page_archived'));
         }
 
         if(inputTenantName) {
-          document.querySelectorAll('.Page_tenantName').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_tenantName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantName.getAttribute('value');
             else
               item.textContent = inputTenantName.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantName'));
+          addGlow(document.querySelector('.Tenant_Page_tenantName'));
         }
 
         if(inputTenantId) {
-          document.querySelectorAll('.Page_tenantId').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_tenantId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantId.getAttribute('value');
             else
               item.textContent = inputTenantId.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantId'));
+          addGlow(document.querySelector('.Tenant_Page_tenantId'));
         }
 
         if(inputTenantDescription) {
-          document.querySelectorAll('.Page_tenantDescription').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_tenantDescription').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantDescription.getAttribute('value');
             else
               item.textContent = inputTenantDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantDescription'));
+          addGlow(document.querySelector('.Tenant_Page_tenantDescription'));
         }
 
         if(inputHostInventoryIds) {
-          document.querySelectorAll('.Page_hostInventoryIds').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_hostInventoryIds').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHostInventoryIds.getAttribute('value');
             else
               item.textContent = inputHostInventoryIds.textContent;
           });
-          addGlow(document.querySelector('.Page_hostInventoryIds'));
+          addGlow(document.querySelector('.Tenant_Page_hostInventoryIds'));
         }
 
         if(inputAnsibleProjectIds) {
-          document.querySelectorAll('.Page_ansibleProjectIds').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_ansibleProjectIds').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAnsibleProjectIds.getAttribute('value');
             else
               item.textContent = inputAnsibleProjectIds.textContent;
           });
-          addGlow(document.querySelector('.Page_ansibleProjectIds'));
+          addGlow(document.querySelector('.Tenant_Page_ansibleProjectIds'));
         }
 
         if(inputPageId) {
-          document.querySelectorAll('.Page_pageId').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_pageId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPageId.getAttribute('value');
             else
               item.textContent = inputPageId.textContent;
           });
-          addGlow(document.querySelector('.Page_pageId'));
+          addGlow(document.querySelector('.Tenant_Page_pageId'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.Tenant_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.Tenant_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.Tenant_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.Tenant_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.Tenant_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.Tenant_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.Tenant_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.Tenant_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.Tenant_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.Tenant_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.Tenant_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.Tenant_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.Tenant_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.Tenant_Page_solrId'));
         }
 
         if(inputTenantResource) {
-          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_tenantResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
               item.textContent = inputTenantResource.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantResource'));
+          addGlow(document.querySelector('.Tenant_Page_tenantResource'));
         }
 
         if(inputHubId) {
-          document.querySelectorAll('.Page_hubId').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_hubId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputHubId.getAttribute('value');
             else
               item.textContent = inputHubId.textContent;
           });
-          addGlow(document.querySelector('.Page_hubId'));
+          addGlow(document.querySelector('.Tenant_Page_hubId'));
         }
 
         if(inputClusterName) {
-          document.querySelectorAll('.Page_clusterName').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_clusterName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClusterName.getAttribute('value');
             else
               item.textContent = inputClusterName.textContent;
           });
-          addGlow(document.querySelector('.Page_clusterName'));
+          addGlow(document.querySelector('.Tenant_Page_clusterName'));
         }
 
         if(inputAapOrganizationId) {
-          document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
+          document.querySelectorAll('.Tenant_Page_aapOrganizationId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapOrganizationId.getAttribute('value');
             else
               item.textContent = inputAapOrganizationId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapOrganizationId'));
+          addGlow(document.querySelector('.Tenant_Page_aapOrganizationId'));
         }
 
           pageGraphTenant();
@@ -749,23 +749,33 @@ function suggestTenantHostInventoryIds(filters, $list, tenantResource = null, ho
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['tenantResource'];
+        var inputVar = 'tenantResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (hostInventoryIds != null && val === hostInventoryIds.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hostInventoryIds_' + tenantResource + '_tenantResource_' + o['tenantResource']);
-        $input.setAttribute('name', 'tenantResource');
-        $input.setAttribute('value', o['tenantResource']);
+        $input.setAttribute('id', 'GET_hostInventoryIds_' + tenantResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueHostInventoryIds ');
         if(tenantResource != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o['tenantResource'] }
+            patchTenantVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantHostInventoryIds(filters, $list, tenantResource, o['tenantResource'], relate, target);
+                  suggestTenantHostInventoryIds(filters, $list, tenantResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -779,7 +789,9 @@ function suggestTenantHostInventoryIds(filters, $list, tenantResource = null, ho
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchHostInventoryVals(filters, target, success, error);
+  if (typeof searchHostInventoryVals === 'function') {
+    searchHostInventoryVals(filters, target, success, error);
+  }
 }
 
 function suggestTenantAnsibleProjectIds(filters, $list, tenantResource = null, ansibleProjectIds = null, relate=true, target) {
@@ -798,23 +810,33 @@ function suggestTenantAnsibleProjectIds(filters, $list, tenantResource = null, a
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['tenantResource'];
+        var inputVar = 'tenantResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (ansibleProjectIds != null && val === ansibleProjectIds.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_ansibleProjectIds_' + tenantResource + '_tenantResource_' + o['tenantResource']);
-        $input.setAttribute('name', 'tenantResource');
-        $input.setAttribute('value', o['tenantResource']);
+        $input.setAttribute('id', 'GET_ansibleProjectIds_' + tenantResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueAnsibleProjectIds ');
         if(tenantResource != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'AnsibleProjectIds']: o['tenantResource'] }
+            patchTenantVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'AnsibleProjectIds']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantAnsibleProjectIds(filters, $list, tenantResource, o['tenantResource'], relate, target);
+                  suggestTenantAnsibleProjectIds(filters, $list, tenantResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -828,7 +850,9 @@ function suggestTenantAnsibleProjectIds(filters, $list, tenantResource = null, a
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchAnsibleProjectVals(filters, target, success, error);
+  if (typeof searchAnsibleProjectVals === 'function') {
+    searchAnsibleProjectVals(filters, target, success, error);
+  }
 }
 
 function suggestTenantObjectSuggest($formFilters, $list, target) {

@@ -1,7 +1,6 @@
 {% include en-us/search/project/ProjectSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchProject() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}

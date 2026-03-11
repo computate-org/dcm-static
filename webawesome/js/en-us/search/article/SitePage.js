@@ -107,6 +107,7 @@ async function websocketSitePageInner(apiRequest) {
         var inputPageImageHeight = null;
         var inputPageImageType = null;
         var inputPageImageAlt = null;
+        var inputPageTemplate = null;
         var inputPrerequisiteArticleIds = null;
         var inputPrerequisiteArticles = null;
         var inputNextArticleIds = null;
@@ -117,79 +118,81 @@ async function websocketSitePageInner(apiRequest) {
         var inputRelatedArticles = null;
 
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.SitePage_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.SitePage_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.SitePage_Page_archived');
         if(vars.includes('authorName'))
-          inputAuthorName = $response.querySelector('.Page_authorName');
+          inputAuthorName = $response.querySelector('.SitePage_Page_authorName');
         if(vars.includes('authorUrl'))
-          inputAuthorUrl = $response.querySelector('.Page_authorUrl');
+          inputAuthorUrl = $response.querySelector('.SitePage_Page_authorUrl');
         if(vars.includes('pageImageUri'))
-          inputPageImageUri = $response.querySelector('.Page_pageImageUri');
+          inputPageImageUri = $response.querySelector('.SitePage_Page_pageImageUri');
         if(vars.includes('pageId'))
-          inputPageId = $response.querySelector('.Page_pageId');
+          inputPageId = $response.querySelector('.SitePage_Page_pageId');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.SitePage_Page_displayPage');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.SitePage_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.SitePage_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.SitePage_Page_classCanonicalNames');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.SitePage_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.SitePage_Page_objectTitle');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.SitePage_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.SitePage_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.SitePage_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.SitePage_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.SitePage_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.SitePage_Page_solrId');
         if(vars.includes('courseNum'))
-          inputCourseNum = $response.querySelector('.Page_courseNum');
+          inputCourseNum = $response.querySelector('.SitePage_Page_courseNum');
         if(vars.includes('lessonNum'))
-          inputLessonNum = $response.querySelector('.Page_lessonNum');
+          inputLessonNum = $response.querySelector('.SitePage_Page_lessonNum');
         if(vars.includes('name'))
-          inputName = $response.querySelector('.Page_name');
+          inputName = $response.querySelector('.SitePage_Page_name');
         if(vars.includes('description'))
-          inputDescription = $response.querySelector('.Page_description');
+          inputDescription = $response.querySelector('.SitePage_Page_description');
         if(vars.includes('h1'))
-          inputH1 = $response.querySelector('.Page_h1');
+          inputH1 = $response.querySelector('.SitePage_Page_h1');
         if(vars.includes('h2'))
-          inputH2 = $response.querySelector('.Page_h2');
+          inputH2 = $response.querySelector('.SitePage_Page_h2');
         if(vars.includes('pageImageWidth'))
-          inputPageImageWidth = $response.querySelector('.Page_pageImageWidth');
+          inputPageImageWidth = $response.querySelector('.SitePage_Page_pageImageWidth');
         if(vars.includes('pageImageHeight'))
-          inputPageImageHeight = $response.querySelector('.Page_pageImageHeight');
+          inputPageImageHeight = $response.querySelector('.SitePage_Page_pageImageHeight');
         if(vars.includes('pageImageType'))
-          inputPageImageType = $response.querySelector('.Page_pageImageType');
+          inputPageImageType = $response.querySelector('.SitePage_Page_pageImageType');
         if(vars.includes('pageImageAlt'))
-          inputPageImageAlt = $response.querySelector('.Page_pageImageAlt');
+          inputPageImageAlt = $response.querySelector('.SitePage_Page_pageImageAlt');
+        if(vars.includes('pageTemplate'))
+          inputPageTemplate = $response.querySelector('.SitePage_Page_pageTemplate');
         if(vars.includes('prerequisiteArticleIds'))
-          inputPrerequisiteArticleIds = $response.querySelector('.Page_prerequisiteArticleIds');
+          inputPrerequisiteArticleIds = $response.querySelector('.SitePage_Page_prerequisiteArticleIds');
         if(vars.includes('prerequisiteArticles'))
-          inputPrerequisiteArticles = $response.querySelector('.Page_prerequisiteArticles');
+          inputPrerequisiteArticles = $response.querySelector('.SitePage_Page_prerequisiteArticles');
         if(vars.includes('nextArticleIds'))
-          inputNextArticleIds = $response.querySelector('.Page_nextArticleIds');
+          inputNextArticleIds = $response.querySelector('.SitePage_Page_nextArticleIds');
         if(vars.includes('nextArticles'))
-          inputNextArticles = $response.querySelector('.Page_nextArticles');
+          inputNextArticles = $response.querySelector('.SitePage_Page_nextArticles');
         if(vars.includes('labelsString'))
-          inputLabelsString = $response.querySelector('.Page_labelsString');
+          inputLabelsString = $response.querySelector('.SitePage_Page_labelsString');
         if(vars.includes('labels'))
-          inputLabels = $response.querySelector('.Page_labels');
+          inputLabels = $response.querySelector('.SitePage_Page_labels');
         if(vars.includes('relatedArticleIds'))
-          inputRelatedArticleIds = $response.querySelector('.Page_relatedArticleIds');
+          inputRelatedArticleIds = $response.querySelector('.SitePage_Page_relatedArticleIds');
         if(vars.includes('relatedArticles'))
-          inputRelatedArticles = $response.querySelector('.Page_relatedArticles');
+          inputRelatedArticles = $response.querySelector('.SitePage_Page_relatedArticles');
 
         jsWebsocketSitePage(pageId, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -197,373 +200,383 @@ async function websocketSitePageInner(apiRequest) {
 
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.SitePage_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.SitePage_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.SitePage_Page_archived'));
         }
 
         if(inputAuthorName) {
-          document.querySelectorAll('.Page_authorName').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_authorName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAuthorName.getAttribute('value');
             else
               item.textContent = inputAuthorName.textContent;
           });
-          addGlow(document.querySelector('.Page_authorName'));
+          addGlow(document.querySelector('.SitePage_Page_authorName'));
         }
 
         if(inputAuthorUrl) {
-          document.querySelectorAll('.Page_authorUrl').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_authorUrl').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAuthorUrl.getAttribute('value');
             else
               item.textContent = inputAuthorUrl.textContent;
           });
-          addGlow(document.querySelector('.Page_authorUrl'));
+          addGlow(document.querySelector('.SitePage_Page_authorUrl'));
         }
 
         if(inputPageImageUri) {
-          document.querySelectorAll('.Page_pageImageUri').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_pageImageUri').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPageImageUri.getAttribute('value');
             else
               item.textContent = inputPageImageUri.textContent;
           });
-          addGlow(document.querySelector('.Page_pageImageUri'));
+          addGlow(document.querySelector('.SitePage_Page_pageImageUri'));
         }
 
         if(inputPageId) {
-          document.querySelectorAll('.Page_pageId').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_pageId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPageId.getAttribute('value');
             else
               item.textContent = inputPageId.textContent;
           });
-          addGlow(document.querySelector('.Page_pageId'));
+          addGlow(document.querySelector('.SitePage_Page_pageId'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.SitePage_Page_displayPage'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.SitePage_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.SitePage_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.SitePage_Page_classCanonicalNames'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.SitePage_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.SitePage_Page_objectTitle'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.SitePage_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.SitePage_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.SitePage_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.SitePage_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.SitePage_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.SitePage_Page_solrId'));
         }
 
         if(inputCourseNum) {
-          document.querySelectorAll('.Page_courseNum').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_courseNum').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCourseNum.getAttribute('value');
             else
               item.textContent = inputCourseNum.textContent;
           });
-          addGlow(document.querySelector('.Page_courseNum'));
+          addGlow(document.querySelector('.SitePage_Page_courseNum'));
         }
 
         if(inputLessonNum) {
-          document.querySelectorAll('.Page_lessonNum').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_lessonNum').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLessonNum.getAttribute('value');
             else
               item.textContent = inputLessonNum.textContent;
           });
-          addGlow(document.querySelector('.Page_lessonNum'));
+          addGlow(document.querySelector('.SitePage_Page_lessonNum'));
         }
 
         if(inputName) {
-          document.querySelectorAll('.Page_name').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_name').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputName.getAttribute('value');
             else
               item.textContent = inputName.textContent;
           });
-          addGlow(document.querySelector('.Page_name'));
+          addGlow(document.querySelector('.SitePage_Page_name'));
         }
 
         if(inputDescription) {
-          document.querySelectorAll('.Page_description').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_description').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDescription.getAttribute('value');
             else
               item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_description'));
+          addGlow(document.querySelector('.SitePage_Page_description'));
         }
 
         if(inputH1) {
-          document.querySelectorAll('.Page_h1').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_h1').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputH1.getAttribute('value');
             else
               item.textContent = inputH1.textContent;
           });
-          addGlow(document.querySelector('.Page_h1'));
+          addGlow(document.querySelector('.SitePage_Page_h1'));
         }
 
         if(inputH2) {
-          document.querySelectorAll('.Page_h2').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_h2').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputH2.getAttribute('value');
             else
               item.textContent = inputH2.textContent;
           });
-          addGlow(document.querySelector('.Page_h2'));
+          addGlow(document.querySelector('.SitePage_Page_h2'));
         }
 
         if(inputPageImageWidth) {
-          document.querySelectorAll('.Page_pageImageWidth').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_pageImageWidth').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPageImageWidth.getAttribute('value');
             else
               item.textContent = inputPageImageWidth.textContent;
           });
-          addGlow(document.querySelector('.Page_pageImageWidth'));
+          addGlow(document.querySelector('.SitePage_Page_pageImageWidth'));
         }
 
         if(inputPageImageHeight) {
-          document.querySelectorAll('.Page_pageImageHeight').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_pageImageHeight').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPageImageHeight.getAttribute('value');
             else
               item.textContent = inputPageImageHeight.textContent;
           });
-          addGlow(document.querySelector('.Page_pageImageHeight'));
+          addGlow(document.querySelector('.SitePage_Page_pageImageHeight'));
         }
 
         if(inputPageImageType) {
-          document.querySelectorAll('.Page_pageImageType').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_pageImageType').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPageImageType.getAttribute('value');
             else
               item.textContent = inputPageImageType.textContent;
           });
-          addGlow(document.querySelector('.Page_pageImageType'));
+          addGlow(document.querySelector('.SitePage_Page_pageImageType'));
         }
 
         if(inputPageImageAlt) {
-          document.querySelectorAll('.Page_pageImageAlt').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_pageImageAlt').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPageImageAlt.getAttribute('value');
             else
               item.textContent = inputPageImageAlt.textContent;
           });
-          addGlow(document.querySelector('.Page_pageImageAlt'));
+          addGlow(document.querySelector('.SitePage_Page_pageImageAlt'));
+        }
+
+        if(inputPageTemplate) {
+          document.querySelectorAll('.SitePage_Page_pageTemplate').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputPageTemplate.getAttribute('value');
+            else
+              item.textContent = inputPageTemplate.textContent;
+          });
+          addGlow(document.querySelector('.SitePage_Page_pageTemplate'));
         }
 
         if(inputPrerequisiteArticleIds) {
-          document.querySelectorAll('.Page_prerequisiteArticleIds').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_prerequisiteArticleIds').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPrerequisiteArticleIds.getAttribute('value');
             else
               item.textContent = inputPrerequisiteArticleIds.textContent;
           });
-          addGlow(document.querySelector('.Page_prerequisiteArticleIds'));
+          addGlow(document.querySelector('.SitePage_Page_prerequisiteArticleIds'));
         }
 
         if(inputPrerequisiteArticles) {
-          document.querySelectorAll('.Page_prerequisiteArticles').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_prerequisiteArticles').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPrerequisiteArticles.getAttribute('value');
             else
               item.textContent = inputPrerequisiteArticles.textContent;
           });
-          addGlow(document.querySelector('.Page_prerequisiteArticles'));
+          addGlow(document.querySelector('.SitePage_Page_prerequisiteArticles'));
         }
 
         if(inputNextArticleIds) {
-          document.querySelectorAll('.Page_nextArticleIds').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_nextArticleIds').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNextArticleIds.getAttribute('value');
             else
               item.textContent = inputNextArticleIds.textContent;
           });
-          addGlow(document.querySelector('.Page_nextArticleIds'));
+          addGlow(document.querySelector('.SitePage_Page_nextArticleIds'));
         }
 
         if(inputNextArticles) {
-          document.querySelectorAll('.Page_nextArticles').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_nextArticles').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputNextArticles.getAttribute('value');
             else
               item.textContent = inputNextArticles.textContent;
           });
-          addGlow(document.querySelector('.Page_nextArticles'));
+          addGlow(document.querySelector('.SitePage_Page_nextArticles'));
         }
 
         if(inputLabelsString) {
-          document.querySelectorAll('.Page_labelsString').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_labelsString').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLabelsString.getAttribute('value');
             else
               item.textContent = inputLabelsString.textContent;
           });
-          addGlow(document.querySelector('.Page_labelsString'));
+          addGlow(document.querySelector('.SitePage_Page_labelsString'));
         }
 
         if(inputLabels) {
-          document.querySelectorAll('.Page_labels').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_labels').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputLabels.getAttribute('value');
             else
               item.textContent = inputLabels.textContent;
           });
-          addGlow(document.querySelector('.Page_labels'));
+          addGlow(document.querySelector('.SitePage_Page_labels'));
         }
 
         if(inputRelatedArticleIds) {
-          document.querySelectorAll('.Page_relatedArticleIds').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_relatedArticleIds').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputRelatedArticleIds.getAttribute('value');
             else
               item.textContent = inputRelatedArticleIds.textContent;
           });
-          addGlow(document.querySelector('.Page_relatedArticleIds'));
+          addGlow(document.querySelector('.SitePage_Page_relatedArticleIds'));
         }
 
         if(inputRelatedArticles) {
-          document.querySelectorAll('.Page_relatedArticles').forEach((item, index) => {
+          document.querySelectorAll('.SitePage_Page_relatedArticles').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputRelatedArticles.getAttribute('value');
             else
               item.textContent = inputRelatedArticles.textContent;
           });
-          addGlow(document.querySelector('.Page_relatedArticles'));
+          addGlow(document.querySelector('.SitePage_Page_relatedArticles'));
         }
 
           pageGraphSitePage();
@@ -1170,6 +1183,18 @@ async function patchSitePage($formFilters, $formValues, target, pageId, success,
   if(removePageImageAlt != null && removePageImageAlt !== '')
     vals['removePageImageAlt'] = removePageImageAlt;
 
+  var valuePageTemplate = $formValues.querySelector('.valuePageTemplate')?.value;
+  var removePageTemplate = $formValues.querySelector('.removePageTemplate')?.value === 'true';
+  var setPageTemplate = removePageTemplate ? null : $formValues.querySelector('.setPageTemplate')?.value;
+  var addPageTemplate = $formValues.querySelector('.addPageTemplate')?.value;
+  if(removePageTemplate || setPageTemplate != null && setPageTemplate !== '')
+    vals['setPageTemplate'] = setPageTemplate;
+  if(addPageTemplate != null && addPageTemplate !== '')
+    vals['addPageTemplate'] = addPageTemplate;
+  var removePageTemplate = $formValues.querySelector('.removePageTemplate')?.value;
+  if(removePageTemplate != null && removePageTemplate !== '')
+    vals['removePageTemplate'] = removePageTemplate;
+
   var valuePrerequisiteArticleIds = $formValues.querySelector('.valuePrerequisiteArticleIds')?.value;
   var removePrerequisiteArticleIds = $formValues.querySelector('.removePrerequisiteArticleIds')?.value === 'true';
   var setPrerequisiteArticleIds = removePrerequisiteArticleIds ? null : $formValues.querySelector('.setPrerequisiteArticleIds')?.value;
@@ -1521,6 +1546,10 @@ async function postSitePage($formValues, target, success, error) {
   var valuePageImageAlt = $formValues.querySelector('.valuePageImageAlt')?.value;
   if(valuePageImageAlt != null && valuePageImageAlt !== '')
     vals['pageImageAlt'] = valuePageImageAlt;
+
+  var valuePageTemplate = $formValues.querySelector('.valuePageTemplate')?.value;
+  if(valuePageTemplate != null && valuePageTemplate !== '')
+    vals['pageTemplate'] = valuePageTemplate;
 
   var valuePrerequisiteArticleIds = $formValues.querySelector('.valuePrerequisiteArticleIds')?.value;
   if(valuePrerequisiteArticleIds != null && valuePrerequisiteArticleIds !== '')

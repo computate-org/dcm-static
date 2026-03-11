@@ -151,11 +151,12 @@
             suggestAnsibleProjectTenantResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,tenantResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
                 , true
+                , event.target
                 );
           }
           document.querySelector('#AnsibleProject_POST_tenantResource')?.addEventListener('input', relate_tenantResource);
@@ -166,24 +167,55 @@
           document.querySelector('#AnsibleProject_Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#Tenant_POST_ansibleProjectResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#Tenant_POST_ansibleProjectResource')?.addEventListener('focus', relate_tenantResource);
-          {% if "PATCH" in scopes %}
-          suggestAnsibleProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listAnsibleProjectTenantResource_Page'), window.result.ansibleProjectResource, window.result.tenantResource, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestAnsibleProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listAnsibleProjectTenantResource_Page'), window.result.ansibleProjectResource, window.result.tenantResource, true);
-          {% else %}
-          suggestAnsibleProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listAnsibleProjectTenantResource_Page'), window.result.ansibleProjectResource, window.result.tenantResource, false);
-          {% endif %}
-          {% endif %}
-          function relate_jobTemplateResources(event) {
-            suggestAnsibleProjectJobTemplateResources(
+          if(window.result.tenantResource) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestAnsibleProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listAnsibleProjectTenantResource_Page'), window.result.ansibleProjectResource, window.result.tenantResource, true, document.getElementById('AnsibleProject_Page_tenantResource'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestAnsibleProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listAnsibleProjectTenantResource_Page'), window.result.ansibleProjectResource, window.result.tenantResource, true, document.getElementById('AnsibleProject_Page_tenantResource'));
+          {% else -%}
+            {{'  '}}suggestAnsibleProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listAnsibleProjectTenantResource_Page'), window.result.ansibleProjectResource, window.result.tenantResource, false, document.getElementById('AnsibleProject_Page_tenantResource'));
+          {% endif -%}
+          {% endif -%}
+          }
+          function Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource(event) {
+            suggestTenantHostInventoryIds(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
+                , true
+                , document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')
+                );
+          }
+          document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')?.addEventListener('input', Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource);
+          document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')?.addEventListener('focus', Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource);
+          function Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource(event) {
+            suggestTenantAnsibleProjectIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
+                , true
+                , document.querySelector('#Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')
+                );
+          }
+          document.querySelector('#Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')?.addEventListener('input', Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource);
+          document.querySelector('#Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')?.addEventListener('focus', Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource);
+          function relate_jobTemplateResources(event) {
+            suggestAnsibleProjectJobTemplateResources(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,jobTemplateResource,ansibleProjectResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.jobTemplateResources : null
                 , true
+                , event.target
                 );
           }
           document.querySelector('#AnsibleProject_POST_jobTemplateResources')?.addEventListener('input', relate_jobTemplateResources);
@@ -194,15 +226,59 @@
           document.querySelector('#AnsibleProject_Page_jobTemplateResources')?.addEventListener('focus', relate_jobTemplateResources);
           document.querySelector('#JobTemplate_POST_ansibleProjectResource')?.addEventListener('input', relate_jobTemplateResources);
           document.querySelector('#JobTemplate_POST_ansibleProjectResource')?.addEventListener('focus', relate_jobTemplateResources);
-          {% if "PATCH" in scopes %}
-          suggestAnsibleProjectJobTemplateResources([{'name':'fq','value':'ansibleProjectResource:' + window.result.jobTemplateResources}], document.querySelector('#listAnsibleProjectJobTemplateResources_Page'), window.result.ansibleProjectResource, window.result.jobTemplateResources, true);
-          {% else %}
-          {% if "GET" in scopes %}
-          suggestAnsibleProjectJobTemplateResources([{'name':'fq','value':'ansibleProjectResource:' + window.result.jobTemplateResources}], document.querySelector('#listAnsibleProjectJobTemplateResources_Page'), window.result.ansibleProjectResource, window.result.jobTemplateResources, true);
-          {% else %}
-          suggestAnsibleProjectJobTemplateResources([{'name':'fq','value':'ansibleProjectResource:' + window.result.jobTemplateResources}], document.querySelector('#listAnsibleProjectJobTemplateResources_Page'), window.result.ansibleProjectResource, window.result.jobTemplateResources, false);
-          {% endif %}
-          {% endif %}
+          if(window.result.jobTemplateResources) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestAnsibleProjectJobTemplateResources([{'name':'fq','value':'ansibleProjectResource:' + window.result.jobTemplateResources}], document.querySelector('#listAnsibleProjectJobTemplateResources_Page'), window.result.ansibleProjectResource, window.result.jobTemplateResources, true, document.getElementById('AnsibleProject_Page_jobTemplateResources'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestAnsibleProjectJobTemplateResources([{'name':'fq','value':'ansibleProjectResource:' + window.result.jobTemplateResources}], document.querySelector('#listAnsibleProjectJobTemplateResources_Page'), window.result.ansibleProjectResource, window.result.jobTemplateResources, true, document.getElementById('AnsibleProject_Page_jobTemplateResources'));
+          {% else -%}
+            {{'  '}}suggestAnsibleProjectJobTemplateResources([{'name':'fq','value':'ansibleProjectResource:' + window.result.jobTemplateResources}], document.querySelector('#listAnsibleProjectJobTemplateResources_Page'), window.result.ansibleProjectResource, window.result.jobTemplateResources, false, document.getElementById('AnsibleProject_Page_jobTemplateResources'));
+          {% endif -%}
+          {% endif -%}
+          }
+          function JobTemplate_POST_inventoryResource_AnsibleProject_POST_jobTemplateResources(event) {
+            suggestJobTemplateInventoryResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.inventoryResource : null
+                , true
+                , document.querySelector('#JobTemplate_POST_inventoryResource_AnsibleProject_POST_jobTemplateResources')
+                );
+          }
+          document.querySelector('#JobTemplate_POST_inventoryResource_AnsibleProject_POST_jobTemplateResources')?.addEventListener('input', JobTemplate_POST_inventoryResource_AnsibleProject_POST_jobTemplateResources);
+          document.querySelector('#JobTemplate_POST_inventoryResource_AnsibleProject_POST_jobTemplateResources')?.addEventListener('focus', JobTemplate_POST_inventoryResource_AnsibleProject_POST_jobTemplateResources);
+          function JobTemplate_POST_ansibleProjectResource_AnsibleProject_POST_jobTemplateResources(event) {
+            suggestJobTemplateAnsibleProjectResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
+                , true
+                , document.querySelector('#JobTemplate_POST_ansibleProjectResource_AnsibleProject_POST_jobTemplateResources')
+                );
+          }
+          document.querySelector('#JobTemplate_POST_ansibleProjectResource_AnsibleProject_POST_jobTemplateResources')?.addEventListener('input', JobTemplate_POST_ansibleProjectResource_AnsibleProject_POST_jobTemplateResources);
+          document.querySelector('#JobTemplate_POST_ansibleProjectResource_AnsibleProject_POST_jobTemplateResources')?.addEventListener('focus', JobTemplate_POST_ansibleProjectResource_AnsibleProject_POST_jobTemplateResources);
+          function JobTemplate_POST_tenantResource_AnsibleProject_POST_jobTemplateResources(event) {
+            suggestJobTemplateTenantResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , true
+                , document.querySelector('#JobTemplate_POST_tenantResource_AnsibleProject_POST_jobTemplateResources')
+                );
+          }
+          document.querySelector('#JobTemplate_POST_tenantResource_AnsibleProject_POST_jobTemplateResources')?.addEventListener('input', JobTemplate_POST_tenantResource_AnsibleProject_POST_jobTemplateResources);
+          document.querySelector('#JobTemplate_POST_tenantResource_AnsibleProject_POST_jobTemplateResources')?.addEventListener('focus', JobTemplate_POST_tenantResource_AnsibleProject_POST_jobTemplateResources);
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listAnsibleProject')?.value;
@@ -303,6 +379,8 @@
               , document.querySelector('#htmFormButton_postTenant')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 
@@ -312,6 +390,8 @@
               , document.querySelector('#htmFormButton_postJobTemplate')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 {%- block htmScriptInitAnsibleProjectPage %}{%- endblock htmScriptInitAnsibleProjectPage %}

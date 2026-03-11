@@ -3,7 +3,6 @@
 {% include en-us/search/job-template/JobTemplateSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchAnsibleProject() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}

@@ -1,4 +1,4 @@
-{%- macro inputPkProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPkProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pk">
   {%- endif %}
@@ -11,14 +11,14 @@
                       id="Project_{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-projectResource={{ result.projectResource | tojson }}
-                      class="label-on-left {{Project_classApiMethodMethod}}_pk setPk classProject inputProject{{ result.projectResource }}Pk "
+                      class="label-on-left Project_{{classApiMethodMethod}}_pk setPk classProject inputProject{{ result.projectResource }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_pk setPk classProject inputProject{{ result.projectResource }}Pk "
+                      class="label-on-left Project_{{classApiMethodMethod}}_pk setPk classProject inputProject{{ result.projectResource }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_pk valuePk classProject inputProject{{ result.projectResource }}Pk "
+                      class="label-on-left Project_{{classApiMethodMethod}}_pk valuePk classProject inputProject{{ result.projectResource }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -35,7 +35,7 @@
 {%- macro htmPkProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPkProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCreatedProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -44,7 +44,7 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{Project_classApiMethodMethod}}_created datetimepicker setCreated classProject inputProject{{ result.projectResource }}Created "
+                      class="label-on-left Project_{{classApiMethodMethod}}_created datetimepicker setCreated classProject inputProject{{ result.projectResource }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="Project_{{classApiMethodMethod}}_created"
@@ -63,7 +63,7 @@
 {%- macro htmCreatedProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputModifiedProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -72,7 +72,7 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{Project_classApiMethodMethod}}_modified datetimepicker setModified classProject inputProject{{ result.projectResource }}Modified "
+                      class="label-on-left Project_{{classApiMethodMethod}}_modified datetimepicker setModified classProject inputProject{{ result.projectResource }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="Project_{{classApiMethodMethod}}_modified"
@@ -91,7 +91,7 @@
 {%- macro htmModifiedProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputArchivedProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -101,7 +101,7 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{Project_classApiMethodMethod}}_archived classProject inputProject{{ result.projectResource }}Archived "
+                      class="label-on-left Project_{{classApiMethodMethod}}_archived classProject inputProject{{ result.projectResource }}Archived "
                       name="setArchived"
                       data-projectResource={{ result.projectResource | tojson }}
                       data-val="{{ result.archived | e }}"
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_archived classProject inputProject{{ result.projectResource }}Archived "
+                      class="label-on-left Project_{{classApiMethodMethod}}_archived classProject inputProject{{ result.projectResource }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_archived classProject inputProject{{ result.projectResource }}Archived "
+                      class="label-on-left Project_{{classApiMethodMethod}}_archived classProject inputProject{{ result.projectResource }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_archived setArchived valueArchived classProject inputProject{{ result.projectResource }}Archived "
+                      class="label-on-left Project_{{classApiMethodMethod}}_archived setArchived valueArchived classProject inputProject{{ result.projectResource }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -153,7 +153,7 @@
 {%- macro htmArchivedProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputProjectNameProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputProjectNameProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_projectName">
   {%- endif %}
@@ -165,14 +165,14 @@
                       id="Project_{{classApiMethodMethod}}_projectName"
   {%- if "Page" == classApiMethodMethod %}
                       data-projectResource={{ result.projectResource | tojson }}
-                      class="label-on-left {{Project_classApiMethodMethod}}_projectName setProjectName classProject inputProject{{ result.projectResource }}ProjectName "
+                      class="label-on-left Project_{{classApiMethodMethod}}_projectName setProjectName classProject inputProject{{ result.projectResource }}ProjectName "
                       name="setProjectName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_projectName setProjectName classProject inputProject{{ result.projectResource }}ProjectName "
+                      class="label-on-left Project_{{classApiMethodMethod}}_projectName setProjectName classProject inputProject{{ result.projectResource }}ProjectName "
                       name="setProjectName"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_projectName valueProjectName classProject inputProject{{ result.projectResource }}ProjectName "
+                      class="label-on-left Project_{{classApiMethodMethod}}_projectName valueProjectName classProject inputProject{{ result.projectResource }}ProjectName "
                       name="projectName"
     {%- endif %}
   {%- endif %}
@@ -189,7 +189,7 @@
 {%- macro htmProjectNameProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputProjectNameProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputDescriptionProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputDescriptionProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_description">
   {%- endif %}
@@ -201,14 +201,14 @@
                       id="Project_{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-projectResource={{ result.projectResource | tojson }}
-                      class="label-on-left {{Project_classApiMethodMethod}}_description setDescription classProject inputProject{{ result.projectResource }}Description "
+                      class="label-on-left Project_{{classApiMethodMethod}}_description setDescription classProject inputProject{{ result.projectResource }}Description "
                       name="setDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_description setDescription classProject inputProject{{ result.projectResource }}Description "
+                      class="label-on-left Project_{{classApiMethodMethod}}_description setDescription classProject inputProject{{ result.projectResource }}Description "
                       name="setDescription"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_description valueDescription classProject inputProject{{ result.projectResource }}Description "
+                      class="label-on-left Project_{{classApiMethodMethod}}_description valueDescription classProject inputProject{{ result.projectResource }}Description "
                       name="description"
     {%- endif %}
   {%- endif %}
@@ -225,7 +225,7 @@
 {%- macro htmDescriptionProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputDescriptionProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputGpuEnabledProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputGpuEnabledProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_gpuEnabled">
   {%- endif %}
@@ -242,14 +242,14 @@
                       label="GPU enabled"
                       hint="Whether GPUs are enabled for this project. "
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_gpuEnabled classProject inputProject{{ result.projectResource }}GpuEnabled "
+                      class="label-on-left Project_{{classApiMethodMethod}}_gpuEnabled classProject inputProject{{ result.projectResource }}GpuEnabled "
                       name="setGpuEnabled"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_gpuEnabled classProject inputProject{{ result.projectResource }}GpuEnabled "
+                      class="label-on-left Project_{{classApiMethodMethod}}_gpuEnabled classProject inputProject{{ result.projectResource }}GpuEnabled "
                       name="setGpuEnabled"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_gpuEnabled setGpuEnabled valueGpuEnabled classProject inputProject{{ result.projectResource }}GpuEnabled "
+                      class="label-on-left Project_{{classApiMethodMethod}}_gpuEnabled setGpuEnabled valueGpuEnabled classProject inputProject{{ result.projectResource }}GpuEnabled "
                       name="setGpuEnabled"
     {%- endif %}
   {%- endif %}
@@ -274,7 +274,7 @@
 {%- macro htmGpuEnabledProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputGpuEnabledProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputPodRestartCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPodRestartCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_podRestartCount">
   {%- endif %}
@@ -287,14 +287,14 @@
                       id="Project_{{classApiMethodMethod}}_podRestartCount"
   {%- if "Page" == classApiMethodMethod %}
                       data-projectResource={{ result.projectResource | tojson }}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podRestartCount setPodRestartCount classProject inputProject{{ result.projectResource }}PodRestartCount "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podRestartCount setPodRestartCount classProject inputProject{{ result.projectResource }}PodRestartCount "
                       name="setPodRestartCount"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podRestartCount setPodRestartCount classProject inputProject{{ result.projectResource }}PodRestartCount "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podRestartCount setPodRestartCount classProject inputProject{{ result.projectResource }}PodRestartCount "
                       name="setPodRestartCount"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podRestartCount valuePodRestartCount classProject inputProject{{ result.projectResource }}PodRestartCount "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podRestartCount valuePodRestartCount classProject inputProject{{ result.projectResource }}PodRestartCount "
                       name="podRestartCount"
     {%- endif %}
   {%- endif %}
@@ -311,7 +311,7 @@
 {%- macro htmPodRestartCountProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPodRestartCountProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputPodsRestartingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPodsRestartingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_podsRestarting">
   {%- endif %}
@@ -323,14 +323,14 @@
                       id="Project_{{classApiMethodMethod}}_podsRestarting"
   {%- if "Page" == classApiMethodMethod %}
                       data-projectResource={{ result.projectResource | tojson }}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podsRestarting setPodsRestarting classProject inputProject{{ result.projectResource }}PodsRestarting "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podsRestarting setPodsRestarting classProject inputProject{{ result.projectResource }}PodsRestarting "
                       name="setPodsRestarting"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podsRestarting setPodsRestarting classProject inputProject{{ result.projectResource }}PodsRestarting "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podsRestarting setPodsRestarting classProject inputProject{{ result.projectResource }}PodsRestarting "
                       name="setPodsRestarting"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podsRestarting valuePodsRestarting classProject inputProject{{ result.projectResource }}PodsRestarting "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podsRestarting valuePodsRestarting classProject inputProject{{ result.projectResource }}PodsRestarting "
                       name="podsRestarting"
     {%- endif %}
   {%- endif %}
@@ -347,7 +347,7 @@
 {%- macro htmPodsRestartingProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPodsRestartingProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputPodTerminatingCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPodTerminatingCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_podTerminatingCount">
   {%- endif %}
@@ -360,14 +360,14 @@
                       id="Project_{{classApiMethodMethod}}_podTerminatingCount"
   {%- if "Page" == classApiMethodMethod %}
                       data-projectResource={{ result.projectResource | tojson }}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podTerminatingCount setPodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podTerminatingCount setPodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
                       name="setPodTerminatingCount"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podTerminatingCount setPodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podTerminatingCount setPodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
                       name="setPodTerminatingCount"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podTerminatingCount valuePodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podTerminatingCount valuePodTerminatingCount classProject inputProject{{ result.projectResource }}PodTerminatingCount "
                       name="podTerminatingCount"
     {%- endif %}
   {%- endif %}
@@ -384,7 +384,7 @@
 {%- macro htmPodTerminatingCountProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPodTerminatingCountProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputPodsTerminatingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPodsTerminatingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_podsTerminating">
   {%- endif %}
@@ -396,14 +396,14 @@
                       id="Project_{{classApiMethodMethod}}_podsTerminating"
   {%- if "Page" == classApiMethodMethod %}
                       data-projectResource={{ result.projectResource | tojson }}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podsTerminating setPodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podsTerminating setPodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
                       name="setPodsTerminating"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podsTerminating setPodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podsTerminating setPodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
                       name="setPodsTerminating"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_podsTerminating valuePodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
+                      class="label-on-left Project_{{classApiMethodMethod}}_podsTerminating valuePodsTerminating classProject inputProject{{ result.projectResource }}PodsTerminating "
                       name="podsTerminating"
     {%- endif %}
   {%- endif %}
@@ -420,7 +420,7 @@
 {%- macro htmPodsTerminatingProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPodsTerminatingProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputFullPvcsCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputFullPvcsCountProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_fullPvcsCount">
   {%- endif %}
@@ -433,14 +433,14 @@
                       id="Project_{{classApiMethodMethod}}_fullPvcsCount"
   {%- if "Page" == classApiMethodMethod %}
                       data-projectResource={{ result.projectResource | tojson }}
-                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcsCount setFullPvcsCount classProject inputProject{{ result.projectResource }}FullPvcsCount "
+                      class="label-on-left Project_{{classApiMethodMethod}}_fullPvcsCount setFullPvcsCount classProject inputProject{{ result.projectResource }}FullPvcsCount "
                       name="setFullPvcsCount"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcsCount setFullPvcsCount classProject inputProject{{ result.projectResource }}FullPvcsCount "
+                      class="label-on-left Project_{{classApiMethodMethod}}_fullPvcsCount setFullPvcsCount classProject inputProject{{ result.projectResource }}FullPvcsCount "
                       name="setFullPvcsCount"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcsCount valueFullPvcsCount classProject inputProject{{ result.projectResource }}FullPvcsCount "
+                      class="label-on-left Project_{{classApiMethodMethod}}_fullPvcsCount valueFullPvcsCount classProject inputProject{{ result.projectResource }}FullPvcsCount "
                       name="fullPvcsCount"
     {%- endif %}
   {%- endif %}
@@ -457,7 +457,7 @@
 {%- macro htmFullPvcsCountProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputFullPvcsCountProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputFullPvcsProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputFullPvcsProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_fullPvcs">
   {%- endif %}
@@ -469,14 +469,14 @@
                       id="Project_{{classApiMethodMethod}}_fullPvcs"
   {%- if "Page" == classApiMethodMethod %}
                       data-projectResource={{ result.projectResource | tojson }}
-                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcs setFullPvcs classProject inputProject{{ result.projectResource }}FullPvcs "
+                      class="label-on-left Project_{{classApiMethodMethod}}_fullPvcs setFullPvcs classProject inputProject{{ result.projectResource }}FullPvcs "
                       name="setFullPvcs"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcs setFullPvcs classProject inputProject{{ result.projectResource }}FullPvcs "
+                      class="label-on-left Project_{{classApiMethodMethod}}_fullPvcs setFullPvcs classProject inputProject{{ result.projectResource }}FullPvcs "
                       name="setFullPvcs"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_fullPvcs valueFullPvcs classProject inputProject{{ result.projectResource }}FullPvcs "
+                      class="label-on-left Project_{{classApiMethodMethod}}_fullPvcs valueFullPvcs classProject inputProject{{ result.projectResource }}FullPvcs "
                       name="fullPvcs"
     {%- endif %}
   {%- endif %}
@@ -493,7 +493,7 @@
 {%- macro htmFullPvcsProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputFullPvcsProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputNamespaceTerminatingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputNamespaceTerminatingProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_namespaceTerminating">
   {%- endif %}
@@ -510,14 +510,14 @@
                       label="namespace terminating"
                       hint="Whether namespace is stuck in terminating status. "
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_namespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
+                      class="label-on-left Project_{{classApiMethodMethod}}_namespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
                       name="setNamespaceTerminating"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_namespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
+                      class="label-on-left Project_{{classApiMethodMethod}}_namespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
                       name="setNamespaceTerminating"
     {%- else %}
-                      class="label-on-left {{Project_classApiMethodMethod}}_namespaceTerminating setNamespaceTerminating valueNamespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
+                      class="label-on-left Project_{{classApiMethodMethod}}_namespaceTerminating setNamespaceTerminating valueNamespaceTerminating classProject inputProject{{ result.projectResource }}NamespaceTerminating "
                       name="setNamespaceTerminating"
     {%- endif %}
   {%- endif %}
@@ -552,7 +552,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchProject() %}
+{%- macro htmForm_patchProject(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchProjectDialog" label="Modify project">
           <form id="htmForm_patchProject" class="round-row primary-smart-border-radius ">
 
@@ -562,32 +562,32 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmProjectNameProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmProjectNameProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmProjectNameProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmDescriptionProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmGpuEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmGpuEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmGpuEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -599,72 +599,72 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPodRestartCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodRestartCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodRestartCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmPodsRestartingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodsRestartingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodsRestartingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -683,7 +683,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postProject() %}
+{%- macro htmForm_postProject(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postProjectDialog" label="Create an project">
           <form id="htmForm_postProject" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -694,32 +694,32 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmProjectNameProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmProjectNameProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmProjectNameProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmDescriptionProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -731,72 +731,72 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmPodRestartCountProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodRestartCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodRestartCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -815,7 +815,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deleteProject() %}
+{%- macro htmForm_deleteProject(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteProjectDialog" label="Delete project">
           <form id="htmForm_deleteProject" class="round-row primary-smart-border-radius ">
           </form>
@@ -832,7 +832,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_putimportProject() %}
+{%- macro htmForm_putimportProject(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportProjectDialog" label="Import projects">
           <form id="htmForm_putimportProject" class="round-row primary-smart-border-radius ">
             <div>
@@ -848,7 +848,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageProject() %}
+{%- macro htmForm_searchpageProject(idSuffix='') %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageProjectDialog" label="Search projects">
           <div id="htmForm_searchpageProject" class="round-row primary-smart-border-radius ">
 
@@ -858,44 +858,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPkProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPkProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPkProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPkProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPkProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPkProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmCreatedProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCreatedProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCreatedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCreatedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCreatedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCreatedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmModifiedProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmModifiedProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmModifiedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmModifiedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmModifiedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmModifiedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmArchivedProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmArchivedProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmArchivedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmArchivedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmArchivedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmArchivedProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -907,32 +907,32 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmProjectNameProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmProjectNameProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmProjectNameProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmProjectNameProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmDescriptionProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmGpuEnabledProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -944,72 +944,72 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPodRestartCountProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodRestartCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodRestartCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodRestartCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodsRestartingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodTerminatingCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPodsTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmFullPvcsCountProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmFullPvcsProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNamespaceTerminatingProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1027,7 +1027,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deletefilterProject() %}
+{%- macro htmForm_deletefilterProject(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterProjectDialog" label="Delete project">
           <form id="htmForm_deletefilterProject" class="round-row primary-smart-border-radius ">
           </form>

@@ -1,4 +1,4 @@
-{%- macro inputPkSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPkSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pk">
   {%- endif %}
@@ -11,14 +11,14 @@
                       id="SiteUser_{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
                       data-userId={{ result.userId | tojson }}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_pk setPk classSiteUser inputSiteUser{{ result.userId }}Pk "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_pk setPk classSiteUser inputSiteUser{{ result.userId }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_pk setPk classSiteUser inputSiteUser{{ result.userId }}Pk "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_pk setPk classSiteUser inputSiteUser{{ result.userId }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_pk valuePk classSiteUser inputSiteUser{{ result.userId }}Pk "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_pk valuePk classSiteUser inputSiteUser{{ result.userId }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -35,7 +35,7 @@
 {%- macro htmPkSiteUserPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPkSiteUserPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCreatedSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -44,7 +44,7 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_created datetimepicker setCreated classSiteUser inputSiteUser{{ result.userId }}Created "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_created datetimepicker setCreated classSiteUser inputSiteUser{{ result.userId }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="SiteUser_{{classApiMethodMethod}}_created"
@@ -63,7 +63,7 @@
 {%- macro htmCreatedSiteUserPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedSiteUserPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputModifiedSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -72,7 +72,7 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_modified datetimepicker setModified classSiteUser inputSiteUser{{ result.userId }}Modified "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_modified datetimepicker setModified classSiteUser inputSiteUser{{ result.userId }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="SiteUser_{{classApiMethodMethod}}_modified"
@@ -91,7 +91,7 @@
 {%- macro htmModifiedSiteUserPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedSiteUserPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputArchivedSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -101,7 +101,7 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_archived classSiteUser inputSiteUser{{ result.userId }}Archived "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_archived classSiteUser inputSiteUser{{ result.userId }}Archived "
                       name="setArchived"
                       data-userId={{ result.userId | tojson }}
                       data-val="{{ result.archived | e }}"
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_archived classSiteUser inputSiteUser{{ result.userId }}Archived "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_archived classSiteUser inputSiteUser{{ result.userId }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_archived classSiteUser inputSiteUser{{ result.userId }}Archived "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_archived classSiteUser inputSiteUser{{ result.userId }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_archived setArchived valueArchived classSiteUser inputSiteUser{{ result.userId }}Archived "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_archived setArchived valueArchived classSiteUser inputSiteUser{{ result.userId }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -153,7 +153,7 @@
 {%- macro htmArchivedSiteUserPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedSiteUserPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputSeeArchivedSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputSeeArchivedSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_seeArchived">
   {%- endif %}
@@ -170,14 +170,14 @@
                       label="see archived"
                       hint="A user field allowing a user to see archived records"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_seeArchived classSiteUser inputSiteUser{{ result.userId }}SeeArchived "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_seeArchived classSiteUser inputSiteUser{{ result.userId }}SeeArchived "
                       name="setSeeArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_seeArchived classSiteUser inputSiteUser{{ result.userId }}SeeArchived "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_seeArchived classSiteUser inputSiteUser{{ result.userId }}SeeArchived "
                       name="setSeeArchived"
     {%- else %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_seeArchived setSeeArchived valueSeeArchived classSiteUser inputSiteUser{{ result.userId }}SeeArchived "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_seeArchived setSeeArchived valueSeeArchived classSiteUser inputSiteUser{{ result.userId }}SeeArchived "
                       name="setSeeArchived"
     {%- endif %}
   {%- endif %}
@@ -202,7 +202,7 @@
 {%- macro htmSeeArchivedSiteUserPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputSeeArchivedSiteUserPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputSiteFontSizeSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputSiteFontSizeSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_siteFontSize">
   {%- endif %}
@@ -214,14 +214,14 @@
                       id="SiteUser_{{classApiMethodMethod}}_siteFontSize"
   {%- if "Page" == classApiMethodMethod %}
                       data-userId={{ result.userId | tojson }}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_siteFontSize setSiteFontSize classSiteUser inputSiteUser{{ result.userId }}SiteFontSize "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_siteFontSize setSiteFontSize classSiteUser inputSiteUser{{ result.userId }}SiteFontSize "
                       name="setSiteFontSize"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_siteFontSize setSiteFontSize classSiteUser inputSiteUser{{ result.userId }}SiteFontSize "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_siteFontSize setSiteFontSize classSiteUser inputSiteUser{{ result.userId }}SiteFontSize "
                       name="setSiteFontSize"
     {%- else %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_siteFontSize valueSiteFontSize classSiteUser inputSiteUser{{ result.userId }}SiteFontSize "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_siteFontSize valueSiteFontSize classSiteUser inputSiteUser{{ result.userId }}SiteFontSize "
                       name="siteFontSize"
     {%- endif %}
   {%- endif %}
@@ -242,7 +242,7 @@
 {%- macro htmSiteFontSizeSiteUserPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputSiteFontSizeSiteUserPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputSiteThemeSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputSiteThemeSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_siteTheme">
   {%- endif %}
@@ -254,14 +254,14 @@
                       id="SiteUser_{{classApiMethodMethod}}_siteTheme"
   {%- if "Page" == classApiMethodMethod %}
                       data-userId={{ result.userId | tojson }}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_siteTheme setSiteTheme classSiteUser inputSiteUser{{ result.userId }}SiteTheme "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_siteTheme setSiteTheme classSiteUser inputSiteUser{{ result.userId }}SiteTheme "
                       name="setSiteTheme"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_siteTheme setSiteTheme classSiteUser inputSiteUser{{ result.userId }}SiteTheme "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_siteTheme setSiteTheme classSiteUser inputSiteUser{{ result.userId }}SiteTheme "
                       name="setSiteTheme"
     {%- else %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_siteTheme valueSiteTheme classSiteUser inputSiteUser{{ result.userId }}SiteTheme "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_siteTheme valueSiteTheme classSiteUser inputSiteUser{{ result.userId }}SiteTheme "
                       name="siteTheme"
     {%- endif %}
   {%- endif %}
@@ -281,7 +281,7 @@
 {%- macro htmSiteThemeSiteUserPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputSiteThemeSiteUserPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputUserProfileUrlSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputUserProfileUrlSiteUserPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_userProfileUrl">
   {%- endif %}
@@ -292,7 +292,7 @@
                         placeholder="[String] Keycloak user profile"
                         label="Keycloak user profile"
                         hint="View and update your user profile in Keycloak"
-                        class="button-on-left {{SiteUser_classApiMethodMethod}}_userProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
+                        class="button-on-left SiteUser_{{classApiMethodMethod}}_userProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
                         name="setUserProfileUrl"
                         href="{{ result.userProfileUrl | e }}"
                         >
@@ -309,14 +309,14 @@
                       id="SiteUser_{{classApiMethodMethod}}_userProfileUrl"
   {%- if "Page" == classApiMethodMethod %}
                       data-userId={{ result.userId | tojson }}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_userProfileUrl setUserProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_userProfileUrl setUserProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
                       name="setUserProfileUrl"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_userProfileUrl setUserProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_userProfileUrl setUserProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
                       name="setUserProfileUrl"
     {%- else %}
-                      class="label-on-left {{SiteUser_classApiMethodMethod}}_userProfileUrl valueUserProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
+                      class="label-on-left SiteUser_{{classApiMethodMethod}}_userProfileUrl valueUserProfileUrl classSiteUser inputSiteUser{{ result.userId }}UserProfileUrl "
                       name="userProfileUrl"
     {%- endif %}
   {%- endif %}
@@ -344,7 +344,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchSiteUser() %}
+{%- macro htmForm_patchSiteUser(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchSiteUserDialog" label="Modify site user">
           <form id="htmForm_patchSiteUser" class="round-row primary-smart-border-radius ">
 
@@ -354,42 +354,42 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -408,7 +408,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postSiteUser() %}
+{%- macro htmForm_postSiteUser(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postSiteUserDialog" label="Create a site user">
           <form id="htmForm_postSiteUser" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -419,42 +419,42 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -464,7 +464,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageSiteUser() %}
+{%- macro htmForm_searchpageSiteUser(idSuffix='') %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageSiteUserDialog" label="Search site users">
           <div id="htmForm_searchpageSiteUser" class="round-row primary-smart-border-radius ">
 
@@ -474,44 +474,44 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPkSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPkSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPkSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPkSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPkSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPkSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmCreatedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCreatedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCreatedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCreatedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCreatedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCreatedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmModifiedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmModifiedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmModifiedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmModifiedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmModifiedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmModifiedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -523,42 +523,42 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSeeArchivedSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSiteFontSizeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmSiteThemeSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmUserProfileUrlSiteUserPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>

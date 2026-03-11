@@ -3,7 +3,6 @@
 {% include en-us/search/ansible-project/AnsibleProjectSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchTenant() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}

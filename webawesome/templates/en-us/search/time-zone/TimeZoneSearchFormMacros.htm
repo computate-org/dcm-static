@@ -1,4 +1,4 @@
-{%- macro inputCreatedTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCreatedTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -7,7 +7,7 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_created datetimepicker setCreated classTimeZone inputTimeZone{{ result.id }}Created "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_created datetimepicker setCreated classTimeZone inputTimeZone{{ result.id }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="TimeZone_{{classApiMethodMethod}}_created"
@@ -26,7 +26,7 @@
 {%- macro htmCreatedTimeZonePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedTimeZonePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputModifiedTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -35,7 +35,7 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_modified datetimepicker setModified classTimeZone inputTimeZone{{ result.id }}Modified "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_modified datetimepicker setModified classTimeZone inputTimeZone{{ result.id }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="TimeZone_{{classApiMethodMethod}}_modified"
@@ -54,7 +54,7 @@
 {%- macro htmModifiedTimeZonePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedTimeZonePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputArchivedTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -64,7 +64,7 @@
                       placeholder="archived"
                       label="archived"
                       hint="For archiving this record"
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_archived classTimeZone inputTimeZone{{ result.id }}Archived "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_archived classTimeZone inputTimeZone{{ result.id }}Archived "
                       name="setArchived"
                       data-id={{ result.id | tojson }}
                       data-val="{{ result.archived | e }}"
@@ -83,14 +83,14 @@
                       label="archived"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_archived classTimeZone inputTimeZone{{ result.id }}Archived "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_archived classTimeZone inputTimeZone{{ result.id }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_archived classTimeZone inputTimeZone{{ result.id }}Archived "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_archived classTimeZone inputTimeZone{{ result.id }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_archived setArchived valueArchived classTimeZone inputTimeZone{{ result.id }}Archived "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_archived setArchived valueArchived classTimeZone inputTimeZone{{ result.id }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -116,7 +116,7 @@
 {%- macro htmArchivedTimeZonePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedTimeZonePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputAbbreviationTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputAbbreviationTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_abbreviation">
   {%- endif %}
@@ -128,14 +128,14 @@
                       id="TimeZone_{{classApiMethodMethod}}_abbreviation"
   {%- if "Page" == classApiMethodMethod %}
                       data-id={{ result.id | tojson }}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_abbreviation setAbbreviation classTimeZone inputTimeZone{{ result.id }}Abbreviation "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_abbreviation setAbbreviation classTimeZone inputTimeZone{{ result.id }}Abbreviation "
                       name="setAbbreviation"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_abbreviation setAbbreviation classTimeZone inputTimeZone{{ result.id }}Abbreviation "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_abbreviation setAbbreviation classTimeZone inputTimeZone{{ result.id }}Abbreviation "
                       name="setAbbreviation"
     {%- else %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_abbreviation valueAbbreviation classTimeZone inputTimeZone{{ result.id }}Abbreviation "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_abbreviation valueAbbreviation classTimeZone inputTimeZone{{ result.id }}Abbreviation "
                       name="abbreviation"
     {%- endif %}
   {%- endif %}
@@ -152,7 +152,7 @@
 {%- macro htmAbbreviationTimeZonePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputAbbreviationTimeZonePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputLocationTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputLocationTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_location">
   {%- endif %}
@@ -164,14 +164,14 @@
                       id="TimeZone_{{classApiMethodMethod}}_location"
   {%- if "Page" == classApiMethodMethod %}
                       data-id={{ result.id | tojson }}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_location setLocation classTimeZone inputTimeZone{{ result.id }}Location "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_location setLocation classTimeZone inputTimeZone{{ result.id }}Location "
                       name="setLocation"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_location setLocation classTimeZone inputTimeZone{{ result.id }}Location "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_location setLocation classTimeZone inputTimeZone{{ result.id }}Location "
                       name="setLocation"
     {%- else %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_location valueLocation classTimeZone inputTimeZone{{ result.id }}Location "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_location valueLocation classTimeZone inputTimeZone{{ result.id }}Location "
                       name="location"
     {%- endif %}
   {%- endif %}
@@ -188,7 +188,7 @@
 {%- macro htmLocationTimeZonePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputLocationTimeZonePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputNameTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputNameTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_name">
   {%- endif %}
@@ -200,14 +200,14 @@
                       id="TimeZone_{{classApiMethodMethod}}_name"
   {%- if "Page" == classApiMethodMethod %}
                       data-id={{ result.id | tojson }}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_name setName classTimeZone inputTimeZone{{ result.id }}Name "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_name setName classTimeZone inputTimeZone{{ result.id }}Name "
                       name="setName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_name setName classTimeZone inputTimeZone{{ result.id }}Name "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_name setName classTimeZone inputTimeZone{{ result.id }}Name "
                       name="setName"
     {%- else %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_name valueName classTimeZone inputTimeZone{{ result.id }}Name "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_name valueName classTimeZone inputTimeZone{{ result.id }}Name "
                       name="name"
     {%- endif %}
   {%- endif %}
@@ -224,7 +224,7 @@
 {%- macro htmNameTimeZonePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputNameTimeZonePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputIdTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputIdTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_id">
   {%- endif %}
@@ -236,14 +236,14 @@
                       id="TimeZone_{{classApiMethodMethod}}_id"
   {%- if "Page" == classApiMethodMethod %}
                       data-id={{ result.id | tojson }}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_id setId classTimeZone inputTimeZone{{ result.id }}Id "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_id setId classTimeZone inputTimeZone{{ result.id }}Id "
                       name="setId"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_id setId classTimeZone inputTimeZone{{ result.id }}Id "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_id setId classTimeZone inputTimeZone{{ result.id }}Id "
                       name="setId"
     {%- else %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_id valueId classTimeZone inputTimeZone{{ result.id }}Id "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_id valueId classTimeZone inputTimeZone{{ result.id }}Id "
                       name="id"
     {%- endif %}
   {%- endif %}
@@ -260,7 +260,7 @@
 {%- macro htmIdTimeZonePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputIdTimeZonePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputDisplayPageTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputDisplayPageTimeZonePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_displayPage">
   {%- endif %}
@@ -268,7 +268,7 @@
                   <div class="button-on-left ">
                     <wa-button variant="brand"
                         id="TimeZone_{{classApiMethodMethod}}_displayPage"
-                        class="button-on-left {{TimeZone_classApiMethodMethod}}_displayPage classTimeZone inputTimeZone{{ result.id }}DisplayPage "
+                        class="button-on-left TimeZone_{{classApiMethodMethod}}_displayPage classTimeZone inputTimeZone{{ result.id }}DisplayPage "
                         name="setDisplayPage"
                         href="{{ result.displayPage | e }}"
                         >
@@ -281,14 +281,14 @@
                       id="TimeZone_{{classApiMethodMethod}}_displayPage"
   {%- if "Page" == classApiMethodMethod %}
                       data-id={{ result.id | tojson }}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_displayPage setDisplayPage classTimeZone inputTimeZone{{ result.id }}DisplayPage "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_displayPage setDisplayPage classTimeZone inputTimeZone{{ result.id }}DisplayPage "
                       name="setDisplayPage"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_displayPage setDisplayPage classTimeZone inputTimeZone{{ result.id }}DisplayPage "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_displayPage setDisplayPage classTimeZone inputTimeZone{{ result.id }}DisplayPage "
                       name="setDisplayPage"
     {%- else %}
-                      class="label-on-left {{TimeZone_classApiMethodMethod}}_displayPage valueDisplayPage classTimeZone inputTimeZone{{ result.id }}DisplayPage "
+                      class="label-on-left TimeZone_{{classApiMethodMethod}}_displayPage valueDisplayPage classTimeZone inputTimeZone{{ result.id }}DisplayPage "
                       name="displayPage"
     {%- endif %}
   {%- endif %}
@@ -316,7 +316,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchTimeZone() %}
+{%- macro htmForm_patchTimeZone(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchTimeZoneDialog" label="Modify time zone">
           <form id="htmForm_patchTimeZone" class="round-row primary-smart-border-radius ">
 
@@ -326,54 +326,54 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmLocationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmLocationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmLocationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmLocationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmLocationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmLocationTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmNameTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNameTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmIdTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmIdTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmIdTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmIdTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmIdTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmIdTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -392,7 +392,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postTimeZone() %}
+{%- macro htmForm_postTimeZone(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postTimeZoneDialog" label="Create a time zone">
           <form id="htmForm_postTimeZone" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -403,54 +403,54 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmLocationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmLocationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmLocationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmLocationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmLocationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmLocationTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmNameTimeZonePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameTimeZonePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNameTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmIdTimeZonePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmIdTimeZonePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmIdTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmIdTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmIdTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmIdTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -469,7 +469,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deleteTimeZone() %}
+{%- macro htmForm_deleteTimeZone(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteTimeZoneDialog" label="Delete time zone">
           <form id="htmForm_deleteTimeZone" class="round-row primary-smart-border-radius ">
           </form>
@@ -486,7 +486,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_putimportTimeZone() %}
+{%- macro htmForm_putimportTimeZone(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportTimeZoneDialog" label="Import time zones">
           <form id="htmForm_putimportTimeZone" class="round-row primary-smart-border-radius ">
             <div>
@@ -502,7 +502,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageTimeZone() %}
+{%- macro htmForm_searchpageTimeZone(idSuffix='') %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageTimeZoneDialog" label="Search time zones">
           <div id="htmForm_searchpageTimeZone" class="round-row primary-smart-border-radius ">
 
@@ -512,34 +512,34 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmCreatedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCreatedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCreatedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCreatedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCreatedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCreatedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmModifiedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmModifiedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmModifiedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmModifiedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmModifiedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmModifiedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmArchivedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmArchivedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmArchivedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmArchivedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmArchivedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmArchivedTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -551,54 +551,54 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAbbreviationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmLocationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmLocationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmLocationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmLocationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmLocationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmLocationTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmNameTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNameTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmIdTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmIdTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmIdTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmIdTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmIdTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmIdTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDisplayPageTimeZonePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -616,7 +616,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deletefilterTimeZone() %}
+{%- macro htmForm_deletefilterTimeZone(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterTimeZoneDialog" label="Delete time zone">
           <form id="htmForm_deletefilterTimeZone" class="round-row primary-smart-border-radius ">
           </form>

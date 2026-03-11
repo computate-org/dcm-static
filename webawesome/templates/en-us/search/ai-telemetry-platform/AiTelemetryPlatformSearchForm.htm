@@ -1,7 +1,6 @@
 {% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchAiTelemetryPlatform() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}

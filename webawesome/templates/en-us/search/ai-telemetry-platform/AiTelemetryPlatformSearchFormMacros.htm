@@ -1,4 +1,4 @@
-{%- macro inputCreatedAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputCreatedAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -7,7 +7,7 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_created datetimepicker setCreated classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Created "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_created datetimepicker setCreated classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="AiTelemetryPlatform_{{classApiMethodMethod}}_created"
@@ -26,7 +26,7 @@
 {%- macro htmCreatedAiTelemetryPlatformPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedAiTelemetryPlatformPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputModifiedAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -35,7 +35,7 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_modified datetimepicker setModified classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Modified "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_modified datetimepicker setModified classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="AiTelemetryPlatform_{{classApiMethodMethod}}_modified"
@@ -54,7 +54,7 @@
 {%- macro htmModifiedAiTelemetryPlatformPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedAiTelemetryPlatformPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputArchivedAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -64,7 +64,7 @@
                       placeholder="archived"
                       label="archived"
                       hint="For archiving this record"
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_archived classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Archived "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_archived classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Archived "
                       name="setArchived"
                       data-pageId={{ result.pageId | tojson }}
                       data-val="{{ result.archived | e }}"
@@ -83,14 +83,14 @@
                       label="archived"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_archived classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Archived "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_archived classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_archived classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Archived "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_archived classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_archived setArchived valueArchived classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Archived "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_archived setArchived valueArchived classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -116,7 +116,7 @@
 {%- macro htmArchivedAiTelemetryPlatformPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedAiTelemetryPlatformPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputNameAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputNameAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_name">
   {%- endif %}
@@ -128,14 +128,14 @@
                       id="AiTelemetryPlatform_{{classApiMethodMethod}}_name"
   {%- if "Page" == classApiMethodMethod %}
                       data-pageId={{ result.pageId | tojson }}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_name setName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Name "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_name setName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Name "
                       name="setName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_name setName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Name "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_name setName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Name "
                       name="setName"
     {%- else %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_name valueName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Name "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_name valueName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Name "
                       name="name"
     {%- endif %}
   {%- endif %}
@@ -152,7 +152,7 @@
 {%- macro htmNameAiTelemetryPlatformPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputNameAiTelemetryPlatformPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputDescriptionAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputDescriptionAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_description">
   {%- endif %}
@@ -164,14 +164,14 @@
                       id="AiTelemetryPlatform_{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-pageId={{ result.pageId | tojson }}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_description setDescription classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Description "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_description setDescription classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Description "
                       name="setDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_description setDescription classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Description "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_description setDescription classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Description "
                       name="setDescription"
     {%- else %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_description valueDescription classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Description "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_description valueDescription classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}Description "
                       name="description"
     {%- endif %}
   {%- endif %}
@@ -188,7 +188,7 @@
 {%- macro htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputDescriptionAiTelemetryPlatformPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputAuthorNameAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputAuthorNameAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_authorName">
   {%- endif %}
@@ -200,14 +200,14 @@
                       id="AiTelemetryPlatform_{{classApiMethodMethod}}_authorName"
   {%- if "Page" == classApiMethodMethod %}
                       data-pageId={{ result.pageId | tojson }}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_authorName setAuthorName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorName "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_authorName setAuthorName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorName "
                       name="setAuthorName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_authorName setAuthorName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorName "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_authorName setAuthorName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorName "
                       name="setAuthorName"
     {%- else %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_authorName valueAuthorName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorName "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_authorName valueAuthorName classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorName "
                       name="authorName"
     {%- endif %}
   {%- endif %}
@@ -224,7 +224,7 @@
 {%- macro htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputAuthorNameAiTelemetryPlatformPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_authorUrl">
   {%- endif %}
@@ -236,14 +236,14 @@
                       id="AiTelemetryPlatform_{{classApiMethodMethod}}_authorUrl"
   {%- if "Page" == classApiMethodMethod %}
                       data-pageId={{ result.pageId | tojson }}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_authorUrl setAuthorUrl classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorUrl "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_authorUrl setAuthorUrl classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorUrl "
                       name="setAuthorUrl"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_authorUrl setAuthorUrl classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorUrl "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_authorUrl setAuthorUrl classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorUrl "
                       name="setAuthorUrl"
     {%- else %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_authorUrl valueAuthorUrl classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorUrl "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_authorUrl valueAuthorUrl classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}AuthorUrl "
                       name="authorUrl"
     {%- endif %}
   {%- endif %}
@@ -260,7 +260,7 @@
 {%- macro htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputPageImageUriAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPageImageUriAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pageImageUri">
   {%- endif %}
@@ -272,14 +272,14 @@
                       id="AiTelemetryPlatform_{{classApiMethodMethod}}_pageImageUri"
   {%- if "Page" == classApiMethodMethod %}
                       data-pageId={{ result.pageId | tojson }}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_pageImageUri setPageImageUri classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageImageUri "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_pageImageUri setPageImageUri classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageImageUri "
                       name="setPageImageUri"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_pageImageUri setPageImageUri classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageImageUri "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_pageImageUri setPageImageUri classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageImageUri "
                       name="setPageImageUri"
     {%- else %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_pageImageUri valuePageImageUri classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageImageUri "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_pageImageUri valuePageImageUri classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageImageUri "
                       name="pageImageUri"
     {%- endif %}
   {%- endif %}
@@ -296,7 +296,7 @@
 {%- macro htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPageImageUriAiTelemetryPlatformPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputPageIdAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputPageIdAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pageId">
   {%- endif %}
@@ -308,14 +308,14 @@
                       id="AiTelemetryPlatform_{{classApiMethodMethod}}_pageId"
   {%- if "Page" == classApiMethodMethod %}
                       data-pageId={{ result.pageId | tojson }}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_pageId setPageId classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageId "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_pageId setPageId classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageId "
                       name="setPageId"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_pageId setPageId classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageId "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_pageId setPageId classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageId "
                       name="setPageId"
     {%- else %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_pageId valuePageId classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageId "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_pageId valuePageId classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}PageId "
                       name="pageId"
     {%- endif %}
   {%- endif %}
@@ -332,7 +332,7 @@
 {%- macro htmPageIdAiTelemetryPlatformPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPageIdAiTelemetryPlatformPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputDisplayPageAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+{%- macro inputDisplayPageAiTelemetryPlatformPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_displayPage">
   {%- endif %}
@@ -340,7 +340,7 @@
                   <div class="button-on-left ">
                     <wa-button variant="brand"
                         id="AiTelemetryPlatform_{{classApiMethodMethod}}_displayPage"
-                        class="button-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_displayPage classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}DisplayPage "
+                        class="button-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_displayPage classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}DisplayPage "
                         name="setDisplayPage"
                         href="{{ result.displayPage | e }}"
                         >
@@ -353,14 +353,14 @@
                       id="AiTelemetryPlatform_{{classApiMethodMethod}}_displayPage"
   {%- if "Page" == classApiMethodMethod %}
                       data-pageId={{ result.pageId | tojson }}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_displayPage setDisplayPage classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}DisplayPage "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_displayPage setDisplayPage classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}DisplayPage "
                       name="setDisplayPage"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_displayPage setDisplayPage classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}DisplayPage "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_displayPage setDisplayPage classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}DisplayPage "
                       name="setDisplayPage"
     {%- else %}
-                      class="label-on-left {{AiTelemetryPlatform_classApiMethodMethod}}_displayPage valueDisplayPage classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}DisplayPage "
+                      class="label-on-left AiTelemetryPlatform_{{classApiMethodMethod}}_displayPage valueDisplayPage classAiTelemetryPlatform inputAiTelemetryPlatform{{ result.pageId }}DisplayPage "
                       name="displayPage"
     {%- endif %}
   {%- endif %}
@@ -388,7 +388,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchAiTelemetryPlatform() %}
+{%- macro htmForm_patchAiTelemetryPlatform(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="patchAiTelemetryPlatformDialog" label="Modify AI Telemetry developer">
           <form id="htmForm_patchAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
 
@@ -398,54 +398,54 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -457,22 +457,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -491,7 +491,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postAiTelemetryPlatform() %}
+{%- macro htmForm_postAiTelemetryPlatform(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="postAiTelemetryPlatformDialog" label="Create an AI Telemetry developer">
           <form id="htmForm_postAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -502,54 +502,54 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -561,22 +561,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -595,7 +595,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deleteAiTelemetryPlatform() %}
+{%- macro htmForm_deleteAiTelemetryPlatform(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteAiTelemetryPlatformDialog" label="Delete AI Telemetry developer">
           <form id="htmForm_deleteAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
           </form>
@@ -612,7 +612,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_putimportAiTelemetryPlatform() %}
+{%- macro htmForm_putimportAiTelemetryPlatform(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportAiTelemetryPlatformDialog" label="Import AI Telemetry developers">
           <form id="htmForm_putimportAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
             <div>
@@ -628,7 +628,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageAiTelemetryPlatform() %}
+{%- macro htmForm_searchpageAiTelemetryPlatform(idSuffix='') %}
         <div with-header with-footer style="--width: 50vw; " id="searchpageAiTelemetryPlatformDialog" label="Search AI Telemetry developers">
           <div id="htmForm_searchpageAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
 
@@ -638,34 +638,34 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmCreatedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmCreatedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmCreatedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmCreatedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmCreatedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmCreatedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmModifiedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmModifiedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmModifiedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmModifiedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmModifiedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmModifiedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmArchivedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmArchivedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmArchivedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmArchivedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmArchivedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmArchivedAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -677,54 +677,54 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDescriptionAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAuthorNameAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmAuthorUrlAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPageImageUriAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -736,22 +736,22 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmPageIdAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {{ htmDisplayPageAiTelemetryPlatformPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -769,7 +769,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deletefilterAiTelemetryPlatform() %}
+{%- macro htmForm_deletefilterAiTelemetryPlatform(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterAiTelemetryPlatformDialog" label="Delete AI Telemetry developer">
           <form id="htmForm_deletefilterAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
           </form>

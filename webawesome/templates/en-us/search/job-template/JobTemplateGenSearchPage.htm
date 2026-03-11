@@ -134,7 +134,7 @@
             suggestJobTemplateInventoryResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ] : [{%- if result.inventoryResource is defined %}{'name':'fq','value':'inventoryResource:{{ result.inventoryResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,inventoryResource,pk,editPage,objectTitle' } ] : [{%- if result.inventoryResource is defined %}{'name':'fq','value':'inventoryResource:{{ result.inventoryResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -150,7 +150,7 @@
             suggestJobTemplateAnsibleProjectResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ] : [{%- if result.ansibleProjectResource is defined %}{'name':'fq','value':'ansibleProjectResource:{{ result.ansibleProjectResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,ansibleProjectResource,pk,editPage,objectTitle' } ] : [{%- if result.ansibleProjectResource is defined %}{'name':'fq','value':'ansibleProjectResource:{{ result.ansibleProjectResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -166,7 +166,7 @@
             suggestJobTemplateTenantResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -296,6 +296,8 @@
               , document.querySelector('#htmFormButton_postTenant')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 
@@ -305,6 +307,8 @@
               , document.querySelector('#htmFormButton_postHostInventory')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 
@@ -314,6 +318,8 @@
               , document.querySelector('#htmFormButton_postAnsibleProject')
               , (json, target) => {
                 addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
               });
         });
 {%- block htmScriptInitJobTemplatePage %}{%- endblock htmScriptInitJobTemplatePage %}

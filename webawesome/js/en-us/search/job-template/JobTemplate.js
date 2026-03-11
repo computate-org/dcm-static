@@ -113,71 +113,71 @@ async function websocketJobTemplateInner(apiRequest) {
         var inputAapTemplateId = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.Page_pk');
+          inputPk = $response.querySelector('.JobTemplate_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.Page_created');
+          inputCreated = $response.querySelector('.JobTemplate_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.Page_modified');
+          inputModified = $response.querySelector('.JobTemplate_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.Page_archived');
+          inputArchived = $response.querySelector('.JobTemplate_Page_archived');
         if(vars.includes('inventoryResource'))
-          inputInventoryResource = $response.querySelector('.Page_inventoryResource');
+          inputInventoryResource = $response.querySelector('.JobTemplate_Page_inventoryResource');
         if(vars.includes('ansibleProjectResource'))
-          inputAnsibleProjectResource = $response.querySelector('.Page_ansibleProjectResource');
+          inputAnsibleProjectResource = $response.querySelector('.JobTemplate_Page_ansibleProjectResource');
         if(vars.includes('ansiblePlaybook'))
-          inputAnsiblePlaybook = $response.querySelector('.Page_ansiblePlaybook');
+          inputAnsiblePlaybook = $response.querySelector('.JobTemplate_Page_ansiblePlaybook');
         if(vars.includes('jobTemplateName'))
-          inputJobTemplateName = $response.querySelector('.Page_jobTemplateName');
+          inputJobTemplateName = $response.querySelector('.JobTemplate_Page_jobTemplateName');
         if(vars.includes('jobTemplateDescription'))
-          inputJobTemplateDescription = $response.querySelector('.Page_jobTemplateDescription');
+          inputJobTemplateDescription = $response.querySelector('.JobTemplate_Page_jobTemplateDescription');
         if(vars.includes('jobType'))
-          inputJobType = $response.querySelector('.Page_jobType');
+          inputJobType = $response.querySelector('.JobTemplate_Page_jobType');
         if(vars.includes('extraVars'))
-          inputExtraVars = $response.querySelector('.Page_extraVars');
+          inputExtraVars = $response.querySelector('.JobTemplate_Page_extraVars');
         if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
+          inputClassCanonicalName = $response.querySelector('.JobTemplate_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.Page_classSimpleName');
+          inputClassSimpleName = $response.querySelector('.JobTemplate_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.Page_classCanonicalNames');
+          inputClassCanonicalNames = $response.querySelector('.JobTemplate_Page_classCanonicalNames');
         if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.Page_sessionId');
+          inputSessionId = $response.querySelector('.JobTemplate_Page_sessionId');
         if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.Page_userKey');
+          inputUserKey = $response.querySelector('.JobTemplate_Page_userKey');
         if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.Page_saves');
+          inputSaves = $response.querySelector('.JobTemplate_Page_saves');
         if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.Page_objectTitle');
+          inputObjectTitle = $response.querySelector('.JobTemplate_Page_objectTitle');
         if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.Page_displayPage');
+          inputDisplayPage = $response.querySelector('.JobTemplate_Page_displayPage');
         if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.Page_editPage');
+          inputEditPage = $response.querySelector('.JobTemplate_Page_editPage');
         if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.Page_userPage');
+          inputUserPage = $response.querySelector('.JobTemplate_Page_userPage');
         if(vars.includes('download'))
-          inputDownload = $response.querySelector('.Page_download');
+          inputDownload = $response.querySelector('.JobTemplate_Page_download');
         if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.Page_objectSuggest');
+          inputObjectSuggest = $response.querySelector('.JobTemplate_Page_objectSuggest');
         if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.Page_objectText');
+          inputObjectText = $response.querySelector('.JobTemplate_Page_objectText');
         if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.Page_solrId');
+          inputSolrId = $response.querySelector('.JobTemplate_Page_solrId');
         if(vars.includes('tenantResource'))
-          inputTenantResource = $response.querySelector('.Page_tenantResource');
+          inputTenantResource = $response.querySelector('.JobTemplate_Page_tenantResource');
         if(vars.includes('tenantId'))
-          inputTenantId = $response.querySelector('.Page_tenantId');
+          inputTenantId = $response.querySelector('.JobTemplate_Page_tenantId');
         if(vars.includes('aapOrganizationId'))
-          inputAapOrganizationId = $response.querySelector('.Page_aapOrganizationId');
+          inputAapOrganizationId = $response.querySelector('.JobTemplate_Page_aapOrganizationId');
         if(vars.includes('aapInventoryId'))
-          inputAapInventoryId = $response.querySelector('.Page_aapInventoryId');
+          inputAapInventoryId = $response.querySelector('.JobTemplate_Page_aapInventoryId');
         if(vars.includes('aapProjectId'))
-          inputAapProjectId = $response.querySelector('.Page_aapProjectId');
+          inputAapProjectId = $response.querySelector('.JobTemplate_Page_aapProjectId');
         if(vars.includes('jobTemplateId'))
-          inputJobTemplateId = $response.querySelector('.Page_jobTemplateId');
+          inputJobTemplateId = $response.querySelector('.JobTemplate_Page_jobTemplateId');
         if(vars.includes('jobTemplateResource'))
-          inputJobTemplateResource = $response.querySelector('.Page_jobTemplateResource');
+          inputJobTemplateResource = $response.querySelector('.JobTemplate_Page_jobTemplateResource');
         if(vars.includes('aapTemplateId'))
-          inputAapTemplateId = $response.querySelector('.Page_aapTemplateId');
+          inputAapTemplateId = $response.querySelector('.JobTemplate_Page_aapTemplateId');
 
         jsWebsocketJobTemplate(jobTemplateResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -185,333 +185,333 @@ async function websocketJobTemplateInner(apiRequest) {
 
 
         if(inputPk) {
-          document.querySelectorAll('.Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_pk').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.Page_pk'));
+          addGlow(document.querySelector('.JobTemplate_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.Page_created').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_created').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.Page_created'));
+          addGlow(document.querySelector('.JobTemplate_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_modified').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.Page_modified'));
+          addGlow(document.querySelector('.JobTemplate_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_archived').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.Page_archived'));
+          addGlow(document.querySelector('.JobTemplate_Page_archived'));
         }
 
         if(inputInventoryResource) {
-          document.querySelectorAll('.Page_inventoryResource').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_inventoryResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryResource.getAttribute('value');
             else
               item.textContent = inputInventoryResource.textContent;
           });
-          addGlow(document.querySelector('.Page_inventoryResource'));
+          addGlow(document.querySelector('.JobTemplate_Page_inventoryResource'));
         }
 
         if(inputAnsibleProjectResource) {
-          document.querySelectorAll('.Page_ansibleProjectResource').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_ansibleProjectResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAnsibleProjectResource.getAttribute('value');
             else
               item.textContent = inputAnsibleProjectResource.textContent;
           });
-          addGlow(document.querySelector('.Page_ansibleProjectResource'));
+          addGlow(document.querySelector('.JobTemplate_Page_ansibleProjectResource'));
         }
 
         if(inputAnsiblePlaybook) {
-          document.querySelectorAll('.Page_ansiblePlaybook').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_ansiblePlaybook').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAnsiblePlaybook.getAttribute('value');
             else
               item.textContent = inputAnsiblePlaybook.textContent;
           });
-          addGlow(document.querySelector('.Page_ansiblePlaybook'));
+          addGlow(document.querySelector('.JobTemplate_Page_ansiblePlaybook'));
         }
 
         if(inputJobTemplateName) {
-          document.querySelectorAll('.Page_jobTemplateName').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_jobTemplateName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateName.getAttribute('value');
             else
               item.textContent = inputJobTemplateName.textContent;
           });
-          addGlow(document.querySelector('.Page_jobTemplateName'));
+          addGlow(document.querySelector('.JobTemplate_Page_jobTemplateName'));
         }
 
         if(inputJobTemplateDescription) {
-          document.querySelectorAll('.Page_jobTemplateDescription').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_jobTemplateDescription').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateDescription.getAttribute('value');
             else
               item.textContent = inputJobTemplateDescription.textContent;
           });
-          addGlow(document.querySelector('.Page_jobTemplateDescription'));
+          addGlow(document.querySelector('.JobTemplate_Page_jobTemplateDescription'));
         }
 
         if(inputJobType) {
-          document.querySelectorAll('.Page_jobType').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_jobType').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputJobType.getAttribute('value');
             else
               item.textContent = inputJobType.textContent;
           });
-          addGlow(document.querySelector('.Page_jobType'));
+          addGlow(document.querySelector('.JobTemplate_Page_jobType'));
         }
 
         if(inputExtraVars) {
-          document.querySelectorAll('.Page_extraVars').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_extraVars').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputExtraVars.getAttribute('value');
             else
               item.textContent = inputExtraVars.textContent;
           });
-          addGlow(document.querySelector('.Page_extraVars'));
+          addGlow(document.querySelector('.JobTemplate_Page_extraVars'));
         }
 
         if(inputClassCanonicalName) {
-          document.querySelectorAll('.Page_classCanonicalName').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_classCanonicalName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
               item.textContent = inputClassCanonicalName.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalName'));
+          addGlow(document.querySelector('.JobTemplate_Page_classCanonicalName'));
         }
 
         if(inputClassSimpleName) {
-          document.querySelectorAll('.Page_classSimpleName').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_classSimpleName').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
               item.textContent = inputClassSimpleName.textContent;
           });
-          addGlow(document.querySelector('.Page_classSimpleName'));
+          addGlow(document.querySelector('.JobTemplate_Page_classSimpleName'));
         }
 
         if(inputClassCanonicalNames) {
-          document.querySelectorAll('.Page_classCanonicalNames').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_classCanonicalNames').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
               item.textContent = inputClassCanonicalNames.textContent;
           });
-          addGlow(document.querySelector('.Page_classCanonicalNames'));
+          addGlow(document.querySelector('.JobTemplate_Page_classCanonicalNames'));
         }
 
         if(inputSessionId) {
-          document.querySelectorAll('.Page_sessionId').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_sessionId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
               item.textContent = inputSessionId.textContent;
           });
-          addGlow(document.querySelector('.Page_sessionId'));
+          addGlow(document.querySelector('.JobTemplate_Page_sessionId'));
         }
 
         if(inputUserKey) {
-          document.querySelectorAll('.Page_userKey').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_userKey').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
               item.textContent = inputUserKey.textContent;
           });
-          addGlow(document.querySelector('.Page_userKey'));
+          addGlow(document.querySelector('.JobTemplate_Page_userKey'));
         }
 
         if(inputSaves) {
-          document.querySelectorAll('.Page_saves').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_saves').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
               item.textContent = inputSaves.textContent;
           });
-          addGlow(document.querySelector('.Page_saves'));
+          addGlow(document.querySelector('.JobTemplate_Page_saves'));
         }
 
         if(inputObjectTitle) {
-          document.querySelectorAll('.Page_objectTitle').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
               item.textContent = inputObjectTitle.textContent;
           });
-          addGlow(document.querySelector('.Page_objectTitle'));
+          addGlow(document.querySelector('.JobTemplate_Page_objectTitle'));
         }
 
         if(inputDisplayPage) {
-          document.querySelectorAll('.Page_displayPage').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_displayPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
               item.textContent = inputDisplayPage.textContent;
           });
-          addGlow(document.querySelector('.Page_displayPage'));
+          addGlow(document.querySelector('.JobTemplate_Page_displayPage'));
         }
 
         if(inputEditPage) {
-          document.querySelectorAll('.Page_editPage').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_editPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
               item.textContent = inputEditPage.textContent;
           });
-          addGlow(document.querySelector('.Page_editPage'));
+          addGlow(document.querySelector('.JobTemplate_Page_editPage'));
         }
 
         if(inputUserPage) {
-          document.querySelectorAll('.Page_userPage').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_userPage').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
               item.textContent = inputUserPage.textContent;
           });
-          addGlow(document.querySelector('.Page_userPage'));
+          addGlow(document.querySelector('.JobTemplate_Page_userPage'));
         }
 
         if(inputDownload) {
-          document.querySelectorAll('.Page_download').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_download').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
               item.textContent = inputDownload.textContent;
           });
-          addGlow(document.querySelector('.Page_download'));
+          addGlow(document.querySelector('.JobTemplate_Page_download'));
         }
 
         if(inputObjectSuggest) {
-          document.querySelectorAll('.Page_objectSuggest').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_objectSuggest').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
               item.textContent = inputObjectSuggest.textContent;
           });
-          addGlow(document.querySelector('.Page_objectSuggest'));
+          addGlow(document.querySelector('.JobTemplate_Page_objectSuggest'));
         }
 
         if(inputObjectText) {
-          document.querySelectorAll('.Page_objectText').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_objectText').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
               item.textContent = inputObjectText.textContent;
           });
-          addGlow(document.querySelector('.Page_objectText'));
+          addGlow(document.querySelector('.JobTemplate_Page_objectText'));
         }
 
         if(inputSolrId) {
-          document.querySelectorAll('.Page_solrId').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
               item.textContent = inputSolrId.textContent;
           });
-          addGlow(document.querySelector('.Page_solrId'));
+          addGlow(document.querySelector('.JobTemplate_Page_solrId'));
         }
 
         if(inputTenantResource) {
-          document.querySelectorAll('.Page_tenantResource').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_tenantResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
               item.textContent = inputTenantResource.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantResource'));
+          addGlow(document.querySelector('.JobTemplate_Page_tenantResource'));
         }
 
         if(inputTenantId) {
-          document.querySelectorAll('.Page_tenantId').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_tenantId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputTenantId.getAttribute('value');
             else
               item.textContent = inputTenantId.textContent;
           });
-          addGlow(document.querySelector('.Page_tenantId'));
+          addGlow(document.querySelector('.JobTemplate_Page_tenantId'));
         }
 
         if(inputAapOrganizationId) {
-          document.querySelectorAll('.Page_aapOrganizationId').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_aapOrganizationId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapOrganizationId.getAttribute('value');
             else
               item.textContent = inputAapOrganizationId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapOrganizationId'));
+          addGlow(document.querySelector('.JobTemplate_Page_aapOrganizationId'));
         }
 
         if(inputAapInventoryId) {
-          document.querySelectorAll('.Page_aapInventoryId').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_aapInventoryId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapInventoryId.getAttribute('value');
             else
               item.textContent = inputAapInventoryId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapInventoryId'));
+          addGlow(document.querySelector('.JobTemplate_Page_aapInventoryId'));
         }
 
         if(inputAapProjectId) {
-          document.querySelectorAll('.Page_aapProjectId').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_aapProjectId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapProjectId.getAttribute('value');
             else
               item.textContent = inputAapProjectId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapProjectId'));
+          addGlow(document.querySelector('.JobTemplate_Page_aapProjectId'));
         }
 
         if(inputJobTemplateId) {
-          document.querySelectorAll('.Page_jobTemplateId').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_jobTemplateId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateId.getAttribute('value');
             else
               item.textContent = inputJobTemplateId.textContent;
           });
-          addGlow(document.querySelector('.Page_jobTemplateId'));
+          addGlow(document.querySelector('.JobTemplate_Page_jobTemplateId'));
         }
 
         if(inputJobTemplateResource) {
-          document.querySelectorAll('.Page_jobTemplateResource').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_jobTemplateResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateResource.getAttribute('value');
             else
               item.textContent = inputJobTemplateResource.textContent;
           });
-          addGlow(document.querySelector('.Page_jobTemplateResource'));
+          addGlow(document.querySelector('.JobTemplate_Page_jobTemplateResource'));
         }
 
         if(inputAapTemplateId) {
-          document.querySelectorAll('.Page_aapTemplateId').forEach((item, index) => {
+          document.querySelectorAll('.JobTemplate_Page_aapTemplateId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
               item.value = inputAapTemplateId.getAttribute('value');
             else
               item.textContent = inputAapTemplateId.textContent;
           });
-          addGlow(document.querySelector('.Page_aapTemplateId'));
+          addGlow(document.querySelector('.JobTemplate_Page_aapTemplateId'));
         }
 
           pageGraphJobTemplate();
@@ -835,23 +835,34 @@ function suggestJobTemplateTenantResource(filters, $list, jobTemplateResource = 
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['tenantResource'];
+        var inputVar = 'tenantResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + jobTemplateResource + '_tenantResource_' + o['tenantResource']);
-        $input.setAttribute('name', 'tenantResource');
-        $input.setAttribute('value', o['tenantResource']);
+        $input.setAttribute('id', 'GET_tenantResource_' + jobTemplateResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueTenantResource ');
         if(jobTemplateResource != null) {
           $input.addEventListener('change', function(event) {
-            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateResource:' + jobTemplateResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o['tenantResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateResource:' + jobTemplateResource }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestJobTemplateTenantResource(filters, $list, jobTemplateResource, o['tenantResource'], relate, target);
+                  suggestJobTemplateTenantResource(filters, $list, jobTemplateResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -865,7 +876,9 @@ function suggestJobTemplateTenantResource(filters, $list, jobTemplateResource = 
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchTenantVals(filters, target, success, error);
+  if (typeof searchTenantVals === 'function') {
+    searchTenantVals(filters, target, success, error);
+  }
 }
 
 function suggestJobTemplateInventoryResource(filters, $list, jobTemplateResource = null, inventoryResource = null, relate=true, target) {
@@ -884,23 +897,34 @@ function suggestJobTemplateInventoryResource(filters, $list, jobTemplateResource
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['inventoryResource'];
+        var inputVar = 'inventoryResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (inventoryResource != null && val === inventoryResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_inventoryResource_' + jobTemplateResource + '_inventoryResource_' + o['inventoryResource']);
-        $input.setAttribute('name', 'inventoryResource');
-        $input.setAttribute('value', o['inventoryResource']);
+        $input.setAttribute('id', 'GET_inventoryResource_' + jobTemplateResource + '_inventoryResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueInventoryResource ');
         if(jobTemplateResource != null) {
           $input.addEventListener('change', function(event) {
-            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateResource:' + jobTemplateResource }], { [(event.target.checked ? 'set' : 'remove') + 'InventoryResource']: o['inventoryResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateResource:' + jobTemplateResource }], { [(event.target.checked ? 'set' : 'remove') + 'InventoryResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestJobTemplateInventoryResource(filters, $list, jobTemplateResource, o['inventoryResource'], relate, target);
+                  suggestJobTemplateInventoryResource(filters, $list, jobTemplateResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -914,7 +938,9 @@ function suggestJobTemplateInventoryResource(filters, $list, jobTemplateResource
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchHostInventoryVals(filters, target, success, error);
+  if (typeof searchHostInventoryVals === 'function') {
+    searchHostInventoryVals(filters, target, success, error);
+  }
 }
 
 function suggestJobTemplateAnsibleProjectResource(filters, $list, jobTemplateResource = null, ansibleProjectResource = null, relate=true, target) {
@@ -933,23 +959,34 @@ function suggestJobTemplateAnsibleProjectResource(filters, $list, jobTemplateRes
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var val = o['ansibleProjectResource'];
+        var inputVar = 'ansibleProjectResource';
+        var val = o[inputVar];
         var checked = val == null ? false : (ansibleProjectResource != null && val === ansibleProjectResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_ansibleProjectResource_' + jobTemplateResource + '_ansibleProjectResource_' + o['ansibleProjectResource']);
-        $input.setAttribute('name', 'ansibleProjectResource');
-        $input.setAttribute('value', o['ansibleProjectResource']);
+        $input.setAttribute('id', 'GET_ansibleProjectResource_' + jobTemplateResource + '_ansibleProjectResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
         $input.setAttribute('class', 'valueAnsibleProjectResource ');
         if(jobTemplateResource != null) {
           $input.addEventListener('change', function(event) {
-            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateResource:' + jobTemplateResource }], { [(event.target.checked ? 'set' : 'remove') + 'AnsibleProjectResource']: o['ansibleProjectResource'] }
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateResource:' + jobTemplateResource }], { [(event.target.checked ? 'set' : 'remove') + 'AnsibleProjectResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestJobTemplateAnsibleProjectResource(filters, $list, jobTemplateResource, o['ansibleProjectResource'], relate, target);
+                  suggestJobTemplateAnsibleProjectResource(filters, $list, jobTemplateResource, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
           });
         }
         if(checked)
@@ -963,7 +1000,9 @@ function suggestJobTemplateAnsibleProjectResource(filters, $list, jobTemplateRes
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchAnsibleProjectVals(filters, target, success, error);
+  if (typeof searchAnsibleProjectVals === 'function') {
+    searchAnsibleProjectVals(filters, target, success, error);
+  }
 }
 
 function suggestJobTemplateObjectSuggest($formFilters, $list, target) {
