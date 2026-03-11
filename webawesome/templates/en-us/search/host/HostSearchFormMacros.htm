@@ -354,6 +354,42 @@
 {%- macro htmEventSubscriptionsHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputEventSubscriptionsHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputTagsHostPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_tags">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] tags"
+                      label="tags"
+                      hint="The list of tags the host has. "
+                      id="Host_{{classApiMethodMethod}}_tags"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-hostResource={{ result.hostResource | tojson }}
+                      class="label-on-left {{Host_classApiMethodMethod}}_tags setTags classHost inputHost{{ result.hostResource }}Tags "
+                      name="setTags"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left {{Host_classApiMethodMethod}}_tags setTags classHost inputHost{{ result.hostResource }}Tags "
+                      name="setTags"
+    {%- else %}
+                      class="label-on-left {{Host_classApiMethodMethod}}_tags valueTags classHost inputHost{{ result.hostResource }}Tags "
+                      name="tags"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.tags) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmTagsHostPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputTagsHostPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 
 {%- macro htmFormButton_patchHost() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchHost" duration="5000" closable class="wa-header-l ">
@@ -429,6 +465,16 @@
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
                 {% else -%}
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmTagsHostPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTagsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTagsHostPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -513,6 +559,16 @@
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
                 {% else -%}
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmTagsHostPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTagsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTagsHostPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -678,6 +734,16 @@
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
                 {% else -%}
                 {{ htmEventSubscriptionsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmTagsHostPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTagsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true) }}
+                {% else -%}
+                {{ htmTagsHostPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false) }}
                 {%- endif %}
                 {%- endif %}
               </div>

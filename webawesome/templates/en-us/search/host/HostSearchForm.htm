@@ -3,7 +3,6 @@
 {% include en-us/search/host-inventory/HostInventorySearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchHost() }}
-  {%- endif %}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}

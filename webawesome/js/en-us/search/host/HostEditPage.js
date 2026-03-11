@@ -145,6 +145,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH tags
+          document.querySelector('#Host_Page_tags')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_tags');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'hostResource:' + event.currentTarget.getAttribute('data-hostResource') }]
+                  , 'setTags', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
+                  , event.currentTarget
+                  , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#Host_Page_tags')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#Host_Page_tags')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_tags');
+            const valid = form.reportValidity();
+          });
+
           // PATCH sessionId
           document.querySelector('#Host_Page_sessionId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_sessionId');

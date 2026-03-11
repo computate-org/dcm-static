@@ -110,6 +110,17 @@ Promise.all([
     facetStatsChange('Host', 'eventSubscriptions', false);
   });
 
+  document.querySelector('#pageSelectSortHost_tags')?.addEventListener('change', (event) => {
+    sort('Host', 'tags', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_tags')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'tags', true);
+  });
+  document.querySelector('#pageStatsHost_tags')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'tags', false);
+  });
+
   document.querySelector('#pageSelectSortHost_classCanonicalName')?.addEventListener('change', (event) => {
     sort('Host', 'classCanonicalName', event.currentTarget.value);
   });

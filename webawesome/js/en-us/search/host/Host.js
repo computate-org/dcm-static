@@ -87,6 +87,7 @@ async function websocketHostInner(apiRequest) {
         var inputIpAddress = null;
         var inputHostDescription = null;
         var inputEventSubscriptions = null;
+        var inputTags = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -128,6 +129,8 @@ async function websocketHostInner(apiRequest) {
           inputHostDescription = $response.querySelector('.Page_hostDescription');
         if(vars.includes('eventSubscriptions'))
           inputEventSubscriptions = $response.querySelector('.Page_eventSubscriptions');
+        if(vars.includes('tags'))
+          inputTags = $response.querySelector('.Page_tags');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -266,6 +269,16 @@ async function websocketHostInner(apiRequest) {
               item.textContent = inputEventSubscriptions.textContent;
           });
           addGlow(document.querySelector('.Page_eventSubscriptions'));
+        }
+
+        if(inputTags) {
+          document.querySelectorAll('.Page_tags').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputTags.getAttribute('value');
+            else
+              item.textContent = inputTags.textContent;
+          });
+          addGlow(document.querySelector('.Page_tags'));
         }
 
         if(inputClassCanonicalName) {
@@ -675,6 +688,10 @@ function searchHostFilters($formFilters) {
     if(filterEventSubscriptions != null && filterEventSubscriptions !== '')
       filters.push({ name: 'fq', value: 'eventSubscriptions:' + filterEventSubscriptions });
 
+    var filterTags = $formFilters.querySelector('.valueTags')?.value;
+    if(filterTags != null && filterTags !== '')
+      filters.push({ name: 'fq', value: 'tags:' + filterTags });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -1038,6 +1055,18 @@ async function patchHost($formFilters, $formValues, target, hostResource, succes
   if(removeEventSubscriptions != null && removeEventSubscriptions !== '')
     vals['removeEventSubscriptions'] = removeEventSubscriptions;
 
+  var valueTags = $formValues.querySelector('.valueTags')?.value;
+  var removeTags = $formValues.querySelector('.removeTags')?.value === 'true';
+  var setTags = removeTags ? null : $formValues.querySelector('.setTags')?.value;
+  var addTags = $formValues.querySelector('.addTags')?.value;
+  if(removeTags || setTags != null && setTags !== '')
+    vals['setTags'] = JSON.parse(setTags);
+  if(addTags != null && addTags !== '')
+    vals['addTags'] = addTags;
+  var removeTags = $formValues.querySelector('.removeTags')?.value;
+  if(removeTags != null && removeTags !== '')
+    vals['removeTags'] = removeTags;
+
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -1260,6 +1289,10 @@ function patchHostFilters($formFilters) {
     if(filterEventSubscriptions != null && filterEventSubscriptions !== '')
       filters.push({ name: 'fq', value: 'eventSubscriptions:' + filterEventSubscriptions });
 
+    var filterTags = $formFilters.querySelector('.valueTags')?.value;
+    if(filterTags != null && filterTags !== '')
+      filters.push({ name: 'fq', value: 'tags:' + filterTags });
+
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -1445,6 +1478,10 @@ async function postHost($formValues, target, success, error) {
   var valueEventSubscriptions = $formValues.querySelector('.valueEventSubscriptions')?.value;
   if(valueEventSubscriptions != null && valueEventSubscriptions !== '')
     vals['eventSubscriptions'] = JSON.parse(valueEventSubscriptions);
+
+  var valueTags = $formValues.querySelector('.valueTags')?.value;
+  if(valueTags != null && valueTags !== '')
+    vals['tags'] = JSON.parse(valueTags);
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')

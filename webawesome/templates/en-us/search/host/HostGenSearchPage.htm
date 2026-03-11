@@ -15,7 +15,7 @@
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 4;
+        --site-results-number-of-columns: 5;
       }
 {{ super() }}
 {%- block htmStyleHostPage %}
@@ -432,6 +432,19 @@
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-tags">
+                      <wa-button variant="brand" slot="trigger" caret>tags</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHost_tags'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Host').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tags-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by tags ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortHost_tags'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-Host').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tags-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by tags descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                   </div>
                   {% for item in listHost%}
                   <div>
@@ -448,6 +461,9 @@
                     <a href="{{ item.displayPage }}">
                       <span>{{ item.eventSubscriptions | e }}</span>
                     </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.tags | e }}</span>
+                    </a>
                   </div>
                   {% endfor %}
               {% if getColumnHostName is defined %}
@@ -463,6 +479,10 @@
                 </div>
               {% endif %}
               {% if getColumnEventSubscriptions is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnTags is defined %}
                 <div>
                 </div>
               {% endif %}
