@@ -1,0 +1,407 @@
+{% extends "en-us/Article.htm" %}
+{% block htmMetaPageLayout %}
+{{ super() }}
+    <meta name="result.pageId" content="{{ result.shortFileName }}" />
+    <meta name="result.name" content="Deploy Desktop Computer Management on OpenShift Local" />
+    <meta name="result.description" content="How to get started for free with OpenShift Local and deploying the Desktop Computer Management platform with GitOps. " />
+    <meta name="result.authorName" content="Christopher Tate" />
+    <meta name="result.authorUrl" content="{{ SITE_BASE_URL }}/en-us/learn/about/about-christopher-tate" />
+    <meta name="result.created" content="2025-08-29T12:23:40.556[America/Denver]" />
+    <meta name="result.pageImageUri" content="/png/dcm-on-openshift-local.png" />
+    <meta name="result.pageImageAlt" content="" />
+    <meta name="result.prerequisiteArticleIds" content="computer-requirements-for-dcm-development, install-openshift-local-on-your-computer" />
+    <meta name="result.importance" content="512" />
+    <meta name="result.labelsString" content="free-course" />
+{% endblock htmMetaPageLayout %}
+{% block htmBodyMiddleArticle %}
+{{ articleImage(result) }}
+
+    <div class="wa-stack">
+
+      <wa-card>
+        <div class="wa-stack ">
+          <div class="wa-heading-2xl ">
+            <i class="{{ FONTAWESOME_STYLE }} fa-cloud-binary "></i>
+            Deploy required microservices to OpenShift Local
+          </div>
+          <p>
+            Several microservices are required first before deploying the Desktop Computer Management platform. 
+            These microservices include: 
+          </p>
+          <ul>
+            <li>
+              ArgoCD GitOps for deploying microservice applications
+            </li>
+            <li>
+              Hashicorp Vault for secrets management
+            </li>
+            <li>
+              Apache Zookeeper cluster manager
+            </li>
+            <li>
+              Apache Solr search engine
+            </li>
+            <li>
+              PostgreSQL relational database
+            </li>
+            <li>
+              Keycloak single sign-on for authentication and authorization
+            </li>
+          </ul>
+        </div>
+      </wa-card>
+
+      <wa-details icon-position="start">
+        <i slot="expand-icon" class="fa-brands fa-windows"></i>
+        <i slot="collapse-icon" class="fa-brands fa-windows"></i>
+        <div class="wa-heading-xl " slot="summary">
+          Click here for Microsoft Windows instructions for deploying the required microservices to OpenShift Local
+        </div>
+
+        <div class="wa-stack">
+
+          <div class="wa-heading-xl ">
+            <i class="{{ FONTAWESOME_STYLE }} fa-folder-plus "></i>
+            Create a directory for your source code. 
+          </div>
+          <p>
+            If you are already a developer, you probably have an opinion of where your source code belongs. 
+            If you are on a new computer, or new to software development, Here are some suggestions to find a place to put your source code. 
+          </p>
+          <p>
+            Open a Command Prompt and make a new <kbd>%USERPROFILE%\\src\\computate-gitops</kbd> directory for your GitOps deployment code with the <kbd>mkdir</kbd> command. 
+          </p>
+          {{ code('mkdir %USERPROFILE%\\src\\computate-gitops\\') }}
+
+          <div class="wa-heading-xl ">
+            <i class="{{ FONTAWESOME_STYLE }} fa-octopus "></i>
+            Clone the gitops for {{ SITE_NAME }} dependent microservices
+          </div>
+          <p>
+            GitOps is a standard created by the ArgoCD project backed by Red Hat for deploying open source applications defined in GitHub. 
+          </p>
+
+          <p>
+            Clone the <kbd>computate-gitops</kbd> repository into your source directory. 
+          </p>
+          {{ code('git clone https://github.com/computate-org/computate-gitops.git %USERPROFILE%\\src\\computate-gitops\\') }}
+          <p>
+            Change into your computate-gitops directory <kbd>%USERPROFILE%\\src\\computate-gitops\\</kbd>. 
+          </p>
+          {{ code('cd %USERPROFILE%\\src\\computate-gitops\\') }}
+          <p>
+            Run the command below to install the Red Hat GitOps Operator in OpenShift Local. 
+          </p>
+          {{ code('oc apply -k openshift-local\\gitops\\base\\') }}
+
+          <wa-callout variant="brand">
+            <i class="{{ FONTAWESOME_STYLE }} fa-circle-info fa-xl"></i>
+            <strong>Wait for the GitOps Operator to be ready<br /></strong>
+            <p>
+              You need to wait patiently for the GitOps Operator to be complete. 
+              Visit the <a target="_blank" href="https://console-openshift-console.apps-crc.testing/k8s/all-namespaces/operators.coreos.com~v1alpha1~ClusterServiceVersion">Installed Operators</a> page here in OpenShift Local to see the GitOps Operator get installed. 
+              The <kbd>openshift-gitops-operator</kbd> will have a Status change from <kbd>Unkown</kbd> to <kbd>Succeeded</kbd>. 
+              If the Operator status doesn't change after several minutes, the CatalogSources might be in a bad state, then try <kbd>crc delete</kbd> and <kbd>crc start</kbd> to recreate your OpenShift Local cluster. 
+            </p>
+            <p>
+              Run the command below to wait for the GitOps Operator control plane to start. 
+            </p>
+            {{ code('oc -n openshift-operators wait pod -l control-plane=gitops-operator ^
+  --for=condition=Ready --timeout=5m') }}
+            <p>
+              Then run the command below to wait for the GitOps Operator application controller to start. 
+            </p>
+            {{ code('oc -n openshift-gitops wait pod ^
+  -l app.kubernetes.io/name=openshift-gitops-application-controller ^
+  --for=condition=Ready --timeout=5m') }}
+          </wa-callout>
+
+          <p>
+            Run the command below to install the Application Set for our dependent microservices. 
+          </p>
+          {{ code('oc apply -k openshift-local/gitops/app/') }}
+          <wa-callout variant="brand">
+            <i class="{{ FONTAWESOME_STYLE }} fa-circle-info fa-xl"></i>
+            <strong>Wait for the Application Set to be ready<br /></strong>
+
+            <p>
+              You need to wait patiently for the GitOps service to be ready. 
+              Run the command below to wait for the GitOps service to start. 
+            </p>
+            {{ code('oc -n openshift-gitops wait pod ^
+  -l app.kubernetes.io/name=openshift-gitops-server ^
+  --for=condition=Ready --timeout=5m') }}
+          </wa-callout>
+
+          <p>
+            Then you need to wait patiently for the Application Set to sync. 
+            Access the ArgoCD application to watch the Application Set sync. 
+          </p>
+
+          <div class="wa-stack wa-align-items-center ">
+            <wa-button href="https://openshift-gitops-server-openshift-gitops.apps-crc.testing/" target="_blank" variant="brand">
+              Access ArgoCD
+              <i slot="end" class="{{ FONTAWESOME_STYLE }} fa-octopus fa-xl "></i>
+            </wa-button>
+          </div>
+          <wa-callout variant="brand">
+            <div class="wa-flank ">
+              <i class="{{ FONTAWESOME_STYLE }} fa-circle-info fa-xl"></i>
+              <strong>
+                Username and password for ArgoCD
+              </strong>
+            </div>
+            <p>
+              The username for ArgoCD is <kbd>kubeadmin</kbd>, 
+              and the password is the kubeadmin password that it showed when OpenShift Local started. 
+              To find the kubeadmin password again, run this command: 
+            </p>
+            {{ code('crc start') }}
+          </wa-callout>
+
+          <div class="wa-heading-m ">
+            Sync the main <kbd>in-cluster-aoa</kbd> Application Set
+          </div>
+          <p>
+            There is one main application called <kbd>in-cluster-aoa</kbd> that the rest of the applications are deployed from. 
+          </p>
+          <ol>
+            <li>
+              Click on the <kbd>in-cluster-aoa</kbd> Application in ArgoCD. 
+            </li>
+            <li>
+              Click <kbd>Sync</kbd>. 
+            </li>
+            <li>
+              Click <kbd>Synchronize</kbd>. 
+            </li>
+          </ol>
+          <p>
+            The deployment of all the Applications in ArgoCD will probably take around 10 minutes to complete. 
+          </p>
+
+          <div class="wa-heading-2xl ">
+            <i class="{{ FONTAWESOME_STYLE }} fa-folder-plus "></i>
+            Deploy Desktop Computer Management to OpenShift Local with ArgoCD GitOps
+          </div>
+          <p>
+            Once you have successfully synced all of the dependent microservice Applications,
+            You are ready to deploy the rest of the Desktop Computer Management Applications to ArgoCD. 
+          </p>
+          <p>
+            Clone the <kbd>{{ SITE_NAME }}</kbd> repository into a new directory <kbd>%USERPROFILE%\\src\\{{ SITE_NAME }}</kbd> in your source directory. 
+          </p>
+          {{ code('git clone https://github.com/computate-org/dcm.git \\
+  %USERPROFILE%\\src\\{{ SITE_NAME }}') }}
+          <p>
+            Change into your source code directory <kbd>%USERPROFILE%\\src\\{{ SITE_NAME }}</kbd>. 
+          </p>
+          {{ code('cd %USERPROFILE%\\src\\{{ SITE_NAME }}\\') }}
+          <p>
+            Run the command below to install the {{ SITE_NAME }} Applications with ArgoCD. 
+          </p>
+          {{ code('oc apply -k openshift-local\\applications\\') }}
+          <p>
+            Then you need to wait patiently for the new Applications to sync. 
+            Access the ArgoCD application to watch the Desktop Computer Management Applications sync. 
+          </p>
+          <div class="wa-stack wa-align-items-center ">
+            <wa-button href="https://openshift-gitops-server-openshift-gitops.apps-crc.testing/" target="_blank" variant="brand">
+              Access ArgoCD
+              <i slot="end" class="{{ FONTAWESOME_STYLE }} fa-octopus fa-xl "></i>
+            </wa-button>
+          </div>
+        </div>
+      </wa-details>
+      <wa-details icon-position="start">
+        <i slot="expand-icon" class="fa-brands fa-linux"></i>
+        <i slot="collapse-icon" class="fa-brands fa-linux"></i>
+        <div class="wa-heading-xl " slot="summary">
+          Click here for Linux instructions for deploying the required microservices to OpenShift Local
+        </div>
+
+        <div class="wa-stack">
+
+          <div class="wa-heading-xl ">
+            <i class="{{ FONTAWESOME_STYLE }} fa-folder-plus "></i>
+            Create a directory for your source code. 
+          </div>
+          <p>
+            If you are already a developer, you probably have an opinion of where your source code belongs. 
+            If you are on a new computer, or new to software development, Here are some suggestions to find a place to put your source code. 
+          </p>
+          <p>
+            Open a Terminal and make a new <kbd>~/.local/src/computate-gitops</kbd> directory for your GitOps deployment code with the <kbd>install -d</kbd> command. 
+          </p>
+          {{ code('install -d ~/.local/src/computate-gitops/') }}
+
+          <div class="wa-heading-xl ">
+            <i class="{{ FONTAWESOME_STYLE }} fa-octopus "></i>
+            Clone the gitops for {{ SITE_NAME }} dependent microservices
+          </div>
+          <p>
+            GitOps is a standard created by the ArgoCD project backed by Red Hat for deploying open source applications defined in GitHub. 
+          </p>
+
+          <p>
+            Clone the <kbd>computate-gitops</kbd> repository into your source directory. 
+          </p>
+          {{ code('git clone https://github.com/computate-org/computate-gitops.git \\
+  ~/.local/src/computate-gitops/') }}
+          <p>
+            Change into your computate-gitops directory <kbd>~/.local/src/computate-gitops/</kbd>. 
+          </p>
+          {{ code('cd ~/.local/src/computate-gitops/') }}
+          <p>
+            Run the command below to install the Red Hat GitOps Operator in OpenShift Local. 
+          </p>
+          {{ code('oc apply -k openshift-local/gitops/base/') }}
+
+          <wa-callout variant="brand">
+            <i class="{{ FONTAWESOME_STYLE }} fa-circle-info fa-xl"></i>
+            <strong>Wait for the GitOps Operator to be ready<br /></strong>
+            <p>
+              You need to wait patiently for the GitOps Operator to be complete. 
+              Visit the <a target="_blank" href="https://console-openshift-console.apps-crc.testing/k8s/all-namespaces/operators.coreos.com~v1alpha1~ClusterServiceVersion">Installed Operators</a> page here in OpenShift Local to see the GitOps Operator get installed. 
+              The <kbd>openshift-gitops-operator</kbd> will have a Status change from <kbd>Unkown</kbd> to <kbd>Succeeded</kbd>. 
+              If the Operator status doesn't change after several minutes, the CatalogSources might be in a bad state, then try <kbd>crc delete</kbd> and <kbd>crc start</kbd> to recreate your OpenShift Local cluster. 
+            </p>
+            <p>
+              Run the command below to wait for the GitOps Operator control plane to start. 
+            </p>
+            {{ code('oc -n openshift-operators wait pod -l control-plane=gitops-operator \\
+  --for=condition=Ready --timeout=5m') }}
+            <p>
+              Then run the command below to wait for the GitOps Operator application controller to start. 
+            </p>
+            {{ code('oc -n openshift-gitops wait pod \\
+  -l app.kubernetes.io/name=openshift-gitops-application-controller \\
+  --for=condition=Ready --timeout=5m') }}
+          </wa-callout>
+
+          <p>
+            Run the command below to install the Application Set for our dependent microservices. 
+          </p>
+          {{ code('oc apply -k openshift-local/gitops/app/') }}
+          <wa-callout variant="brand">
+            <i class="{{ FONTAWESOME_STYLE }} fa-circle-info fa-xl"></i>
+            <strong>Wait for the Application Set to be ready<br /></strong>
+
+            <p>
+              You need to wait patiently for the GitOps service to be ready. 
+              Run the command below to wait for the GitOps service to start. 
+            </p>
+            {{ code('oc -n openshift-gitops wait pod \\
+  -l app.kubernetes.io/name=openshift-gitops-server \\
+  --for=condition=Ready --timeout=5m') }}
+          </wa-callout>
+
+          <p>
+            Then you need to wait patiently for the Application Set to sync. 
+            Access the ArgoCD application to watch the Application Set sync. 
+          </p>
+          <div class="wa-stack wa-align-items-center ">
+            <wa-button href="https://openshift-gitops-server-openshift-gitops.apps-crc.testing/" target="_blank" variant="brand">
+              Access ArgoCD
+              <i slot="end" class="{{ FONTAWESOME_STYLE }} fa-octopus fa-xl "></i>
+            </wa-button>
+          </div>
+          <wa-callout variant="brand">
+            <div class="wa-flank ">
+              <i class="{{ FONTAWESOME_STYLE }} fa-circle-info fa-xl"></i>
+              <strong>
+                Username and password for ArgoCD
+              </strong>
+            </div>
+            <p>
+              The username for ArgoCD is <kbd>kubeadmin</kbd>, 
+              and the password is the kubeadmin password that it showed when OpenShift Local started. 
+              To find the kubeadmin password again, run this command: 
+            </p>
+            {{ code('crc start') }}
+          </wa-callout>
+
+          <div class="wa-heading-m ">
+            Sync the main <kbd>in-cluster-aoa</kbd> Application Set
+          </div>
+          <p>
+            There is one main application called <kbd>in-cluster-aoa</kbd> that the rest of the applications are deployed from. 
+          </p>
+          <ol>
+            <li>
+              Click on the <kbd>in-cluster-aoa</kbd> Application in ArgoCD. 
+            </li>
+            <li>
+              Click <kbd>Sync</kbd>. 
+            </li>
+            <li>
+              Click <kbd>Synchronize</kbd>. 
+            </li>
+          </ol>
+          <p>
+            The deployment of all the Applications in ArgoCD will probably take around 10 minutes to complete. 
+          </p>
+
+          <div class="wa-heading-2xl ">
+            <i class="{{ FONTAWESOME_STYLE }} fa-folder-plus "></i>
+            Deploy Desktop Computer Management to OpenShift Local with ArgoCD GitOps
+          </div>
+          <p>
+            Once you have successfully synced all of the dependent microservice Applications,
+            You are ready to deploy the rest of the Desktop Computer Management Applications to ArgoCD. 
+          </p>
+          <p>
+            Clone the <kbd>{{ SITE_NAME }}</kbd> repository into a new directory <kbd>~/.local/src/{{ SITE_NAME }}</kbd> in your source directory. 
+          </p>
+          {{ code('git clone https://github.com/computate-org/dcm.git \\
+  ~/.local/src/{{ SITE_NAME }}') }}
+          <p>
+            Change into your source code directory <kbd>~/.local/src/{{ SITE_NAME }}</kbd>. 
+          </p>
+          {{ code('cd ~/.local/src/dcm/') }}
+          <p>
+            Run the command below to install the {{ SITE_NAME }} Applications with ArgoCD. 
+          </p>
+          {{ code('oc apply -k openshift-local/applications/') }}
+          <p>
+            Then you need to wait patiently for the new Applications to sync. 
+            Access the ArgoCD application to watch the Desktop Computer Management Applications sync and become healthy. 
+          </p>
+          <div class="wa-stack wa-align-items-center ">
+            <wa-button href="https://openshift-gitops-server-openshift-gitops.apps-crc.testing/" target="_blank" variant="brand">
+              Access ArgoCD
+              <i slot="end" class="{{ FONTAWESOME_STYLE }} fa-octopus fa-xl "></i>
+            </wa-button>
+          </div>
+        </div>
+      </wa-details>
+      <wa-card>
+        <div class="wa-stack ">
+          <div class="wa-heading-2xl ">
+            <i class="{{ FONTAWESOME_STYLE }} fa-fish "></i>
+            Access your own Desktop Computer Management site
+          </div>
+          <p>
+            Once all of your ArgoCD applications have become healthy and synced, 
+            your Desktop Computer Management platform is running. 
+            View the Routes to the Desktop Computer Management platform that you have deployed at this link. 
+          </p>
+          <div class="wa-stack wa-align-items-center ">
+            <wa-button href="https://console-openshift-console.apps-crc.testing/k8s/ns/dcm/route.openshift.io~v1~Route" target="_blank" variant="brand">
+              View route
+              <i slot="end" class="{{ FONTAWESOME_STYLE }} fa-route fa-xl "></i>
+            </wa-button>
+          </div>
+          <p>
+            The Route has a location that will take you to your Desktop Computer Management platform. 
+          </p>
+          <div class="wa-stack wa-align-items-center ">
+            <wa-button href="https://dcm.apps-crc.testing/" target="_blank" variant="brand">
+              Access Desktop Computer Management platform
+              <i slot="end" class="{{ FONTAWESOME_STYLE }} fa-fish fa-xl "></i>
+            </wa-button>
+          </div>
+        </div>
+      </wa-card>
+    </div>
+{% endblock %}

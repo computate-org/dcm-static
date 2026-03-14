@@ -1,0 +1,68 @@
+{% extends "en-us/Article.htm" %}
+{% block htmMetaPageLayout %}
+{{ super() }}
+    <meta name="result.pageId" content="{{ result.shortFileName }}" />
+    <meta name="result.name" content="How to backup and restore the Desktop Computer Management database" />
+    <meta name="result.description" content="In case you change your database location or design, you may be required to migrate your current Desktop Computer Management database by following these instructions. " />
+    <meta name="result.authorName" content="Christopher Tate" />
+    <meta name="result.authorUrl" content="{{ SITE_BASE_URL }}/en-us/learn/about/about-christopher-tate" />
+    <meta name="result.created" content="2025-10-21T11:02:16.556[America/Denver]" />
+    <meta name="result.pageImageUri" content="/png/dcm-on-openshift-local.png" />
+    <meta name="result.pageImageAlt" content="" />
+    <meta name="result.prerequisiteArticleIds" content="configure-vscode" />
+    <meta name="result.importance" content="512" />
+{% endblock htmMetaPageLayout %}
+{% block htmBodyMiddleArticle %}
+{{ articleImage(result) }}
+
+    <div class="wa-stack">
+
+      <wa-card>
+        <div class="wa-stack ">
+          <h2>
+            Connect to your OpenShift cluster running the database that needs to be backed up. 
+          </h2>
+          <p>
+            Make a directory on the pod for the backup
+          </p>
+          {{ code('oc -n postgres exec $(oc -n postgres get pod -l postgres-operator.crunchydata.com/role=master -o name) -- \\
+  mkdir -p /pgdata/backup/') }}
+          <p>
+            Back up the database
+          </p>
+          {{ code('oc -n postgres exec $(oc -n postgres get pod -l postgres-operator.crunchydata.com/role=master -o name) -- \\
+  bash -c "pg_dump -U dcm dcmlocal > /pgdata/backup/dcmlocal.sql"') }}
+          <p>
+            Make a directory on your own computer for the database backup
+          </p>
+          {{ code('mkdir -p ~/Downloads/backup/') }}
+          <p>
+            Rsync the backup file to your computer
+          </p>
+          {{ code('oc -n postgres rsync $(oc -n postgres get pod -l postgres-operator.crunchydata.com/role=master -o name):/pgdata/backup/ ~/Downloads/backup/') }}
+          <h2>
+            Connect to your OpenShift cluster running Postgres where you would like to restore the database. 
+          </h2>
+          <p>
+            Make a directory on the pod for the backup
+          </p>
+          {{ code('oc -n postgres exec $(oc -n postgres get pod -l postgres-operator.crunchydata.com/role=master -o name) -- \\
+  mkdir -p /pgdata/restore/') }}
+          <p>
+            Rsync the backup file to your Postgres pod
+          </p>
+          {{ code('oc -n postgres rsync ~/Downloads/backup/ $(oc -n postgres get pod -l postgres-operator.crunchydata.com/role=master -o name):/pgdata/restore/') }}
+          <p>
+            Drop the public schema and recreate a new public schema
+          </p>
+          {{ code('oc -n postgres exec $(oc -n postgres get pod -l postgres-operator.crunchydata.com/role=master -o name) -- \\
+  bash -c "psql -U dcm dcmlocal -c \'drop schema public cascade; create schema public; \'"') }}
+          <p>
+            Restore the database
+          </p>
+          {{ code('oc -n postgres exec $(oc -n postgres get pod -l postgres-operator.crunchydata.com/role=master -o name) -- \\
+  bash -c "psql -U dcm dcmlocal < /pgdata/restore/dcmlocal.sql"') }}
+        </div>
+      </wa-card>
+    </div>
+{% endblock %}

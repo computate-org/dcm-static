@@ -1,0 +1,456 @@
+{% extends "en-us/Article.htm" %}
+{% block htmMetaPageLayout %}
+{{ super() }}
+    <meta name="result.pageId" content="{{ result.shortFileName }}" />
+    <meta name="result.name" content="Install OpenShift Local on your own computer" />
+    <meta name="result.description" content="How to install OpenShift Local for free for local cloud development of data driven-websites like Desktop Computer Management. " />
+    <meta name="result.authorName" content="Christopher Tate" />
+    <meta name="result.authorUrl" content="{{ SITE_BASE_URL }}/en-us/learn/about/about-christopher-tate" />
+    <meta name="result.created" content="2025-08-29T16:30:01.556[America/Denver]" />
+    <meta name="result.pageImageUri" content="/png/openshift-local-console.png" />
+    <meta name="result.pageImageAlt" content="Screenshot of the OpenShift Local Console" />
+    <meta name="result.prerequisiteArticleIds" content="become-a-red-hat-developer, computer-requirements-for-dcm-development" />
+    <meta name="result.nextArticleIds" content="deploy-dcm-on-openshift-local" />
+    <meta name="result.labelsString" content="free-course" />
+{% endblock htmMetaPageLayout %}
+{% block htmBodyMiddleArticle %}
+{{ articleImage(result) }}
+
+    <div class="wa-stack">
+
+      <wa-card>
+        <div class="wa-stack ">
+          <div class="wa-heading-2xl ">
+            <i class="fa-kit fa-openshift fa-2xl " style="color: red; "></i>
+            Download OpenShift Local
+          </div>
+          <p>
+            There are many ways to run applications like databases, message brokers, and search engines on your computer. 
+            I like to run these applications for development on my computer the same way I would in the cloud. 
+            Red Hat OpenShift Local makes it simple to run as many cloud-native applications as your computer has resources to support. 
+            To get started with OpenShift Local: 
+          </p>
+          <div class="wa-stack wa-align-items-center ">
+            <wa-button href="https://developers.redhat.com/products/openshift-local/overview" target="_blank" variant="brand">
+              Download
+              <i slot="end" class="fa-kit fa-openshift fa-xl "></i>
+            </wa-button>
+          </div>
+          <p>
+            Click the <kbd>Install OpenShift on your laptop</kbd> button. 
+          </p>
+          <p>
+            This will ask you to log into your Red Hat account. 
+            If you do not already have a Red Hat account, click here to learn about <a target="_blank" href="{{ (result.prerequisiteArticles | selectattr('pageId', 'equalto', 'become-a-red-hat-developer') | first).displayPage }}">becoming a Red Hat Developer</a> for free. 
+          </p>
+        </div>
+      </wa-card>
+
+      <wa-card class="wa-stack ">
+        <div class="wa-stack ">
+          <div class="wa-heading-2xl ">
+            <i class="fa-kit fa-openshift fa-2xl " style="color: red; "></i>
+            Install OpenShift Local
+          </div>
+
+          <p>
+            It depends on your operating system how you will install OpenShift Local. 
+            Here are some instructions for installing OpenShift Local if you have a computer running Microsoft Windows or Linux. 
+            Select your operating system below. 
+          </p>
+        </div>
+      </wa-card>
+
+      <wa-details icon-position="start">
+        <i slot="expand-icon" class="fa-brands fa-windows"></i>
+        <i slot="collapse-icon" class="fa-brands fa-windows"></i>
+        <div class="wa-heading-xl " slot="summary">
+          Click here for Microsoft Windows instructions for installing OpenShift Local
+        </div>
+
+        <div class="wa-stack">
+          <div class="wa-heading-l ">
+            Run the OpenShift Local installer
+          </div>
+          <p>
+            The next page has a section "Download what you need to get started". 
+            Make sure that <kbd>Windows</kbd> is selected in the dropdown, then click the <kbd>Download OpenShift Local</kbd> button. 
+          </p>
+          <p>
+            Extract the OpenShift Local compressed zip file into the Downloads directory in the Command Prompt. 
+          </p>
+          {{ code('tar -xf %USERPROFILE%\\Downloads\\crc-windows-installer.zip ^
+  -C %USERPROFILE%\\Downloads\\') }}
+          <p>
+            From the Command Prompt, run the OpenShift Local MSI installer. 
+          </p>
+          {{ code('%USERPROFILE%\\Downloads\\crc-windows-amd64.msi') }}
+          <ol>
+            <li>
+              Click <kbd>Next</kbd>. 
+            </li>
+            <li>
+              Read the license agreement, 
+              then click <kbd>I accept the terms in the License Agreement</kbd>, 
+              then click the <kbd>Next</kbd> button. 
+            </li>
+            <li>
+              Click the <kbd>Install</kbd> button. 
+            </li>
+            <li>
+              <wa-callout variant="brand" class="wa-stack ">
+                <wa-flank>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-circle-info fa-xl"></i>
+                  <strong>Windows Administrator privileges required</strong>
+                </wa-flank>
+                <div>
+                  Configuring OpenShift Local requires Administrator privileges to your system to configure it's virtual machine configuration and networking. 
+                </div>
+                <div>
+                  Click the <kbd>Yes</kbd> button to continue. 
+                </div>
+                <div>
+                  Then click the <kbd>Yes</kbd> button to continue. 
+                </div>
+              </wa-callout>
+            </li>
+            <li>
+              When completed, click the <kbd>Finish</kbd> button. 
+            </li>
+            <li>
+              Then click the <kbd>Reboot</kbd> button to reboot your computer. 
+            </li>
+          </ol>
+
+          <div class="wa-heading-l ">
+            Configuring OpenShift Local resources
+          </div>
+          <p>
+            To effectively configure OpenShift Local, you need to understand the amount of CPUs, memory, and storage on your computer. 
+            Use the command below in Command Prompt to display the amount of system resources in your computer. 
+          </p>
+          {{ code('systeminfo | findstr /C:"Total Physical Memory"') }}
+          <p>
+            Use the command below in Command Prompt to display the amount of logical processors in your computer. 
+          </p>
+          {{ code('echo %NUMBER_OF_PROCESSORS%') }}
+          <ul>
+            <li>
+              <dt>
+                For <kbd>cpus</kbd>:
+              </dt>
+              <dd>
+                I recommend subtracting your total number of CPUs by 1. 
+              </dd>
+            </li>
+            <li>
+              <dt>
+                For <kbd>memory</kbd>:
+              </dt>
+              <dd>
+                I recommend reserving your 90% of your total memory for OpenShift Local, but you can do more or less if you wish. Multiply by <kbd>90%<kbd> of your total memory, and I divide by <kbd>1000</kbd> to get the total memory in MB, which is normally shown in <kbd>kB</kbd>. 
+              </dd>
+            </li>
+            <li>
+              <dt>
+                For <kbd>disk-size</kbd>:
+              </dt>
+              <dd>
+                I recommend at least 400GiB, but if you don't actually have that much space, it's ok. The disk automatically grows dynamically over time, as data is persisted. 
+              </dd>
+            </li>
+          </ul>
+
+          <p>
+            Now configure the CPUs of OpenShift Local with the <kbd>crc</kbd> command. 
+          </p>
+          {{ code('set /a CRC_CPUS=%NUMBER_OF_PROCESSORS%-1 && crc config set cpus %CRC_CPUS%') }}
+          <p>
+            Now configure the memory of OpenShift Local with the <kbd>crc</kbd> command. 
+          </p>
+          {{ code('for /f "tokens=4" %a in (\'systeminfo ^| findstr /C:"Total Physical Memory"\') do set STR_MEMORY=%a
+set "TOTAL_MEMORY=%STR_MEMORY:,=%"
+set /A MULTIPLY_MEMORY="%TOTAL_MEMORY%*90"
+set SET_MEMORY=%MULTIPLY_MEMORY:~0,-3%
+crc config set memory %SET_MEMORY%0') }}
+
+          <p>
+            Now configure the disk-size of OpenShift Local with the <kbd>crc</kbd> command. 
+          </p>
+          {{ code('crc config set disk-size 400') }}
+
+          <div class="wa-heading-m ">
+            Optionally set your own <kbd>kubeadmin</kbd> password
+          </div>
+          <p>
+            By default, OpenShift Local will generate a random password for the <kbd>kubeadmin</kbd> user. 
+            If you have a password in mind you would like to use instead of a random password, 
+            or you use OpenShift Local on multiple computers and save the password in the browser, 
+            you might want to set the default kubeadmin password. 
+          </p>
+          {{ code('crc config set kubeadmin-password ') }}
+                  </div>
+      </wa-details>
+
+      </wa-details>
+      <wa-details icon-position="start">
+        <i slot="expand-icon" class="fa-brands fa-linux"></i>
+        <i slot="collapse-icon" class="fa-brands fa-linux"></i>
+        <div class="wa-heading-xl " slot="summary">
+          Click here for Linux instructions for installing OpenShift Local
+        </div>
+
+        <div class="wa-stack">
+          <p>
+            The next page has a section "Download what you need to get started". 
+            Make sure that <kbd>Linux</kbd> is selected in the dropdown, then click the <kbd>Download OpenShift Local</kbd> button. 
+          </p>
+          <div class="wa-heading-l ">
+            Create a <kbd>~/.local/bin/</kbd> directory
+          </div>
+          {{ code('install -d ~/.local/bin/') }}
+          <div class="wa-heading-l ">
+            Extract the <kbd>crc</kbd> command in your Terminal
+          </div>
+          {{ code('tar xvf \\
+  ~/Downloads/crc-linux-amd64.tar.xz \\
+  --strip-components=1 \\
+  -C ~/.local/bin/ \\
+  crc-linux-*-amd64/crc') }}
+
+          <div class="wa-heading-l ">
+            Configuring OpenShift Local resources
+          </div>
+          <p>
+            To effectively configure OpenShift Local, you need to understand the amount of CPUs, memory, and storage on your computer. 
+            Use the command below to display the amount of system resources in your Terminal. 
+          </p>
+          {{ code('echo "scale=0; $(grep MemTotal \\
+  /proc/meminfo | awk \\
+  \'{print $2}\') / 1000" | bc \\
+  | { read -r prefix; echo "${prefix}MiB memory"; }
+echo "$(nproc) logical processors"') }}
+          <ul>
+            <li>
+              <dt>
+                For <kbd>cpus</kbd>:
+              </dt>
+              <dd>
+                I recommend subtracting your total number of CPUs by 1. 
+              </dd>
+            </li>
+            <li>
+              <dt>
+                For <kbd>memory</kbd>:
+              </dt>
+              <dd>
+                I recommend reserving your 90% of your total memory for OpenShift Local, but you can do more or less if you wish. Multiply by <kbd>90%</kbd> of your total memory, and I divide by <kbd>1000</kbd> to get the total memory in MB, which is normally shown in <kbd>kB</kbd>. 
+              </dd>
+            </li>
+            <li>
+              <dt>
+                For <kbd>disk-size</kbd>:
+              </dt>
+              <dd>
+                I recommend at least 400GiB, but if you don't actually have that much space, it's ok. The disk automatically grows dynamically over time, as data is persisted. 
+              </dd>
+            </li>
+          </ul>
+
+          <p>
+            Now configure the CPUs of OpenShift Local with the <kbd>crc</kbd> command. 
+          </p>
+          {{ code('crc config set cpus $(($(nproc) - 1))') }}
+          <p>
+            Now configure the memory of OpenShift Local with the <kbd>crc</kbd> command. 
+          </p>
+          {{ code('crc config set memory $(echo \\
+  "scale=0; $(grep MemTotal \\
+  /proc/meminfo | awk \\
+  \'{print $2}\') * 0.9 / 1000" | bc)') }}
+          <p>
+            Now configure the disk-size of OpenShift Local with the <kbd>crc</kbd> command. 
+          </p>
+          {{ code('crc config set disk-size 400') }}
+
+          <div class="wa-heading-m ">
+            Optionally set your own <kbd>kubeadmin</kbd> password
+          </div>
+          <p>
+            By default, OpenShift Local will generate a random password for the <kbd>kubeadmin</kbd> user. 
+            If you have a password in mind you would like to use instead of a random password, 
+            or you use OpenShift Local on multiple computers and save the password in the browser, 
+            you might want to set the default kubeadmin password. 
+          </p>
+          {{ code('crc config set kubeadmin-password ') }}
+                  </div>
+      </wa-details>
+
+      <wa-callout variant="brand">
+        <i class="{{ FONTAWESOME_STYLE }} fa-circle-info fa-xl"></i>
+        <strong>MacOS operating system unsupported</strong><br />
+        Unfortunately, MacOS is not supported with OpenShift Local since MacOS became ARM64 architecture. 
+      </wa-callout>
+
+      <wa-card class="wa-stack ">
+        <div class="wa-stack ">
+          <div class="wa-heading-2xl ">
+            <i class="fa-kit fa-openshift fa-2xl " style="color: red; "></i>
+            Start OpenShift Local
+          </div>
+
+          <div class="wa-heading-xl ">
+            Review your OpenShift Local configuration below
+          </div>
+          <p>
+            Make sure everything looks just right before starting OpenShift Local for the first time. 
+          </p>
+          {{ code('crc config view') }}
+
+          <div class="wa-heading-xl ">
+            Set up OpenShift Local virtual machine
+          </div>
+          <p>
+            The next step will set up local virtualization and networking infrastructure for using OpenShift Local. 
+            Run this command in a Terminal. 
+          </p>
+          {{ code('crc setup') }}
+          <p>
+            It will ask you, <kbd>Would you like to contribute anonymous usage statistics?</kbd> 
+            You can enter <kbd>y</kbd>, or <kbd>N</kbd>. 
+          </p>
+          <wa-callout variant="brand">
+            <i class="{{ FONTAWESOME_STYLE }} fa-circle-info fa-xl"></i>
+            <strong>root access</strong><br />
+            Configuring OpenShift Local requires root access to your system to configure it's virtual machine configuration and networking. 
+          </wa-callout>
+
+          <div class="wa-heading-xl ">
+            Start OpenShift Local
+          </div>
+          <p>
+            When everything is ready, start OpenShift Local. 
+          </p>
+          {{ code('crc start') }}
+        </div>
+      </wa-card>
+
+      <wa-card class="wa-stack ">
+        <div class="wa-stack ">
+          <div class="wa-heading-2xl ">
+            <i class="fa-kit fa-openshift fa-2xl " style="color: red; "></i>
+            Use OpenShift Local
+          </div>
+
+          <div class="wa-heading-xl ">
+            Log into OpenShift Local
+          </div>
+          <p>
+            Once your <kbd>crc start</kbd> command says <kbd>Started the OpenShift cluster</kbd>, you can log in. 
+            The URL to access your OpenShift Local graphical console is <a target="_blank" href="https://console-openshift-console.apps-crc.testing/">https://console-openshift-console.apps-crc.testing/</a>. 
+          </p>
+          <div class="wa-stack wa-align-items-center ">
+            <wa-button href="https://console-openshift-console.apps-crc.testing/" target="_blank" variant="brand">
+              OpenShift Local Console
+              <i slot="end" class="fa-kit fa-openshift fa-xl "></i>
+            </wa-button>
+          </div>
+          <p>
+            When you access the OpenShift Local Console for the first time, it will warn you about invalid certificates twice. 
+            Once when it takes you to the OAuth page to log in, and then again when you access the actual OpenShift Console. 
+            The certificates for anything <kbd>*.apps-crc.testing</kbd> are invalid because it's a fake domain set up on your local computer. 
+            You will need to accept these self-signed certificates to use the OpenShift Local Console. 
+          </p>
+          <p>
+            Remember the administrator username is <kbd>kubeadmin</kbd>, 
+            and the administrator password is also provided in the output of the <kbd>crc start</kbd> command. 
+          </p>
+        </div>
+      </wa-card>
+
+      <wa-details icon-position="start">
+        <i slot="expand-icon" class="fa-brands fa-windows"></i>
+        <i slot="collapse-icon" class="fa-brands fa-windows"></i>
+        <div class="wa-heading-xl " slot="summary">
+          Click here for Microsoft Windows instructions for installing the oc command
+        </div>
+
+        <div class="wa-stack">
+
+          <div class="wa-heading-l ">
+            Download the oc command
+          </div>
+          <ul>
+            <li>
+              Click the <kbd>?</kbd> button in the top right. 
+            </li>
+            <li>
+              Click <kbd>Command Line Tools</kbd>. 
+            </li>
+            <li>
+              Click <kbd>Download oc for Windows for x86_64</kbd>. 
+            </li>
+            <li>
+              Accept another self-signed certificate for downloads. 
+            </li>
+            <li>
+              Extract the <kbd>oc</kbd> command in your Terminal. 
+            </li>
+            <li>
+              {{ code('tar -xf %USERPROFILE%\\Downloads\\oc.zip ^
+  -C %USERPROFILE%\\AppData\\Local\\Microsoft\\WindowsApps\\') }}
+            </li>
+            <li>
+              Log into your OpenShift Local cluster in the Command Prompt using the <kbd>oc</kbd> command. 
+              You need to find the <kbd>kubeadmin</kbd> password provided when you started OpenShift Local with the <kbd>crc start</kbd> command and paste it after <kbd>-p</kbd>. 
+            </li>
+            <li>
+              {{ code('oc login https://api.crc.testing:6443 -u kubeadmin -p ') }}
+            </li>
+          </ul>
+        </div>
+      </wa-details>
+
+      <wa-details icon-position="start">
+        <i slot="expand-icon" class="fa-brands fa-linux"></i>
+        <i slot="collapse-icon" class="fa-brands fa-linux"></i>
+        <div class="wa-heading-xl " slot="summary">
+          Click here for Linux instructions for installing the oc command
+        </div>
+
+        <div class="wa-stack">
+          <div class="wa-heading-l ">
+            Download the oc command
+          </div>
+          <ul>
+            <li>
+              Click the <kbd>?</kbd> button in the top right. 
+            </li>
+            <li>
+              Click <kbd>Command Line Tools</kbd>. 
+            </li>
+            <li>
+              Click <kbd>Download oc for Linux for x86_64</kbd>. 
+            </li>
+            <li>
+              Accept another self-signed certificate for downloads. 
+            </li>
+            <li>
+              Extract the <kbd>oc</kbd> command in your Terminal. 
+            </li>
+            <li>
+              {{ code('tar xvf ~/Downloads/oc.tar \\
+  -C ~/.local/bin/') }}
+            </li>
+            <li>
+              Log into your OpenShift Local cluster in the Command Prompt using the <kbd>oc</kbd> command. 
+              You need to find the <kbd>kubeadmin</kbd> password provided when you started OpenShift Local with the <kbd>crc start</kbd> command and paste it after <kbd>-p</kbd>. 
+            </li>
+            <li>
+              {{ code('oc login https://api.crc.testing:6443 -u kubeadmin -p ') }}
+            </li>
+          </ul>
+        </div>
+      </wa-details>
+    </div>
+{% endblock %}
