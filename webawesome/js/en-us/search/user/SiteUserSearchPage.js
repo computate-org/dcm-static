@@ -275,28 +275,6 @@ Promise.all([
     facetStatsChange('SiteUser', 'userId', false);
   });
 
-  document.querySelector('#pageSelectSortSiteUser_userName')?.addEventListener('change', (event) => {
-    sort('SiteUser', 'userName', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSiteUser_userName')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SiteUser', 'userName', true);
-  });
-  document.querySelector('#pageStatsSiteUser_userName')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SiteUser', 'userName', false);
-  });
-
-  document.querySelector('#pageSelectSortSiteUser_userEmail')?.addEventListener('change', (event) => {
-    sort('SiteUser', 'userEmail', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSiteUser_userEmail')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SiteUser', 'userEmail', true);
-  });
-  document.querySelector('#pageStatsSiteUser_userEmail')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SiteUser', 'userEmail', false);
-  });
-
   document.querySelector('#pageSelectSortSiteUser_userFirstName')?.addEventListener('change', (event) => {
     sort('SiteUser', 'userFirstName', event.currentTarget.value);
   });
@@ -339,6 +317,28 @@ Promise.all([
   });
   document.querySelector('#pageStatsSiteUser_displayName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('SiteUser', 'displayName', false);
+  });
+
+  document.querySelector('#pageSelectSortSiteUser_userName')?.addEventListener('change', (event) => {
+    sort('SiteUser', 'userName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSiteUser_userName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SiteUser', 'userName', true);
+  });
+  document.querySelector('#pageStatsSiteUser_userName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SiteUser', 'userName', false);
+  });
+
+  document.querySelector('#pageSelectSortSiteUser_userEmail')?.addEventListener('change', (event) => {
+    sort('SiteUser', 'userEmail', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSiteUser_userEmail')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SiteUser', 'userEmail', true);
+  });
+  document.querySelector('#pageStatsSiteUser_userEmail')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SiteUser', 'userEmail', false);
   });
 
   document.querySelector('#pageSelectSortSiteUser_customerProfileId')?.addEventListener('change', (event) => {
