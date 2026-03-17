@@ -126,6 +126,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var hostResource = {% if result.hostResource is defined %}{{ result.hostResource | tojson }}{% else %}null{% endif %};
 
@@ -316,7 +317,7 @@
               <wa-tooltip for="return-to-Host">back to all hosts</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-Host" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-server"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-server"></i>
                   all hosts
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -335,7 +336,7 @@
           <wa-tooltip for="return-to-Host">back to all hosts</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-Host" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-server"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-server"></i>
               all hosts
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -344,7 +345,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-server"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-server"></i>
             </div>
             <span class="wa-heading-m ">no host found</span>
             <p class="wa-caption-l ">A managed host computer. </p>
@@ -354,6 +355,7 @@
 {% include en-us/search/host/HostSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/host" id="HostForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
               <input name="listHost" id="listHost" class="listHost"  value='{{ toJsonArrayStringInApostrophes(listHost) }}' type="hidden"/>
@@ -453,7 +455,7 @@
                   {% for item in listHost%}
                   <div>
                     <a href="{{ item.displayPage }}">
-                      <i class="fa-duotone fa-regular fa-server"></i>
+                      <i class="{{ FONTAWESOME_STYLE }} fa-server"></i>
                       <span>{{ item.hostName | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">

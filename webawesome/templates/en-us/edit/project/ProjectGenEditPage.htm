@@ -124,6 +124,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var projectResource = {% if result.projectResource is defined %}{{ result.projectResource | tojson }}{% else %}null{% endif %};
 
@@ -271,7 +272,7 @@
               <wa-tooltip for="return-to-Project">back to all projects</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-Project" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-people-line"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-people-line"></i>
                   all projects
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -286,7 +287,7 @@
 {%- block htmBodyStartProjectPage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <h1 class="Page_objectTitle"><i class="fa-duotone fa-regular fa-people-line"></i> {{ result.objectTitle | e }}</h1>
+            <h1 class="Page_objectTitle"><i class="{{ FONTAWESOME_STYLE }} fa-people-line"></i> {{ result.objectTitle | e }}</h1>
           </div>
 {% endif %}
 {% include en-us/search/project/ProjectSearchForm.htm %}
@@ -302,7 +303,7 @@
           <wa-tooltip for="return-to-Project">back to all projects</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-Project" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-people-line"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-people-line"></i>
               all projects
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -311,7 +312,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-people-line"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-people-line"></i>
             </div>
             <span class="wa-heading-m ">no project found</span>
             <p class="wa-caption-l ">A research project using AI and GPUs</p>
@@ -322,6 +323,7 @@
 {% endif %}
 {%- block htmFormProjectPage %}
           <form action="/en-us/api/project" id="ProjectForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
 {% if result.projectResource is defined %}
             <input name="projectResource" class="valueProjectResource" type="hidden" value="{{ result.projectResource }}"/>
             {% endif %}

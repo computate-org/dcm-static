@@ -124,6 +124,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var userId = {% if result.userId is defined %}{{ result.userId | tojson }}{% else %}null{% endif %};
 
@@ -241,7 +242,7 @@
               <wa-tooltip for="return-to-SiteUser">back to all site users</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-SiteUser" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-regular fa-user-gear"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-user-gear"></i>
                   all site users
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -256,7 +257,7 @@
 {%- block htmBodyStartSiteUserPage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <h1 class="Page_objectTitle"><i class="fa-regular fa-user-gear"></i> {{ result.objectTitle | e }}</h1>
+            <h1 class="Page_objectTitle"><i class="{{ FONTAWESOME_STYLE }} fa-user-gear"></i> {{ result.objectTitle | e }}</h1>
           </div>
 {% endif %}
 {% include en-us/search/user/SiteUserSearchForm.htm %}
@@ -272,7 +273,7 @@
           <wa-tooltip for="return-to-SiteUser">back to all site users</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-SiteUser" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-regular fa-user-gear"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-user-gear"></i>
               all site users
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -281,7 +282,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-regular fa-user-gear"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-user-gear"></i>
             </div>
             <span class="wa-heading-m ">no site user found</span>
             <p class="wa-caption-l ">A user record for each site user</p>
@@ -292,6 +293,7 @@
 {% endif %}
 {%- block htmFormSiteUserPage %}
           <form action="/en-us/api/user" id="SiteUserForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
 {% if result.userId is defined %}
             <input name="userId" class="valueUserId" type="hidden" value="{{ result.userId }}"/>
             {% endif %}

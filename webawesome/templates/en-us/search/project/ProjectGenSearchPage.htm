@@ -124,6 +124,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var projectResource = {% if result.projectResource is defined %}{{ result.projectResource | tojson }}{% else %}null{% endif %};
 
@@ -260,7 +261,7 @@
               <wa-tooltip for="return-to-Project">back to all projects</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-Project" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-people-line"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-people-line"></i>
                   all projects
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -279,7 +280,7 @@
           <wa-tooltip for="return-to-Project">back to all projects</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-Project" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-people-line"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-people-line"></i>
               all projects
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -288,7 +289,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-people-line"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-people-line"></i>
             </div>
             <span class="wa-heading-m ">no project found</span>
             <p class="wa-caption-l ">A research project using AI and GPUs</p>
@@ -298,6 +299,7 @@
 {% include en-us/search/project/ProjectSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/project" id="ProjectForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
               <input name="listProject" id="listProject" class="listProject"  value='{{ toJsonArrayStringInApostrophes(listProject) }}' type="hidden"/>
@@ -345,7 +347,7 @@
                   {% for item in listProject%}
                   <div>
                     <a href="{{ item.displayPage }}">
-                      <i class="fa-duotone fa-regular fa-people-line"></i>
+                      <i class="{{ FONTAWESOME_STYLE }} fa-people-line"></i>
                       <span>{{ item.projectName | e }}</span>
                     </a>
                   </div>

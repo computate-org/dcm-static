@@ -126,6 +126,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var checkResource = {% if result.checkResource is defined %}{{ result.checkResource | tojson }}{% else %}null{% endif %};
 
@@ -316,7 +317,7 @@
               <wa-tooltip for="return-to-HostCheck">back to all host checks</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-HostCheck" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-box-check"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-box-check"></i>
                   all host checks
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -335,7 +336,7 @@
           <wa-tooltip for="return-to-HostCheck">back to all host checks</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-HostCheck" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-box-check"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-box-check"></i>
               all host checks
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -344,7 +345,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-box-check"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-box-check"></i>
             </div>
             <span class="wa-heading-m ">no host check found</span>
             <p class="wa-caption-l ">A check to be performed on a computer. </p>
@@ -354,6 +355,7 @@
 {% include en-us/search/host-check/HostCheckSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/host-check" id="HostCheckForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
               <input name="listHostCheck" id="listHostCheck" class="listHostCheck"  value='{{ toJsonArrayStringInApostrophes(listHostCheck) }}' type="hidden"/>
@@ -466,7 +468,7 @@
                   {% for item in listHostCheck%}
                   <div>
                     <a href="{{ item.displayPage }}">
-                      <i class="fa-duotone fa-regular fa-box-check"></i>
+                      <i class="{{ FONTAWESOME_STYLE }} fa-box-check"></i>
                       <span>{{ item.tenantResource | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">

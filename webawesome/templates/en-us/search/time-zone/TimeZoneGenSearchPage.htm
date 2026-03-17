@@ -124,6 +124,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var id = {% if result.id is defined %}{{ result.id | tojson }}{% else %}null{% endif %};
 
@@ -260,7 +261,7 @@
               <wa-tooltip for="return-to-TimeZone">back to all time zones</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-TimeZone" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-globe"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-globe"></i>
                   all time zones
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -279,7 +280,7 @@
           <wa-tooltip for="return-to-TimeZone">back to all time zones</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-TimeZone" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-globe"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-globe"></i>
               all time zones
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -288,7 +289,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-globe"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-globe"></i>
             </div>
             <span class="wa-heading-m ">no time zone found</span>
             <p class="wa-caption-l ">A timezone</p>
@@ -298,6 +299,7 @@
 {% include en-us/search/time-zone/TimeZoneSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/time-zone" id="TimeZoneForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
               <input name="listTimeZone" id="listTimeZone" class="listTimeZone"  value='{{ toJsonArrayStringInApostrophes(listTimeZone) }}' type="hidden"/>
@@ -384,7 +386,7 @@
                   {% for item in listTimeZone%}
                   <div>
                     <a href="{{ item.displayPage }}">
-                      <i class="fa-duotone fa-regular fa-globe"></i>
+                      <i class="{{ FONTAWESOME_STYLE }} fa-globe"></i>
                       <span>{{ item.id | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">

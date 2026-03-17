@@ -127,6 +127,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var jobTemplateResource = {% if result.jobTemplateResource is defined %}{{ result.jobTemplateResource | tojson }}{% else %}null{% endif %};
 
@@ -344,7 +345,7 @@
               <wa-tooltip for="return-to-JobTemplate">back to all job templates</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-JobTemplate" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-excavator"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
                   all job templates
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -363,7 +364,7 @@
           <wa-tooltip for="return-to-JobTemplate">back to all job templates</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-JobTemplate" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-excavator"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
               all job templates
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -372,7 +373,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-excavator"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
             </div>
             <span class="wa-heading-m ">no job template found</span>
             <p class="wa-caption-l ">A job template to be run on a computer in Ansible Automation Platform. </p>
@@ -382,6 +383,7 @@
 {% include en-us/search/job-template/JobTemplateSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/job-template" id="JobTemplateForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
               <input name="listJobTemplate" id="listJobTemplate" class="listJobTemplate"  value='{{ toJsonArrayStringInApostrophes(listJobTemplate) }}' type="hidden"/>
@@ -455,7 +457,7 @@
                   {% for item in listJobTemplate%}
                   <div>
                     <a href="{{ item.displayPage }}">
-                      <i class="fa-duotone fa-regular fa-excavator"></i>
+                      <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
                       <span>{{ item.tenantResource | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">

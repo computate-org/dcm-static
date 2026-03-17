@@ -127,6 +127,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var jobTemplateResource = {% if result.jobTemplateResource is defined %}{{ result.jobTemplateResource | tojson }}{% else %}null{% endif %};
 
@@ -484,7 +485,7 @@
               <wa-tooltip for="return-to-JobTemplate">back to all job templates</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-JobTemplate" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-excavator"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
                   all job templates
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -499,7 +500,7 @@
 {%- block htmBodyStartJobTemplatePage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <h1 class="Page_objectTitle"><i class="fa-duotone fa-regular fa-excavator"></i> {{ result.objectTitle | e }}</h1>
+            <h1 class="Page_objectTitle"><i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i> {{ result.objectTitle | e }}</h1>
           </div>
 {% endif %}
 {% include en-us/search/job-template/JobTemplateSearchForm.htm %}
@@ -515,7 +516,7 @@
           <wa-tooltip for="return-to-JobTemplate">back to all job templates</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-JobTemplate" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-excavator"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
               all job templates
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -524,7 +525,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-excavator"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
             </div>
             <span class="wa-heading-m ">no job template found</span>
             <p class="wa-caption-l ">A job template to be run on a computer in Ansible Automation Platform. </p>
@@ -535,6 +536,7 @@
 {% endif %}
 {%- block htmFormJobTemplatePage %}
           <form action="/en-us/api/job-template" id="JobTemplateForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
 {% if result.jobTemplateResource is defined %}
             <input name="jobTemplateResource" class="valueJobTemplateResource" type="hidden" value="{{ result.jobTemplateResource }}"/>
             {% endif %}

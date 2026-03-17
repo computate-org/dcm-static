@@ -126,6 +126,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var ansibleProjectResource = {% if result.ansibleProjectResource is defined %}{{ result.ansibleProjectResource | tojson }}{% else %}null{% endif %};
 
@@ -316,7 +317,7 @@
               <wa-tooltip for="return-to-AnsibleProject">back to all ansible projects</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-AnsibleProject" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-excavator"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
                   all ansible projects
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -335,7 +336,7 @@
           <wa-tooltip for="return-to-AnsibleProject">back to all ansible projects</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-AnsibleProject" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-excavator"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
               all ansible projects
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -344,7 +345,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-excavator"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
             </div>
             <span class="wa-heading-m ">no ansible project found</span>
             <p class="wa-caption-l ">A ansible project to be run on a computer in Ansible Automation Platform. </p>
@@ -354,6 +355,7 @@
 {% include en-us/search/ansible-project/AnsibleProjectSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/ansible-project" id="AnsibleProjectForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
               <input name="listAnsibleProject" id="listAnsibleProject" class="listAnsibleProject"  value='{{ toJsonArrayStringInApostrophes(listAnsibleProject) }}' type="hidden"/>
@@ -427,7 +429,7 @@
                   {% for item in listAnsibleProject%}
                   <div>
                     <a href="{{ item.displayPage }}">
-                      <i class="fa-duotone fa-regular fa-excavator"></i>
+                      <i class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
                       <span>{{ item.tenantResource | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">

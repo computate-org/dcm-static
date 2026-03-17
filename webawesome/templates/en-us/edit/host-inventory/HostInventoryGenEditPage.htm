@@ -126,6 +126,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var inventoryResource = {% if result.inventoryResource is defined %}{{ result.inventoryResource | tojson }}{% else %}null{% endif %};
 
@@ -413,7 +414,7 @@
               <wa-tooltip for="return-to-HostInventory">back to all host inventories</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-HostInventory" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-network-wired"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-network-wired"></i>
                   all host inventories
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -428,7 +429,7 @@
 {%- block htmBodyStartHostInventoryPage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <h1 class="Page_objectTitle"><i class="fa-duotone fa-regular fa-network-wired"></i> {{ result.objectTitle | e }}</h1>
+            <h1 class="Page_objectTitle"><i class="{{ FONTAWESOME_STYLE }} fa-network-wired"></i> {{ result.objectTitle | e }}</h1>
           </div>
 {% endif %}
 {% include en-us/search/host-inventory/HostInventorySearchForm.htm %}
@@ -444,7 +445,7 @@
           <wa-tooltip for="return-to-HostInventory">back to all host inventories</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-HostInventory" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-network-wired"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-network-wired"></i>
               all host inventories
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -453,7 +454,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-network-wired"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-network-wired"></i>
             </div>
             <span class="wa-heading-m ">no host inventory found</span>
             <p class="wa-caption-l ">A managed host inventory. </p>
@@ -464,6 +465,7 @@
 {% endif %}
 {%- block htmFormHostInventoryPage %}
           <form action="/en-us/api/host-inventory" id="HostInventoryForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
 {% if result.inventoryResource is defined %}
             <input name="inventoryResource" class="valueInventoryResource" type="hidden" value="{{ result.inventoryResource }}"/>
             {% endif %}

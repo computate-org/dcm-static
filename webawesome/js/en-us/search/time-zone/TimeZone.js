@@ -24,7 +24,7 @@ async function websocketTimeZone(success) {
       $header.setAttribute('class', 'w3-container fa- ');
       $header.setAttribute('id', 'header-' + id);
       var iTemplate = document.createElement('template');
-      iTemplate.innerHTML = '<i class="fa-duotone fa-regular fa-globe"></i>';
+      iTemplate.innerHTML = '<i class="' + window.FONTAWESOME_STYLE + ' fa-globe"></i>';
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
@@ -89,14 +89,14 @@ async function websocketTimeZoneInner(apiRequest) {
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
-        var inputSaves = null;
         var inputObjectTitle = null;
-        var inputEditPage = null;
         var inputUserPage = null;
         var inputDownload = null;
         var inputObjectSuggest = null;
-        var inputObjectText = null;
         var inputSolrId = null;
+        var inputSaves = null;
+        var inputEditPage = null;
+        var inputObjectText = null;
         var inputDisplayName = null;
 
         if(vars.includes('created'))
@@ -121,22 +121,22 @@ async function websocketTimeZoneInner(apiRequest) {
           inputClassSimpleName = $response.querySelector('.TimeZone_Page_classSimpleName');
         if(vars.includes('classCanonicalNames'))
           inputClassCanonicalNames = $response.querySelector('.TimeZone_Page_classCanonicalNames');
-        if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.TimeZone_Page_saves');
         if(vars.includes('objectTitle'))
           inputObjectTitle = $response.querySelector('.TimeZone_Page_objectTitle');
-        if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.TimeZone_Page_editPage');
         if(vars.includes('userPage'))
           inputUserPage = $response.querySelector('.TimeZone_Page_userPage');
         if(vars.includes('download'))
           inputDownload = $response.querySelector('.TimeZone_Page_download');
         if(vars.includes('objectSuggest'))
           inputObjectSuggest = $response.querySelector('.TimeZone_Page_objectSuggest');
-        if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.TimeZone_Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.TimeZone_Page_solrId');
+        if(vars.includes('saves'))
+          inputSaves = $response.querySelector('.TimeZone_Page_saves');
+        if(vars.includes('editPage'))
+          inputEditPage = $response.querySelector('.TimeZone_Page_editPage');
+        if(vars.includes('objectText'))
+          inputObjectText = $response.querySelector('.TimeZone_Page_objectText');
         if(vars.includes('displayName'))
           inputDisplayName = $response.querySelector('.TimeZone_Page_displayName');
 
@@ -255,16 +255,6 @@ async function websocketTimeZoneInner(apiRequest) {
           addGlow(document.querySelector('.TimeZone_Page_classCanonicalNames'));
         }
 
-        if(inputSaves) {
-          document.querySelectorAll('.TimeZone_Page_saves').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSaves.getAttribute('value');
-            else
-              item.textContent = inputSaves.textContent;
-          });
-          addGlow(document.querySelector('.TimeZone_Page_saves'));
-        }
-
         if(inputObjectTitle) {
           document.querySelectorAll('.TimeZone_Page_objectTitle').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -273,16 +263,6 @@ async function websocketTimeZoneInner(apiRequest) {
               item.textContent = inputObjectTitle.textContent;
           });
           addGlow(document.querySelector('.TimeZone_Page_objectTitle'));
-        }
-
-        if(inputEditPage) {
-          document.querySelectorAll('.TimeZone_Page_editPage').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputEditPage.getAttribute('value');
-            else
-              item.textContent = inputEditPage.textContent;
-          });
-          addGlow(document.querySelector('.TimeZone_Page_editPage'));
         }
 
         if(inputUserPage) {
@@ -315,16 +295,6 @@ async function websocketTimeZoneInner(apiRequest) {
           addGlow(document.querySelector('.TimeZone_Page_objectSuggest'));
         }
 
-        if(inputObjectText) {
-          document.querySelectorAll('.TimeZone_Page_objectText').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectText.getAttribute('value');
-            else
-              item.textContent = inputObjectText.textContent;
-          });
-          addGlow(document.querySelector('.TimeZone_Page_objectText'));
-        }
-
         if(inputSolrId) {
           document.querySelectorAll('.TimeZone_Page_solrId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -333,6 +303,36 @@ async function websocketTimeZoneInner(apiRequest) {
               item.textContent = inputSolrId.textContent;
           });
           addGlow(document.querySelector('.TimeZone_Page_solrId'));
+        }
+
+        if(inputSaves) {
+          document.querySelectorAll('.TimeZone_Page_saves').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputSaves.getAttribute('value');
+            else
+              item.textContent = inputSaves.textContent;
+          });
+          addGlow(document.querySelector('.TimeZone_Page_saves'));
+        }
+
+        if(inputEditPage) {
+          document.querySelectorAll('.TimeZone_Page_editPage').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputEditPage.getAttribute('value');
+            else
+              item.textContent = inputEditPage.textContent;
+          });
+          addGlow(document.querySelector('.TimeZone_Page_editPage'));
+        }
+
+        if(inputObjectText) {
+          document.querySelectorAll('.TimeZone_Page_objectText').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectText.getAttribute('value');
+            else
+              item.textContent = inputObjectText.textContent;
+          });
+          addGlow(document.querySelector('.TimeZone_Page_objectText'));
         }
 
         if(inputDisplayName) {
@@ -540,17 +540,9 @@ function searchTimeZoneFilters($formFilters) {
     if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
       filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
 
-    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
-    if(filterSaves != null && filterSaves !== '')
-      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
-
     var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
     if(filterObjectTitle != null && filterObjectTitle !== '')
       filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
-
-    var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
-    if(filterEditPage != null && filterEditPage !== '')
-      filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
 
     var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
     if(filterUserPage != null && filterUserPage !== '')
@@ -564,13 +556,21 @@ function searchTimeZoneFilters($formFilters) {
     if(filterObjectSuggest != null && filterObjectSuggest !== '')
       filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
 
-    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
-    if(filterObjectText != null && filterObjectText !== '')
-      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
-
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
+    var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
+    if(filterEditPage != null && filterEditPage !== '')
+      filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
+
+    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
+    if(filterObjectText != null && filterObjectText !== '')
+      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
 
     var filterDisplayName = $formFilters.querySelector('.valueDisplayName')?.value;
     if(filterDisplayName != null && filterDisplayName !== '')
@@ -603,7 +603,7 @@ function suggestTimeZoneObjectSuggest($formFilters, $list, target) {
     if($list) {
       $list.innerHTML = '';
       data['list'].forEach((o, i) => {
-        var $i = document.querySelector('<i class="fa-duotone fa-regular fa-globe"></i>');
+        var $i = document.querySelector('<i class="{{ FONTAWESOME_STYLE }} fa-globe"></i>');
         var $span = document.createElement('span');
         $span.setAttribute('class', '');
         $span.innerText = o['objectTitle'];
@@ -761,18 +761,6 @@ async function patchTimeZone($formFilters, $formValues, target, id, success, err
   if(removeObjectTitle != null && removeObjectTitle !== '')
     vals['removeObjectTitle'] = removeObjectTitle;
 
-  var valueEditPage = $formValues.querySelector('.valueEditPage')?.value;
-  var removeEditPage = $formValues.querySelector('.removeEditPage')?.value === 'true';
-  var setEditPage = removeEditPage ? null : $formValues.querySelector('.setEditPage')?.value;
-  var addEditPage = $formValues.querySelector('.addEditPage')?.value;
-  if(removeEditPage || setEditPage != null && setEditPage !== '')
-    vals['setEditPage'] = setEditPage;
-  if(addEditPage != null && addEditPage !== '')
-    vals['addEditPage'] = addEditPage;
-  var removeEditPage = $formValues.querySelector('.removeEditPage')?.value;
-  if(removeEditPage != null && removeEditPage !== '')
-    vals['removeEditPage'] = removeEditPage;
-
   var valueUserPage = $formValues.querySelector('.valueUserPage')?.value;
   var removeUserPage = $formValues.querySelector('.removeUserPage')?.value === 'true';
   var setUserPage = removeUserPage ? null : $formValues.querySelector('.setUserPage')?.value;
@@ -808,6 +796,18 @@ async function patchTimeZone($formFilters, $formValues, target, id, success, err
   var removeSolrId = $formValues.querySelector('.removeSolrId')?.value;
   if(removeSolrId != null && removeSolrId !== '')
     vals['removeSolrId'] = removeSolrId;
+
+  var valueEditPage = $formValues.querySelector('.valueEditPage')?.value;
+  var removeEditPage = $formValues.querySelector('.removeEditPage')?.value === 'true';
+  var setEditPage = removeEditPage ? null : $formValues.querySelector('.setEditPage')?.value;
+  var addEditPage = $formValues.querySelector('.addEditPage')?.value;
+  if(removeEditPage || setEditPage != null && setEditPage !== '')
+    vals['setEditPage'] = setEditPage;
+  if(addEditPage != null && addEditPage !== '')
+    vals['addEditPage'] = addEditPage;
+  var removeEditPage = $formValues.querySelector('.removeEditPage')?.value;
+  if(removeEditPage != null && removeEditPage !== '')
+    vals['removeEditPage'] = removeEditPage;
 
   var valueDisplayName = $formValues.querySelector('.valueDisplayName')?.value;
   var removeDisplayName = $formValues.querySelector('.removeDisplayName')?.value === 'true';
@@ -879,17 +879,9 @@ function patchTimeZoneFilters($formFilters) {
     if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
       filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
 
-    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
-    if(filterSaves != null && filterSaves !== '')
-      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
-
     var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
     if(filterObjectTitle != null && filterObjectTitle !== '')
       filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
-
-    var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
-    if(filterEditPage != null && filterEditPage !== '')
-      filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
 
     var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
     if(filterUserPage != null && filterUserPage !== '')
@@ -903,13 +895,21 @@ function patchTimeZoneFilters($formFilters) {
     if(filterObjectSuggest != null && filterObjectSuggest !== '')
       filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
 
-    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
-    if(filterObjectText != null && filterObjectText !== '')
-      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
-
     var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
+    var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
+    if(filterEditPage != null && filterEditPage !== '')
+      filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
+
+    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
+    if(filterObjectText != null && filterObjectText !== '')
+      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
 
     var filterDisplayName = $formFilters.querySelector('.valueDisplayName')?.value;
     if(filterDisplayName != null && filterDisplayName !== '')
@@ -1013,10 +1013,6 @@ async function postTimeZone($formValues, target, success, error) {
   if(valueObjectTitle != null && valueObjectTitle !== '')
     vals['objectTitle'] = valueObjectTitle;
 
-  var valueEditPage = $formValues.querySelector('.valueEditPage')?.value;
-  if(valueEditPage != null && valueEditPage !== '')
-    vals['editPage'] = valueEditPage;
-
   var valueUserPage = $formValues.querySelector('.valueUserPage')?.value;
   if(valueUserPage != null && valueUserPage !== '')
     vals['userPage'] = valueUserPage;
@@ -1028,6 +1024,10 @@ async function postTimeZone($formValues, target, success, error) {
   var valueSolrId = $formValues.querySelector('.valueSolrId')?.value;
   if(valueSolrId != null && valueSolrId !== '')
     vals['solrId'] = valueSolrId;
+
+  var valueEditPage = $formValues.querySelector('.valueEditPage')?.value;
+  if(valueEditPage != null && valueEditPage !== '')
+    vals['editPage'] = valueEditPage;
 
   var valueDisplayName = $formValues.querySelector('.valueDisplayName')?.value;
   if(valueDisplayName != null && valueDisplayName !== '')

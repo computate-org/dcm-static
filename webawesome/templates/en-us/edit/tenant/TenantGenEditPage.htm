@@ -126,6 +126,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var tenantResource = {% if result.tenantResource is defined %}{{ result.tenantResource | tojson }}{% else %}null{% endif %};
 
@@ -413,7 +414,7 @@
               <wa-tooltip for="return-to-Tenant">back to all tenants</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-Tenant" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-buildings"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
                   all tenants
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -428,7 +429,7 @@
 {%- block htmBodyStartTenantPage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <h1 class="Page_objectTitle"><i class="fa-duotone fa-regular fa-buildings"></i> {{ result.objectTitle | e }}</h1>
+            <h1 class="Page_objectTitle"><i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i> {{ result.objectTitle | e }}</h1>
           </div>
 {% endif %}
 {% include en-us/search/tenant/TenantSearchForm.htm %}
@@ -444,7 +445,7 @@
           <wa-tooltip for="return-to-Tenant">back to all tenants</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-Tenant" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-buildings"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
               all tenants
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -453,7 +454,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-buildings"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
             </div>
             <span class="wa-heading-m ">no tenant found</span>
             <p class="wa-caption-l ">Tenants are separate organizations sharing the same cloud resources. </p>
@@ -464,6 +465,7 @@
 {% endif %}
 {%- block htmFormTenantPage %}
           <form action="/en-us/api/tenant" id="TenantForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
 {% if result.tenantResource is defined %}
             <input name="tenantResource" class="valueTenantResource" type="hidden" value="{{ result.tenantResource }}"/>
             {% endif %}

@@ -124,6 +124,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var pageId = {% if result.pageId is defined %}{{ result.pageId | tojson }}{% else %}null{% endif %};
 
@@ -260,7 +261,7 @@
               <wa-tooltip for="return-to-AiTelemetryPlatform">back to all AI Telemetry developers</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-AiTelemetryPlatform" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-chart-fft"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-chart-fft"></i>
                   all AI Telemetry developers
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -279,7 +280,7 @@
           <wa-tooltip for="return-to-AiTelemetryPlatform">back to all AI Telemetry developers</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-AiTelemetryPlatform" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-chart-fft"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-chart-fft"></i>
               all AI Telemetry developers
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -288,7 +289,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-chart-fft"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-chart-fft"></i>
             </div>
             <span class="wa-heading-m ">no AI Telemetry developer found</span>
             <p class="wa-caption-l ">Learn how to become an AI Telemetry platform developer — Providing access control to observability metrics for cloud environments, ACM hubs, OpenShift Clusters, virtual machines, bare metal hardware, and cloud projects. </p>
@@ -298,6 +299,7 @@
 {% include en-us/search/ai-telemetry-platform/AiTelemetryPlatformSuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/ai-telemetry-platform" id="AiTelemetryPlatformForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
               <input name="listAiTelemetryPlatform" id="listAiTelemetryPlatform" class="listAiTelemetryPlatform"  value='{{ toJsonArrayStringInApostrophes(listAiTelemetryPlatform) }}' type="hidden"/>
@@ -358,7 +360,7 @@
                   {% for item in listAiTelemetryPlatform%}
                   <div>
                     <a href="{{ item.displayPage }}">
-                      <i class="fa-duotone fa-regular fa-chart-fft"></i>
+                      <i class="{{ FONTAWESOME_STYLE }} fa-chart-fft"></i>
                       <span>{{ item.name | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">

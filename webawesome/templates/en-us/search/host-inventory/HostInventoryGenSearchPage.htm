@@ -126,6 +126,7 @@
         , customElements.whenDefined('wa-checkbox')
         , customElements.whenDefined('wa-dropdown')
       ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
         var inventoryResource = {% if result.inventoryResource is defined %}{{ result.inventoryResource | tojson }}{% else %}null{% endif %};
 
@@ -316,7 +317,7 @@
               <wa-tooltip for="return-to-HostInventory">back to all host inventories</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-HostInventory" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-                  <i class="fa-duotone fa-regular fa-network-wired"></i>
+                  <i class="{{ FONTAWESOME_STYLE }} fa-network-wired"></i>
                   all host inventories
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
@@ -335,7 +336,7 @@
           <wa-tooltip for="return-to-HostInventory">back to all host inventories</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-HostInventory" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
-              <i class="fa-duotone fa-regular fa-network-wired"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-network-wired"></i>
               all host inventories
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
@@ -344,7 +345,7 @@
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
-              <i class="fa-duotone fa-regular fa-network-wired"></i>
+              <i class="{{ FONTAWESOME_STYLE }} fa-network-wired"></i>
             </div>
             <span class="wa-heading-m ">no host inventory found</span>
             <p class="wa-caption-l ">A managed host inventory. </p>
@@ -354,6 +355,7 @@
 {% include en-us/search/host-inventory/HostInventorySuggestedSearch.htm %}
           <div class="pageContent ">
             <form action="/en-us/api/host-inventory" id="HostInventoryForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
               <input name="focusId" type="hidden"/>
               <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
               <input name="listHostInventory" id="listHostInventory" class="listHostInventory"  value='{{ toJsonArrayStringInApostrophes(listHostInventory) }}' type="hidden"/>
@@ -427,7 +429,7 @@
                   {% for item in listHostInventory%}
                   <div>
                     <a href="{{ item.displayPage }}">
-                      <i class="fa-duotone fa-regular fa-network-wired"></i>
+                      <i class="{{ FONTAWESOME_STYLE }} fa-network-wired"></i>
                       <span>{{ item.tenantResource | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
