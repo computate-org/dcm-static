@@ -83,6 +83,7 @@ async function websocketHostInventoryInner(apiRequest) {
         var inputModified = null;
         var inputArchived = null;
         var inputTenantResource = null;
+        var inputCredentialResource = null;
         var inputInventoryName = null;
         var inputInventoryDescription = null;
         var inputInventoryKind = null;
@@ -117,6 +118,8 @@ async function websocketHostInventoryInner(apiRequest) {
           inputArchived = $response.querySelector('.HostInventory_Page_archived');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.HostInventory_Page_tenantResource');
+        if(vars.includes('credentialResource'))
+          inputCredentialResource = $response.querySelector('.HostInventory_Page_credentialResource');
         if(vars.includes('inventoryName'))
           inputInventoryName = $response.querySelector('.HostInventory_Page_inventoryName');
         if(vars.includes('inventoryDescription'))
@@ -217,6 +220,16 @@ async function websocketHostInventoryInner(apiRequest) {
               item.textContent = inputTenantResource.textContent;
           });
           addGlow(document.querySelector('.HostInventory_Page_tenantResource'));
+        }
+
+        if(inputCredentialResource) {
+          document.querySelectorAll('.HostInventory_Page_credentialResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputCredentialResource.getAttribute('value');
+            else
+              item.textContent = inputCredentialResource.textContent;
+          });
+          addGlow(document.querySelector('.HostInventory_Page_credentialResource'));
         }
 
         if(inputInventoryName) {
@@ -620,6 +633,10 @@ function searchHostInventoryFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
+    var filterCredentialResource = $formFilters.querySelector('.valueCredentialResource')?.value;
+    if(filterCredentialResource != null && filterCredentialResource !== '')
+      filters.push({ name: 'fq', value: 'credentialResource:' + filterCredentialResource });
+
     var filterInventoryName = $formFilters.querySelector('.valueInventoryName')?.value;
     if(filterInventoryName != null && filterInventoryName !== '')
       filters.push({ name: 'fq', value: 'inventoryName:' + filterInventoryName });
@@ -798,6 +815,70 @@ function suggestHostInventoryTenantResource(filters, $list, inventoryResource = 
   }
 }
 
+function suggestHostInventoryCredentialResource(filters, $list, inventoryResource = null, credentialResource = null, relate=true, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="' + window.FONTAWESOME_STYLE + ' fa-input-password"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('class', 'wa-flank wa-gap-xs ');
+        $a.setAttribute('target', '_blank');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var inputVar = 'credentialResource';
+        var val = o[inputVar];
+        var checked = val == null ? false : (credentialResource != null && val === credentialResource.toString());
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_credentialResource_' + inventoryResource + '_credentialResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
+        $input.setAttribute('class', 'valueCredentialResource ');
+        if(inventoryResource != null) {
+          $input.addEventListener('change', function(event) {
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchHostInventoryVals([{ name: 'fq', value: 'inventoryResource:' + inventoryResource }], { [(event.target.checked ? 'set' : 'remove') + 'CredentialResource']: o[inputVar] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestHostInventoryCredentialResource(filters, $list, inventoryResource, o[inputVar], relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        $li.setAttribute('class', 'wa-flank wa-gap-0 ');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  if (typeof searchHostCredentialVals === 'function') {
+    searchHostCredentialVals(filters, target, success, error);
+  }
+}
+
 function suggestHostInventoryHostInventoryIds(filters, $list, inventoryResource = null, hostInventoryIds = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
@@ -967,6 +1048,10 @@ async function patchHostInventory($formFilters, $formValues, target, inventoryRe
   var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['setTenantResource'] = valueTenantResource;
+
+  var valueCredentialResource = (Array.from($formValues.querySelectorAll('.valueCredentialResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueCredentialResource != null && valueCredentialResource !== '')
+    vals['setCredentialResource'] = valueCredentialResource;
 
   var valueInventoryName = $formValues.querySelector('.valueInventoryName')?.value;
   var removeInventoryName = $formValues.querySelector('.removeInventoryName')?.value === 'true';
@@ -1186,6 +1271,10 @@ function patchHostInventoryFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
+    var filterCredentialResource = $formFilters.querySelector('.valueCredentialResource')?.value;
+    if(filterCredentialResource != null && filterCredentialResource !== '')
+      filters.push({ name: 'fq', value: 'credentialResource:' + filterCredentialResource });
+
     var filterInventoryName = $formFilters.querySelector('.valueInventoryName')?.value;
     if(filterInventoryName != null && filterInventoryName !== '')
       filters.push({ name: 'fq', value: 'inventoryName:' + filterInventoryName });
@@ -1359,6 +1448,10 @@ async function postHostInventory($formValues, target, success, error) {
   var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['tenantResource'] = valueTenantResource;
+
+  var valueCredentialResource = (Array.from($formValues.querySelectorAll('.valueCredentialResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueCredentialResource != null && valueCredentialResource !== '')
+    vals['credentialResource'] = valueCredentialResource;
 
   var valueInventoryName = $formValues.querySelector('.valueInventoryName')?.value;
   if(valueInventoryName != null && valueInventoryName !== '')

@@ -193,6 +193,20 @@
           }
           document.querySelector('#HostInventory_POST_tenantResource_Host_POST_inventoryResource')?.addEventListener('input', HostInventory_POST_tenantResource_Host_POST_inventoryResource);
           document.querySelector('#HostInventory_POST_tenantResource_Host_POST_inventoryResource')?.addEventListener('focus', HostInventory_POST_tenantResource_Host_POST_inventoryResource);
+          function HostInventory_POST_credentialResource_Host_POST_inventoryResource(event) {
+            suggestHostInventoryCredentialResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,credentialResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.credentialResource : null
+                , true
+                , document.querySelector('#HostInventory_POST_credentialResource_Host_POST_inventoryResource')
+                );
+          }
+          document.querySelector('#HostInventory_POST_credentialResource_Host_POST_inventoryResource')?.addEventListener('input', HostInventory_POST_credentialResource_Host_POST_inventoryResource);
+          document.querySelector('#HostInventory_POST_credentialResource_Host_POST_inventoryResource')?.addEventListener('focus', HostInventory_POST_credentialResource_Host_POST_inventoryResource);
           function HostInventory_POST_hostInventoryIds_Host_POST_inventoryResource(event) {
             suggestHostInventoryHostInventoryIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }

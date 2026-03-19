@@ -28,6 +28,7 @@
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventorySearchPage.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventoryEditPage.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/host-credential/HostCredential.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host/Host.js"></script>
 {%- endblock htmScriptsHostInventoryPage %}
 {%- endblock htmScriptsPageLayout %}
@@ -207,6 +208,51 @@
           }
           document.querySelector('#Tenant_POST_ansibleProjectIds_HostInventory_POST_tenantResource')?.addEventListener('input', Tenant_POST_ansibleProjectIds_HostInventory_POST_tenantResource);
           document.querySelector('#Tenant_POST_ansibleProjectIds_HostInventory_POST_tenantResource')?.addEventListener('focus', Tenant_POST_ansibleProjectIds_HostInventory_POST_tenantResource);
+          function relate_credentialResource(event) {
+            suggestHostInventoryCredentialResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,credentialResource,credentialResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.inventoryResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.credentialResource : null
+                , true
+                , event.target
+                );
+          }
+          document.querySelector('#HostInventory_POST_credentialResource')?.addEventListener('input', relate_credentialResource);
+          document.querySelector('#HostInventory_POST_credentialResource')?.addEventListener('focus', relate_credentialResource);
+          document.querySelector('#HostInventory_PATCH_credentialResource')?.addEventListener('input', relate_credentialResource);
+          document.querySelector('#HostInventory_PATCH_credentialResource')?.addEventListener('focus', relate_credentialResource);
+          document.querySelector('#HostInventory_Page_credentialResource')?.addEventListener('input', relate_credentialResource);
+          document.querySelector('#HostInventory_Page_credentialResource')?.addEventListener('focus', relate_credentialResource);
+          document.querySelector('#HostCredential_POST_inventoryResource')?.addEventListener('input', relate_credentialResource);
+          document.querySelector('#HostCredential_POST_inventoryResource')?.addEventListener('focus', relate_credentialResource);
+          if(window.result.credentialResource) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestHostInventoryCredentialResource([{'name':'fq','value':'credentialResource:' + window.result.credentialResource}], document.querySelector('#listHostInventoryCredentialResource_Page'), window.result.inventoryResource, window.result.credentialResource, true, document.getElementById('HostInventory_Page_credentialResource'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestHostInventoryCredentialResource([{'name':'fq','value':'credentialResource:' + window.result.credentialResource}], document.querySelector('#listHostInventoryCredentialResource_Page'), window.result.inventoryResource, window.result.credentialResource, true, document.getElementById('HostInventory_Page_credentialResource'));
+          {% else -%}
+            {{'  '}}suggestHostInventoryCredentialResource([{'name':'fq','value':'credentialResource:' + window.result.credentialResource}], document.querySelector('#listHostInventoryCredentialResource_Page'), window.result.inventoryResource, window.result.credentialResource, false, document.getElementById('HostInventory_Page_credentialResource'));
+          {% endif -%}
+          {% endif -%}
+          }
+          function HostCredential_POST_tenantResource_HostInventory_POST_credentialResource(event) {
+            suggestHostCredentialTenantResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.inventoryResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , true
+                , document.querySelector('#HostCredential_POST_tenantResource_HostInventory_POST_credentialResource')
+                );
+          }
+          document.querySelector('#HostCredential_POST_tenantResource_HostInventory_POST_credentialResource')?.addEventListener('input', HostCredential_POST_tenantResource_HostInventory_POST_credentialResource);
+          document.querySelector('#HostCredential_POST_tenantResource_HostInventory_POST_credentialResource')?.addEventListener('focus', HostCredential_POST_tenantResource_HostInventory_POST_credentialResource);
           function relate_hostInventoryIds(event) {
             suggestHostInventoryHostInventoryIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -364,6 +410,17 @@
           event.preventDefault();
           postTenant(document.querySelector('#htmForm_postTenant')
               , document.querySelector('#htmFormButton_postTenant')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
+
+        document.querySelector('#htmFormButton_postHostCredential')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHostCredential(document.querySelector('#htmForm_postHostCredential')
+              , document.querySelector('#htmFormButton_postHostCredential')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])

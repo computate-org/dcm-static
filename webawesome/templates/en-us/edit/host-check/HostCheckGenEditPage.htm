@@ -252,6 +252,20 @@
           }
           document.querySelector('#JobTemplate_POST_inventoryResource_HostCheck_POST_jobTemplateResource')?.addEventListener('input', JobTemplate_POST_inventoryResource_HostCheck_POST_jobTemplateResource);
           document.querySelector('#JobTemplate_POST_inventoryResource_HostCheck_POST_jobTemplateResource')?.addEventListener('focus', JobTemplate_POST_inventoryResource_HostCheck_POST_jobTemplateResource);
+          function JobTemplate_POST_credentialResource_HostCheck_POST_jobTemplateResource(event) {
+            suggestJobTemplateCredentialResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,credentialResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.checkResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.credentialResource : null
+                , true
+                , document.querySelector('#JobTemplate_POST_credentialResource_HostCheck_POST_jobTemplateResource')
+                );
+          }
+          document.querySelector('#JobTemplate_POST_credentialResource_HostCheck_POST_jobTemplateResource')?.addEventListener('input', JobTemplate_POST_credentialResource_HostCheck_POST_jobTemplateResource);
+          document.querySelector('#JobTemplate_POST_credentialResource_HostCheck_POST_jobTemplateResource')?.addEventListener('focus', JobTemplate_POST_credentialResource_HostCheck_POST_jobTemplateResource);
           function JobTemplate_POST_ansibleProjectResource_HostCheck_POST_jobTemplateResource(event) {
             suggestJobTemplateAnsibleProjectResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }

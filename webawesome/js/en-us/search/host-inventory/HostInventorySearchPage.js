@@ -66,6 +66,17 @@ Promise.all([
     facetStatsChange('HostInventory', 'tenantResource', false);
   });
 
+  document.querySelector('#pageSelectSortHostInventory_credentialResource')?.addEventListener('change', (event) => {
+    sort('HostInventory', 'credentialResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostInventory_credentialResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostInventory', 'credentialResource', true);
+  });
+  document.querySelector('#pageStatsHostInventory_credentialResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostInventory', 'credentialResource', false);
+  });
+
   document.querySelector('#pageSelectSortHostInventory_inventoryName')?.addEventListener('change', (event) => {
     sort('HostInventory', 'inventoryName', event.currentTarget.value);
   });

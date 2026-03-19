@@ -121,94 +121,6 @@ Promise.all([
     facetStatsChange('Host', 'tags', false);
   });
 
-  document.querySelector('#pageSelectSortHost_tenantResource')?.addEventListener('change', (event) => {
-    sort('Host', 'tenantResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'tenantResource', true);
-  });
-  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'tenantResource', false);
-  });
-
-  document.querySelector('#pageSelectSortHost_tenantId')?.addEventListener('change', (event) => {
-    sort('Host', 'tenantId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_tenantId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'tenantId', true);
-  });
-  document.querySelector('#pageStatsHost_tenantId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'tenantId', false);
-  });
-
-  document.querySelector('#pageSelectSortHost_aapOrganizationId')?.addEventListener('change', (event) => {
-    sort('Host', 'aapOrganizationId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_aapOrganizationId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'aapOrganizationId', true);
-  });
-  document.querySelector('#pageStatsHost_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'aapOrganizationId', false);
-  });
-
-  document.querySelector('#pageSelectSortHost_aapHostId')?.addEventListener('change', (event) => {
-    sort('Host', 'aapHostId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_aapHostId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'aapHostId', true);
-  });
-  document.querySelector('#pageStatsHost_aapHostId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'aapHostId', false);
-  });
-
-  document.querySelector('#pageSelectSortHost_hostId')?.addEventListener('change', (event) => {
-    sort('Host', 'hostId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_hostId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'hostId', true);
-  });
-  document.querySelector('#pageStatsHost_hostId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'hostId', false);
-  });
-
-  document.querySelector('#pageSelectSortHost_hostResource')?.addEventListener('change', (event) => {
-    sort('Host', 'hostResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_hostResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'hostResource', true);
-  });
-  document.querySelector('#pageStatsHost_hostResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'hostResource', false);
-  });
-
-  document.querySelector('#pageSelectSortHost_aapInventoryId')?.addEventListener('change', (event) => {
-    sort('Host', 'aapInventoryId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_aapInventoryId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'aapInventoryId', true);
-  });
-  document.querySelector('#pageStatsHost_aapInventoryId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'aapInventoryId', false);
-  });
-
-  document.querySelector('#pageSelectSortHost_inventoryName')?.addEventListener('change', (event) => {
-    sort('Host', 'inventoryName', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_inventoryName')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'inventoryName', true);
-  });
-  document.querySelector('#pageStatsHost_inventoryName')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'inventoryName', false);
-  });
-
   document.querySelector('#pageSelectSortHost_classCanonicalName')?.addEventListener('change', (event) => {
     sort('Host', 'classCanonicalName', event.currentTarget.value);
   });
@@ -362,6 +274,94 @@ Promise.all([
   document.querySelector('#pageStatsHost_solrId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Host', 'solrId', false);
   });
+
+  document.querySelector('#pageSelectSortHost_tenantResource')?.addEventListener('change', (event) => {
+    sort('Host', 'tenantResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'tenantResource', true);
+  });
+  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'tenantResource', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_tenantId')?.addEventListener('change', (event) => {
+    sort('Host', 'tenantId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_tenantId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'tenantId', true);
+  });
+  document.querySelector('#pageStatsHost_tenantId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'tenantId', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_aapOrganizationId')?.addEventListener('change', (event) => {
+    sort('Host', 'aapOrganizationId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_aapOrganizationId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'aapOrganizationId', true);
+  });
+  document.querySelector('#pageStatsHost_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'aapOrganizationId', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_aapHostId')?.addEventListener('change', (event) => {
+    sort('Host', 'aapHostId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_aapHostId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'aapHostId', true);
+  });
+  document.querySelector('#pageStatsHost_aapHostId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'aapHostId', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_hostId')?.addEventListener('change', (event) => {
+    sort('Host', 'hostId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_hostId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'hostId', true);
+  });
+  document.querySelector('#pageStatsHost_hostId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'hostId', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_hostResource')?.addEventListener('change', (event) => {
+    sort('Host', 'hostResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_hostResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'hostResource', true);
+  });
+  document.querySelector('#pageStatsHost_hostResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'hostResource', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_aapInventoryId')?.addEventListener('change', (event) => {
+    sort('Host', 'aapInventoryId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_aapInventoryId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'aapInventoryId', true);
+  });
+  document.querySelector('#pageStatsHost_aapInventoryId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'aapInventoryId', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_inventoryName')?.addEventListener('change', (event) => {
+    sort('Host', 'inventoryName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_inventoryName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'inventoryName', true);
+  });
+  document.querySelector('#pageStatsHost_inventoryName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'inventoryName', false);
+  });
           document.querySelector('#fqHost_created')?.addEventListener('change', (event) => {
             fqChange('Host', event.currentTarget, facetChangeHostSuccess, facetChangeHostError);
           });
@@ -396,24 +396,6 @@ Promise.all([
             facetRangeStartChange('Host', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndHost_archived')?.addEventListener('change', (event) => {
-            facetRangeEndChange('Host', event.currentTarget);
-          });
-          document.querySelector('#fqHost_inventoryName')?.addEventListener('change', (event) => {
-            fqChange('Host', event.currentTarget, facetChangeHostSuccess, facetChangeHostError);
-          });
-          document.querySelector('#buttonFacetHost_inventoryName')?.addEventListener('click', (event) => {
-            facetFieldChange('Host', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotHost_inventoryName')?.addEventListener('change', (event) => {
-            facetPivotChange('Host', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapHost_inventoryName')?.addEventListener('change', (event) => {
-            facetRangeGapChange('Host', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeStartHost_inventoryName')?.addEventListener('change', (event) => {
-            facetRangeStartChange('Host', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeEndHost_inventoryName')?.addEventListener('change', (event) => {
             facetRangeEndChange('Host', event.currentTarget);
           });
           document.querySelector('#fqHost_displayPage')?.addEventListener('change', (event) => {
@@ -486,6 +468,24 @@ Promise.all([
             facetRangeStartChange('Host', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndHost_download')?.addEventListener('change', (event) => {
+            facetRangeEndChange('Host', event.currentTarget);
+          });
+          document.querySelector('#fqHost_inventoryName')?.addEventListener('change', (event) => {
+            fqChange('Host', event.currentTarget, facetChangeHostSuccess, facetChangeHostError);
+          });
+          document.querySelector('#buttonFacetHost_inventoryName')?.addEventListener('click', (event) => {
+            facetFieldChange('Host', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotHost_inventoryName')?.addEventListener('change', (event) => {
+            facetPivotChange('Host', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapHost_inventoryName')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Host', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartHost_inventoryName')?.addEventListener('change', (event) => {
+            facetRangeStartChange('Host', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndHost_inventoryName')?.addEventListener('change', (event) => {
             facetRangeEndChange('Host', event.currentTarget);
           });
 });

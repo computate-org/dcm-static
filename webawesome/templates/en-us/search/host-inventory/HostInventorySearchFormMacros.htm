@@ -210,6 +210,63 @@
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
+{%- macro inputCredentialResourceHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_credentialResource">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}HostInventory_{{classApiMethodMethod}}_credentialResource{{ idSuffix }}_clear"
+                        class="label-on-left HostInventory_classApiMethodMethod}}_credentialResource_clear credentialResource_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="host credential"
+                      label="host credential"
+                      hint="The Ansible host credential to use when connecting to hosts. "
+                      class="label-on-left HostInventory_{{classApiMethodMethod}}_credentialResource valueObjectSuggest suggestCredentialResource "
+                      name="setCredentialResource"
+                      id="{{ idPrefix }}HostInventory_{{classApiMethodMethod}}_credentialResource{{ idSuffix }}"
+                      data-list="listHostInventoryCredentialResource_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.credentialResource | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCredentialResourceHostInventoryPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputCredentialResourceHostInventoryPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a host credential to this host inventory
+                </div>
+                <ul class="label-on-left-ul " id="listHostInventoryCredentialResource_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postHostCredential(idSuffix='_HostInventory_POST_credentialResource') }}
+                  <wa-button
+                       id="HostInventory_{{classApiMethodMethod}}_credentialResource_add"
+                       data-dialog="open postHostCredentialDialog"
+                      >add a host credential</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
 {%- macro inputInventoryNameHostInventoryPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_inventoryName">
@@ -404,6 +461,16 @@
                 {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCredentialResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCredentialResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCredentialResourceHostInventoryPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
 
@@ -491,6 +558,16 @@
                 {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCredentialResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCredentialResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCredentialResourceHostInventoryPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -661,6 +738,16 @@
                 {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmTenantResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCredentialResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCredentialResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCredentialResourceHostInventoryPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
