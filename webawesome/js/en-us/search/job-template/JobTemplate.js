@@ -83,6 +83,7 @@ async function websocketJobTemplateInner(apiRequest) {
         var inputModified = null;
         var inputArchived = null;
         var inputInventoryResource = null;
+        var inputCredentialResource = null;
         var inputAnsibleProjectResource = null;
         var inputAnsiblePlaybook = null;
         var inputJobTemplateName = null;
@@ -107,6 +108,7 @@ async function websocketJobTemplateInner(apiRequest) {
         var inputTenantId = null;
         var inputAapOrganizationId = null;
         var inputAapInventoryId = null;
+        var inputAapHostCredentialId = null;
         var inputAapProjectId = null;
         var inputJobTemplateId = null;
         var inputJobTemplateResource = null;
@@ -122,6 +124,8 @@ async function websocketJobTemplateInner(apiRequest) {
           inputArchived = $response.querySelector('.JobTemplate_Page_archived');
         if(vars.includes('inventoryResource'))
           inputInventoryResource = $response.querySelector('.JobTemplate_Page_inventoryResource');
+        if(vars.includes('credentialResource'))
+          inputCredentialResource = $response.querySelector('.JobTemplate_Page_credentialResource');
         if(vars.includes('ansibleProjectResource'))
           inputAnsibleProjectResource = $response.querySelector('.JobTemplate_Page_ansibleProjectResource');
         if(vars.includes('ansiblePlaybook'))
@@ -170,6 +174,8 @@ async function websocketJobTemplateInner(apiRequest) {
           inputAapOrganizationId = $response.querySelector('.JobTemplate_Page_aapOrganizationId');
         if(vars.includes('aapInventoryId'))
           inputAapInventoryId = $response.querySelector('.JobTemplate_Page_aapInventoryId');
+        if(vars.includes('aapHostCredentialId'))
+          inputAapHostCredentialId = $response.querySelector('.JobTemplate_Page_aapHostCredentialId');
         if(vars.includes('aapProjectId'))
           inputAapProjectId = $response.querySelector('.JobTemplate_Page_aapProjectId');
         if(vars.includes('jobTemplateId'))
@@ -232,6 +238,16 @@ async function websocketJobTemplateInner(apiRequest) {
               item.textContent = inputInventoryResource.textContent;
           });
           addGlow(document.querySelector('.JobTemplate_Page_inventoryResource'));
+        }
+
+        if(inputCredentialResource) {
+          document.querySelectorAll('.JobTemplate_Page_credentialResource').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputCredentialResource.getAttribute('value');
+            else
+              item.textContent = inputCredentialResource.textContent;
+          });
+          addGlow(document.querySelector('.JobTemplate_Page_credentialResource'));
         }
 
         if(inputAnsibleProjectResource) {
@@ -474,6 +490,16 @@ async function websocketJobTemplateInner(apiRequest) {
           addGlow(document.querySelector('.JobTemplate_Page_aapInventoryId'));
         }
 
+        if(inputAapHostCredentialId) {
+          document.querySelectorAll('.JobTemplate_Page_aapHostCredentialId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapHostCredentialId.getAttribute('value');
+            else
+              item.textContent = inputAapHostCredentialId.textContent;
+          });
+          addGlow(document.querySelector('.JobTemplate_Page_aapHostCredentialId'));
+        }
+
         if(inputAapProjectId) {
           document.querySelectorAll('.JobTemplate_Page_aapProjectId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -685,6 +711,10 @@ function searchJobTemplateFilters($formFilters) {
     if(filterInventoryResource != null && filterInventoryResource !== '')
       filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
 
+    var filterCredentialResource = $formFilters.querySelector('.valueCredentialResource')?.value;
+    if(filterCredentialResource != null && filterCredentialResource !== '')
+      filters.push({ name: 'fq', value: 'credentialResource:' + filterCredentialResource });
+
     var filterAnsibleProjectResource = $formFilters.querySelector('.valueAnsibleProjectResource')?.value;
     if(filterAnsibleProjectResource != null && filterAnsibleProjectResource !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectResource:' + filterAnsibleProjectResource });
@@ -780,6 +810,10 @@ function searchJobTemplateFilters($formFilters) {
     var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
     if(filterAapInventoryId != null && filterAapInventoryId !== '')
       filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
+
+    var filterAapHostCredentialId = $formFilters.querySelector('.valueAapHostCredentialId')?.value;
+    if(filterAapHostCredentialId != null && filterAapHostCredentialId !== '')
+      filters.push({ name: 'fq', value: 'aapHostCredentialId:' + filterAapHostCredentialId });
 
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
@@ -944,6 +978,70 @@ function suggestJobTemplateInventoryResource(filters, $list, jobTemplateResource
   error = function( jqXhr, target2 ) {};
   if (typeof searchHostInventoryVals === 'function') {
     searchHostInventoryVals(filters, target, success, error);
+  }
+}
+
+function suggestJobTemplateCredentialResource(filters, $list, jobTemplateResource = null, credentialResource = null, relate=true, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="' + window.FONTAWESOME_STYLE + ' fa-input-password"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('class', 'wa-flank wa-gap-xs ');
+        $a.setAttribute('target', '_blank');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var inputVar = 'credentialResource';
+        var val = o[inputVar];
+        var checked = val == null ? false : (credentialResource != null && val === credentialResource.toString());
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_credentialResource_' + jobTemplateResource + '_credentialResource_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
+        $input.setAttribute('class', 'valueCredentialResource ');
+        if(jobTemplateResource != null) {
+          $input.addEventListener('change', function(event) {
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchJobTemplateVals([{ name: 'fq', value: 'jobTemplateResource:' + jobTemplateResource }], { [(event.target.checked ? 'set' : 'remove') + 'CredentialResource']: o[inputVar] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestJobTemplateCredentialResource(filters, $list, jobTemplateResource, o[inputVar], relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        $li.setAttribute('class', 'wa-flank wa-gap-0 ');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  if (typeof searchHostCredentialVals === 'function') {
+    searchHostCredentialVals(filters, target, success, error);
   }
 }
 
@@ -1117,6 +1215,10 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateRe
   var valueInventoryResource = (Array.from($formValues.querySelectorAll('.valueInventoryResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueInventoryResource != null && valueInventoryResource !== '')
     vals['setInventoryResource'] = valueInventoryResource;
+
+  var valueCredentialResource = (Array.from($formValues.querySelectorAll('.valueCredentialResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueCredentialResource != null && valueCredentialResource !== '')
+    vals['setCredentialResource'] = valueCredentialResource;
 
   var valueAnsibleProjectResource = (Array.from($formValues.querySelectorAll('.valueAnsibleProjectResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueAnsibleProjectResource != null && valueAnsibleProjectResource !== '')
@@ -1306,6 +1408,18 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateRe
   if(removeAapInventoryId != null && removeAapInventoryId !== '')
     vals['removeAapInventoryId'] = removeAapInventoryId;
 
+  var valueAapHostCredentialId = $formValues.querySelector('.valueAapHostCredentialId')?.value;
+  var removeAapHostCredentialId = $formValues.querySelector('.removeAapHostCredentialId')?.value === 'true';
+  var setAapHostCredentialId = removeAapHostCredentialId ? null : $formValues.querySelector('.setAapHostCredentialId')?.value;
+  var addAapHostCredentialId = $formValues.querySelector('.addAapHostCredentialId')?.value;
+  if(removeAapHostCredentialId || setAapHostCredentialId != null && setAapHostCredentialId !== '')
+    vals['setAapHostCredentialId'] = setAapHostCredentialId;
+  if(addAapHostCredentialId != null && addAapHostCredentialId !== '')
+    vals['addAapHostCredentialId'] = addAapHostCredentialId;
+  var removeAapHostCredentialId = $formValues.querySelector('.removeAapHostCredentialId')?.value;
+  if(removeAapHostCredentialId != null && removeAapHostCredentialId !== '')
+    vals['removeAapHostCredentialId'] = removeAapHostCredentialId;
+
   var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
   var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value === 'true';
   var setAapProjectId = removeAapProjectId ? null : $formValues.querySelector('.setAapProjectId')?.value;
@@ -1387,6 +1501,10 @@ function patchJobTemplateFilters($formFilters) {
     var filterInventoryResource = $formFilters.querySelector('.valueInventoryResource')?.value;
     if(filterInventoryResource != null && filterInventoryResource !== '')
       filters.push({ name: 'fq', value: 'inventoryResource:' + filterInventoryResource });
+
+    var filterCredentialResource = $formFilters.querySelector('.valueCredentialResource')?.value;
+    if(filterCredentialResource != null && filterCredentialResource !== '')
+      filters.push({ name: 'fq', value: 'credentialResource:' + filterCredentialResource });
 
     var filterAnsibleProjectResource = $formFilters.querySelector('.valueAnsibleProjectResource')?.value;
     if(filterAnsibleProjectResource != null && filterAnsibleProjectResource !== '')
@@ -1483,6 +1601,10 @@ function patchJobTemplateFilters($formFilters) {
     var filterAapInventoryId = $formFilters.querySelector('.valueAapInventoryId')?.value;
     if(filterAapInventoryId != null && filterAapInventoryId !== '')
       filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
+
+    var filterAapHostCredentialId = $formFilters.querySelector('.valueAapHostCredentialId')?.value;
+    if(filterAapHostCredentialId != null && filterAapHostCredentialId !== '')
+      filters.push({ name: 'fq', value: 'aapHostCredentialId:' + filterAapHostCredentialId });
 
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
@@ -1582,6 +1704,10 @@ async function postJobTemplate($formValues, target, success, error) {
   if(valueInventoryResource != null && valueInventoryResource !== '')
     vals['inventoryResource'] = valueInventoryResource;
 
+  var valueCredentialResource = (Array.from($formValues.querySelectorAll('.valueCredentialResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueCredentialResource != null && valueCredentialResource !== '')
+    vals['credentialResource'] = valueCredentialResource;
+
   var valueAnsibleProjectResource = (Array.from($formValues.querySelectorAll('.valueAnsibleProjectResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueAnsibleProjectResource != null && valueAnsibleProjectResource !== '')
     vals['ansibleProjectResource'] = valueAnsibleProjectResource;
@@ -1649,6 +1775,10 @@ async function postJobTemplate($formValues, target, success, error) {
   var valueAapInventoryId = $formValues.querySelector('.valueAapInventoryId')?.value;
   if(valueAapInventoryId != null && valueAapInventoryId !== '')
     vals['aapInventoryId'] = valueAapInventoryId;
+
+  var valueAapHostCredentialId = $formValues.querySelector('.valueAapHostCredentialId')?.value;
+  if(valueAapHostCredentialId != null && valueAapHostCredentialId !== '')
+    vals['aapHostCredentialId'] = valueAapHostCredentialId;
 
   var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
   if(valueAapProjectId != null && valueAapProjectId !== '')

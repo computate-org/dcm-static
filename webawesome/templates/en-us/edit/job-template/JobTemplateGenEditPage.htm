@@ -29,6 +29,7 @@
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/job-template/JobTemplateEditPage.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/host-credential/HostCredential.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
 {%- endblock htmScriptsJobTemplatePage %}
 {%- endblock htmScriptsPageLayout %}
@@ -208,6 +209,51 @@
           }
           document.querySelector('#HostInventory_POST_hostInventoryIds_JobTemplate_POST_inventoryResource')?.addEventListener('input', HostInventory_POST_hostInventoryIds_JobTemplate_POST_inventoryResource);
           document.querySelector('#HostInventory_POST_hostInventoryIds_JobTemplate_POST_inventoryResource')?.addEventListener('focus', HostInventory_POST_hostInventoryIds_JobTemplate_POST_inventoryResource);
+          function relate_credentialResource(event) {
+            suggestJobTemplateCredentialResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,credentialResource,credentialResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.jobTemplateResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.credentialResource : null
+                , true
+                , event.target
+                );
+          }
+          document.querySelector('#JobTemplate_POST_credentialResource')?.addEventListener('input', relate_credentialResource);
+          document.querySelector('#JobTemplate_POST_credentialResource')?.addEventListener('focus', relate_credentialResource);
+          document.querySelector('#JobTemplate_PATCH_credentialResource')?.addEventListener('input', relate_credentialResource);
+          document.querySelector('#JobTemplate_PATCH_credentialResource')?.addEventListener('focus', relate_credentialResource);
+          document.querySelector('#JobTemplate_Page_credentialResource')?.addEventListener('input', relate_credentialResource);
+          document.querySelector('#JobTemplate_Page_credentialResource')?.addEventListener('focus', relate_credentialResource);
+          document.querySelector('#HostCredential_POST_jobTemplateResource')?.addEventListener('input', relate_credentialResource);
+          document.querySelector('#HostCredential_POST_jobTemplateResource')?.addEventListener('focus', relate_credentialResource);
+          if(window.result.credentialResource) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestJobTemplateCredentialResource([{'name':'fq','value':'credentialResource:' + window.result.credentialResource}], document.querySelector('#listJobTemplateCredentialResource_Page'), window.result.jobTemplateResource, window.result.credentialResource, true, document.getElementById('JobTemplate_Page_credentialResource'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestJobTemplateCredentialResource([{'name':'fq','value':'credentialResource:' + window.result.credentialResource}], document.querySelector('#listJobTemplateCredentialResource_Page'), window.result.jobTemplateResource, window.result.credentialResource, true, document.getElementById('JobTemplate_Page_credentialResource'));
+          {% else -%}
+            {{'  '}}suggestJobTemplateCredentialResource([{'name':'fq','value':'credentialResource:' + window.result.credentialResource}], document.querySelector('#listJobTemplateCredentialResource_Page'), window.result.jobTemplateResource, window.result.credentialResource, false, document.getElementById('JobTemplate_Page_credentialResource'));
+          {% endif -%}
+          {% endif -%}
+          }
+          function HostCredential_POST_tenantResource_JobTemplate_POST_credentialResource(event) {
+            suggestHostCredentialTenantResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.jobTemplateResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , true
+                , document.querySelector('#HostCredential_POST_tenantResource_JobTemplate_POST_credentialResource')
+                );
+          }
+          document.querySelector('#HostCredential_POST_tenantResource_JobTemplate_POST_credentialResource')?.addEventListener('input', HostCredential_POST_tenantResource_JobTemplate_POST_credentialResource);
+          document.querySelector('#HostCredential_POST_tenantResource_JobTemplate_POST_credentialResource')?.addEventListener('focus', HostCredential_POST_tenantResource_JobTemplate_POST_credentialResource);
           function relate_ansibleProjectResource(event) {
             suggestJobTemplateAnsibleProjectResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -435,6 +481,17 @@
           event.preventDefault();
           postHostInventory(document.querySelector('#htmForm_postHostInventory')
               , document.querySelector('#htmFormButton_postHostInventory')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+              });
+        });
+
+        document.querySelector('#htmFormButton_postHostCredential')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHostCredential(document.querySelector('#htmForm_postHostCredential')
+              , document.querySelector('#htmFormButton_postHostCredential')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])

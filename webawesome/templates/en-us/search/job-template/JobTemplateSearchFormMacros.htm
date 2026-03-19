@@ -210,6 +210,63 @@
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
+{%- macro inputCredentialResourceJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_credentialResource">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}JobTemplate_{{classApiMethodMethod}}_credentialResource{{ idSuffix }}_clear"
+                        class="label-on-left JobTemplate_classApiMethodMethod}}_credentialResource_clear credentialResource_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="host credential"
+                      label="host credential"
+                      hint="The Ansible host credential to use when connecting to hosts. "
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_credentialResource valueObjectSuggest suggestCredentialResource "
+                      name="setCredentialResource"
+                      id="{{ idPrefix }}JobTemplate_{{classApiMethodMethod}}_credentialResource{{ idSuffix }}"
+                      data-list="listJobTemplateCredentialResource_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.credentialResource | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCredentialResourceJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputCredentialResourceJobTemplatePage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a host credential to this job template
+                </div>
+                <ul class="label-on-left-ul " id="listJobTemplateCredentialResource_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postHostCredential(idSuffix='_JobTemplate_POST_credentialResource') }}
+                  <wa-button
+                       id="JobTemplate_{{classApiMethodMethod}}_credentialResource_add"
+                       data-dialog="open postHostCredentialDialog"
+                      >add a host credential</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
 {%- macro inputAnsibleProjectResourceJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_ansibleProjectResource">
@@ -479,6 +536,16 @@
                 {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCredentialResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCredentialResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCredentialResourceJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
 
@@ -586,6 +653,16 @@
                 {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCredentialResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCredentialResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCredentialResourceJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -776,6 +853,16 @@
                 {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmInventoryResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCredentialResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCredentialResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCredentialResourceJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>

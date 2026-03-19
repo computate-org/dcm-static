@@ -376,6 +376,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH aapHostCredentialId
+          document.querySelector('#JobTemplate_Page_aapHostCredentialId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapHostCredentialId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateResource:' + event.currentTarget.getAttribute('data-jobTemplateResource') }]
+                  , 'setAapHostCredentialId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#JobTemplate_Page_aapHostCredentialId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#JobTemplate_Page_aapHostCredentialId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapHostCredentialId');
+            const valid = form.reportValidity();
+          });
+
           // PATCH aapProjectId
           document.querySelector('#JobTemplate_Page_aapProjectId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_aapProjectId');

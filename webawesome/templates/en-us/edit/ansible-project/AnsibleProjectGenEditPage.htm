@@ -252,6 +252,20 @@
           }
           document.querySelector('#JobTemplate_POST_inventoryResource_AnsibleProject_POST_jobTemplateResources')?.addEventListener('input', JobTemplate_POST_inventoryResource_AnsibleProject_POST_jobTemplateResources);
           document.querySelector('#JobTemplate_POST_inventoryResource_AnsibleProject_POST_jobTemplateResources')?.addEventListener('focus', JobTemplate_POST_inventoryResource_AnsibleProject_POST_jobTemplateResources);
+          function JobTemplate_POST_credentialResource_AnsibleProject_POST_jobTemplateResources(event) {
+            suggestJobTemplateCredentialResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,credentialResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.credentialResource : null
+                , true
+                , document.querySelector('#JobTemplate_POST_credentialResource_AnsibleProject_POST_jobTemplateResources')
+                );
+          }
+          document.querySelector('#JobTemplate_POST_credentialResource_AnsibleProject_POST_jobTemplateResources')?.addEventListener('input', JobTemplate_POST_credentialResource_AnsibleProject_POST_jobTemplateResources);
+          document.querySelector('#JobTemplate_POST_credentialResource_AnsibleProject_POST_jobTemplateResources')?.addEventListener('focus', JobTemplate_POST_credentialResource_AnsibleProject_POST_jobTemplateResources);
           function JobTemplate_POST_ansibleProjectResource_AnsibleProject_POST_jobTemplateResources(event) {
             suggestJobTemplateAnsibleProjectResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }

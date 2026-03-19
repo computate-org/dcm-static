@@ -219,6 +219,7 @@
                       placeholder="[String] inventory name"
                       label="inventory name"
                       hint="The name of the inventory in AAP. "
+                      required
                       id="HostInventory_{{classApiMethodMethod}}_inventoryName"
   {%- if "Page" == classApiMethodMethod %}
                       data-inventoryResource={{ result.inventoryResource | tojson }}
