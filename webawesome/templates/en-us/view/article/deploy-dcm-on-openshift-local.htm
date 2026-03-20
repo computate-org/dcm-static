@@ -2,8 +2,8 @@
 {% block htmMetaPageLayout %}
 {{ super() }}
     <meta name="result.pageId" content="{{ result.shortFileName }}" />
-    <meta name="result.name" content="Deploy Developer Computer Minions on OpenShift Local" />
-    <meta name="result.description" content="How to get started for free with OpenShift Local and deploying the Developer Computer Minions platform with GitOps. " />
+    <meta name="result.name" content="Deploy Developer Computer Managements on OpenShift Local" />
+    <meta name="result.description" content="How to get started for free with OpenShift Local and deploying the Developer Computer Managements platform with GitOps. " />
     <meta name="result.authorName" content="Christopher Tate" />
     <meta name="result.authorUrl" content="{{ SITE_BASE_URL }}/en-us/learn/about/about-christopher-tate" />
     <meta name="result.created" content="2025-08-29T12:23:40.556[America/Denver]" />
@@ -25,7 +25,7 @@
             Deploy required microservices to OpenShift Local
           </div>
           <p>
-            Several microservices are required first before deploying the Developer Computer Minions platform. 
+            Several microservices are required first before deploying the Developer Computer Managements platform. 
             These microservices include: 
           </p>
           <ul>
@@ -182,11 +182,11 @@
 
           <div class="wa-heading-2xl ">
             <i class="{{ FONTAWESOME_STYLE }} fa-folder-plus "></i>
-            Deploy Developer Computer Minions to OpenShift Local with ArgoCD GitOps
+            Deploy Developer Computer Managements to OpenShift Local with ArgoCD GitOps
           </div>
           <p>
             Once you have successfully synced all of the dependent microservice Applications,
-            You are ready to deploy the rest of the Developer Computer Minions Applications to ArgoCD. 
+            You are ready to deploy the rest of the Developer Computer Managements Applications to ArgoCD. 
           </p>
           <p>
             Clone the <kbd>{{ SITE_NAME }}</kbd> repository into a new directory <kbd>%USERPROFILE%\\src\\{{ SITE_NAME }}</kbd> in your source directory. 
@@ -203,7 +203,7 @@
           {{ code('oc apply -k openshift-local\\applications\\') }}
           <p>
             Then you need to wait patiently for the new Applications to sync. 
-            Access the ArgoCD application to watch the Developer Computer Minions Applications sync. 
+            Access the ArgoCD application to watch the Developer Computer Managements Applications sync. 
           </p>
           <div class="wa-stack wa-align-items-center ">
             <wa-button href="https://openshift-gitops-server-openshift-gitops.apps-crc.testing/" target="_blank" variant="brand">
@@ -344,11 +344,11 @@
 
           <div class="wa-heading-2xl ">
             <i class="{{ FONTAWESOME_STYLE }} fa-folder-plus "></i>
-            Deploy Developer Computer Minions to OpenShift Local with ArgoCD GitOps
+            Deploy Developer Computer Managements to OpenShift Local with ArgoCD GitOps
           </div>
           <p>
             Once you have successfully synced all of the dependent microservice Applications,
-            You are ready to deploy the rest of the Developer Computer Minions Applications to ArgoCD. 
+            You are ready to deploy the rest of the Developer Computer Managements Applications to ArgoCD. 
           </p>
           <p>
             Clone the <kbd>{{ SITE_NAME }}</kbd> repository into a new directory <kbd>~/.local/src/{{ SITE_NAME }}</kbd> in your source directory. 
@@ -365,7 +365,7 @@
           {{ code('oc apply -k openshift-local/applications/') }}
           <p>
             Then you need to wait patiently for the new Applications to sync. 
-            Access the ArgoCD application to watch the Developer Computer Minions Applications sync and become healthy. 
+            Access the ArgoCD application to watch the Developer Computer Managements Applications sync and become healthy. 
           </p>
           <div class="wa-stack wa-align-items-center ">
             <wa-button href="https://openshift-gitops-server-openshift-gitops.apps-crc.testing/" target="_blank" variant="brand">
@@ -379,12 +379,12 @@
         <div class="wa-stack ">
           <div class="wa-heading-2xl ">
             <i class="{{ FONTAWESOME_STYLE }} fa-fish "></i>
-            Access your own Developer Computer Minions site
+            Access your own Developer Computer Managements site
           </div>
           <p>
             Once all of your ArgoCD applications have become healthy and synced, 
-            your Developer Computer Minions platform is running. 
-            View the Routes to the Developer Computer Minions platform that you have deployed at this link. 
+            your Developer Computer Managements platform is running. 
+            View the Routes to the Developer Computer Managements platform that you have deployed at this link. 
           </p>
           <div class="wa-stack wa-align-items-center ">
             <wa-button href="https://console-openshift-console.apps-crc.testing/k8s/ns/dcm/route.openshift.io~v1~Route" target="_blank" variant="brand">
@@ -393,11 +393,11 @@
             </wa-button>
           </div>
           <p>
-            The Route has a location that will take you to your Developer Computer Minions platform. 
+            The Route has a location that will take you to your Developer Computer Managements platform. 
           </p>
           <div class="wa-stack wa-align-items-center ">
             <wa-button href="https://dcm.apps-crc.testing/" target="_blank" variant="brand">
-              Access Developer Computer Minions platform
+              Access Developer Computer Managements platform
               <i slot="end" class="{{ FONTAWESOME_STYLE }} fa-fish fa-xl "></i>
             </wa-button>
           </div>
