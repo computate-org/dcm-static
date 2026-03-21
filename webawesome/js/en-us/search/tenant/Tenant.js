@@ -85,8 +85,8 @@ async function websocketTenantInner(apiRequest) {
         var inputTenantName = null;
         var inputTenantId = null;
         var inputTenantDescription = null;
-        var inputHostInventoryIds = null;
         var inputAnsibleProjectIds = null;
+        var inputHostInventoryIds = null;
         var inputPageId = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
@@ -102,10 +102,10 @@ async function websocketTenantInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputAapOrganizationId = null;
         var inputTenantResource = null;
         var inputHubId = null;
         var inputClusterName = null;
-        var inputAapOrganizationId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Tenant_Page_pk');
@@ -121,10 +121,10 @@ async function websocketTenantInner(apiRequest) {
           inputTenantId = $response.querySelector('.Tenant_Page_tenantId');
         if(vars.includes('tenantDescription'))
           inputTenantDescription = $response.querySelector('.Tenant_Page_tenantDescription');
-        if(vars.includes('hostInventoryIds'))
-          inputHostInventoryIds = $response.querySelector('.Tenant_Page_hostInventoryIds');
         if(vars.includes('ansibleProjectIds'))
           inputAnsibleProjectIds = $response.querySelector('.Tenant_Page_ansibleProjectIds');
+        if(vars.includes('hostInventoryIds'))
+          inputHostInventoryIds = $response.querySelector('.Tenant_Page_hostInventoryIds');
         if(vars.includes('pageId'))
           inputPageId = $response.querySelector('.Tenant_Page_pageId');
         if(vars.includes('classCanonicalName'))
@@ -155,14 +155,14 @@ async function websocketTenantInner(apiRequest) {
           inputObjectText = $response.querySelector('.Tenant_Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Tenant_Page_solrId');
+        if(vars.includes('aapOrganizationId'))
+          inputAapOrganizationId = $response.querySelector('.Tenant_Page_aapOrganizationId');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.Tenant_Page_tenantResource');
         if(vars.includes('hubId'))
           inputHubId = $response.querySelector('.Tenant_Page_hubId');
         if(vars.includes('clusterName'))
           inputClusterName = $response.querySelector('.Tenant_Page_clusterName');
-        if(vars.includes('aapOrganizationId'))
-          inputAapOrganizationId = $response.querySelector('.Tenant_Page_aapOrganizationId');
 
         jsWebsocketTenant(tenantResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -239,16 +239,6 @@ async function websocketTenantInner(apiRequest) {
           addGlow(document.querySelector('.Tenant_Page_tenantDescription'));
         }
 
-        if(inputHostInventoryIds) {
-          document.querySelectorAll('.Tenant_Page_hostInventoryIds').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputHostInventoryIds.getAttribute('value');
-            else
-              item.textContent = inputHostInventoryIds.textContent;
-          });
-          addGlow(document.querySelector('.Tenant_Page_hostInventoryIds'));
-        }
-
         if(inputAnsibleProjectIds) {
           document.querySelectorAll('.Tenant_Page_ansibleProjectIds').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -257,6 +247,16 @@ async function websocketTenantInner(apiRequest) {
               item.textContent = inputAnsibleProjectIds.textContent;
           });
           addGlow(document.querySelector('.Tenant_Page_ansibleProjectIds'));
+        }
+
+        if(inputHostInventoryIds) {
+          document.querySelectorAll('.Tenant_Page_hostInventoryIds').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputHostInventoryIds.getAttribute('value');
+            else
+              item.textContent = inputHostInventoryIds.textContent;
+          });
+          addGlow(document.querySelector('.Tenant_Page_hostInventoryIds'));
         }
 
         if(inputPageId) {
@@ -409,6 +409,16 @@ async function websocketTenantInner(apiRequest) {
           addGlow(document.querySelector('.Tenant_Page_solrId'));
         }
 
+        if(inputAapOrganizationId) {
+          document.querySelectorAll('.Tenant_Page_aapOrganizationId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapOrganizationId.getAttribute('value');
+            else
+              item.textContent = inputAapOrganizationId.textContent;
+          });
+          addGlow(document.querySelector('.Tenant_Page_aapOrganizationId'));
+        }
+
         if(inputTenantResource) {
           document.querySelectorAll('.Tenant_Page_tenantResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -437,16 +447,6 @@ async function websocketTenantInner(apiRequest) {
               item.textContent = inputClusterName.textContent;
           });
           addGlow(document.querySelector('.Tenant_Page_clusterName'));
-        }
-
-        if(inputAapOrganizationId) {
-          document.querySelectorAll('.Tenant_Page_aapOrganizationId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapOrganizationId.getAttribute('value');
-            else
-              item.textContent = inputAapOrganizationId.textContent;
-          });
-          addGlow(document.querySelector('.Tenant_Page_aapOrganizationId'));
         }
 
           pageGraphTenant();
@@ -628,13 +628,13 @@ function searchTenantFilters($formFilters) {
     if(filterTenantDescription != null && filterTenantDescription !== '')
       filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
 
-    var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
-    if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
-      filters.push({ name: 'fq', value: 'hostInventoryIds:' + filterHostInventoryIds });
-
     var filterAnsibleProjectIds = $formFilters.querySelector('.valueAnsibleProjectIds')?.value;
     if(filterAnsibleProjectIds != null && filterAnsibleProjectIds !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectIds:' + filterAnsibleProjectIds });
+
+    var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
+    if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
+      filters.push({ name: 'fq', value: 'hostInventoryIds:' + filterHostInventoryIds });
 
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
@@ -696,6 +696,10 @@ function searchTenantFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
@@ -707,10 +711,6 @@ function searchTenantFilters($formFilters) {
     var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
-
-    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
-    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
-      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
   }
   return filters;
 }
@@ -998,13 +998,13 @@ async function patchTenant($formFilters, $formValues, target, tenantResource, su
   if(removeTenantDescription != null && removeTenantDescription !== '')
     vals['removeTenantDescription'] = removeTenantDescription;
 
-  var valueHostInventoryIds = (Array.from($formValues.querySelectorAll('.valueHostInventoryIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueHostInventoryIds != null && valueHostInventoryIds !== '')
-    vals['addHostInventoryIds'] = valueHostInventoryIds;
-
   var valueAnsibleProjectIds = (Array.from($formValues.querySelectorAll('.valueAnsibleProjectIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueAnsibleProjectIds != null && valueAnsibleProjectIds !== '')
     vals['addAnsibleProjectIds'] = valueAnsibleProjectIds;
+
+  var valueHostInventoryIds = (Array.from($formValues.querySelectorAll('.valueHostInventoryIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueHostInventoryIds != null && valueHostInventoryIds !== '')
+    vals['addHostInventoryIds'] = valueHostInventoryIds;
 
   var valuePageId = $formValues.querySelector('.valuePageId')?.value;
   var removePageId = $formValues.querySelector('.removePageId')?.value === 'true';
@@ -1102,6 +1102,18 @@ async function patchTenant($formFilters, $formValues, target, tenantResource, su
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
+  var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
+  var addAapOrganizationId = $formValues.querySelector('.addAapOrganizationId')?.value;
+  if(removeAapOrganizationId || setAapOrganizationId != null && setAapOrganizationId !== '')
+    vals['setAapOrganizationId'] = setAapOrganizationId;
+  if(addAapOrganizationId != null && addAapOrganizationId !== '')
+    vals['addAapOrganizationId'] = addAapOrganizationId;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
+  if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
+    vals['removeAapOrganizationId'] = removeAapOrganizationId;
+
   var valueTenantResource = $formValues.querySelector('.valueTenantResource')?.value;
   var removeTenantResource = $formValues.querySelector('.removeTenantResource')?.value === 'true';
   var setTenantResource = removeTenantResource ? null : $formValues.querySelector('.setTenantResource')?.value;
@@ -1137,18 +1149,6 @@ async function patchTenant($formFilters, $formValues, target, tenantResource, su
   var removeClusterName = $formValues.querySelector('.removeClusterName')?.value;
   if(removeClusterName != null && removeClusterName !== '')
     vals['removeClusterName'] = removeClusterName;
-
-  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
-  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
-  var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
-  var addAapOrganizationId = $formValues.querySelector('.addAapOrganizationId')?.value;
-  if(removeAapOrganizationId || setAapOrganizationId != null && setAapOrganizationId !== '')
-    vals['setAapOrganizationId'] = setAapOrganizationId;
-  if(addAapOrganizationId != null && addAapOrganizationId !== '')
-    vals['addAapOrganizationId'] = addAapOrganizationId;
-  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
-  if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
-    vals['removeAapOrganizationId'] = removeAapOrganizationId;
 
   patchTenantVals(tenantResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'tenantResource:' + tenantResource}], vals, target, success, error);
 }
@@ -1192,13 +1192,13 @@ function patchTenantFilters($formFilters) {
     if(filterTenantDescription != null && filterTenantDescription !== '')
       filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
 
-    var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
-    if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
-      filters.push({ name: 'fq', value: 'hostInventoryIds:' + filterHostInventoryIds });
-
     var filterAnsibleProjectIds = $formFilters.querySelector('.valueAnsibleProjectIds')?.value;
     if(filterAnsibleProjectIds != null && filterAnsibleProjectIds !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectIds:' + filterAnsibleProjectIds });
+
+    var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
+    if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
+      filters.push({ name: 'fq', value: 'hostInventoryIds:' + filterHostInventoryIds });
 
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
@@ -1260,6 +1260,10 @@ function patchTenantFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
@@ -1271,10 +1275,6 @@ function patchTenantFilters($formFilters) {
     var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
-
-    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
-    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
-      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
   }
   return filters;
 }
@@ -1366,19 +1366,19 @@ async function postTenant($formValues, target, success, error) {
   if(valueTenantDescription != null && valueTenantDescription !== '')
     vals['tenantDescription'] = valueTenantDescription;
 
-  var valueHostInventoryIds = [];
-  $formValues.querySelectorAll('input.valueHostInventoryIds:checked').forEach(function(index) {
-    valueHostInventoryIds.push(this.value);
-  });
-  if(valueHostInventoryIds.length > 0)
-    vals['hostInventoryIds'] = valueHostInventoryIds;
-
   var valueAnsibleProjectIds = [];
   $formValues.querySelectorAll('input.valueAnsibleProjectIds:checked').forEach(function(index) {
     valueAnsibleProjectIds.push(this.value);
   });
   if(valueAnsibleProjectIds.length > 0)
     vals['ansibleProjectIds'] = valueAnsibleProjectIds;
+
+  var valueHostInventoryIds = [];
+  $formValues.querySelectorAll('input.valueHostInventoryIds:checked').forEach(function(index) {
+    valueHostInventoryIds.push(this.value);
+  });
+  if(valueHostInventoryIds.length > 0)
+    vals['hostInventoryIds'] = valueHostInventoryIds;
 
   var valuePageId = $formValues.querySelector('.valuePageId')?.value;
   if(valuePageId != null && valuePageId !== '')
@@ -1412,6 +1412,10 @@ async function postTenant($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
+    vals['aapOrganizationId'] = valueAapOrganizationId;
+
   var valueTenantResource = $formValues.querySelector('.valueTenantResource')?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['tenantResource'] = valueTenantResource;
@@ -1423,10 +1427,6 @@ async function postTenant($formValues, target, success, error) {
   var valueClusterName = $formValues.querySelector('.valueClusterName')?.value;
   if(valueClusterName != null && valueClusterName !== '')
     vals['clusterName'] = valueClusterName;
-
-  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
-  if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
-    vals['aapOrganizationId'] = valueAapOrganizationId;
 
   fetch(
     '/en-us/api/tenant'

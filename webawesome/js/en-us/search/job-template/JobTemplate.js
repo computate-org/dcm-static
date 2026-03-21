@@ -104,12 +104,12 @@ async function websocketJobTemplateInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputAapProjectId = null;
         var inputTenantResource = null;
         var inputTenantId = null;
         var inputAapOrganizationId = null;
         var inputAapInventoryId = null;
         var inputAapHostCredentialId = null;
-        var inputAapProjectId = null;
         var inputJobTemplateId = null;
         var inputJobTemplateResource = null;
         var inputAapTemplateId = null;
@@ -166,6 +166,8 @@ async function websocketJobTemplateInner(apiRequest) {
           inputObjectText = $response.querySelector('.JobTemplate_Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.JobTemplate_Page_solrId');
+        if(vars.includes('aapProjectId'))
+          inputAapProjectId = $response.querySelector('.JobTemplate_Page_aapProjectId');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.JobTemplate_Page_tenantResource');
         if(vars.includes('tenantId'))
@@ -176,8 +178,6 @@ async function websocketJobTemplateInner(apiRequest) {
           inputAapInventoryId = $response.querySelector('.JobTemplate_Page_aapInventoryId');
         if(vars.includes('aapHostCredentialId'))
           inputAapHostCredentialId = $response.querySelector('.JobTemplate_Page_aapHostCredentialId');
-        if(vars.includes('aapProjectId'))
-          inputAapProjectId = $response.querySelector('.JobTemplate_Page_aapProjectId');
         if(vars.includes('jobTemplateId'))
           inputJobTemplateId = $response.querySelector('.JobTemplate_Page_jobTemplateId');
         if(vars.includes('jobTemplateResource'))
@@ -450,6 +450,16 @@ async function websocketJobTemplateInner(apiRequest) {
           addGlow(document.querySelector('.JobTemplate_Page_solrId'));
         }
 
+        if(inputAapProjectId) {
+          document.querySelectorAll('.JobTemplate_Page_aapProjectId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapProjectId.getAttribute('value');
+            else
+              item.textContent = inputAapProjectId.textContent;
+          });
+          addGlow(document.querySelector('.JobTemplate_Page_aapProjectId'));
+        }
+
         if(inputTenantResource) {
           document.querySelectorAll('.JobTemplate_Page_tenantResource').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -498,16 +508,6 @@ async function websocketJobTemplateInner(apiRequest) {
               item.textContent = inputAapHostCredentialId.textContent;
           });
           addGlow(document.querySelector('.JobTemplate_Page_aapHostCredentialId'));
-        }
-
-        if(inputAapProjectId) {
-          document.querySelectorAll('.JobTemplate_Page_aapProjectId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapProjectId.getAttribute('value');
-            else
-              item.textContent = inputAapProjectId.textContent;
-          });
-          addGlow(document.querySelector('.JobTemplate_Page_aapProjectId'));
         }
 
         if(inputJobTemplateId) {
@@ -795,6 +795,10 @@ function searchJobTemplateFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
+    if(filterAapProjectId != null && filterAapProjectId !== '')
+      filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
+
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
@@ -814,10 +818,6 @@ function searchJobTemplateFilters($formFilters) {
     var filterAapHostCredentialId = $formFilters.querySelector('.valueAapHostCredentialId')?.value;
     if(filterAapHostCredentialId != null && filterAapHostCredentialId !== '')
       filters.push({ name: 'fq', value: 'aapHostCredentialId:' + filterAapHostCredentialId });
-
-    var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
-    if(filterAapProjectId != null && filterAapProjectId !== '')
-      filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
 
     var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
     if(filterJobTemplateId != null && filterJobTemplateId !== '')
@@ -1368,6 +1368,18 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateRe
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
+  var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
+  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value === 'true';
+  var setAapProjectId = removeAapProjectId ? null : $formValues.querySelector('.setAapProjectId')?.value;
+  var addAapProjectId = $formValues.querySelector('.addAapProjectId')?.value;
+  if(removeAapProjectId || setAapProjectId != null && setAapProjectId !== '')
+    vals['setAapProjectId'] = setAapProjectId;
+  if(addAapProjectId != null && addAapProjectId !== '')
+    vals['addAapProjectId'] = addAapProjectId;
+  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value;
+  if(removeAapProjectId != null && removeAapProjectId !== '')
+    vals['removeAapProjectId'] = removeAapProjectId;
+
   var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['setTenantResource'] = valueTenantResource;
@@ -1419,18 +1431,6 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateRe
   var removeAapHostCredentialId = $formValues.querySelector('.removeAapHostCredentialId')?.value;
   if(removeAapHostCredentialId != null && removeAapHostCredentialId !== '')
     vals['removeAapHostCredentialId'] = removeAapHostCredentialId;
-
-  var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
-  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value === 'true';
-  var setAapProjectId = removeAapProjectId ? null : $formValues.querySelector('.setAapProjectId')?.value;
-  var addAapProjectId = $formValues.querySelector('.addAapProjectId')?.value;
-  if(removeAapProjectId || setAapProjectId != null && setAapProjectId !== '')
-    vals['setAapProjectId'] = setAapProjectId;
-  if(addAapProjectId != null && addAapProjectId !== '')
-    vals['addAapProjectId'] = addAapProjectId;
-  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value;
-  if(removeAapProjectId != null && removeAapProjectId !== '')
-    vals['removeAapProjectId'] = removeAapProjectId;
 
   var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
   var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value === 'true';
@@ -1586,6 +1586,10 @@ function patchJobTemplateFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
+    if(filterAapProjectId != null && filterAapProjectId !== '')
+      filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
+
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
@@ -1605,10 +1609,6 @@ function patchJobTemplateFilters($formFilters) {
     var filterAapHostCredentialId = $formFilters.querySelector('.valueAapHostCredentialId')?.value;
     if(filterAapHostCredentialId != null && filterAapHostCredentialId !== '')
       filters.push({ name: 'fq', value: 'aapHostCredentialId:' + filterAapHostCredentialId });
-
-    var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
-    if(filterAapProjectId != null && filterAapProjectId !== '')
-      filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
 
     var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
     if(filterJobTemplateId != null && filterJobTemplateId !== '')
@@ -1760,6 +1760,10 @@ async function postJobTemplate($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
+  var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
+  if(valueAapProjectId != null && valueAapProjectId !== '')
+    vals['aapProjectId'] = valueAapProjectId;
+
   var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['tenantResource'] = valueTenantResource;
@@ -1779,10 +1783,6 @@ async function postJobTemplate($formValues, target, success, error) {
   var valueAapHostCredentialId = $formValues.querySelector('.valueAapHostCredentialId')?.value;
   if(valueAapHostCredentialId != null && valueAapHostCredentialId !== '')
     vals['aapHostCredentialId'] = valueAapHostCredentialId;
-
-  var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
-  if(valueAapProjectId != null && valueAapProjectId !== '')
-    vals['aapProjectId'] = valueAapProjectId;
 
   var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
   if(valueJobTemplateId != null && valueJobTemplateId !== '')

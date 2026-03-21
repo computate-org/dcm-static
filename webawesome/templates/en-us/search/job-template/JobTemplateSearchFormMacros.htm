@@ -519,7 +519,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchJobTemplate(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchJobTemplateDialog" label="Modify job template">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchJobTemplateDialog" label="Modify job template">
           <form id="htmForm_patchJobTemplate" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="inventory-details">
@@ -637,7 +637,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postJobTemplate(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postJobTemplateDialog" label="Create a job template">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postJobTemplateDialog" label="Create a job template">
           <form id="htmForm_postJobTemplate" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -756,7 +756,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteJobTemplate(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteJobTemplateDialog" label="Delete job template">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteJobTemplateDialog" label="Delete job template">
           <form id="htmForm_deleteJobTemplate" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteJobTemplate() }}
@@ -773,7 +773,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportJobTemplate(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportJobTemplateDialog" label="Import job templates">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportJobTemplateDialog" label="Import job templates">
           <form id="htmForm_putimportJobTemplate" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -789,7 +789,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageJobTemplate(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageJobTemplateDialog" label="Search job templates">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageJobTemplateDialog" label="Search job templates">
           <div id="htmForm_searchpageJobTemplate" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -955,7 +955,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterJobTemplate(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterJobTemplateDialog" label="Delete job template">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterJobTemplateDialog" label="Delete job template">
           <form id="htmForm_deletefilterJobTemplate" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterJobTemplate() }}

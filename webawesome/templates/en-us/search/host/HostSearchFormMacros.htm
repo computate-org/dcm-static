@@ -403,7 +403,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchHost(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHostDialog" label="Modify host">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchHostDialog" label="Modify host">
           <form id="htmForm_patchHost" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="inventory-details">
@@ -496,7 +496,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postHost(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postHostDialog" label="Create a host">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postHostDialog" label="Create a host">
           <form id="htmForm_postHost" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -590,7 +590,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteHost(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteHostDialog" label="Delete host">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteHostDialog" label="Delete host">
           <form id="htmForm_deleteHost" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteHost() }}
@@ -607,7 +607,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportHost(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportHostDialog" label="Import hosts">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportHostDialog" label="Import hosts">
           <form id="htmForm_putimportHost" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -623,7 +623,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageHost(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageHostDialog" label="Search hosts">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageHostDialog" label="Search hosts">
           <div id="htmForm_searchpageHost" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -764,7 +764,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterHost(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterHostDialog" label="Delete host">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterHostDialog" label="Delete host">
           <form id="htmForm_deletefilterHost" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterHost() }}

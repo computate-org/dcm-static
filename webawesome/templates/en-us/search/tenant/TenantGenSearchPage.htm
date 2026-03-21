@@ -130,22 +130,6 @@
 
         var tenantResource = {% if result.tenantResource is defined %}{{ result.tenantResource | tojson }}{% else %}null{% endif %};
 
-          function relate_hostInventoryIds(event) {
-            suggestTenantHostInventoryIds(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.hostInventoryIds is defined %}{'name':'fq','value':'tenantResource:{{ result.hostInventoryIds }}'}{%- else %}{%- endif %}]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , null
-                , null
-                , true
-                , this
-                );
-          }
-          document.querySelector('#Tenant_POST_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
-          document.querySelector('#Tenant_POST_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
-          document.querySelector('#Tenant_PATCH_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
-          document.querySelector('#Tenant_PATCH_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
           function relate_ansibleProjectIds(event) {
             suggestTenantAnsibleProjectIds(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -162,6 +146,22 @@
           document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
           document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
           document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+          function relate_hostInventoryIds(event) {
+            suggestTenantHostInventoryIds(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.hostInventoryIds is defined %}{'name':'fq','value':'tenantResource:{{ result.hostInventoryIds }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#Tenant_POST_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#Tenant_POST_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#Tenant_PATCH_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#Tenant_PATCH_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
         if(tenantResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -216,7 +216,33 @@
         });
         document.querySelector('#htmFormButton_patchTenant')?.addEventListener('click', event => {
           event.preventDefault();
-          patchTenant(null, document.querySelector('#htmForm_patchTenant'), document.querySelector('#htmFormButton_patchTenant'), event.target.getAttribute('data-tenantResource'));
+          event.target.setAttribute('loading', true);
+          patchTenant(null, document.querySelector('#htmForm_patchTenant')
+              , document.querySelector('#htmFormButton_patchTenant')
+              , event.target.getAttribute('data-tenantResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -226,10 +252,31 @@
         });
         document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
           event.preventDefault();
+          event.target.setAttribute('loading', true);
           postTenant(document.querySelector('#htmForm_postTenant')
-          , document.querySelector('#htmFormButton_postTenant')
-          , (json, target) => {
+              , document.querySelector('#htmFormButton_postTenant')
+              , (json, target) => {
             window.location.href = json.editPage;
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
           });
           return false;
         });
@@ -240,7 +287,31 @@
         });
         document.querySelector('#htmFormButton_deleteTenant')?.addEventListener('click', event => {
           event.preventDefault();
-          deleteTenant(event.target, event.target.getAttribute('data-tenantResource'));
+          event.target.setAttribute('loading', true);
+          deleteTenant(event.target, event.target.getAttribute('data-tenantResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -250,7 +321,33 @@
         });
         document.querySelector('#htmFormButton_putimportTenant')?.addEventListener('click', event => {
           event.preventDefault();
-          putimportTenant(document.querySelector('#htmForm_putimportTenant'), document.querySelector('#htmFormButton_putimportTenant'));
+          event.target.setAttribute('loading', true);
+          putimportTenant(document.querySelector('#htmForm_putimportTenant')
+              , document.querySelector('#htmFormButton_putimportTenant')
+              , event.target.getAttribute('data-tenantResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -260,6 +357,7 @@
         });
         document.querySelector('#htmFormButton_searchpageTenant')?.addEventListener('click', event => {
           event.preventDefault();
+          event.target.setAttribute('loading', true);
           searchpageTenant();
           return false;
         });
@@ -270,7 +368,31 @@
         });
         document.querySelector('#htmFormButton_deletefilterTenant')?.addEventListener('click', event => {
           event.preventDefault();
-          deletefilterTenant(event.target);
+          event.target.setAttribute('loading', true);
+          deletefilterTenant(event.target
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
           return false;
         });
 
@@ -282,7 +404,27 @@
                 addGlow(target);
                 if(json['editPage'])
                   window.location.href = json['editPage'];
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
               });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
         });
 
         document.querySelector('#htmFormButton_postAnsibleProject')?.addEventListener('click', event => {
@@ -293,7 +435,27 @@
                 addGlow(target);
                 if(json['editPage'])
                   window.location.href = json['editPage'];
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
               });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
         });
 {%- block htmScriptInitTenantPage %}{%- endblock htmScriptInitTenantPage %}
       });

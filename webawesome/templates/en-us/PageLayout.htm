@@ -138,6 +138,7 @@
   <body class="wa-body-{{ userFontSize[0:1] }} wa-size-{{ userFontSize[0:1] }} ">
     {% if WEB_COMPONENTS_PRO == 'true' -%}
     <wa-page disable-sticky="header">
+      <wa-toast style="--width: min(64rem, 100vw); "></wa-toast>
     {%- else -%}
     <div id="site-grid">
     {%- endif %}

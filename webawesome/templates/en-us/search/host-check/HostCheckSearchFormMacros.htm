@@ -581,7 +581,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchHostCheck(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchHostCheckDialog" label="Modify host check">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchHostCheckDialog" label="Modify host check">
           <form id="htmForm_patchHostCheck" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="tenant-details">
@@ -719,7 +719,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postHostCheck(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postHostCheckDialog" label="Create a host check">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postHostCheckDialog" label="Create a host check">
           <form id="htmForm_postHostCheck" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -858,7 +858,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteHostCheck(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteHostCheckDialog" label="Delete host check">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteHostCheckDialog" label="Delete host check">
           <form id="htmForm_deleteHostCheck" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteHostCheck() }}
@@ -875,7 +875,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportHostCheck(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportHostCheckDialog" label="Import host checks">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportHostCheckDialog" label="Import host checks">
           <form id="htmForm_putimportHostCheck" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -891,7 +891,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageHostCheck(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageHostCheckDialog" label="Search host checks">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageHostCheckDialog" label="Search host checks">
           <div id="htmForm_searchpageHostCheck" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -1077,7 +1077,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterHostCheck(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterHostCheckDialog" label="Delete host check">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterHostCheckDialog" label="Delete host check">
           <form id="htmForm_deletefilterHostCheck" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterHostCheck() }}

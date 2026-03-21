@@ -317,7 +317,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchTimeZone(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchTimeZoneDialog" label="Modify time zone">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchTimeZoneDialog" label="Modify time zone">
           <form id="htmForm_patchTimeZone" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="time-zone-details">
@@ -393,7 +393,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postTimeZone(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postTimeZoneDialog" label="Create a time zone">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postTimeZoneDialog" label="Create a time zone">
           <form id="htmForm_postTimeZone" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -470,7 +470,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteTimeZone(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteTimeZoneDialog" label="Delete time zone">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteTimeZoneDialog" label="Delete time zone">
           <form id="htmForm_deleteTimeZone" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteTimeZone() }}
@@ -487,7 +487,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportTimeZone(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportTimeZoneDialog" label="Import time zones">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportTimeZoneDialog" label="Import time zones">
           <form id="htmForm_putimportTimeZone" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -503,7 +503,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageTimeZone(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageTimeZoneDialog" label="Search time zones">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageTimeZoneDialog" label="Search time zones">
           <div id="htmForm_searchpageTimeZone" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -617,7 +617,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterTimeZone(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterTimeZoneDialog" label="Delete time zone">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterTimeZoneDialog" label="Delete time zone">
           <form id="htmForm_deletefilterTimeZone" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterTimeZone() }}

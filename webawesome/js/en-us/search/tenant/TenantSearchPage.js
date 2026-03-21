@@ -88,17 +88,6 @@ Promise.all([
     facetStatsChange('Tenant', 'tenantDescription', false);
   });
 
-  document.querySelector('#pageSelectSortTenant_hostInventoryIds')?.addEventListener('change', (event) => {
-    sort('Tenant', 'hostInventoryIds', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsTenant_hostInventoryIds')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Tenant', 'hostInventoryIds', true);
-  });
-  document.querySelector('#pageStatsTenant_hostInventoryIds')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Tenant', 'hostInventoryIds', false);
-  });
-
   document.querySelector('#pageSelectSortTenant_ansibleProjectIds')?.addEventListener('change', (event) => {
     sort('Tenant', 'ansibleProjectIds', event.currentTarget.value);
   });
@@ -108,6 +97,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsTenant_ansibleProjectIds')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Tenant', 'ansibleProjectIds', false);
+  });
+
+  document.querySelector('#pageSelectSortTenant_hostInventoryIds')?.addEventListener('change', (event) => {
+    sort('Tenant', 'hostInventoryIds', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenant_hostInventoryIds')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Tenant', 'hostInventoryIds', true);
+  });
+  document.querySelector('#pageStatsTenant_hostInventoryIds')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Tenant', 'hostInventoryIds', false);
   });
 
   document.querySelector('#pageSelectSortTenant_pageId')?.addEventListener('change', (event) => {
@@ -275,6 +275,17 @@ Promise.all([
     facetStatsChange('Tenant', 'solrId', false);
   });
 
+  document.querySelector('#pageSelectSortTenant_aapOrganizationId')?.addEventListener('change', (event) => {
+    sort('Tenant', 'aapOrganizationId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenant_aapOrganizationId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Tenant', 'aapOrganizationId', true);
+  });
+  document.querySelector('#pageStatsTenant_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Tenant', 'aapOrganizationId', false);
+  });
+
   document.querySelector('#pageSelectSortTenant_tenantResource')?.addEventListener('change', (event) => {
     sort('Tenant', 'tenantResource', event.currentTarget.value);
   });
@@ -306,17 +317,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsTenant_clusterName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Tenant', 'clusterName', false);
-  });
-
-  document.querySelector('#pageSelectSortTenant_aapOrganizationId')?.addEventListener('change', (event) => {
-    sort('Tenant', 'aapOrganizationId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsTenant_aapOrganizationId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Tenant', 'aapOrganizationId', true);
-  });
-  document.querySelector('#pageStatsTenant_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Tenant', 'aapOrganizationId', false);
   });
           document.querySelector('#fqTenant_created')?.addEventListener('change', (event) => {
             fqChange('Tenant', event.currentTarget, facetChangeTenantSuccess, facetChangeTenantError);

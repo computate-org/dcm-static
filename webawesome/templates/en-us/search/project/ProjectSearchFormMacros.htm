@@ -553,7 +553,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchProject(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchProjectDialog" label="Modify project">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchProjectDialog" label="Modify project">
           <form id="htmForm_patchProject" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="project-details">
@@ -684,7 +684,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postProject(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postProjectDialog" label="Create an project">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postProjectDialog" label="Create an project">
           <form id="htmForm_postProject" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -816,7 +816,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteProject(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteProjectDialog" label="Delete project">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteProjectDialog" label="Delete project">
           <form id="htmForm_deleteProject" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteProject() }}
@@ -833,7 +833,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportProject(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportProjectDialog" label="Import projects">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportProjectDialog" label="Import projects">
           <form id="htmForm_putimportProject" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -849,7 +849,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageProject(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageProjectDialog" label="Search projects">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageProjectDialog" label="Search projects">
           <div id="htmForm_searchpageProject" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -1028,7 +1028,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterProject(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterProjectDialog" label="Delete project">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterProjectDialog" label="Delete project">
           <form id="htmForm_deletefilterProject" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterProject() }}

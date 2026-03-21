@@ -317,7 +317,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchSitePage(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchSitePageDialog" label="Modify article">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchSitePageDialog" label="Modify article">
           <form id="htmForm_patchSitePage" class="round-row primary-smart-border-radius ">
 
               <div class="grid-with-subgrid-2col ">
@@ -396,7 +396,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postSitePage(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postSitePageDialog" label="Create an article">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postSitePageDialog" label="Create an article">
           <form id="htmForm_postSitePage" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -476,7 +476,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_putimportSitePage(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="putimportSitePageDialog" label="Import articles">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportSitePageDialog" label="Import articles">
           <form id="htmForm_putimportSitePage" class="round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
@@ -501,7 +501,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deleteSitePage(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deleteSitePageDialog" label="Delete article">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteSitePageDialog" label="Delete article">
           <form id="htmForm_deleteSitePage" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deleteSitePage() }}
@@ -509,7 +509,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageSitePage(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageSitePageDialog" label="Search articles">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageSitePageDialog" label="Search articles">
           <div id="htmForm_searchpageSitePage" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
@@ -625,7 +625,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterSitePage(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="deletefilterSitePageDialog" label="Delete article">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterSitePageDialog" label="Delete article">
           <form id="htmForm_deletefilterSitePage" class="round-row primary-smart-border-radius ">
           </form>
           {{ htmFormButton_deletefilterSitePage() }}

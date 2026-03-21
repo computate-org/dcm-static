@@ -313,111 +313,6 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH hubResource
-          document.querySelector('#AiTelemetryPlatform_Page_hubResource')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_hubResource');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchAiTelemetryPlatformVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
-                  , 'setHubResource', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#AiTelemetryPlatform_Page_hubResource')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#AiTelemetryPlatform_Page_hubResource')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_hubResource');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH courseNum
-          document.querySelector('#AiTelemetryPlatform_Page_courseNum')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_courseNum');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchAiTelemetryPlatformVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
-                  , 'setCourseNum', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#AiTelemetryPlatform_Page_courseNum')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#AiTelemetryPlatform_Page_courseNum')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_courseNum');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH lessonNum
-          document.querySelector('#AiTelemetryPlatform_Page_lessonNum')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_lessonNum');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchAiTelemetryPlatformVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
-                  , 'setLessonNum', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#AiTelemetryPlatform_Page_lessonNum')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#AiTelemetryPlatform_Page_lessonNum')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_lessonNum');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH pageImageAlt
-          document.querySelector('#AiTelemetryPlatform_Page_pageImageAlt')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_pageImageAlt');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchAiTelemetryPlatformVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
-                  , 'setPageImageAlt', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#AiTelemetryPlatform_Page_pageImageAlt')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#AiTelemetryPlatform_Page_pageImageAlt')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_pageImageAlt');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH prerequisiteArticleIds
-          document.querySelector('#AiTelemetryPlatform_Page_prerequisiteArticleIds')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_prerequisiteArticleIds');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchAiTelemetryPlatformVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
-                  , 'setPrerequisiteArticleIds', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#AiTelemetryPlatform_Page_prerequisiteArticleIds')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#AiTelemetryPlatform_Page_prerequisiteArticleIds')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_prerequisiteArticleIds');
-            const valid = form.reportValidity();
-          });
-
           // PATCH nextArticleIds
           document.querySelector('#AiTelemetryPlatform_Page_nextArticleIds')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_nextArticleIds');
@@ -499,6 +394,111 @@ Promise.all([
           });
           document.querySelector('#AiTelemetryPlatform_Page_relatedArticleIds')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_relatedArticleIds');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH lessonNum
+          document.querySelector('#AiTelemetryPlatform_Page_lessonNum')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_lessonNum');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAiTelemetryPlatformVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
+                  , 'setLessonNum', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#AiTelemetryPlatform_Page_lessonNum')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#AiTelemetryPlatform_Page_lessonNum')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_lessonNum');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH hubResource
+          document.querySelector('#AiTelemetryPlatform_Page_hubResource')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_hubResource');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAiTelemetryPlatformVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
+                  , 'setHubResource', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#AiTelemetryPlatform_Page_hubResource')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#AiTelemetryPlatform_Page_hubResource')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_hubResource');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH courseNum
+          document.querySelector('#AiTelemetryPlatform_Page_courseNum')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_courseNum');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAiTelemetryPlatformVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
+                  , 'setCourseNum', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#AiTelemetryPlatform_Page_courseNum')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#AiTelemetryPlatform_Page_courseNum')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_courseNum');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH pageImageAlt
+          document.querySelector('#AiTelemetryPlatform_Page_pageImageAlt')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_pageImageAlt');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAiTelemetryPlatformVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
+                  , 'setPageImageAlt', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#AiTelemetryPlatform_Page_pageImageAlt')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#AiTelemetryPlatform_Page_pageImageAlt')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_pageImageAlt');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH prerequisiteArticleIds
+          document.querySelector('#AiTelemetryPlatform_Page_prerequisiteArticleIds')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_prerequisiteArticleIds');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAiTelemetryPlatformVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'pageId:' + event.currentTarget.getAttribute('data-pageId') }]
+                  , 'setPrerequisiteArticleIds', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#AiTelemetryPlatform_Page_prerequisiteArticleIds')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#AiTelemetryPlatform_Page_prerequisiteArticleIds')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_prerequisiteArticleIds');
             const valid = form.reportValidity();
           });
 });

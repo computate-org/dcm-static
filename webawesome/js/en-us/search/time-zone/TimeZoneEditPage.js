@@ -166,6 +166,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH displayName
+          document.querySelector('#TimeZone_Page_displayName')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_displayName');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTimeZoneVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + event.currentTarget.getAttribute('data-id') }]
+                  , 'setDisplayName', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TimeZone_Page_displayName')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TimeZone_Page_displayName')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_displayName');
+            const valid = form.reportValidity();
+          });
+
           // PATCH objectTitle
           document.querySelector('#TimeZone_Page_objectTitle')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_objectTitle');
@@ -184,6 +205,27 @@ Promise.all([
           });
           document.querySelector('#TimeZone_Page_objectTitle')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_objectTitle');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH editPage
+          document.querySelector('#TimeZone_Page_editPage')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_editPage');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTimeZoneVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + event.currentTarget.getAttribute('data-id') }]
+                  , 'setEditPage', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TimeZone_Page_editPage')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TimeZone_Page_editPage')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_editPage');
             const valid = form.reportValidity();
           });
 
@@ -247,48 +289,6 @@ Promise.all([
           });
           document.querySelector('#TimeZone_Page_solrId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_solrId');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH editPage
-          document.querySelector('#TimeZone_Page_editPage')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_editPage');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchTimeZoneVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + event.currentTarget.getAttribute('data-id') }]
-                  , 'setEditPage', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#TimeZone_Page_editPage')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#TimeZone_Page_editPage')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_editPage');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH displayName
-          document.querySelector('#TimeZone_Page_displayName')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_displayName');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchTimeZoneVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'id:' + event.currentTarget.getAttribute('data-id') }]
-                  , 'setDisplayName', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#TimeZone_Page_displayName')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#TimeZone_Page_displayName')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_displayName');
             const valid = form.reportValidity();
           });
 });

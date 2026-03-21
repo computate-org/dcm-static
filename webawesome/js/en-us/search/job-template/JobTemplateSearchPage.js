@@ -297,6 +297,17 @@ Promise.all([
     facetStatsChange('JobTemplate', 'solrId', false);
   });
 
+  document.querySelector('#pageSelectSortJobTemplate_aapProjectId')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'aapProjectId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_aapProjectId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'aapProjectId', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_aapProjectId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'aapProjectId', false);
+  });
+
   document.querySelector('#pageSelectSortJobTemplate_tenantResource')?.addEventListener('change', (event) => {
     sort('JobTemplate', 'tenantResource', event.currentTarget.value);
   });
@@ -350,17 +361,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsJobTemplate_aapHostCredentialId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('JobTemplate', 'aapHostCredentialId', false);
-  });
-
-  document.querySelector('#pageSelectSortJobTemplate_aapProjectId')?.addEventListener('change', (event) => {
-    sort('JobTemplate', 'aapProjectId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsJobTemplate_aapProjectId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('JobTemplate', 'aapProjectId', true);
-  });
-  document.querySelector('#pageStatsJobTemplate_aapProjectId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('JobTemplate', 'aapProjectId', false);
   });
 
   document.querySelector('#pageSelectSortJobTemplate_jobTemplateId')?.addEventListener('change', (event) => {

@@ -345,7 +345,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_patchSiteUser(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="patchSiteUserDialog" label="Modify site user">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchSiteUserDialog" label="Modify site user">
           <form id="htmForm_patchSiteUser" class="round-row primary-smart-border-radius ">
 
             <wa-details open class="HtmRow" id="user-options">
@@ -409,7 +409,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_postSiteUser(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: 50vw; " id="postSiteUserDialog" label="Create a site user">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postSiteUserDialog" label="Create a site user">
           <form id="htmForm_postSiteUser" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
@@ -465,7 +465,7 @@
 {%- endmacro %}
 
 {%- macro htmForm_searchpageSiteUser(idSuffix='') %}
-        <div with-header with-footer style="--width: 50vw; " id="searchpageSiteUserDialog" label="Search site users">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageSiteUserDialog" label="Search site users">
           <div id="htmForm_searchpageSiteUser" class="round-row primary-smart-border-radius ">
 
             <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">

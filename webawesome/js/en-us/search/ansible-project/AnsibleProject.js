@@ -84,8 +84,8 @@ async function websocketAnsibleProjectInner(apiRequest) {
         var inputArchived = null;
         var inputTenantResource = null;
         var inputSourceControlType = null;
-        var inputAnsibleProjectDescription = null;
         var inputSourceControlUrl = null;
+        var inputAnsibleProjectDescription = null;
         var inputSourceControlBranch = null;
         var inputJobTemplateResources = null;
         var inputAnsibleProjectName = null;
@@ -103,11 +103,11 @@ async function websocketAnsibleProjectInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputTenantId = null;
+        var inputAapOrganizationId = null;
         var inputAnsibleProjectId = null;
         var inputAnsibleProjectResource = null;
         var inputAapProjectId = null;
-        var inputTenantId = null;
-        var inputAapOrganizationId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.AnsibleProject_Page_pk');
@@ -121,10 +121,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
           inputTenantResource = $response.querySelector('.AnsibleProject_Page_tenantResource');
         if(vars.includes('sourceControlType'))
           inputSourceControlType = $response.querySelector('.AnsibleProject_Page_sourceControlType');
-        if(vars.includes('ansibleProjectDescription'))
-          inputAnsibleProjectDescription = $response.querySelector('.AnsibleProject_Page_ansibleProjectDescription');
         if(vars.includes('sourceControlUrl'))
           inputSourceControlUrl = $response.querySelector('.AnsibleProject_Page_sourceControlUrl');
+        if(vars.includes('ansibleProjectDescription'))
+          inputAnsibleProjectDescription = $response.querySelector('.AnsibleProject_Page_ansibleProjectDescription');
         if(vars.includes('sourceControlBranch'))
           inputSourceControlBranch = $response.querySelector('.AnsibleProject_Page_sourceControlBranch');
         if(vars.includes('jobTemplateResources'))
@@ -159,16 +159,16 @@ async function websocketAnsibleProjectInner(apiRequest) {
           inputObjectText = $response.querySelector('.AnsibleProject_Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.AnsibleProject_Page_solrId');
+        if(vars.includes('tenantId'))
+          inputTenantId = $response.querySelector('.AnsibleProject_Page_tenantId');
+        if(vars.includes('aapOrganizationId'))
+          inputAapOrganizationId = $response.querySelector('.AnsibleProject_Page_aapOrganizationId');
         if(vars.includes('ansibleProjectId'))
           inputAnsibleProjectId = $response.querySelector('.AnsibleProject_Page_ansibleProjectId');
         if(vars.includes('ansibleProjectResource'))
           inputAnsibleProjectResource = $response.querySelector('.AnsibleProject_Page_ansibleProjectResource');
         if(vars.includes('aapProjectId'))
           inputAapProjectId = $response.querySelector('.AnsibleProject_Page_aapProjectId');
-        if(vars.includes('tenantId'))
-          inputTenantId = $response.querySelector('.AnsibleProject_Page_tenantId');
-        if(vars.includes('aapOrganizationId'))
-          inputAapOrganizationId = $response.querySelector('.AnsibleProject_Page_aapOrganizationId');
 
         jsWebsocketAnsibleProject(ansibleProjectResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -235,16 +235,6 @@ async function websocketAnsibleProjectInner(apiRequest) {
           addGlow(document.querySelector('.AnsibleProject_Page_sourceControlType'));
         }
 
-        if(inputAnsibleProjectDescription) {
-          document.querySelectorAll('.AnsibleProject_Page_ansibleProjectDescription').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAnsibleProjectDescription.getAttribute('value');
-            else
-              item.textContent = inputAnsibleProjectDescription.textContent;
-          });
-          addGlow(document.querySelector('.AnsibleProject_Page_ansibleProjectDescription'));
-        }
-
         if(inputSourceControlUrl) {
           document.querySelectorAll('.AnsibleProject_Page_sourceControlUrl').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -253,6 +243,16 @@ async function websocketAnsibleProjectInner(apiRequest) {
               item.textContent = inputSourceControlUrl.textContent;
           });
           addGlow(document.querySelector('.AnsibleProject_Page_sourceControlUrl'));
+        }
+
+        if(inputAnsibleProjectDescription) {
+          document.querySelectorAll('.AnsibleProject_Page_ansibleProjectDescription').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAnsibleProjectDescription.getAttribute('value');
+            else
+              item.textContent = inputAnsibleProjectDescription.textContent;
+          });
+          addGlow(document.querySelector('.AnsibleProject_Page_ansibleProjectDescription'));
         }
 
         if(inputSourceControlBranch) {
@@ -425,6 +425,26 @@ async function websocketAnsibleProjectInner(apiRequest) {
           addGlow(document.querySelector('.AnsibleProject_Page_solrId'));
         }
 
+        if(inputTenantId) {
+          document.querySelectorAll('.AnsibleProject_Page_tenantId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantId.getAttribute('value');
+            else
+              item.textContent = inputTenantId.textContent;
+          });
+          addGlow(document.querySelector('.AnsibleProject_Page_tenantId'));
+        }
+
+        if(inputAapOrganizationId) {
+          document.querySelectorAll('.AnsibleProject_Page_aapOrganizationId').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapOrganizationId.getAttribute('value');
+            else
+              item.textContent = inputAapOrganizationId.textContent;
+          });
+          addGlow(document.querySelector('.AnsibleProject_Page_aapOrganizationId'));
+        }
+
         if(inputAnsibleProjectId) {
           document.querySelectorAll('.AnsibleProject_Page_ansibleProjectId').forEach((item, index) => {
             if(typeof item.value !== 'undefined')
@@ -453,26 +473,6 @@ async function websocketAnsibleProjectInner(apiRequest) {
               item.textContent = inputAapProjectId.textContent;
           });
           addGlow(document.querySelector('.AnsibleProject_Page_aapProjectId'));
-        }
-
-        if(inputTenantId) {
-          document.querySelectorAll('.AnsibleProject_Page_tenantId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantId.getAttribute('value');
-            else
-              item.textContent = inputTenantId.textContent;
-          });
-          addGlow(document.querySelector('.AnsibleProject_Page_tenantId'));
-        }
-
-        if(inputAapOrganizationId) {
-          document.querySelectorAll('.AnsibleProject_Page_aapOrganizationId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapOrganizationId.getAttribute('value');
-            else
-              item.textContent = inputAapOrganizationId.textContent;
-          });
-          addGlow(document.querySelector('.AnsibleProject_Page_aapOrganizationId'));
         }
 
           pageGraphAnsibleProject();
@@ -650,13 +650,13 @@ function searchAnsibleProjectFilters($formFilters) {
     if(filterSourceControlType != null && filterSourceControlType !== '')
       filters.push({ name: 'fq', value: 'sourceControlType:' + filterSourceControlType });
 
-    var filterAnsibleProjectDescription = $formFilters.querySelector('.valueAnsibleProjectDescription')?.value;
-    if(filterAnsibleProjectDescription != null && filterAnsibleProjectDescription !== '')
-      filters.push({ name: 'fq', value: 'ansibleProjectDescription:' + filterAnsibleProjectDescription });
-
     var filterSourceControlUrl = $formFilters.querySelector('.valueSourceControlUrl')?.value;
     if(filterSourceControlUrl != null && filterSourceControlUrl !== '')
       filters.push({ name: 'fq', value: 'sourceControlUrl:' + filterSourceControlUrl });
+
+    var filterAnsibleProjectDescription = $formFilters.querySelector('.valueAnsibleProjectDescription')?.value;
+    if(filterAnsibleProjectDescription != null && filterAnsibleProjectDescription !== '')
+      filters.push({ name: 'fq', value: 'ansibleProjectDescription:' + filterAnsibleProjectDescription });
 
     var filterSourceControlBranch = $formFilters.querySelector('.valueSourceControlBranch')?.value;
     if(filterSourceControlBranch != null && filterSourceControlBranch !== '')
@@ -726,6 +726,14 @@ function searchAnsibleProjectFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
     var filterAnsibleProjectId = $formFilters.querySelector('.valueAnsibleProjectId')?.value;
     if(filterAnsibleProjectId != null && filterAnsibleProjectId !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectId:' + filterAnsibleProjectId });
@@ -737,14 +745,6 @@ function searchAnsibleProjectFilters($formFilters) {
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
       filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
-
-    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
-    if(filterTenantId != null && filterTenantId !== '')
-      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
-
-    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
-    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
-      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
   }
   return filters;
 }
@@ -1014,18 +1014,6 @@ async function patchAnsibleProject($formFilters, $formValues, target, ansiblePro
   if(removeSourceControlType != null && removeSourceControlType !== '')
     vals['removeSourceControlType'] = removeSourceControlType;
 
-  var valueAnsibleProjectDescription = $formValues.querySelector('.valueAnsibleProjectDescription')?.value;
-  var removeAnsibleProjectDescription = $formValues.querySelector('.removeAnsibleProjectDescription')?.value === 'true';
-  var setAnsibleProjectDescription = removeAnsibleProjectDescription ? null : $formValues.querySelector('.setAnsibleProjectDescription')?.value;
-  var addAnsibleProjectDescription = $formValues.querySelector('.addAnsibleProjectDescription')?.value;
-  if(removeAnsibleProjectDescription || setAnsibleProjectDescription != null && setAnsibleProjectDescription !== '')
-    vals['setAnsibleProjectDescription'] = setAnsibleProjectDescription;
-  if(addAnsibleProjectDescription != null && addAnsibleProjectDescription !== '')
-    vals['addAnsibleProjectDescription'] = addAnsibleProjectDescription;
-  var removeAnsibleProjectDescription = $formValues.querySelector('.removeAnsibleProjectDescription')?.value;
-  if(removeAnsibleProjectDescription != null && removeAnsibleProjectDescription !== '')
-    vals['removeAnsibleProjectDescription'] = removeAnsibleProjectDescription;
-
   var valueSourceControlUrl = $formValues.querySelector('.valueSourceControlUrl')?.value;
   var removeSourceControlUrl = $formValues.querySelector('.removeSourceControlUrl')?.value === 'true';
   var setSourceControlUrl = removeSourceControlUrl ? null : $formValues.querySelector('.setSourceControlUrl')?.value;
@@ -1037,6 +1025,18 @@ async function patchAnsibleProject($formFilters, $formValues, target, ansiblePro
   var removeSourceControlUrl = $formValues.querySelector('.removeSourceControlUrl')?.value;
   if(removeSourceControlUrl != null && removeSourceControlUrl !== '')
     vals['removeSourceControlUrl'] = removeSourceControlUrl;
+
+  var valueAnsibleProjectDescription = $formValues.querySelector('.valueAnsibleProjectDescription')?.value;
+  var removeAnsibleProjectDescription = $formValues.querySelector('.removeAnsibleProjectDescription')?.value === 'true';
+  var setAnsibleProjectDescription = removeAnsibleProjectDescription ? null : $formValues.querySelector('.setAnsibleProjectDescription')?.value;
+  var addAnsibleProjectDescription = $formValues.querySelector('.addAnsibleProjectDescription')?.value;
+  if(removeAnsibleProjectDescription || setAnsibleProjectDescription != null && setAnsibleProjectDescription !== '')
+    vals['setAnsibleProjectDescription'] = setAnsibleProjectDescription;
+  if(addAnsibleProjectDescription != null && addAnsibleProjectDescription !== '')
+    vals['addAnsibleProjectDescription'] = addAnsibleProjectDescription;
+  var removeAnsibleProjectDescription = $formValues.querySelector('.removeAnsibleProjectDescription')?.value;
+  if(removeAnsibleProjectDescription != null && removeAnsibleProjectDescription !== '')
+    vals['removeAnsibleProjectDescription'] = removeAnsibleProjectDescription;
 
   var valueSourceControlBranch = $formValues.querySelector('.valueSourceControlBranch')?.value;
   var removeSourceControlBranch = $formValues.querySelector('.removeSourceControlBranch')?.value === 'true';
@@ -1150,6 +1150,30 @@ async function patchAnsibleProject($formFilters, $formValues, target, ansiblePro
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value === 'true';
+  var setTenantId = removeTenantId ? null : $formValues.querySelector('.setTenantId')?.value;
+  var addTenantId = $formValues.querySelector('.addTenantId')?.value;
+  if(removeTenantId || setTenantId != null && setTenantId !== '')
+    vals['setTenantId'] = setTenantId;
+  if(addTenantId != null && addTenantId !== '')
+    vals['addTenantId'] = addTenantId;
+  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value;
+  if(removeTenantId != null && removeTenantId !== '')
+    vals['removeTenantId'] = removeTenantId;
+
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
+  var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
+  var addAapOrganizationId = $formValues.querySelector('.addAapOrganizationId')?.value;
+  if(removeAapOrganizationId || setAapOrganizationId != null && setAapOrganizationId !== '')
+    vals['setAapOrganizationId'] = setAapOrganizationId;
+  if(addAapOrganizationId != null && addAapOrganizationId !== '')
+    vals['addAapOrganizationId'] = addAapOrganizationId;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
+  if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
+    vals['removeAapOrganizationId'] = removeAapOrganizationId;
+
   var valueAnsibleProjectId = $formValues.querySelector('.valueAnsibleProjectId')?.value;
   var removeAnsibleProjectId = $formValues.querySelector('.removeAnsibleProjectId')?.value === 'true';
   var setAnsibleProjectId = removeAnsibleProjectId ? null : $formValues.querySelector('.setAnsibleProjectId')?.value;
@@ -1185,30 +1209,6 @@ async function patchAnsibleProject($formFilters, $formValues, target, ansiblePro
   var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value;
   if(removeAapProjectId != null && removeAapProjectId !== '')
     vals['removeAapProjectId'] = removeAapProjectId;
-
-  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
-  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value === 'true';
-  var setTenantId = removeTenantId ? null : $formValues.querySelector('.setTenantId')?.value;
-  var addTenantId = $formValues.querySelector('.addTenantId')?.value;
-  if(removeTenantId || setTenantId != null && setTenantId !== '')
-    vals['setTenantId'] = setTenantId;
-  if(addTenantId != null && addTenantId !== '')
-    vals['addTenantId'] = addTenantId;
-  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value;
-  if(removeTenantId != null && removeTenantId !== '')
-    vals['removeTenantId'] = removeTenantId;
-
-  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
-  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
-  var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
-  var addAapOrganizationId = $formValues.querySelector('.addAapOrganizationId')?.value;
-  if(removeAapOrganizationId || setAapOrganizationId != null && setAapOrganizationId !== '')
-    vals['setAapOrganizationId'] = setAapOrganizationId;
-  if(addAapOrganizationId != null && addAapOrganizationId !== '')
-    vals['addAapOrganizationId'] = addAapOrganizationId;
-  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
-  if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
-    vals['removeAapOrganizationId'] = removeAapOrganizationId;
 
   patchAnsibleProjectVals(ansibleProjectResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'ansibleProjectResource:' + ansibleProjectResource}], vals, target, success, error);
 }
@@ -1248,13 +1248,13 @@ function patchAnsibleProjectFilters($formFilters) {
     if(filterSourceControlType != null && filterSourceControlType !== '')
       filters.push({ name: 'fq', value: 'sourceControlType:' + filterSourceControlType });
 
-    var filterAnsibleProjectDescription = $formFilters.querySelector('.valueAnsibleProjectDescription')?.value;
-    if(filterAnsibleProjectDescription != null && filterAnsibleProjectDescription !== '')
-      filters.push({ name: 'fq', value: 'ansibleProjectDescription:' + filterAnsibleProjectDescription });
-
     var filterSourceControlUrl = $formFilters.querySelector('.valueSourceControlUrl')?.value;
     if(filterSourceControlUrl != null && filterSourceControlUrl !== '')
       filters.push({ name: 'fq', value: 'sourceControlUrl:' + filterSourceControlUrl });
+
+    var filterAnsibleProjectDescription = $formFilters.querySelector('.valueAnsibleProjectDescription')?.value;
+    if(filterAnsibleProjectDescription != null && filterAnsibleProjectDescription !== '')
+      filters.push({ name: 'fq', value: 'ansibleProjectDescription:' + filterAnsibleProjectDescription });
 
     var filterSourceControlBranch = $formFilters.querySelector('.valueSourceControlBranch')?.value;
     if(filterSourceControlBranch != null && filterSourceControlBranch !== '')
@@ -1324,6 +1324,14 @@ function patchAnsibleProjectFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+
     var filterAnsibleProjectId = $formFilters.querySelector('.valueAnsibleProjectId')?.value;
     if(filterAnsibleProjectId != null && filterAnsibleProjectId !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectId:' + filterAnsibleProjectId });
@@ -1335,14 +1343,6 @@ function patchAnsibleProjectFilters($formFilters) {
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
       filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
-
-    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
-    if(filterTenantId != null && filterTenantId !== '')
-      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
-
-    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
-    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
-      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
   }
   return filters;
 }
@@ -1430,13 +1430,13 @@ async function postAnsibleProject($formValues, target, success, error) {
   if(valueSourceControlType != null && valueSourceControlType !== '')
     vals['sourceControlType'] = valueSourceControlType;
 
-  var valueAnsibleProjectDescription = $formValues.querySelector('.valueAnsibleProjectDescription')?.value;
-  if(valueAnsibleProjectDescription != null && valueAnsibleProjectDescription !== '')
-    vals['ansibleProjectDescription'] = valueAnsibleProjectDescription;
-
   var valueSourceControlUrl = $formValues.querySelector('.valueSourceControlUrl')?.value;
   if(valueSourceControlUrl != null && valueSourceControlUrl !== '')
     vals['sourceControlUrl'] = valueSourceControlUrl;
+
+  var valueAnsibleProjectDescription = $formValues.querySelector('.valueAnsibleProjectDescription')?.value;
+  if(valueAnsibleProjectDescription != null && valueAnsibleProjectDescription !== '')
+    vals['ansibleProjectDescription'] = valueAnsibleProjectDescription;
 
   var valueSourceControlBranch = $formValues.querySelector('.valueSourceControlBranch')?.value;
   if(valueSourceControlBranch != null && valueSourceControlBranch !== '')
@@ -1481,6 +1481,14 @@ async function postAnsibleProject($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  if(valueTenantId != null && valueTenantId !== '')
+    vals['tenantId'] = valueTenantId;
+
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
+    vals['aapOrganizationId'] = valueAapOrganizationId;
+
   var valueAnsibleProjectId = $formValues.querySelector('.valueAnsibleProjectId')?.value;
   if(valueAnsibleProjectId != null && valueAnsibleProjectId !== '')
     vals['ansibleProjectId'] = valueAnsibleProjectId;
@@ -1492,14 +1500,6 @@ async function postAnsibleProject($formValues, target, success, error) {
   var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
   if(valueAapProjectId != null && valueAapProjectId !== '')
     vals['aapProjectId'] = valueAapProjectId;
-
-  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
-  if(valueTenantId != null && valueTenantId !== '')
-    vals['tenantId'] = valueTenantId;
-
-  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
-  if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
-    vals['aapOrganizationId'] = valueAapOrganizationId;
 
   fetch(
     '/en-us/api/ansible-project'

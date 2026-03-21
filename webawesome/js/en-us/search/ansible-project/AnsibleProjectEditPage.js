@@ -82,27 +82,6 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH ansibleProjectDescription
-          document.querySelector('#AnsibleProject_Page_ansibleProjectDescription')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_ansibleProjectDescription');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectResource:' + event.currentTarget.getAttribute('data-ansibleProjectResource') }]
-                  , 'setAnsibleProjectDescription', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#AnsibleProject_Page_ansibleProjectDescription')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#AnsibleProject_Page_ansibleProjectDescription')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_ansibleProjectDescription');
-            const valid = form.reportValidity();
-          });
-
           // PATCH sourceControlUrl
           document.querySelector('#AnsibleProject_Page_sourceControlUrl')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_sourceControlUrl');
@@ -121,6 +100,27 @@ Promise.all([
           });
           document.querySelector('#AnsibleProject_Page_sourceControlUrl')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_sourceControlUrl');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH ansibleProjectDescription
+          document.querySelector('#AnsibleProject_Page_ansibleProjectDescription')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_ansibleProjectDescription');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectResource:' + event.currentTarget.getAttribute('data-ansibleProjectResource') }]
+                  , 'setAnsibleProjectDescription', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#AnsibleProject_Page_ansibleProjectDescription')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#AnsibleProject_Page_ansibleProjectDescription')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_ansibleProjectDescription');
             const valid = form.reportValidity();
           });
 
@@ -313,6 +313,48 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH tenantId
+          document.querySelector('#AnsibleProject_Page_tenantId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_tenantId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectResource:' + event.currentTarget.getAttribute('data-ansibleProjectResource') }]
+                  , 'setTenantId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#AnsibleProject_Page_tenantId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#AnsibleProject_Page_tenantId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_tenantId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH aapOrganizationId
+          document.querySelector('#AnsibleProject_Page_aapOrganizationId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapOrganizationId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectResource:' + event.currentTarget.getAttribute('data-ansibleProjectResource') }]
+                  , 'setAapOrganizationId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#AnsibleProject_Page_aapOrganizationId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#AnsibleProject_Page_aapOrganizationId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapOrganizationId');
+            const valid = form.reportValidity();
+          });
+
           // PATCH ansibleProjectId
           document.querySelector('#AnsibleProject_Page_ansibleProjectId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_ansibleProjectId');
@@ -373,48 +415,6 @@ Promise.all([
           });
           document.querySelector('#AnsibleProject_Page_aapProjectId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_aapProjectId');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH tenantId
-          document.querySelector('#AnsibleProject_Page_tenantId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_tenantId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectResource:' + event.currentTarget.getAttribute('data-ansibleProjectResource') }]
-                  , 'setTenantId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#AnsibleProject_Page_tenantId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#AnsibleProject_Page_tenantId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_tenantId');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH aapOrganizationId
-          document.querySelector('#AnsibleProject_Page_aapOrganizationId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_aapOrganizationId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectResource:' + event.currentTarget.getAttribute('data-ansibleProjectResource') }]
-                  , 'setAapOrganizationId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#AnsibleProject_Page_aapOrganizationId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#AnsibleProject_Page_aapOrganizationId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_aapOrganizationId');
             const valid = form.reportValidity();
           });
 });

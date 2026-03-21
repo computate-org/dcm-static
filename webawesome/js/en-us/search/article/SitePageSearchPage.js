@@ -132,6 +132,17 @@ Promise.all([
     facetStatsChange('SitePage', 'classCanonicalNames', false);
   });
 
+  document.querySelector('#pageSelectSortSitePage_saves')?.addEventListener('change', (event) => {
+    sort('SitePage', 'saves', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_saves')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'saves', true);
+  });
+  document.querySelector('#pageStatsSitePage_saves')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'saves', false);
+  });
+
   document.querySelector('#pageSelectSortSitePage_objectTitle')?.addEventListener('change', (event) => {
     sort('SitePage', 'objectTitle', event.currentTarget.value);
   });
@@ -141,6 +152,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsSitePage_objectTitle')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('SitePage', 'objectTitle', false);
+  });
+
+  document.querySelector('#pageSelectSortSitePage_editPage')?.addEventListener('change', (event) => {
+    sort('SitePage', 'editPage', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_editPage')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'editPage', true);
+  });
+  document.querySelector('#pageStatsSitePage_editPage')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'editPage', false);
   });
 
   document.querySelector('#pageSelectSortSitePage_userPage')?.addEventListener('change', (event) => {
@@ -176,39 +198,6 @@ Promise.all([
     facetStatsChange('SitePage', 'objectSuggest', false);
   });
 
-  document.querySelector('#pageSelectSortSitePage_solrId')?.addEventListener('change', (event) => {
-    sort('SitePage', 'solrId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_solrId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'solrId', true);
-  });
-  document.querySelector('#pageStatsSitePage_solrId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'solrId', false);
-  });
-
-  document.querySelector('#pageSelectSortSitePage_saves')?.addEventListener('change', (event) => {
-    sort('SitePage', 'saves', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_saves')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'saves', true);
-  });
-  document.querySelector('#pageStatsSitePage_saves')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'saves', false);
-  });
-
-  document.querySelector('#pageSelectSortSitePage_editPage')?.addEventListener('change', (event) => {
-    sort('SitePage', 'editPage', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsSitePage_editPage')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('SitePage', 'editPage', true);
-  });
-  document.querySelector('#pageStatsSitePage_editPage')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('SitePage', 'editPage', false);
-  });
-
   document.querySelector('#pageSelectSortSitePage_objectText')?.addEventListener('change', (event) => {
     sort('SitePage', 'objectText', event.currentTarget.value);
   });
@@ -218,6 +207,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsSitePage_objectText')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('SitePage', 'objectText', false);
+  });
+
+  document.querySelector('#pageSelectSortSitePage_solrId')?.addEventListener('change', (event) => {
+    sort('SitePage', 'solrId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsSitePage_solrId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('SitePage', 'solrId', true);
+  });
+  document.querySelector('#pageStatsSitePage_solrId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('SitePage', 'solrId', false);
   });
 
   document.querySelector('#pageSelectSortSitePage_courseNum')?.addEventListener('change', (event) => {
@@ -492,6 +492,24 @@ Promise.all([
           document.querySelector('#pageFacetRangeEndSitePage_displayPage')?.addEventListener('change', (event) => {
             facetRangeEndChange('SitePage', event.currentTarget);
           });
+          document.querySelector('#fqSitePage_editPage')?.addEventListener('change', (event) => {
+            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
+          });
+          document.querySelector('#buttonFacetSitePage_editPage')?.addEventListener('click', (event) => {
+            facetFieldChange('SitePage', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotSitePage_editPage')?.addEventListener('change', (event) => {
+            facetPivotChange('SitePage', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapSitePage_editPage')?.addEventListener('change', (event) => {
+            facetRangeGapChange('SitePage', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartSitePage_editPage')?.addEventListener('change', (event) => {
+            facetRangeStartChange('SitePage', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndSitePage_editPage')?.addEventListener('change', (event) => {
+            facetRangeEndChange('SitePage', event.currentTarget);
+          });
           document.querySelector('#fqSitePage_userPage')?.addEventListener('change', (event) => {
             fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
           });
@@ -526,24 +544,6 @@ Promise.all([
             facetRangeStartChange('SitePage', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndSitePage_download')?.addEventListener('change', (event) => {
-            facetRangeEndChange('SitePage', event.currentTarget);
-          });
-          document.querySelector('#fqSitePage_editPage')?.addEventListener('change', (event) => {
-            fqChange('SitePage', event.currentTarget, facetChangeSitePageSuccess, facetChangeSitePageError);
-          });
-          document.querySelector('#buttonFacetSitePage_editPage')?.addEventListener('click', (event) => {
-            facetFieldChange('SitePage', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotSitePage_editPage')?.addEventListener('change', (event) => {
-            facetPivotChange('SitePage', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapSitePage_editPage')?.addEventListener('change', (event) => {
-            facetRangeGapChange('SitePage', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeStartSitePage_editPage')?.addEventListener('change', (event) => {
-            facetRangeStartChange('SitePage', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeEndSitePage_editPage')?.addEventListener('change', (event) => {
             facetRangeEndChange('SitePage', event.currentTarget);
           });
           document.querySelector('#fqSitePage_courseNum')?.addEventListener('change', (event) => {
