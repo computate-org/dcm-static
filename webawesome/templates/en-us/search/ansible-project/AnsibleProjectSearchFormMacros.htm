@@ -417,6 +417,42 @@
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
+{%- macro inputAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_ansiblePlaybooksList">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] ansible playbooks"
+                      label="ansible playbooks"
+                      hint="The related ansible playbooks for this Ansible project. "
+                      id="AnsibleProject_{{classApiMethodMethod}}_ansiblePlaybooksList"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-ansibleProjectResource={{ result.ansibleProjectResource | tojson }}
+                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_ansiblePlaybooksList setAnsiblePlaybooksList classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}AnsiblePlaybooksList "
+                      name="setAnsiblePlaybooksList"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_ansiblePlaybooksList setAnsiblePlaybooksList classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}AnsiblePlaybooksList "
+                      name="setAnsiblePlaybooksList"
+    {%- else %}
+                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_ansiblePlaybooksList valueAnsiblePlaybooksList classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}AnsiblePlaybooksList "
+                      name="ansiblePlaybooksList"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.ansiblePlaybooksList | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 {%- macro inputAnsibleProjectNameAnsibleProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_ansibleProjectName">
@@ -538,6 +574,16 @@
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
 
@@ -645,6 +691,16 @@
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -835,6 +891,16 @@
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>

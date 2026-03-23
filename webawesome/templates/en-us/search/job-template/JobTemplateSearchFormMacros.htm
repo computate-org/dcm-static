@@ -324,6 +324,42 @@
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
+{%- macro inputAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_ansiblePlaybooksList">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] ansible playbooks"
+                      label="ansible playbooks"
+                      hint="The related ansible playbooks for this Ansible project. "
+                      id="JobTemplate_{{classApiMethodMethod}}_ansiblePlaybooksList"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-jobTemplateResource={{ result.jobTemplateResource | tojson }}
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_ansiblePlaybooksList setAnsiblePlaybooksList classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AnsiblePlaybooksList "
+                      name="setAnsiblePlaybooksList"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_ansiblePlaybooksList setAnsiblePlaybooksList classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AnsiblePlaybooksList "
+                      name="setAnsiblePlaybooksList"
+    {%- else %}
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_ansiblePlaybooksList valueAnsiblePlaybooksList classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AnsiblePlaybooksList "
+                      name="ansiblePlaybooksList"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.ansiblePlaybooksList | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 {%- macro inputAnsiblePlaybookJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_ansiblePlaybook">
@@ -564,13 +600,18 @@
                 {%- endif %}
                 {%- endif %}
               </div>
-            </wa-details>
 
-            <wa-details open class="HtmRow" id="ansible-job-template-details">
-              <div slot="summary">
-                <span>Ansible Job Template details</span>
-              </div>
               <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
                 {% if "PATCH" in scopes -%}
                 {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
@@ -683,13 +724,18 @@
                 {%- endif %}
                 {%- endif %}
               </div>
-            </wa-details>
 
-            <wa-details open class="HtmRow" id="ansible-job-template-details">
-              <div slot="summary">
-                <span>Ansible Job Template details</span>
-              </div>
               <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
                 {% if "POST" in scopes -%}
                 {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
@@ -883,13 +929,18 @@
                 {%- endif %}
                 {%- endif %}
               </div>
-            </wa-details>
 
-            <wa-details open class="HtmRow" id="ansible-job-template-details">
-              <div slot="summary">
-                <span>Ansible Job Template details</span>
-              </div>
               <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsiblePlaybooksListJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
                 {% if "PATCH" in scopes -%}
                 {{ htmAnsiblePlaybookJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}

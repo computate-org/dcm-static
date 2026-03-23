@@ -179,20 +179,6 @@
           {% endif -%}
           {% endif -%}
           }
-          function Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource(event) {
-            suggestTenantHostInventoryIds(
-                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
-                , true
-                , document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')
-                );
-          }
-          document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')?.addEventListener('input', Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource);
-          document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')?.addEventListener('focus', Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource);
           function Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource(event) {
             suggestTenantAnsibleProjectIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -207,6 +193,20 @@
           }
           document.querySelector('#Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')?.addEventListener('input', Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource);
           document.querySelector('#Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')?.addEventListener('focus', Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource);
+          function Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource(event) {
+            suggestTenantHostInventoryIds(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
+                , true
+                , document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')
+                );
+          }
+          document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')?.addEventListener('input', Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource);
+          document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')?.addEventListener('focus', Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource);
           function relate_jobTemplateResources(event) {
             suggestAnsibleProjectJobTemplateResources(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }

@@ -417,4 +417,25 @@ Promise.all([
             const form = document.querySelector('#PageForm_aapProjectId');
             const valid = form.reportValidity();
           });
+
+          // PATCH ansiblePlaybooks
+          document.querySelector('#AnsibleProject_Page_ansiblePlaybooks')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_ansiblePlaybooks');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchAnsibleProjectVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'ansibleProjectResource:' + event.currentTarget.getAttribute('data-ansibleProjectResource') }]
+                  , 'setAnsiblePlaybooks', event.currentTarget.value == '' ? null : JSON.parse(event.currentTarget.value)
+                  , event.currentTarget
+                  , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#AnsibleProject_Page_ansiblePlaybooks')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#AnsibleProject_Page_ansiblePlaybooks')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_ansiblePlaybooks');
+            const valid = form.reportValidity();
+          });
 });

@@ -88,6 +88,7 @@ async function websocketAnsibleProjectInner(apiRequest) {
         var inputAnsibleProjectDescription = null;
         var inputSourceControlBranch = null;
         var inputJobTemplateResources = null;
+        var inputAnsiblePlaybooksList = null;
         var inputAnsibleProjectName = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
@@ -108,6 +109,7 @@ async function websocketAnsibleProjectInner(apiRequest) {
         var inputAnsibleProjectId = null;
         var inputAnsibleProjectResource = null;
         var inputAapProjectId = null;
+        var inputAnsiblePlaybooks = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.AnsibleProject_Page_pk');
@@ -129,6 +131,8 @@ async function websocketAnsibleProjectInner(apiRequest) {
           inputSourceControlBranch = $response.querySelector('.AnsibleProject_Page_sourceControlBranch');
         if(vars.includes('jobTemplateResources'))
           inputJobTemplateResources = $response.querySelector('.AnsibleProject_Page_jobTemplateResources');
+        if(vars.includes('ansiblePlaybooksList'))
+          inputAnsiblePlaybooksList = $response.querySelector('.AnsibleProject_Page_ansiblePlaybooksList');
         if(vars.includes('ansibleProjectName'))
           inputAnsibleProjectName = $response.querySelector('.AnsibleProject_Page_ansibleProjectName');
         if(vars.includes('classCanonicalName'))
@@ -169,6 +173,8 @@ async function websocketAnsibleProjectInner(apiRequest) {
           inputAnsibleProjectResource = $response.querySelector('.AnsibleProject_Page_ansibleProjectResource');
         if(vars.includes('aapProjectId'))
           inputAapProjectId = $response.querySelector('.AnsibleProject_Page_aapProjectId');
+        if(vars.includes('ansiblePlaybooks'))
+          inputAnsiblePlaybooks = $response.querySelector('.AnsibleProject_Page_ansiblePlaybooks');
 
         jsWebsocketAnsibleProject(ansibleProjectResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
@@ -273,6 +279,16 @@ async function websocketAnsibleProjectInner(apiRequest) {
               item.textContent = inputJobTemplateResources.textContent;
           });
           addGlow(document.querySelector('.AnsibleProject_Page_jobTemplateResources'));
+        }
+
+        if(inputAnsiblePlaybooksList) {
+          document.querySelectorAll('.AnsibleProject_Page_ansiblePlaybooksList').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAnsiblePlaybooksList.getAttribute('value');
+            else
+              item.textContent = inputAnsiblePlaybooksList.textContent;
+          });
+          addGlow(document.querySelector('.AnsibleProject_Page_ansiblePlaybooksList'));
         }
 
         if(inputAnsibleProjectName) {
@@ -475,6 +491,16 @@ async function websocketAnsibleProjectInner(apiRequest) {
           addGlow(document.querySelector('.AnsibleProject_Page_aapProjectId'));
         }
 
+        if(inputAnsiblePlaybooks) {
+          document.querySelectorAll('.AnsibleProject_Page_ansiblePlaybooks').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAnsiblePlaybooks.getAttribute('value');
+            else
+              item.textContent = inputAnsiblePlaybooks.textContent;
+          });
+          addGlow(document.querySelector('.AnsibleProject_Page_ansiblePlaybooks'));
+        }
+
           pageGraphAnsibleProject();
       });
     });
@@ -666,6 +692,10 @@ function searchAnsibleProjectFilters($formFilters) {
     if(filterJobTemplateResources != null && filterJobTemplateResources !== '')
       filters.push({ name: 'fq', value: 'jobTemplateResources:' + filterJobTemplateResources });
 
+    var filterAnsiblePlaybooksList = $formFilters.querySelector('.valueAnsiblePlaybooksList')?.value;
+    if(filterAnsiblePlaybooksList != null && filterAnsiblePlaybooksList !== '')
+      filters.push({ name: 'fq', value: 'ansiblePlaybooksList:' + filterAnsiblePlaybooksList });
+
     var filterAnsibleProjectName = $formFilters.querySelector('.valueAnsibleProjectName')?.value;
     if(filterAnsibleProjectName != null && filterAnsibleProjectName !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectName:' + filterAnsibleProjectName });
@@ -745,6 +775,10 @@ function searchAnsibleProjectFilters($formFilters) {
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
       filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
+
+    var filterAnsiblePlaybooks = $formFilters.querySelector('.valueAnsiblePlaybooks')?.value;
+    if(filterAnsiblePlaybooks != null && filterAnsiblePlaybooks !== '')
+      filters.push({ name: 'fq', value: 'ansiblePlaybooks:' + filterAnsiblePlaybooks });
   }
   return filters;
 }
@@ -1054,6 +1088,18 @@ async function patchAnsibleProject($formFilters, $formValues, target, ansiblePro
   if(valueJobTemplateResources != null && valueJobTemplateResources !== '')
     vals['addJobTemplateResources'] = valueJobTemplateResources;
 
+  var valueAnsiblePlaybooksList = $formValues.querySelector('.valueAnsiblePlaybooksList')?.value;
+  var removeAnsiblePlaybooksList = $formValues.querySelector('.removeAnsiblePlaybooksList')?.value === 'true';
+  var setAnsiblePlaybooksList = removeAnsiblePlaybooksList ? null : $formValues.querySelector('.setAnsiblePlaybooksList')?.value;
+  var addAnsiblePlaybooksList = $formValues.querySelector('.addAnsiblePlaybooksList')?.value;
+  if(removeAnsiblePlaybooksList || setAnsiblePlaybooksList != null && setAnsiblePlaybooksList !== '')
+    vals['setAnsiblePlaybooksList'] = setAnsiblePlaybooksList;
+  if(addAnsiblePlaybooksList != null && addAnsiblePlaybooksList !== '')
+    vals['addAnsiblePlaybooksList'] = addAnsiblePlaybooksList;
+  var removeAnsiblePlaybooksList = $formValues.querySelector('.removeAnsiblePlaybooksList')?.value;
+  if(removeAnsiblePlaybooksList != null && removeAnsiblePlaybooksList !== '')
+    vals['removeAnsiblePlaybooksList'] = removeAnsiblePlaybooksList;
+
   var valueAnsibleProjectName = $formValues.querySelector('.valueAnsibleProjectName')?.value;
   var removeAnsibleProjectName = $formValues.querySelector('.removeAnsibleProjectName')?.value === 'true';
   var setAnsibleProjectName = removeAnsibleProjectName ? null : $formValues.querySelector('.setAnsibleProjectName')?.value;
@@ -1210,6 +1256,18 @@ async function patchAnsibleProject($formFilters, $formValues, target, ansiblePro
   if(removeAapProjectId != null && removeAapProjectId !== '')
     vals['removeAapProjectId'] = removeAapProjectId;
 
+  var valueAnsiblePlaybooks = $formValues.querySelector('.valueAnsiblePlaybooks')?.value;
+  var removeAnsiblePlaybooks = $formValues.querySelector('.removeAnsiblePlaybooks')?.value === 'true';
+  var setAnsiblePlaybooks = removeAnsiblePlaybooks ? null : $formValues.querySelector('.setAnsiblePlaybooks')?.value;
+  var addAnsiblePlaybooks = $formValues.querySelector('.addAnsiblePlaybooks')?.value;
+  if(removeAnsiblePlaybooks || setAnsiblePlaybooks != null && setAnsiblePlaybooks !== '')
+    vals['setAnsiblePlaybooks'] = JSON.parse(setAnsiblePlaybooks);
+  if(addAnsiblePlaybooks != null && addAnsiblePlaybooks !== '')
+    vals['addAnsiblePlaybooks'] = addAnsiblePlaybooks;
+  var removeAnsiblePlaybooks = $formValues.querySelector('.removeAnsiblePlaybooks')?.value;
+  if(removeAnsiblePlaybooks != null && removeAnsiblePlaybooks !== '')
+    vals['removeAnsiblePlaybooks'] = removeAnsiblePlaybooks;
+
   patchAnsibleProjectVals(ansibleProjectResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'ansibleProjectResource:' + ansibleProjectResource}], vals, target, success, error);
 }
 
@@ -1263,6 +1321,10 @@ function patchAnsibleProjectFilters($formFilters) {
     var filterJobTemplateResources = $formFilters.querySelector('.valueJobTemplateResources')?.value;
     if(filterJobTemplateResources != null && filterJobTemplateResources !== '')
       filters.push({ name: 'fq', value: 'jobTemplateResources:' + filterJobTemplateResources });
+
+    var filterAnsiblePlaybooksList = $formFilters.querySelector('.valueAnsiblePlaybooksList')?.value;
+    if(filterAnsiblePlaybooksList != null && filterAnsiblePlaybooksList !== '')
+      filters.push({ name: 'fq', value: 'ansiblePlaybooksList:' + filterAnsiblePlaybooksList });
 
     var filterAnsibleProjectName = $formFilters.querySelector('.valueAnsibleProjectName')?.value;
     if(filterAnsibleProjectName != null && filterAnsibleProjectName !== '')
@@ -1343,6 +1405,10 @@ function patchAnsibleProjectFilters($formFilters) {
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
       filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
+
+    var filterAnsiblePlaybooks = $formFilters.querySelector('.valueAnsiblePlaybooks')?.value;
+    if(filterAnsiblePlaybooks != null && filterAnsiblePlaybooks !== '')
+      filters.push({ name: 'fq', value: 'ansiblePlaybooks:' + filterAnsiblePlaybooks });
   }
   return filters;
 }
@@ -1449,6 +1515,10 @@ async function postAnsibleProject($formValues, target, success, error) {
   if(valueJobTemplateResources.length > 0)
     vals['jobTemplateResources'] = valueJobTemplateResources;
 
+  var valueAnsiblePlaybooksList = $formValues.querySelector('.valueAnsiblePlaybooksList')?.value;
+  if(valueAnsiblePlaybooksList != null && valueAnsiblePlaybooksList !== '')
+    vals['ansiblePlaybooksList'] = valueAnsiblePlaybooksList;
+
   var valueAnsibleProjectName = $formValues.querySelector('.valueAnsibleProjectName')?.value;
   if(valueAnsibleProjectName != null && valueAnsibleProjectName !== '')
     vals['ansibleProjectName'] = valueAnsibleProjectName;
@@ -1500,6 +1570,10 @@ async function postAnsibleProject($formValues, target, success, error) {
   var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
   if(valueAapProjectId != null && valueAapProjectId !== '')
     vals['aapProjectId'] = valueAapProjectId;
+
+  var valueAnsiblePlaybooks = $formValues.querySelector('.valueAnsiblePlaybooks')?.value;
+  if(valueAnsiblePlaybooks != null && valueAnsiblePlaybooks !== '')
+    vals['ansiblePlaybooks'] = JSON.parse(valueAnsiblePlaybooks);
 
   fetch(
     '/en-us/api/ansible-project'
