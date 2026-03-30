@@ -143,6 +143,17 @@ Promise.all([
     facetStatsChange('JobTemplate', 'jobType', false);
   });
 
+  document.querySelector('#pageSelectSortJobTemplate_askExtraVarsOnLaunch')?.addEventListener('change', (event) => {
+    sort('JobTemplate', 'askExtraVarsOnLaunch', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsJobTemplate_askExtraVarsOnLaunch')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('JobTemplate', 'askExtraVarsOnLaunch', true);
+  });
+  document.querySelector('#pageStatsJobTemplate_askExtraVarsOnLaunch')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('JobTemplate', 'askExtraVarsOnLaunch', false);
+  });
+
   document.querySelector('#pageSelectSortJobTemplate_extraVars')?.addEventListener('change', (event) => {
     sort('JobTemplate', 'extraVars', event.currentTarget.value);
   });

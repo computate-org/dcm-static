@@ -508,6 +508,55 @@
 {%- macro htmJobTypeJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputJobTypeJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_askExtraVarsOnLaunch">
+  {%- endif %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="JobTemplate_{{classApiMethodMethod}}_askExtraVarsOnLaunch"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="JobTemplate_{{classApiMethodMethod}}_askExtraVarsOnLaunch"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="ask extra vars on launch"
+                      label="ask extra vars on launch"
+                      hint="If extra vars should be asked on launch. "
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_askExtraVarsOnLaunch classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AskExtraVarsOnLaunch "
+                      name="setAskExtraVarsOnLaunch"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_askExtraVarsOnLaunch classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AskExtraVarsOnLaunch "
+                      name="setAskExtraVarsOnLaunch"
+    {%- else %}
+                      class="label-on-left JobTemplate_{{classApiMethodMethod}}_askExtraVarsOnLaunch setAskExtraVarsOnLaunch valueAskExtraVarsOnLaunch classJobTemplate inputJobTemplate{{ result.jobTemplateResource }}AskExtraVarsOnLaunch "
+                      name="setAskExtraVarsOnLaunch"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.askExtraVarsOnLaunch == true %}
+                      checked
+    {%- endif %}
+                      data-jobTemplateResource={{ result.jobTemplateResource | tojson }}
+                      >ask extra vars on launch</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 {%- macro inputExtraVarsJobTemplatePage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_extraVars">
@@ -653,6 +702,16 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
+                {{ htmAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
                 {{ htmExtraVarsJobTemplatePage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
@@ -773,6 +832,16 @@
                 {{ htmJobTypeJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmJobTypeJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
@@ -978,6 +1047,16 @@
                 {{ htmJobTypeJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmJobTypeJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAskExtraVarsOnLaunchJobTemplatePage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 

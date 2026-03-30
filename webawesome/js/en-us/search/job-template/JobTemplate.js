@@ -90,6 +90,7 @@ async function websocketJobTemplateInner(apiRequest) {
         var inputJobTemplateName = null;
         var inputJobTemplateDescription = null;
         var inputJobType = null;
+        var inputAskExtraVarsOnLaunch = null;
         var inputExtraVars = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
@@ -140,6 +141,8 @@ async function websocketJobTemplateInner(apiRequest) {
           inputJobTemplateDescription = $response.querySelector('.JobTemplate_Page_jobTemplateDescription');
         if(vars.includes('jobType'))
           inputJobType = $response.querySelector('.JobTemplate_Page_jobType');
+        if(vars.includes('askExtraVarsOnLaunch'))
+          inputAskExtraVarsOnLaunch = $response.querySelector('.JobTemplate_Page_askExtraVarsOnLaunch');
         if(vars.includes('extraVars'))
           inputExtraVars = $response.querySelector('.JobTemplate_Page_extraVars');
         if(vars.includes('classCanonicalName'))
@@ -314,6 +317,16 @@ async function websocketJobTemplateInner(apiRequest) {
               item.textContent = inputJobType.textContent;
           });
           addGlow(document.querySelector('.JobTemplate_Page_jobType'));
+        }
+
+        if(inputAskExtraVarsOnLaunch) {
+          document.querySelectorAll('.JobTemplate_Page_askExtraVarsOnLaunch').forEach((item, index) => {
+            if(typeof item.value !== 'undefined')
+              item.value = inputAskExtraVarsOnLaunch.getAttribute('value');
+            else
+              item.textContent = inputAskExtraVarsOnLaunch.textContent;
+          });
+          addGlow(document.querySelector('.JobTemplate_Page_askExtraVarsOnLaunch'));
         }
 
         if(inputExtraVars) {
@@ -764,6 +777,16 @@ function searchJobTemplateFilters($formFilters) {
     var filterJobType = $formFilters.querySelector('.valueJobType')?.value;
     if(filterJobType != null && filterJobType !== '')
       filters.push({ name: 'fq', value: 'jobType:' + filterJobType });
+
+    var $filterAskExtraVarsOnLaunchCheckbox = $formFilters.querySelector('input.valueAskExtraVarsOnLaunch[type = "checkbox"]');
+    var $filterAskExtraVarsOnLaunchSelect = $formFilters.querySelector('select.valueAskExtraVarsOnLaunch');
+    var filterAskExtraVarsOnLaunch = $filterAskExtraVarsOnLaunchSelect.length ? $filterAskExtraVarsOnLaunchSelect.value : $filterAskExtraVarsOnLaunchCheckbox.checked;
+    var filterAskExtraVarsOnLaunchSelectVal = $formFilters.querySelector('select.filterAskExtraVarsOnLaunch')?.value;
+    var filterAskExtraVarsOnLaunch = null;
+    if(filterAskExtraVarsOnLaunchSelectVal !== '')
+      filterAskExtraVarsOnLaunch = filterAskExtraVarsOnLaunchSelectVal == 'true';
+    if(filterAskExtraVarsOnLaunch != null && filterAskExtraVarsOnLaunch === true)
+      filters.push({ name: 'fq', value: 'askExtraVarsOnLaunch:' + filterAskExtraVarsOnLaunch });
 
     var filterExtraVars = $formFilters.querySelector('.valueExtraVars')?.value;
     if(filterExtraVars != null && filterExtraVars !== '')
@@ -1318,6 +1341,25 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateRe
   if(removeJobType != null && removeJobType !== '')
     vals['removeJobType'] = removeJobType;
 
+  var valueAskExtraVarsOnLaunch = $formValues.querySelector('.valueAskExtraVarsOnLaunch')?.value;
+  var removeAskExtraVarsOnLaunch = $formValues.querySelector('.removeAskExtraVarsOnLaunch')?.value === 'true';
+  if(valueAskExtraVarsOnLaunch != null)
+    valueAskExtraVarsOnLaunch = valueAskExtraVarsOnLaunch === 'true';
+  var valueAskExtraVarsOnLaunchSelectVal = $formValues.querySelector('select.setAskExtraVarsOnLaunch')?.value;
+  if(valueAskExtraVarsOnLaunchSelectVal != null)
+    valueAskExtraVarsOnLaunchSelectVal = valueAskExtraVarsOnLaunchSelectVal === 'true';
+  if(valueAskExtraVarsOnLaunchSelectVal != null && valueAskExtraVarsOnLaunchSelectVal !== '')
+    valueAskExtraVarsOnLaunch = valueAskExtraVarsOnLaunchSelectVal == 'true';
+  var setAskExtraVarsOnLaunch = removeAskExtraVarsOnLaunch ? null : valueAskExtraVarsOnLaunch;
+  var addAskExtraVarsOnLaunch = $formValues.querySelector('.addAskExtraVarsOnLaunch')?.checked;
+  if(removeAskExtraVarsOnLaunch || setAskExtraVarsOnLaunch != null && setAskExtraVarsOnLaunch !== '')
+    vals['setAskExtraVarsOnLaunch'] = setAskExtraVarsOnLaunch;
+  if(addAskExtraVarsOnLaunch != null && addAskExtraVarsOnLaunch !== '')
+    vals['addAskExtraVarsOnLaunch'] = addAskExtraVarsOnLaunch;
+  var removeAskExtraVarsOnLaunch = $formValues.querySelector('.removeAskExtraVarsOnLaunch')?.checked;
+  if(removeAskExtraVarsOnLaunch != null && removeAskExtraVarsOnLaunch !== '')
+    vals['removeAskExtraVarsOnLaunch'] = removeAskExtraVarsOnLaunch;
+
   var valueExtraVars = $formValues.querySelector('.valueExtraVars')?.value;
   var removeExtraVars = $formValues.querySelector('.removeExtraVars')?.value === 'true';
   var setExtraVars = removeExtraVars ? null : $formValues.querySelector('.setExtraVars')?.value;
@@ -1588,6 +1630,16 @@ function patchJobTemplateFilters($formFilters) {
     if(filterJobType != null && filterJobType !== '')
       filters.push({ name: 'fq', value: 'jobType:' + filterJobType });
 
+    var $filterAskExtraVarsOnLaunchCheckbox = $formFilters.querySelector('input.valueAskExtraVarsOnLaunch[type = "checkbox"]');
+    var $filterAskExtraVarsOnLaunchSelect = $formFilters.querySelector('select.valueAskExtraVarsOnLaunch');
+    var filterAskExtraVarsOnLaunch = $filterAskExtraVarsOnLaunchSelect.length ? $filterAskExtraVarsOnLaunchSelect.value : $filterAskExtraVarsOnLaunchCheckbox.checked;
+    var filterAskExtraVarsOnLaunchSelectVal = $formFilters.querySelector('select.filterAskExtraVarsOnLaunch')?.value;
+    var filterAskExtraVarsOnLaunch = null;
+    if(filterAskExtraVarsOnLaunchSelectVal !== '')
+      filterAskExtraVarsOnLaunch = filterAskExtraVarsOnLaunchSelectVal == 'true';
+    if(filterAskExtraVarsOnLaunch != null && filterAskExtraVarsOnLaunch === true)
+      filters.push({ name: 'fq', value: 'askExtraVarsOnLaunch:' + filterAskExtraVarsOnLaunch });
+
     var filterExtraVars = $formFilters.querySelector('.valueExtraVars')?.value;
     if(filterExtraVars != null && filterExtraVars !== '')
       filters.push({ name: 'fq', value: 'extraVars:' + filterExtraVars });
@@ -1797,6 +1849,10 @@ async function postJobTemplate($formValues, target, success, error) {
   var valueJobType = $formValues.querySelector('.valueJobType')?.value;
   if(valueJobType != null && valueJobType !== '')
     vals['jobType'] = valueJobType;
+
+  var valueAskExtraVarsOnLaunch = $formValues.querySelector('.valueAskExtraVarsOnLaunch')?.value;
+  if(valueAskExtraVarsOnLaunch != null && valueAskExtraVarsOnLaunch !== '')
+    vals['askExtraVarsOnLaunch'] = valueAskExtraVarsOnLaunch == 'true';
 
   var valueExtraVars = $formValues.querySelector('.valueExtraVars')?.value;
   if(valueExtraVars != null && valueExtraVars !== '')

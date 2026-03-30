@@ -145,6 +145,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH askExtraVarsOnLaunch
+          document.querySelector('#JobTemplate_Page_askExtraVarsOnLaunch')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_askExtraVarsOnLaunch');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchJobTemplateVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'jobTemplateResource:' + event.currentTarget.getAttribute('data-jobTemplateResource') }]
+                  , 'setAskExtraVarsOnLaunch', event.currentTarget.checked
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#JobTemplate_Page_askExtraVarsOnLaunch')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#JobTemplate_Page_askExtraVarsOnLaunch')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_askExtraVarsOnLaunch');
+            const valid = form.reportValidity();
+          });
+
           // PATCH extraVars
           document.querySelector('#JobTemplate_Page_extraVars')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_extraVars');
