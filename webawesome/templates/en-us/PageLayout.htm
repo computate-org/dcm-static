@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html lang="{{ SITE_LOCALE }}" class="wa-cloak wa-{{ userSiteTheme | default(SITE_THEME) }} wa-theme-{{ userWebComponentsTheme | default(WEB_COMPONENTS_THEME) }} ">
   <head>
-{%- block htmHeadPageLayout %}
+    {% block htmHeadPageLayout -%}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-{%- block htmMetaPageLayout %}
-{%- if result is defined %}
+    {% block htmMetaPageLayout -%}
+    {% if result is defined -%}
     <meta name="og:title" content="{{ result.name | e }}" />
     <meta name="og:type" content="website" />
     <meta name="og:image" content="{{ STATIC_BASE_URL }}{{ result.pageImageUri }}" />
-{%- if result.pageImageWidth is defined %}
+    {% if result.pageImageWidth is defined -%}
     <meta name="og:image:width" content="{{ result.pageImageWidth }}" />
     <meta name="og:image:height" content="{{ result.pageImageHeight }}" />
     <meta name="og:image:type" content="{{ result.pageImageType }}" />
-{%- endif %}
-{%- if result.pageImageWidth is defined %}
+    {% endif -%}
+    {% if result.pageImageWidth is defined -%}
     <meta name="og:image:alt" content="{{ result.pageImageAlt }}" />
-{%- endif %}
+    {% endif -%}
     <meta name="og:url" content="{{ result.displayPage }}" />
     <meta name="og:description" content="{{ result.description }}" />
-{%- endif %}
-{%- endblock htmMetaPageLayout %}
-{%- block htmTitlePageLayout %}
+    {% endif -%}
+    {% endblock htmMetaPageLayout -%}
+    {% block htmTitlePageLayout -%}
     <title>{{ SITE_DISPLAY_NAME }}</title>
-{%- endblock htmTitlePageLayout %}
-{%- block htmStylesPageLayout %}
+    {% endblock htmTitlePageLayout -%}
+    {% block htmStylesPageLayout -%}
     <link rel="icon" href="{{ STATIC_BASE_URL }}/favicon.svg" />
     <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.draw.css" />
     <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/leaflet.contextmenu.css"/>
     <link rel="stylesheet" href="{{ STATIC_BASE_URL }}/css/site.css"/>
-{%- endblock htmStylesPageLayout %}
+    {% endblock htmStylesPageLayout -%}
     <style>
-{%- block htmStylePageLayout %}{%- endblock htmStylePageLayout %}
+      {% block htmStylePageLayout -%}
+      {%- endblock htmStylePageLayout %}{{''}}
     </style>
-{%- block htmScriptsPageLayout %}
-{%- if FONTAWESOME_KIT is defined %}
-    {{ FONTAWESOME_KIT }}
-{%- endif %}
+    {% block htmScriptsPageLayout -%}
+    {% if FONTAWESOME_KIT is defined -%}
+    {{ FONTAWESOME_KIT -}}
+    {% endif -%}
     <script type="module">
-
       function siteSearchInput(event) {
         var filters = [];
         if(event.target.value == '')
@@ -72,7 +72,6 @@
           })
           .catch(response => error(response, event.target));
       }
-
       Promise.all([
         customElements.whenDefined('wa-button')
         , customElements.whenDefined('wa-input')
@@ -91,9 +90,9 @@
         });
       });
     </script>
-    {%- if WEB_COMPONENTS_KIT is defined and WEB_COMPONENTS_KIT != '' %}
-    {{ WEB_COMPONENTS_KIT }}
-    {%- else %}
+    {%- if WEB_COMPONENTS_KIT is defined and WEB_COMPONENTS_KIT != '' -%}
+    {{ WEB_COMPONENTS_KIT -}}
+    {%- else -%}
     <script async src="https://ga.jspm.io/npm:es-module-shims@2.6.2/dist/es-module-shims.js" crossorigin="anonymous"></script>
     <script type="importmap">
     {
@@ -101,24 +100,24 @@
     "@patternfly/elements/pf-card/pf-card.js": "https://ga.jspm.io/npm:@patternfly/elements@4.2.0/pf-card/pf-card.js"
       },
       "scopes": {
-    "https://ga.jspm.io/": {
-    "@lit/reactive-element": "https://ga.jspm.io/npm:@lit/reactive-element@2.1.1/reactive-element.js",
-    "@lit/reactive-element/decorators/": "https://ga.jspm.io/npm:@lit/reactive-element@2.1.1/decorators/",
-    "@patternfly/pfe-core/controllers/slot-controller.js": "https://ga.jspm.io/npm:@patternfly/pfe-core@5.0.4/controllers/slot-controller.js",
-    "lit": "https://ga.jspm.io/npm:lit@3.3.1/index.js",
-    "lit-element/lit-element.js": "https://ga.jspm.io/npm:lit-element@4.2.1/lit-element.js",
-    "lit-html": "https://ga.jspm.io/npm:lit-html@3.3.1/lit-html.js",
-    "lit-html/": "https://ga.jspm.io/npm:lit-html@3.3.1/",
-    "lit/": "https://ga.jspm.io/npm:lit@3.3.1/",
-    "tslib": "https://ga.jspm.io/npm:tslib@2.8.1/tslib.es6.mjs"
-    }
+        "https://ga.jspm.io/": {
+          "@lit/reactive-element": "https://ga.jspm.io/npm:@lit/reactive-element@2.1.1/reactive-element.js",
+          "@lit/reactive-element/decorators/": "https://ga.jspm.io/npm:@lit/reactive-element@2.1.1/decorators/",
+          "@patternfly/pfe-core/controllers/slot-controller.js": "https://ga.jspm.io/npm:@patternfly/pfe-core@5.0.4/controllers/slot-controller.js",
+          "lit": "https://ga.jspm.io/npm:lit@3.3.1/index.js",
+          "lit-element/lit-element.js": "https://ga.jspm.io/npm:lit-element@4.2.1/lit-element.js",
+          "lit-html": "https://ga.jspm.io/npm:lit-html@3.3.1/lit-html.js",
+          "lit-html/": "https://ga.jspm.io/npm:lit-html@3.3.1/",
+          "lit/": "https://ga.jspm.io/npm:lit@3.3.1/",
+          "tslib": "https://ga.jspm.io/npm:tslib@2.8.1/tslib.es6.mjs"
+        }
       }
     }
     </script>
     <script type="module">
       import "@patternfly/elements/pf-card/pf-card.js";
     </script>
-    {%- endif %}
+    {% endif -%}
     <script src="{{ STATIC_BASE_URL }}/js/site.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/sockjs.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/vertx-eventbus.js"></script>
@@ -127,18 +126,19 @@
     <script src="{{ STATIC_BASE_URL }}/js/leaflet.draw.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/leaflet.contextmenu.js"></script>
     <script src="{{ STATIC_BASE_URL }}/js/moment.js"></script>
-{%- endblock htmScriptsPageLayout %}
-{%- block htmScriptPageLayout %}
-{%- endblock htmScriptPageLayout %}
-{%- endblock htmHeadPageLayout %}
+    {%- endblock htmScriptsPageLayout -%}
+    {%- block htmScriptPageLayout -%}
+    {%- endblock htmScriptPageLayout -%}
+    {%- endblock htmHeadPageLayout -%}
     <script>
-{%- block websocketPageLayout %}{%- endblock websocketPageLayout %}
+      {% block websocketPageLayout -%}
+      {%- endblock websocketPageLayout %}{{''}}
     </script>
   </head>
   <body class="wa-body-{{ userFontSize[0:1] }} wa-size-{{ userFontSize[0:1] }} ">
     {% if WEB_COMPONENTS_PRO == 'true' -%}
     <wa-page disable-sticky="header">
-      <wa-toast style="--width: min(64rem, 100vw); "></wa-toast>
+      <wa-toast style="--width: 50vw; "></wa-toast>
     {%- else -%}
     <div id="site-grid">
     {%- endif %}
@@ -154,9 +154,9 @@
             <div id="siteSearchDropdownMenu" class="site-listbox">
             </div>
           </wa-popup>
-          {% if pageSearchFormButtons is defined or pageBreadcrumb is defined -%}
-          {{ pageSearchFormButtons | default('') }}
-          {%- endif %}
+          {%- if pageSearchFormButtons is defined or pageBreadcrumb is defined -%}
+          {{- pageSearchFormButtons | default('') -}}
+          {%- endif %}{{''}}
         </div>
       </header>
       {% if pageSearchButtons is defined or pageBreadcrumb is defined -%}
@@ -170,213 +170,210 @@
           </div>
         </div>
       </header>
-      {%- endif %}
-{%- block htmBodyPageLayout %}
-{%- block htmBodyStartPageLayout %}
+      {% endif -%}
+      {% block htmBodyPageLayout -%}
+      {% block htmBodyStartPageLayout -%}
       {% if WEB_COMPONENTS_PRO == 'false' -%}
       <wa-drawer placement="start" id="site-aside-left" class="margin-block-end-1rem ">
-        {%- endif %}
-        <nav{% if WEB_COMPONENTS_PRO == 'true' %} slot="navigation"{% endif %}>
-          <div class="display-flex-center ">
-            <a href="/">
-              <img id="site-aside-left-img-logo" src="{{ STATIC_BASE_URL }}/svg/logo-{{ userSiteTheme | default(SITE_THEME) }}.svg"/>
-            </a>
-          </div>
-          <div class="wa-grid " style="--min-column-size: 15ch; ">
-            <wa-button size="small" variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" variant="brand" target="_blank">
-              GitHub
-              <i slot="start" label="View our source code on GitHub" class="fa-brands fa-github fa-2xl"></i>
-            </wa-button>
-            <wa-button size="small" variant="brand" href="mailto:{{ MAILING_LIST_EMAIL }}" variant="brand" target="_blank">
-              Email
-              <i slot="start" label="Share with email" class="{{ FONTAWESOME_STYLE }} fa-envelope-open fa-2xl"></i>
-            </wa-button>
-          </div>
-          <div class="wa-stack ">
-            <div>
-{%- if userName is defined %}
-              <wa-details>
-                <div slot="summary" class="wa-stack ">
-                  <wa-tooltip for="siteUserSummary">
-                    <div class="wa-stack ">
-                      <div>
-                        {{ userFullName }}{% if userEmail is defined %} &lt;{{ userEmail | e }}&gt;{% endif %}
-                      </div>
-                    </div>
-                  </wa-tooltip>
-                  <div id="siteUserSummary" class="wa-cluster ">
-                    <wa-avatar label="user"></wa-avatar>
+      {% endif -%}
+      <nav{% if WEB_COMPONENTS_PRO == 'true' %} slot="navigation"{% endif %}>
+        <div class="display-flex-center ">
+          <a href="/">
+            <img id="site-aside-left-img-logo" src="{{ STATIC_BASE_URL }}/svg/logo-{{ userSiteTheme | default(SITE_THEME) }}.svg"/>
+          </a>
+        </div>
+        <div class="wa-grid " style="--min-column-size: 15ch; ">
+          <wa-button size="small" variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" target="_blank">
+            GitHub
+            <i slot="start" label="View our source code on GitHub" class="fa-brands fa-github fa-2xl"></i>
+          </wa-button>
+          <wa-button size="small" variant="brand" href="mailto:{{ MAILING_LIST_EMAIL }}" target="_blank">
+            Email
+            <i slot="start" label="Share with email" class="{{ FONTAWESOME_STYLE }} fa-envelope-open fa-2xl"></i>
+          </wa-button>
+        </div>
+        <div class="wa-stack ">
+          <div>
+            {% if userName is defined -%}
+            <wa-details>
+              <div slot="summary" class="wa-stack ">
+                <wa-tooltip for="siteUserSummary">
+                  <div class="wa-stack ">
                     <div>
-                      user: {{ userName | e }}
+                      {{ userFullName }}{% if userEmail is defined %} &lt;{{ userEmail | e }}&gt;{% endif %}
                     </div>
+                  </div>
+                </wa-tooltip>
+                <div id="siteUserSummary" class="wa-cluster ">
+                  <wa-avatar label="user"></wa-avatar>
+                  <div>
+                    user: {{ userName | e }}
                   </div>
                 </div>
+              </div>
+              <div class="wa-stack ">
+                <wa-tooltip for="site-button-user-page">see or change your user profile</wa-tooltip>
+                <wa-tooltip for="site-button-logout" placement="right">log out</wa-tooltip>
                 <div class="wa-stack ">
-                  <wa-tooltip for="site-button-user-page">see or change your user profile</wa-tooltip>
-                  <wa-tooltip for="site-button-logout" placement="right">log out</wa-tooltip>
-                  <div>
-                    <wa-button size="small" id="site-button-user-page" variant="brand" href="{{ SITE_BASE_URL }}{% if userId is defined %}/en-us/edit/user/{{ userId }}{% else %}/en-us/search/user{% endif %}" label="see or change your user profile">
-                      <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-house-user"></i>
-                      <span>my user page</span>
-                    </wa-button>
-                    <wa-button size="small" id="site-button-logout" variant="brand" href="{{ logoutUrl }}" label="sign out">
-                      <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-person-from-portal"></i>
-                      <span>log out</span>
-                    </wa-button>
-                  </div>
-                  <wa-details summary="User groups" open="true">
-                    <div class="wa-stack ">
-                      <wa-scroller>
-                          {% for group in userGroups %}
-                          <div>
-                            <a target="_blank" href="{{ AUTH_URL }}/admin/master/console/#/{{ AUTH_REALM | urlencode() }}/clients/{{ AUTH_CLIENT | urlencode() }}/authorization/policy/{{ AUTH_REALM | urlencode() }}-group-{{ group | regex_replace('/?(.*)', '$1') | urlencode() }}/group">
-                              <wa-badge variant="success">
-                                {{ group | e }}
-                              </wa-badge>
-                            </a>
-                          </div>
-                          {% endfor %}
-                      </wa-scroller>
-                    </div>
-                  </wa-details>
-                  <wa-details summary="Current scopes" open="true">
-                    <div class="wa-stack ">
-                      <wa-scroller>
+                  <wa-button size="small" id="site-button-user-page" variant="brand" href="{{ SITE_BASE_URL }}{% if userId is defined %}/en-us/edit/user/{{ userId }}{% else %}/en-us/search/user{% endif %}" label="see or change your user profile">
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-house-user"></i>
+                    <span>my user page</span>
+                  </wa-button>
+                  <wa-button size="small" id="site-button-logout" variant="brand" href="{{ logoutUrl }}" label="sign out">
+                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-person-from-portal"></i>
+                    <span>log out</span>
+                  </wa-button>
+                </div>
+                <wa-details summary="User groups" open="true">
+                  <div class="wa-stack ">
+                    <wa-scroller>
+                        {% for group in userGroups %}
                         <div>
-                          <wa-tag variant="neutral">{{ pageUri }}</wa-tag>
-                        </div>
-                        <div>
-                          {% for scope in scopes %}
-                          <a target="_blank" href="{{ AUTH_URL }}/admin/master/console/#/{{ AUTH_REALM | urlencode() }}/clients/{{ AUTH_CLIENT | urlencode() }}/authorization/scope/{{ AUTH_REALM | urlencode() }}-{{ scope | urlencode() }}">
+                          <a target="_blank" href="{{ AUTH_URL }}/admin/master/console/#/{{ AUTH_REALM | urlencode() }}/clients/{{ AUTH_CLIENT | urlencode() }}/authorization/policy/{{ AUTH_REALM | urlencode() }}-group-{{ group | regex_replace('/?(.*)', '$1') | urlencode() }}/group">
                             <wa-badge variant="success">
-                              {{ scope }}
+                              {{ group | e }}
                             </wa-badge>
                           </a>
-                          {% endfor %}
                         </div>
-                      </wa-scroller>
-                    </div>
-                  </wa-details>
-                </div>
-              </wa-details>
-{%- else %}
-              <wa-button variant="brand" href="{{ SITE_BASE_URL }}/en-us/search/user">
-                <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-person-to-portal"></i> sign in
-              </wa-button>
-{%- endif %}
-            </div>
-            <div>
-              <wa-details summary="info" open="true">
-                <div class="wa-stack ">
-                  <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-SitePage" href="{{ SITE_BASE_URL }}/en-us/search/article">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-newspaper"></i>
-                    articles
-                  </wa-button>
-                </div>
-              </wa-details>
-              <wa-details summary="multi-tenancy" open="true">
-                <div class="wa-stack ">
-                  <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/tenant">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
-                    tenants
-                  </wa-button>
-                  <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-HostCredential" href="{{ SITE_BASE_URL }}/en-us/search/host-credential">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-input-password"></i>
-                    host credentials
-                  </wa-button>
-                </div>
-              </wa-details>
-              <wa-details summary="hosts" open="true">
-                <div class="wa-stack ">
-                  <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-HostInventory" href="{{ SITE_BASE_URL }}/en-us/search/host-inventory">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-network-wired"></i>
-                    host inventories
-                  </wa-button>
-                  <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-Host" href="{{ SITE_BASE_URL }}/en-us/search/host">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-server"></i>
-                    hosts
-                  </wa-button>
-                  <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-HostCheck" href="{{ SITE_BASE_URL }}/en-us/search/host-check">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-box-check"></i>
-                    host checks
-                  </wa-button>
-                </div>
-              </wa-details>
-              <wa-details summary="Ansible" open="true">
-                <div class="wa-stack ">
-                  <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-AnsibleProject" href="{{ SITE_BASE_URL }}/en-us/search/ansible-project">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
-                    ansible projects
-                  </wa-button>
-                  <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-JobTemplate" href="{{ SITE_BASE_URL }}/en-us/search/job-template">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
-                    job templates
-                  </wa-button>
-                </div>
-              </wa-details>
-              <wa-details summary="OpenShift" open="true">
-                <div class="wa-stack ">
-                  <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-Project" href="{{ SITE_BASE_URL }}/en-us/search/project">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-people-line"></i>
-                    projects
-                  </wa-button>
-                  <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-AiTelemetryPlatform" href="{{ SITE_BASE_URL }}/en-us/search/ai-telemetry-platform">
-                    <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-chart-fft"></i>
-                    AI Telemetry developers
-                  </wa-button>
-                </div>
-              </wa-details>
+                        {% endfor %}
+                    </wa-scroller>
+                  </div>
+                </wa-details>
+                <wa-details summary="Current scopes" open="true">
+                  <div class="wa-stack ">
+                    <wa-scroller>
+                      <div>
+                        <wa-tag variant="neutral">{{ pageUri }}</wa-tag>
+                      </div>
+                      <div>
+                        {% for scope in scopes -%}
+                        <a target="_blank" href="{{ AUTH_URL }}/admin/master/console/#/{{ AUTH_REALM | urlencode() }}/clients/{{ AUTH_CLIENT | urlencode() }}/authorization/scope/{{ AUTH_REALM | urlencode() }}-{{ scope | urlencode() }}">
+                          <wa-badge variant="success">
+                            {{ scope }}
+                          </wa-badge>
+                        </a>
+                        {%- endfor %}{{''}}
+                      </div>
+                    </wa-scroller>
+                  </div>
+                </wa-details>
               </div>
+            </wa-details>
+            {%- else -%}
+            <wa-button variant="brand" href="{{ SITE_BASE_URL }}/en-us/search/user">
+              <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-person-to-portal"></i> sign in
+            </wa-button>
+            {%- endif %}{{''}}
           </div>
-        </nav>
+          <div>
+            <wa-details summary="info" open="true">
+              <div class="wa-stack ">
+                <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-SitePage" href="{{ SITE_BASE_URL }}/en-us/search/article">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-newspaper"></i>
+                  articles
+                </wa-button>
+              </div>
+            </wa-details>
+            <wa-details summary="multi-tenancy" open="true">
+              <div class="wa-stack ">
+                <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-Tenant" href="{{ SITE_BASE_URL }}/en-us/search/tenant">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+                  tenants
+                </wa-button>
+                <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-HostCredential" href="{{ SITE_BASE_URL }}/en-us/search/host-credential">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-input-password"></i>
+                  host credentials
+                </wa-button>
+              </div>
+            </wa-details>
+            <wa-details summary="hosts" open="true">
+              <div class="wa-stack ">
+                <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-HostInventory" href="{{ SITE_BASE_URL }}/en-us/search/host-inventory">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-network-wired"></i>
+                  host inventories
+                </wa-button>
+                <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-Host" href="{{ SITE_BASE_URL }}/en-us/search/host">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-server"></i>
+                  hosts
+                </wa-button>
+                <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-HostCheck" href="{{ SITE_BASE_URL }}/en-us/search/host-check">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-box-check"></i>
+                  host checks
+                </wa-button>
+              </div>
+            </wa-details>
+            <wa-details summary="Ansible" open="true">
+              <div class="wa-stack ">
+                <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-AnsibleProject" href="{{ SITE_BASE_URL }}/en-us/search/ansible-project">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
+                  ansible projects
+                </wa-button>
+                <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-JobTemplate" href="{{ SITE_BASE_URL }}/en-us/search/job-template">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-excavator"></i>
+                  job templates
+                </wa-button>
+              </div>
+            </wa-details>
+            <wa-details summary="OpenShift" open="true">
+              <div class="wa-stack ">
+                <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-Project" href="{{ SITE_BASE_URL }}/en-us/search/project">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-people-line"></i>
+                  projects
+                </wa-button>
+                <wa-button size="small" style="width: 100%; " variant="brand" id="site-aside-left-model-button-AiTelemetryPlatform" href="{{ SITE_BASE_URL }}/en-us/search/ai-telemetry-platform">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-chart-fft"></i>
+                  AI Telemetry developers
+                </wa-button>
+              </div>
+            </wa-details>
+          </div>
+        </div>
+      </nav>
       {% if WEB_COMPONENTS_PRO == 'false' -%}
       </wa-drawer>
       {% endif %}
       <main id="site-main" class="wa-stack ">
-        <wa-drawer id="warnings-drawer" label="Warnings">
-          <div id="warnings-drawer-stack" class="wa-stack ">
-          </div>
-        </wa-drawer>
-{%- endblock htmBodyStartPageLayout %}
-{% block htmBodyMiddlePageLayout %}
+        {% endblock htmBodyStartPageLayout -%}
+        {% block htmBodyMiddlePageLayout -%}
         <main slot="main" class="pageContent wa-stack wa-gap-3xl ">
           put stuff here
         </main>
-{%- endblock htmBodyMiddlePageLayout %}
-{%- block htmBodyEndPageLayout %}
+        {% endblock htmBodyMiddlePageLayout -%}
+        {% block htmBodyEndPageLayout -%}
         <footer class="no-gradient wa-cluster wa-align-items-center " slot="main-footer">
-          {% if GITHUB_ORG is defined %}
-          <wa-button size="small" variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" variant="brand" target="_blank" appearance="filled outlined" class="tile">
+          {% if GITHUB_ORG is defined -%}
+          <wa-button size="small" variant="brand" href="https://github.com/{{ GITHUB_ORG }}/{{ SITE_NAME }}" target="_blank" appearance="filled outlined" class="tile">
             <div class="wa-cluster" style="gap: 1ch;">
               <span>This site is</span>
               <i class="fa-brands fa-github fa-xl"></i>
               <b>open source</b>
             </div>
           </wa-button>
-          {% endif %}
-          <wa-button size="small" variant="brand" href="https://computate.org/" variant="brand" target="_blank" id="footer-generated-by" appearance="filled outlined" class="tile">
+          {% endif -%}
+          <wa-button size="small" variant="brand" href="https://computate.org/" target="_blank" id="footer-generated-by" appearance="filled outlined" class="tile">
             <div class="wa-cluster" style="gap: 1ch;">
               <span>Generated with </span>
               <img class="footer-img" style="font-weight: var(--wa-font-weight-bold);" src="{{ STATIC_BASE_URL }}/svg/computate-keys.svg" alt="Computate"/>
             </div>
           </wa-button>
-          {% if SITE_POWERED_BY_URL is defined %}
-          <wa-button size="small" variant="brand" href="{{ SITE_POWERED_BY_URL }}" variant="brand" target="_blank" id="footer-powered-by" appearance="filled outlined" class="tile">
+          {% if SITE_POWERED_BY_URL is defined -%}
+          <wa-button size="small" variant="brand" href="{{ SITE_POWERED_BY_URL }}" target="_blank" id="footer-powered-by" appearance="filled outlined" class="tile">
             <div class="wa-cluster" style="gap: 1ch;">
               <span>Powered by </span>
-              <i class="fa-brands fa-redhat fa-xl" style="color: #ff0000;"></i>
+              {{ SITE_POWERED_BY_IMAGE }}
               <b>{{ SITE_POWERED_BY_NAME | e }}</b>
             </div>
           </wa-button>
-          {% endif %}
+          {%- endif %}{{''}}
+          
         </footer>
       </main>
-    {% if WEB_COMPONENTS_PREFIX == 'wa-' -%}
+    {%- if WEB_COMPONENTS_PREFIX == 'wa-' %}{{''}}
     </wa-page>
     {%- else -%}
     </div>
-    {% endif %}
-{%- endblock htmBodyEndPageLayout %}
-{%- endblock htmBodyPageLayout %}
+    {%- endif %}
+    {%- endblock htmBodyEndPageLayout %}
+    {%- endblock htmBodyPageLayout %}{{''}}
   </body>
 </html>
