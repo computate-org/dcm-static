@@ -340,42 +340,6 @@
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputPageIdTenantPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
-  {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_pageId">
-  {%- endif %}
-                  <wa-input
-                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[String] Page ID"
-                      label="Page ID"
-                      hint="The ID for this page. "
-                      id="Tenant_{{classApiMethodMethod}}_pageId"
-  {%- if "Page" == classApiMethodMethod %}
-                      data-tenantResource={{ result.tenantResource | tojson }}
-                      class="label-on-left Tenant_{{classApiMethodMethod}}_pageId setPageId classTenant inputTenant{{ result.tenantResource }}PageId "
-                      name="setPageId"
-  {%- else %}
-    {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left Tenant_{{classApiMethodMethod}}_pageId setPageId classTenant inputTenant{{ result.tenantResource }}PageId "
-                      name="setPageId"
-    {%- else %}
-                      class="label-on-left Tenant_{{classApiMethodMethod}}_pageId valuePageId classTenant inputTenant{{ result.tenantResource }}PageId "
-                      name="pageId"
-    {%- endif %}
-  {%- endif %}
-  {% if "Page" == classApiMethodMethod -%}
-                      value="{{result.pageId | e }}"
-  {% endif -%}
-                      ></wa-input>
-
-  {%- if 'Page' == classApiMethodMethod %}
-                </form>
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro htmPageIdTenantPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputPageIdTenantPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
-{%- endmacro %}
 
 {%- macro htmFormButton_patchTenant() %}
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchTenant" duration="5000" closable class="wa-header-l ">
@@ -439,23 +403,6 @@
                 {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-              </div>
-            </wa-details>
-
-            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="useful-urls">
-              <div slot="summary">
-                <span>Useful URLs</span>
-              </div>
-              <div class="grid-with-subgrid-2col ">
-                {% if "PATCH" in scopes -%}
-                {{ htmPageIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmPageIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmPageIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -528,23 +475,6 @@
                 {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-              </div>
-            </wa-details>
-
-            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="useful-urls">
-              <div slot="summary">
-                <span>Useful URLs</span>
-              </div>
-              <div class="grid-with-subgrid-2col ">
-                {% if "POST" in scopes -%}
-                {{ htmPageIdTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmPageIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmPageIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -698,23 +628,6 @@
                 {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-              </div>
-            </wa-details>
-
-            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="useful-urls">
-              <div slot="summary">
-                <span>Useful URLs</span>
-              </div>
-              <div class="grid-with-subgrid-2col ">
-                {% if "PATCH" in scopes -%}
-                {{ htmPageIdTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmPageIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmPageIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>

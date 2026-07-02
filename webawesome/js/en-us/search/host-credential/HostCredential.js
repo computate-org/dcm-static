@@ -85,8 +85,8 @@ async function websocketHostCredentialInner(apiRequest) {
         var inputTenantResource = null;
         var inputCredentialName = null;
         var inputCredentialDescription = null;
-        var inputUserName = null;
         var inputBecomePassword = null;
+        var inputUserName = null;
         var inputPassword = null;
         var inputBecomeMethod = null;
         var inputClassCanonicalName = null;
@@ -103,11 +103,11 @@ async function websocketHostCredentialInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputAapCredentialId = null;
         var inputTenantId = null;
         var inputAapOrganizationId = null;
         var inputCredentialId = null;
         var inputCredentialResource = null;
-        var inputAapCredentialId = null;
         var inputAapCredentialTypeId = null;
 
         if(vars.includes('pk'))
@@ -124,10 +124,10 @@ async function websocketHostCredentialInner(apiRequest) {
           inputCredentialName = $response.querySelector('.HostCredential_Page_credentialName');
         if(vars.includes('credentialDescription'))
           inputCredentialDescription = $response.querySelector('.HostCredential_Page_credentialDescription');
-        if(vars.includes('userName'))
-          inputUserName = $response.querySelector('.HostCredential_Page_userName');
         if(vars.includes('becomePassword'))
           inputBecomePassword = $response.querySelector('.HostCredential_Page_becomePassword');
+        if(vars.includes('userName'))
+          inputUserName = $response.querySelector('.HostCredential_Page_userName');
         if(vars.includes('password'))
           inputPassword = $response.querySelector('.HostCredential_Page_password');
         if(vars.includes('becomeMethod'))
@@ -160,6 +160,8 @@ async function websocketHostCredentialInner(apiRequest) {
           inputObjectText = $response.querySelector('.HostCredential_Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.HostCredential_Page_solrId');
+        if(vars.includes('aapCredentialId'))
+          inputAapCredentialId = $response.querySelector('.HostCredential_Page_aapCredentialId');
         if(vars.includes('tenantId'))
           inputTenantId = $response.querySelector('.HostCredential_Page_tenantId');
         if(vars.includes('aapOrganizationId'))
@@ -168,8 +170,6 @@ async function websocketHostCredentialInner(apiRequest) {
           inputCredentialId = $response.querySelector('.HostCredential_Page_credentialId');
         if(vars.includes('credentialResource'))
           inputCredentialResource = $response.querySelector('.HostCredential_Page_credentialResource');
-        if(vars.includes('aapCredentialId'))
-          inputAapCredentialId = $response.querySelector('.HostCredential_Page_aapCredentialId');
         if(vars.includes('aapCredentialTypeId'))
           inputAapCredentialTypeId = $response.querySelector('.HostCredential_Page_aapCredentialTypeId');
 
@@ -276,20 +276,6 @@ async function websocketHostCredentialInner(apiRequest) {
           addGlow(document.querySelector('.HostCredential_Page_credentialDescription'));
         }
 
-        if(inputUserName) {
-          document.querySelectorAll('.HostCredential_Page_userName').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputUserName.getAttribute('value');
-            else
-              item.textContent = inputUserName.textContent;
-          });
-          addGlow(document.querySelector('.HostCredential_Page_userName'));
-        }
-
         if(inputBecomePassword) {
           document.querySelectorAll('.HostCredential_Page_becomePassword').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
@@ -302,6 +288,20 @@ async function websocketHostCredentialInner(apiRequest) {
               item.textContent = inputBecomePassword.textContent;
           });
           addGlow(document.querySelector('.HostCredential_Page_becomePassword'));
+        }
+
+        if(inputUserName) {
+          document.querySelectorAll('.HostCredential_Page_userName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputUserName.getAttribute('value');
+            else
+              item.textContent = inputUserName.textContent;
+          });
+          addGlow(document.querySelector('.HostCredential_Page_userName'));
         }
 
         if(inputPassword) {
@@ -528,6 +528,20 @@ async function websocketHostCredentialInner(apiRequest) {
           addGlow(document.querySelector('.HostCredential_Page_solrId'));
         }
 
+        if(inputAapCredentialId) {
+          document.querySelectorAll('.HostCredential_Page_aapCredentialId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapCredentialId.getAttribute('value');
+            else
+              item.textContent = inputAapCredentialId.textContent;
+          });
+          addGlow(document.querySelector('.HostCredential_Page_aapCredentialId'));
+        }
+
         if(inputTenantId) {
           document.querySelectorAll('.HostCredential_Page_tenantId').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
@@ -582,20 +596,6 @@ async function websocketHostCredentialInner(apiRequest) {
               item.textContent = inputCredentialResource.textContent;
           });
           addGlow(document.querySelector('.HostCredential_Page_credentialResource'));
-        }
-
-        if(inputAapCredentialId) {
-          document.querySelectorAll('.HostCredential_Page_aapCredentialId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapCredentialId.getAttribute('value');
-            else
-              item.textContent = inputAapCredentialId.textContent;
-          });
-          addGlow(document.querySelector('.HostCredential_Page_aapCredentialId'));
         }
 
         if(inputAapCredentialTypeId) {
@@ -791,13 +791,13 @@ function searchHostCredentialFilters($formFilters) {
     if(filterCredentialDescription != null && filterCredentialDescription !== '')
       filters.push({ name: 'fq', value: 'credentialDescription:' + filterCredentialDescription });
 
-    var filterUserName = $formFilters.querySelector('.valueUserName')?.value;
-    if(filterUserName != null && filterUserName !== '')
-      filters.push({ name: 'fq', value: 'userName:' + filterUserName });
-
     var filterBecomePassword = $formFilters.querySelector('.valueBecomePassword')?.value;
     if(filterBecomePassword != null && filterBecomePassword !== '')
       filters.push({ name: 'fq', value: 'becomePassword:' + filterBecomePassword });
+
+    var filterUserName = $formFilters.querySelector('.valueUserName')?.value;
+    if(filterUserName != null && filterUserName !== '')
+      filters.push({ name: 'fq', value: 'userName:' + filterUserName });
 
     var filterPassword = $formFilters.querySelector('.valuePassword')?.value;
     if(filterPassword != null && filterPassword !== '')
@@ -863,6 +863,10 @@ function searchHostCredentialFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterAapCredentialId = $formFilters.querySelector('.valueAapCredentialId')?.value;
+    if(filterAapCredentialId != null && filterAapCredentialId !== '')
+      filters.push({ name: 'fq', value: 'aapCredentialId:' + filterAapCredentialId });
+
     var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
     if(filterTenantId != null && filterTenantId !== '')
       filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
@@ -878,10 +882,6 @@ function searchHostCredentialFilters($formFilters) {
     var filterCredentialResource = $formFilters.querySelector('.valueCredentialResource')?.value;
     if(filterCredentialResource != null && filterCredentialResource !== '')
       filters.push({ name: 'fq', value: 'credentialResource:' + filterCredentialResource });
-
-    var filterAapCredentialId = $formFilters.querySelector('.valueAapCredentialId')?.value;
-    if(filterAapCredentialId != null && filterAapCredentialId !== '')
-      filters.push({ name: 'fq', value: 'aapCredentialId:' + filterAapCredentialId });
 
     var filterAapCredentialTypeId = $formFilters.querySelector('.valueAapCredentialTypeId')?.value;
     if(filterAapCredentialTypeId != null && filterAapCredentialTypeId !== '')
@@ -968,8 +968,8 @@ function suggestHostCredentialTenantResource(filters, $list, credentialResource 
     }
   };
   error = function( jqXhr, target2 ) {};
-  if (typeof searchTenantVals === 'function') {
-    searchTenantVals(filters, target, success, error);
+  if (typeof searchTenantIntentVals === 'function') {
+    searchTenantIntentVals(filters, target, success, error);
   }
 }
 
@@ -1104,18 +1104,6 @@ async function patchHostCredential($formFilters, $formValues, target, credential
   if(removeCredentialDescription != null && removeCredentialDescription !== '')
     vals['removeCredentialDescription'] = removeCredentialDescription;
 
-  var valueUserName = $formValues.querySelector('.valueUserName')?.value;
-  var removeUserName = $formValues.querySelector('.removeUserName')?.value === 'true';
-  var setUserName = removeUserName ? null : $formValues.querySelector('.setUserName')?.value;
-  var addUserName = $formValues.querySelector('.addUserName')?.value;
-  if(removeUserName || setUserName != null && setUserName !== '')
-    vals['setUserName'] = setUserName;
-  if(addUserName != null && addUserName !== '')
-    vals['addUserName'] = addUserName;
-  var removeUserName = $formValues.querySelector('.removeUserName')?.value;
-  if(removeUserName != null && removeUserName !== '')
-    vals['removeUserName'] = removeUserName;
-
   var valueBecomePassword = $formValues.querySelector('.valueBecomePassword')?.value;
   var removeBecomePassword = $formValues.querySelector('.removeBecomePassword')?.value === 'true';
   var setBecomePassword = removeBecomePassword ? null : $formValues.querySelector('.setBecomePassword')?.value;
@@ -1127,6 +1115,18 @@ async function patchHostCredential($formFilters, $formValues, target, credential
   var removeBecomePassword = $formValues.querySelector('.removeBecomePassword')?.value;
   if(removeBecomePassword != null && removeBecomePassword !== '')
     vals['removeBecomePassword'] = removeBecomePassword;
+
+  var valueUserName = $formValues.querySelector('.valueUserName')?.value;
+  var removeUserName = $formValues.querySelector('.removeUserName')?.value === 'true';
+  var setUserName = removeUserName ? null : $formValues.querySelector('.setUserName')?.value;
+  var addUserName = $formValues.querySelector('.addUserName')?.value;
+  if(removeUserName || setUserName != null && setUserName !== '')
+    vals['setUserName'] = setUserName;
+  if(addUserName != null && addUserName !== '')
+    vals['addUserName'] = addUserName;
+  var removeUserName = $formValues.querySelector('.removeUserName')?.value;
+  if(removeUserName != null && removeUserName !== '')
+    vals['removeUserName'] = removeUserName;
 
   var valuePassword = $formValues.querySelector('.valuePassword')?.value;
   var removePassword = $formValues.querySelector('.removePassword')?.value === 'true';
@@ -1236,6 +1236,18 @@ async function patchHostCredential($formFilters, $formValues, target, credential
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
+  var valueAapCredentialId = $formValues.querySelector('.valueAapCredentialId')?.value;
+  var removeAapCredentialId = $formValues.querySelector('.removeAapCredentialId')?.value === 'true';
+  var setAapCredentialId = removeAapCredentialId ? null : $formValues.querySelector('.setAapCredentialId')?.value;
+  var addAapCredentialId = $formValues.querySelector('.addAapCredentialId')?.value;
+  if(removeAapCredentialId || setAapCredentialId != null && setAapCredentialId !== '')
+    vals['setAapCredentialId'] = setAapCredentialId;
+  if(addAapCredentialId != null && addAapCredentialId !== '')
+    vals['addAapCredentialId'] = addAapCredentialId;
+  var removeAapCredentialId = $formValues.querySelector('.removeAapCredentialId')?.value;
+  if(removeAapCredentialId != null && removeAapCredentialId !== '')
+    vals['removeAapCredentialId'] = removeAapCredentialId;
+
   var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
   var removeTenantId = $formValues.querySelector('.removeTenantId')?.value === 'true';
   var setTenantId = removeTenantId ? null : $formValues.querySelector('.setTenantId')?.value;
@@ -1283,18 +1295,6 @@ async function patchHostCredential($formFilters, $formValues, target, credential
   var removeCredentialResource = $formValues.querySelector('.removeCredentialResource')?.value;
   if(removeCredentialResource != null && removeCredentialResource !== '')
     vals['removeCredentialResource'] = removeCredentialResource;
-
-  var valueAapCredentialId = $formValues.querySelector('.valueAapCredentialId')?.value;
-  var removeAapCredentialId = $formValues.querySelector('.removeAapCredentialId')?.value === 'true';
-  var setAapCredentialId = removeAapCredentialId ? null : $formValues.querySelector('.setAapCredentialId')?.value;
-  var addAapCredentialId = $formValues.querySelector('.addAapCredentialId')?.value;
-  if(removeAapCredentialId || setAapCredentialId != null && setAapCredentialId !== '')
-    vals['setAapCredentialId'] = setAapCredentialId;
-  if(addAapCredentialId != null && addAapCredentialId !== '')
-    vals['addAapCredentialId'] = addAapCredentialId;
-  var removeAapCredentialId = $formValues.querySelector('.removeAapCredentialId')?.value;
-  if(removeAapCredentialId != null && removeAapCredentialId !== '')
-    vals['removeAapCredentialId'] = removeAapCredentialId;
 
   var valueAapCredentialTypeId = $formValues.querySelector('.valueAapCredentialTypeId')?.value;
   var removeAapCredentialTypeId = $formValues.querySelector('.removeAapCredentialTypeId')?.value === 'true';
@@ -1350,13 +1350,13 @@ function patchHostCredentialFilters($formFilters) {
     if(filterCredentialDescription != null && filterCredentialDescription !== '')
       filters.push({ name: 'fq', value: 'credentialDescription:' + filterCredentialDescription });
 
-    var filterUserName = $formFilters.querySelector('.valueUserName')?.value;
-    if(filterUserName != null && filterUserName !== '')
-      filters.push({ name: 'fq', value: 'userName:' + filterUserName });
-
     var filterBecomePassword = $formFilters.querySelector('.valueBecomePassword')?.value;
     if(filterBecomePassword != null && filterBecomePassword !== '')
       filters.push({ name: 'fq', value: 'becomePassword:' + filterBecomePassword });
+
+    var filterUserName = $formFilters.querySelector('.valueUserName')?.value;
+    if(filterUserName != null && filterUserName !== '')
+      filters.push({ name: 'fq', value: 'userName:' + filterUserName });
 
     var filterPassword = $formFilters.querySelector('.valuePassword')?.value;
     if(filterPassword != null && filterPassword !== '')
@@ -1422,6 +1422,10 @@ function patchHostCredentialFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterAapCredentialId = $formFilters.querySelector('.valueAapCredentialId')?.value;
+    if(filterAapCredentialId != null && filterAapCredentialId !== '')
+      filters.push({ name: 'fq', value: 'aapCredentialId:' + filterAapCredentialId });
+
     var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
     if(filterTenantId != null && filterTenantId !== '')
       filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
@@ -1437,10 +1441,6 @@ function patchHostCredentialFilters($formFilters) {
     var filterCredentialResource = $formFilters.querySelector('.valueCredentialResource')?.value;
     if(filterCredentialResource != null && filterCredentialResource !== '')
       filters.push({ name: 'fq', value: 'credentialResource:' + filterCredentialResource });
-
-    var filterAapCredentialId = $formFilters.querySelector('.valueAapCredentialId')?.value;
-    if(filterAapCredentialId != null && filterAapCredentialId !== '')
-      filters.push({ name: 'fq', value: 'aapCredentialId:' + filterAapCredentialId });
 
     var filterAapCredentialTypeId = $formFilters.querySelector('.valueAapCredentialTypeId')?.value;
     if(filterAapCredentialTypeId != null && filterAapCredentialTypeId !== '')
@@ -1536,13 +1536,13 @@ async function postHostCredential($formValues, target, success, error) {
   if(valueCredentialDescription != null && valueCredentialDescription !== '')
     vals['credentialDescription'] = valueCredentialDescription;
 
-  var valueUserName = $formValues.querySelector('.valueUserName')?.value;
-  if(valueUserName != null && valueUserName !== '')
-    vals['userName'] = valueUserName;
-
   var valueBecomePassword = $formValues.querySelector('.valueBecomePassword')?.value;
   if(valueBecomePassword != null && valueBecomePassword !== '')
     vals['becomePassword'] = valueBecomePassword;
+
+  var valueUserName = $formValues.querySelector('.valueUserName')?.value;
+  if(valueUserName != null && valueUserName !== '')
+    vals['userName'] = valueUserName;
 
   var valuePassword = $formValues.querySelector('.valuePassword')?.value;
   if(valuePassword != null && valuePassword !== '')
@@ -1580,6 +1580,10 @@ async function postHostCredential($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
+  var valueAapCredentialId = $formValues.querySelector('.valueAapCredentialId')?.value;
+  if(valueAapCredentialId != null && valueAapCredentialId !== '')
+    vals['aapCredentialId'] = valueAapCredentialId;
+
   var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
   if(valueTenantId != null && valueTenantId !== '')
     vals['tenantId'] = valueTenantId;
@@ -1595,10 +1599,6 @@ async function postHostCredential($formValues, target, success, error) {
   var valueCredentialResource = $formValues.querySelector('.valueCredentialResource')?.value;
   if(valueCredentialResource != null && valueCredentialResource !== '')
     vals['credentialResource'] = valueCredentialResource;
-
-  var valueAapCredentialId = $formValues.querySelector('.valueAapCredentialId')?.value;
-  if(valueAapCredentialId != null && valueAapCredentialId !== '')
-    vals['aapCredentialId'] = valueAapCredentialId;
 
   var valueAapCredentialTypeId = $formValues.querySelector('.valueAapCredentialTypeId')?.value;
   if(valueAapCredentialTypeId != null && valueAapCredentialTypeId !== '')

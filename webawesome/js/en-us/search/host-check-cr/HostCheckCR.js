@@ -130,8 +130,8 @@ async function websocketHostCheckCRInner(apiRequest) {
         var inputCheckId = null;
         var inputCheckResource = null;
         var inputCreatedByUserId = null;
-        var inputOwnedByUserId = null;
         var inputCreatedByFullName = null;
+        var inputOwnedByUserId = null;
         var inputOwnedByDisplayName = null;
         var inputAapOrganizationIdChange = null;
         var inputJobTemplateIdChange = null;
@@ -240,10 +240,10 @@ async function websocketHostCheckCRInner(apiRequest) {
           inputCheckResource = $response.querySelector('.HostCheckCR_Page_checkResource');
         if(vars.includes('createdByUserId'))
           inputCreatedByUserId = $response.querySelector('.HostCheckCR_Page_createdByUserId');
-        if(vars.includes('ownedByUserId'))
-          inputOwnedByUserId = $response.querySelector('.HostCheckCR_Page_ownedByUserId');
         if(vars.includes('createdByFullName'))
           inputCreatedByFullName = $response.querySelector('.HostCheckCR_Page_createdByFullName');
+        if(vars.includes('ownedByUserId'))
+          inputOwnedByUserId = $response.querySelector('.HostCheckCR_Page_ownedByUserId');
         if(vars.includes('ownedByDisplayName'))
           inputOwnedByDisplayName = $response.querySelector('.HostCheckCR_Page_ownedByDisplayName');
         if(vars.includes('aapOrganizationIdChange'))
@@ -984,20 +984,6 @@ async function websocketHostCheckCRInner(apiRequest) {
           addGlow(document.querySelector('.HostCheckCR_Page_createdByUserId'));
         }
 
-        if(inputOwnedByUserId) {
-          document.querySelectorAll('.HostCheckCR_Page_ownedByUserId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputOwnedByUserId.getAttribute('value');
-            else
-              item.textContent = inputOwnedByUserId.textContent;
-          });
-          addGlow(document.querySelector('.HostCheckCR_Page_ownedByUserId'));
-        }
-
         if(inputCreatedByFullName) {
           document.querySelectorAll('.HostCheckCR_Page_createdByFullName').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
@@ -1010,6 +996,20 @@ async function websocketHostCheckCRInner(apiRequest) {
               item.textContent = inputCreatedByFullName.textContent;
           });
           addGlow(document.querySelector('.HostCheckCR_Page_createdByFullName'));
+        }
+
+        if(inputOwnedByUserId) {
+          document.querySelectorAll('.HostCheckCR_Page_ownedByUserId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputOwnedByUserId.getAttribute('value');
+            else
+              item.textContent = inputOwnedByUserId.textContent;
+          });
+          addGlow(document.querySelector('.HostCheckCR_Page_ownedByUserId'));
         }
 
         if(inputOwnedByDisplayName) {
@@ -1425,13 +1425,13 @@ function searchHostCheckCRFilters($formFilters) {
     if(filterCreatedByUserId != null && filterCreatedByUserId !== '')
       filters.push({ name: 'fq', value: 'createdByUserId:' + filterCreatedByUserId });
 
-    var filterOwnedByUserId = $formFilters.querySelector('.valueOwnedByUserId')?.value;
-    if(filterOwnedByUserId != null && filterOwnedByUserId !== '')
-      filters.push({ name: 'fq', value: 'ownedByUserId:' + filterOwnedByUserId });
-
     var filterCreatedByFullName = $formFilters.querySelector('.valueCreatedByFullName')?.value;
     if(filterCreatedByFullName != null && filterCreatedByFullName !== '')
       filters.push({ name: 'fq', value: 'createdByFullName:' + filterCreatedByFullName });
+
+    var filterOwnedByUserId = $formFilters.querySelector('.valueOwnedByUserId')?.value;
+    if(filterOwnedByUserId != null && filterOwnedByUserId !== '')
+      filters.push({ name: 'fq', value: 'ownedByUserId:' + filterOwnedByUserId });
 
     var filterOwnedByDisplayName = $formFilters.querySelector('.valueOwnedByDisplayName')?.value;
     if(filterOwnedByDisplayName != null && filterOwnedByDisplayName !== '')
@@ -1526,8 +1526,8 @@ function suggestHostCheckCRTenantResource(filters, $list, changeRequestId = null
     }
   };
   error = function( jqXhr, target2 ) {};
-  if (typeof searchTenantVals === 'function') {
-    searchTenantVals(filters, target, success, error);
+  if (typeof searchTenantIntentVals === 'function') {
+    searchTenantIntentVals(filters, target, success, error);
   }
 }
 
@@ -2086,18 +2086,6 @@ async function patchHostCheckCR($formFilters, $formValues, target, changeRequest
   if(removeCreatedByUserId != null && removeCreatedByUserId !== '')
     vals['removeCreatedByUserId'] = removeCreatedByUserId;
 
-  var valueOwnedByUserId = $formValues.querySelector('.valueOwnedByUserId')?.value;
-  var removeOwnedByUserId = $formValues.querySelector('.removeOwnedByUserId')?.value === 'true';
-  var setOwnedByUserId = removeOwnedByUserId ? null : $formValues.querySelector('.setOwnedByUserId')?.value;
-  var addOwnedByUserId = $formValues.querySelector('.addOwnedByUserId')?.value;
-  if(removeOwnedByUserId || setOwnedByUserId != null && setOwnedByUserId !== '')
-    vals['setOwnedByUserId'] = setOwnedByUserId;
-  if(addOwnedByUserId != null && addOwnedByUserId !== '')
-    vals['addOwnedByUserId'] = addOwnedByUserId;
-  var removeOwnedByUserId = $formValues.querySelector('.removeOwnedByUserId')?.value;
-  if(removeOwnedByUserId != null && removeOwnedByUserId !== '')
-    vals['removeOwnedByUserId'] = removeOwnedByUserId;
-
   var valueCreatedByFullName = $formValues.querySelector('.valueCreatedByFullName')?.value;
   var removeCreatedByFullName = $formValues.querySelector('.removeCreatedByFullName')?.value === 'true';
   var setCreatedByFullName = removeCreatedByFullName ? null : $formValues.querySelector('.setCreatedByFullName')?.value;
@@ -2109,6 +2097,18 @@ async function patchHostCheckCR($formFilters, $formValues, target, changeRequest
   var removeCreatedByFullName = $formValues.querySelector('.removeCreatedByFullName')?.value;
   if(removeCreatedByFullName != null && removeCreatedByFullName !== '')
     vals['removeCreatedByFullName'] = removeCreatedByFullName;
+
+  var valueOwnedByUserId = $formValues.querySelector('.valueOwnedByUserId')?.value;
+  var removeOwnedByUserId = $formValues.querySelector('.removeOwnedByUserId')?.value === 'true';
+  var setOwnedByUserId = removeOwnedByUserId ? null : $formValues.querySelector('.setOwnedByUserId')?.value;
+  var addOwnedByUserId = $formValues.querySelector('.addOwnedByUserId')?.value;
+  if(removeOwnedByUserId || setOwnedByUserId != null && setOwnedByUserId !== '')
+    vals['setOwnedByUserId'] = setOwnedByUserId;
+  if(addOwnedByUserId != null && addOwnedByUserId !== '')
+    vals['addOwnedByUserId'] = addOwnedByUserId;
+  var removeOwnedByUserId = $formValues.querySelector('.removeOwnedByUserId')?.value;
+  if(removeOwnedByUserId != null && removeOwnedByUserId !== '')
+    vals['removeOwnedByUserId'] = removeOwnedByUserId;
 
   var valueOwnedByDisplayName = $formValues.querySelector('.valueOwnedByDisplayName')?.value;
   var removeOwnedByDisplayName = $formValues.querySelector('.removeOwnedByDisplayName')?.value === 'true';
@@ -2380,13 +2380,13 @@ function patchHostCheckCRFilters($formFilters) {
     if(filterCreatedByUserId != null && filterCreatedByUserId !== '')
       filters.push({ name: 'fq', value: 'createdByUserId:' + filterCreatedByUserId });
 
-    var filterOwnedByUserId = $formFilters.querySelector('.valueOwnedByUserId')?.value;
-    if(filterOwnedByUserId != null && filterOwnedByUserId !== '')
-      filters.push({ name: 'fq', value: 'ownedByUserId:' + filterOwnedByUserId });
-
     var filterCreatedByFullName = $formFilters.querySelector('.valueCreatedByFullName')?.value;
     if(filterCreatedByFullName != null && filterCreatedByFullName !== '')
       filters.push({ name: 'fq', value: 'createdByFullName:' + filterCreatedByFullName });
+
+    var filterOwnedByUserId = $formFilters.querySelector('.valueOwnedByUserId')?.value;
+    if(filterOwnedByUserId != null && filterOwnedByUserId !== '')
+      filters.push({ name: 'fq', value: 'ownedByUserId:' + filterOwnedByUserId });
 
     var filterOwnedByDisplayName = $formFilters.querySelector('.valueOwnedByDisplayName')?.value;
     if(filterOwnedByDisplayName != null && filterOwnedByDisplayName !== '')
@@ -2642,13 +2642,13 @@ async function postHostCheckCR($formValues, target, success, error) {
   if(valueCreatedByUserId != null && valueCreatedByUserId !== '')
     vals['createdByUserId'] = valueCreatedByUserId;
 
-  var valueOwnedByUserId = $formValues.querySelector('.valueOwnedByUserId')?.value;
-  if(valueOwnedByUserId != null && valueOwnedByUserId !== '')
-    vals['ownedByUserId'] = valueOwnedByUserId;
-
   var valueCreatedByFullName = $formValues.querySelector('.valueCreatedByFullName')?.value;
   if(valueCreatedByFullName != null && valueCreatedByFullName !== '')
     vals['createdByFullName'] = valueCreatedByFullName;
+
+  var valueOwnedByUserId = $formValues.querySelector('.valueOwnedByUserId')?.value;
+  if(valueOwnedByUserId != null && valueOwnedByUserId !== '')
+    vals['ownedByUserId'] = valueOwnedByUserId;
 
   var valueOwnedByDisplayName = $formValues.querySelector('.valueOwnedByDisplayName')?.value;
   if(valueOwnedByDisplayName != null && valueOwnedByDisplayName !== '')

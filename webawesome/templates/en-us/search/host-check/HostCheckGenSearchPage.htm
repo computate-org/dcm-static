@@ -27,7 +27,7 @@
 {%- block htmScriptsHostCheckPage %}
     <script src="{{staticBaseUrl}}/js/en-us/search/host-check/HostCheck.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-check/HostCheckSearchPage.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/job-template/JobTemplate.js"></script>
 {%- endblock htmScriptsHostCheckPage %}
 {%- endblock htmScriptsPageLayout %}
@@ -216,10 +216,6 @@
 
         var submitForm_patchHostCheck = document.querySelector('#htmForm_patchHostCheck')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_patchHostCheck')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           patchHostCheck(null, document.querySelector('#htmForm_patchHostCheck')
               , document.querySelector('#htmFormButton_patchHostCheck')
@@ -252,10 +248,6 @@
 
         var submitForm_postHostCheck = document.querySelector('#htmForm_postHostCheck')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_postHostCheck')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           postHostCheck(document.querySelector('#htmForm_postHostCheck')
               , document.querySelector('#htmFormButton_postHostCheck')
@@ -287,10 +279,6 @@
 
         var submitForm_deleteHostCheck = document.querySelector('#htmForm_deleteHostCheck')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deleteHostCheck')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           deleteHostCheck(event.target, event.target.getAttribute('data-checkResource')
               , (json, target) => {
@@ -320,10 +308,6 @@
         });
 
         var submitForm_putimportHostCheck = document.querySelector('#htmForm_putimportHostCheck')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportHostCheck')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           putimportHostCheck(document.querySelector('#htmForm_putimportHostCheck')
@@ -357,20 +341,12 @@
 
         var submitForm_searchpageHostCheck = document.querySelector('#htmForm_searchpageHostCheck')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_searchpageHostCheck')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           searchpageHostCheck();
           return false;
         });
 
         var submitForm_deletefilterHostCheck = document.querySelector('#htmForm_deletefilterHostCheck')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deletefilterHostCheck')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           deletefilterHostCheck(event.target
@@ -400,10 +376,10 @@
           return false;
         });
 
-        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_postTenantIntent')?.addEventListener('click', event => {
           event.preventDefault();
-          postTenant(document.querySelector('#htmForm_postTenant')
-              , document.querySelector('#htmFormButton_postTenant')
+          postTenantIntent(document.querySelector('#htmForm_postTenantIntent')
+              , document.querySelector('#htmFormButton_postTenantIntent')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])

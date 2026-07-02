@@ -66,6 +66,28 @@ Promise.all([
     facetStatsChange('TenantIntent', 'createdByEmail', false);
   });
 
+  document.querySelector('#pageSelectSortTenantIntent_createdByUserId')?.addEventListener('change', (event) => {
+    sort('TenantIntent', 'createdByUserId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantIntent_createdByUserId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantIntent', 'createdByUserId', true);
+  });
+  document.querySelector('#pageStatsTenantIntent_createdByUserId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantIntent', 'createdByUserId', false);
+  });
+
+  document.querySelector('#pageSelectSortTenantIntent_createdByFullName')?.addEventListener('change', (event) => {
+    sort('TenantIntent', 'createdByFullName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantIntent_createdByFullName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantIntent', 'createdByFullName', true);
+  });
+  document.querySelector('#pageStatsTenantIntent_createdByFullName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantIntent', 'createdByFullName', false);
+  });
+
   document.querySelector('#pageSelectSortTenantIntent_createdVia')?.addEventListener('change', (event) => {
     sort('TenantIntent', 'createdVia', event.currentTarget.value);
   });
@@ -132,6 +154,39 @@ Promise.all([
     facetStatsChange('TenantIntent', 'tenantDescription', false);
   });
 
+  document.querySelector('#pageSelectSortTenantIntent_tenantRequested')?.addEventListener('change', (event) => {
+    sort('TenantIntent', 'tenantRequested', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantIntent_tenantRequested')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantIntent', 'tenantRequested', true);
+  });
+  document.querySelector('#pageStatsTenantIntent_tenantRequested')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantIntent', 'tenantRequested', false);
+  });
+
+  document.querySelector('#pageSelectSortTenantIntent_locked')?.addEventListener('change', (event) => {
+    sort('TenantIntent', 'locked', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantIntent_locked')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantIntent', 'locked', true);
+  });
+  document.querySelector('#pageStatsTenantIntent_locked')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantIntent', 'locked', false);
+  });
+
+  document.querySelector('#pageSelectSortTenantIntent_tenantRealized')?.addEventListener('change', (event) => {
+    sort('TenantIntent', 'tenantRealized', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantIntent_tenantRealized')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantIntent', 'tenantRealized', true);
+  });
+  document.querySelector('#pageStatsTenantIntent_tenantRealized')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantIntent', 'tenantRealized', false);
+  });
+
   document.querySelector('#pageSelectSortTenantIntent_hostInventoryIds')?.addEventListener('change', (event) => {
     sort('TenantIntent', 'hostInventoryIds', event.currentTarget.value);
   });
@@ -152,17 +207,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsTenantIntent_ansibleProjectIds')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('TenantIntent', 'ansibleProjectIds', false);
-  });
-
-  document.querySelector('#pageSelectSortTenantIntent_pageId')?.addEventListener('change', (event) => {
-    sort('TenantIntent', 'pageId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsTenantIntent_pageId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('TenantIntent', 'pageId', true);
-  });
-  document.querySelector('#pageStatsTenantIntent_pageId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('TenantIntent', 'pageId', false);
   });
 
   document.querySelector('#pageSelectSortTenantIntent_classCanonicalName')?.addEventListener('change', (event) => {
@@ -319,28 +363,6 @@ Promise.all([
     facetStatsChange('TenantIntent', 'solrId', false);
   });
 
-  document.querySelector('#pageSelectSortTenantIntent_tenantId')?.addEventListener('change', (event) => {
-    sort('TenantIntent', 'tenantId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsTenantIntent_tenantId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('TenantIntent', 'tenantId', true);
-  });
-  document.querySelector('#pageStatsTenantIntent_tenantId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('TenantIntent', 'tenantId', false);
-  });
-
-  document.querySelector('#pageSelectSortTenantIntent_tenantResource')?.addEventListener('change', (event) => {
-    sort('TenantIntent', 'tenantResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsTenantIntent_tenantResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('TenantIntent', 'tenantResource', true);
-  });
-  document.querySelector('#pageStatsTenantIntent_tenantResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('TenantIntent', 'tenantResource', false);
-  });
-
   document.querySelector('#pageSelectSortTenantIntent_hubId')?.addEventListener('change', (event) => {
     sort('TenantIntent', 'hubId', event.currentTarget.value);
   });
@@ -361,6 +383,39 @@ Promise.all([
   });
   document.querySelector('#pageStatsTenantIntent_clusterName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('TenantIntent', 'clusterName', false);
+  });
+
+  document.querySelector('#pageSelectSortTenantIntent_aapOrganizationId')?.addEventListener('change', (event) => {
+    sort('TenantIntent', 'aapOrganizationId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantIntent_aapOrganizationId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantIntent', 'aapOrganizationId', true);
+  });
+  document.querySelector('#pageStatsTenantIntent_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantIntent', 'aapOrganizationId', false);
+  });
+
+  document.querySelector('#pageSelectSortTenantIntent_tenantId')?.addEventListener('change', (event) => {
+    sort('TenantIntent', 'tenantId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantIntent_tenantId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantIntent', 'tenantId', true);
+  });
+  document.querySelector('#pageStatsTenantIntent_tenantId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantIntent', 'tenantId', false);
+  });
+
+  document.querySelector('#pageSelectSortTenantIntent_tenantResource')?.addEventListener('change', (event) => {
+    sort('TenantIntent', 'tenantResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantIntent_tenantResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantIntent', 'tenantResource', true);
+  });
+  document.querySelector('#pageStatsTenantIntent_tenantResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantIntent', 'tenantResource', false);
   });
           document.querySelector('#fqTenantIntent_created')?.addEventListener('change', (event) => {
             fqChange('TenantIntent', event.currentTarget, facetChangeTenantIntentSuccess, facetChangeTenantIntentError);
@@ -434,22 +489,22 @@ Promise.all([
           document.querySelector('#pageFacetRangeEndTenantIntent_tenantDescription')?.addEventListener('change', (event) => {
             facetRangeEndChange('TenantIntent', event.currentTarget);
           });
-          document.querySelector('#fqTenantIntent_pageId')?.addEventListener('change', (event) => {
+          document.querySelector('#fqTenantIntent_locked')?.addEventListener('change', (event) => {
             fqChange('TenantIntent', event.currentTarget, facetChangeTenantIntentSuccess, facetChangeTenantIntentError);
           });
-          document.querySelector('#buttonFacetTenantIntent_pageId')?.addEventListener('click', (event) => {
+          document.querySelector('#buttonFacetTenantIntent_locked')?.addEventListener('click', (event) => {
             facetFieldChange('TenantIntent', event.currentTarget);
           });
-          document.querySelector('#pageFacetPivotTenantIntent_pageId')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetPivotTenantIntent_locked')?.addEventListener('change', (event) => {
             facetPivotChange('TenantIntent', event.currentTarget);
           });
-          document.querySelector('#pageFacetRangeGapTenantIntent_pageId')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetRangeGapTenantIntent_locked')?.addEventListener('change', (event) => {
             facetRangeGapChange('TenantIntent', event.currentTarget);
           });
-          document.querySelector('#pageFacetRangeStartTenantIntent_pageId')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetRangeStartTenantIntent_locked')?.addEventListener('change', (event) => {
             facetRangeStartChange('TenantIntent', event.currentTarget);
           });
-          document.querySelector('#pageFacetRangeEndTenantIntent_pageId')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetRangeEndTenantIntent_locked')?.addEventListener('change', (event) => {
             facetRangeEndChange('TenantIntent', event.currentTarget);
           });
           document.querySelector('#fqTenantIntent_displayPage')?.addEventListener('change', (event) => {
@@ -524,42 +579,6 @@ Promise.all([
           document.querySelector('#pageFacetRangeEndTenantIntent_download')?.addEventListener('change', (event) => {
             facetRangeEndChange('TenantIntent', event.currentTarget);
           });
-          document.querySelector('#fqTenantIntent_tenantId')?.addEventListener('change', (event) => {
-            fqChange('TenantIntent', event.currentTarget, facetChangeTenantIntentSuccess, facetChangeTenantIntentError);
-          });
-          document.querySelector('#buttonFacetTenantIntent_tenantId')?.addEventListener('click', (event) => {
-            facetFieldChange('TenantIntent', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotTenantIntent_tenantId')?.addEventListener('change', (event) => {
-            facetPivotChange('TenantIntent', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapTenantIntent_tenantId')?.addEventListener('change', (event) => {
-            facetRangeGapChange('TenantIntent', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeStartTenantIntent_tenantId')?.addEventListener('change', (event) => {
-            facetRangeStartChange('TenantIntent', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeEndTenantIntent_tenantId')?.addEventListener('change', (event) => {
-            facetRangeEndChange('TenantIntent', event.currentTarget);
-          });
-          document.querySelector('#fqTenantIntent_tenantResource')?.addEventListener('change', (event) => {
-            fqChange('TenantIntent', event.currentTarget, facetChangeTenantIntentSuccess, facetChangeTenantIntentError);
-          });
-          document.querySelector('#buttonFacetTenantIntent_tenantResource')?.addEventListener('click', (event) => {
-            facetFieldChange('TenantIntent', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotTenantIntent_tenantResource')?.addEventListener('change', (event) => {
-            facetPivotChange('TenantIntent', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapTenantIntent_tenantResource')?.addEventListener('change', (event) => {
-            facetRangeGapChange('TenantIntent', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeStartTenantIntent_tenantResource')?.addEventListener('change', (event) => {
-            facetRangeStartChange('TenantIntent', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeEndTenantIntent_tenantResource')?.addEventListener('change', (event) => {
-            facetRangeEndChange('TenantIntent', event.currentTarget);
-          });
           document.querySelector('#fqTenantIntent_hubId')?.addEventListener('change', (event) => {
             fqChange('TenantIntent', event.currentTarget, facetChangeTenantIntentSuccess, facetChangeTenantIntentError);
           });
@@ -594,6 +613,42 @@ Promise.all([
             facetRangeStartChange('TenantIntent', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndTenantIntent_clusterName')?.addEventListener('change', (event) => {
+            facetRangeEndChange('TenantIntent', event.currentTarget);
+          });
+          document.querySelector('#fqTenantIntent_tenantId')?.addEventListener('change', (event) => {
+            fqChange('TenantIntent', event.currentTarget, facetChangeTenantIntentSuccess, facetChangeTenantIntentError);
+          });
+          document.querySelector('#buttonFacetTenantIntent_tenantId')?.addEventListener('click', (event) => {
+            facetFieldChange('TenantIntent', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotTenantIntent_tenantId')?.addEventListener('change', (event) => {
+            facetPivotChange('TenantIntent', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapTenantIntent_tenantId')?.addEventListener('change', (event) => {
+            facetRangeGapChange('TenantIntent', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartTenantIntent_tenantId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('TenantIntent', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndTenantIntent_tenantId')?.addEventListener('change', (event) => {
+            facetRangeEndChange('TenantIntent', event.currentTarget);
+          });
+          document.querySelector('#fqTenantIntent_tenantResource')?.addEventListener('change', (event) => {
+            fqChange('TenantIntent', event.currentTarget, facetChangeTenantIntentSuccess, facetChangeTenantIntentError);
+          });
+          document.querySelector('#buttonFacetTenantIntent_tenantResource')?.addEventListener('click', (event) => {
+            facetFieldChange('TenantIntent', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotTenantIntent_tenantResource')?.addEventListener('change', (event) => {
+            facetPivotChange('TenantIntent', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapTenantIntent_tenantResource')?.addEventListener('change', (event) => {
+            facetRangeGapChange('TenantIntent', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartTenantIntent_tenantResource')?.addEventListener('change', (event) => {
+            facetRangeStartChange('TenantIntent', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndTenantIntent_tenantResource')?.addEventListener('change', (event) => {
             facetRangeEndChange('TenantIntent', event.currentTarget);
           });
 });

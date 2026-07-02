@@ -15,7 +15,7 @@
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 3;
+        --site-results-number-of-columns: 2;
       }
 {{ super() }}
 {%- block htmStyleTenantIntentPage %}
@@ -29,6 +29,8 @@
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntentSearchPage.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/requested/tenant/TenantRequested.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/realized/tenant/TenantRealized.js"></script>
 {%- endblock htmScriptsTenantIntentPage %}
 {%- endblock htmScriptsPageLayout %}
 
@@ -134,6 +136,38 @@
 
         var tenantResource = {% if result.tenantResource is defined %}{{ result.tenantResource | tojson }}{% else %}null{% endif %};
 
+          function relate_tenantRequested(event) {
+            suggestTenantIntentTenantRequested(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantRequestedId,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantRequested is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantRequested }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#TenantIntent_POST_tenantRequested')?.addEventListener('input', relate_tenantRequested);
+          document.querySelector('#TenantIntent_POST_tenantRequested')?.addEventListener('focus', relate_tenantRequested);
+          document.querySelector('#TenantIntent_PATCH_tenantRequested')?.addEventListener('input', relate_tenantRequested);
+          document.querySelector('#TenantIntent_PATCH_tenantRequested')?.addEventListener('focus', relate_tenantRequested);
+          function relate_tenantRealized(event) {
+            suggestTenantIntentTenantRealized(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantRealizedId,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantRealized is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantRealized }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#TenantIntent_POST_tenantRealized')?.addEventListener('input', relate_tenantRealized);
+          document.querySelector('#TenantIntent_POST_tenantRealized')?.addEventListener('focus', relate_tenantRealized);
+          document.querySelector('#TenantIntent_PATCH_tenantRealized')?.addEventListener('input', relate_tenantRealized);
+          document.querySelector('#TenantIntent_PATCH_tenantRealized')?.addEventListener('focus', relate_tenantRealized);
           function relate_hostInventoryIds(event) {
             suggestTenantIntentHostInventoryIds(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -376,7 +410,7 @@
           return false;
         });
 
-        document.querySelector('#htmFormButton_postHostInventory')?.addEventListener('click', event => {
+        document.querySelector('#htmForm_postHostInventory')?.addEventListener('submit', event => {
           event.preventDefault();
           postHostInventory(document.querySelector('#htmForm_postHostInventory')
               , document.querySelector('#htmFormButton_postHostInventory')
@@ -407,10 +441,72 @@
           });
         });
 
-        document.querySelector('#htmFormButton_postAnsibleProject')?.addEventListener('click', event => {
+        document.querySelector('#htmForm_postAnsibleProject')?.addEventListener('submit', event => {
           event.preventDefault();
           postAnsibleProject(document.querySelector('#htmForm_postAnsibleProject')
               , document.querySelector('#htmFormButton_postAnsibleProject')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+        });
+
+        document.querySelector('#htmForm_postTenantRequested')?.addEventListener('submit', event => {
+          event.preventDefault();
+          postTenantRequested(document.querySelector('#htmForm_postTenantRequested')
+              , document.querySelector('#htmFormButton_postTenantRequested')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+        });
+
+        document.querySelector('#htmForm_postTenantRealized')?.addEventListener('submit', event => {
+          event.preventDefault();
+          postTenantRealized(document.querySelector('#htmForm_postTenantRealized')
+              , document.querySelector('#htmFormButton_postTenantRealized')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])
@@ -562,7 +658,7 @@
                       <span>{{ item.tenantName | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
-                      <span>{{ item.tenantDescription | e }}</span>
+                      <span class="white-space-pre-wrap ">{{ item.tenantDescription | e }}</span>
                     </a>
                   </div>
                   {% endfor %}

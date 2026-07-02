@@ -605,9 +605,9 @@
 
 {%- macro htmForm_patchJobTemplate(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchJobTemplateDialog" label="Modify job template">
-          <form id="htmForm_patchJobTemplate" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_patchJobTemplate" class="wa-stack round-row primary-smart-border-radius ">
 
-            <wa-details open class="HtmRow" id="inventory-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="inventory-details">
               <div slot="summary">
                 <span>inventory details</span>
               </div>
@@ -634,7 +634,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="ansible-project-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="ansible-project-details">
               <div slot="summary">
                 <span>Ansible Project details</span>
               </div>
@@ -722,8 +722,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_patchJobTemplate() }}
           </form>
-          {{ htmFormButton_patchJobTemplate() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -738,10 +738,10 @@
 
 {%- macro htmForm_postJobTemplate(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postJobTemplateDialog" label="Create a job template">
-          <form id="htmForm_postJobTemplate" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_postJobTemplate" class="wa-stack round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
-            <wa-details open class="HtmRow" id="inventory-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="inventory-details">
               <div slot="summary">
                 <span>inventory details</span>
               </div>
@@ -768,7 +768,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="ansible-project-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="ansible-project-details">
               <div slot="summary">
                 <span>Ansible Project details</span>
               </div>
@@ -856,8 +856,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_postJobTemplate() }}
           </form>
-          {{ htmFormButton_postJobTemplate() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -872,9 +872,9 @@
 
 {%- macro htmForm_deleteJobTemplate(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteJobTemplateDialog" label="Delete job template">
-          <form id="htmForm_deleteJobTemplate" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deleteJobTemplate" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteJobTemplate() }}
           </form>
-          {{ htmFormButton_deleteJobTemplate() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -889,7 +889,7 @@
 
 {%- macro htmForm_putimportJobTemplate(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportJobTemplateDialog" label="Import job templates">
-          <form id="htmForm_putimportJobTemplate" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_putimportJobTemplate" class="wa-stack round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
                   class="PUTImport_searchList "
@@ -898,16 +898,16 @@
                   >
               </wa-textarea>
             </div>
+            {{ htmFormButton_putimportJobTemplate() }}
           </form>
-          {{ htmFormButton_putimportJobTemplate() }}
         </wa-dialog>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageJobTemplate(idSuffix='') %}
         <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageJobTemplateDialog" label="Search job templates">
-          <div id="htmForm_searchpageJobTemplate" class="round-row primary-smart-border-radius ">
+          <div id="htmForm_searchpageJobTemplate" class="wa-stack round-row primary-smart-border-radius ">
 
-            <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
                 <span>primary key, ID, created, modified, archive details</span>
               </div>
@@ -956,7 +956,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="inventory-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="inventory-details">
               <div slot="summary">
                 <span>inventory details</span>
               </div>
@@ -983,7 +983,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="ansible-project-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="ansible-project-details">
               <div slot="summary">
                 <span>Ansible Project details</span>
               </div>
@@ -1086,8 +1086,8 @@
 
 {%- macro htmForm_deletefilterJobTemplate(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterJobTemplateDialog" label="Delete job template">
-          <form id="htmForm_deletefilterJobTemplate" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deletefilterJobTemplate" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterJobTemplate() }}
           </form>
-          {{ htmFormButton_deletefilterJobTemplate() }}
         </wa-dialog>
 {%- endmacro %}

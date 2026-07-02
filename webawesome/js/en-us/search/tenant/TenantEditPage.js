@@ -103,27 +103,6 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH pageId
-          document.querySelector('#Tenant_Page_pageId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_pageId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchTenantVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
-                  , 'setPageId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#Tenant_Page_pageId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#Tenant_Page_pageId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_pageId');
-            const valid = form.reportValidity();
-          });
-
           // PATCH sessionId
           document.querySelector('#Tenant_Page_sessionId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_sessionId');

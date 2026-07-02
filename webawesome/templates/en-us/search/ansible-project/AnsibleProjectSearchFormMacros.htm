@@ -194,18 +194,18 @@
                 {{ inputTenantResourceAnsibleProjectPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
-                  relate a tenant to this ansible project
+                  relate a tenant intent to this ansible project
                 </div>
                 <ul class="label-on-left-ul " id="listAnsibleProjectTenantResource_{{classApiMethodMethod}}">
                 </ul>
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postTenant(idSuffix='_AnsibleProject_POST_tenantResource') }}
+                  {{ htmForm_postTenantIntent(idSuffix='_AnsibleProject_POST_tenantResource') }}
                   <wa-button
                        id="AnsibleProject_{{classApiMethodMethod}}_tenantResource_add"
-                       data-dialog="open postTenantDialog"
-                      >add a tenant</wa-button>
+                       data-dialog="open postTenantIntentDialog"
+                      >add a tenant intent</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
@@ -251,42 +251,6 @@
 {%- macro htmSourceControlTypeAnsibleProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputSourceControlTypeAnsibleProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
-  {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_ansibleProjectDescription">
-  {%- endif %}
-                  <wa-input
-                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[String] ansible project description"
-                      label="ansible project description"
-                      hint="The description of the ansible project. "
-                      id="AnsibleProject_{{classApiMethodMethod}}_ansibleProjectDescription"
-  {%- if "Page" == classApiMethodMethod %}
-                      data-ansibleProjectResource={{ result.ansibleProjectResource | tojson }}
-                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_ansibleProjectDescription setAnsibleProjectDescription classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}AnsibleProjectDescription "
-                      name="setAnsibleProjectDescription"
-  {%- else %}
-    {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_ansibleProjectDescription setAnsibleProjectDescription classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}AnsibleProjectDescription "
-                      name="setAnsibleProjectDescription"
-    {%- else %}
-                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_ansibleProjectDescription valueAnsibleProjectDescription classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}AnsibleProjectDescription "
-                      name="ansibleProjectDescription"
-    {%- endif %}
-  {%- endif %}
-  {% if "Page" == classApiMethodMethod -%}
-                      value="{{result.ansibleProjectDescription | e }}"
-  {% endif -%}
-                      ></wa-input>
-
-  {%- if 'Page' == classApiMethodMethod %}
-                </form>
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
-{%- endmacro %}
 {%- macro inputSourceControlUrlAnsibleProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_sourceControlUrl">
@@ -324,31 +288,31 @@
 {%- macro htmSourceControlUrlAnsibleProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputSourceControlUrlAnsibleProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputSourceControlBranchAnsibleProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_sourceControlBranch">
+                <form class="subgrid-2col " id="PageForm_ansibleProjectDescription">
   {%- endif %}
                   <wa-input
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[String] source control branch"
-                      label="source control branch"
-                      hint="The URL to the source control branch. "
-                      id="AnsibleProject_{{classApiMethodMethod}}_sourceControlBranch"
+                      placeholder="[String] ansible project description"
+                      label="ansible project description"
+                      hint="The description of the ansible project. "
+                      id="AnsibleProject_{{classApiMethodMethod}}_ansibleProjectDescription"
   {%- if "Page" == classApiMethodMethod %}
                       data-ansibleProjectResource={{ result.ansibleProjectResource | tojson }}
-                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_sourceControlBranch setSourceControlBranch classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}SourceControlBranch "
-                      name="setSourceControlBranch"
+                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_ansibleProjectDescription setAnsibleProjectDescription classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}AnsibleProjectDescription "
+                      name="setAnsibleProjectDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_sourceControlBranch setSourceControlBranch classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}SourceControlBranch "
-                      name="setSourceControlBranch"
+                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_ansibleProjectDescription setAnsibleProjectDescription classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}AnsibleProjectDescription "
+                      name="setAnsibleProjectDescription"
     {%- else %}
-                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_sourceControlBranch valueSourceControlBranch classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}SourceControlBranch "
-                      name="sourceControlBranch"
+                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_ansibleProjectDescription valueAnsibleProjectDescription classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}AnsibleProjectDescription "
+                      name="ansibleProjectDescription"
     {%- endif %}
   {%- endif %}
   {% if "Page" == classApiMethodMethod -%}
-                      value="{{result.sourceControlBranch | e }}"
+                      value="{{result.ansibleProjectDescription | e }}"
   {% endif -%}
                       ></wa-input>
 
@@ -357,8 +321,8 @@
   {%- endif %}
 {%- endmacro %}
 
-{%- macro htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputSourceControlBranchAnsibleProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- macro htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -416,6 +380,42 @@
                   </div>
                 {%- endif %}
                 {%- endif %}
+{%- endmacro %}
+{%- macro inputSourceControlBranchAnsibleProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_sourceControlBranch">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] source control branch"
+                      label="source control branch"
+                      hint="The URL to the source control branch. "
+                      id="AnsibleProject_{{classApiMethodMethod}}_sourceControlBranch"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-ansibleProjectResource={{ result.ansibleProjectResource | tojson }}
+                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_sourceControlBranch setSourceControlBranch classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}SourceControlBranch "
+                      name="setSourceControlBranch"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_sourceControlBranch setSourceControlBranch classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}SourceControlBranch "
+                      name="setSourceControlBranch"
+    {%- else %}
+                      class="label-on-left AnsibleProject_{{classApiMethodMethod}}_sourceControlBranch valueSourceControlBranch classAnsibleProject inputAnsibleProject{{ result.ansibleProjectResource }}SourceControlBranch "
+                      name="sourceControlBranch"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.sourceControlBranch | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputSourceControlBranchAnsibleProjectPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputAnsiblePlaybooksListAnsibleProjectPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -501,7 +501,7 @@
 
 {%- macro htmForm_patchAnsibleProject(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchAnsibleProjectDialog" label="Modify ansible project">
-          <form id="htmForm_patchAnsibleProject" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_patchAnsibleProject" class="wa-stack round-row primary-smart-border-radius ">
 
             <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
               <div slot="summary">
@@ -536,16 +536,6 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
-                {% if "PATCH" in scopes -%}
                 {{ htmSourceControlUrlAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
@@ -556,12 +546,12 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
@@ -572,6 +562,16 @@
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
@@ -603,8 +603,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_patchAnsibleProject() }}
           </form>
-          {{ htmFormButton_patchAnsibleProject() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -619,7 +619,7 @@
 
 {%- macro htmForm_postAnsibleProject(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postAnsibleProjectDialog" label="Create a ansible project">
-          <form id="htmForm_postAnsibleProject" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_postAnsibleProject" class="wa-stack round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
             <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
@@ -655,16 +655,6 @@
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
-                {% if "POST" in scopes -%}
                 {{ htmSourceControlUrlAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
@@ -675,12 +665,12 @@
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
@@ -691,6 +681,16 @@
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
@@ -722,8 +722,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_postAnsibleProject() }}
           </form>
-          {{ htmFormButton_postAnsibleProject() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -738,9 +738,9 @@
 
 {%- macro htmForm_deleteAnsibleProject(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteAnsibleProjectDialog" label="Delete ansible project">
-          <form id="htmForm_deleteAnsibleProject" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deleteAnsibleProject" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteAnsibleProject() }}
           </form>
-          {{ htmFormButton_deleteAnsibleProject() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -755,7 +755,7 @@
 
 {%- macro htmForm_putimportAnsibleProject(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportAnsibleProjectDialog" label="Import ansible projects">
-          <form id="htmForm_putimportAnsibleProject" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_putimportAnsibleProject" class="wa-stack round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
                   class="PUTImport_searchList "
@@ -764,14 +764,14 @@
                   >
               </wa-textarea>
             </div>
+            {{ htmFormButton_putimportAnsibleProject() }}
           </form>
-          {{ htmFormButton_putimportAnsibleProject() }}
         </wa-dialog>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageAnsibleProject(idSuffix='') %}
         <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageAnsibleProjectDialog" label="Search ansible projects">
-          <div id="htmForm_searchpageAnsibleProject" class="round-row primary-smart-border-radius ">
+          <div id="htmForm_searchpageAnsibleProject" class="wa-stack round-row primary-smart-border-radius ">
 
             <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
@@ -855,16 +855,6 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
-                {% if "PATCH" in scopes -%}
                 {{ htmSourceControlUrlAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
@@ -875,12 +865,12 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmAnsibleProjectDescriptionAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
@@ -891,6 +881,16 @@
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmJobTemplateResourcesAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmSourceControlBranchAnsibleProjectPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
 
@@ -937,8 +937,8 @@
 
 {%- macro htmForm_deletefilterAnsibleProject(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterAnsibleProjectDialog" label="Delete ansible project">
-          <form id="htmForm_deletefilterAnsibleProject" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deletefilterAnsibleProject" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterAnsibleProject() }}
           </form>
-          {{ htmFormButton_deletefilterAnsibleProject() }}
         </wa-dialog>
 {%- endmacro %}

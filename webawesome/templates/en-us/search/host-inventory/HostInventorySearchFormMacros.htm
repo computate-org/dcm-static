@@ -194,18 +194,18 @@
                 {{ inputTenantResourceHostInventoryPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
-                  relate a tenant to this host inventory
+                  relate a tenant intent to this host inventory
                 </div>
                 <ul class="label-on-left-ul " id="listHostInventoryTenantResource_{{classApiMethodMethod}}">
                 </ul>
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postTenant(idSuffix='_HostInventory_POST_tenantResource') }}
+                  {{ htmForm_postTenantIntent(idSuffix='_HostInventory_POST_tenantResource') }}
                   <wa-button
                        id="HostInventory_{{classApiMethodMethod}}_tenantResource_add"
-                       data-dialog="open postTenantDialog"
-                      >add a tenant</wa-button>
+                       data-dialog="open postTenantIntentDialog"
+                      >add a tenant intent</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
@@ -445,7 +445,7 @@
 
 {%- macro htmForm_patchHostInventory(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchHostInventoryDialog" label="Modify host inventory">
-          <form id="htmForm_patchHostInventory" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_patchHostInventory" class="wa-stack round-row primary-smart-border-radius ">
 
             <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
               <div slot="summary">
@@ -527,8 +527,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_patchHostInventory() }}
           </form>
-          {{ htmFormButton_patchHostInventory() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -543,7 +543,7 @@
 
 {%- macro htmForm_postHostInventory(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postHostInventoryDialog" label="Create a host inventory">
-          <form id="htmForm_postHostInventory" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_postHostInventory" class="wa-stack round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
             <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
@@ -626,8 +626,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_postHostInventory() }}
           </form>
-          {{ htmFormButton_postHostInventory() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -642,9 +642,9 @@
 
 {%- macro htmForm_deleteHostInventory(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteHostInventoryDialog" label="Delete host inventory">
-          <form id="htmForm_deleteHostInventory" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deleteHostInventory" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteHostInventory() }}
           </form>
-          {{ htmFormButton_deleteHostInventory() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -659,7 +659,7 @@
 
 {%- macro htmForm_putimportHostInventory(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportHostInventoryDialog" label="Import host inventories">
-          <form id="htmForm_putimportHostInventory" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_putimportHostInventory" class="wa-stack round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
                   class="PUTImport_searchList "
@@ -668,14 +668,14 @@
                   >
               </wa-textarea>
             </div>
+            {{ htmFormButton_putimportHostInventory() }}
           </form>
-          {{ htmFormButton_putimportHostInventory() }}
         </wa-dialog>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageHostInventory(idSuffix='') %}
         <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageHostInventoryDialog" label="Search host inventories">
-          <div id="htmForm_searchpageHostInventory" class="round-row primary-smart-border-radius ">
+          <div id="htmForm_searchpageHostInventory" class="wa-stack round-row primary-smart-border-radius ">
 
             <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
@@ -821,8 +821,8 @@
 
 {%- macro htmForm_deletefilterHostInventory(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterHostInventoryDialog" label="Delete host inventory">
-          <form id="htmForm_deletefilterHostInventory" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deletefilterHostInventory" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterHostInventory() }}
           </form>
-          {{ htmFormButton_deletefilterHostInventory() }}
         </wa-dialog>
 {%- endmacro %}

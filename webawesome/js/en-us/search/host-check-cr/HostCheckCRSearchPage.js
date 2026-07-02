@@ -583,17 +583,6 @@ Promise.all([
     facetStatsChange('HostCheckCR', 'createdByUserId', false);
   });
 
-  document.querySelector('#pageSelectSortHostCheckCR_ownedByUserId')?.addEventListener('change', (event) => {
-    sort('HostCheckCR', 'ownedByUserId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHostCheckCR_ownedByUserId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('HostCheckCR', 'ownedByUserId', true);
-  });
-  document.querySelector('#pageStatsHostCheckCR_ownedByUserId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('HostCheckCR', 'ownedByUserId', false);
-  });
-
   document.querySelector('#pageSelectSortHostCheckCR_createdByFullName')?.addEventListener('change', (event) => {
     sort('HostCheckCR', 'createdByFullName', event.currentTarget.value);
   });
@@ -603,6 +592,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsHostCheckCR_createdByFullName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('HostCheckCR', 'createdByFullName', false);
+  });
+
+  document.querySelector('#pageSelectSortHostCheckCR_ownedByUserId')?.addEventListener('change', (event) => {
+    sort('HostCheckCR', 'ownedByUserId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCheckCR_ownedByUserId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCheckCR', 'ownedByUserId', true);
+  });
+  document.querySelector('#pageStatsHostCheckCR_ownedByUserId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCheckCR', 'ownedByUserId', false);
   });
 
   document.querySelector('#pageSelectSortHostCheckCR_ownedByDisplayName')?.addEventListener('change', (event) => {

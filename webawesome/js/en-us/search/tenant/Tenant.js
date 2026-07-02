@@ -86,7 +86,6 @@ async function websocketTenantInner(apiRequest) {
         var inputTenantDescription = null;
         var inputHostInventoryIds = null;
         var inputAnsibleProjectIds = null;
-        var inputPageId = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
         var inputClassCanonicalNames = null;
@@ -123,8 +122,6 @@ async function websocketTenantInner(apiRequest) {
           inputHostInventoryIds = $response.querySelector('.Tenant_Page_hostInventoryIds');
         if(vars.includes('ansibleProjectIds'))
           inputAnsibleProjectIds = $response.querySelector('.Tenant_Page_ansibleProjectIds');
-        if(vars.includes('pageId'))
-          inputPageId = $response.querySelector('.Tenant_Page_pageId');
         if(vars.includes('classCanonicalName'))
           inputClassCanonicalName = $response.querySelector('.Tenant_Page_classCanonicalName');
         if(vars.includes('classSimpleName'))
@@ -279,20 +276,6 @@ async function websocketTenantInner(apiRequest) {
               item.textContent = inputAnsibleProjectIds.textContent;
           });
           addGlow(document.querySelector('.Tenant_Page_ansibleProjectIds'));
-        }
-
-        if(inputPageId) {
-          document.querySelectorAll('.Tenant_Page_pageId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputPageId.getAttribute('value');
-            else
-              item.textContent = inputPageId.textContent;
-          });
-          addGlow(document.querySelector('.Tenant_Page_pageId'));
         }
 
         if(inputClassCanonicalName) {
@@ -744,10 +727,6 @@ function searchTenantFilters($formFilters) {
     if(filterAnsibleProjectIds != null && filterAnsibleProjectIds !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectIds:' + filterAnsibleProjectIds });
 
-    var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
-    if(filterPageId != null && filterPageId !== '')
-      filters.push({ name: 'fq', value: 'pageId:' + filterPageId });
-
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -1106,18 +1085,6 @@ async function patchTenant($formFilters, $formValues, target, tenantResource, su
   if(valueAnsibleProjectIds != null && valueAnsibleProjectIds !== '')
     vals['addAnsibleProjectIds'] = valueAnsibleProjectIds;
 
-  var valuePageId = $formValues.querySelector('.valuePageId')?.value;
-  var removePageId = $formValues.querySelector('.removePageId')?.value === 'true';
-  var setPageId = removePageId ? null : $formValues.querySelector('.setPageId')?.value;
-  var addPageId = $formValues.querySelector('.addPageId')?.value;
-  if(removePageId || setPageId != null && setPageId !== '')
-    vals['setPageId'] = setPageId;
-  if(addPageId != null && addPageId !== '')
-    vals['addPageId'] = addPageId;
-  var removePageId = $formValues.querySelector('.removePageId')?.value;
-  if(removePageId != null && removePageId !== '')
-    vals['removePageId'] = removePageId;
-
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   var removeSessionId = $formValues.querySelector('.removeSessionId')?.value === 'true';
   var setSessionId = removeSessionId ? null : $formValues.querySelector('.setSessionId')?.value;
@@ -1308,10 +1275,6 @@ function patchTenantFilters($formFilters) {
     if(filterAnsibleProjectIds != null && filterAnsibleProjectIds !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectIds:' + filterAnsibleProjectIds });
 
-    var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
-    if(filterPageId != null && filterPageId !== '')
-      filters.push({ name: 'fq', value: 'pageId:' + filterPageId });
-
     var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
     if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
       filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
@@ -1487,10 +1450,6 @@ async function postTenant($formValues, target, success, error) {
   });
   if(valueAnsibleProjectIds.length > 0)
     vals['ansibleProjectIds'] = valueAnsibleProjectIds;
-
-  var valuePageId = $formValues.querySelector('.valuePageId')?.value;
-  if(valuePageId != null && valuePageId !== '')
-    vals['pageId'] = valuePageId;
 
   var valueSessionId = $formValues.querySelector('.valueSessionId')?.value;
   if(valueSessionId != null && valueSessionId !== '')

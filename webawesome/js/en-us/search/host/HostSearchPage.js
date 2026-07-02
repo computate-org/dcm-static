@@ -275,17 +275,6 @@ Promise.all([
     facetStatsChange('Host', 'solrId', false);
   });
 
-  document.querySelector('#pageSelectSortHost_tenantResource')?.addEventListener('change', (event) => {
-    sort('Host', 'tenantResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'tenantResource', true);
-  });
-  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'tenantResource', false);
-  });
-
   document.querySelector('#pageSelectSortHost_tenantId')?.addEventListener('change', (event) => {
     sort('Host', 'tenantId', event.currentTarget.value);
   });
@@ -306,17 +295,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsHost_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Host', 'aapOrganizationId', false);
-  });
-
-  document.querySelector('#pageSelectSortHost_aapHostId')?.addEventListener('change', (event) => {
-    sort('Host', 'aapHostId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_aapHostId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'aapHostId', true);
-  });
-  document.querySelector('#pageStatsHost_aapHostId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'aapHostId', false);
   });
 
   document.querySelector('#pageSelectSortHost_hostId')?.addEventListener('change', (event) => {
@@ -341,17 +319,6 @@ Promise.all([
     facetStatsChange('Host', 'hostResource', false);
   });
 
-  document.querySelector('#pageSelectSortHost_aapInventoryId')?.addEventListener('change', (event) => {
-    sort('Host', 'aapInventoryId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHost_aapInventoryId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Host', 'aapInventoryId', true);
-  });
-  document.querySelector('#pageStatsHost_aapInventoryId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Host', 'aapInventoryId', false);
-  });
-
   document.querySelector('#pageSelectSortHost_inventoryName')?.addEventListener('change', (event) => {
     sort('Host', 'inventoryName', event.currentTarget.value);
   });
@@ -361,6 +328,39 @@ Promise.all([
   });
   document.querySelector('#pageStatsHost_inventoryName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Host', 'inventoryName', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_tenantResource')?.addEventListener('change', (event) => {
+    sort('Host', 'tenantResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'tenantResource', true);
+  });
+  document.querySelector('#pageStatsHost_tenantResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'tenantResource', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_aapHostId')?.addEventListener('change', (event) => {
+    sort('Host', 'aapHostId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_aapHostId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'aapHostId', true);
+  });
+  document.querySelector('#pageStatsHost_aapHostId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'aapHostId', false);
+  });
+
+  document.querySelector('#pageSelectSortHost_aapInventoryId')?.addEventListener('change', (event) => {
+    sort('Host', 'aapInventoryId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHost_aapInventoryId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Host', 'aapInventoryId', true);
+  });
+  document.querySelector('#pageStatsHost_aapInventoryId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Host', 'aapInventoryId', false);
   });
           document.querySelector('#fqHost_created')?.addEventListener('change', (event) => {
             fqChange('Host', event.currentTarget, facetChangeHostSuccess, facetChangeHostError);

@@ -1,6 +1,7 @@
 {% include en-us/search/realized/tenant/TenantRealizedSearchFormMacros.htm %}
 {% include en-us/search/host-inventory/HostInventorySearchFormMacros.htm %}
 {% include en-us/search/ansible-project/AnsibleProjectSearchFormMacros.htm %}
+{% include en-us/search/intent/tenant/TenantIntentSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
     {{ htmForm_patchTenantRealized() }}
 {%- endif %}

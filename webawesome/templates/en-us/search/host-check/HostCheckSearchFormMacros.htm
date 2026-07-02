@@ -194,18 +194,18 @@
                 {{ inputTenantResourceHostCheckPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
-                  relate a tenant to this host check
+                  relate a tenant intent to this host check
                 </div>
                 <ul class="label-on-left-ul " id="listHostCheckTenantResource_{{classApiMethodMethod}}">
                 </ul>
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postTenant(idSuffix='_HostCheck_POST_tenantResource') }}
+                  {{ htmForm_postTenantIntent(idSuffix='_HostCheck_POST_tenantResource') }}
                   <wa-button
                        id="HostCheck_{{classApiMethodMethod}}_tenantResource_add"
-                       data-dialog="open postTenantDialog"
-                      >add a tenant</wa-button>
+                       data-dialog="open postTenantIntentDialog"
+                      >add a tenant intent</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
@@ -582,7 +582,7 @@
 
 {%- macro htmForm_patchHostCheck(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchHostCheckDialog" label="Modify host check">
-          <form id="htmForm_patchHostCheck" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_patchHostCheck" class="wa-stack round-row primary-smart-border-radius ">
 
             <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
               <div slot="summary">
@@ -704,8 +704,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_patchHostCheck() }}
           </form>
-          {{ htmFormButton_patchHostCheck() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -720,7 +720,7 @@
 
 {%- macro htmForm_postHostCheck(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postHostCheckDialog" label="Create a host check">
-          <form id="htmForm_postHostCheck" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_postHostCheck" class="wa-stack round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
             <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
@@ -843,8 +843,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_postHostCheck() }}
           </form>
-          {{ htmFormButton_postHostCheck() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -859,9 +859,9 @@
 
 {%- macro htmForm_deleteHostCheck(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteHostCheckDialog" label="Delete host check">
-          <form id="htmForm_deleteHostCheck" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deleteHostCheck" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteHostCheck() }}
           </form>
-          {{ htmFormButton_deleteHostCheck() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -876,7 +876,7 @@
 
 {%- macro htmForm_putimportHostCheck(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportHostCheckDialog" label="Import host checks">
-          <form id="htmForm_putimportHostCheck" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_putimportHostCheck" class="wa-stack round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
                   class="PUTImport_searchList "
@@ -885,14 +885,14 @@
                   >
               </wa-textarea>
             </div>
+            {{ htmFormButton_putimportHostCheck() }}
           </form>
-          {{ htmFormButton_putimportHostCheck() }}
         </wa-dialog>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageHostCheck(idSuffix='') %}
         <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageHostCheckDialog" label="Search host checks">
-          <div id="htmForm_searchpageHostCheck" class="round-row primary-smart-border-radius ">
+          <div id="htmForm_searchpageHostCheck" class="wa-stack round-row primary-smart-border-radius ">
 
             <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
@@ -1078,8 +1078,8 @@
 
 {%- macro htmForm_deletefilterHostCheck(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterHostCheckDialog" label="Delete host check">
-          <form id="htmForm_deletefilterHostCheck" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deletefilterHostCheck" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterHostCheck() }}
           </form>
-          {{ htmFormButton_deletefilterHostCheck() }}
         </wa-dialog>
 {%- endmacro %}

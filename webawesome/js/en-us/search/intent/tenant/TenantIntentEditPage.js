@@ -82,6 +82,48 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH createdByUserId
+          document.querySelector('#TenantIntent_Page_createdByUserId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_createdByUserId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
+                  , 'setCreatedByUserId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TenantIntent_Page_createdByUserId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TenantIntent_Page_createdByUserId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_createdByUserId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH createdByFullName
+          document.querySelector('#TenantIntent_Page_createdByFullName')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_createdByFullName');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
+                  , 'setCreatedByFullName', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TenantIntent_Page_createdByFullName')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TenantIntent_Page_createdByFullName')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_createdByFullName');
+            const valid = form.reportValidity();
+          });
+
           // PATCH createdVia
           document.querySelector('#TenantIntent_Page_createdVia')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_createdVia');
@@ -208,24 +250,24 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH pageId
-          document.querySelector('#TenantIntent_Page_pageId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_pageId');
+          // PATCH locked
+          document.querySelector('#TenantIntent_Page_locked')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_locked');
             const valid = form.checkValidity();
             if(valid) {
               patchTenantIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
-                  , 'setPageId', event.currentTarget.value
+                  , 'setLocked', event.currentTarget.checked
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#TenantIntent_Page_pageId')?.addEventListener('focus', (event) => {
+          document.querySelector('#TenantIntent_Page_locked')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#TenantIntent_Page_pageId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_pageId');
+          document.querySelector('#TenantIntent_Page_locked')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_locked');
             const valid = form.reportValidity();
           });
 
@@ -376,48 +418,6 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH tenantId
-          document.querySelector('#TenantIntent_Page_tenantId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_tenantId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchTenantIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
-                  , 'setTenantId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#TenantIntent_Page_tenantId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#TenantIntent_Page_tenantId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_tenantId');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH tenantResource
-          document.querySelector('#TenantIntent_Page_tenantResource')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_tenantResource');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchTenantIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
-                  , 'setTenantResource', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#TenantIntent_Page_tenantResource')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#TenantIntent_Page_tenantResource')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_tenantResource');
-            const valid = form.reportValidity();
-          });
-
           // PATCH hubId
           document.querySelector('#TenantIntent_Page_hubId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_hubId');
@@ -457,6 +457,69 @@ Promise.all([
           });
           document.querySelector('#TenantIntent_Page_clusterName')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_clusterName');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH aapOrganizationId
+          document.querySelector('#TenantIntent_Page_aapOrganizationId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapOrganizationId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
+                  , 'setAapOrganizationId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TenantIntent_Page_aapOrganizationId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TenantIntent_Page_aapOrganizationId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapOrganizationId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH tenantId
+          document.querySelector('#TenantIntent_Page_tenantId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_tenantId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
+                  , 'setTenantId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TenantIntent_Page_tenantId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TenantIntent_Page_tenantId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_tenantId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH tenantResource
+          document.querySelector('#TenantIntent_Page_tenantResource')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_tenantResource');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
+                  , 'setTenantResource', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TenantIntent_Page_tenantResource')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TenantIntent_Page_tenantResource')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_tenantResource');
             const valid = form.reportValidity();
           });
 });

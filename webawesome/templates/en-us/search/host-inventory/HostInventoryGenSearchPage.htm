@@ -27,7 +27,7 @@
 {%- block htmScriptsHostInventoryPage %}
     <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventorySearchPage.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host-credential/HostCredential.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host/Host.js"></script>
 {%- endblock htmScriptsHostInventoryPage %}
@@ -233,10 +233,6 @@
 
         var submitForm_patchHostInventory = document.querySelector('#htmForm_patchHostInventory')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_patchHostInventory')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           patchHostInventory(null, document.querySelector('#htmForm_patchHostInventory')
               , document.querySelector('#htmFormButton_patchHostInventory')
@@ -269,10 +265,6 @@
 
         var submitForm_postHostInventory = document.querySelector('#htmForm_postHostInventory')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_postHostInventory')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           postHostInventory(document.querySelector('#htmForm_postHostInventory')
               , document.querySelector('#htmFormButton_postHostInventory')
@@ -304,10 +296,6 @@
 
         var submitForm_deleteHostInventory = document.querySelector('#htmForm_deleteHostInventory')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deleteHostInventory')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           deleteHostInventory(event.target, event.target.getAttribute('data-inventoryResource')
               , (json, target) => {
@@ -337,10 +325,6 @@
         });
 
         var submitForm_putimportHostInventory = document.querySelector('#htmForm_putimportHostInventory')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportHostInventory')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           putimportHostInventory(document.querySelector('#htmForm_putimportHostInventory')
@@ -374,20 +358,12 @@
 
         var submitForm_searchpageHostInventory = document.querySelector('#htmForm_searchpageHostInventory')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_searchpageHostInventory')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           searchpageHostInventory();
           return false;
         });
 
         var submitForm_deletefilterHostInventory = document.querySelector('#htmForm_deletefilterHostInventory')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deletefilterHostInventory')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           deletefilterHostInventory(event.target
@@ -417,10 +393,10 @@
           return false;
         });
 
-        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_postTenantIntent')?.addEventListener('click', event => {
           event.preventDefault();
-          postTenant(document.querySelector('#htmForm_postTenant')
-              , document.querySelector('#htmFormButton_postTenant')
+          postTenantIntent(document.querySelector('#htmForm_postTenantIntent')
+              , document.querySelector('#htmFormButton_postTenantIntent')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])

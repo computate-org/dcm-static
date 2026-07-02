@@ -27,7 +27,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProjectSearchPage.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProjectEditPage.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/job-template/JobTemplate.js"></script>
 {%- endblock htmScriptsAnsibleProjectPage %}
 {%- endblock htmScriptsPageLayout %}
@@ -170,8 +170,8 @@
           document.querySelector('#AnsibleProject_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#AnsibleProject_Page_tenantResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#AnsibleProject_Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#Tenant_POST_ansibleProjectResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#Tenant_POST_ansibleProjectResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectResource')?.addEventListener('focus', relate_tenantResource);
           if(window.result.tenantResource) {
           {% if "PATCH" in scopes -%}
             {{'  '}}suggestAnsibleProjectTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listAnsibleProjectTenantResource_Page'), window.result.ansibleProjectResource, window.result.tenantResource, true, document.getElementById('AnsibleProject_Page_tenantResource'));
@@ -183,8 +183,8 @@
           {% endif -%}
           {% endif -%}
           }
-          function Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource(event) {
-            suggestTenantHostInventoryIds(
+          function TenantIntent_POST_hostInventoryIds_AnsibleProject_POST_tenantResource(event) {
+            suggestTenantIntentHostInventoryIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
@@ -192,13 +192,13 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
                 , true
-                , document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')
                 );
           }
-          document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')?.addEventListener('input', Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource);
-          document.querySelector('#Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')?.addEventListener('focus', Tenant_POST_hostInventoryIds_AnsibleProject_POST_tenantResource);
-          function Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource(event) {
-            suggestTenantAnsibleProjectIds(
+          document.querySelector('#TenantIntent_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_hostInventoryIds_AnsibleProject_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_hostInventoryIds_AnsibleProject_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_hostInventoryIds_AnsibleProject_POST_tenantResource);
+          function TenantIntent_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource(event) {
+            suggestTenantIntentAnsibleProjectIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ]
@@ -206,11 +206,11 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
                 , true
-                , document.querySelector('#Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')
                 );
           }
-          document.querySelector('#Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')?.addEventListener('input', Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource);
-          document.querySelector('#Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')?.addEventListener('focus', Tenant_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_ansibleProjectIds_AnsibleProject_POST_tenantResource);
           function relate_jobTemplateResources(event) {
             suggestAnsibleProjectJobTemplateResources(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -330,10 +330,6 @@
 
         var submitForm_patchAnsibleProject = document.querySelector('#htmForm_patchAnsibleProject')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_patchAnsibleProject')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           patchAnsibleProject(null, document.querySelector('#htmForm_patchAnsibleProject')
               , document.querySelector('#htmFormButton_patchAnsibleProject')
@@ -366,10 +362,6 @@
 
         var submitForm_postAnsibleProject = document.querySelector('#htmForm_postAnsibleProject')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_postAnsibleProject')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           postAnsibleProject(document.querySelector('#htmForm_postAnsibleProject')
               , document.querySelector('#htmFormButton_postAnsibleProject')
@@ -401,10 +393,6 @@
 
         var submitForm_deleteAnsibleProject = document.querySelector('#htmForm_deleteAnsibleProject')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deleteAnsibleProject')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           deleteAnsibleProject(event.target, event.target.getAttribute('data-ansibleProjectResource')
               , (json, target) => {
@@ -434,10 +422,6 @@
         });
 
         var submitForm_putimportAnsibleProject = document.querySelector('#htmForm_putimportAnsibleProject')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportAnsibleProject')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           putimportAnsibleProject(document.querySelector('#htmForm_putimportAnsibleProject')
@@ -471,20 +455,12 @@
 
         var submitForm_searchpageAnsibleProject = document.querySelector('#htmForm_searchpageAnsibleProject')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_searchpageAnsibleProject')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           searchpageAnsibleProject();
           return false;
         });
 
         var submitForm_deletefilterAnsibleProject = document.querySelector('#htmForm_deletefilterAnsibleProject')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deletefilterAnsibleProject')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           deletefilterAnsibleProject(event.target
@@ -514,10 +490,10 @@
           return false;
         });
 
-        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_postTenantIntent')?.addEventListener('click', event => {
           event.preventDefault();
-          postTenant(document.querySelector('#htmForm_postTenant')
-              , document.querySelector('#htmFormButton_postTenant')
+          postTenantIntent(document.querySelector('#htmForm_postTenantIntent')
+              , document.querySelector('#htmFormButton_postTenantIntent')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])

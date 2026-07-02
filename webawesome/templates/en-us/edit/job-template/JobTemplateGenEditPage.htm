@@ -27,7 +27,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/job-template/JobTemplate.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/job-template/JobTemplateSearchPage.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/job-template/JobTemplateEditPage.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host-credential/HostCredential.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
@@ -113,12 +113,16 @@
       }
     </script>
     <script type="module">
-{% if DEFAULT_MAP_LOCATION is defined %}
-      window.DEFAULT_MAP_LOCATION = { type: 'Point', coordinates: [ {{ DEFAULT_MAP_LOCATION.coordinates[0] }}, {{ DEFAULT_MAP_LOCATION.coordinates[1] }} ]};
+{% if location is defined %}
+      window.mapLocation = { type: 'Point', coordinates: [ {{ location.coordinates[0] }}, {{ location.coordinates[1] }} ]};
 {% endif %}
-{% if DEFAULT_MAP_ZOOM is defined %}
-      window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{% if zoom is defined %}
+      window.mapZoom = {{ zoom }};
 {% endif %}
+{% if pitch is defined %}
+      window.mapPitch = {{ toDegree(pitch) }};
+{% endif %}
+      window.STATIC_BASE_URL = '{{ STATIC_BASE_URL }}';
       window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
       Promise.all([
         customElements.whenDefined('wa-button')
@@ -345,8 +349,8 @@
           document.querySelector('#JobTemplate_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#JobTemplate_Page_tenantResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#JobTemplate_Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#Tenant_POST_jobTemplateResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#Tenant_POST_jobTemplateResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#TenantIntent_POST_jobTemplateResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#TenantIntent_POST_jobTemplateResource')?.addEventListener('focus', relate_tenantResource);
           if(window.result.tenantResource) {
           {% if "PATCH" in scopes -%}
             {{'  '}}suggestJobTemplateTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listJobTemplateTenantResource_Page'), window.result.jobTemplateResource, window.result.tenantResource, true, document.getElementById('JobTemplate_Page_tenantResource'));
@@ -358,8 +362,8 @@
           {% endif -%}
           {% endif -%}
           }
-          function Tenant_POST_hostInventoryIds_JobTemplate_POST_tenantResource(event) {
-            suggestTenantHostInventoryIds(
+          function TenantIntent_POST_hostInventoryIds_JobTemplate_POST_tenantResource(event) {
+            suggestTenantIntentHostInventoryIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
@@ -367,13 +371,13 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.jobTemplateResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
                 , true
-                , document.querySelector('#Tenant_POST_hostInventoryIds_JobTemplate_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_hostInventoryIds_JobTemplate_POST_tenantResource')
                 );
           }
-          document.querySelector('#Tenant_POST_hostInventoryIds_JobTemplate_POST_tenantResource')?.addEventListener('input', Tenant_POST_hostInventoryIds_JobTemplate_POST_tenantResource);
-          document.querySelector('#Tenant_POST_hostInventoryIds_JobTemplate_POST_tenantResource')?.addEventListener('focus', Tenant_POST_hostInventoryIds_JobTemplate_POST_tenantResource);
-          function Tenant_POST_ansibleProjectIds_JobTemplate_POST_tenantResource(event) {
-            suggestTenantAnsibleProjectIds(
+          document.querySelector('#TenantIntent_POST_hostInventoryIds_JobTemplate_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_hostInventoryIds_JobTemplate_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_hostInventoryIds_JobTemplate_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_hostInventoryIds_JobTemplate_POST_tenantResource);
+          function TenantIntent_POST_ansibleProjectIds_JobTemplate_POST_tenantResource(event) {
+            suggestTenantIntentAnsibleProjectIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ]
@@ -381,11 +385,11 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.jobTemplateResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
                 , true
-                , document.querySelector('#Tenant_POST_ansibleProjectIds_JobTemplate_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_ansibleProjectIds_JobTemplate_POST_tenantResource')
                 );
           }
-          document.querySelector('#Tenant_POST_ansibleProjectIds_JobTemplate_POST_tenantResource')?.addEventListener('input', Tenant_POST_ansibleProjectIds_JobTemplate_POST_tenantResource);
-          document.querySelector('#Tenant_POST_ansibleProjectIds_JobTemplate_POST_tenantResource')?.addEventListener('focus', Tenant_POST_ansibleProjectIds_JobTemplate_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds_JobTemplate_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_ansibleProjectIds_JobTemplate_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds_JobTemplate_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_ansibleProjectIds_JobTemplate_POST_tenantResource);
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listJobTemplate')?.value;
@@ -417,10 +421,6 @@
 
 
         var submitForm_patchJobTemplate = document.querySelector('#htmForm_patchJobTemplate')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_patchJobTemplate')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           patchJobTemplate(null, document.querySelector('#htmForm_patchJobTemplate')
@@ -454,10 +454,6 @@
 
         var submitForm_postJobTemplate = document.querySelector('#htmForm_postJobTemplate')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_postJobTemplate')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           postJobTemplate(document.querySelector('#htmForm_postJobTemplate')
               , document.querySelector('#htmFormButton_postJobTemplate')
@@ -489,10 +485,6 @@
 
         var submitForm_deleteJobTemplate = document.querySelector('#htmForm_deleteJobTemplate')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deleteJobTemplate')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           deleteJobTemplate(event.target, event.target.getAttribute('data-jobTemplateResource')
               , (json, target) => {
@@ -522,10 +514,6 @@
         });
 
         var submitForm_putimportJobTemplate = document.querySelector('#htmForm_putimportJobTemplate')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportJobTemplate')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           putimportJobTemplate(document.querySelector('#htmForm_putimportJobTemplate')
@@ -559,20 +547,12 @@
 
         var submitForm_searchpageJobTemplate = document.querySelector('#htmForm_searchpageJobTemplate')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_searchpageJobTemplate')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           searchpageJobTemplate();
           return false;
         });
 
         var submitForm_deletefilterJobTemplate = document.querySelector('#htmForm_deletefilterJobTemplate')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deletefilterJobTemplate')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           deletefilterJobTemplate(event.target
@@ -602,10 +582,10 @@
           return false;
         });
 
-        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_postTenantIntent')?.addEventListener('click', event => {
           event.preventDefault();
-          postTenant(document.querySelector('#htmForm_postTenant')
-              , document.querySelector('#htmFormButton_postTenant')
+          postTenantIntent(document.querySelector('#htmForm_postTenantIntent')
+              , document.querySelector('#htmFormButton_postTenantIntent')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])

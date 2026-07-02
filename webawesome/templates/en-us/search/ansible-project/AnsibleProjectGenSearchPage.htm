@@ -27,7 +27,7 @@
 {%- block htmScriptsAnsibleProjectPage %}
     <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProjectSearchPage.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/job-template/JobTemplate.js"></script>
 {%- endblock htmScriptsAnsibleProjectPage %}
 {%- endblock htmScriptsPageLayout %}
@@ -216,10 +216,6 @@
 
         var submitForm_patchAnsibleProject = document.querySelector('#htmForm_patchAnsibleProject')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_patchAnsibleProject')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           patchAnsibleProject(null, document.querySelector('#htmForm_patchAnsibleProject')
               , document.querySelector('#htmFormButton_patchAnsibleProject')
@@ -252,10 +248,6 @@
 
         var submitForm_postAnsibleProject = document.querySelector('#htmForm_postAnsibleProject')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_postAnsibleProject')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           postAnsibleProject(document.querySelector('#htmForm_postAnsibleProject')
               , document.querySelector('#htmFormButton_postAnsibleProject')
@@ -287,10 +279,6 @@
 
         var submitForm_deleteAnsibleProject = document.querySelector('#htmForm_deleteAnsibleProject')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deleteAnsibleProject')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           deleteAnsibleProject(event.target, event.target.getAttribute('data-ansibleProjectResource')
               , (json, target) => {
@@ -320,10 +308,6 @@
         });
 
         var submitForm_putimportAnsibleProject = document.querySelector('#htmForm_putimportAnsibleProject')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportAnsibleProject')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           putimportAnsibleProject(document.querySelector('#htmForm_putimportAnsibleProject')
@@ -357,20 +341,12 @@
 
         var submitForm_searchpageAnsibleProject = document.querySelector('#htmForm_searchpageAnsibleProject')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_searchpageAnsibleProject')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           searchpageAnsibleProject();
           return false;
         });
 
         var submitForm_deletefilterAnsibleProject = document.querySelector('#htmForm_deletefilterAnsibleProject')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deletefilterAnsibleProject')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           deletefilterAnsibleProject(event.target
@@ -400,10 +376,10 @@
           return false;
         });
 
-        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_postTenantIntent')?.addEventListener('click', event => {
           event.preventDefault();
-          postTenant(document.querySelector('#htmForm_postTenant')
-              , document.querySelector('#htmFormButton_postTenant')
+          postTenantIntent(document.querySelector('#htmForm_postTenantIntent')
+              , document.querySelector('#htmFormButton_postTenantIntent')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])

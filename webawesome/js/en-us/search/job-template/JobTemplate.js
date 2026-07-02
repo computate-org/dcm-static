@@ -106,14 +106,14 @@ async function websocketJobTemplateInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
+        var inputAapHostCredentialId = null;
+        var inputAapProjectId = null;
+        var inputJobTemplateId = null;
         var inputTenantResource = null;
         var inputTenantId = null;
         var inputAapOrganizationId = null;
         var inputAapInventoryId = null;
-        var inputAapHostCredentialId = null;
-        var inputAapProjectId = null;
         var inputAnsiblePlaybooks = null;
-        var inputJobTemplateId = null;
         var inputJobTemplateResource = null;
         var inputAapTemplateId = null;
 
@@ -173,6 +173,12 @@ async function websocketJobTemplateInner(apiRequest) {
           inputObjectText = $response.querySelector('.JobTemplate_Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.JobTemplate_Page_solrId');
+        if(vars.includes('aapHostCredentialId'))
+          inputAapHostCredentialId = $response.querySelector('.JobTemplate_Page_aapHostCredentialId');
+        if(vars.includes('aapProjectId'))
+          inputAapProjectId = $response.querySelector('.JobTemplate_Page_aapProjectId');
+        if(vars.includes('jobTemplateId'))
+          inputJobTemplateId = $response.querySelector('.JobTemplate_Page_jobTemplateId');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.JobTemplate_Page_tenantResource');
         if(vars.includes('tenantId'))
@@ -181,26 +187,24 @@ async function websocketJobTemplateInner(apiRequest) {
           inputAapOrganizationId = $response.querySelector('.JobTemplate_Page_aapOrganizationId');
         if(vars.includes('aapInventoryId'))
           inputAapInventoryId = $response.querySelector('.JobTemplate_Page_aapInventoryId');
-        if(vars.includes('aapHostCredentialId'))
-          inputAapHostCredentialId = $response.querySelector('.JobTemplate_Page_aapHostCredentialId');
-        if(vars.includes('aapProjectId'))
-          inputAapProjectId = $response.querySelector('.JobTemplate_Page_aapProjectId');
         if(vars.includes('ansiblePlaybooks'))
           inputAnsiblePlaybooks = $response.querySelector('.JobTemplate_Page_ansiblePlaybooks');
-        if(vars.includes('jobTemplateId'))
-          inputJobTemplateId = $response.querySelector('.JobTemplate_Page_jobTemplateId');
         if(vars.includes('jobTemplateResource'))
           inputJobTemplateResource = $response.querySelector('.JobTemplate_Page_jobTemplateResource');
         if(vars.includes('aapTemplateId'))
           inputAapTemplateId = $response.querySelector('.JobTemplate_Page_aapTemplateId');
 
-        jsWebsocketJobTemplate(jobTemplateResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listJobTemplate = JSON.parse($response.querySelector('.pageForm .listJobTemplate')?.value);
+        jsWebsocketJobTemplate(jobTemplateResource, vars, $response);
 
 
         if(inputPk) {
           document.querySelectorAll('.JobTemplate_Page_pk').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
@@ -211,6 +215,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputCreated) {
           document.querySelectorAll('.JobTemplate_Page_created').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
@@ -221,6 +229,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputModified) {
           document.querySelectorAll('.JobTemplate_Page_modified').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
@@ -231,6 +243,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputArchived) {
           document.querySelectorAll('.JobTemplate_Page_archived').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
@@ -241,6 +257,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputInventoryResource) {
           document.querySelectorAll('.JobTemplate_Page_inventoryResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryResource.getAttribute('value');
             else
@@ -251,6 +271,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputCredentialResource) {
           document.querySelectorAll('.JobTemplate_Page_credentialResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCredentialResource.getAttribute('value');
             else
@@ -261,6 +285,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputAnsibleProjectResource) {
           document.querySelectorAll('.JobTemplate_Page_ansibleProjectResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAnsibleProjectResource.getAttribute('value');
             else
@@ -271,6 +299,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputAnsiblePlaybooksList) {
           document.querySelectorAll('.JobTemplate_Page_ansiblePlaybooksList').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAnsiblePlaybooksList.getAttribute('value');
             else
@@ -281,6 +313,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputAnsiblePlaybook) {
           document.querySelectorAll('.JobTemplate_Page_ansiblePlaybook').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAnsiblePlaybook.getAttribute('value');
             else
@@ -291,6 +327,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputJobTemplateName) {
           document.querySelectorAll('.JobTemplate_Page_jobTemplateName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateName.getAttribute('value');
             else
@@ -301,6 +341,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputJobTemplateDescription) {
           document.querySelectorAll('.JobTemplate_Page_jobTemplateDescription').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateDescription.getAttribute('value');
             else
@@ -311,6 +355,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputJobType) {
           document.querySelectorAll('.JobTemplate_Page_jobType').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputJobType.getAttribute('value');
             else
@@ -321,6 +369,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputAskExtraVarsOnLaunch) {
           document.querySelectorAll('.JobTemplate_Page_askExtraVarsOnLaunch').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAskExtraVarsOnLaunch.getAttribute('value');
             else
@@ -331,6 +383,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputExtraVars) {
           document.querySelectorAll('.JobTemplate_Page_extraVars').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputExtraVars.getAttribute('value');
             else
@@ -341,6 +397,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputClassCanonicalName) {
           document.querySelectorAll('.JobTemplate_Page_classCanonicalName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
@@ -351,6 +411,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputClassSimpleName) {
           document.querySelectorAll('.JobTemplate_Page_classSimpleName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
@@ -361,6 +425,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputClassCanonicalNames) {
           document.querySelectorAll('.JobTemplate_Page_classCanonicalNames').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
@@ -371,6 +439,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputSessionId) {
           document.querySelectorAll('.JobTemplate_Page_sessionId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
@@ -381,6 +453,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputUserKey) {
           document.querySelectorAll('.JobTemplate_Page_userKey').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
@@ -391,6 +467,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputSaves) {
           document.querySelectorAll('.JobTemplate_Page_saves').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
@@ -401,6 +481,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputObjectTitle) {
           document.querySelectorAll('.JobTemplate_Page_objectTitle').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
@@ -411,6 +495,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputDisplayPage) {
           document.querySelectorAll('.JobTemplate_Page_displayPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
@@ -421,6 +509,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputEditPage) {
           document.querySelectorAll('.JobTemplate_Page_editPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
@@ -431,6 +523,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputUserPage) {
           document.querySelectorAll('.JobTemplate_Page_userPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
@@ -441,6 +537,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputDownload) {
           document.querySelectorAll('.JobTemplate_Page_download').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
@@ -451,6 +551,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputObjectSuggest) {
           document.querySelectorAll('.JobTemplate_Page_objectSuggest').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
@@ -461,6 +565,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputObjectText) {
           document.querySelectorAll('.JobTemplate_Page_objectText').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
@@ -471,6 +579,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputSolrId) {
           document.querySelectorAll('.JobTemplate_Page_solrId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
@@ -479,48 +591,12 @@ async function websocketJobTemplateInner(apiRequest) {
           addGlow(document.querySelector('.JobTemplate_Page_solrId'));
         }
 
-        if(inputTenantResource) {
-          document.querySelectorAll('.JobTemplate_Page_tenantResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantResource.getAttribute('value');
-            else
-              item.textContent = inputTenantResource.textContent;
-          });
-          addGlow(document.querySelector('.JobTemplate_Page_tenantResource'));
-        }
-
-        if(inputTenantId) {
-          document.querySelectorAll('.JobTemplate_Page_tenantId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantId.getAttribute('value');
-            else
-              item.textContent = inputTenantId.textContent;
-          });
-          addGlow(document.querySelector('.JobTemplate_Page_tenantId'));
-        }
-
-        if(inputAapOrganizationId) {
-          document.querySelectorAll('.JobTemplate_Page_aapOrganizationId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapOrganizationId.getAttribute('value');
-            else
-              item.textContent = inputAapOrganizationId.textContent;
-          });
-          addGlow(document.querySelector('.JobTemplate_Page_aapOrganizationId'));
-        }
-
-        if(inputAapInventoryId) {
-          document.querySelectorAll('.JobTemplate_Page_aapInventoryId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapInventoryId.getAttribute('value');
-            else
-              item.textContent = inputAapInventoryId.textContent;
-          });
-          addGlow(document.querySelector('.JobTemplate_Page_aapInventoryId'));
-        }
-
         if(inputAapHostCredentialId) {
           document.querySelectorAll('.JobTemplate_Page_aapHostCredentialId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapHostCredentialId.getAttribute('value');
             else
@@ -531,6 +607,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputAapProjectId) {
           document.querySelectorAll('.JobTemplate_Page_aapProjectId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapProjectId.getAttribute('value');
             else
@@ -539,18 +619,12 @@ async function websocketJobTemplateInner(apiRequest) {
           addGlow(document.querySelector('.JobTemplate_Page_aapProjectId'));
         }
 
-        if(inputAnsiblePlaybooks) {
-          document.querySelectorAll('.JobTemplate_Page_ansiblePlaybooks').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAnsiblePlaybooks.getAttribute('value');
-            else
-              item.textContent = inputAnsiblePlaybooks.textContent;
-          });
-          addGlow(document.querySelector('.JobTemplate_Page_ansiblePlaybooks'));
-        }
-
         if(inputJobTemplateId) {
           document.querySelectorAll('.JobTemplate_Page_jobTemplateId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateId.getAttribute('value');
             else
@@ -559,8 +633,82 @@ async function websocketJobTemplateInner(apiRequest) {
           addGlow(document.querySelector('.JobTemplate_Page_jobTemplateId'));
         }
 
+        if(inputTenantResource) {
+          document.querySelectorAll('.JobTemplate_Page_tenantResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantResource.getAttribute('value');
+            else
+              item.textContent = inputTenantResource.textContent;
+          });
+          addGlow(document.querySelector('.JobTemplate_Page_tenantResource'));
+        }
+
+        if(inputTenantId) {
+          document.querySelectorAll('.JobTemplate_Page_tenantId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantId.getAttribute('value');
+            else
+              item.textContent = inputTenantId.textContent;
+          });
+          addGlow(document.querySelector('.JobTemplate_Page_tenantId'));
+        }
+
+        if(inputAapOrganizationId) {
+          document.querySelectorAll('.JobTemplate_Page_aapOrganizationId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapOrganizationId.getAttribute('value');
+            else
+              item.textContent = inputAapOrganizationId.textContent;
+          });
+          addGlow(document.querySelector('.JobTemplate_Page_aapOrganizationId'));
+        }
+
+        if(inputAapInventoryId) {
+          document.querySelectorAll('.JobTemplate_Page_aapInventoryId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapInventoryId.getAttribute('value');
+            else
+              item.textContent = inputAapInventoryId.textContent;
+          });
+          addGlow(document.querySelector('.JobTemplate_Page_aapInventoryId'));
+        }
+
+        if(inputAnsiblePlaybooks) {
+          document.querySelectorAll('.JobTemplate_Page_ansiblePlaybooks').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputAnsiblePlaybooks.getAttribute('value');
+            else
+              item.textContent = inputAnsiblePlaybooks.textContent;
+          });
+          addGlow(document.querySelector('.JobTemplate_Page_ansiblePlaybooks'));
+        }
+
         if(inputJobTemplateResource) {
           document.querySelectorAll('.JobTemplate_Page_jobTemplateResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateResource.getAttribute('value');
             else
@@ -571,6 +719,10 @@ async function websocketJobTemplateInner(apiRequest) {
 
         if(inputAapTemplateId) {
           document.querySelectorAll('.JobTemplate_Page_aapTemplateId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapTemplateId.getAttribute('value');
             else
@@ -848,6 +1000,18 @@ function searchJobTemplateFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterAapHostCredentialId = $formFilters.querySelector('.valueAapHostCredentialId')?.value;
+    if(filterAapHostCredentialId != null && filterAapHostCredentialId !== '')
+      filters.push({ name: 'fq', value: 'aapHostCredentialId:' + filterAapHostCredentialId });
+
+    var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
+    if(filterAapProjectId != null && filterAapProjectId !== '')
+      filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
+
+    var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
+    if(filterJobTemplateId != null && filterJobTemplateId !== '')
+      filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
+
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
@@ -864,21 +1028,9 @@ function searchJobTemplateFilters($formFilters) {
     if(filterAapInventoryId != null && filterAapInventoryId !== '')
       filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
 
-    var filterAapHostCredentialId = $formFilters.querySelector('.valueAapHostCredentialId')?.value;
-    if(filterAapHostCredentialId != null && filterAapHostCredentialId !== '')
-      filters.push({ name: 'fq', value: 'aapHostCredentialId:' + filterAapHostCredentialId });
-
-    var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
-    if(filterAapProjectId != null && filterAapProjectId !== '')
-      filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
-
     var filterAnsiblePlaybooks = $formFilters.querySelector('.valueAnsiblePlaybooks')?.value;
     if(filterAnsiblePlaybooks != null && filterAnsiblePlaybooks !== '')
       filters.push({ name: 'fq', value: 'ansiblePlaybooks:' + filterAnsiblePlaybooks });
-
-    var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
-    if(filterJobTemplateId != null && filterJobTemplateId !== '')
-      filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
 
     var filterJobTemplateResource = $formFilters.querySelector('.valueJobTemplateResource')?.value;
     if(filterJobTemplateResource != null && filterJobTemplateResource !== '')
@@ -969,8 +1121,8 @@ function suggestJobTemplateTenantResource(filters, $list, jobTemplateResource = 
     }
   };
   error = function( jqXhr, target2 ) {};
-  if (typeof searchTenantVals === 'function') {
-    searchTenantVals(filters, target, success, error);
+  if (typeof searchTenantIntentVals === 'function') {
+    searchTenantIntentVals(filters, target, success, error);
   }
 }
 
@@ -1456,6 +1608,42 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateRe
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
+  var valueAapHostCredentialId = $formValues.querySelector('.valueAapHostCredentialId')?.value;
+  var removeAapHostCredentialId = $formValues.querySelector('.removeAapHostCredentialId')?.value === 'true';
+  var setAapHostCredentialId = removeAapHostCredentialId ? null : $formValues.querySelector('.setAapHostCredentialId')?.value;
+  var addAapHostCredentialId = $formValues.querySelector('.addAapHostCredentialId')?.value;
+  if(removeAapHostCredentialId || setAapHostCredentialId != null && setAapHostCredentialId !== '')
+    vals['setAapHostCredentialId'] = setAapHostCredentialId;
+  if(addAapHostCredentialId != null && addAapHostCredentialId !== '')
+    vals['addAapHostCredentialId'] = addAapHostCredentialId;
+  var removeAapHostCredentialId = $formValues.querySelector('.removeAapHostCredentialId')?.value;
+  if(removeAapHostCredentialId != null && removeAapHostCredentialId !== '')
+    vals['removeAapHostCredentialId'] = removeAapHostCredentialId;
+
+  var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
+  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value === 'true';
+  var setAapProjectId = removeAapProjectId ? null : $formValues.querySelector('.setAapProjectId')?.value;
+  var addAapProjectId = $formValues.querySelector('.addAapProjectId')?.value;
+  if(removeAapProjectId || setAapProjectId != null && setAapProjectId !== '')
+    vals['setAapProjectId'] = setAapProjectId;
+  if(addAapProjectId != null && addAapProjectId !== '')
+    vals['addAapProjectId'] = addAapProjectId;
+  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value;
+  if(removeAapProjectId != null && removeAapProjectId !== '')
+    vals['removeAapProjectId'] = removeAapProjectId;
+
+  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
+  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value === 'true';
+  var setJobTemplateId = removeJobTemplateId ? null : $formValues.querySelector('.setJobTemplateId')?.value;
+  var addJobTemplateId = $formValues.querySelector('.addJobTemplateId')?.value;
+  if(removeJobTemplateId || setJobTemplateId != null && setJobTemplateId !== '')
+    vals['setJobTemplateId'] = setJobTemplateId;
+  if(addJobTemplateId != null && addJobTemplateId !== '')
+    vals['addJobTemplateId'] = addJobTemplateId;
+  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value;
+  if(removeJobTemplateId != null && removeJobTemplateId !== '')
+    vals['removeJobTemplateId'] = removeJobTemplateId;
+
   var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['setTenantResource'] = valueTenantResource;
@@ -1496,30 +1684,6 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateRe
   if(removeAapInventoryId != null && removeAapInventoryId !== '')
     vals['removeAapInventoryId'] = removeAapInventoryId;
 
-  var valueAapHostCredentialId = $formValues.querySelector('.valueAapHostCredentialId')?.value;
-  var removeAapHostCredentialId = $formValues.querySelector('.removeAapHostCredentialId')?.value === 'true';
-  var setAapHostCredentialId = removeAapHostCredentialId ? null : $formValues.querySelector('.setAapHostCredentialId')?.value;
-  var addAapHostCredentialId = $formValues.querySelector('.addAapHostCredentialId')?.value;
-  if(removeAapHostCredentialId || setAapHostCredentialId != null && setAapHostCredentialId !== '')
-    vals['setAapHostCredentialId'] = setAapHostCredentialId;
-  if(addAapHostCredentialId != null && addAapHostCredentialId !== '')
-    vals['addAapHostCredentialId'] = addAapHostCredentialId;
-  var removeAapHostCredentialId = $formValues.querySelector('.removeAapHostCredentialId')?.value;
-  if(removeAapHostCredentialId != null && removeAapHostCredentialId !== '')
-    vals['removeAapHostCredentialId'] = removeAapHostCredentialId;
-
-  var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
-  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value === 'true';
-  var setAapProjectId = removeAapProjectId ? null : $formValues.querySelector('.setAapProjectId')?.value;
-  var addAapProjectId = $formValues.querySelector('.addAapProjectId')?.value;
-  if(removeAapProjectId || setAapProjectId != null && setAapProjectId !== '')
-    vals['setAapProjectId'] = setAapProjectId;
-  if(addAapProjectId != null && addAapProjectId !== '')
-    vals['addAapProjectId'] = addAapProjectId;
-  var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value;
-  if(removeAapProjectId != null && removeAapProjectId !== '')
-    vals['removeAapProjectId'] = removeAapProjectId;
-
   var valueAnsiblePlaybooks = $formValues.querySelector('.valueAnsiblePlaybooks')?.value;
   var removeAnsiblePlaybooks = $formValues.querySelector('.removeAnsiblePlaybooks')?.value === 'true';
   var setAnsiblePlaybooks = removeAnsiblePlaybooks ? null : $formValues.querySelector('.setAnsiblePlaybooks')?.value;
@@ -1531,18 +1695,6 @@ async function patchJobTemplate($formFilters, $formValues, target, jobTemplateRe
   var removeAnsiblePlaybooks = $formValues.querySelector('.removeAnsiblePlaybooks')?.value;
   if(removeAnsiblePlaybooks != null && removeAnsiblePlaybooks !== '')
     vals['removeAnsiblePlaybooks'] = removeAnsiblePlaybooks;
-
-  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
-  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value === 'true';
-  var setJobTemplateId = removeJobTemplateId ? null : $formValues.querySelector('.setJobTemplateId')?.value;
-  var addJobTemplateId = $formValues.querySelector('.addJobTemplateId')?.value;
-  if(removeJobTemplateId || setJobTemplateId != null && setJobTemplateId !== '')
-    vals['setJobTemplateId'] = setJobTemplateId;
-  if(addJobTemplateId != null && addJobTemplateId !== '')
-    vals['addJobTemplateId'] = addJobTemplateId;
-  var removeJobTemplateId = $formValues.querySelector('.removeJobTemplateId')?.value;
-  if(removeJobTemplateId != null && removeJobTemplateId !== '')
-    vals['removeJobTemplateId'] = removeJobTemplateId;
 
   var valueJobTemplateResource = $formValues.querySelector('.valueJobTemplateResource')?.value;
   var removeJobTemplateResource = $formValues.querySelector('.removeJobTemplateResource')?.value === 'true';
@@ -1700,6 +1852,18 @@ function patchJobTemplateFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
+    var filterAapHostCredentialId = $formFilters.querySelector('.valueAapHostCredentialId')?.value;
+    if(filterAapHostCredentialId != null && filterAapHostCredentialId !== '')
+      filters.push({ name: 'fq', value: 'aapHostCredentialId:' + filterAapHostCredentialId });
+
+    var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
+    if(filterAapProjectId != null && filterAapProjectId !== '')
+      filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
+
+    var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
+    if(filterJobTemplateId != null && filterJobTemplateId !== '')
+      filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
+
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
@@ -1716,21 +1880,9 @@ function patchJobTemplateFilters($formFilters) {
     if(filterAapInventoryId != null && filterAapInventoryId !== '')
       filters.push({ name: 'fq', value: 'aapInventoryId:' + filterAapInventoryId });
 
-    var filterAapHostCredentialId = $formFilters.querySelector('.valueAapHostCredentialId')?.value;
-    if(filterAapHostCredentialId != null && filterAapHostCredentialId !== '')
-      filters.push({ name: 'fq', value: 'aapHostCredentialId:' + filterAapHostCredentialId });
-
-    var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
-    if(filterAapProjectId != null && filterAapProjectId !== '')
-      filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
-
     var filterAnsiblePlaybooks = $formFilters.querySelector('.valueAnsiblePlaybooks')?.value;
     if(filterAnsiblePlaybooks != null && filterAnsiblePlaybooks !== '')
       filters.push({ name: 'fq', value: 'ansiblePlaybooks:' + filterAnsiblePlaybooks });
-
-    var filterJobTemplateId = $formFilters.querySelector('.valueJobTemplateId')?.value;
-    if(filterJobTemplateId != null && filterJobTemplateId !== '')
-      filters.push({ name: 'fq', value: 'jobTemplateId:' + filterJobTemplateId });
 
     var filterJobTemplateResource = $formFilters.querySelector('.valueJobTemplateResource')?.value;
     if(filterJobTemplateResource != null && filterJobTemplateResource !== '')
@@ -1886,6 +2038,18 @@ async function postJobTemplate($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
+  var valueAapHostCredentialId = $formValues.querySelector('.valueAapHostCredentialId')?.value;
+  if(valueAapHostCredentialId != null && valueAapHostCredentialId !== '')
+    vals['aapHostCredentialId'] = valueAapHostCredentialId;
+
+  var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
+  if(valueAapProjectId != null && valueAapProjectId !== '')
+    vals['aapProjectId'] = valueAapProjectId;
+
+  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
+  if(valueJobTemplateId != null && valueJobTemplateId !== '')
+    vals['jobTemplateId'] = valueJobTemplateId;
+
   var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['tenantResource'] = valueTenantResource;
@@ -1902,21 +2066,9 @@ async function postJobTemplate($formValues, target, success, error) {
   if(valueAapInventoryId != null && valueAapInventoryId !== '')
     vals['aapInventoryId'] = valueAapInventoryId;
 
-  var valueAapHostCredentialId = $formValues.querySelector('.valueAapHostCredentialId')?.value;
-  if(valueAapHostCredentialId != null && valueAapHostCredentialId !== '')
-    vals['aapHostCredentialId'] = valueAapHostCredentialId;
-
-  var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
-  if(valueAapProjectId != null && valueAapProjectId !== '')
-    vals['aapProjectId'] = valueAapProjectId;
-
   var valueAnsiblePlaybooks = $formValues.querySelector('.valueAnsiblePlaybooks')?.value;
   if(valueAnsiblePlaybooks != null && valueAnsiblePlaybooks !== '')
     vals['ansiblePlaybooks'] = JSON.parse(valueAnsiblePlaybooks);
-
-  var valueJobTemplateId = $formValues.querySelector('.valueJobTemplateId')?.value;
-  if(valueJobTemplateId != null && valueJobTemplateId !== '')
-    vals['jobTemplateId'] = valueJobTemplateId;
 
   var valueJobTemplateResource = $formValues.querySelector('.valueJobTemplateResource')?.value;
   if(valueJobTemplateResource != null && valueJobTemplateResource !== '')

@@ -27,7 +27,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventorySearchPage.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventoryEditPage.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host-credential/HostCredential.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host/Host.js"></script>
 {%- endblock htmScriptsHostInventoryPage %}
@@ -171,8 +171,8 @@
           document.querySelector('#HostInventory_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#HostInventory_Page_tenantResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#HostInventory_Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#Tenant_POST_inventoryResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#Tenant_POST_inventoryResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#TenantIntent_POST_inventoryResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#TenantIntent_POST_inventoryResource')?.addEventListener('focus', relate_tenantResource);
           if(window.result.tenantResource) {
           {% if "PATCH" in scopes -%}
             {{'  '}}suggestHostInventoryTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostInventoryTenantResource_Page'), window.result.inventoryResource, window.result.tenantResource, true, document.getElementById('HostInventory_Page_tenantResource'));
@@ -184,8 +184,8 @@
           {% endif -%}
           {% endif -%}
           }
-          function Tenant_POST_hostInventoryIds_HostInventory_POST_tenantResource(event) {
-            suggestTenantHostInventoryIds(
+          function TenantIntent_POST_hostInventoryIds_HostInventory_POST_tenantResource(event) {
+            suggestTenantIntentHostInventoryIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
@@ -193,13 +193,13 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.inventoryResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
                 , true
-                , document.querySelector('#Tenant_POST_hostInventoryIds_HostInventory_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_hostInventoryIds_HostInventory_POST_tenantResource')
                 );
           }
-          document.querySelector('#Tenant_POST_hostInventoryIds_HostInventory_POST_tenantResource')?.addEventListener('input', Tenant_POST_hostInventoryIds_HostInventory_POST_tenantResource);
-          document.querySelector('#Tenant_POST_hostInventoryIds_HostInventory_POST_tenantResource')?.addEventListener('focus', Tenant_POST_hostInventoryIds_HostInventory_POST_tenantResource);
-          function Tenant_POST_ansibleProjectIds_HostInventory_POST_tenantResource(event) {
-            suggestTenantAnsibleProjectIds(
+          document.querySelector('#TenantIntent_POST_hostInventoryIds_HostInventory_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_hostInventoryIds_HostInventory_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_hostInventoryIds_HostInventory_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_hostInventoryIds_HostInventory_POST_tenantResource);
+          function TenantIntent_POST_ansibleProjectIds_HostInventory_POST_tenantResource(event) {
+            suggestTenantIntentAnsibleProjectIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ]
@@ -207,11 +207,11 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.inventoryResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
                 , true
-                , document.querySelector('#Tenant_POST_ansibleProjectIds_HostInventory_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_ansibleProjectIds_HostInventory_POST_tenantResource')
                 );
           }
-          document.querySelector('#Tenant_POST_ansibleProjectIds_HostInventory_POST_tenantResource')?.addEventListener('input', Tenant_POST_ansibleProjectIds_HostInventory_POST_tenantResource);
-          document.querySelector('#Tenant_POST_ansibleProjectIds_HostInventory_POST_tenantResource')?.addEventListener('focus', Tenant_POST_ansibleProjectIds_HostInventory_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds_HostInventory_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_ansibleProjectIds_HostInventory_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds_HostInventory_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_ansibleProjectIds_HostInventory_POST_tenantResource);
           function relate_credentialResource(event) {
             suggestHostInventoryCredentialResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -348,10 +348,6 @@
 
         var submitForm_patchHostInventory = document.querySelector('#htmForm_patchHostInventory')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_patchHostInventory')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           patchHostInventory(null, document.querySelector('#htmForm_patchHostInventory')
               , document.querySelector('#htmFormButton_patchHostInventory')
@@ -384,10 +380,6 @@
 
         var submitForm_postHostInventory = document.querySelector('#htmForm_postHostInventory')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_postHostInventory')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           postHostInventory(document.querySelector('#htmForm_postHostInventory')
               , document.querySelector('#htmFormButton_postHostInventory')
@@ -419,10 +411,6 @@
 
         var submitForm_deleteHostInventory = document.querySelector('#htmForm_deleteHostInventory')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deleteHostInventory')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           deleteHostInventory(event.target, event.target.getAttribute('data-inventoryResource')
               , (json, target) => {
@@ -452,10 +440,6 @@
         });
 
         var submitForm_putimportHostInventory = document.querySelector('#htmForm_putimportHostInventory')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportHostInventory')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           putimportHostInventory(document.querySelector('#htmForm_putimportHostInventory')
@@ -489,20 +473,12 @@
 
         var submitForm_searchpageHostInventory = document.querySelector('#htmForm_searchpageHostInventory')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_searchpageHostInventory')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           searchpageHostInventory();
           return false;
         });
 
         var submitForm_deletefilterHostInventory = document.querySelector('#htmForm_deletefilterHostInventory')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deletefilterHostInventory')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           deletefilterHostInventory(event.target
@@ -532,10 +508,10 @@
           return false;
         });
 
-        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_postTenantIntent')?.addEventListener('click', event => {
           event.preventDefault();
-          postTenant(document.querySelector('#htmForm_postTenant')
-              , document.querySelector('#htmFormButton_postTenant')
+          postTenantIntent(document.querySelector('#htmForm_postTenantIntent')
+              , document.querySelector('#htmFormButton_postTenantIntent')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])

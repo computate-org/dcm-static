@@ -1,13 +1,13 @@
 
-{%- macro htmButton_patchTenantRequested() %}<wa-button variant="brand" id="htmButton_patchTenantRequested"  data-dialog="open patchTenantRequestedDialog" data-tenantResource={{ result.tenantResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+{%- macro htmButton_patchTenantRequested() %}<wa-button variant="brand" id="htmButton_patchTenantRequested"  data-dialog="open patchTenantRequestedDialog" data-tenantRequestedId={{ result.tenantRequestedId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
 
-{%- macro htmButton_postTenantRequested() %}<wa-button variant="brand" id="htmButton_postTenantRequested"  data-dialog="open postTenantRequestedDialog" data-tenantResource={{ result.tenantResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+{%- macro htmButton_postTenantRequested() %}<wa-button variant="brand" id="htmButton_postTenantRequested"  data-dialog="open postTenantRequestedDialog" data-tenantRequestedId={{ result.tenantRequestedId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
 
-{%- macro htmButton_deleteTenantRequested() %}<wa-button variant="brand" id="htmButton_deleteTenantRequested" data-tenantResource={{ result.tenantResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deleteTenantRequested() %}<wa-button variant="brand" id="htmButton_deleteTenantRequested" data-tenantRequestedId={{ result.tenantRequestedId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
 
-{%- macro htmButton_putimportTenantRequested() %}<wa-button variant="brand" id="htmButton_putimportTenantRequested"  data-dialog="open putimportTenantRequestedDialog" data-tenantResource={{ result.tenantResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+{%- macro htmButton_putimportTenantRequested() %}<wa-button variant="brand" id="htmButton_putimportTenantRequested"  data-dialog="open putimportTenantRequestedDialog" data-tenantRequestedId={{ result.tenantRequestedId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
 
-{%- macro htmButton_deletefilterTenantRequested() %}<wa-button variant="brand" id="htmButton_deletefilterTenantRequested" data-tenantResource={{ result.tenantResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+{%- macro htmButton_deletefilterTenantRequested() %}<wa-button variant="brand" id="htmButton_deletefilterTenantRequested" data-tenantRequestedId={{ result.tenantRequestedId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
           <div id="htmSearchForm">
             <wa-scroller>
               <wa-button-group>
@@ -15,14 +15,14 @@
   {% if "PATCH" in scopes %}
     {% if resultCount >= 1 %}
                 <wa-button variant="brand" id="refreshThisTenantRequestedGenPage"
-                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'tenantResource:{{ result.tenantResource }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisTenantRequestedGenPage')); }, function() { addError(document.querySelector('#refreshThisTenantRequestedGenPage')); }); return false; ">
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'tenantRequestedId:{{ result.tenantRequestedId }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisTenantRequestedGenPage')); }, function() { addError(document.querySelector('#refreshThisTenantRequestedGenPage')); }); return false; ">
                   <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
                   refresh
                 </wa-button>
     {% endif %}
     {% if resultCount > 0 %}
-                <wa-button variant="brand" id="refreshAllTenantRequestedGenPage{{ result.tenantResource | e }}"
-                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllTenantRequestedGenPage{{ result.tenantResource | e }}')); }, function() { addError(document.querySelector('#refreshAllTenantRequestedGenPage{{ result.tenantResource | e }}')); }); "
+                <wa-button variant="brand" id="refreshAllTenantRequestedGenPage{{ result.tenantRequestedId | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllTenantRequestedGenPage{{ result.tenantRequestedId | e }}')); }, function() { addError(document.querySelector('#refreshAllTenantRequestedGenPage{{ result.tenantRequestedId | e }}')); }); "
                     >
                   <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
                   refresh all 

@@ -857,18 +857,18 @@
                 {{ inputTenantResourceHostCheckCRPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
-                  relate a tenant to this host check change request
+                  relate a tenant intent to this host check change request
                 </div>
                 <ul class="label-on-left-ul " id="listHostCheckCRTenantResource_{{classApiMethodMethod}}">
                 </ul>
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postTenant(idSuffix='_HostCheckCR_POST_tenantResource') }}
+                  {{ htmForm_postTenantIntent(idSuffix='_HostCheckCR_POST_tenantResource') }}
                   <wa-button
                        id="HostCheckCR_{{classApiMethodMethod}}_tenantResource_add"
-                       data-dialog="open postTenantDialog"
-                      >add a tenant</wa-button>
+                       data-dialog="open postTenantIntentDialog"
+                      >add a tenant intent</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
@@ -1302,7 +1302,7 @@
 
 {%- macro htmForm_patchHostCheckCR(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchHostCheckCRDialog" label="Modify host check change request">
-          <form id="htmForm_patchHostCheckCR" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_patchHostCheckCR" class="wa-stack round-row primary-smart-border-radius ">
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
@@ -1644,8 +1644,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_patchHostCheckCR() }}
           </form>
-          {{ htmFormButton_patchHostCheckCR() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -1660,7 +1660,7 @@
 
 {%- macro htmForm_postHostCheckCR(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postHostCheckCRDialog" label="Create a host check change request">
-          <form id="htmForm_postHostCheckCR" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_postHostCheckCR" class="wa-stack round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
               <div class="grid-with-subgrid-2col ">
@@ -2003,8 +2003,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_postHostCheckCR() }}
           </form>
-          {{ htmFormButton_postHostCheckCR() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -2019,9 +2019,9 @@
 
 {%- macro htmForm_deleteHostCheckCR(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteHostCheckCRDialog" label="Delete host check change request">
-          <form id="htmForm_deleteHostCheckCR" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deleteHostCheckCR" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteHostCheckCR() }}
           </form>
-          {{ htmFormButton_deleteHostCheckCR() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -2036,7 +2036,7 @@
 
 {%- macro htmForm_putimportHostCheckCR(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportHostCheckCRDialog" label="Import host check change requests">
-          <form id="htmForm_putimportHostCheckCR" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_putimportHostCheckCR" class="wa-stack round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
                   class="PUTImport_searchList "
@@ -2045,14 +2045,14 @@
                   >
               </wa-textarea>
             </div>
+            {{ htmFormButton_putimportHostCheckCR() }}
           </form>
-          {{ htmFormButton_putimportHostCheckCR() }}
         </wa-dialog>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageHostCheckCR(idSuffix='') %}
         <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageHostCheckCRDialog" label="Search host check change requests">
-          <div id="htmForm_searchpageHostCheckCR" class="round-row primary-smart-border-radius ">
+          <div id="htmForm_searchpageHostCheckCR" class="wa-stack round-row primary-smart-border-radius ">
 
             <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
@@ -2457,8 +2457,8 @@
 
 {%- macro htmForm_deletefilterHostCheckCR(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterHostCheckCRDialog" label="Delete host check change request">
-          <form id="htmForm_deletefilterHostCheckCR" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deletefilterHostCheckCR" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterHostCheckCR() }}
           </form>
-          {{ htmFormButton_deletefilterHostCheckCR() }}
         </wa-dialog>
 {%- endmacro %}

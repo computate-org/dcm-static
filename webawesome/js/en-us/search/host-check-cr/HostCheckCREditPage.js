@@ -838,27 +838,6 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH ownedByUserId
-          document.querySelector('#HostCheckCR_Page_ownedByUserId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_ownedByUserId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchHostCheckCRVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'changeRequestId:' + event.currentTarget.getAttribute('data-changeRequestId') }]
-                  , 'setOwnedByUserId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#HostCheckCR_Page_ownedByUserId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#HostCheckCR_Page_ownedByUserId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_ownedByUserId');
-            const valid = form.reportValidity();
-          });
-
           // PATCH createdByFullName
           document.querySelector('#HostCheckCR_Page_createdByFullName')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_createdByFullName');
@@ -877,6 +856,27 @@ Promise.all([
           });
           document.querySelector('#HostCheckCR_Page_createdByFullName')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_createdByFullName');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH ownedByUserId
+          document.querySelector('#HostCheckCR_Page_ownedByUserId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_ownedByUserId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostCheckCRVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'changeRequestId:' + event.currentTarget.getAttribute('data-changeRequestId') }]
+                  , 'setOwnedByUserId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#HostCheckCR_Page_ownedByUserId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#HostCheckCR_Page_ownedByUserId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_ownedByUserId');
             const valid = form.reportValidity();
           });
 

@@ -77,17 +77,6 @@ Promise.all([
     facetStatsChange('AnsibleProject', 'sourceControlType', false);
   });
 
-  document.querySelector('#pageSelectSortAnsibleProject_ansibleProjectDescription')?.addEventListener('change', (event) => {
-    sort('AnsibleProject', 'ansibleProjectDescription', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsAnsibleProject_ansibleProjectDescription')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AnsibleProject', 'ansibleProjectDescription', true);
-  });
-  document.querySelector('#pageStatsAnsibleProject_ansibleProjectDescription')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AnsibleProject', 'ansibleProjectDescription', false);
-  });
-
   document.querySelector('#pageSelectSortAnsibleProject_sourceControlUrl')?.addEventListener('change', (event) => {
     sort('AnsibleProject', 'sourceControlUrl', event.currentTarget.value);
   });
@@ -99,15 +88,15 @@ Promise.all([
     facetStatsChange('AnsibleProject', 'sourceControlUrl', false);
   });
 
-  document.querySelector('#pageSelectSortAnsibleProject_sourceControlBranch')?.addEventListener('change', (event) => {
-    sort('AnsibleProject', 'sourceControlBranch', event.currentTarget.value);
+  document.querySelector('#pageSelectSortAnsibleProject_ansibleProjectDescription')?.addEventListener('change', (event) => {
+    sort('AnsibleProject', 'ansibleProjectDescription', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsAnsibleProject_sourceControlBranch')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AnsibleProject', 'sourceControlBranch', true);
+  document.querySelector('#pageStatsAnsibleProject_ansibleProjectDescription')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AnsibleProject', 'ansibleProjectDescription', true);
   });
-  document.querySelector('#pageStatsAnsibleProject_sourceControlBranch')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AnsibleProject', 'sourceControlBranch', false);
+  document.querySelector('#pageStatsAnsibleProject_ansibleProjectDescription')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AnsibleProject', 'ansibleProjectDescription', false);
   });
 
   document.querySelector('#pageSelectSortAnsibleProject_jobTemplateResources')?.addEventListener('change', (event) => {
@@ -119,6 +108,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsAnsibleProject_jobTemplateResources')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('AnsibleProject', 'jobTemplateResources', false);
+  });
+
+  document.querySelector('#pageSelectSortAnsibleProject_sourceControlBranch')?.addEventListener('change', (event) => {
+    sort('AnsibleProject', 'sourceControlBranch', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsAnsibleProject_sourceControlBranch')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AnsibleProject', 'sourceControlBranch', true);
+  });
+  document.querySelector('#pageStatsAnsibleProject_sourceControlBranch')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AnsibleProject', 'sourceControlBranch', false);
   });
 
   document.querySelector('#pageSelectSortAnsibleProject_ansiblePlaybooksList')?.addEventListener('change', (event) => {
@@ -308,6 +308,17 @@ Promise.all([
     facetStatsChange('AnsibleProject', 'tenantId', false);
   });
 
+  document.querySelector('#pageSelectSortAnsibleProject_ansibleProjectResource')?.addEventListener('change', (event) => {
+    sort('AnsibleProject', 'ansibleProjectResource', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsAnsibleProject_ansibleProjectResource')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('AnsibleProject', 'ansibleProjectResource', true);
+  });
+  document.querySelector('#pageStatsAnsibleProject_ansibleProjectResource')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('AnsibleProject', 'ansibleProjectResource', false);
+  });
+
   document.querySelector('#pageSelectSortAnsibleProject_aapOrganizationId')?.addEventListener('change', (event) => {
     sort('AnsibleProject', 'aapOrganizationId', event.currentTarget.value);
   });
@@ -339,17 +350,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsAnsibleProject_aapProjectId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('AnsibleProject', 'aapProjectId', false);
-  });
-
-  document.querySelector('#pageSelectSortAnsibleProject_ansibleProjectResource')?.addEventListener('change', (event) => {
-    sort('AnsibleProject', 'ansibleProjectResource', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsAnsibleProject_ansibleProjectResource')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('AnsibleProject', 'ansibleProjectResource', true);
-  });
-  document.querySelector('#pageStatsAnsibleProject_ansibleProjectResource')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('AnsibleProject', 'ansibleProjectResource', false);
   });
 
   document.querySelector('#pageSelectSortAnsibleProject_ansiblePlaybooks')?.addEventListener('change', (event) => {

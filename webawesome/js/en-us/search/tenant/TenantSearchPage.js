@@ -99,17 +99,6 @@ Promise.all([
     facetStatsChange('Tenant', 'ansibleProjectIds', false);
   });
 
-  document.querySelector('#pageSelectSortTenant_pageId')?.addEventListener('change', (event) => {
-    sort('Tenant', 'pageId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsTenant_pageId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Tenant', 'pageId', true);
-  });
-  document.querySelector('#pageStatsTenant_pageId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Tenant', 'pageId', false);
-  });
-
   document.querySelector('#pageSelectSortTenant_classCanonicalName')?.addEventListener('change', (event) => {
     sort('Tenant', 'classCanonicalName', event.currentTarget.value);
   });
@@ -388,24 +377,6 @@ Promise.all([
             facetRangeStartChange('Tenant', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndTenant_tenantDescription')?.addEventListener('change', (event) => {
-            facetRangeEndChange('Tenant', event.currentTarget);
-          });
-          document.querySelector('#fqTenant_pageId')?.addEventListener('change', (event) => {
-            fqChange('Tenant', event.currentTarget, facetChangeTenantSuccess, facetChangeTenantError);
-          });
-          document.querySelector('#buttonFacetTenant_pageId')?.addEventListener('click', (event) => {
-            facetFieldChange('Tenant', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotTenant_pageId')?.addEventListener('change', (event) => {
-            facetPivotChange('Tenant', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapTenant_pageId')?.addEventListener('change', (event) => {
-            facetRangeGapChange('Tenant', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeStartTenant_pageId')?.addEventListener('change', (event) => {
-            facetRangeStartChange('Tenant', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeEndTenant_pageId')?.addEventListener('change', (event) => {
             facetRangeEndChange('Tenant', event.currentTarget);
           });
           document.querySelector('#fqTenant_displayPage')?.addEventListener('change', (event) => {

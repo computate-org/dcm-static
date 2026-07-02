@@ -15,7 +15,7 @@
 
 {%- block htmStylePageLayout %}
       :root {
-        --site-results-number-of-columns: 2;
+        --site-results-number-of-columns: 3;
       }
 {{ super() }}
 {%- block htmStyleTenantRequestedPage %}
@@ -31,6 +31,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/approval/RequestApproval.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/realized/tenant/TenantRealized.js"></script>
 {%- endblock htmScriptsTenantRequestedPage %}
 {%- endblock htmScriptsPageLayout %}
 
@@ -38,7 +39,7 @@
 {%- block htmScriptTenantRequestedPage %}
     <script>
 
-      function jsWebsocketTenantRequested(tenantResource, vars, $response) {
+      function jsWebsocketTenantRequested(tenantRequestedId, vars, $response) {
 {%- block jsWebsocketTenantRequestedPage %}{%- endblock %}
       }
 
@@ -134,8 +135,24 @@
       ]).then(() => {
         window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
 
-        var tenantResource = {% if result.tenantResource is defined %}{{ result.tenantResource | tojson }}{% else %}null{% endif %};
+        var tenantRequestedId = {% if result.tenantRequestedId is defined %}{{ result.tenantRequestedId | tojson }}{% else %}null{% endif %};
 
+          function relate_tenantResource(event) {
+            suggestTenantRequestedTenantResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#TenantRequested_POST_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#TenantRequested_POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#TenantRequested_PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#TenantRequested_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
           function relate_requestApprovals(event) {
             suggestTenantRequestedRequestApprovals(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -152,6 +169,22 @@
           document.querySelector('#TenantRequested_POST_requestApprovals')?.addEventListener('focus', relate_requestApprovals);
           document.querySelector('#TenantRequested_PATCH_requestApprovals')?.addEventListener('input', relate_requestApprovals);
           document.querySelector('#TenantRequested_PATCH_requestApprovals')?.addEventListener('focus', relate_requestApprovals);
+          function relate_tenantRealized(event) {
+            suggestTenantRequestedTenantRealized(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantRealizedId,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantRealized is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantRealized }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#TenantRequested_POST_tenantRealized')?.addEventListener('input', relate_tenantRealized);
+          document.querySelector('#TenantRequested_POST_tenantRealized')?.addEventListener('focus', relate_tenantRealized);
+          document.querySelector('#TenantRequested_PATCH_tenantRealized')?.addEventListener('input', relate_tenantRealized);
+          document.querySelector('#TenantRequested_PATCH_tenantRealized')?.addEventListener('focus', relate_tenantRealized);
           function relate_hostInventoryIds(event) {
             suggestTenantRequestedHostInventoryIds(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -184,23 +217,7 @@
           document.querySelector('#TenantRequested_POST_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
           document.querySelector('#TenantRequested_PATCH_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
           document.querySelector('#TenantRequested_PATCH_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
-          function relate_tenantResource(event) {
-            suggestTenantRequestedTenantResource(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantResource is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantResource }}'}{%- else %}{%- endif %}]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , null
-                , null
-                , true
-                , this
-                );
-          }
-          document.querySelector('#TenantRequested_POST_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#TenantRequested_POST_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#TenantRequested_PATCH_tenantResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#TenantRequested_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
-        if(tenantResource == null) {
+        if(tenantRequestedId == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
             document.querySelector('#site-results-grid').classList.add('grid-mode-details');
@@ -217,7 +234,7 @@
           var o = document.querySelector('.pageForm .result')?.value;
           if(o)
             window.result = JSON.parse(o);
-        {% if result.tenantResource is defined %}
+        {% if result.tenantRequestedId is defined %}
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listTenantRequested')?.value;
@@ -253,7 +270,7 @@
           event.target.setAttribute('loading', true);
           patchTenantRequested(null, document.querySelector('#htmForm_patchTenantRequested')
               , document.querySelector('#htmFormButton_patchTenantRequested')
-              , event.target.getAttribute('data-tenantResource')
+              , event.target.getAttribute('data-tenantRequestedId')
               , (json, target) => {
             
           }, (response, target) => {
@@ -314,7 +331,7 @@
         var submitForm_deleteTenantRequested = document.querySelector('#htmForm_deleteTenantRequested')?.addEventListener('submit', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
-          deleteTenantRequested(event.target, event.target.getAttribute('data-tenantResource')
+          deleteTenantRequested(event.target, event.target.getAttribute('data-tenantRequestedId')
               , (json, target) => {
             
           }, (response, target) => {
@@ -346,7 +363,7 @@
           event.target.setAttribute('loading', true);
           putimportTenantRequested(document.querySelector('#htmForm_putimportTenantRequested')
               , document.querySelector('#htmFormButton_putimportTenantRequested')
-              , event.target.getAttribute('data-tenantResource')
+              , event.target.getAttribute('data-tenantRequestedId')
               , (json, target) => {
             
           }, (response, target) => {
@@ -410,7 +427,7 @@
           return false;
         });
 
-        document.querySelector('#htmFormButton_postHostInventory')?.addEventListener('click', event => {
+        document.querySelector('#htmForm_postHostInventory')?.addEventListener('submit', event => {
           event.preventDefault();
           postHostInventory(document.querySelector('#htmForm_postHostInventory')
               , document.querySelector('#htmFormButton_postHostInventory')
@@ -441,7 +458,7 @@
           });
         });
 
-        document.querySelector('#htmFormButton_postAnsibleProject')?.addEventListener('click', event => {
+        document.querySelector('#htmForm_postAnsibleProject')?.addEventListener('submit', event => {
           event.preventDefault();
           postAnsibleProject(document.querySelector('#htmForm_postAnsibleProject')
               , document.querySelector('#htmFormButton_postAnsibleProject')
@@ -472,7 +489,7 @@
           });
         });
 
-        document.querySelector('#htmFormButton_postTenantIntent')?.addEventListener('click', event => {
+        document.querySelector('#htmForm_postTenantIntent')?.addEventListener('submit', event => {
           event.preventDefault();
           postTenantIntent(document.querySelector('#htmForm_postTenantIntent')
               , document.querySelector('#htmFormButton_postTenantIntent')
@@ -503,10 +520,41 @@
           });
         });
 
-        document.querySelector('#htmFormButton_postRequestApproval')?.addEventListener('click', event => {
+        document.querySelector('#htmForm_postRequestApproval')?.addEventListener('submit', event => {
           event.preventDefault();
           postRequestApproval(document.querySelector('#htmForm_postRequestApproval')
               , document.querySelector('#htmFormButton_postRequestApproval')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+        });
+
+        document.querySelector('#htmForm_postTenantRealized')?.addEventListener('submit', event => {
+          event.preventDefault();
+          postTenantRealized(document.querySelector('#htmForm_postTenantRealized')
+              , document.querySelector('#htmFormButton_postTenantRealized')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])
@@ -624,6 +672,19 @@
 {% include en-us/search/requested/tenant/TenantRequestedPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
+                    <wa-dropdown id="htmDropdown-tenantResource">
+                      <wa-button variant="brand" slot="trigger" caret>tenant auth resource</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRequested_tenantResource'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantResource-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by tenant auth resource ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRequested_tenantResource'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantResource-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by tenant auth resource descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
                     <wa-dropdown id="htmDropdown-tenantName">
                       <wa-button variant="brand" slot="trigger" caret>tenant name</wa-button>
                       <wa-menu>
@@ -655,13 +716,20 @@
                   <div>
                     <a href="{{ item.displayPage }}">
                       <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+                      <span>{{ item.tenantResource | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
                       <span>{{ item.tenantName | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
-                      <span>{{ item.tenantDescription | e }}</span>
+                      <span class="white-space-pre-wrap ">{{ item.tenantDescription | e }}</span>
                     </a>
                   </div>
                   {% endfor %}
+              {% if getColumnTenantResource is defined %}
+                <div>
+                </div>
+              {% endif %}
               {% if getColumnTenantName is defined %}
                 <div>
                 </div>

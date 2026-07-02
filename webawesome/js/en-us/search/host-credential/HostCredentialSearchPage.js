@@ -88,17 +88,6 @@ Promise.all([
     facetStatsChange('HostCredential', 'credentialDescription', false);
   });
 
-  document.querySelector('#pageSelectSortHostCredential_userName')?.addEventListener('change', (event) => {
-    sort('HostCredential', 'userName', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHostCredential_userName')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('HostCredential', 'userName', true);
-  });
-  document.querySelector('#pageStatsHostCredential_userName')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('HostCredential', 'userName', false);
-  });
-
   document.querySelector('#pageSelectSortHostCredential_becomePassword')?.addEventListener('change', (event) => {
     sort('HostCredential', 'becomePassword', event.currentTarget.value);
   });
@@ -108,6 +97,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsHostCredential_becomePassword')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('HostCredential', 'becomePassword', false);
+  });
+
+  document.querySelector('#pageSelectSortHostCredential_userName')?.addEventListener('change', (event) => {
+    sort('HostCredential', 'userName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCredential_userName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCredential', 'userName', true);
+  });
+  document.querySelector('#pageStatsHostCredential_userName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCredential', 'userName', false);
   });
 
   document.querySelector('#pageSelectSortHostCredential_password')?.addEventListener('change', (event) => {
@@ -286,6 +286,17 @@ Promise.all([
     facetStatsChange('HostCredential', 'solrId', false);
   });
 
+  document.querySelector('#pageSelectSortHostCredential_aapCredentialId')?.addEventListener('change', (event) => {
+    sort('HostCredential', 'aapCredentialId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsHostCredential_aapCredentialId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('HostCredential', 'aapCredentialId', true);
+  });
+  document.querySelector('#pageStatsHostCredential_aapCredentialId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('HostCredential', 'aapCredentialId', false);
+  });
+
   document.querySelector('#pageSelectSortHostCredential_tenantId')?.addEventListener('change', (event) => {
     sort('HostCredential', 'tenantId', event.currentTarget.value);
   });
@@ -328,17 +339,6 @@ Promise.all([
   });
   document.querySelector('#pageStatsHostCredential_credentialResource')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('HostCredential', 'credentialResource', false);
-  });
-
-  document.querySelector('#pageSelectSortHostCredential_aapCredentialId')?.addEventListener('change', (event) => {
-    sort('HostCredential', 'aapCredentialId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsHostCredential_aapCredentialId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('HostCredential', 'aapCredentialId', true);
-  });
-  document.querySelector('#pageStatsHostCredential_aapCredentialId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('HostCredential', 'aapCredentialId', false);
   });
 
   document.querySelector('#pageSelectSortHostCredential_aapCredentialTypeId')?.addEventListener('change', (event) => {

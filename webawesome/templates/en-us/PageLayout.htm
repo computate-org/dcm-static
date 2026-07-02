@@ -135,7 +135,7 @@
       {%- endblock websocketPageLayout %}{{''}}
     </script>
   </head>
-  <body class="wa-body-{{ userFontSize[0:1] }} wa-size-{{ userFontSize[0:1] }} "{% if CONTENT_TYPE_PDF is not defined or not CONTENT_TYPE_PDF -%} style="padding: var(--wa-space-xl)"{% endif -%}>
+  <body class="wa-body-{{ userFontSize[0:1] }} wa-size-{{ userFontSize[0:1] }} "{% if CONTENT_TYPE_PDF is not defined or not CONTENT_TYPE_PDF %} style="padding: var(--wa-space-xl)"{% endif %}>
     <wa-page disable-sticky="header">
       {% if CONTENT_TYPE_PDF is not defined or not CONTENT_TYPE_PDF -%}
       <wa-toast style="--width: min(64rem, 100vw); "></wa-toast>

@@ -27,7 +27,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/host/Host.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host/HostSearchPage.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host/HostEditPage.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
 {%- endblock htmScriptsHostPage %}
 {%- endblock htmScriptsPageLayout %}
@@ -243,8 +243,8 @@
           document.querySelector('#Host_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#Host_Page_tenantResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#Host_Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#Tenant_POST_hostResource')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#Tenant_POST_hostResource')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#TenantIntent_POST_hostResource')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#TenantIntent_POST_hostResource')?.addEventListener('focus', relate_tenantResource);
           if(window.result.tenantResource) {
           {% if "PATCH" in scopes -%}
             {{'  '}}suggestHostTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostTenantResource_Page'), window.result.hostResource, window.result.tenantResource, true, document.getElementById('Host_Page_tenantResource'));
@@ -256,8 +256,8 @@
           {% endif -%}
           {% endif -%}
           }
-          function Tenant_POST_hostInventoryIds_Host_POST_tenantResource(event) {
-            suggestTenantHostInventoryIds(
+          function TenantIntent_POST_hostInventoryIds_Host_POST_tenantResource(event) {
+            suggestTenantIntentHostInventoryIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
@@ -265,13 +265,13 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.hostResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
                 , true
-                , document.querySelector('#Tenant_POST_hostInventoryIds_Host_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_hostInventoryIds_Host_POST_tenantResource')
                 );
           }
-          document.querySelector('#Tenant_POST_hostInventoryIds_Host_POST_tenantResource')?.addEventListener('input', Tenant_POST_hostInventoryIds_Host_POST_tenantResource);
-          document.querySelector('#Tenant_POST_hostInventoryIds_Host_POST_tenantResource')?.addEventListener('focus', Tenant_POST_hostInventoryIds_Host_POST_tenantResource);
-          function Tenant_POST_ansibleProjectIds_Host_POST_tenantResource(event) {
-            suggestTenantAnsibleProjectIds(
+          document.querySelector('#TenantIntent_POST_hostInventoryIds_Host_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_hostInventoryIds_Host_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_hostInventoryIds_Host_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_hostInventoryIds_Host_POST_tenantResource);
+          function TenantIntent_POST_ansibleProjectIds_Host_POST_tenantResource(event) {
+            suggestTenantIntentAnsibleProjectIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ]
@@ -279,11 +279,11 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.hostResource : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
                 , true
-                , document.querySelector('#Tenant_POST_ansibleProjectIds_Host_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_ansibleProjectIds_Host_POST_tenantResource')
                 );
           }
-          document.querySelector('#Tenant_POST_ansibleProjectIds_Host_POST_tenantResource')?.addEventListener('input', Tenant_POST_ansibleProjectIds_Host_POST_tenantResource);
-          document.querySelector('#Tenant_POST_ansibleProjectIds_Host_POST_tenantResource')?.addEventListener('focus', Tenant_POST_ansibleProjectIds_Host_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds_Host_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_ansibleProjectIds_Host_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds_Host_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_ansibleProjectIds_Host_POST_tenantResource);
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listHost')?.value;
@@ -315,10 +315,6 @@
 
 
         var submitForm_patchHost = document.querySelector('#htmForm_patchHost')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_patchHost')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           patchHost(null, document.querySelector('#htmForm_patchHost')
@@ -352,10 +348,6 @@
 
         var submitForm_postHost = document.querySelector('#htmForm_postHost')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_postHost')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           postHost(document.querySelector('#htmForm_postHost')
               , document.querySelector('#htmFormButton_postHost')
@@ -387,10 +379,6 @@
 
         var submitForm_deleteHost = document.querySelector('#htmForm_deleteHost')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deleteHost')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           deleteHost(event.target, event.target.getAttribute('data-hostResource')
               , (json, target) => {
@@ -420,10 +408,6 @@
         });
 
         var submitForm_putimportHost = document.querySelector('#htmForm_putimportHost')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportHost')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           putimportHost(document.querySelector('#htmForm_putimportHost')
@@ -457,20 +441,12 @@
 
         var submitForm_searchpageHost = document.querySelector('#htmForm_searchpageHost')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_searchpageHost')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           searchpageHost();
           return false;
         });
 
         var submitForm_deletefilterHost = document.querySelector('#htmForm_deletefilterHost')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deletefilterHost')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           deletefilterHost(event.target
@@ -500,10 +476,10 @@
           return false;
         });
 
-        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_postTenantIntent')?.addEventListener('click', event => {
           event.preventDefault();
-          postTenant(document.querySelector('#htmForm_postTenant')
-              , document.querySelector('#htmFormButton_postTenant')
+          postTenantIntent(document.querySelector('#htmForm_postTenantIntent')
+              , document.querySelector('#htmFormButton_postTenantIntent')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])

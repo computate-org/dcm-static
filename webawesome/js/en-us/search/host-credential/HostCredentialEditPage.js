@@ -103,27 +103,6 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH userName
-          document.querySelector('#HostCredential_Page_userName')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_userName');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchHostCredentialVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'credentialResource:' + event.currentTarget.getAttribute('data-credentialResource') }]
-                  , 'setUserName', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#HostCredential_Page_userName')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#HostCredential_Page_userName')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_userName');
-            const valid = form.reportValidity();
-          });
-
           // PATCH becomePassword
           document.querySelector('#HostCredential_Page_becomePassword')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_becomePassword');
@@ -142,6 +121,27 @@ Promise.all([
           });
           document.querySelector('#HostCredential_Page_becomePassword')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_becomePassword');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH userName
+          document.querySelector('#HostCredential_Page_userName')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_userName');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostCredentialVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'credentialResource:' + event.currentTarget.getAttribute('data-credentialResource') }]
+                  , 'setUserName', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#HostCredential_Page_userName')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#HostCredential_Page_userName')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_userName');
             const valid = form.reportValidity();
           });
 
@@ -334,6 +334,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH aapCredentialId
+          document.querySelector('#HostCredential_Page_aapCredentialId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_aapCredentialId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchHostCredentialVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'credentialResource:' + event.currentTarget.getAttribute('data-credentialResource') }]
+                  , 'setAapCredentialId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#HostCredential_Page_aapCredentialId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#HostCredential_Page_aapCredentialId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_aapCredentialId');
+            const valid = form.reportValidity();
+          });
+
           // PATCH tenantId
           document.querySelector('#HostCredential_Page_tenantId')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_tenantId');
@@ -415,27 +436,6 @@ Promise.all([
           });
           document.querySelector('#HostCredential_Page_credentialResource')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_credentialResource');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH aapCredentialId
-          document.querySelector('#HostCredential_Page_aapCredentialId')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_aapCredentialId');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchHostCredentialVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'credentialResource:' + event.currentTarget.getAttribute('data-credentialResource') }]
-                  , 'setAapCredentialId', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#HostCredential_Page_aapCredentialId')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#HostCredential_Page_aapCredentialId')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_aapCredentialId');
             const valid = form.reportValidity();
           });
 

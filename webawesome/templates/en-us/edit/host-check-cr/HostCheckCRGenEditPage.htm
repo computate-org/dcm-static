@@ -27,7 +27,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/host-check-cr/HostCheckCR.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-check-cr/HostCheckCRSearchPage.js"></script>
     <script type="module" src="{{staticBaseUrl}}/js/en-us/search/host-check-cr/HostCheckCREditPage.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/Tenant.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/job-template/JobTemplate.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/host-check/HostCheck.js"></script>
 {%- endblock htmScriptsHostCheckCRPage %}
@@ -258,8 +258,8 @@
           document.querySelector('#HostCheckCR_PATCH_tenantResource')?.addEventListener('focus', relate_tenantResource);
           document.querySelector('#HostCheckCR_Page_tenantResource')?.addEventListener('input', relate_tenantResource);
           document.querySelector('#HostCheckCR_Page_tenantResource')?.addEventListener('focus', relate_tenantResource);
-          document.querySelector('#Tenant_POST_changeRequestId')?.addEventListener('input', relate_tenantResource);
-          document.querySelector('#Tenant_POST_changeRequestId')?.addEventListener('focus', relate_tenantResource);
+          document.querySelector('#TenantIntent_POST_changeRequestId')?.addEventListener('input', relate_tenantResource);
+          document.querySelector('#TenantIntent_POST_changeRequestId')?.addEventListener('focus', relate_tenantResource);
           if(window.result.tenantResource) {
           {% if "PATCH" in scopes -%}
             {{'  '}}suggestHostCheckCRTenantResource([{'name':'fq','value':'tenantResource:' + window.result.tenantResource}], document.querySelector('#listHostCheckCRTenantResource_Page'), window.result.changeRequestId, window.result.tenantResource, true, document.getElementById('HostCheckCR_Page_tenantResource'));
@@ -271,8 +271,8 @@
           {% endif -%}
           {% endif -%}
           }
-          function Tenant_POST_hostInventoryIds_HostCheckCR_POST_tenantResource(event) {
-            suggestTenantHostInventoryIds(
+          function TenantIntent_POST_hostInventoryIds_HostCheckCR_POST_tenantResource(event) {
+            suggestTenantIntentHostInventoryIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
@@ -280,13 +280,13 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.changeRequestId : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
                 , true
-                , document.querySelector('#Tenant_POST_hostInventoryIds_HostCheckCR_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_hostInventoryIds_HostCheckCR_POST_tenantResource')
                 );
           }
-          document.querySelector('#Tenant_POST_hostInventoryIds_HostCheckCR_POST_tenantResource')?.addEventListener('input', Tenant_POST_hostInventoryIds_HostCheckCR_POST_tenantResource);
-          document.querySelector('#Tenant_POST_hostInventoryIds_HostCheckCR_POST_tenantResource')?.addEventListener('focus', Tenant_POST_hostInventoryIds_HostCheckCR_POST_tenantResource);
-          function Tenant_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource(event) {
-            suggestTenantAnsibleProjectIds(
+          document.querySelector('#TenantIntent_POST_hostInventoryIds_HostCheckCR_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_hostInventoryIds_HostCheckCR_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_hostInventoryIds_HostCheckCR_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_hostInventoryIds_HostCheckCR_POST_tenantResource);
+          function TenantIntent_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource(event) {
+            suggestTenantIntentAnsibleProjectIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ]
@@ -294,11 +294,11 @@
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.changeRequestId : null
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
                 , true
-                , document.querySelector('#Tenant_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource')
                 );
           }
-          document.querySelector('#Tenant_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource')?.addEventListener('input', Tenant_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource);
-          document.querySelector('#Tenant_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource')?.addEventListener('focus', Tenant_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_ansibleProjectIds_HostCheckCR_POST_tenantResource);
           function relate_jobTemplateResource(event) {
             suggestHostCheckCRJobTemplateResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -477,10 +477,6 @@
 
         var submitForm_patchHostCheckCR = document.querySelector('#htmForm_patchHostCheckCR')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_patchHostCheckCR')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           patchHostCheckCR(null, document.querySelector('#htmForm_patchHostCheckCR')
               , document.querySelector('#htmFormButton_patchHostCheckCR')
@@ -513,10 +509,6 @@
 
         var submitForm_postHostCheckCR = document.querySelector('#htmForm_postHostCheckCR')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_postHostCheckCR')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           postHostCheckCR(document.querySelector('#htmForm_postHostCheckCR')
               , document.querySelector('#htmFormButton_postHostCheckCR')
@@ -548,10 +540,6 @@
 
         var submitForm_deleteHostCheckCR = document.querySelector('#htmForm_deleteHostCheckCR')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deleteHostCheckCR')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           deleteHostCheckCR(event.target, event.target.getAttribute('data-changeRequestId')
               , (json, target) => {
@@ -581,10 +569,6 @@
         });
 
         var submitForm_putimportHostCheckCR = document.querySelector('#htmForm_putimportHostCheckCR')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportHostCheckCR')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           putimportHostCheckCR(document.querySelector('#htmForm_putimportHostCheckCR')
@@ -618,20 +602,12 @@
 
         var submitForm_searchpageHostCheckCR = document.querySelector('#htmForm_searchpageHostCheckCR')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_searchpageHostCheckCR')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           searchpageHostCheckCR();
           return false;
         });
 
         var submitForm_deletefilterHostCheckCR = document.querySelector('#htmForm_deletefilterHostCheckCR')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deletefilterHostCheckCR')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           deletefilterHostCheckCR(event.target
@@ -661,10 +637,10 @@
           return false;
         });
 
-        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
+        document.querySelector('#htmFormButton_postTenantIntent')?.addEventListener('click', event => {
           event.preventDefault();
-          postTenant(document.querySelector('#htmForm_postTenant')
-              , document.querySelector('#htmFormButton_postTenant')
+          postTenantIntent(document.querySelector('#htmForm_postTenantIntent')
+              , document.querySelector('#htmFormButton_postTenantIntent')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])
