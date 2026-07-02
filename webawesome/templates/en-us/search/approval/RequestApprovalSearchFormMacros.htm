@@ -1,0 +1,546 @@
+{%- macro inputPkRequestApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_pk">
+  {%- endif %}
+                  <wa-input
+                      readonly
+                      placeholder="[Long] primary key"
+                      label="primary key"
+                      type="number"
+                      hint="The primary key of this object in the database"
+                      id="RequestApproval_{{classApiMethodMethod}}_pk"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_pk setPk classRequestApproval inputRequestApproval{{ result.approvalId }}Pk "
+                      name="setPk"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_pk setPk classRequestApproval inputRequestApproval{{ result.approvalId }}Pk "
+                      name="setPk"
+    {%- else %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_pk valuePk classRequestApproval inputRequestApproval{{ result.approvalId }}Pk "
+                      name="pk"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.pk | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPkRequestApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPkRequestApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedRequestApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_created">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A created timestamp for this record in the database"
+                      label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_created datetimepicker setCreated classRequestApproval inputRequestApproval{{ result.approvalId }}Created "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="RequestApproval_{{classApiMethodMethod}}_created"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedRequestApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedRequestApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputModifiedRequestApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_modified">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A modified timestamp for this record in the database"
+                      label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_modified datetimepicker setModified classRequestApproval inputRequestApproval{{ result.approvalId }}Modified "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="RequestApproval_{{classApiMethodMethod}}_modified"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmModifiedRequestApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputModifiedRequestApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputArchivedRequestApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_archived">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-button variant="brand"
+                      id="RequestApproval_{{classApiMethodMethod}}_archived"
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_archived classRequestApproval inputRequestApproval{{ result.approvalId }}Archived "
+                      name="setArchived"
+                      data-approvalId={{ result.approvalId | tojson }}
+                      data-val="{{ result.archived | e }}"
+                      >archive</wa-button>
+  {%- else %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="RequestApproval_{{classApiMethodMethod}}_archived"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="RequestApproval_{{classApiMethodMethod}}_archived"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_archived classRequestApproval inputRequestApproval{{ result.approvalId }}Archived "
+                      name="setArchived"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_archived classRequestApproval inputRequestApproval{{ result.approvalId }}Archived "
+                      name="setArchived"
+    {%- else %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_archived setArchived valueArchived classRequestApproval inputRequestApproval{{ result.approvalId }}Archived "
+                      name="setArchived"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.archived == true %}
+                      checked
+    {%- endif %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      >archive</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmArchivedRequestApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputArchivedRequestApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputApprovedByEmailRequestApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_approvedByEmail">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] approved by user email"
+                      label="approved by user email"
+                      hint="The email address for the user who approved the change request. "
+                      id="RequestApproval_{{classApiMethodMethod}}_approvedByEmail"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_approvedByEmail setApprovedByEmail classRequestApproval inputRequestApproval{{ result.approvalId }}ApprovedByEmail "
+                      name="setApprovedByEmail"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_approvedByEmail setApprovedByEmail classRequestApproval inputRequestApproval{{ result.approvalId }}ApprovedByEmail "
+                      name="setApprovedByEmail"
+    {%- else %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_approvedByEmail valueApprovedByEmail classRequestApproval inputRequestApproval{{ result.approvalId }}ApprovedByEmail "
+                      name="approvedByEmail"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.approvedByEmail | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmApprovedByEmailRequestApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputApprovedByEmailRequestApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputApprovalNameRequestApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_approvalName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] approval name"
+                      label="approval name"
+                      hint="The name of this approval"
+                      required
+                      id="RequestApproval_{{classApiMethodMethod}}_approvalName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_approvalName setApprovalName classRequestApproval inputRequestApproval{{ result.approvalId }}ApprovalName "
+                      name="setApprovalName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_approvalName setApprovalName classRequestApproval inputRequestApproval{{ result.approvalId }}ApprovalName "
+                      name="setApprovalName"
+    {%- else %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_approvalName valueApprovalName classRequestApproval inputRequestApproval{{ result.approvalId }}ApprovalName "
+                      name="approvalName"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.approvalName | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmApprovalNameRequestApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputApprovalNameRequestApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputApprovalNoteRequestApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_approvalNote">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] approval note"
+                      label="approval note"
+                      hint="A note from the approver about their decision about the requested change. "
+                      id="RequestApproval_{{classApiMethodMethod}}_approvalNote"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_approvalNote setApprovalNote classRequestApproval inputRequestApproval{{ result.approvalId }}ApprovalNote "
+                      name="setApprovalNote"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_approvalNote setApprovalNote classRequestApproval inputRequestApproval{{ result.approvalId }}ApprovalNote "
+                      name="setApprovalNote"
+    {%- else %}
+                      class="label-on-left RequestApproval_{{classApiMethodMethod}}_approvalNote valueApprovalNote classRequestApproval inputRequestApproval{{ result.approvalId }}ApprovalNote "
+                      name="approvalNote"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.approvalNote | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmApprovalNoteRequestApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputApprovalNoteRequestApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+
+{%- macro htmFormButton_patchRequestApproval() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_patchRequestApproval" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_patchRequestApproval"
+                >Modify request approval</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_patchRequestApproval"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_patchRequestApproval(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchRequestApprovalDialog" label="Modify request approval">
+          <form id="htmForm_patchRequestApproval" class="wa-stack round-row primary-smart-border-radius ">
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="approved-by">
+              <div slot="summary">
+                <span>approved by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovedByEmailRequestApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByEmailRequestApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByEmailRequestApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="approval-details">
+              <div slot="summary">
+                <span>approval details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovalNameRequestApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovalNameRequestApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovalNameRequestApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovalNoteRequestApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovalNoteRequestApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovalNoteRequestApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+            {{ htmFormButton_patchRequestApproval() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_postRequestApproval() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_postRequestApproval" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_postRequestApproval"
+                >Create a request approval</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_postRequestApproval"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_postRequestApproval(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postRequestApprovalDialog" label="Create a request approval">
+          <form id="htmForm_postRequestApproval" class="wa-stack round-row primary-smart-border-radius ">
+            <div>You can override any default values below: </div>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="approved-by">
+              <div slot="summary">
+                <span>approved by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmApprovedByEmailRequestApprovalPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByEmailRequestApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByEmailRequestApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="approval-details">
+              <div slot="summary">
+                <span>approval details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmApprovalNameRequestApprovalPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovalNameRequestApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovalNameRequestApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmApprovalNoteRequestApprovalPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovalNoteRequestApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovalNoteRequestApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+            {{ htmFormButton_postRequestApproval() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_deleteRequestApproval() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deleteRequestApproval" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deleteRequestApproval"
+                >Delete request approval</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deleteRequestApproval"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deleteRequestApproval(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteRequestApprovalDialog" label="Delete request approval">
+          <form id="htmForm_deleteRequestApproval" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteRequestApproval() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_putimportRequestApproval() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_putimportRequestApproval" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_putimportRequestApproval"
+                >Import request approvals</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_putimportRequestApproval"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_putimportRequestApproval(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportRequestApprovalDialog" label="Import request approvals">
+          <form id="htmForm_putimportRequestApproval" class="wa-stack round-row primary-smart-border-radius ">
+            <div>
+              <wa-textarea
+                  class="PUTImport_searchList "
+                  style="height: 300px; "
+                  placeholder="{ 'searchList': [ { 'approvalId': ... , 'saves': [ ... ] }, ... ] }"
+                  >
+              </wa-textarea>
+            </div>
+            {{ htmFormButton_putimportRequestApproval() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmForm_searchpageRequestApproval(idSuffix='') %}
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageRequestApprovalDialog" label="Search request approvals">
+          <div id="htmForm_searchpageRequestApproval" class="wa-stack round-row primary-smart-border-radius ">
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
+              <div slot="summary">
+                <span>primary key, ID, created, modified, archive details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmPkRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmPkRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmModifiedRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmModifiedRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmArchivedRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmArchivedRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="approved-by">
+              <div slot="summary">
+                <span>approved by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovedByEmailRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByEmailRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByEmailRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="approval-details">
+              <div slot="summary">
+                <span>approval details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovalNameRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovalNameRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovalNameRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovalNoteRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovalNoteRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovalNoteRequestApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </div>
+        </div>
+{%- endmacro %}
+
+{%- macro htmFormButton_deletefilterRequestApproval() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterRequestApproval" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deletefilterRequestApproval"
+                >Delete request approval</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deletefilterRequestApproval"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deletefilterRequestApproval(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterRequestApprovalDialog" label="Delete request approval">
+          <form id="htmForm_deletefilterRequestApproval" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterRequestApproval() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}

@@ -1,0 +1,65 @@
+
+{%- macro htmButton_patchHostCheckCR() %}<wa-button variant="brand" id="htmButton_patchHostCheckCR"  data-dialog="open patchHostCheckCRDialog" data-changeRequestId={{ result.changeRequestId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+
+{%- macro htmButton_postHostCheckCR() %}<wa-button variant="brand" id="htmButton_postHostCheckCR"  data-dialog="open postHostCheckCRDialog" data-changeRequestId={{ result.changeRequestId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deleteHostCheckCR() %}<wa-button variant="brand" id="htmButton_deleteHostCheckCR" data-changeRequestId={{ result.changeRequestId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+
+{%- macro htmButton_putimportHostCheckCR() %}<wa-button variant="brand" id="htmButton_putimportHostCheckCR"  data-dialog="open putimportHostCheckCRDialog" data-changeRequestId={{ result.changeRequestId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deletefilterHostCheckCR() %}<wa-button variant="brand" id="htmButton_deletefilterHostCheckCR" data-changeRequestId={{ result.changeRequestId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+          <div id="htmSearchForm">
+            <wa-scroller>
+              <wa-button-group>
+{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {% if "PATCH" in scopes %}
+    {% if resultCount >= 1 %}
+                <wa-button variant="brand" id="refreshThisHostCheckCRGenPage"
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'changeRequestId:{{ result.changeRequestId }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisHostCheckCRGenPage')); }, function() { addError(document.querySelector('#refreshThisHostCheckCRGenPage')); }); return false; ">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  refresh
+                </wa-button>
+    {% endif %}
+    {% if resultCount > 0 %}
+                <wa-button variant="brand" id="refreshAllHostCheckCRGenPage{{ result.changeRequestId | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllHostCheckCRGenPage{{ result.changeRequestId | e }}')); }, function() { addError(document.querySelector('#refreshAllHostCheckCRGenPage{{ result.changeRequestId | e }}')); }); "
+                    >
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  refresh all 
+                </wa-button>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{%- if 'PATCH' in scopes %}
+  {%- if resultCount > 0 %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_patchHostCheckCR() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmButton_postHostCheckCR() }}
+  {%- else %}
+    {{ htmButton_postHostCheckCR() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is defined %}
+    {{ htmButton_deleteHostCheckCR() }}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmButton_putimportHostCheckCR() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is not defined %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_deletefilterHostCheckCR() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+
+              </wa-button-group>
+            </wa-scroller>
+          </div>

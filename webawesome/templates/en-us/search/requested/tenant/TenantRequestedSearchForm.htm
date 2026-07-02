@@ -1,0 +1,30 @@
+{% include en-us/search/requested/tenant/TenantRequestedSearchFormMacros.htm %}
+{% include en-us/search/host-inventory/HostInventorySearchFormMacros.htm %}
+{% include en-us/search/ansible-project/AnsibleProjectSearchFormMacros.htm %}
+{% include en-us/search/intent/tenant/TenantIntentSearchFormMacros.htm %}
+{% include en-us/search/approval/RequestApprovalSearchFormMacros.htm %}
+{%- if 'DELETE' in scopes %}
+    {{ htmForm_patchTenantRequested() }}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_postTenantRequested() }}
+  {%- else %}
+    {{ htmForm_postTenantRequested() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_deleteTenantRequested() }}
+  {%- else %}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmForm_putimportTenantRequested() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_deletefilterTenantRequested() }}
+  {%- else %}
+  {%- endif %}
+{%- endif %}

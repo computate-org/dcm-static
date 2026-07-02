@@ -84,8 +84,8 @@ async function websocketAnsibleProjectInner(apiRequest) {
         var inputArchived = null;
         var inputTenantResource = null;
         var inputSourceControlType = null;
-        var inputSourceControlUrl = null;
         var inputAnsibleProjectDescription = null;
+        var inputSourceControlUrl = null;
         var inputSourceControlBranch = null;
         var inputJobTemplateResources = null;
         var inputAnsiblePlaybooksList = null;
@@ -107,8 +107,8 @@ async function websocketAnsibleProjectInner(apiRequest) {
         var inputTenantId = null;
         var inputAapOrganizationId = null;
         var inputAnsibleProjectId = null;
-        var inputAnsibleProjectResource = null;
         var inputAapProjectId = null;
+        var inputAnsibleProjectResource = null;
         var inputAnsiblePlaybooks = null;
 
         if(vars.includes('pk'))
@@ -123,10 +123,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
           inputTenantResource = $response.querySelector('.AnsibleProject_Page_tenantResource');
         if(vars.includes('sourceControlType'))
           inputSourceControlType = $response.querySelector('.AnsibleProject_Page_sourceControlType');
-        if(vars.includes('sourceControlUrl'))
-          inputSourceControlUrl = $response.querySelector('.AnsibleProject_Page_sourceControlUrl');
         if(vars.includes('ansibleProjectDescription'))
           inputAnsibleProjectDescription = $response.querySelector('.AnsibleProject_Page_ansibleProjectDescription');
+        if(vars.includes('sourceControlUrl'))
+          inputSourceControlUrl = $response.querySelector('.AnsibleProject_Page_sourceControlUrl');
         if(vars.includes('sourceControlBranch'))
           inputSourceControlBranch = $response.querySelector('.AnsibleProject_Page_sourceControlBranch');
         if(vars.includes('jobTemplateResources'))
@@ -169,20 +169,24 @@ async function websocketAnsibleProjectInner(apiRequest) {
           inputAapOrganizationId = $response.querySelector('.AnsibleProject_Page_aapOrganizationId');
         if(vars.includes('ansibleProjectId'))
           inputAnsibleProjectId = $response.querySelector('.AnsibleProject_Page_ansibleProjectId');
-        if(vars.includes('ansibleProjectResource'))
-          inputAnsibleProjectResource = $response.querySelector('.AnsibleProject_Page_ansibleProjectResource');
         if(vars.includes('aapProjectId'))
           inputAapProjectId = $response.querySelector('.AnsibleProject_Page_aapProjectId');
+        if(vars.includes('ansibleProjectResource'))
+          inputAnsibleProjectResource = $response.querySelector('.AnsibleProject_Page_ansibleProjectResource');
         if(vars.includes('ansiblePlaybooks'))
           inputAnsiblePlaybooks = $response.querySelector('.AnsibleProject_Page_ansiblePlaybooks');
 
-        jsWebsocketAnsibleProject(ansibleProjectResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listAnsibleProject = JSON.parse($response.querySelector('.pageForm .listAnsibleProject')?.value);
+        jsWebsocketAnsibleProject(ansibleProjectResource, vars, $response);
 
 
         if(inputPk) {
           document.querySelectorAll('.AnsibleProject_Page_pk').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
@@ -193,6 +197,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputCreated) {
           document.querySelectorAll('.AnsibleProject_Page_created').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
@@ -203,6 +211,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputModified) {
           document.querySelectorAll('.AnsibleProject_Page_modified').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
@@ -213,6 +225,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputArchived) {
           document.querySelectorAll('.AnsibleProject_Page_archived').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
@@ -223,6 +239,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputTenantResource) {
           document.querySelectorAll('.AnsibleProject_Page_tenantResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
@@ -233,6 +253,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputSourceControlType) {
           document.querySelectorAll('.AnsibleProject_Page_sourceControlType').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSourceControlType.getAttribute('value');
             else
@@ -241,18 +265,12 @@ async function websocketAnsibleProjectInner(apiRequest) {
           addGlow(document.querySelector('.AnsibleProject_Page_sourceControlType'));
         }
 
-        if(inputSourceControlUrl) {
-          document.querySelectorAll('.AnsibleProject_Page_sourceControlUrl').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputSourceControlUrl.getAttribute('value');
-            else
-              item.textContent = inputSourceControlUrl.textContent;
-          });
-          addGlow(document.querySelector('.AnsibleProject_Page_sourceControlUrl'));
-        }
-
         if(inputAnsibleProjectDescription) {
           document.querySelectorAll('.AnsibleProject_Page_ansibleProjectDescription').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAnsibleProjectDescription.getAttribute('value');
             else
@@ -261,8 +279,26 @@ async function websocketAnsibleProjectInner(apiRequest) {
           addGlow(document.querySelector('.AnsibleProject_Page_ansibleProjectDescription'));
         }
 
+        if(inputSourceControlUrl) {
+          document.querySelectorAll('.AnsibleProject_Page_sourceControlUrl').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputSourceControlUrl.getAttribute('value');
+            else
+              item.textContent = inputSourceControlUrl.textContent;
+          });
+          addGlow(document.querySelector('.AnsibleProject_Page_sourceControlUrl'));
+        }
+
         if(inputSourceControlBranch) {
           document.querySelectorAll('.AnsibleProject_Page_sourceControlBranch').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSourceControlBranch.getAttribute('value');
             else
@@ -273,6 +309,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputJobTemplateResources) {
           document.querySelectorAll('.AnsibleProject_Page_jobTemplateResources').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateResources.getAttribute('value');
             else
@@ -283,6 +323,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputAnsiblePlaybooksList) {
           document.querySelectorAll('.AnsibleProject_Page_ansiblePlaybooksList').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAnsiblePlaybooksList.getAttribute('value');
             else
@@ -293,6 +337,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputAnsibleProjectName) {
           document.querySelectorAll('.AnsibleProject_Page_ansibleProjectName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAnsibleProjectName.getAttribute('value');
             else
@@ -303,6 +351,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputClassCanonicalName) {
           document.querySelectorAll('.AnsibleProject_Page_classCanonicalName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
@@ -313,6 +365,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputClassSimpleName) {
           document.querySelectorAll('.AnsibleProject_Page_classSimpleName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
@@ -323,6 +379,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputClassCanonicalNames) {
           document.querySelectorAll('.AnsibleProject_Page_classCanonicalNames').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
@@ -333,6 +393,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputSessionId) {
           document.querySelectorAll('.AnsibleProject_Page_sessionId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
@@ -343,6 +407,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputUserKey) {
           document.querySelectorAll('.AnsibleProject_Page_userKey').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
@@ -353,6 +421,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputSaves) {
           document.querySelectorAll('.AnsibleProject_Page_saves').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
@@ -363,6 +435,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputObjectTitle) {
           document.querySelectorAll('.AnsibleProject_Page_objectTitle').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
@@ -373,6 +449,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputDisplayPage) {
           document.querySelectorAll('.AnsibleProject_Page_displayPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
@@ -383,6 +463,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputEditPage) {
           document.querySelectorAll('.AnsibleProject_Page_editPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
@@ -393,6 +477,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputUserPage) {
           document.querySelectorAll('.AnsibleProject_Page_userPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
@@ -403,6 +491,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputDownload) {
           document.querySelectorAll('.AnsibleProject_Page_download').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
@@ -413,6 +505,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputObjectSuggest) {
           document.querySelectorAll('.AnsibleProject_Page_objectSuggest').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
@@ -423,6 +519,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputObjectText) {
           document.querySelectorAll('.AnsibleProject_Page_objectText').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
@@ -433,6 +533,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputSolrId) {
           document.querySelectorAll('.AnsibleProject_Page_solrId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
@@ -443,6 +547,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputTenantId) {
           document.querySelectorAll('.AnsibleProject_Page_tenantId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantId.getAttribute('value');
             else
@@ -453,6 +561,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputAapOrganizationId) {
           document.querySelectorAll('.AnsibleProject_Page_aapOrganizationId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapOrganizationId.getAttribute('value');
             else
@@ -463,6 +575,10 @@ async function websocketAnsibleProjectInner(apiRequest) {
 
         if(inputAnsibleProjectId) {
           document.querySelectorAll('.AnsibleProject_Page_ansibleProjectId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAnsibleProjectId.getAttribute('value');
             else
@@ -471,18 +587,12 @@ async function websocketAnsibleProjectInner(apiRequest) {
           addGlow(document.querySelector('.AnsibleProject_Page_ansibleProjectId'));
         }
 
-        if(inputAnsibleProjectResource) {
-          document.querySelectorAll('.AnsibleProject_Page_ansibleProjectResource').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAnsibleProjectResource.getAttribute('value');
-            else
-              item.textContent = inputAnsibleProjectResource.textContent;
-          });
-          addGlow(document.querySelector('.AnsibleProject_Page_ansibleProjectResource'));
-        }
-
         if(inputAapProjectId) {
           document.querySelectorAll('.AnsibleProject_Page_aapProjectId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapProjectId.getAttribute('value');
             else
@@ -491,8 +601,26 @@ async function websocketAnsibleProjectInner(apiRequest) {
           addGlow(document.querySelector('.AnsibleProject_Page_aapProjectId'));
         }
 
+        if(inputAnsibleProjectResource) {
+          document.querySelectorAll('.AnsibleProject_Page_ansibleProjectResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputAnsibleProjectResource.getAttribute('value');
+            else
+              item.textContent = inputAnsibleProjectResource.textContent;
+          });
+          addGlow(document.querySelector('.AnsibleProject_Page_ansibleProjectResource'));
+        }
+
         if(inputAnsiblePlaybooks) {
           document.querySelectorAll('.AnsibleProject_Page_ansiblePlaybooks').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAnsiblePlaybooks.getAttribute('value');
             else
@@ -676,13 +804,13 @@ function searchAnsibleProjectFilters($formFilters) {
     if(filterSourceControlType != null && filterSourceControlType !== '')
       filters.push({ name: 'fq', value: 'sourceControlType:' + filterSourceControlType });
 
-    var filterSourceControlUrl = $formFilters.querySelector('.valueSourceControlUrl')?.value;
-    if(filterSourceControlUrl != null && filterSourceControlUrl !== '')
-      filters.push({ name: 'fq', value: 'sourceControlUrl:' + filterSourceControlUrl });
-
     var filterAnsibleProjectDescription = $formFilters.querySelector('.valueAnsibleProjectDescription')?.value;
     if(filterAnsibleProjectDescription != null && filterAnsibleProjectDescription !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectDescription:' + filterAnsibleProjectDescription });
+
+    var filterSourceControlUrl = $formFilters.querySelector('.valueSourceControlUrl')?.value;
+    if(filterSourceControlUrl != null && filterSourceControlUrl !== '')
+      filters.push({ name: 'fq', value: 'sourceControlUrl:' + filterSourceControlUrl });
 
     var filterSourceControlBranch = $formFilters.querySelector('.valueSourceControlBranch')?.value;
     if(filterSourceControlBranch != null && filterSourceControlBranch !== '')
@@ -768,13 +896,13 @@ function searchAnsibleProjectFilters($formFilters) {
     if(filterAnsibleProjectId != null && filterAnsibleProjectId !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectId:' + filterAnsibleProjectId });
 
-    var filterAnsibleProjectResource = $formFilters.querySelector('.valueAnsibleProjectResource')?.value;
-    if(filterAnsibleProjectResource != null && filterAnsibleProjectResource !== '')
-      filters.push({ name: 'fq', value: 'ansibleProjectResource:' + filterAnsibleProjectResource });
-
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
       filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
+
+    var filterAnsibleProjectResource = $formFilters.querySelector('.valueAnsibleProjectResource')?.value;
+    if(filterAnsibleProjectResource != null && filterAnsibleProjectResource !== '')
+      filters.push({ name: 'fq', value: 'ansibleProjectResource:' + filterAnsibleProjectResource });
 
     var filterAnsiblePlaybooks = $formFilters.querySelector('.valueAnsiblePlaybooks')?.value;
     if(filterAnsiblePlaybooks != null && filterAnsiblePlaybooks !== '')
@@ -1048,18 +1176,6 @@ async function patchAnsibleProject($formFilters, $formValues, target, ansiblePro
   if(removeSourceControlType != null && removeSourceControlType !== '')
     vals['removeSourceControlType'] = removeSourceControlType;
 
-  var valueSourceControlUrl = $formValues.querySelector('.valueSourceControlUrl')?.value;
-  var removeSourceControlUrl = $formValues.querySelector('.removeSourceControlUrl')?.value === 'true';
-  var setSourceControlUrl = removeSourceControlUrl ? null : $formValues.querySelector('.setSourceControlUrl')?.value;
-  var addSourceControlUrl = $formValues.querySelector('.addSourceControlUrl')?.value;
-  if(removeSourceControlUrl || setSourceControlUrl != null && setSourceControlUrl !== '')
-    vals['setSourceControlUrl'] = setSourceControlUrl;
-  if(addSourceControlUrl != null && addSourceControlUrl !== '')
-    vals['addSourceControlUrl'] = addSourceControlUrl;
-  var removeSourceControlUrl = $formValues.querySelector('.removeSourceControlUrl')?.value;
-  if(removeSourceControlUrl != null && removeSourceControlUrl !== '')
-    vals['removeSourceControlUrl'] = removeSourceControlUrl;
-
   var valueAnsibleProjectDescription = $formValues.querySelector('.valueAnsibleProjectDescription')?.value;
   var removeAnsibleProjectDescription = $formValues.querySelector('.removeAnsibleProjectDescription')?.value === 'true';
   var setAnsibleProjectDescription = removeAnsibleProjectDescription ? null : $formValues.querySelector('.setAnsibleProjectDescription')?.value;
@@ -1071,6 +1187,18 @@ async function patchAnsibleProject($formFilters, $formValues, target, ansiblePro
   var removeAnsibleProjectDescription = $formValues.querySelector('.removeAnsibleProjectDescription')?.value;
   if(removeAnsibleProjectDescription != null && removeAnsibleProjectDescription !== '')
     vals['removeAnsibleProjectDescription'] = removeAnsibleProjectDescription;
+
+  var valueSourceControlUrl = $formValues.querySelector('.valueSourceControlUrl')?.value;
+  var removeSourceControlUrl = $formValues.querySelector('.removeSourceControlUrl')?.value === 'true';
+  var setSourceControlUrl = removeSourceControlUrl ? null : $formValues.querySelector('.setSourceControlUrl')?.value;
+  var addSourceControlUrl = $formValues.querySelector('.addSourceControlUrl')?.value;
+  if(removeSourceControlUrl || setSourceControlUrl != null && setSourceControlUrl !== '')
+    vals['setSourceControlUrl'] = setSourceControlUrl;
+  if(addSourceControlUrl != null && addSourceControlUrl !== '')
+    vals['addSourceControlUrl'] = addSourceControlUrl;
+  var removeSourceControlUrl = $formValues.querySelector('.removeSourceControlUrl')?.value;
+  if(removeSourceControlUrl != null && removeSourceControlUrl !== '')
+    vals['removeSourceControlUrl'] = removeSourceControlUrl;
 
   var valueSourceControlBranch = $formValues.querySelector('.valueSourceControlBranch')?.value;
   var removeSourceControlBranch = $formValues.querySelector('.removeSourceControlBranch')?.value === 'true';
@@ -1232,18 +1360,6 @@ async function patchAnsibleProject($formFilters, $formValues, target, ansiblePro
   if(removeAnsibleProjectId != null && removeAnsibleProjectId !== '')
     vals['removeAnsibleProjectId'] = removeAnsibleProjectId;
 
-  var valueAnsibleProjectResource = $formValues.querySelector('.valueAnsibleProjectResource')?.value;
-  var removeAnsibleProjectResource = $formValues.querySelector('.removeAnsibleProjectResource')?.value === 'true';
-  var setAnsibleProjectResource = removeAnsibleProjectResource ? null : $formValues.querySelector('.setAnsibleProjectResource')?.value;
-  var addAnsibleProjectResource = $formValues.querySelector('.addAnsibleProjectResource')?.value;
-  if(removeAnsibleProjectResource || setAnsibleProjectResource != null && setAnsibleProjectResource !== '')
-    vals['setAnsibleProjectResource'] = setAnsibleProjectResource;
-  if(addAnsibleProjectResource != null && addAnsibleProjectResource !== '')
-    vals['addAnsibleProjectResource'] = addAnsibleProjectResource;
-  var removeAnsibleProjectResource = $formValues.querySelector('.removeAnsibleProjectResource')?.value;
-  if(removeAnsibleProjectResource != null && removeAnsibleProjectResource !== '')
-    vals['removeAnsibleProjectResource'] = removeAnsibleProjectResource;
-
   var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
   var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value === 'true';
   var setAapProjectId = removeAapProjectId ? null : $formValues.querySelector('.setAapProjectId')?.value;
@@ -1255,6 +1371,18 @@ async function patchAnsibleProject($formFilters, $formValues, target, ansiblePro
   var removeAapProjectId = $formValues.querySelector('.removeAapProjectId')?.value;
   if(removeAapProjectId != null && removeAapProjectId !== '')
     vals['removeAapProjectId'] = removeAapProjectId;
+
+  var valueAnsibleProjectResource = $formValues.querySelector('.valueAnsibleProjectResource')?.value;
+  var removeAnsibleProjectResource = $formValues.querySelector('.removeAnsibleProjectResource')?.value === 'true';
+  var setAnsibleProjectResource = removeAnsibleProjectResource ? null : $formValues.querySelector('.setAnsibleProjectResource')?.value;
+  var addAnsibleProjectResource = $formValues.querySelector('.addAnsibleProjectResource')?.value;
+  if(removeAnsibleProjectResource || setAnsibleProjectResource != null && setAnsibleProjectResource !== '')
+    vals['setAnsibleProjectResource'] = setAnsibleProjectResource;
+  if(addAnsibleProjectResource != null && addAnsibleProjectResource !== '')
+    vals['addAnsibleProjectResource'] = addAnsibleProjectResource;
+  var removeAnsibleProjectResource = $formValues.querySelector('.removeAnsibleProjectResource')?.value;
+  if(removeAnsibleProjectResource != null && removeAnsibleProjectResource !== '')
+    vals['removeAnsibleProjectResource'] = removeAnsibleProjectResource;
 
   var valueAnsiblePlaybooks = $formValues.querySelector('.valueAnsiblePlaybooks')?.value;
   var removeAnsiblePlaybooks = $formValues.querySelector('.removeAnsiblePlaybooks')?.value === 'true';
@@ -1306,13 +1434,13 @@ function patchAnsibleProjectFilters($formFilters) {
     if(filterSourceControlType != null && filterSourceControlType !== '')
       filters.push({ name: 'fq', value: 'sourceControlType:' + filterSourceControlType });
 
-    var filterSourceControlUrl = $formFilters.querySelector('.valueSourceControlUrl')?.value;
-    if(filterSourceControlUrl != null && filterSourceControlUrl !== '')
-      filters.push({ name: 'fq', value: 'sourceControlUrl:' + filterSourceControlUrl });
-
     var filterAnsibleProjectDescription = $formFilters.querySelector('.valueAnsibleProjectDescription')?.value;
     if(filterAnsibleProjectDescription != null && filterAnsibleProjectDescription !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectDescription:' + filterAnsibleProjectDescription });
+
+    var filterSourceControlUrl = $formFilters.querySelector('.valueSourceControlUrl')?.value;
+    if(filterSourceControlUrl != null && filterSourceControlUrl !== '')
+      filters.push({ name: 'fq', value: 'sourceControlUrl:' + filterSourceControlUrl });
 
     var filterSourceControlBranch = $formFilters.querySelector('.valueSourceControlBranch')?.value;
     if(filterSourceControlBranch != null && filterSourceControlBranch !== '')
@@ -1398,13 +1526,13 @@ function patchAnsibleProjectFilters($formFilters) {
     if(filterAnsibleProjectId != null && filterAnsibleProjectId !== '')
       filters.push({ name: 'fq', value: 'ansibleProjectId:' + filterAnsibleProjectId });
 
-    var filterAnsibleProjectResource = $formFilters.querySelector('.valueAnsibleProjectResource')?.value;
-    if(filterAnsibleProjectResource != null && filterAnsibleProjectResource !== '')
-      filters.push({ name: 'fq', value: 'ansibleProjectResource:' + filterAnsibleProjectResource });
-
     var filterAapProjectId = $formFilters.querySelector('.valueAapProjectId')?.value;
     if(filterAapProjectId != null && filterAapProjectId !== '')
       filters.push({ name: 'fq', value: 'aapProjectId:' + filterAapProjectId });
+
+    var filterAnsibleProjectResource = $formFilters.querySelector('.valueAnsibleProjectResource')?.value;
+    if(filterAnsibleProjectResource != null && filterAnsibleProjectResource !== '')
+      filters.push({ name: 'fq', value: 'ansibleProjectResource:' + filterAnsibleProjectResource });
 
     var filterAnsiblePlaybooks = $formFilters.querySelector('.valueAnsiblePlaybooks')?.value;
     if(filterAnsiblePlaybooks != null && filterAnsiblePlaybooks !== '')
@@ -1496,13 +1624,13 @@ async function postAnsibleProject($formValues, target, success, error) {
   if(valueSourceControlType != null && valueSourceControlType !== '')
     vals['sourceControlType'] = valueSourceControlType;
 
-  var valueSourceControlUrl = $formValues.querySelector('.valueSourceControlUrl')?.value;
-  if(valueSourceControlUrl != null && valueSourceControlUrl !== '')
-    vals['sourceControlUrl'] = valueSourceControlUrl;
-
   var valueAnsibleProjectDescription = $formValues.querySelector('.valueAnsibleProjectDescription')?.value;
   if(valueAnsibleProjectDescription != null && valueAnsibleProjectDescription !== '')
     vals['ansibleProjectDescription'] = valueAnsibleProjectDescription;
+
+  var valueSourceControlUrl = $formValues.querySelector('.valueSourceControlUrl')?.value;
+  if(valueSourceControlUrl != null && valueSourceControlUrl !== '')
+    vals['sourceControlUrl'] = valueSourceControlUrl;
 
   var valueSourceControlBranch = $formValues.querySelector('.valueSourceControlBranch')?.value;
   if(valueSourceControlBranch != null && valueSourceControlBranch !== '')
@@ -1563,13 +1691,13 @@ async function postAnsibleProject($formValues, target, success, error) {
   if(valueAnsibleProjectId != null && valueAnsibleProjectId !== '')
     vals['ansibleProjectId'] = valueAnsibleProjectId;
 
-  var valueAnsibleProjectResource = $formValues.querySelector('.valueAnsibleProjectResource')?.value;
-  if(valueAnsibleProjectResource != null && valueAnsibleProjectResource !== '')
-    vals['ansibleProjectResource'] = valueAnsibleProjectResource;
-
   var valueAapProjectId = $formValues.querySelector('.valueAapProjectId')?.value;
   if(valueAapProjectId != null && valueAapProjectId !== '')
     vals['aapProjectId'] = valueAapProjectId;
+
+  var valueAnsibleProjectResource = $formValues.querySelector('.valueAnsibleProjectResource')?.value;
+  if(valueAnsibleProjectResource != null && valueAnsibleProjectResource !== '')
+    vals['ansibleProjectResource'] = valueAnsibleProjectResource;
 
   var valueAnsiblePlaybooks = $formValues.querySelector('.valueAnsiblePlaybooks')?.value;
   if(valueAnsiblePlaybooks != null && valueAnsiblePlaybooks !== '')

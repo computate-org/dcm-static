@@ -111,12 +111,16 @@
       }
     </script>
     <script type="module">
-{% if DEFAULT_MAP_LOCATION is defined %}
-      window.DEFAULT_MAP_LOCATION = { type: 'Point', coordinates: [ {{ DEFAULT_MAP_LOCATION.coordinates[0] }}, {{ DEFAULT_MAP_LOCATION.coordinates[1] }} ]};
+{% if location is defined %}
+      window.mapLocation = { type: 'Point', coordinates: [ {{ location.coordinates[0] }}, {{ location.coordinates[1] }} ]};
 {% endif %}
-{% if DEFAULT_MAP_ZOOM is defined %}
-      window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{% if zoom is defined %}
+      window.mapZoom = {{ zoom }};
 {% endif %}
+{% if pitch is defined %}
+      window.mapPitch = {{ toDegree(pitch) }};
+{% endif %}
+      window.STATIC_BASE_URL = '{{ STATIC_BASE_URL }}';
       window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
       Promise.all([
         customElements.whenDefined('wa-button')
@@ -148,65 +152,6 @@
           if(o)
             window.result = JSON.parse(o);
         {% if result.tenantResource is defined %}
-          function relate_ansibleProjectIds(event) {
-            suggestTenantAnsibleProjectIds(
-                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,tenantResource,pk,editPage,objectTitle' } ]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
-                , true
-                , event.target
-                );
-          }
-          document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
-          document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
-          document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
-          document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
-          document.querySelector('#Tenant_Page_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
-          document.querySelector('#Tenant_Page_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
-          document.querySelector('#AnsibleProject_POST_tenantResource')?.addEventListener('input', relate_ansibleProjectIds);
-          document.querySelector('#AnsibleProject_POST_tenantResource')?.addEventListener('focus', relate_ansibleProjectIds);
-          if(window.result.ansibleProjectIds) {
-          {% if "PATCH" in scopes -%}
-            {{'  '}}suggestTenantAnsibleProjectIds([{'name':'fq','value':'tenantResource:' + window.result.ansibleProjectIds}], document.querySelector('#listTenantAnsibleProjectIds_Page'), window.result.tenantResource, window.result.ansibleProjectIds, true, document.getElementById('Tenant_Page_ansibleProjectIds'));
-          {% else -%}
-          {% if "GET" in scopes -%}
-            {{'  '}}suggestTenantAnsibleProjectIds([{'name':'fq','value':'tenantResource:' + window.result.ansibleProjectIds}], document.querySelector('#listTenantAnsibleProjectIds_Page'), window.result.tenantResource, window.result.ansibleProjectIds, true, document.getElementById('Tenant_Page_ansibleProjectIds'));
-          {% else -%}
-            {{'  '}}suggestTenantAnsibleProjectIds([{'name':'fq','value':'tenantResource:' + window.result.ansibleProjectIds}], document.querySelector('#listTenantAnsibleProjectIds_Page'), window.result.tenantResource, window.result.ansibleProjectIds, false, document.getElementById('Tenant_Page_ansibleProjectIds'));
-          {% endif -%}
-          {% endif -%}
-          }
-          function AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds(event) {
-            suggestAnsibleProjectTenantResource(
-                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
-                , true
-                , document.querySelector('#AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds')
-                );
-          }
-          document.querySelector('#AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds')?.addEventListener('input', AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds);
-          document.querySelector('#AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds')?.addEventListener('focus', AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds);
-          function AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds(event) {
-            suggestAnsibleProjectJobTemplateResources(
-                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,jobTemplateResource,pk,editPage,objectTitle' } ]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.jobTemplateResources : null
-                , true
-                , document.querySelector('#AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds')
-                );
-          }
-          document.querySelector('#AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds')?.addEventListener('input', AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds);
-          document.querySelector('#AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds')?.addEventListener('focus', AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds);
           function relate_hostInventoryIds(event) {
             suggestTenantHostInventoryIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -280,6 +225,65 @@
           }
           document.querySelector('#HostInventory_POST_hostInventoryIds_Tenant_POST_hostInventoryIds')?.addEventListener('input', HostInventory_POST_hostInventoryIds_Tenant_POST_hostInventoryIds);
           document.querySelector('#HostInventory_POST_hostInventoryIds_Tenant_POST_hostInventoryIds')?.addEventListener('focus', HostInventory_POST_hostInventoryIds_Tenant_POST_hostInventoryIds);
+          function relate_ansibleProjectIds(event) {
+            suggestTenantAnsibleProjectIds(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
+                , true
+                , event.target
+                );
+          }
+          document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_Page_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_Page_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+          document.querySelector('#AnsibleProject_POST_tenantResource')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#AnsibleProject_POST_tenantResource')?.addEventListener('focus', relate_ansibleProjectIds);
+          if(window.result.ansibleProjectIds) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestTenantAnsibleProjectIds([{'name':'fq','value':'tenantResource:' + window.result.ansibleProjectIds}], document.querySelector('#listTenantAnsibleProjectIds_Page'), window.result.tenantResource, window.result.ansibleProjectIds, true, document.getElementById('Tenant_Page_ansibleProjectIds'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestTenantAnsibleProjectIds([{'name':'fq','value':'tenantResource:' + window.result.ansibleProjectIds}], document.querySelector('#listTenantAnsibleProjectIds_Page'), window.result.tenantResource, window.result.ansibleProjectIds, true, document.getElementById('Tenant_Page_ansibleProjectIds'));
+          {% else -%}
+            {{'  '}}suggestTenantAnsibleProjectIds([{'name':'fq','value':'tenantResource:' + window.result.ansibleProjectIds}], document.querySelector('#listTenantAnsibleProjectIds_Page'), window.result.tenantResource, window.result.ansibleProjectIds, false, document.getElementById('Tenant_Page_ansibleProjectIds'));
+          {% endif -%}
+          {% endif -%}
+          }
+          function AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds(event) {
+            suggestAnsibleProjectTenantResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , true
+                , document.querySelector('#AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds')
+                );
+          }
+          document.querySelector('#AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds')?.addEventListener('input', AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds);
+          document.querySelector('#AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds')?.addEventListener('focus', AnsibleProject_POST_tenantResource_Tenant_POST_ansibleProjectIds);
+          function AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds(event) {
+            suggestAnsibleProjectJobTemplateResources(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,jobTemplateResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.jobTemplateResources : null
+                , true
+                , document.querySelector('#AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds')
+                );
+          }
+          document.querySelector('#AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds')?.addEventListener('input', AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds);
+          document.querySelector('#AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds')?.addEventListener('focus', AnsibleProject_POST_jobTemplateResources_Tenant_POST_ansibleProjectIds);
         {% endif %}
         }
         var l = document.querySelector('.pageForm .listTenant')?.value;
@@ -311,10 +315,6 @@
 
 
         var submitForm_patchTenant = document.querySelector('#htmForm_patchTenant')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_patchTenant')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           patchTenant(null, document.querySelector('#htmForm_patchTenant')
@@ -348,10 +348,6 @@
 
         var submitForm_postTenant = document.querySelector('#htmForm_postTenant')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           postTenant(document.querySelector('#htmForm_postTenant')
               , document.querySelector('#htmFormButton_postTenant')
@@ -383,10 +379,6 @@
 
         var submitForm_deleteTenant = document.querySelector('#htmForm_deleteTenant')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deleteTenant')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           deleteTenant(event.target, event.target.getAttribute('data-tenantResource')
               , (json, target) => {
@@ -416,10 +408,6 @@
         });
 
         var submitForm_putimportTenant = document.querySelector('#htmForm_putimportTenant')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportTenant')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           putimportTenant(document.querySelector('#htmForm_putimportTenant')
@@ -453,20 +441,12 @@
 
         var submitForm_searchpageTenant = document.querySelector('#htmForm_searchpageTenant')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_searchpageTenant')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           searchpageTenant();
           return false;
         });
 
         var submitForm_deletefilterTenant = document.querySelector('#htmForm_deletefilterTenant')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deletefilterTenant')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           deletefilterTenant(event.target
@@ -587,14 +567,14 @@
 {%- endif %}
 {%- if pageBreadcrumb is not defined %}
 {%- set pageBreadcrumb %}
-              <wa-tooltip for="return-to-Tenant">back to all tenants</wa-tooltip>
+              <wa-tooltip for="return-to-Tenant">back to all discovered tenants</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-Tenant" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
                   <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
-                  all tenants
+                  all discovered tenants
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
-                  a tenant
+                  a discovered tenant
                 </wa-breadcrumb-item>
               </wa-breadcrumb>
 {%- endset pageBreadcrumb %}
@@ -618,21 +598,21 @@
         <div class="pageContent ">
 {% if resultCount == 0 %}
         <div class="wa-stack ">
-          <wa-tooltip for="return-to-Tenant">back to all tenants</wa-tooltip></wa-tooltip>
+          <wa-tooltip for="return-to-Tenant">back to all discovered tenants</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-Tenant" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
               <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
-              all tenants
+              all discovered tenants
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
-              no tenant found
+              no discovered tenant found
             </wa-breadcrumb-item>
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
               <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
             </div>
-            <span class="wa-heading-m ">no tenant found</span>
+            <span class="wa-heading-m ">no discovered tenant found</span>
             <p class="wa-caption-l ">Tenants are separate organizations sharing the same cloud resources. </p>
           </div>
         </div>

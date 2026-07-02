@@ -2,7 +2,7 @@
 
 {%- block htmTitlePageLayout %}
 {%- block htmTitleTenantPage %}
-    <title>{% if resultCount == 0 %}no tenant found{% else %}tenants{% endif %}</title>
+    <title>{% if resultCount == 0 %}no discovered tenant found{% else %}discovered tenants{% endif %}</title>
 {%- endblock htmTitleTenantPage %}
 {%- endblock htmTitlePageLayout %}
 
@@ -111,12 +111,16 @@
       }
     </script>
     <script type="module">
-{% if DEFAULT_MAP_LOCATION is defined %}
-      window.DEFAULT_MAP_LOCATION = { type: 'Point', coordinates: [ {{ DEFAULT_MAP_LOCATION.coordinates[0] }}, {{ DEFAULT_MAP_LOCATION.coordinates[1] }} ]};
+{% if location is defined %}
+      window.mapLocation = { type: 'Point', coordinates: [ {{ location.coordinates[0] }}, {{ location.coordinates[1] }} ]};
 {% endif %}
-{% if DEFAULT_MAP_ZOOM is defined %}
-      window.DEFAULT_MAP_ZOOM = {{ DEFAULT_MAP_ZOOM }};
+{% if zoom is defined %}
+      window.mapZoom = {{ zoom }};
 {% endif %}
+{% if pitch is defined %}
+      window.mapPitch = {{ toDegree(pitch) }};
+{% endif %}
+      window.STATIC_BASE_URL = '{{ STATIC_BASE_URL }}';
       window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
       Promise.all([
         customElements.whenDefined('wa-button')
@@ -130,22 +134,6 @@
 
         var tenantResource = {% if result.tenantResource is defined %}{{ result.tenantResource | tojson }}{% else %}null{% endif %};
 
-          function relate_ansibleProjectIds(event) {
-            suggestTenantAnsibleProjectIds(
-                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
-                , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.ansibleProjectIds is defined %}{'name':'fq','value':'tenantResource:{{ result.ansibleProjectIds }}'}{%- else %}{%- endif %}]
-                , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , null
-                , null
-                , true
-                , this
-                );
-          }
-          document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
-          document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
-          document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
-          document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
           function relate_hostInventoryIds(event) {
             suggestTenantHostInventoryIds(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -162,6 +150,22 @@
           document.querySelector('#Tenant_POST_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
           document.querySelector('#Tenant_PATCH_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
           document.querySelector('#Tenant_PATCH_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          function relate_ansibleProjectIds(event) {
+            suggestTenantAnsibleProjectIds(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.ansibleProjectIds is defined %}{'name':'fq','value':'tenantResource:{{ result.ansibleProjectIds }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_POST_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#Tenant_PATCH_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
         if(tenantResource == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -212,10 +216,6 @@
 
         var submitForm_patchTenant = document.querySelector('#htmForm_patchTenant')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_patchTenant')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           patchTenant(null, document.querySelector('#htmForm_patchTenant')
               , document.querySelector('#htmFormButton_patchTenant')
@@ -248,10 +248,6 @@
 
         var submitForm_postTenant = document.querySelector('#htmForm_postTenant')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_postTenant')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           postTenant(document.querySelector('#htmForm_postTenant')
               , document.querySelector('#htmFormButton_postTenant')
@@ -283,10 +279,6 @@
 
         var submitForm_deleteTenant = document.querySelector('#htmForm_deleteTenant')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deleteTenant')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           deleteTenant(event.target, event.target.getAttribute('data-tenantResource')
               , (json, target) => {
@@ -316,10 +308,6 @@
         });
 
         var submitForm_putimportTenant = document.querySelector('#htmForm_putimportTenant')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_putimportTenant')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           putimportTenant(document.querySelector('#htmForm_putimportTenant')
@@ -353,20 +341,12 @@
 
         var submitForm_searchpageTenant = document.querySelector('#htmForm_searchpageTenant')?.addEventListener('submit', event => {
           event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_searchpageTenant')?.addEventListener('click', event => {
-          event.preventDefault();
           event.target.setAttribute('loading', true);
           searchpageTenant();
           return false;
         });
 
         var submitForm_deletefilterTenant = document.querySelector('#htmForm_deletefilterTenant')?.addEventListener('submit', event => {
-          event.preventDefault();
-          return false;
-        });
-        document.querySelector('#htmFormButton_deletefilterTenant')?.addEventListener('click', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
           deletefilterTenant(event.target
@@ -476,14 +456,14 @@
 {%- block htmUrlTenantPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlTenantPage %}
 {%- if pageBreadcrumb is not defined %}
 {%- set pageBreadcrumb %}
-              <wa-tooltip for="return-to-Tenant">back to all tenants</wa-tooltip>
+              <wa-tooltip for="return-to-Tenant">back to all discovered tenants</wa-tooltip>
               <wa-breadcrumb>
                 <wa-breadcrumb-item id="return-to-Tenant" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
                   <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
-                  all tenants
+                  all discovered tenants
                 </wa-breadcrumb-item>
                 <wa-breadcrumb-item>
-                  search tenants
+                  search discovered tenants
                 </wa-breadcrumb-item>
               </wa-breadcrumb>
 {%- endset pageBreadcrumb %}
@@ -495,21 +475,21 @@
 {% include en-us/search/tenant/TenantSidebar.htm %}
 {% if resultCount == 0 %}
         <div class="wa-stack ">
-          <wa-tooltip for="return-to-Tenant">back to all tenants</wa-tooltip></wa-tooltip>
+          <wa-tooltip for="return-to-Tenant">back to all discovered tenants</wa-tooltip></wa-tooltip>
           <wa-breadcrumb>
             <wa-breadcrumb-item id="return-to-Tenant" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
               <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
-              all tenants
+              all discovered tenants
             </wa-breadcrumb-item>
             <wa-breadcrumb-item>
-              no tenant found
+              no discovered tenant found
             </wa-breadcrumb-item>
           </wa-breadcrumb>
           <div class="wa-stack wa-align-items-center ">
             <div class="wa-heading-3xl ">
               <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
             </div>
-            <span class="wa-heading-m ">no tenant found</span>
+            <span class="wa-heading-m ">no discovered tenant found</span>
             <p class="wa-caption-l ">Tenants are separate organizations sharing the same cloud resources. </p>
           </div>
         </div>

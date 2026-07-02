@@ -1,0 +1,65 @@
+
+{%- macro htmButton_patchRequestApproval() %}<wa-button variant="brand" id="htmButton_patchRequestApproval"  data-dialog="open patchRequestApprovalDialog" data-approvalId={{ result.approvalId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+
+{%- macro htmButton_postRequestApproval() %}<wa-button variant="brand" id="htmButton_postRequestApproval"  data-dialog="open postRequestApprovalDialog" data-approvalId={{ result.approvalId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deleteRequestApproval() %}<wa-button variant="brand" id="htmButton_deleteRequestApproval" data-approvalId={{ result.approvalId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+
+{%- macro htmButton_putimportRequestApproval() %}<wa-button variant="brand" id="htmButton_putimportRequestApproval"  data-dialog="open putimportRequestApprovalDialog" data-approvalId={{ result.approvalId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deletefilterRequestApproval() %}<wa-button variant="brand" id="htmButton_deletefilterRequestApproval" data-approvalId={{ result.approvalId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+          <div id="htmSearchForm">
+            <wa-scroller>
+              <wa-button-group>
+{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {% if "PATCH" in scopes %}
+    {% if resultCount >= 1 %}
+                <wa-button variant="brand" id="refreshThisRequestApprovalGenPage"
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'approvalId:{{ result.approvalId }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisRequestApprovalGenPage')); }, function() { addError(document.querySelector('#refreshThisRequestApprovalGenPage')); }); return false; ">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  refresh
+                </wa-button>
+    {% endif %}
+    {% if resultCount > 0 %}
+                <wa-button variant="brand" id="refreshAllRequestApprovalGenPage{{ result.approvalId | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllRequestApprovalGenPage{{ result.approvalId | e }}')); }, function() { addError(document.querySelector('#refreshAllRequestApprovalGenPage{{ result.approvalId | e }}')); }); "
+                    >
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  refresh all 
+                </wa-button>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{%- if 'PATCH' in scopes %}
+  {%- if resultCount > 0 %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_patchRequestApproval() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmButton_postRequestApproval() }}
+  {%- else %}
+    {{ htmButton_postRequestApproval() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is defined %}
+    {{ htmButton_deleteRequestApproval() }}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmButton_putimportRequestApproval() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is not defined %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_deletefilterRequestApproval() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+
+              </wa-button-group>
+            </wa-scroller>
+          </div>

@@ -1,0 +1,65 @@
+
+{%- macro htmButton_patchTenantRealized() %}<wa-button variant="brand" id="htmButton_patchTenantRealized"  data-dialog="open patchTenantRealizedDialog" data-tenantResource={{ result.tenantResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+
+{%- macro htmButton_postTenantRealized() %}<wa-button variant="brand" id="htmButton_postTenantRealized"  data-dialog="open postTenantRealizedDialog" data-tenantResource={{ result.tenantResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deleteTenantRealized() %}<wa-button variant="brand" id="htmButton_deleteTenantRealized" data-tenantResource={{ result.tenantResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+
+{%- macro htmButton_putimportTenantRealized() %}<wa-button variant="brand" id="htmButton_putimportTenantRealized"  data-dialog="open putimportTenantRealizedDialog" data-tenantResource={{ result.tenantResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deletefilterTenantRealized() %}<wa-button variant="brand" id="htmButton_deletefilterTenantRealized" data-tenantResource={{ result.tenantResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+          <div id="htmSearchForm">
+            <wa-scroller>
+              <wa-button-group>
+{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {% if "PATCH" in scopes %}
+    {% if resultCount >= 1 %}
+                <wa-button variant="brand" id="refreshThisTenantRealizedGenPage"
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'tenantResource:{{ result.tenantResource }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisTenantRealizedGenPage')); }, function() { addError(document.querySelector('#refreshThisTenantRealizedGenPage')); }); return false; ">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  refresh
+                </wa-button>
+    {% endif %}
+    {% if resultCount > 0 %}
+                <wa-button variant="brand" id="refreshAllTenantRealizedGenPage{{ result.tenantResource | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllTenantRealizedGenPage{{ result.tenantResource | e }}')); }, function() { addError(document.querySelector('#refreshAllTenantRealizedGenPage{{ result.tenantResource | e }}')); }); "
+                    >
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  refresh all 
+                </wa-button>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{%- if 'PATCH' in scopes %}
+  {%- if resultCount > 0 %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_patchTenantRealized() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmButton_postTenantRealized() }}
+  {%- else %}
+    {{ htmButton_postTenantRealized() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is defined %}
+    {{ htmButton_deleteTenantRealized() }}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmButton_putimportTenantRealized() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is not defined %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_deletefilterTenantRealized() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+
+              </wa-button-group>
+            </wa-scroller>
+          </div>

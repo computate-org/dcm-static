@@ -1,0 +1,29 @@
+{% include en-us/search/host-check-cr/HostCheckCRSearchFormMacros.htm %}
+{% include en-us/search/tenant/TenantSearchFormMacros.htm %}
+{% include en-us/search/job-template/JobTemplateSearchFormMacros.htm %}
+{% include en-us/search/host-check/HostCheckSearchFormMacros.htm %}
+{%- if 'DELETE' in scopes %}
+    {{ htmForm_patchHostCheckCR() }}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_postHostCheckCR() }}
+  {%- else %}
+    {{ htmForm_postHostCheckCR() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_deleteHostCheckCR() }}
+  {%- else %}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmForm_putimportHostCheckCR() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_deletefilterHostCheckCR() }}
+  {%- else %}
+  {%- endif %}
+{%- endif %}

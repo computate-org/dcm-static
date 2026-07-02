@@ -167,13 +167,17 @@ async function websocketHostInventoryInner(apiRequest) {
         if(vars.includes('aapInventoryId'))
           inputAapInventoryId = $response.querySelector('.HostInventory_Page_aapInventoryId');
 
-        jsWebsocketHostInventory(inventoryResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listHostInventory = JSON.parse($response.querySelector('.pageForm .listHostInventory')?.value);
+        jsWebsocketHostInventory(inventoryResource, vars, $response);
 
 
         if(inputPk) {
           document.querySelectorAll('.HostInventory_Page_pk').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
@@ -184,6 +188,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputCreated) {
           document.querySelectorAll('.HostInventory_Page_created').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
@@ -194,6 +202,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputModified) {
           document.querySelectorAll('.HostInventory_Page_modified').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
@@ -204,6 +216,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputArchived) {
           document.querySelectorAll('.HostInventory_Page_archived').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
@@ -214,6 +230,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputTenantResource) {
           document.querySelectorAll('.HostInventory_Page_tenantResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
@@ -224,6 +244,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputCredentialResource) {
           document.querySelectorAll('.HostInventory_Page_credentialResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCredentialResource.getAttribute('value');
             else
@@ -234,6 +258,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputInventoryName) {
           document.querySelectorAll('.HostInventory_Page_inventoryName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryName.getAttribute('value');
             else
@@ -244,6 +272,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputInventoryDescription) {
           document.querySelectorAll('.HostInventory_Page_inventoryDescription').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryDescription.getAttribute('value');
             else
@@ -254,6 +286,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputInventoryKind) {
           document.querySelectorAll('.HostInventory_Page_inventoryKind').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryKind.getAttribute('value');
             else
@@ -264,6 +300,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputHostInventoryIds) {
           document.querySelectorAll('.HostInventory_Page_hostInventoryIds').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputHostInventoryIds.getAttribute('value');
             else
@@ -274,6 +314,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputClassCanonicalName) {
           document.querySelectorAll('.HostInventory_Page_classCanonicalName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
@@ -284,6 +328,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputClassSimpleName) {
           document.querySelectorAll('.HostInventory_Page_classSimpleName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
@@ -294,6 +342,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputClassCanonicalNames) {
           document.querySelectorAll('.HostInventory_Page_classCanonicalNames').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
@@ -304,6 +356,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputSessionId) {
           document.querySelectorAll('.HostInventory_Page_sessionId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
@@ -314,6 +370,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputUserKey) {
           document.querySelectorAll('.HostInventory_Page_userKey').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
@@ -324,6 +384,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputSaves) {
           document.querySelectorAll('.HostInventory_Page_saves').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
@@ -334,6 +398,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputObjectTitle) {
           document.querySelectorAll('.HostInventory_Page_objectTitle').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
@@ -344,6 +412,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputDisplayPage) {
           document.querySelectorAll('.HostInventory_Page_displayPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
@@ -354,6 +426,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputEditPage) {
           document.querySelectorAll('.HostInventory_Page_editPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
@@ -364,6 +440,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputUserPage) {
           document.querySelectorAll('.HostInventory_Page_userPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
@@ -374,6 +454,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputDownload) {
           document.querySelectorAll('.HostInventory_Page_download').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
@@ -384,6 +468,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputObjectSuggest) {
           document.querySelectorAll('.HostInventory_Page_objectSuggest').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
@@ -394,6 +482,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputObjectText) {
           document.querySelectorAll('.HostInventory_Page_objectText').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
@@ -404,6 +496,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputSolrId) {
           document.querySelectorAll('.HostInventory_Page_solrId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
@@ -414,6 +510,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputTenantId) {
           document.querySelectorAll('.HostInventory_Page_tenantId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantId.getAttribute('value');
             else
@@ -424,6 +524,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputAapOrganizationId) {
           document.querySelectorAll('.HostInventory_Page_aapOrganizationId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapOrganizationId.getAttribute('value');
             else
@@ -434,6 +538,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputInventoryId) {
           document.querySelectorAll('.HostInventory_Page_inventoryId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryId.getAttribute('value');
             else
@@ -444,6 +552,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputInventoryResource) {
           document.querySelectorAll('.HostInventory_Page_inventoryResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputInventoryResource.getAttribute('value');
             else
@@ -454,6 +566,10 @@ async function websocketHostInventoryInner(apiRequest) {
 
         if(inputAapInventoryId) {
           document.querySelectorAll('.HostInventory_Page_aapInventoryId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapInventoryId.getAttribute('value');
             else

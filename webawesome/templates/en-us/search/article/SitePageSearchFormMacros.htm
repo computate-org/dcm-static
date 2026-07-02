@@ -355,7 +355,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="useful-urls">
+            <wa-details open class="pdf-page-break-after HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
@@ -435,7 +435,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="useful-urls">
+            <wa-details open class="pdf-page-break-after HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
@@ -512,7 +512,7 @@
         <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageSitePageDialog" label="Search articles">
           <div id="htmForm_searchpageSitePage" class="round-row primary-smart-border-radius ">
 
-            <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
                 <span>primary key, ID, created, modified, archive details</span>
               </div>
@@ -585,7 +585,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="useful-urls">
+            <wa-details open class="pdf-page-break-after HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>

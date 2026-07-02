@@ -182,13 +182,17 @@ async function websocketHostCheckInner(apiRequest) {
         if(vars.includes('checkResource'))
           inputCheckResource = $response.querySelector('.HostCheck_Page_checkResource');
 
-        jsWebsocketHostCheck(checkResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listHostCheck = JSON.parse($response.querySelector('.pageForm .listHostCheck')?.value);
+        jsWebsocketHostCheck(checkResource, vars, $response);
 
 
         if(inputPk) {
           document.querySelectorAll('.HostCheck_Page_pk').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
@@ -199,6 +203,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputCreated) {
           document.querySelectorAll('.HostCheck_Page_created').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
@@ -209,6 +217,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputModified) {
           document.querySelectorAll('.HostCheck_Page_modified').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
@@ -219,6 +231,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputArchived) {
           document.querySelectorAll('.HostCheck_Page_archived').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
@@ -229,6 +245,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputTenantResource) {
           document.querySelectorAll('.HostCheck_Page_tenantResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
@@ -239,6 +259,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputJobTemplateResource) {
           document.querySelectorAll('.HostCheck_Page_jobTemplateResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateResource.getAttribute('value');
             else
@@ -249,6 +273,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputCheckName) {
           document.querySelectorAll('.HostCheck_Page_checkName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCheckName.getAttribute('value');
             else
@@ -259,6 +287,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputCheckDescription) {
           document.querySelectorAll('.HostCheck_Page_checkDescription').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCheckDescription.getAttribute('value');
             else
@@ -269,6 +301,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputCheckNamespace) {
           document.querySelectorAll('.HostCheck_Page_checkNamespace').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCheckNamespace.getAttribute('value');
             else
@@ -279,6 +315,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputCheckCommand) {
           document.querySelectorAll('.HostCheck_Page_checkCommand').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCheckCommand.getAttribute('value');
             else
@@ -289,6 +329,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputCheckInterval) {
           document.querySelectorAll('.HostCheck_Page_checkInterval').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCheckInterval.getAttribute('value');
             else
@@ -299,6 +343,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputCheckPublished) {
           document.querySelectorAll('.HostCheck_Page_checkPublished').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCheckPublished.getAttribute('value');
             else
@@ -309,6 +357,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputEventSubscriptions) {
           document.querySelectorAll('.HostCheck_Page_eventSubscriptions').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputEventSubscriptions.getAttribute('value');
             else
@@ -319,6 +371,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputEventHandlers) {
           document.querySelectorAll('.HostCheck_Page_eventHandlers').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputEventHandlers.getAttribute('value');
             else
@@ -329,6 +385,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputClassCanonicalName) {
           document.querySelectorAll('.HostCheck_Page_classCanonicalName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
@@ -339,6 +399,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputClassSimpleName) {
           document.querySelectorAll('.HostCheck_Page_classSimpleName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
@@ -349,6 +413,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputClassCanonicalNames) {
           document.querySelectorAll('.HostCheck_Page_classCanonicalNames').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
@@ -359,6 +427,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputSessionId) {
           document.querySelectorAll('.HostCheck_Page_sessionId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
@@ -369,6 +441,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputUserKey) {
           document.querySelectorAll('.HostCheck_Page_userKey').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
@@ -379,6 +455,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputSaves) {
           document.querySelectorAll('.HostCheck_Page_saves').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
@@ -389,6 +469,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputObjectTitle) {
           document.querySelectorAll('.HostCheck_Page_objectTitle').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
@@ -399,6 +483,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputDisplayPage) {
           document.querySelectorAll('.HostCheck_Page_displayPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
@@ -409,6 +497,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputEditPage) {
           document.querySelectorAll('.HostCheck_Page_editPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
@@ -419,6 +511,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputUserPage) {
           document.querySelectorAll('.HostCheck_Page_userPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
@@ -429,6 +525,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputDownload) {
           document.querySelectorAll('.HostCheck_Page_download').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
@@ -439,6 +539,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputObjectSuggest) {
           document.querySelectorAll('.HostCheck_Page_objectSuggest').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
@@ -449,6 +553,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputObjectText) {
           document.querySelectorAll('.HostCheck_Page_objectText').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
@@ -459,6 +567,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputSolrId) {
           document.querySelectorAll('.HostCheck_Page_solrId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
@@ -469,6 +581,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputTenantId) {
           document.querySelectorAll('.HostCheck_Page_tenantId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantId.getAttribute('value');
             else
@@ -479,6 +595,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputAapOrganizationId) {
           document.querySelectorAll('.HostCheck_Page_aapOrganizationId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapOrganizationId.getAttribute('value');
             else
@@ -489,6 +609,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputJobTemplateId) {
           document.querySelectorAll('.HostCheck_Page_jobTemplateId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputJobTemplateId.getAttribute('value');
             else
@@ -499,6 +623,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputAapTemplateId) {
           document.querySelectorAll('.HostCheck_Page_aapTemplateId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapTemplateId.getAttribute('value');
             else
@@ -509,6 +637,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputCheckId) {
           document.querySelectorAll('.HostCheck_Page_checkId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCheckId.getAttribute('value');
             else
@@ -519,6 +651,10 @@ async function websocketHostCheckInner(apiRequest) {
 
         if(inputCheckResource) {
           document.querySelectorAll('.HostCheck_Page_checkResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCheckResource.getAttribute('value');
             else

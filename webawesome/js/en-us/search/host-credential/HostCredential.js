@@ -173,13 +173,17 @@ async function websocketHostCredentialInner(apiRequest) {
         if(vars.includes('aapCredentialTypeId'))
           inputAapCredentialTypeId = $response.querySelector('.HostCredential_Page_aapCredentialTypeId');
 
-        jsWebsocketHostCredential(credentialResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listHostCredential = JSON.parse($response.querySelector('.pageForm .listHostCredential')?.value);
+        jsWebsocketHostCredential(credentialResource, vars, $response);
 
 
         if(inputPk) {
           document.querySelectorAll('.HostCredential_Page_pk').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
@@ -190,6 +194,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputCreated) {
           document.querySelectorAll('.HostCredential_Page_created').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
@@ -200,6 +208,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputModified) {
           document.querySelectorAll('.HostCredential_Page_modified').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
@@ -210,6 +222,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputArchived) {
           document.querySelectorAll('.HostCredential_Page_archived').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
@@ -220,6 +236,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputTenantResource) {
           document.querySelectorAll('.HostCredential_Page_tenantResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
@@ -230,6 +250,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputCredentialName) {
           document.querySelectorAll('.HostCredential_Page_credentialName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCredentialName.getAttribute('value');
             else
@@ -240,6 +264,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputCredentialDescription) {
           document.querySelectorAll('.HostCredential_Page_credentialDescription').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCredentialDescription.getAttribute('value');
             else
@@ -250,6 +278,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputUserName) {
           document.querySelectorAll('.HostCredential_Page_userName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserName.getAttribute('value');
             else
@@ -260,6 +292,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputBecomePassword) {
           document.querySelectorAll('.HostCredential_Page_becomePassword').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputBecomePassword.getAttribute('value');
             else
@@ -270,6 +306,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputPassword) {
           document.querySelectorAll('.HostCredential_Page_password').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputPassword.getAttribute('value');
             else
@@ -280,6 +320,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputBecomeMethod) {
           document.querySelectorAll('.HostCredential_Page_becomeMethod').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputBecomeMethod.getAttribute('value');
             else
@@ -290,6 +334,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputClassCanonicalName) {
           document.querySelectorAll('.HostCredential_Page_classCanonicalName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
@@ -300,6 +348,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputClassSimpleName) {
           document.querySelectorAll('.HostCredential_Page_classSimpleName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
@@ -310,6 +362,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputClassCanonicalNames) {
           document.querySelectorAll('.HostCredential_Page_classCanonicalNames').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
@@ -320,6 +376,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputSessionId) {
           document.querySelectorAll('.HostCredential_Page_sessionId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
@@ -330,6 +390,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputUserKey) {
           document.querySelectorAll('.HostCredential_Page_userKey').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
@@ -340,6 +404,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputSaves) {
           document.querySelectorAll('.HostCredential_Page_saves').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
@@ -350,6 +418,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputObjectTitle) {
           document.querySelectorAll('.HostCredential_Page_objectTitle').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
@@ -360,6 +432,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputDisplayPage) {
           document.querySelectorAll('.HostCredential_Page_displayPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
@@ -370,6 +446,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputEditPage) {
           document.querySelectorAll('.HostCredential_Page_editPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
@@ -380,6 +460,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputUserPage) {
           document.querySelectorAll('.HostCredential_Page_userPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
@@ -390,6 +474,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputDownload) {
           document.querySelectorAll('.HostCredential_Page_download').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
@@ -400,6 +488,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputObjectSuggest) {
           document.querySelectorAll('.HostCredential_Page_objectSuggest').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
@@ -410,6 +502,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputObjectText) {
           document.querySelectorAll('.HostCredential_Page_objectText').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
@@ -420,6 +516,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputSolrId) {
           document.querySelectorAll('.HostCredential_Page_solrId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
@@ -430,6 +530,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputTenantId) {
           document.querySelectorAll('.HostCredential_Page_tenantId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantId.getAttribute('value');
             else
@@ -440,6 +544,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputAapOrganizationId) {
           document.querySelectorAll('.HostCredential_Page_aapOrganizationId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapOrganizationId.getAttribute('value');
             else
@@ -450,6 +558,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputCredentialId) {
           document.querySelectorAll('.HostCredential_Page_credentialId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCredentialId.getAttribute('value');
             else
@@ -460,6 +572,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputCredentialResource) {
           document.querySelectorAll('.HostCredential_Page_credentialResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCredentialResource.getAttribute('value');
             else
@@ -470,6 +586,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputAapCredentialId) {
           document.querySelectorAll('.HostCredential_Page_aapCredentialId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapCredentialId.getAttribute('value');
             else
@@ -480,6 +600,10 @@ async function websocketHostCredentialInner(apiRequest) {
 
         if(inputAapCredentialTypeId) {
           document.querySelectorAll('.HostCredential_Page_aapCredentialTypeId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputAapCredentialTypeId.getAttribute('value');
             else

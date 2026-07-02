@@ -1,0 +1,8 @@
+{
+  "@context" : {
+    "ngsi-ld" : "https://uri.etsi.org/ngsi-ld/",
+    "fiware" : "https://uri.fiware.org/ns/data-models#",
+    "schema" : "https://schema.org/",
+    "dcm" : "https://dcm.computate.org/static/fiware/"
+  }
+}

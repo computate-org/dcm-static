@@ -173,13 +173,17 @@ async function websocketSiteUserInner(apiRequest) {
         if(vars.includes('customerProfileId'))
           inputCustomerProfileId = $response.querySelector('.SiteUser_Page_customerProfileId');
 
-        jsWebsocketSiteUser(userId, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listSiteUser = JSON.parse($response.querySelector('.pageForm .listSiteUser')?.value);
+        jsWebsocketSiteUser(userId, vars, $response);
 
 
         if(inputPk) {
           document.querySelectorAll('.SiteUser_Page_pk').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
@@ -190,6 +194,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputCreated) {
           document.querySelectorAll('.SiteUser_Page_created').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
@@ -200,6 +208,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputModified) {
           document.querySelectorAll('.SiteUser_Page_modified').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
@@ -210,6 +222,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputArchived) {
           document.querySelectorAll('.SiteUser_Page_archived').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
@@ -220,6 +236,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputSeeArchived) {
           document.querySelectorAll('.SiteUser_Page_seeArchived').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSeeArchived.getAttribute('value');
             else
@@ -230,6 +250,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputSiteFontSize) {
           document.querySelectorAll('.SiteUser_Page_siteFontSize').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSiteFontSize.getAttribute('value');
             else
@@ -240,6 +264,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputSiteTheme) {
           document.querySelectorAll('.SiteUser_Page_siteTheme').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSiteTheme.getAttribute('value');
             else
@@ -250,6 +278,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputUserProfileUrl) {
           document.querySelectorAll('.SiteUser_Page_userProfileUrl').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserProfileUrl.getAttribute('value');
             else
@@ -260,6 +292,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputClassCanonicalName) {
           document.querySelectorAll('.SiteUser_Page_classCanonicalName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
@@ -270,6 +306,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputClassSimpleName) {
           document.querySelectorAll('.SiteUser_Page_classSimpleName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
@@ -280,6 +320,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputClassCanonicalNames) {
           document.querySelectorAll('.SiteUser_Page_classCanonicalNames').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
@@ -290,6 +334,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputSessionId) {
           document.querySelectorAll('.SiteUser_Page_sessionId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
@@ -300,6 +348,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputUserKey) {
           document.querySelectorAll('.SiteUser_Page_userKey').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
@@ -310,6 +362,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputSaves) {
           document.querySelectorAll('.SiteUser_Page_saves').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
@@ -320,6 +376,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputObjectTitle) {
           document.querySelectorAll('.SiteUser_Page_objectTitle').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
@@ -330,6 +390,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputDisplayPage) {
           document.querySelectorAll('.SiteUser_Page_displayPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
@@ -340,6 +404,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputEditPage) {
           document.querySelectorAll('.SiteUser_Page_editPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
@@ -350,6 +418,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputUserPage) {
           document.querySelectorAll('.SiteUser_Page_userPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
@@ -360,6 +432,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputDownload) {
           document.querySelectorAll('.SiteUser_Page_download').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
@@ -370,6 +446,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputObjectSuggest) {
           document.querySelectorAll('.SiteUser_Page_objectSuggest').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
@@ -380,6 +460,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputObjectText) {
           document.querySelectorAll('.SiteUser_Page_objectText').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
@@ -390,6 +474,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputSolrId) {
           document.querySelectorAll('.SiteUser_Page_solrId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
@@ -400,6 +488,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputUserKeys) {
           document.querySelectorAll('.SiteUser_Page_userKeys').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserKeys.getAttribute('value');
             else
@@ -410,6 +502,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputUserId) {
           document.querySelectorAll('.SiteUser_Page_userId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserId.getAttribute('value');
             else
@@ -420,6 +516,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputUserName) {
           document.querySelectorAll('.SiteUser_Page_userName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserName.getAttribute('value');
             else
@@ -430,6 +530,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputUserEmail) {
           document.querySelectorAll('.SiteUser_Page_userEmail').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserEmail.getAttribute('value');
             else
@@ -440,6 +544,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputUserFirstName) {
           document.querySelectorAll('.SiteUser_Page_userFirstName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserFirstName.getAttribute('value');
             else
@@ -450,6 +558,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputUserLastName) {
           document.querySelectorAll('.SiteUser_Page_userLastName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserLastName.getAttribute('value');
             else
@@ -460,6 +572,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputUserFullName) {
           document.querySelectorAll('.SiteUser_Page_userFullName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserFullName.getAttribute('value');
             else
@@ -470,6 +586,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputDisplayName) {
           document.querySelectorAll('.SiteUser_Page_displayName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayName.getAttribute('value');
             else
@@ -480,6 +600,10 @@ async function websocketSiteUserInner(apiRequest) {
 
         if(inputCustomerProfileId) {
           document.querySelectorAll('.SiteUser_Page_customerProfileId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCustomerProfileId.getAttribute('value');
             else

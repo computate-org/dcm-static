@@ -390,9 +390,9 @@
 
 {%- macro htmForm_patchAiTelemetryPlatform(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchAiTelemetryPlatformDialog" label="Modify AI Telemetry developer">
-          <form id="htmForm_patchAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_patchAiTelemetryPlatform" class="wa-stack round-row primary-smart-border-radius ">
 
-            <wa-details open class="HtmRow" id="course-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="course-details">
               <div slot="summary">
                 <span>course details</span>
               </div>
@@ -451,7 +451,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="useful-urls">
+            <wa-details open class="pdf-page-break-after HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
@@ -477,8 +477,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_patchAiTelemetryPlatform() }}
           </form>
-          {{ htmFormButton_patchAiTelemetryPlatform() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -493,10 +493,10 @@
 
 {%- macro htmForm_postAiTelemetryPlatform(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postAiTelemetryPlatformDialog" label="Create an AI Telemetry developer">
-          <form id="htmForm_postAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_postAiTelemetryPlatform" class="wa-stack round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
-            <wa-details open class="HtmRow" id="course-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="course-details">
               <div slot="summary">
                 <span>course details</span>
               </div>
@@ -555,7 +555,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="useful-urls">
+            <wa-details open class="pdf-page-break-after HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
@@ -581,8 +581,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_postAiTelemetryPlatform() }}
           </form>
-          {{ htmFormButton_postAiTelemetryPlatform() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -597,9 +597,9 @@
 
 {%- macro htmForm_deleteAiTelemetryPlatform(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteAiTelemetryPlatformDialog" label="Delete AI Telemetry developer">
-          <form id="htmForm_deleteAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deleteAiTelemetryPlatform" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteAiTelemetryPlatform() }}
           </form>
-          {{ htmFormButton_deleteAiTelemetryPlatform() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -614,7 +614,7 @@
 
 {%- macro htmForm_putimportAiTelemetryPlatform(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportAiTelemetryPlatformDialog" label="Import AI Telemetry developers">
-          <form id="htmForm_putimportAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_putimportAiTelemetryPlatform" class="wa-stack round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
                   class="PUTImport_searchList "
@@ -623,16 +623,16 @@
                   >
               </wa-textarea>
             </div>
+            {{ htmFormButton_putimportAiTelemetryPlatform() }}
           </form>
-          {{ htmFormButton_putimportAiTelemetryPlatform() }}
         </wa-dialog>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageAiTelemetryPlatform(idSuffix='') %}
         <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageAiTelemetryPlatformDialog" label="Search AI Telemetry developers">
-          <div id="htmForm_searchpageAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
+          <div id="htmForm_searchpageAiTelemetryPlatform" class="wa-stack round-row primary-smart-border-radius ">
 
-            <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
                 <span>primary key, ID, created, modified, archive details</span>
               </div>
@@ -671,7 +671,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="course-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="course-details">
               <div slot="summary">
                 <span>course details</span>
               </div>
@@ -730,7 +730,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="useful-urls">
+            <wa-details open class="pdf-page-break-after HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
@@ -771,8 +771,8 @@
 
 {%- macro htmForm_deletefilterAiTelemetryPlatform(idSuffix='') %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterAiTelemetryPlatformDialog" label="Delete AI Telemetry developer">
-          <form id="htmForm_deletefilterAiTelemetryPlatform" class="round-row primary-smart-border-radius ">
+          <form id="htmForm_deletefilterAiTelemetryPlatform" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterAiTelemetryPlatform() }}
           </form>
-          {{ htmFormButton_deletefilterAiTelemetryPlatform() }}
         </wa-dialog>
 {%- endmacro %}

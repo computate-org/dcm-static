@@ -1,0 +1,591 @@
+{% extends "en-us/PageLayout.htm" %}
+
+{%- block htmTitlePageLayout %}
+{%- block htmTitleTenantRealizedPage %}
+    <title>{% if resultCount == 0 %}no realized tenant found{% else %}realized tenants{% endif %}</title>
+{%- endblock htmTitleTenantRealizedPage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/realized/tenant/TenantRealized.css"/>
+{%- block htmStylesTenantRealizedPage %}
+{%- endblock htmStylesTenantRealizedPage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 2;
+      }
+{{ super() }}
+{%- block htmStyleTenantRealizedPage %}
+{%- endblock htmStyleTenantRealizedPage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsTenantRealizedPage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/realized/tenant/TenantRealized.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/realized/tenant/TenantRealizedSearchPage.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
+{%- endblock htmScriptsTenantRealizedPage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptTenantRealizedPage %}
+    <script>
+
+      function jsWebsocketTenantRealized(tenantResource, vars, $response) {
+{%- block jsWebsocketTenantRealizedPage %}{%- endblock %}
+      }
+
+      function jsTooltipTenantRealized(e, feature) {
+{%- block jsTooltipTenantRealizedPage %}{%- endblock %}
+      }
+
+      function htmTooltipTenantRealized(feature, layer) {
+        return `{%- block htmTooltipTenantRealizedPage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipTenantRealizedPage %}`;
+      }
+
+      function facetChangeTenantRealizedSuccess(e) {
+        var l = e.querySelector('.pageForm .listTenantRealized')?.value;
+        if(l)
+          window.listTenantRealized = JSON.parse(l);
+{% block facetChangeTenantRealizedSuccess %}{%- endblock facetTenantRealizedSuccess %}
+      }
+      function facetChangeTenantRealizedError(e) {
+{% block facetChangeTenantRealizedError %}{%- endblock facetTenantRealizedError %}
+      }
+
+      function facetSimpleRangeTenantRealizedSuccess(e) {
+{% block facetSimpleRangeTenantRealizedSuccess %}      facetChangeTenantRealizedSuccess(e);{% endblock facetSimpleRangeTenantRealizedSuccess %}
+      }
+      function facetSimpleRangeTenantRealizedError(e) {
+{% block facetSimpleRangeTenantRealizedError %}      facetChangeTenantRealizedError(e);{% endblock facetSimpleRangeTenantRealizedError %}
+      }
+      function facetSimpleRangeTenantRealized(e) {
+        facetSimpleRange(e, facetSimpleRangeTenantRealizedSuccess, facetSimpleRangeTenantRealizedError);
+      }
+
+      function facetRangeTimeZoneTenantRealizedSuccess(e) {
+{% block facetRangeTimeZoneTenantRealizedSuccess %}      facetChangeTenantRealizedSuccess(e);{% endblock facetRangeTimeZoneTenantRealizedSuccess %}
+      }
+      function facetRangeTimeZoneTenantRealizedError(e) {
+{% block facetRangeTimeZoneTenantRealizedError %}      facetChangeTenantRealizedError(e);{%- endblock facetRangeTimeZoneTenantRealizedError %}
+      }
+      function facetRangeTimeZoneTenantRealized(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneTenantRealizedSuccess, facetRangeTimeZoneTenantRealizedError);
+      }
+
+      function facetRangeGapChangeTenantRealizedSuccess(e) {
+{% block facetRangeGapChangeTenantRealizedSuccess %}      facetChangeTenantRealizedSuccess(e);{% endblock facetRangeGapChangeTenantRealizedSuccess %}
+      }
+      function facetRangeGapChangeTenantRealizedError(e) {
+{% block facetRangeGapChangeTenantRealizedError %}      facetChangeTenantRealizedError(e);{%- endblock facetRangeGapChangeTenantRealizedError %}
+      }
+      function facetRangeGapChangeTenantRealized(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeTenantRealizedSuccess, facetRangeGapChangeTenantRealizedError);
+      }
+
+      function facetRangeStartChangeTenantRealizedSuccess(e) {
+{% block facetRangeStartChangeTenantRealizedSuccess %}      facetChangeTenantRealizedSuccess(e);{% endblock facetRangeStartChangeTenantRealizedSuccess %}
+      }
+      function facetRangeStartChangeTenantRealizedError(e) {
+{% block facetRangeStartChangeTenantRealizedError %}      facetChangeTenantRealizedError(e);{%- endblock facetRangeStartChangeTenantRealizedError %}
+      }
+      function facetRangeStartChangeTenantRealized(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeTenantRealizedSuccess, facetRangeStartChangeTenantRealizedError);
+      }
+
+      function facetRangeEndChangeTenantRealizedSuccess(e) {
+{% block facetRangeEndChangeTenantRealizedSuccess %}      facetChangeTenantRealizedSuccess(e);{% endblock facetRangeEndChangeTenantRealizedSuccess %}
+      }
+      function facetRangeEndChangeTenantRealizedError(e) {
+{% block facetRangeEndChangeTenantRealizedError %}      facetChangeTenantRealizedError(e);{%- endblock facetRangeEndChangeTenantRealizedError %}
+      }
+      function facetRangeEndChangeTenantRealized(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeTenantRealizedSuccess, facetRangeEndChangeTenantRealizedError);
+      }
+    </script>
+    <script type="module">
+{% if location is defined %}
+      window.mapLocation = { type: 'Point', coordinates: [ {{ location.coordinates[0] }}, {{ location.coordinates[1] }} ]};
+{% endif %}
+{% if zoom is defined %}
+      window.mapZoom = {{ zoom }};
+{% endif %}
+{% if pitch is defined %}
+      window.mapPitch = {{ toDegree(pitch) }};
+{% endif %}
+      window.STATIC_BASE_URL = '{{ STATIC_BASE_URL }}';
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
+
+        var tenantResource = {% if result.tenantResource is defined %}{{ result.tenantResource | tojson }}{% else %}null{% endif %};
+
+          function relate_hostInventoryIds(event) {
+            suggestTenantRealizedHostInventoryIds(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.hostInventoryIds is defined %}{'name':'fq','value':'tenantResource:{{ result.hostInventoryIds }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#TenantRealized_POST_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#TenantRealized_POST_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#TenantRealized_PATCH_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#TenantRealized_PATCH_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          function relate_ansibleProjectIds(event) {
+            suggestTenantRealizedAnsibleProjectIds(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.ansibleProjectIds is defined %}{'name':'fq','value':'tenantResource:{{ result.ansibleProjectIds }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#TenantRealized_POST_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#TenantRealized_POST_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+          document.querySelector('#TenantRealized_PATCH_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#TenantRealized_PATCH_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+        if(tenantResource == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.tenantResource is defined %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listTenantRealized')?.value;
+        if(l)
+          window.listTenantRealized = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTenantRealized);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTenantRealized);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneTenantRealized);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeTenantRealized);
+        pageGraphTenantRealized();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qTenantRealized_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('TenantRealized', event.target, document.querySelector('#qTenantRealizedDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qTenantRealized_rows')?.addEventListener('change', event => {
+          paramChange('TenantRealized', event.target, document.querySelector('#qTenantRealizedDiv_rows'));
+        });
+
+        document.querySelector('#qTenantRealized_start')?.addEventListener('change', event => {
+          paramChange('TenantRealized', event.target, document.querySelector('#qTenantRealizedDiv_start'));
+        });
+
+
+        var submitForm_patchTenantRealized = document.querySelector('#htmForm_patchTenantRealized')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          patchTenantRealized(null, document.querySelector('#htmForm_patchTenantRealized')
+              , document.querySelector('#htmFormButton_patchTenantRealized')
+              , event.target.getAttribute('data-tenantResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_postTenantRealized = document.querySelector('#htmForm_postTenantRealized')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          postTenantRealized(document.querySelector('#htmForm_postTenantRealized')
+              , document.querySelector('#htmFormButton_postTenantRealized')
+              , (json, target) => {
+            window.location.href = json.editPage;
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_deleteTenantRealized = document.querySelector('#htmForm_deleteTenantRealized')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          deleteTenantRealized(event.target, event.target.getAttribute('data-tenantResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_putimportTenantRealized = document.querySelector('#htmForm_putimportTenantRealized')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          putimportTenantRealized(document.querySelector('#htmForm_putimportTenantRealized')
+              , document.querySelector('#htmFormButton_putimportTenantRealized')
+              , event.target.getAttribute('data-tenantResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_searchpageTenantRealized = document.querySelector('#htmForm_searchpageTenantRealized')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          searchpageTenantRealized();
+          return false;
+        });
+
+        var submitForm_deletefilterTenantRealized = document.querySelector('#htmForm_deletefilterTenantRealized')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          deletefilterTenantRealized(event.target
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        document.querySelector('#htmFormButton_postHostInventory')?.addEventListener('click', event => {
+          event.preventDefault();
+          postHostInventory(document.querySelector('#htmForm_postHostInventory')
+              , document.querySelector('#htmFormButton_postHostInventory')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+        });
+
+        document.querySelector('#htmFormButton_postAnsibleProject')?.addEventListener('click', event => {
+          event.preventDefault();
+          postAnsibleProject(document.querySelector('#htmForm_postAnsibleProject')
+              , document.querySelector('#htmFormButton_postAnsibleProject')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+        });
+{%- block htmScriptInitTenantRealizedPage %}{%- endblock htmScriptInitTenantRealizedPage %}
+      });
+    </script>
+{%- endblock htmScriptTenantRealizedPage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketTenantRealizedPage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketTenantRealized(websocketTenantRealizedInner);
+{% endif %}
+{%- endblock websocketTenantRealizedPage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlTenantRealizedPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlTenantRealizedPage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-TenantRealized">back to all realized tenants</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-TenantRealized" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+                  all realized tenants
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search realized tenants
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+{{ super() }}
+{%- block htmBodyStartTenantRealizedPage %}
+{% include en-us/search/realized/tenant/TenantRealizedSidebar.htm %}
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-TenantRealized">back to all realized tenants</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-TenantRealized" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+              all realized tenants
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no realized tenant found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+            </div>
+            <span class="wa-heading-m ">no realized tenant found</span>
+            <p class="wa-caption-l ">Requesting a change to create a new Tenant, or modify an existing Tenant. Tenants are separate organizations sharing the same cloud resources. </p>
+          </div>
+        </div>
+{% else %}
+{% include en-us/search/realized/tenant/TenantRealizedSuggestedSearch.htm %}
+          <div class="pageContent ">
+            <form action="/en-us/api/intent/realized" id="TenantRealizedForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
+              <input name="focusId" type="hidden"/>
+              <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+              <input name="listTenantRealized" id="listTenantRealized" class="listTenantRealized"  value='{{ toJsonArrayStringInApostrophes(listTenantRealized) }}' type="hidden"/>
+            </form>
+            <div id="site-calendar-box">
+              <div id="site-calendar"><!-- // --></div>
+            </div>
+            <div class="wa-stack wa-gap-m ">
+{% endif %}
+{% include en-us/search/realized/tenant/TenantRealizedSearchForm.htm %}
+{%- endblock htmBodyStartTenantRealizedPage %}
+{%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/realized/tenant/TenantRealizedSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/realized/tenant/TenantRealizedSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleTenantRealizedPage %}
+{% if resultCount > 0 %}
+              <div class="wa-stack wa-gap-0 ">
+{% include en-us/search/realized/tenant/TenantRealizedPaginationButtons.htm %}
+                <div class="card-like-thing background-color-surface-border" id="site-results-grid">
+                  <div>
+                    <wa-dropdown id="htmDropdown-tenantName">
+                      <wa-button variant="brand" slot="trigger" caret>tenant name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRealized_tenantName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRealized').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by tenant name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRealized_tenantName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRealized').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by tenant name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-tenantDescription">
+                      <wa-button variant="brand" slot="trigger" caret>description</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRealized_tenantDescription'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRealized').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantDescription-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by description ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRealized_tenantDescription'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRealized').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantDescription-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by description descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                  </div>
+                  {% for item in listTenantRealized%}
+                  <div>
+                    <a href="{{ item.displayPage }}">
+                      <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+                      <span>{{ item.tenantName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.tenantDescription | e }}</span>
+                    </a>
+                  </div>
+                  {% endfor %}
+              {% if getColumnTenantName is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnTenantDescription is defined %}
+                <div>
+                </div>
+              {% endif %}
+                </div>
+{% include en-us/search/realized/tenant/TenantRealizedPaginationButtons.htm %}
+              </div>
+{% endif %}
+{%- endblock htmBodyMiddleTenantRealizedPage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndTenantRealizedPage %}
+{%- include en-us/search/realized/tenant/TenantRealizedLocation.htm %}
+            </div>
+          </div>
+{%- endblock htmBodyEndTenantRealizedPage %}
+  {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

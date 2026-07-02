@@ -66,17 +66,6 @@ Promise.all([
     facetStatsChange('Tenant', 'tenantName', false);
   });
 
-  document.querySelector('#pageSelectSortTenant_tenantId')?.addEventListener('change', (event) => {
-    sort('Tenant', 'tenantId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsTenant_tenantId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Tenant', 'tenantId', true);
-  });
-  document.querySelector('#pageStatsTenant_tenantId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Tenant', 'tenantId', false);
-  });
-
   document.querySelector('#pageSelectSortTenant_tenantDescription')?.addEventListener('change', (event) => {
     sort('Tenant', 'tenantDescription', event.currentTarget.value);
   });
@@ -88,17 +77,6 @@ Promise.all([
     facetStatsChange('Tenant', 'tenantDescription', false);
   });
 
-  document.querySelector('#pageSelectSortTenant_ansibleProjectIds')?.addEventListener('change', (event) => {
-    sort('Tenant', 'ansibleProjectIds', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsTenant_ansibleProjectIds')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Tenant', 'ansibleProjectIds', true);
-  });
-  document.querySelector('#pageStatsTenant_ansibleProjectIds')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Tenant', 'ansibleProjectIds', false);
-  });
-
   document.querySelector('#pageSelectSortTenant_hostInventoryIds')?.addEventListener('change', (event) => {
     sort('Tenant', 'hostInventoryIds', event.currentTarget.value);
   });
@@ -108,6 +86,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsTenant_hostInventoryIds')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Tenant', 'hostInventoryIds', false);
+  });
+
+  document.querySelector('#pageSelectSortTenant_ansibleProjectIds')?.addEventListener('change', (event) => {
+    sort('Tenant', 'ansibleProjectIds', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenant_ansibleProjectIds')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Tenant', 'ansibleProjectIds', true);
+  });
+  document.querySelector('#pageStatsTenant_ansibleProjectIds')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Tenant', 'ansibleProjectIds', false);
   });
 
   document.querySelector('#pageSelectSortTenant_pageId')?.addEventListener('change', (event) => {
@@ -275,15 +264,15 @@ Promise.all([
     facetStatsChange('Tenant', 'solrId', false);
   });
 
-  document.querySelector('#pageSelectSortTenant_aapOrganizationId')?.addEventListener('change', (event) => {
-    sort('Tenant', 'aapOrganizationId', event.currentTarget.value);
+  document.querySelector('#pageSelectSortTenant_tenantId')?.addEventListener('change', (event) => {
+    sort('Tenant', 'tenantId', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsTenant_aapOrganizationId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('Tenant', 'aapOrganizationId', true);
+  document.querySelector('#pageStatsTenant_tenantId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Tenant', 'tenantId', true);
   });
-  document.querySelector('#pageStatsTenant_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('Tenant', 'aapOrganizationId', false);
+  document.querySelector('#pageStatsTenant_tenantId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Tenant', 'tenantId', false);
   });
 
   document.querySelector('#pageSelectSortTenant_tenantResource')?.addEventListener('change', (event) => {
@@ -317,6 +306,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsTenant_clusterName')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('Tenant', 'clusterName', false);
+  });
+
+  document.querySelector('#pageSelectSortTenant_aapOrganizationId')?.addEventListener('change', (event) => {
+    sort('Tenant', 'aapOrganizationId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenant_aapOrganizationId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('Tenant', 'aapOrganizationId', true);
+  });
+  document.querySelector('#pageStatsTenant_aapOrganizationId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('Tenant', 'aapOrganizationId', false);
   });
           document.querySelector('#fqTenant_created')?.addEventListener('change', (event) => {
             fqChange('Tenant', event.currentTarget, facetChangeTenantSuccess, facetChangeTenantError);
@@ -370,24 +370,6 @@ Promise.all([
             facetRangeStartChange('Tenant', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndTenant_tenantName')?.addEventListener('change', (event) => {
-            facetRangeEndChange('Tenant', event.currentTarget);
-          });
-          document.querySelector('#fqTenant_tenantId')?.addEventListener('change', (event) => {
-            fqChange('Tenant', event.currentTarget, facetChangeTenantSuccess, facetChangeTenantError);
-          });
-          document.querySelector('#buttonFacetTenant_tenantId')?.addEventListener('click', (event) => {
-            facetFieldChange('Tenant', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotTenant_tenantId')?.addEventListener('change', (event) => {
-            facetPivotChange('Tenant', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapTenant_tenantId')?.addEventListener('change', (event) => {
-            facetRangeGapChange('Tenant', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeStartTenant_tenantId')?.addEventListener('change', (event) => {
-            facetRangeStartChange('Tenant', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeEndTenant_tenantId')?.addEventListener('change', (event) => {
             facetRangeEndChange('Tenant', event.currentTarget);
           });
           document.querySelector('#fqTenant_tenantDescription')?.addEventListener('change', (event) => {
@@ -496,6 +478,24 @@ Promise.all([
             facetRangeStartChange('Tenant', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndTenant_download')?.addEventListener('change', (event) => {
+            facetRangeEndChange('Tenant', event.currentTarget);
+          });
+          document.querySelector('#fqTenant_tenantId')?.addEventListener('change', (event) => {
+            fqChange('Tenant', event.currentTarget, facetChangeTenantSuccess, facetChangeTenantError);
+          });
+          document.querySelector('#buttonFacetTenant_tenantId')?.addEventListener('click', (event) => {
+            facetFieldChange('Tenant', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotTenant_tenantId')?.addEventListener('change', (event) => {
+            facetPivotChange('Tenant', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapTenant_tenantId')?.addEventListener('change', (event) => {
+            facetRangeGapChange('Tenant', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartTenant_tenantId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('Tenant', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndTenant_tenantId')?.addEventListener('change', (event) => {
             facetRangeEndChange('Tenant', event.currentTarget);
           });
           document.querySelector('#fqTenant_tenantResource')?.addEventListener('change', (event) => {

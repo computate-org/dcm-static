@@ -1,0 +1,606 @@
+{% extends "en-us/PageLayout.htm" %}
+{%- block htmTitlePageLayout %}
+{%- block htmTitleTenantIntentPage %}
+    <title>{{ result.objectTitle }}</title>
+{%- endblock htmTitleTenantIntentPage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/tenant/TenantIntent.css"/>
+{%- block htmStylesTenantIntentPage %}
+{%- endblock htmStylesTenantIntentPage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 2;
+      }
+{{ super() }}
+{%- block htmStyleTenantIntentPage %}
+{%- endblock htmStyleTenantIntentPage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsTenantIntentPage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/tenant/TenantIntent.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/tenant/TenantIntentSearchPage.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/tenant/TenantIntentEditPage.js"></script>
+{%- endblock htmScriptsTenantIntentPage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptTenantIntentPage %}
+    <script>
+
+      function jsWebsocketTenantIntent(tenantResource, vars, $response) {
+{%- block jsWebsocketTenantIntentPage %}{%- endblock %}
+      }
+
+      function jsTooltipTenantIntent(e, feature) {
+{%- block jsTooltipTenantIntentPage %}{%- endblock %}
+      }
+
+      function htmTooltipTenantIntent(feature, layer) {
+        return `{%- block htmTooltipTenantIntentPage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipTenantIntentPage %}`;
+      }
+
+      function facetChangeTenantIntentSuccess(e) {
+        var l = e.querySelector('.pageForm .listTenantIntent')?.value;
+        if(l)
+          window.listTenantIntent = JSON.parse(l);
+{% block facetChangeTenantIntentSuccess %}{%- endblock facetTenantIntentSuccess %}
+      }
+      function facetChangeTenantIntentError(e) {
+{% block facetChangeTenantIntentError %}{%- endblock facetTenantIntentError %}
+      }
+
+      function facetSimpleRangeTenantIntentSuccess(e) {
+{% block facetSimpleRangeTenantIntentSuccess %}      facetChangeTenantIntentSuccess(e);{% endblock facetSimpleRangeTenantIntentSuccess %}
+      }
+      function facetSimpleRangeTenantIntentError(e) {
+{% block facetSimpleRangeTenantIntentError %}      facetChangeTenantIntentError(e);{% endblock facetSimpleRangeTenantIntentError %}
+      }
+      function facetSimpleRangeTenantIntent(e) {
+        facetSimpleRange(e, facetSimpleRangeTenantIntentSuccess, facetSimpleRangeTenantIntentError);
+      }
+
+      function facetRangeTimeZoneTenantIntentSuccess(e) {
+{% block facetRangeTimeZoneTenantIntentSuccess %}      facetChangeTenantIntentSuccess(e);{% endblock facetRangeTimeZoneTenantIntentSuccess %}
+      }
+      function facetRangeTimeZoneTenantIntentError(e) {
+{% block facetRangeTimeZoneTenantIntentError %}      facetChangeTenantIntentError(e);{%- endblock facetRangeTimeZoneTenantIntentError %}
+      }
+      function facetRangeTimeZoneTenantIntent(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneTenantIntentSuccess, facetRangeTimeZoneTenantIntentError);
+      }
+
+      function facetRangeGapChangeTenantIntentSuccess(e) {
+{% block facetRangeGapChangeTenantIntentSuccess %}      facetChangeTenantIntentSuccess(e);{% endblock facetRangeGapChangeTenantIntentSuccess %}
+      }
+      function facetRangeGapChangeTenantIntentError(e) {
+{% block facetRangeGapChangeTenantIntentError %}      facetChangeTenantIntentError(e);{%- endblock facetRangeGapChangeTenantIntentError %}
+      }
+      function facetRangeGapChangeTenantIntent(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeTenantIntentSuccess, facetRangeGapChangeTenantIntentError);
+      }
+
+      function facetRangeStartChangeTenantIntentSuccess(e) {
+{% block facetRangeStartChangeTenantIntentSuccess %}      facetChangeTenantIntentSuccess(e);{% endblock facetRangeStartChangeTenantIntentSuccess %}
+      }
+      function facetRangeStartChangeTenantIntentError(e) {
+{% block facetRangeStartChangeTenantIntentError %}      facetChangeTenantIntentError(e);{%- endblock facetRangeStartChangeTenantIntentError %}
+      }
+      function facetRangeStartChangeTenantIntent(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeTenantIntentSuccess, facetRangeStartChangeTenantIntentError);
+      }
+
+      function facetRangeEndChangeTenantIntentSuccess(e) {
+{% block facetRangeEndChangeTenantIntentSuccess %}      facetChangeTenantIntentSuccess(e);{% endblock facetRangeEndChangeTenantIntentSuccess %}
+      }
+      function facetRangeEndChangeTenantIntentError(e) {
+{% block facetRangeEndChangeTenantIntentError %}      facetChangeTenantIntentError(e);{%- endblock facetRangeEndChangeTenantIntentError %}
+      }
+      function facetRangeEndChangeTenantIntent(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeTenantIntentSuccess, facetRangeEndChangeTenantIntentError);
+      }
+    </script>
+    <script type="module">
+{% if location is defined %}
+      window.mapLocation = { type: 'Point', coordinates: [ {{ location.coordinates[0] }}, {{ location.coordinates[1] }} ]};
+{% endif %}
+{% if zoom is defined %}
+      window.mapZoom = {{ zoom }};
+{% endif %}
+{% if pitch is defined %}
+      window.mapPitch = {{ toDegree(pitch) }};
+{% endif %}
+      window.STATIC_BASE_URL = '{{ STATIC_BASE_URL }}';
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
+
+        var tenantResource = {% if result.tenantResource is defined %}{{ result.tenantResource | tojson }}{% else %}null{% endif %};
+
+        if(tenantResource == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.tenantResource is defined %}
+          function relate_hostInventoryIds(event) {
+            suggestTenantIntentHostInventoryIds(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
+                , true
+                , event.target
+                );
+          }
+          document.querySelector('#TenantIntent_POST_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#TenantIntent_POST_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#TenantIntent_PATCH_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#TenantIntent_PATCH_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#TenantIntent_Page_hostInventoryIds')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#TenantIntent_Page_hostInventoryIds')?.addEventListener('focus', relate_hostInventoryIds);
+          document.querySelector('#HostInventory_POST_tenantResource')?.addEventListener('input', relate_hostInventoryIds);
+          document.querySelector('#HostInventory_POST_tenantResource')?.addEventListener('focus', relate_hostInventoryIds);
+          if(window.result.hostInventoryIds) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestTenantIntentHostInventoryIds([{'name':'fq','value':'tenantResource:' + window.result.hostInventoryIds}], document.querySelector('#listTenantIntentHostInventoryIds_Page'), window.result.tenantResource, window.result.hostInventoryIds, true, document.getElementById('TenantIntent_Page_hostInventoryIds'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestTenantIntentHostInventoryIds([{'name':'fq','value':'tenantResource:' + window.result.hostInventoryIds}], document.querySelector('#listTenantIntentHostInventoryIds_Page'), window.result.tenantResource, window.result.hostInventoryIds, true, document.getElementById('TenantIntent_Page_hostInventoryIds'));
+          {% else -%}
+            {{'  '}}suggestTenantIntentHostInventoryIds([{'name':'fq','value':'tenantResource:' + window.result.hostInventoryIds}], document.querySelector('#listTenantIntentHostInventoryIds_Page'), window.result.tenantResource, window.result.hostInventoryIds, false, document.getElementById('TenantIntent_Page_hostInventoryIds'));
+          {% endif -%}
+          {% endif -%}
+          }
+          function HostInventory_POST_tenantResource_TenantIntent_POST_hostInventoryIds(event) {
+            suggestHostInventoryTenantResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , true
+                , document.querySelector('#HostInventory_POST_tenantResource_TenantIntent_POST_hostInventoryIds')
+                );
+          }
+          document.querySelector('#HostInventory_POST_tenantResource_TenantIntent_POST_hostInventoryIds')?.addEventListener('input', HostInventory_POST_tenantResource_TenantIntent_POST_hostInventoryIds);
+          document.querySelector('#HostInventory_POST_tenantResource_TenantIntent_POST_hostInventoryIds')?.addEventListener('focus', HostInventory_POST_tenantResource_TenantIntent_POST_hostInventoryIds);
+          function HostInventory_POST_credentialResource_TenantIntent_POST_hostInventoryIds(event) {
+            suggestHostInventoryCredentialResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,credentialResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.credentialResource : null
+                , true
+                , document.querySelector('#HostInventory_POST_credentialResource_TenantIntent_POST_hostInventoryIds')
+                );
+          }
+          document.querySelector('#HostInventory_POST_credentialResource_TenantIntent_POST_hostInventoryIds')?.addEventListener('input', HostInventory_POST_credentialResource_TenantIntent_POST_hostInventoryIds);
+          document.querySelector('#HostInventory_POST_credentialResource_TenantIntent_POST_hostInventoryIds')?.addEventListener('focus', HostInventory_POST_credentialResource_TenantIntent_POST_hostInventoryIds);
+          function HostInventory_POST_hostInventoryIds_TenantIntent_POST_hostInventoryIds(event) {
+            suggestHostInventoryHostInventoryIds(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,hostResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
+                , true
+                , document.querySelector('#HostInventory_POST_hostInventoryIds_TenantIntent_POST_hostInventoryIds')
+                );
+          }
+          document.querySelector('#HostInventory_POST_hostInventoryIds_TenantIntent_POST_hostInventoryIds')?.addEventListener('input', HostInventory_POST_hostInventoryIds_TenantIntent_POST_hostInventoryIds);
+          document.querySelector('#HostInventory_POST_hostInventoryIds_TenantIntent_POST_hostInventoryIds')?.addEventListener('focus', HostInventory_POST_hostInventoryIds_TenantIntent_POST_hostInventoryIds);
+          function relate_ansibleProjectIds(event) {
+            suggestTenantIntentAnsibleProjectIds(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
+                , true
+                , event.target
+                );
+          }
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#TenantIntent_POST_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+          document.querySelector('#TenantIntent_PATCH_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#TenantIntent_PATCH_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+          document.querySelector('#TenantIntent_Page_ansibleProjectIds')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#TenantIntent_Page_ansibleProjectIds')?.addEventListener('focus', relate_ansibleProjectIds);
+          document.querySelector('#AnsibleProject_POST_tenantResource')?.addEventListener('input', relate_ansibleProjectIds);
+          document.querySelector('#AnsibleProject_POST_tenantResource')?.addEventListener('focus', relate_ansibleProjectIds);
+          if(window.result.ansibleProjectIds) {
+          {% if "PATCH" in scopes -%}
+            {{'  '}}suggestTenantIntentAnsibleProjectIds([{'name':'fq','value':'tenantResource:' + window.result.ansibleProjectIds}], document.querySelector('#listTenantIntentAnsibleProjectIds_Page'), window.result.tenantResource, window.result.ansibleProjectIds, true, document.getElementById('TenantIntent_Page_ansibleProjectIds'));
+          {% else -%}
+          {% if "GET" in scopes -%}
+            {{'  '}}suggestTenantIntentAnsibleProjectIds([{'name':'fq','value':'tenantResource:' + window.result.ansibleProjectIds}], document.querySelector('#listTenantIntentAnsibleProjectIds_Page'), window.result.tenantResource, window.result.ansibleProjectIds, true, document.getElementById('TenantIntent_Page_ansibleProjectIds'));
+          {% else -%}
+            {{'  '}}suggestTenantIntentAnsibleProjectIds([{'name':'fq','value':'tenantResource:' + window.result.ansibleProjectIds}], document.querySelector('#listTenantIntentAnsibleProjectIds_Page'), window.result.tenantResource, window.result.ansibleProjectIds, false, document.getElementById('TenantIntent_Page_ansibleProjectIds'));
+          {% endif -%}
+          {% endif -%}
+          }
+          function AnsibleProject_POST_tenantResource_TenantIntent_POST_ansibleProjectIds(event) {
+            suggestAnsibleProjectTenantResource(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , true
+                , document.querySelector('#AnsibleProject_POST_tenantResource_TenantIntent_POST_ansibleProjectIds')
+                );
+          }
+          document.querySelector('#AnsibleProject_POST_tenantResource_TenantIntent_POST_ansibleProjectIds')?.addEventListener('input', AnsibleProject_POST_tenantResource_TenantIntent_POST_ansibleProjectIds);
+          document.querySelector('#AnsibleProject_POST_tenantResource_TenantIntent_POST_ansibleProjectIds')?.addEventListener('focus', AnsibleProject_POST_tenantResource_TenantIntent_POST_ansibleProjectIds);
+          function AnsibleProject_POST_jobTemplateResources_TenantIntent_POST_ansibleProjectIds(event) {
+            suggestAnsibleProjectJobTemplateResources(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,jobTemplateResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.jobTemplateResources : null
+                , true
+                , document.querySelector('#AnsibleProject_POST_jobTemplateResources_TenantIntent_POST_ansibleProjectIds')
+                );
+          }
+          document.querySelector('#AnsibleProject_POST_jobTemplateResources_TenantIntent_POST_ansibleProjectIds')?.addEventListener('input', AnsibleProject_POST_jobTemplateResources_TenantIntent_POST_ansibleProjectIds);
+          document.querySelector('#AnsibleProject_POST_jobTemplateResources_TenantIntent_POST_ansibleProjectIds')?.addEventListener('focus', AnsibleProject_POST_jobTemplateResources_TenantIntent_POST_ansibleProjectIds);
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listTenantIntent')?.value;
+        if(l)
+          window.listTenantIntent = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTenantIntent);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTenantIntent);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneTenantIntent);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeTenantIntent);
+        pageGraphTenantIntent();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qTenantIntent_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('TenantIntent', event.target, document.querySelector('#qTenantIntentDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qTenantIntent_rows')?.addEventListener('change', event => {
+          paramChange('TenantIntent', event.target, document.querySelector('#qTenantIntentDiv_rows'));
+        });
+
+        document.querySelector('#qTenantIntent_start')?.addEventListener('change', event => {
+          paramChange('TenantIntent', event.target, document.querySelector('#qTenantIntentDiv_start'));
+        });
+
+
+        var submitForm_patchTenantIntent = document.querySelector('#htmForm_patchTenantIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_patchTenantIntent')?.addEventListener('click', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          patchTenantIntent(null, document.querySelector('#htmForm_patchTenantIntent')
+              , document.querySelector('#htmFormButton_patchTenantIntent')
+              , event.target.getAttribute('data-tenantResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_postTenantIntent = document.querySelector('#htmForm_postTenantIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_postTenantIntent')?.addEventListener('click', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          postTenantIntent(document.querySelector('#htmForm_postTenantIntent')
+              , document.querySelector('#htmFormButton_postTenantIntent')
+              , (json, target) => {
+            window.location.href = json.editPage;
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_deleteTenantIntent = document.querySelector('#htmForm_deleteTenantIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deleteTenantIntent')?.addEventListener('click', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          deleteTenantIntent(event.target, event.target.getAttribute('data-tenantResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_putimportTenantIntent = document.querySelector('#htmForm_putimportTenantIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_putimportTenantIntent')?.addEventListener('click', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          putimportTenantIntent(document.querySelector('#htmForm_putimportTenantIntent')
+              , document.querySelector('#htmFormButton_putimportTenantIntent')
+              , event.target.getAttribute('data-tenantResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_searchpageTenantIntent = document.querySelector('#htmForm_searchpageTenantIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_searchpageTenantIntent')?.addEventListener('click', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          searchpageTenantIntent();
+          return false;
+        });
+
+        var submitForm_deletefilterTenantIntent = document.querySelector('#htmForm_deletefilterTenantIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          return false;
+        });
+        document.querySelector('#htmFormButton_deletefilterTenantIntent')?.addEventListener('click', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          deletefilterTenantIntent(event.target
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+{%- block htmScriptInitTenantIntentPage %}{%- endblock htmScriptInitTenantIntentPage %}
+      });
+    </script>
+{%- endblock htmScriptTenantIntentPage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketTenantIntentPage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketTenantIntent(websocketTenantIntentInner);
+{% endif %}
+{%- endblock websocketTenantIntentPage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlTenantIntentPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlTenantIntentPage %}
+
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/tenant/TenantIntentSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/tenant/TenantIntentSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-TenantIntent">back to all tenant intents</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-TenantIntent" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+                  all tenant intents
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  a tenant intent
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+    {{ super() }}
+{%- block htmBodyStartTenantIntentPage %}
+{% if resultCount > 0 %}
+          <div class="wa-flank ">
+            <h1 class="Page_objectTitle"><i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i> {{ result.objectTitle | e }}</h1>
+          </div>
+{% endif %}
+{% include en-us/search/tenant/TenantIntentSearchForm.htm %}
+{%- endblock htmBodyStartTenantIntentPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleTenantIntentPage %}
+{%- include en-us/search/tenant/TenantIntentSidebar.htm %}
+        <div class="pageContent ">
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-TenantIntent">back to all tenant intents</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-TenantIntent" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+              all tenant intents
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no tenant intent found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+            </div>
+            <span class="wa-heading-m ">no tenant intent found</span>
+            <p class="wa-caption-l ">Describing the intent for a new Tenant. Tenants are separate organizations sharing the same cloud resources. </p>
+          </div>
+        </div>
+{% else %}
+{%- include en-us/search/tenant/TenantIntentSuggestedSearch.htm %}
+{% endif %}
+{%- block htmFormTenantIntentPage %}
+          <form action="/en-us/api/tenant" id="TenantIntentForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
+{% if result.tenantResource is defined %}
+            <input name="tenantResource" class="valueTenantResource" type="hidden" value="{{ result.tenantResource }}"/>
+            {% endif %}
+            <input name="focusId" type="hidden"/>
+            <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+            <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
+            <input name="listTenantIntent" id="listTenantIntent" class="listTenantIntent"  value='{{ toJsonArrayStringInApostrophes(listTenantIntent) }}' type="hidden"/>
+          </form>
+{%- if resultCount >= 1 %}
+          {{ htmForm_searchpageTenantIntent() }}
+{% endif -%}
+{%- endblock htmFormTenantIntentPage %}
+        </div>
+{%- endblock htmBodyMiddleTenantIntentPage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndTenantIntentPage %}
+{%- include en-us/search/tenant/TenantIntentLocation.htm %}
+{%- endblock htmBodyEndTenantIntentPage %}
+      {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

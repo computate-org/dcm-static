@@ -1,0 +1,2464 @@
+{%- macro inputPkHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_pk">
+  {%- endif %}
+                  <wa-input
+                      readonly
+                      placeholder="[Long] primary key"
+                      label="primary key"
+                      type="number"
+                      hint="The primary key of this object in the database"
+                      id="HostCheckCR_{{classApiMethodMethod}}_pk"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_pk setPk classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}Pk "
+                      name="setPk"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_pk setPk classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}Pk "
+                      name="setPk"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_pk valuePk classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}Pk "
+                      name="pk"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.pk | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPkHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPkHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_created">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A created timestamp for this record in the database"
+                      label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_created datetimepicker setCreated classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}Created "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="HostCheckCR_{{classApiMethodMethod}}_created"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputModifiedHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_modified">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A modified timestamp for this record in the database"
+                      label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_modified datetimepicker setModified classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}Modified "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="HostCheckCR_{{classApiMethodMethod}}_modified"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmModifiedHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputModifiedHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputArchivedHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_archived">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-button variant="brand"
+                      id="HostCheckCR_{{classApiMethodMethod}}_archived"
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_archived classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}Archived "
+                      name="setArchived"
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      data-val="{{ result.archived | e }}"
+                      >archive</wa-button>
+  {%- else %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="HostCheckCR_{{classApiMethodMethod}}_archived"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="HostCheckCR_{{classApiMethodMethod}}_archived"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_archived classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}Archived "
+                      name="setArchived"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_archived classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}Archived "
+                      name="setArchived"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_archived setArchived valueArchived classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}Archived "
+                      name="setArchived"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.archived == true %}
+                      checked
+    {%- endif %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      >archive</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmArchivedHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputArchivedHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputChangeRequestIdHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_changeRequestId">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] host check resource"
+                      label="host check resource"
+                      hint="The unique authorization resource for the host check for multi-tenancy"
+                      id="HostCheckCR_{{classApiMethodMethod}}_changeRequestId"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_changeRequestId setChangeRequestId classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}ChangeRequestId "
+                      name="setChangeRequestId"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_changeRequestId setChangeRequestId classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}ChangeRequestId "
+                      name="setChangeRequestId"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_changeRequestId valueChangeRequestId classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}ChangeRequestId "
+                      name="changeRequestId"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.changeRequestId | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmChangeRequestIdHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputChangeRequestIdHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedByEmailHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_createdByEmail">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] created by user email"
+                      label="created by user email"
+                      hint="The email address for the user who created the change request. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_createdByEmail"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_createdByEmail setCreatedByEmail classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CreatedByEmail "
+                      name="setCreatedByEmail"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_createdByEmail setCreatedByEmail classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CreatedByEmail "
+                      name="setCreatedByEmail"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_createdByEmail valueCreatedByEmail classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CreatedByEmail "
+                      name="createdByEmail"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.createdByEmail | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedByEmailHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedByEmailHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedViaHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_createdVia">
+  {%- endif %}
+                  <wa-radio-group
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] created via"
+                      label="created via"
+                      hint="Declares the ingestion path that makes audit quality transparent. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_createdVia"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_createdVia setCreatedVia classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CreatedVia "
+                      name="setCreatedVia"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_createdVia setCreatedVia classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CreatedVia "
+                      name="setCreatedVia"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_createdVia valueCreatedVia classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CreatedVia "
+                      name="createdVia"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.createdVia | e }}"
+  {% endif -%}
+                      >
+                    <wa-radio value="pr">pull request</wa-radio>
+                    <wa-radio value="api">API</wa-radio>
+                    <wa-radio value="migration">migration</wa-radio>
+                    <wa-radio value="system">system</wa-radio>
+                  </wa-radio-group>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedViaHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedViaHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputOwnedByEmailHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_ownedByEmail">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] owned by user email"
+                      label="owned by user email"
+                      hint="The email address for the user who owns the change request. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_ownedByEmail"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_ownedByEmail setOwnedByEmail classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}OwnedByEmail "
+                      name="setOwnedByEmail"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_ownedByEmail setOwnedByEmail classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}OwnedByEmail "
+                      name="setOwnedByEmail"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_ownedByEmail valueOwnedByEmail classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}OwnedByEmail "
+                      name="ownedByEmail"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.ownedByEmail | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmOwnedByEmailHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputOwnedByEmailHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputLifecycleStateHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_lifecycleState">
+  {%- endif %}
+                  <wa-radio-group
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] lifecycle state"
+                      label="lifecycle state"
+                      hint="Every Data artifact is in exactly one lifecycle state at any moment. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_lifecycleState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_lifecycleState setLifecycleState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}LifecycleState "
+                      name="setLifecycleState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_lifecycleState setLifecycleState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}LifecycleState "
+                      name="setLifecycleState"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_lifecycleState valueLifecycleState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}LifecycleState "
+                      name="lifecycleState"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.lifecycleState | e }}"
+  {% endif -%}
+                      >
+                    <wa-radio value="REQUESTED">Requested</wa-radio>
+                    <wa-radio value="INITIATED">Initiated</wa-radio>
+                    <wa-radio value="EXECUTING">Executing</wa-radio>
+                    <wa-radio value="COMPLETED">Completed</wa-radio>
+                    <wa-radio value="FAILED">Failed</wa-radio>
+                    <wa-radio value="CANCELLED">Cancelled</wa-radio>
+                  </wa-radio-group>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmLifecycleStateHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputLifecycleStateHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputIntentStateHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_intentState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] intent state"
+                      label="intent state"
+                      hint="Captures the consumer's raw intent &mdash; what they asked for in their own terms. "
+                      required
+                      id="HostCheckCR_{{classApiMethodMethod}}_intentState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_intentState setIntentState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}IntentState "
+                      name="setIntentState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_intentState setIntentState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}IntentState "
+                      name="setIntentState"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_intentState valueIntentState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}IntentState "
+                      name="intentState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.intentState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmIntentStateHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputIntentStateHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputRequestedStateHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_requestedState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] requested state"
+                      label="requested state"
+                      hint="Represents a complete, validated, provider-ready declaration of desired state. "
+                      required
+                      id="HostCheckCR_{{classApiMethodMethod}}_requestedState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_requestedState setRequestedState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}RequestedState "
+                      name="setRequestedState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_requestedState setRequestedState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}RequestedState "
+                      name="setRequestedState"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_requestedState valueRequestedState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}RequestedState "
+                      name="requestedState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.requestedState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRequestedStateHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputRequestedStateHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputRealizedStateHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_realizedState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] realized state"
+                      label="realized state"
+                      hint="Must be a complete representation of the provisioned resource in DCM unified format &mdash; not a status code, but a full state description. "
+                      required
+                      id="HostCheckCR_{{classApiMethodMethod}}_realizedState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_realizedState setRealizedState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}RealizedState "
+                      name="setRealizedState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_realizedState setRealizedState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}RealizedState "
+                      name="setRealizedState"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_realizedState valueRealizedState classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}RealizedState "
+                      name="realizedState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.realizedState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRealizedStateHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputRealizedStateHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_jobTemplateResourceChange">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}HostCheckCR_{{classApiMethodMethod}}_jobTemplateResourceChange{{ idSuffix }}_clear"
+                        class="label-on-left HostCheckCR_classApiMethodMethod}}_jobTemplateResourceChange_clear jobTemplateResourceChange_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="job template"
+                      label="job template"
+                      hint="The unique authorization resource for the job template for multi-tenancy"
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_jobTemplateResourceChange valueObjectSuggest suggestJobTemplateResourceChange "
+                      name="setJobTemplateResourceChange"
+                      id="{{ idPrefix }}HostCheckCR_{{classApiMethodMethod}}_jobTemplateResourceChange{{ idSuffix }}"
+                      data-list="listHostCheckCRJobTemplateResourceChange_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.jobTemplateResourceChange | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputJobTemplateResourceChangeHostCheckCRPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a job template to this host check change request
+                </div>
+                <ul class="label-on-left-ul " id="listHostCheckCRJobTemplateResourceChange_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postJobTemplate(idSuffix='_HostCheckCR_POST_jobTemplateResourceChange') }}
+                  <wa-button
+                       id="HostCheckCR_{{classApiMethodMethod}}_jobTemplateResourceChange_add"
+                       data-dialog="open postJobTemplateDialog"
+                      >add a job template</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+{%- macro inputCheckNameChangeHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkNameChange">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] check name"
+                      label="check name"
+                      hint="The name of the host check (may only contain letters, numbers, periods, colons, and dashes). "
+                      required
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkNameChange"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkNameChange setCheckNameChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckNameChange "
+                      name="setCheckNameChange"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkNameChange setCheckNameChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckNameChange "
+                      name="setCheckNameChange"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkNameChange valueCheckNameChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckNameChange "
+                      name="checkNameChange"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.checkNameChange | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckNameChangeHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckNameChangeHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkDescriptionChange">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] check description"
+                      label="check description"
+                      hint="The descrition of the host check. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkDescriptionChange"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkDescriptionChange setCheckDescriptionChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckDescriptionChange "
+                      name="setCheckDescriptionChange"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkDescriptionChange setCheckDescriptionChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckDescriptionChange "
+                      name="setCheckDescriptionChange"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkDescriptionChange valueCheckDescriptionChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckDescriptionChange "
+                      name="checkDescriptionChange"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.checkDescriptionChange | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkNamespaceChange">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] check namespace"
+                      label="check namespace"
+                      hint="The namespace of the host check. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkNamespaceChange"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkNamespaceChange setCheckNamespaceChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckNamespaceChange "
+                      name="setCheckNamespaceChange"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkNamespaceChange setCheckNamespaceChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckNamespaceChange "
+                      name="setCheckNamespaceChange"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkNamespaceChange valueCheckNamespaceChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckNamespaceChange "
+                      name="checkNamespaceChange"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.checkNamespaceChange | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckCommandChangeHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkCommandChange">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] check command"
+                      label="check command"
+                      hint="The bash command to run during the check. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkCommandChange"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkCommandChange setCheckCommandChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckCommandChange "
+                      name="setCheckCommandChange"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkCommandChange setCheckCommandChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckCommandChange "
+                      name="setCheckCommandChange"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkCommandChange valueCheckCommandChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckCommandChange "
+                      name="checkCommandChange"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.checkCommandChange | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckCommandChangeHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckCommandChangeHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckIntervalChangeHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkIntervalChange">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[Integer] check interval in seconds"
+                      label="check interval in seconds"
+                      type="number"
+                      hint="The check interval in seconds. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkIntervalChange"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkIntervalChange setCheckIntervalChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckIntervalChange "
+                      name="setCheckIntervalChange"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkIntervalChange setCheckIntervalChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckIntervalChange "
+                      name="setCheckIntervalChange"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkIntervalChange valueCheckIntervalChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckIntervalChange "
+                      name="checkIntervalChange"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.checkIntervalChange | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckIntervalChangeHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckIntervalChangeHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckPublishedChangeHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkPublishedChange">
+  {%- endif %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkPublishedChange"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkPublishedChange"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="check published"
+                      label="check published"
+                      hint="When disabled the check will not be executed unless explicitly queued. "
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkPublishedChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckPublishedChange "
+                      name="setCheckPublishedChange"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkPublishedChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckPublishedChange "
+                      name="setCheckPublishedChange"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkPublishedChange setCheckPublishedChange valueCheckPublishedChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckPublishedChange "
+                      name="setCheckPublishedChange"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.checkPublishedChange == true %}
+                      checked
+    {%- endif %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      >check published</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckPublishedChangeHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckPublishedChangeHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_eventSubscriptionsChange">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] event subscriptions"
+                      label="event subscriptions"
+                      hint="The list of event subscriptions the host check subscribes to. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_eventSubscriptionsChange"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventSubscriptionsChange setEventSubscriptionsChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventSubscriptionsChange "
+                      name="setEventSubscriptionsChange"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventSubscriptionsChange setEventSubscriptionsChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventSubscriptionsChange "
+                      name="setEventSubscriptionsChange"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventSubscriptionsChange valueEventSubscriptionsChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventSubscriptionsChange "
+                      name="eventSubscriptionsChange"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.eventSubscriptionsChange) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputEventHandlersChangeHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_eventHandlersChange">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] event handlers"
+                      label="event handlers"
+                      hint="The list of event handlers the host subscribes to. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_eventHandlersChange"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventHandlersChange setEventHandlersChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventHandlersChange "
+                      name="setEventHandlersChange"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventHandlersChange setEventHandlersChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventHandlersChange "
+                      name="setEventHandlersChange"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventHandlersChange valueEventHandlersChange classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventHandlersChange "
+                      name="eventHandlersChange"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.eventHandlersChange) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmEventHandlersChangeHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputEventHandlersChangeHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputTenantResourceHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_tenantResource">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}HostCheckCR_{{classApiMethodMethod}}_tenantResource{{ idSuffix }}_clear"
+                        class="label-on-left HostCheckCR_classApiMethodMethod}}_tenantResource_clear tenantResource_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="tenant"
+                      label="tenant"
+                      hint="The unique authorization resource for the tenant for multi-tenancy"
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_tenantResource valueObjectSuggest suggestTenantResource "
+                      name="setTenantResource"
+                      id="{{ idPrefix }}HostCheckCR_{{classApiMethodMethod}}_tenantResource{{ idSuffix }}"
+                      data-list="listHostCheckCRTenantResource_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.tenantResource | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmTenantResourceHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputTenantResourceHostCheckCRPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a tenant to this host check change request
+                </div>
+                <ul class="label-on-left-ul " id="listHostCheckCRTenantResource_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postTenant(idSuffix='_HostCheckCR_POST_tenantResource') }}
+                  <wa-button
+                       id="HostCheckCR_{{classApiMethodMethod}}_tenantResource_add"
+                       data-dialog="open postTenantDialog"
+                      >add a tenant</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+{%- macro inputJobTemplateResourceHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_jobTemplateResource">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}HostCheckCR_{{classApiMethodMethod}}_jobTemplateResource{{ idSuffix }}_clear"
+                        class="label-on-left HostCheckCR_classApiMethodMethod}}_jobTemplateResource_clear jobTemplateResource_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="job template"
+                      label="job template"
+                      hint="The unique authorization resource for the job template for multi-tenancy"
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_jobTemplateResource valueObjectSuggest suggestJobTemplateResource "
+                      name="setJobTemplateResource"
+                      id="{{ idPrefix }}HostCheckCR_{{classApiMethodMethod}}_jobTemplateResource{{ idSuffix }}"
+                      data-list="listHostCheckCRJobTemplateResource_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.jobTemplateResource | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmJobTemplateResourceHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputJobTemplateResourceHostCheckCRPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a job template to this host check change request
+                </div>
+                <ul class="label-on-left-ul " id="listHostCheckCRJobTemplateResource_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postJobTemplate(idSuffix='_HostCheckCR_POST_jobTemplateResource') }}
+                  <wa-button
+                       id="HostCheckCR_{{classApiMethodMethod}}_jobTemplateResource_add"
+                       data-dialog="open postJobTemplateDialog"
+                      >add a job template</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+{%- macro inputCheckNameHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] check name"
+                      label="check name"
+                      hint="The name of the host check (may only contain letters, numbers, periods, colons, and dashes). "
+                      required
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkName setCheckName classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckName "
+                      name="setCheckName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkName setCheckName classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckName "
+                      name="setCheckName"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkName valueCheckName classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckName "
+                      name="checkName"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.checkName | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckNameHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckNameHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckDescriptionHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkDescription">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] check description"
+                      label="check description"
+                      hint="The descrition of the host check. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkDescription"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkDescription setCheckDescription classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckDescription "
+                      name="setCheckDescription"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkDescription setCheckDescription classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckDescription "
+                      name="setCheckDescription"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkDescription valueCheckDescription classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckDescription "
+                      name="checkDescription"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.checkDescription | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckDescriptionHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckDescriptionHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckNamespaceHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkNamespace">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] check namespace"
+                      label="check namespace"
+                      hint="The namespace of the host check. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkNamespace"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkNamespace setCheckNamespace classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckNamespace "
+                      name="setCheckNamespace"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkNamespace setCheckNamespace classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckNamespace "
+                      name="setCheckNamespace"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkNamespace valueCheckNamespace classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckNamespace "
+                      name="checkNamespace"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.checkNamespace | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckNamespaceHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckNamespaceHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckCommandHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkCommand">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] check command"
+                      label="check command"
+                      hint="The bash command to run during the check. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkCommand"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkCommand setCheckCommand classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckCommand "
+                      name="setCheckCommand"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkCommand setCheckCommand classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckCommand "
+                      name="setCheckCommand"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkCommand valueCheckCommand classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckCommand "
+                      name="checkCommand"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.checkCommand | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckCommandHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckCommandHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckIntervalHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkInterval">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[Integer] check interval in seconds"
+                      label="check interval in seconds"
+                      type="number"
+                      hint="The check interval in seconds. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkInterval"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkInterval setCheckInterval classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckInterval "
+                      name="setCheckInterval"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkInterval setCheckInterval classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckInterval "
+                      name="setCheckInterval"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkInterval valueCheckInterval classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckInterval "
+                      name="checkInterval"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.checkInterval | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckIntervalHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckIntervalHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckPublishedHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkPublished">
+  {%- endif %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkPublished"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="HostCheckCR_{{classApiMethodMethod}}_checkPublished"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="check published"
+                      label="check published"
+                      hint="When disabled the check will not be executed unless explicitly queued. "
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkPublished classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckPublished "
+                      name="setCheckPublished"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkPublished classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckPublished "
+                      name="setCheckPublished"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkPublished setCheckPublished valueCheckPublished classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}CheckPublished "
+                      name="setCheckPublished"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.checkPublished == true %}
+                      checked
+    {%- endif %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      >check published</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckPublishedHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCheckPublishedHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputEventSubscriptionsHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_eventSubscriptions">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] event subscriptions"
+                      label="event subscriptions"
+                      hint="The list of event subscriptions the host check subscribes to. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_eventSubscriptions"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventSubscriptions "
+                      name="setEventSubscriptions"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventSubscriptions setEventSubscriptions classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventSubscriptions "
+                      name="setEventSubscriptions"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventSubscriptions valueEventSubscriptions classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventSubscriptions "
+                      name="eventSubscriptions"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.eventSubscriptions) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmEventSubscriptionsHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputEventSubscriptionsHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputEventHandlersHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_eventHandlers">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] event handlers"
+                      label="event handlers"
+                      hint="The list of event handlers the host subscribes to. "
+                      id="HostCheckCR_{{classApiMethodMethod}}_eventHandlers"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-changeRequestId={{ result.changeRequestId | tojson }}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventHandlers setEventHandlers classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventHandlers "
+                      name="setEventHandlers"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventHandlers setEventHandlers classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventHandlers "
+                      name="setEventHandlers"
+    {%- else %}
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_eventHandlers valueEventHandlers classHostCheckCR inputHostCheckCR{{ result.changeRequestId }}EventHandlers "
+                      name="eventHandlers"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.eventHandlers) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmEventHandlersHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputEventHandlersHostCheckCRPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCheckResourceHostCheckCRPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_checkResource">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}HostCheckCR_{{classApiMethodMethod}}_checkResource{{ idSuffix }}_clear"
+                        class="label-on-left HostCheckCR_classApiMethodMethod}}_checkResource_clear checkResource_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="host check resource"
+                      label="host check resource"
+                      hint="The unique authorization resource for the host check for multi-tenancy"
+                      class="label-on-left HostCheckCR_{{classApiMethodMethod}}_checkResource valueObjectSuggest suggestCheckResource "
+                      name="setCheckResource"
+                      id="{{ idPrefix }}HostCheckCR_{{classApiMethodMethod}}_checkResource{{ idSuffix }}"
+                      data-list="listHostCheckCRCheckResource_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.checkResource | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCheckResourceHostCheckCRPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputCheckResourceHostCheckCRPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a host check to this host check change request
+                </div>
+                <ul class="label-on-left-ul " id="listHostCheckCRCheckResource_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postHostCheck(idSuffix='_HostCheckCR_POST_checkResource') }}
+                  <wa-button
+                       id="HostCheckCR_{{classApiMethodMethod}}_checkResource_add"
+                       data-dialog="open postHostCheckDialog"
+                      >add a host check</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+
+{%- macro htmFormButton_patchHostCheckCR() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_patchHostCheckCR" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_patchHostCheckCR"
+                >Modify host check change request</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_patchHostCheckCR"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_patchHostCheckCR(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchHostCheckCRDialog" label="Modify host check change request">
+          <form id="htmForm_patchHostCheckCR" class="round-row primary-smart-border-radius ">
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmChangeRequestIdHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmChangeRequestIdHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmChangeRequestIdHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="created-by">
+              <div slot="summary">
+                <span>created by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedByEmailHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByEmailHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByEmailHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedViaHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedViaHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedViaHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="owned-by">
+              <div slot="summary">
+                <span>owned by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmOwnedByEmailHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmOwnedByEmailHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmOwnedByEmailHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="lifecycle-state">
+              <div slot="summary">
+                <span>lifecycle state</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmLifecycleStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmLifecycleStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmLifecycleStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmIntentStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIntentStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmIntentStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRealizedStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="job-template-details">
+              <div slot="summary">
+                <span>job template details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="host-check-details">
+              <div slot="summary">
+                <span>host check details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckNameChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNameChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNameChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckCommandChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckCommandChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckCommandChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckIntervalChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckIntervalChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckIntervalChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckPublishedChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckPublishedChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckPublishedChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmEventHandlersChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventHandlersChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventHandlersChangeHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantResourceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantResourceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantResourceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="job-template-details">
+              <div slot="summary">
+                <span>job template details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmJobTemplateResourceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmJobTemplateResourceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmJobTemplateResourceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="host-check-details">
+              <div slot="summary">
+                <span>host check details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckNameHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNameHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNameHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckDescriptionHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckDescriptionHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckDescriptionHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckNamespaceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNamespaceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNamespaceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckCommandHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckCommandHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckCommandHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckIntervalHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckIntervalHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckIntervalHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckPublishedHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckPublishedHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckPublishedHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmEventSubscriptionsHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventSubscriptionsHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventSubscriptionsHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmEventHandlersHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventHandlersHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventHandlersHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckResourceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckResourceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckResourceHostCheckCRPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </form>
+          {{ htmFormButton_patchHostCheckCR() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_postHostCheckCR() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_postHostCheckCR" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_postHostCheckCR"
+                >Create a host check change request</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_postHostCheckCR"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_postHostCheckCR(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postHostCheckCRDialog" label="Create a host check change request">
+          <form id="htmForm_postHostCheckCR" class="round-row primary-smart-border-radius ">
+            <div>You can override any default values below: </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmChangeRequestIdHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmChangeRequestIdHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmChangeRequestIdHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="created-by">
+              <div slot="summary">
+                <span>created by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmCreatedByEmailHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByEmailHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByEmailHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCreatedViaHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedViaHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedViaHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="owned-by">
+              <div slot="summary">
+                <span>owned by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmOwnedByEmailHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmOwnedByEmailHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmOwnedByEmailHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="lifecycle-state">
+              <div slot="summary">
+                <span>lifecycle state</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmLifecycleStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmLifecycleStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmLifecycleStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmIntentStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIntentStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmIntentStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmRequestedStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmRealizedStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="job-template-details">
+              <div slot="summary">
+                <span>job template details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="host-check-details">
+              <div slot="summary">
+                <span>host check details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmCheckNameChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNameChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNameChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCheckCommandChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckCommandChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckCommandChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCheckIntervalChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckIntervalChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckIntervalChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCheckPublishedChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckPublishedChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckPublishedChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmEventHandlersChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventHandlersChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventHandlersChangeHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmTenantResourceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantResourceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantResourceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="job-template-details">
+              <div slot="summary">
+                <span>job template details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmJobTemplateResourceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmJobTemplateResourceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmJobTemplateResourceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="host-check-details">
+              <div slot="summary">
+                <span>host check details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmCheckNameHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNameHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNameHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCheckDescriptionHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckDescriptionHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckDescriptionHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCheckNamespaceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNamespaceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNamespaceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCheckCommandHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckCommandHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckCommandHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCheckIntervalHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckIntervalHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckIntervalHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCheckPublishedHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckPublishedHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckPublishedHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmEventSubscriptionsHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventSubscriptionsHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventSubscriptionsHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmEventHandlersHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventHandlersHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventHandlersHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmCheckResourceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckResourceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckResourceHostCheckCRPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </form>
+          {{ htmFormButton_postHostCheckCR() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_deleteHostCheckCR() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deleteHostCheckCR" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deleteHostCheckCR"
+                >Delete host check change request</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deleteHostCheckCR"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deleteHostCheckCR(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteHostCheckCRDialog" label="Delete host check change request">
+          <form id="htmForm_deleteHostCheckCR" class="round-row primary-smart-border-radius ">
+          </form>
+          {{ htmFormButton_deleteHostCheckCR() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_putimportHostCheckCR() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_putimportHostCheckCR" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_putimportHostCheckCR"
+                >Import host check change requests</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_putimportHostCheckCR"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_putimportHostCheckCR(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportHostCheckCRDialog" label="Import host check change requests">
+          <form id="htmForm_putimportHostCheckCR" class="round-row primary-smart-border-radius ">
+            <div>
+              <wa-textarea
+                  class="PUTImport_searchList "
+                  style="height: 300px; "
+                  placeholder="{ 'searchList': [ { 'changeRequestId': ... , 'saves': [ ... ] }, ... ] }"
+                  >
+              </wa-textarea>
+            </div>
+          </form>
+          {{ htmFormButton_putimportHostCheckCR() }}
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmForm_searchpageHostCheckCR(idSuffix='') %}
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageHostCheckCRDialog" label="Search host check change requests">
+          <div id="htmForm_searchpageHostCheckCR" class="round-row primary-smart-border-radius ">
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
+              <div slot="summary">
+                <span>primary key, ID, created, modified, archive details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmPkHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmPkHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmModifiedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmModifiedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmArchivedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmArchivedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmChangeRequestIdHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmChangeRequestIdHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmChangeRequestIdHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="created-by">
+              <div slot="summary">
+                <span>created by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedByEmailHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByEmailHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByEmailHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedViaHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedViaHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedViaHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="owned-by">
+              <div slot="summary">
+                <span>owned by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmOwnedByEmailHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmOwnedByEmailHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmOwnedByEmailHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="lifecycle-state">
+              <div slot="summary">
+                <span>lifecycle state</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmLifecycleStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmLifecycleStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmLifecycleStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmIntentStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIntentStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmIntentStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRealizedStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="job-template-details">
+              <div slot="summary">
+                <span>job template details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmJobTemplateResourceChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="host-check-details">
+              <div slot="summary">
+                <span>host check details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckNameChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNameChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNameChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckDescriptionChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNamespaceChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckCommandChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckCommandChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckCommandChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckIntervalChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckIntervalChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckIntervalChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckPublishedChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckPublishedChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckPublishedChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventSubscriptionsChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmEventHandlersChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventHandlersChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventHandlersChangeHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantResourceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantResourceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantResourceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="job-template-details">
+              <div slot="summary">
+                <span>job template details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmJobTemplateResourceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmJobTemplateResourceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmJobTemplateResourceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="host-check-details">
+              <div slot="summary">
+                <span>host check details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckNameHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNameHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNameHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckDescriptionHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckDescriptionHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckDescriptionHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckNamespaceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckNamespaceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckNamespaceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckCommandHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckCommandHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckCommandHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckIntervalHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckIntervalHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckIntervalHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckPublishedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckPublishedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckPublishedHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmEventSubscriptionsHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventSubscriptionsHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventSubscriptionsHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmEventHandlersHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmEventHandlersHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmEventHandlersHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmCheckResourceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCheckResourceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCheckResourceHostCheckCRPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </div>
+        </div>
+{%- endmacro %}
+
+{%- macro htmFormButton_deletefilterHostCheckCR() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterHostCheckCR" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deletefilterHostCheckCR"
+                >Delete host check change request</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deletefilterHostCheckCR"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deletefilterHostCheckCR(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterHostCheckCRDialog" label="Delete host check change request">
+          <form id="htmForm_deletefilterHostCheckCR" class="round-row primary-smart-border-radius ">
+          </form>
+          {{ htmFormButton_deletefilterHostCheckCR() }}
+        </wa-dialog>
+{%- endmacro %}

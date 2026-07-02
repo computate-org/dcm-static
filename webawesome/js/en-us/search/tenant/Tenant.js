@@ -28,7 +28,7 @@ async function websocketTenant(success) {
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
-      $headerSpan.innerText = 'modify tenants in ' + json.timeRemaining;
+      $headerSpan.innerText = 'modify discovered tenants in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
       $x.setAttribute('onclick', 'document.querySelector("#card-' + tenantResource + '");');
@@ -83,10 +83,9 @@ async function websocketTenantInner(apiRequest) {
         var inputModified = null;
         var inputArchived = null;
         var inputTenantName = null;
-        var inputTenantId = null;
         var inputTenantDescription = null;
-        var inputAnsibleProjectIds = null;
         var inputHostInventoryIds = null;
+        var inputAnsibleProjectIds = null;
         var inputPageId = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
@@ -102,10 +101,11 @@ async function websocketTenantInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
-        var inputAapOrganizationId = null;
+        var inputTenantId = null;
         var inputTenantResource = null;
         var inputHubId = null;
         var inputClusterName = null;
+        var inputAapOrganizationId = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.Tenant_Page_pk');
@@ -117,14 +117,12 @@ async function websocketTenantInner(apiRequest) {
           inputArchived = $response.querySelector('.Tenant_Page_archived');
         if(vars.includes('tenantName'))
           inputTenantName = $response.querySelector('.Tenant_Page_tenantName');
-        if(vars.includes('tenantId'))
-          inputTenantId = $response.querySelector('.Tenant_Page_tenantId');
         if(vars.includes('tenantDescription'))
           inputTenantDescription = $response.querySelector('.Tenant_Page_tenantDescription');
-        if(vars.includes('ansibleProjectIds'))
-          inputAnsibleProjectIds = $response.querySelector('.Tenant_Page_ansibleProjectIds');
         if(vars.includes('hostInventoryIds'))
           inputHostInventoryIds = $response.querySelector('.Tenant_Page_hostInventoryIds');
+        if(vars.includes('ansibleProjectIds'))
+          inputAnsibleProjectIds = $response.querySelector('.Tenant_Page_ansibleProjectIds');
         if(vars.includes('pageId'))
           inputPageId = $response.querySelector('.Tenant_Page_pageId');
         if(vars.includes('classCanonicalName'))
@@ -155,22 +153,28 @@ async function websocketTenantInner(apiRequest) {
           inputObjectText = $response.querySelector('.Tenant_Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.Tenant_Page_solrId');
-        if(vars.includes('aapOrganizationId'))
-          inputAapOrganizationId = $response.querySelector('.Tenant_Page_aapOrganizationId');
+        if(vars.includes('tenantId'))
+          inputTenantId = $response.querySelector('.Tenant_Page_tenantId');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.Tenant_Page_tenantResource');
         if(vars.includes('hubId'))
           inputHubId = $response.querySelector('.Tenant_Page_hubId');
         if(vars.includes('clusterName'))
           inputClusterName = $response.querySelector('.Tenant_Page_clusterName');
+        if(vars.includes('aapOrganizationId'))
+          inputAapOrganizationId = $response.querySelector('.Tenant_Page_aapOrganizationId');
 
-        jsWebsocketTenant(tenantResource, vars, $response);
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listTenant = JSON.parse($response.querySelector('.pageForm .listTenant')?.value);
+        jsWebsocketTenant(tenantResource, vars, $response);
 
 
         if(inputPk) {
           document.querySelectorAll('.Tenant_Page_pk').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputPk.getAttribute('value');
             else
@@ -181,6 +185,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputCreated) {
           document.querySelectorAll('.Tenant_Page_created').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputCreated.getAttribute('value');
             else
@@ -191,6 +199,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputModified) {
           document.querySelectorAll('.Tenant_Page_modified').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputModified.getAttribute('value');
             else
@@ -201,6 +213,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputArchived) {
           document.querySelectorAll('.Tenant_Page_archived').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputArchived.getAttribute('value');
             else
@@ -211,6 +227,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputTenantName) {
           document.querySelectorAll('.Tenant_Page_tenantName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantName.getAttribute('value');
             else
@@ -219,18 +239,12 @@ async function websocketTenantInner(apiRequest) {
           addGlow(document.querySelector('.Tenant_Page_tenantName'));
         }
 
-        if(inputTenantId) {
-          document.querySelectorAll('.Tenant_Page_tenantId').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantId.getAttribute('value');
-            else
-              item.textContent = inputTenantId.textContent;
-          });
-          addGlow(document.querySelector('.Tenant_Page_tenantId'));
-        }
-
         if(inputTenantDescription) {
           document.querySelectorAll('.Tenant_Page_tenantDescription').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantDescription.getAttribute('value');
             else
@@ -239,18 +253,12 @@ async function websocketTenantInner(apiRequest) {
           addGlow(document.querySelector('.Tenant_Page_tenantDescription'));
         }
 
-        if(inputAnsibleProjectIds) {
-          document.querySelectorAll('.Tenant_Page_ansibleProjectIds').forEach((item, index) => {
-            if(typeof item.value !== 'undefined')
-              item.value = inputAnsibleProjectIds.getAttribute('value');
-            else
-              item.textContent = inputAnsibleProjectIds.textContent;
-          });
-          addGlow(document.querySelector('.Tenant_Page_ansibleProjectIds'));
-        }
-
         if(inputHostInventoryIds) {
           document.querySelectorAll('.Tenant_Page_hostInventoryIds').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputHostInventoryIds.getAttribute('value');
             else
@@ -259,8 +267,26 @@ async function websocketTenantInner(apiRequest) {
           addGlow(document.querySelector('.Tenant_Page_hostInventoryIds'));
         }
 
+        if(inputAnsibleProjectIds) {
+          document.querySelectorAll('.Tenant_Page_ansibleProjectIds').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputAnsibleProjectIds.getAttribute('value');
+            else
+              item.textContent = inputAnsibleProjectIds.textContent;
+          });
+          addGlow(document.querySelector('.Tenant_Page_ansibleProjectIds'));
+        }
+
         if(inputPageId) {
           document.querySelectorAll('.Tenant_Page_pageId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputPageId.getAttribute('value');
             else
@@ -271,6 +297,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputClassCanonicalName) {
           document.querySelectorAll('.Tenant_Page_classCanonicalName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalName.getAttribute('value');
             else
@@ -281,6 +311,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputClassSimpleName) {
           document.querySelectorAll('.Tenant_Page_classSimpleName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassSimpleName.getAttribute('value');
             else
@@ -291,6 +325,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputClassCanonicalNames) {
           document.querySelectorAll('.Tenant_Page_classCanonicalNames').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClassCanonicalNames.getAttribute('value');
             else
@@ -301,6 +339,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputSessionId) {
           document.querySelectorAll('.Tenant_Page_sessionId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSessionId.getAttribute('value');
             else
@@ -311,6 +353,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputUserKey) {
           document.querySelectorAll('.Tenant_Page_userKey').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserKey.getAttribute('value');
             else
@@ -321,6 +367,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputSaves) {
           document.querySelectorAll('.Tenant_Page_saves').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSaves.getAttribute('value');
             else
@@ -331,6 +381,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputObjectTitle) {
           document.querySelectorAll('.Tenant_Page_objectTitle').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectTitle.getAttribute('value');
             else
@@ -341,6 +395,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputDisplayPage) {
           document.querySelectorAll('.Tenant_Page_displayPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDisplayPage.getAttribute('value');
             else
@@ -351,6 +409,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputEditPage) {
           document.querySelectorAll('.Tenant_Page_editPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputEditPage.getAttribute('value');
             else
@@ -361,6 +423,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputUserPage) {
           document.querySelectorAll('.Tenant_Page_userPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputUserPage.getAttribute('value');
             else
@@ -371,6 +437,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputDownload) {
           document.querySelectorAll('.Tenant_Page_download').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputDownload.getAttribute('value');
             else
@@ -381,6 +451,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputObjectSuggest) {
           document.querySelectorAll('.Tenant_Page_objectSuggest').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectSuggest.getAttribute('value');
             else
@@ -391,6 +465,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputObjectText) {
           document.querySelectorAll('.Tenant_Page_objectText').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputObjectText.getAttribute('value');
             else
@@ -401,6 +479,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputSolrId) {
           document.querySelectorAll('.Tenant_Page_solrId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputSolrId.getAttribute('value');
             else
@@ -409,18 +491,26 @@ async function websocketTenantInner(apiRequest) {
           addGlow(document.querySelector('.Tenant_Page_solrId'));
         }
 
-        if(inputAapOrganizationId) {
-          document.querySelectorAll('.Tenant_Page_aapOrganizationId').forEach((item, index) => {
+        if(inputTenantId) {
+          document.querySelectorAll('.Tenant_Page_tenantId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
-              item.value = inputAapOrganizationId.getAttribute('value');
+              item.value = inputTenantId.getAttribute('value');
             else
-              item.textContent = inputAapOrganizationId.textContent;
+              item.textContent = inputTenantId.textContent;
           });
-          addGlow(document.querySelector('.Tenant_Page_aapOrganizationId'));
+          addGlow(document.querySelector('.Tenant_Page_tenantId'));
         }
 
         if(inputTenantResource) {
           document.querySelectorAll('.Tenant_Page_tenantResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputTenantResource.getAttribute('value');
             else
@@ -431,6 +521,10 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputHubId) {
           document.querySelectorAll('.Tenant_Page_hubId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputHubId.getAttribute('value');
             else
@@ -441,12 +535,30 @@ async function websocketTenantInner(apiRequest) {
 
         if(inputClusterName) {
           document.querySelectorAll('.Tenant_Page_clusterName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
             if(typeof item.value !== 'undefined')
               item.value = inputClusterName.getAttribute('value');
             else
               item.textContent = inputClusterName.textContent;
           });
           addGlow(document.querySelector('.Tenant_Page_clusterName'));
+        }
+
+        if(inputAapOrganizationId) {
+          document.querySelectorAll('.Tenant_Page_aapOrganizationId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapOrganizationId.getAttribute('value');
+            else
+              item.textContent = inputAapOrganizationId.textContent;
+          });
+          addGlow(document.querySelector('.Tenant_Page_aapOrganizationId'));
         }
 
           pageGraphTenant();
@@ -487,7 +599,7 @@ function pageGraphTenant(apiRequest) {
         var data = [];
         var layout = {};
         if(range) {
-          layout['title'] = 'tenants';
+          layout['title'] = 'discovered tenants';
           layout['xaxis'] = {
             title: rangeVarFq.displayName
           }
@@ -620,21 +732,17 @@ function searchTenantFilters($formFilters) {
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
 
-    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
-    if(filterTenantId != null && filterTenantId !== '')
-      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
-
     var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
     if(filterTenantDescription != null && filterTenantDescription !== '')
       filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
 
-    var filterAnsibleProjectIds = $formFilters.querySelector('.valueAnsibleProjectIds')?.value;
-    if(filterAnsibleProjectIds != null && filterAnsibleProjectIds !== '')
-      filters.push({ name: 'fq', value: 'ansibleProjectIds:' + filterAnsibleProjectIds });
-
     var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
     if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
       filters.push({ name: 'fq', value: 'hostInventoryIds:' + filterHostInventoryIds });
+
+    var filterAnsibleProjectIds = $formFilters.querySelector('.valueAnsibleProjectIds')?.value;
+    if(filterAnsibleProjectIds != null && filterAnsibleProjectIds !== '')
+      filters.push({ name: 'fq', value: 'ansibleProjectIds:' + filterAnsibleProjectIds });
 
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
@@ -696,9 +804,9 @@ function searchTenantFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
-    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
-    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
-      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
@@ -711,6 +819,10 @@ function searchTenantFilters($formFilters) {
     var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
   }
   return filters;
 }
@@ -974,18 +1086,6 @@ async function patchTenant($formFilters, $formValues, target, tenantResource, su
   if(removeTenantName != null && removeTenantName !== '')
     vals['removeTenantName'] = removeTenantName;
 
-  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
-  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value === 'true';
-  var setTenantId = removeTenantId ? null : $formValues.querySelector('.setTenantId')?.value;
-  var addTenantId = $formValues.querySelector('.addTenantId')?.value;
-  if(removeTenantId || setTenantId != null && setTenantId !== '')
-    vals['setTenantId'] = setTenantId;
-  if(addTenantId != null && addTenantId !== '')
-    vals['addTenantId'] = addTenantId;
-  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value;
-  if(removeTenantId != null && removeTenantId !== '')
-    vals['removeTenantId'] = removeTenantId;
-
   var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
   var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value === 'true';
   var setTenantDescription = removeTenantDescription ? null : $formValues.querySelector('.setTenantDescription')?.value;
@@ -998,13 +1098,13 @@ async function patchTenant($formFilters, $formValues, target, tenantResource, su
   if(removeTenantDescription != null && removeTenantDescription !== '')
     vals['removeTenantDescription'] = removeTenantDescription;
 
-  var valueAnsibleProjectIds = (Array.from($formValues.querySelectorAll('.valueAnsibleProjectIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueAnsibleProjectIds != null && valueAnsibleProjectIds !== '')
-    vals['addAnsibleProjectIds'] = valueAnsibleProjectIds;
-
   var valueHostInventoryIds = (Array.from($formValues.querySelectorAll('.valueHostInventoryIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHostInventoryIds != null && valueHostInventoryIds !== '')
     vals['addHostInventoryIds'] = valueHostInventoryIds;
+
+  var valueAnsibleProjectIds = (Array.from($formValues.querySelectorAll('.valueAnsibleProjectIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueAnsibleProjectIds != null && valueAnsibleProjectIds !== '')
+    vals['addAnsibleProjectIds'] = valueAnsibleProjectIds;
 
   var valuePageId = $formValues.querySelector('.valuePageId')?.value;
   var removePageId = $formValues.querySelector('.removePageId')?.value === 'true';
@@ -1102,17 +1202,17 @@ async function patchTenant($formFilters, $formValues, target, tenantResource, su
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
-  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
-  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
-  var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
-  var addAapOrganizationId = $formValues.querySelector('.addAapOrganizationId')?.value;
-  if(removeAapOrganizationId || setAapOrganizationId != null && setAapOrganizationId !== '')
-    vals['setAapOrganizationId'] = setAapOrganizationId;
-  if(addAapOrganizationId != null && addAapOrganizationId !== '')
-    vals['addAapOrganizationId'] = addAapOrganizationId;
-  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
-  if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
-    vals['removeAapOrganizationId'] = removeAapOrganizationId;
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value === 'true';
+  var setTenantId = removeTenantId ? null : $formValues.querySelector('.setTenantId')?.value;
+  var addTenantId = $formValues.querySelector('.addTenantId')?.value;
+  if(removeTenantId || setTenantId != null && setTenantId !== '')
+    vals['setTenantId'] = setTenantId;
+  if(addTenantId != null && addTenantId !== '')
+    vals['addTenantId'] = addTenantId;
+  var removeTenantId = $formValues.querySelector('.removeTenantId')?.value;
+  if(removeTenantId != null && removeTenantId !== '')
+    vals['removeTenantId'] = removeTenantId;
 
   var valueTenantResource = $formValues.querySelector('.valueTenantResource')?.value;
   var removeTenantResource = $formValues.querySelector('.removeTenantResource')?.value === 'true';
@@ -1150,6 +1250,18 @@ async function patchTenant($formFilters, $formValues, target, tenantResource, su
   if(removeClusterName != null && removeClusterName !== '')
     vals['removeClusterName'] = removeClusterName;
 
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value === 'true';
+  var setAapOrganizationId = removeAapOrganizationId ? null : $formValues.querySelector('.setAapOrganizationId')?.value;
+  var addAapOrganizationId = $formValues.querySelector('.addAapOrganizationId')?.value;
+  if(removeAapOrganizationId || setAapOrganizationId != null && setAapOrganizationId !== '')
+    vals['setAapOrganizationId'] = setAapOrganizationId;
+  if(addAapOrganizationId != null && addAapOrganizationId !== '')
+    vals['addAapOrganizationId'] = addAapOrganizationId;
+  var removeAapOrganizationId = $formValues.querySelector('.removeAapOrganizationId')?.value;
+  if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
+    vals['removeAapOrganizationId'] = removeAapOrganizationId;
+
   patchTenantVals(tenantResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'tenantResource:' + tenantResource}], vals, target, success, error);
 }
 
@@ -1184,21 +1296,17 @@ function patchTenantFilters($formFilters) {
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
 
-    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
-    if(filterTenantId != null && filterTenantId !== '')
-      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
-
     var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
     if(filterTenantDescription != null && filterTenantDescription !== '')
       filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
 
-    var filterAnsibleProjectIds = $formFilters.querySelector('.valueAnsibleProjectIds')?.value;
-    if(filterAnsibleProjectIds != null && filterAnsibleProjectIds !== '')
-      filters.push({ name: 'fq', value: 'ansibleProjectIds:' + filterAnsibleProjectIds });
-
     var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
     if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
       filters.push({ name: 'fq', value: 'hostInventoryIds:' + filterHostInventoryIds });
+
+    var filterAnsibleProjectIds = $formFilters.querySelector('.valueAnsibleProjectIds')?.value;
+    if(filterAnsibleProjectIds != null && filterAnsibleProjectIds !== '')
+      filters.push({ name: 'fq', value: 'ansibleProjectIds:' + filterAnsibleProjectIds });
 
     var filterPageId = $formFilters.querySelector('.valuePageId')?.value;
     if(filterPageId != null && filterPageId !== '')
@@ -1260,9 +1368,9 @@ function patchTenantFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
-    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
-    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
-      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
@@ -1275,6 +1383,10 @@ function patchTenantFilters($formFilters) {
     var filterClusterName = $formFilters.querySelector('.valueClusterName')?.value;
     if(filterClusterName != null && filterClusterName !== '')
       filters.push({ name: 'fq', value: 'clusterName:' + filterClusterName });
+
+    var filterAapOrganizationId = $formFilters.querySelector('.valueAapOrganizationId')?.value;
+    if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
+      filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
   }
   return filters;
 }
@@ -1358,20 +1470,9 @@ async function postTenant($formValues, target, success, error) {
   if(valueTenantName != null && valueTenantName !== '')
     vals['tenantName'] = valueTenantName;
 
-  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
-  if(valueTenantId != null && valueTenantId !== '')
-    vals['tenantId'] = valueTenantId;
-
   var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
   if(valueTenantDescription != null && valueTenantDescription !== '')
     vals['tenantDescription'] = valueTenantDescription;
-
-  var valueAnsibleProjectIds = [];
-  $formValues.querySelectorAll('input.valueAnsibleProjectIds:checked').forEach(function(index) {
-    valueAnsibleProjectIds.push(this.value);
-  });
-  if(valueAnsibleProjectIds.length > 0)
-    vals['ansibleProjectIds'] = valueAnsibleProjectIds;
 
   var valueHostInventoryIds = [];
   $formValues.querySelectorAll('input.valueHostInventoryIds:checked').forEach(function(index) {
@@ -1379,6 +1480,13 @@ async function postTenant($formValues, target, success, error) {
   });
   if(valueHostInventoryIds.length > 0)
     vals['hostInventoryIds'] = valueHostInventoryIds;
+
+  var valueAnsibleProjectIds = [];
+  $formValues.querySelectorAll('input.valueAnsibleProjectIds:checked').forEach(function(index) {
+    valueAnsibleProjectIds.push(this.value);
+  });
+  if(valueAnsibleProjectIds.length > 0)
+    vals['ansibleProjectIds'] = valueAnsibleProjectIds;
 
   var valuePageId = $formValues.querySelector('.valuePageId')?.value;
   if(valuePageId != null && valuePageId !== '')
@@ -1412,9 +1520,9 @@ async function postTenant($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
-  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
-  if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
-    vals['aapOrganizationId'] = valueAapOrganizationId;
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  if(valueTenantId != null && valueTenantId !== '')
+    vals['tenantId'] = valueTenantId;
 
   var valueTenantResource = $formValues.querySelector('.valueTenantResource')?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
@@ -1427,6 +1535,10 @@ async function postTenant($formValues, target, success, error) {
   var valueClusterName = $formValues.querySelector('.valueClusterName')?.value;
   if(valueClusterName != null && valueClusterName !== '')
     vals['clusterName'] = valueClusterName;
+
+  var valueAapOrganizationId = $formValues.querySelector('.valueAapOrganizationId')?.value;
+  if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
+    vals['aapOrganizationId'] = valueAapOrganizationId;
 
   fetch(
     '/en-us/api/tenant'

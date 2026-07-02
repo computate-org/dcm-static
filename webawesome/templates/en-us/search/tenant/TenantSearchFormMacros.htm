@@ -190,42 +190,6 @@
 {%- macro htmTenantNameTenantPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputTenantNameTenantPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputTenantIdTenantPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
-  {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_tenantId">
-  {%- endif %}
-                  <wa-input
-                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[String] tenant ID"
-                      label="tenant ID"
-                      hint="The ID of this tenant"
-                      id="Tenant_{{classApiMethodMethod}}_tenantId"
-  {%- if "Page" == classApiMethodMethod %}
-                      data-tenantResource={{ result.tenantResource | tojson }}
-                      class="label-on-left Tenant_{{classApiMethodMethod}}_tenantId setTenantId classTenant inputTenant{{ result.tenantResource }}TenantId "
-                      name="setTenantId"
-  {%- else %}
-    {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left Tenant_{{classApiMethodMethod}}_tenantId setTenantId classTenant inputTenant{{ result.tenantResource }}TenantId "
-                      name="setTenantId"
-    {%- else %}
-                      class="label-on-left Tenant_{{classApiMethodMethod}}_tenantId valueTenantId classTenant inputTenant{{ result.tenantResource }}TenantId "
-                      name="tenantId"
-    {%- endif %}
-  {%- endif %}
-  {% if "Page" == classApiMethodMethod -%}
-                      value="{{result.tenantId | e }}"
-  {% endif -%}
-                      ></wa-input>
-
-  {%- if 'Page' == classApiMethodMethod %}
-                </form>
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro htmTenantIdTenantPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputTenantIdTenantPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
-{%- endmacro %}
 {%- macro inputTenantDescriptionTenantPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_tenantDescription">
@@ -261,63 +225,6 @@
 
 {%- macro htmTenantDescriptionTenantPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputTenantDescriptionTenantPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
-{%- endmacro %}
-{%- macro inputAnsibleProjectIdsTenantPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
-  {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_ansibleProjectIds">
-  {%- endif %}
-  {%- if 'PUTCopy' == classApiMethodMethod %}
-                  <div>
-                    <wa-checkbox 
-                        id="{{ idPrefix }}Tenant_{{classApiMethodMethod}}_ansibleProjectIds{{ idSuffix }}_clear"
-                        class="label-on-left Tenant_classApiMethodMethod}}_ansibleProjectIds_clear ansibleProjectIds_clear "
-                        hint="clear"
-                        >
-                      clear
-                    </wa-checkbox>
-                  </div>
-  {%- endif %}
-                  <wa-input
-                      type="text"
-                      placeholder="Ansible projects"
-                      label="Ansible projects"
-                      hint="The related Ansible projects for this tenant. "
-                      class="label-on-left Tenant_{{classApiMethodMethod}}_ansibleProjectIds valueObjectSuggest suggestAnsibleProjectIds "
-                      name="setAnsibleProjectIds"
-                      id="{{ idPrefix }}Tenant_{{classApiMethodMethod}}_ansibleProjectIds{{ idSuffix }}"
-                      data-list="listTenantAnsibleProjectIds_{{classApiMethodMethod}}"
-                      data-method="{{classApiMethodMethod}}"
-                      autocomplete="off"
-  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
-                      value="{{result.ansibleProjectIds | e }}"
-  {% endif -%}
-                  >
-              </wa-input>
-
-  {%- if 'Page' == classApiMethodMethod %}
-                </form>
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro htmAnsibleProjectIdsTenantPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputAnsibleProjectIdsTenantPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
-                <div class="label-on-left-ul-label ">
-                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
-                  relate  to this tenant
-                </div>
-                <ul class="label-on-left-ul " id="listTenantAnsibleProjectIds_{{classApiMethodMethod}}">
-                </ul>
-                {%- if authForReadBool == true %}
-                {% if 'Page' == classApiMethodMethod %}
-                <div>
-                  {{ htmForm_postAnsibleProject(idSuffix='_Tenant_POST_ansibleProjectIds') }}
-                  <wa-button
-                       id="Tenant_{{classApiMethodMethod}}_ansibleProjectIds_add"
-                       data-dialog="open postAnsibleProjectDialog"
-                      >add a ansible project</wa-button>
-                  </div>
-                {%- endif %}
-                {%- endif %}
 {%- endmacro %}
 {%- macro inputHostInventoryIdsTenantPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -360,7 +267,7 @@
                 {{ inputHostInventoryIdsTenantPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
-                  relate  to this tenant
+                  relate  to this discovered tenant
                 </div>
                 <ul class="label-on-left-ul " id="listTenantHostInventoryIds_{{classApiMethodMethod}}">
                 </ul>
@@ -372,6 +279,63 @@
                        id="Tenant_{{classApiMethodMethod}}_hostInventoryIds_add"
                        data-dialog="open postHostInventoryDialog"
                       >add a host inventory</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+{%- macro inputAnsibleProjectIdsTenantPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_ansibleProjectIds">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}Tenant_{{classApiMethodMethod}}_ansibleProjectIds{{ idSuffix }}_clear"
+                        class="label-on-left Tenant_classApiMethodMethod}}_ansibleProjectIds_clear ansibleProjectIds_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="Ansible projects"
+                      label="Ansible projects"
+                      hint="The related Ansible projects for this tenant. "
+                      class="label-on-left Tenant_{{classApiMethodMethod}}_ansibleProjectIds valueObjectSuggest suggestAnsibleProjectIds "
+                      name="setAnsibleProjectIds"
+                      id="{{ idPrefix }}Tenant_{{classApiMethodMethod}}_ansibleProjectIds{{ idSuffix }}"
+                      data-list="listTenantAnsibleProjectIds_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.ansibleProjectIds | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmAnsibleProjectIdsTenantPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputAnsibleProjectIdsTenantPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate  to this discovered tenant
+                </div>
+                <ul class="label-on-left-ul " id="listTenantAnsibleProjectIds_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postAnsibleProject(idSuffix='_Tenant_POST_ansibleProjectIds') }}
+                  <wa-button
+                       id="Tenant_{{classApiMethodMethod}}_ansibleProjectIds_add"
+                       data-dialog="open postAnsibleProjectDialog"
+                      >add a ansible project</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
@@ -417,16 +381,16 @@
           <wa-popup  auto-size="both" placement="top" id="alertButton_patchTenant" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_patchTenant"
-                >Modify tenant</wa-button>
+                >Modify discovered tenant</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_patchTenant"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_patchTenant(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchTenantDialog" label="Modify tenant">
-          <form id="htmForm_patchTenant" class="round-row primary-smart-border-radius ">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchTenantDialog" label="Modify discovered tenant">
+          <form id="htmForm_patchTenant" class="wa-stack round-row primary-smart-border-radius ">
 
-            <wa-details open class="HtmRow" id="tenant-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
               <div slot="summary">
                 <span>tenant details</span>
               </div>
@@ -442,16 +406,6 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmTenantIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmTenantIdTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
-                {% if "PATCH" in scopes -%}
                 {{ htmTenantDescriptionTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
@@ -461,18 +415,13 @@
                 {%- endif %}
                 {%- endif %}
               </div>
+            </wa-details>
 
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="relationships">
+              <div slot="summary">
+                <span>relationships</span>
+              </div>
               <div class="grid-with-subgrid-2col ">
-                {% if "PATCH" in scopes -%}
-                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
                 {% if "PATCH" in scopes -%}
                 {{ htmHostInventoryIdsTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
@@ -482,10 +431,20 @@
                 {{ htmHostInventoryIdsTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="useful-urls">
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
@@ -501,8 +460,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_patchTenant() }}
           </form>
-          {{ htmFormButton_patchTenant() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -510,17 +469,17 @@
           <wa-popup  auto-size="both" placement="top" id="alertButton_postTenant" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_postTenant"
-                >Create a tenant</wa-button>
+                >Create a discovered tenant</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_postTenant"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_postTenant(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postTenantDialog" label="Create a tenant">
-          <form id="htmForm_postTenant" class="round-row primary-smart-border-radius ">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postTenantDialog" label="Create a discovered tenant">
+          <form id="htmForm_postTenant" class="wa-stack round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
-            <wa-details open class="HtmRow" id="tenant-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
               <div slot="summary">
                 <span>tenant details</span>
               </div>
@@ -536,16 +495,6 @@
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmTenantIdTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmTenantIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmTenantIdTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
-                {% if "POST" in scopes -%}
                 {{ htmTenantDescriptionTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
@@ -555,18 +504,13 @@
                 {%- endif %}
                 {%- endif %}
               </div>
+            </wa-details>
 
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="relationships">
+              <div slot="summary">
+                <span>relationships</span>
+              </div>
               <div class="grid-with-subgrid-2col ">
-                {% if "POST" in scopes -%}
-                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
                 {% if "POST" in scopes -%}
                 {{ htmHostInventoryIdsTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
@@ -576,10 +520,20 @@
                 {{ htmHostInventoryIdsTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="useful-urls">
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
@@ -595,8 +549,8 @@
                 {%- endif %}
               </div>
             </wa-details>
+            {{ htmFormButton_postTenant() }}
           </form>
-          {{ htmFormButton_postTenant() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -604,16 +558,16 @@
           <wa-popup  auto-size="both" placement="top" id="alertButton_deleteTenant" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_deleteTenant"
-                >Delete tenant</wa-button>
+                >Delete discovered tenant</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_deleteTenant"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_deleteTenant(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteTenantDialog" label="Delete tenant">
-          <form id="htmForm_deleteTenant" class="round-row primary-smart-border-radius ">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteTenantDialog" label="Delete discovered tenant">
+          <form id="htmForm_deleteTenant" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteTenant() }}
           </form>
-          {{ htmFormButton_deleteTenant() }}
         </wa-dialog>
 {%- endmacro %}
 
@@ -621,14 +575,14 @@
           <wa-popup  auto-size="both" placement="top" id="alertButton_putimportTenant" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_putimportTenant"
-                >Import tenants</wa-button>
+                >Import discovered tenants</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_putimportTenant"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_putimportTenant(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportTenantDialog" label="Import tenants">
-          <form id="htmForm_putimportTenant" class="round-row primary-smart-border-radius ">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportTenantDialog" label="Import discovered tenants">
+          <form id="htmForm_putimportTenant" class="wa-stack round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
                   class="PUTImport_searchList "
@@ -637,16 +591,16 @@
                   >
               </wa-textarea>
             </div>
+            {{ htmFormButton_putimportTenant() }}
           </form>
-          {{ htmFormButton_putimportTenant() }}
         </wa-dialog>
 {%- endmacro %}
 
 {%- macro htmForm_searchpageTenant(idSuffix='') %}
-        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageTenantDialog" label="Search tenants">
-          <div id="htmForm_searchpageTenant" class="round-row primary-smart-border-radius ">
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageTenantDialog" label="Search discovered tenants">
+          <div id="htmForm_searchpageTenant" class="wa-stack round-row primary-smart-border-radius ">
 
-            <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
                 <span>primary key, ID, created, modified, archive details</span>
               </div>
@@ -695,7 +649,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="tenant-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
               <div slot="summary">
                 <span>tenant details</span>
               </div>
@@ -711,16 +665,6 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantIdTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmTenantIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmTenantIdTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
-                {% if "PATCH" in scopes -%}
                 {{ htmTenantDescriptionTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
@@ -730,18 +674,13 @@
                 {%- endif %}
                 {%- endif %}
               </div>
+            </wa-details>
 
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="relationships">
+              <div slot="summary">
+                <span>relationships</span>
+              </div>
               <div class="grid-with-subgrid-2col ">
-                {% if "PATCH" in scopes -%}
-                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
                 {% if "PATCH" in scopes -%}
                 {{ htmHostInventoryIdsTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
@@ -751,10 +690,20 @@
                 {{ htmHostInventoryIdsTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsibleProjectIdsTenantPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="useful-urls">
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="useful-urls">
               <div slot="summary">
                 <span>Useful URLs</span>
               </div>
@@ -778,15 +727,15 @@
           <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterTenant" duration="5000" closable class="wa-header-l ">
             <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
                  id="htmFormButton_deletefilterTenant"
-                >Delete tenant</wa-button>
+                >Delete discovered tenant</wa-button>
             <wa-badge class="alertPopup" id="alertPopupButton_deletefilterTenant"></wa-badge>
           </wa-popup>
 {%- endmacro %}
 
 {%- macro htmForm_deletefilterTenant(idSuffix='') %}
-        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterTenantDialog" label="Delete tenant">
-          <form id="htmForm_deletefilterTenant" class="round-row primary-smart-border-radius ">
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterTenantDialog" label="Delete discovered tenant">
+          <form id="htmForm_deletefilterTenant" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterTenant() }}
           </form>
-          {{ htmFormButton_deletefilterTenant() }}
         </wa-dialog>
 {%- endmacro %}

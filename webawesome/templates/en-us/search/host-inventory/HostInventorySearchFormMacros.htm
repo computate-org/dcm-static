@@ -447,7 +447,7 @@
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchHostInventoryDialog" label="Modify host inventory">
           <form id="htmForm_patchHostInventory" class="round-row primary-smart-border-radius ">
 
-            <wa-details open class="HtmRow" id="tenant-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
               <div slot="summary">
                 <span>tenant details</span>
               </div>
@@ -474,7 +474,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="inventory-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="inventory-details">
               <div slot="summary">
                 <span>inventory details</span>
               </div>
@@ -511,7 +511,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="relationships">
+            <wa-details open class="pdf-page-break-after HtmRow" id="relationships">
               <div slot="summary">
                 <span>relationships</span>
               </div>
@@ -546,7 +546,7 @@
           <form id="htmForm_postHostInventory" class="round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
 
-            <wa-details open class="HtmRow" id="tenant-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
               <div slot="summary">
                 <span>tenant details</span>
               </div>
@@ -573,7 +573,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="inventory-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="inventory-details">
               <div slot="summary">
                 <span>inventory details</span>
               </div>
@@ -610,7 +610,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="relationships">
+            <wa-details open class="pdf-page-break-after HtmRow" id="relationships">
               <div slot="summary">
                 <span>relationships</span>
               </div>
@@ -677,7 +677,7 @@
         <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageHostInventoryDialog" label="Search host inventories">
           <div id="htmForm_searchpageHostInventory" class="round-row primary-smart-border-radius ">
 
-            <wa-details class="HtmRow" id="primary-key-id-created-modified-archive-details">
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
               <div slot="summary">
                 <span>primary key, ID, created, modified, archive details</span>
               </div>
@@ -726,7 +726,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="tenant-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
               <div slot="summary">
                 <span>tenant details</span>
               </div>
@@ -753,7 +753,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="inventory-details">
+            <wa-details open class="pdf-page-break-after HtmRow" id="inventory-details">
               <div slot="summary">
                 <span>inventory details</span>
               </div>
@@ -790,7 +790,7 @@
               </div>
             </wa-details>
 
-            <wa-details open class="HtmRow" id="relationships">
+            <wa-details open class="pdf-page-break-after HtmRow" id="relationships">
               <div slot="summary">
                 <span>relationships</span>
               </div>
