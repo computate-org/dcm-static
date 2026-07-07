@@ -1,0 +1,799 @@
+{%- macro inputPkTenantApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_pk">
+  {%- endif %}
+                  <wa-input
+                      readonly
+                      placeholder="[Long] primary key"
+                      label="primary key"
+                      type="number"
+                      hint="The primary key of this object in the database"
+                      id="TenantApproval_{{classApiMethodMethod}}_pk"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_pk setPk classTenantApproval inputTenantApproval{{ result.approvalId }}Pk "
+                      name="setPk"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_pk setPk classTenantApproval inputTenantApproval{{ result.approvalId }}Pk "
+                      name="setPk"
+    {%- else %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_pk valuePk classTenantApproval inputTenantApproval{{ result.approvalId }}Pk "
+                      name="pk"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.pk | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPkTenantApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPkTenantApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedTenantApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_created">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A created timestamp for this record in the database"
+                      label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_created datetimepicker setCreated classTenantApproval inputTenantApproval{{ result.approvalId }}Created "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="TenantApproval_{{classApiMethodMethod}}_created"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedTenantApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedTenantApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputModifiedTenantApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_modified">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A modified timestamp for this record in the database"
+                      label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_modified datetimepicker setModified classTenantApproval inputTenantApproval{{ result.approvalId }}Modified "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="TenantApproval_{{classApiMethodMethod}}_modified"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmModifiedTenantApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputModifiedTenantApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputArchivedTenantApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_archived">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-button variant="brand"
+                      id="TenantApproval_{{classApiMethodMethod}}_archived"
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_archived classTenantApproval inputTenantApproval{{ result.approvalId }}Archived "
+                      name="setArchived"
+                      data-approvalId={{ result.approvalId | tojson }}
+                      data-val="{{ result.archived | e }}"
+                      >archive</wa-button>
+  {%- else %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="TenantApproval_{{classApiMethodMethod}}_archived"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="TenantApproval_{{classApiMethodMethod}}_archived"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_archived classTenantApproval inputTenantApproval{{ result.approvalId }}Archived "
+                      name="setArchived"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_archived classTenantApproval inputTenantApproval{{ result.approvalId }}Archived "
+                      name="setArchived"
+    {%- else %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_archived setArchived valueArchived classTenantApproval inputTenantApproval{{ result.approvalId }}Archived "
+                      name="setArchived"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.archived == true %}
+                      checked
+    {%- endif %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      >archive</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmArchivedTenantApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputArchivedTenantApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputTenantRequestedIdTenantApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_tenantRequestedId">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}TenantApproval_{{classApiMethodMethod}}_tenantRequestedId{{ idSuffix }}_clear"
+                        class="label-on-left TenantApproval_classApiMethodMethod}}_tenantRequestedId_clear tenantRequestedId_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="tenant requested"
+                      label="tenant requested"
+                      hint="The tenant requested being approved. "
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_tenantRequestedId valueObjectSuggest suggestTenantRequestedId "
+                      name="setTenantRequestedId"
+                      id="{{ idPrefix }}TenantApproval_{{classApiMethodMethod}}_tenantRequestedId{{ idSuffix }}"
+                      data-list="listTenantApprovalTenantRequestedId_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.tenantRequestedId | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmTenantRequestedIdTenantApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputTenantRequestedIdTenantApprovalPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a requested tenant to this tenant approval
+                </div>
+                <ul class="label-on-left-ul " id="listTenantApprovalTenantRequestedId_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postTenantRequested(idSuffix='_TenantApproval_POST_tenantRequestedId') }}
+                  <wa-button
+                       id="TenantApproval_{{classApiMethodMethod}}_tenantRequestedId_add"
+                       data-dialog="open postTenantRequestedDialog"
+                      >add a requested tenant</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+{%- macro inputApprovedByEmailTenantApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_approvedByEmail">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] approved by user email"
+                      label="approved by user email"
+                      hint="The email address for the user who approved the change request. "
+                      id="TenantApproval_{{classApiMethodMethod}}_approvedByEmail"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvedByEmail setApprovedByEmail classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovedByEmail "
+                      name="setApprovedByEmail"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvedByEmail setApprovedByEmail classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovedByEmail "
+                      name="setApprovedByEmail"
+    {%- else %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvedByEmail valueApprovedByEmail classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovedByEmail "
+                      name="approvedByEmail"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.approvedByEmail | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmApprovedByEmailTenantApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputApprovedByEmailTenantApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputApprovedByUserIdTenantApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_approvedByUserId">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] approved by user ID"
+                      label="approved by user ID"
+                      hint="The IdP UUID record for the user who approved the change request. "
+                      id="TenantApproval_{{classApiMethodMethod}}_approvedByUserId"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvedByUserId setApprovedByUserId classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovedByUserId "
+                      name="setApprovedByUserId"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvedByUserId setApprovedByUserId classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovedByUserId "
+                      name="setApprovedByUserId"
+    {%- else %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvedByUserId valueApprovedByUserId classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovedByUserId "
+                      name="approvedByUserId"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.approvedByUserId | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmApprovedByUserIdTenantApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputApprovedByUserIdTenantApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputApprovedByFullNameTenantApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_approvedByFullName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] approved by user full name"
+                      label="approved by user full name"
+                      hint="The first and last name for the user who approved the change request. "
+                      id="TenantApproval_{{classApiMethodMethod}}_approvedByFullName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvedByFullName setApprovedByFullName classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovedByFullName "
+                      name="setApprovedByFullName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvedByFullName setApprovedByFullName classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovedByFullName "
+                      name="setApprovedByFullName"
+    {%- else %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvedByFullName valueApprovedByFullName classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovedByFullName "
+                      name="approvedByFullName"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.approvedByFullName | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmApprovedByFullNameTenantApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputApprovedByFullNameTenantApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputApprovedTenantApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_approved">
+  {%- endif %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="TenantApproval_{{classApiMethodMethod}}_approved"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="TenantApproval_{{classApiMethodMethod}}_approved"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="approved"
+                      label="approved"
+                      hint="Whether the requested change was approved by the approver. "
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approved classTenantApproval inputTenantApproval{{ result.approvalId }}Approved "
+                      name="setApproved"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approved classTenantApproval inputTenantApproval{{ result.approvalId }}Approved "
+                      name="setApproved"
+    {%- else %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approved setApproved valueApproved classTenantApproval inputTenantApproval{{ result.approvalId }}Approved "
+                      name="setApproved"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.approved == true %}
+                      checked
+    {%- endif %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      >approved</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmApprovedTenantApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputApprovedTenantApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputApprovalNoteTenantApprovalPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_approvalNote">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] approval note"
+                      label="approval note"
+                      hint="A note from the approver about their decision about the requested change. "
+                      required
+                      id="TenantApproval_{{classApiMethodMethod}}_approvalNote"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-approvalId={{ result.approvalId | tojson }}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvalNote setApprovalNote classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovalNote "
+                      name="setApprovalNote"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvalNote setApprovalNote classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovalNote "
+                      name="setApprovalNote"
+    {%- else %}
+                      class="label-on-left TenantApproval_{{classApiMethodMethod}}_approvalNote valueApprovalNote classTenantApproval inputTenantApproval{{ result.approvalId }}ApprovalNote "
+                      name="approvalNote"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.approvalNote | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmApprovalNoteTenantApprovalPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputApprovalNoteTenantApprovalPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+
+{%- macro htmFormButton_patchTenantApproval() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_patchTenantApproval" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_patchTenantApproval"
+                >Modify tenant approval</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_patchTenantApproval"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_patchTenantApproval(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchTenantApprovalDialog" label="Modify tenant approval">
+          <form id="htmForm_patchTenantApproval" class="wa-stack round-row primary-smart-border-radius ">
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantRequestedIdTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantRequestedIdTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantRequestedIdTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="approved-by">
+              <div slot="summary">
+                <span>approved by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovedByEmailTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByEmailTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByEmailTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovedByUserIdTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByUserIdTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByUserIdTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovedByFullNameTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByFullNameTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByFullNameTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="approval">
+              <div slot="summary">
+                <span>approval</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovedTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovalNoteTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovalNoteTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovalNoteTenantApprovalPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+            {{ htmFormButton_patchTenantApproval() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_postTenantApproval() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_postTenantApproval" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_postTenantApproval"
+                >Create a tenant approval</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_postTenantApproval"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_postTenantApproval(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postTenantApprovalDialog" label="Create a tenant approval">
+          <form id="htmForm_postTenantApproval" class="wa-stack round-row primary-smart-border-radius ">
+            <div>You can override any default values below: </div>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmTenantRequestedIdTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantRequestedIdTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantRequestedIdTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="approved-by">
+              <div slot="summary">
+                <span>approved by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmApprovedByEmailTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByEmailTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByEmailTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmApprovedByUserIdTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByUserIdTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByUserIdTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmApprovedByFullNameTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByFullNameTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByFullNameTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="approval">
+              <div slot="summary">
+                <span>approval</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmApprovedTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmApprovalNoteTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovalNoteTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovalNoteTenantApprovalPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+            {{ htmFormButton_postTenantApproval() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_deleteTenantApproval() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deleteTenantApproval" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deleteTenantApproval"
+                >Delete tenant approval</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deleteTenantApproval"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deleteTenantApproval(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteTenantApprovalDialog" label="Delete tenant approval">
+          <form id="htmForm_deleteTenantApproval" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteTenantApproval() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_putimportTenantApproval() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_putimportTenantApproval" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_putimportTenantApproval"
+                >Import tenant approvals</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_putimportTenantApproval"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_putimportTenantApproval(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportTenantApprovalDialog" label="Import tenant approvals">
+          <form id="htmForm_putimportTenantApproval" class="wa-stack round-row primary-smart-border-radius ">
+            <div>
+              <wa-textarea
+                  class="PUTImport_searchList "
+                  style="height: 300px; "
+                  placeholder="{ 'searchList': [ { 'approvalId': ... , 'saves': [ ... ] }, ... ] }"
+                  >
+              </wa-textarea>
+            </div>
+            {{ htmFormButton_putimportTenantApproval() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmForm_searchpageTenantApproval(idSuffix='') %}
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageTenantApprovalDialog" label="Search tenant approvals">
+          <div id="htmForm_searchpageTenantApproval" class="wa-stack round-row primary-smart-border-radius ">
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
+              <div slot="summary">
+                <span>primary key, ID, created, modified, archive details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmPkTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmPkTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmModifiedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmModifiedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmArchivedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmArchivedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantRequestedIdTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantRequestedIdTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantRequestedIdTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="approved-by">
+              <div slot="summary">
+                <span>approved by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovedByEmailTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByEmailTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByEmailTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovedByUserIdTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByUserIdTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByUserIdTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovedByFullNameTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedByFullNameTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedByFullNameTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="approval">
+              <div slot="summary">
+                <span>approval</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovedTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmApprovalNoteTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmApprovalNoteTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmApprovalNoteTenantApprovalPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </div>
+        </div>
+{%- endmacro %}
+
+{%- macro htmFormButton_deletefilterTenantApproval() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterTenantApproval" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deletefilterTenantApproval"
+                >Delete tenant approval</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deletefilterTenantApproval"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deletefilterTenantApproval(idSuffix='') %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterTenantApprovalDialog" label="Delete tenant approval">
+          <form id="htmForm_deletefilterTenantApproval" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterTenantApproval() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}

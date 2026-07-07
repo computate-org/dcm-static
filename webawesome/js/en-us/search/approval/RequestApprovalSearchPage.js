@@ -66,15 +66,37 @@ Promise.all([
     facetStatsChange('RequestApproval', 'approvedByEmail', false);
   });
 
-  document.querySelector('#pageSelectSortRequestApproval_approvalName')?.addEventListener('change', (event) => {
-    sort('RequestApproval', 'approvalName', event.currentTarget.value);
+  document.querySelector('#pageSelectSortRequestApproval_approvedByUserId')?.addEventListener('change', (event) => {
+    sort('RequestApproval', 'approvedByUserId', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsRequestApproval_approvalName')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('RequestApproval', 'approvalName', true);
+  document.querySelector('#pageStatsRequestApproval_approvedByUserId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('RequestApproval', 'approvedByUserId', true);
   });
-  document.querySelector('#pageStatsRequestApproval_approvalName')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('RequestApproval', 'approvalName', false);
+  document.querySelector('#pageStatsRequestApproval_approvedByUserId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('RequestApproval', 'approvedByUserId', false);
+  });
+
+  document.querySelector('#pageSelectSortRequestApproval_approvedByFullName')?.addEventListener('change', (event) => {
+    sort('RequestApproval', 'approvedByFullName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsRequestApproval_approvedByFullName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('RequestApproval', 'approvedByFullName', true);
+  });
+  document.querySelector('#pageStatsRequestApproval_approvedByFullName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('RequestApproval', 'approvedByFullName', false);
+  });
+
+  document.querySelector('#pageSelectSortRequestApproval_approved')?.addEventListener('change', (event) => {
+    sort('RequestApproval', 'approved', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsRequestApproval_approved')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('RequestApproval', 'approved', true);
+  });
+  document.querySelector('#pageStatsRequestApproval_approved')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('RequestApproval', 'approved', false);
   });
 
   document.querySelector('#pageSelectSortRequestApproval_approvalNote')?.addEventListener('change', (event) => {
@@ -242,50 +264,6 @@ Promise.all([
     facetStatsChange('RequestApproval', 'solrId', false);
   });
 
-  document.querySelector('#pageSelectSortRequestApproval_approvalId')?.addEventListener('change', (event) => {
-    sort('RequestApproval', 'approvalId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsRequestApproval_approvalId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('RequestApproval', 'approvalId', true);
-  });
-  document.querySelector('#pageStatsRequestApproval_approvalId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('RequestApproval', 'approvalId', false);
-  });
-
-  document.querySelector('#pageSelectSortRequestApproval_approvedByUserId')?.addEventListener('change', (event) => {
-    sort('RequestApproval', 'approvedByUserId', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsRequestApproval_approvedByUserId')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('RequestApproval', 'approvedByUserId', true);
-  });
-  document.querySelector('#pageStatsRequestApproval_approvedByUserId')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('RequestApproval', 'approvedByUserId', false);
-  });
-
-  document.querySelector('#pageSelectSortRequestApproval_approvedByFullName')?.addEventListener('change', (event) => {
-    sort('RequestApproval', 'approvedByFullName', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsRequestApproval_approvedByFullName')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('RequestApproval', 'approvedByFullName', true);
-  });
-  document.querySelector('#pageStatsRequestApproval_approvedByFullName')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('RequestApproval', 'approvedByFullName', false);
-  });
-
-  document.querySelector('#pageSelectSortRequestApproval_approved')?.addEventListener('change', (event) => {
-    sort('RequestApproval', 'approved', event.currentTarget.value);
-  });
-
-  document.querySelector('#pageStatsRequestApproval_approved')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('RequestApproval', 'approved', true);
-  });
-  document.querySelector('#pageStatsRequestApproval_approved')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('RequestApproval', 'approved', false);
-  });
-
   document.querySelector('#pageSelectSortRequestApproval_modelType')?.addEventListener('change', (event) => {
     sort('RequestApproval', 'modelType', event.currentTarget.value);
   });
@@ -306,6 +284,28 @@ Promise.all([
   });
   document.querySelector('#pageStatsRequestApproval_modelResource')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('RequestApproval', 'modelResource', false);
+  });
+
+  document.querySelector('#pageSelectSortRequestApproval_approvalName')?.addEventListener('change', (event) => {
+    sort('RequestApproval', 'approvalName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsRequestApproval_approvalName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('RequestApproval', 'approvalName', true);
+  });
+  document.querySelector('#pageStatsRequestApproval_approvalName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('RequestApproval', 'approvalName', false);
+  });
+
+  document.querySelector('#pageSelectSortRequestApproval_approvalId')?.addEventListener('change', (event) => {
+    sort('RequestApproval', 'approvalId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsRequestApproval_approvalId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('RequestApproval', 'approvalId', true);
+  });
+  document.querySelector('#pageStatsRequestApproval_approvalId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('RequestApproval', 'approvalId', false);
   });
 
   document.querySelector('#pageSelectSortRequestApproval_approvalTitle')?.addEventListener('change', (event) => {
@@ -354,22 +354,22 @@ Promise.all([
           document.querySelector('#pageFacetRangeEndRequestApproval_archived')?.addEventListener('change', (event) => {
             facetRangeEndChange('RequestApproval', event.currentTarget);
           });
-          document.querySelector('#fqRequestApproval_approvalName')?.addEventListener('change', (event) => {
+          document.querySelector('#fqRequestApproval_approved')?.addEventListener('change', (event) => {
             fqChange('RequestApproval', event.currentTarget, facetChangeRequestApprovalSuccess, facetChangeRequestApprovalError);
           });
-          document.querySelector('#buttonFacetRequestApproval_approvalName')?.addEventListener('click', (event) => {
+          document.querySelector('#buttonFacetRequestApproval_approved')?.addEventListener('click', (event) => {
             facetFieldChange('RequestApproval', event.currentTarget);
           });
-          document.querySelector('#pageFacetPivotRequestApproval_approvalName')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetPivotRequestApproval_approved')?.addEventListener('change', (event) => {
             facetPivotChange('RequestApproval', event.currentTarget);
           });
-          document.querySelector('#pageFacetRangeGapRequestApproval_approvalName')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetRangeGapRequestApproval_approved')?.addEventListener('change', (event) => {
             facetRangeGapChange('RequestApproval', event.currentTarget);
           });
-          document.querySelector('#pageFacetRangeStartRequestApproval_approvalName')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetRangeStartRequestApproval_approved')?.addEventListener('change', (event) => {
             facetRangeStartChange('RequestApproval', event.currentTarget);
           });
-          document.querySelector('#pageFacetRangeEndRequestApproval_approvalName')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetRangeEndRequestApproval_approved')?.addEventListener('change', (event) => {
             facetRangeEndChange('RequestApproval', event.currentTarget);
           });
           document.querySelector('#fqRequestApproval_approvalNote')?.addEventListener('change', (event) => {
@@ -462,42 +462,6 @@ Promise.all([
           document.querySelector('#pageFacetRangeEndRequestApproval_download')?.addEventListener('change', (event) => {
             facetRangeEndChange('RequestApproval', event.currentTarget);
           });
-          document.querySelector('#fqRequestApproval_approvalId')?.addEventListener('change', (event) => {
-            fqChange('RequestApproval', event.currentTarget, facetChangeRequestApprovalSuccess, facetChangeRequestApprovalError);
-          });
-          document.querySelector('#buttonFacetRequestApproval_approvalId')?.addEventListener('click', (event) => {
-            facetFieldChange('RequestApproval', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotRequestApproval_approvalId')?.addEventListener('change', (event) => {
-            facetPivotChange('RequestApproval', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapRequestApproval_approvalId')?.addEventListener('change', (event) => {
-            facetRangeGapChange('RequestApproval', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeStartRequestApproval_approvalId')?.addEventListener('change', (event) => {
-            facetRangeStartChange('RequestApproval', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeEndRequestApproval_approvalId')?.addEventListener('change', (event) => {
-            facetRangeEndChange('RequestApproval', event.currentTarget);
-          });
-          document.querySelector('#fqRequestApproval_approved')?.addEventListener('change', (event) => {
-            fqChange('RequestApproval', event.currentTarget, facetChangeRequestApprovalSuccess, facetChangeRequestApprovalError);
-          });
-          document.querySelector('#buttonFacetRequestApproval_approved')?.addEventListener('click', (event) => {
-            facetFieldChange('RequestApproval', event.currentTarget);
-          });
-          document.querySelector('#pageFacetPivotRequestApproval_approved')?.addEventListener('change', (event) => {
-            facetPivotChange('RequestApproval', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeGapRequestApproval_approved')?.addEventListener('change', (event) => {
-            facetRangeGapChange('RequestApproval', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeStartRequestApproval_approved')?.addEventListener('change', (event) => {
-            facetRangeStartChange('RequestApproval', event.currentTarget);
-          });
-          document.querySelector('#pageFacetRangeEndRequestApproval_approved')?.addEventListener('change', (event) => {
-            facetRangeEndChange('RequestApproval', event.currentTarget);
-          });
           document.querySelector('#fqRequestApproval_modelType')?.addEventListener('change', (event) => {
             fqChange('RequestApproval', event.currentTarget, facetChangeRequestApprovalSuccess, facetChangeRequestApprovalError);
           });
@@ -532,6 +496,42 @@ Promise.all([
             facetRangeStartChange('RequestApproval', event.currentTarget);
           });
           document.querySelector('#pageFacetRangeEndRequestApproval_modelResource')?.addEventListener('change', (event) => {
+            facetRangeEndChange('RequestApproval', event.currentTarget);
+          });
+          document.querySelector('#fqRequestApproval_approvalName')?.addEventListener('change', (event) => {
+            fqChange('RequestApproval', event.currentTarget, facetChangeRequestApprovalSuccess, facetChangeRequestApprovalError);
+          });
+          document.querySelector('#buttonFacetRequestApproval_approvalName')?.addEventListener('click', (event) => {
+            facetFieldChange('RequestApproval', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotRequestApproval_approvalName')?.addEventListener('change', (event) => {
+            facetPivotChange('RequestApproval', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapRequestApproval_approvalName')?.addEventListener('change', (event) => {
+            facetRangeGapChange('RequestApproval', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartRequestApproval_approvalName')?.addEventListener('change', (event) => {
+            facetRangeStartChange('RequestApproval', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndRequestApproval_approvalName')?.addEventListener('change', (event) => {
+            facetRangeEndChange('RequestApproval', event.currentTarget);
+          });
+          document.querySelector('#fqRequestApproval_approvalId')?.addEventListener('change', (event) => {
+            fqChange('RequestApproval', event.currentTarget, facetChangeRequestApprovalSuccess, facetChangeRequestApprovalError);
+          });
+          document.querySelector('#buttonFacetRequestApproval_approvalId')?.addEventListener('click', (event) => {
+            facetFieldChange('RequestApproval', event.currentTarget);
+          });
+          document.querySelector('#pageFacetPivotRequestApproval_approvalId')?.addEventListener('change', (event) => {
+            facetPivotChange('RequestApproval', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeGapRequestApproval_approvalId')?.addEventListener('change', (event) => {
+            facetRangeGapChange('RequestApproval', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeStartRequestApproval_approvalId')?.addEventListener('change', (event) => {
+            facetRangeStartChange('RequestApproval', event.currentTarget);
+          });
+          document.querySelector('#pageFacetRangeEndRequestApproval_approvalId')?.addEventListener('change', (event) => {
             facetRangeEndChange('RequestApproval', event.currentTarget);
           });
           document.querySelector('#fqRequestApproval_approvalTitle')?.addEventListener('change', (event) => {
@@ -571,7 +571,8 @@ Promise.all([
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
       deletefilterRequestApproval(
-          event.currentTarget
+          [{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'approvalId:' + event.currentTarget.getAttribute('data-approvalId') }]
+          , event.currentTarget
           , function(response, target) { addGlow(target); }
           , function(response, target) { addError(target); }
           );

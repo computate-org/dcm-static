@@ -1,0 +1,65 @@
+
+{%- macro htmButton_patchTenantApproval() %}<wa-button variant="brand" id="htmButton_patchTenantApproval"  data-dialog="open patchTenantApprovalDialog" data-approvalId={{ result.approvalId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+
+{%- macro htmButton_postTenantApproval() %}<wa-button variant="brand" id="htmButton_postTenantApproval"  data-dialog="open postTenantApprovalDialog" data-approvalId={{ result.approvalId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deleteTenantApproval() %}<wa-button variant="brand" id="htmButton_deleteTenantApproval" data-approvalId={{ result.approvalId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+
+{%- macro htmButton_putimportTenantApproval() %}<wa-button variant="brand" id="htmButton_putimportTenantApproval"  data-dialog="open putimportTenantApprovalDialog" data-approvalId={{ result.approvalId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deletefilterTenantApproval() %}<wa-button variant="brand" id="htmButton_deletefilterTenantApproval" data-approvalId={{ result.approvalId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+          <div id="htmSearchForm">
+            <wa-scroller>
+              <wa-button-group>
+{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {% if "PATCH" in scopes %}
+    {% if resultCount >= 1 %}
+                <wa-button variant="brand" id="refreshThisTenantApprovalGenPage"
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'approvalId:{{ result.approvalId }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisTenantApprovalGenPage')); }, function() { addError(document.querySelector('#refreshThisTenantApprovalGenPage')); }); return false; ">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  refresh
+                </wa-button>
+    {% endif %}
+    {% if resultCount > 0 %}
+                <wa-button variant="brand" id="refreshAllTenantApprovalGenPage{{ result.approvalId | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllTenantApprovalGenPage{{ result.approvalId | e }}')); }, function() { addError(document.querySelector('#refreshAllTenantApprovalGenPage{{ result.approvalId | e }}')); }); "
+                    >
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  refresh all 
+                </wa-button>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{%- if 'PATCH' in scopes %}
+  {%- if resultCount > 0 %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_patchTenantApproval() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmButton_postTenantApproval() }}
+  {%- else %}
+    {{ htmButton_postTenantApproval() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is defined %}
+    {{ htmButton_deleteTenantApproval() }}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmButton_putimportTenantApproval() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is not defined %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_deletefilterTenantApproval() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+
+              </wa-button-group>
+            </wa-scroller>
+          </div>

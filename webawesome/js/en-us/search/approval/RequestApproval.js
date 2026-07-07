@@ -83,7 +83,9 @@ async function websocketRequestApprovalInner(apiRequest) {
         var inputModified = null;
         var inputArchived = null;
         var inputApprovedByEmail = null;
-        var inputApprovalName = null;
+        var inputApprovedByUserId = null;
+        var inputApprovedByFullName = null;
+        var inputApproved = null;
         var inputApprovalNote = null;
         var inputClassCanonicalName = null;
         var inputClassSimpleName = null;
@@ -99,12 +101,10 @@ async function websocketRequestApprovalInner(apiRequest) {
         var inputObjectSuggest = null;
         var inputObjectText = null;
         var inputSolrId = null;
-        var inputApprovalId = null;
-        var inputApprovedByUserId = null;
-        var inputApprovedByFullName = null;
-        var inputApproved = null;
         var inputModelType = null;
         var inputModelResource = null;
+        var inputApprovalName = null;
+        var inputApprovalId = null;
         var inputApprovalTitle = null;
 
         if(vars.includes('pk'))
@@ -117,8 +117,12 @@ async function websocketRequestApprovalInner(apiRequest) {
           inputArchived = $response.querySelector('.RequestApproval_Page_archived');
         if(vars.includes('approvedByEmail'))
           inputApprovedByEmail = $response.querySelector('.RequestApproval_Page_approvedByEmail');
-        if(vars.includes('approvalName'))
-          inputApprovalName = $response.querySelector('.RequestApproval_Page_approvalName');
+        if(vars.includes('approvedByUserId'))
+          inputApprovedByUserId = $response.querySelector('.RequestApproval_Page_approvedByUserId');
+        if(vars.includes('approvedByFullName'))
+          inputApprovedByFullName = $response.querySelector('.RequestApproval_Page_approvedByFullName');
+        if(vars.includes('approved'))
+          inputApproved = $response.querySelector('.RequestApproval_Page_approved');
         if(vars.includes('approvalNote'))
           inputApprovalNote = $response.querySelector('.RequestApproval_Page_approvalNote');
         if(vars.includes('classCanonicalName'))
@@ -149,18 +153,14 @@ async function websocketRequestApprovalInner(apiRequest) {
           inputObjectText = $response.querySelector('.RequestApproval_Page_objectText');
         if(vars.includes('solrId'))
           inputSolrId = $response.querySelector('.RequestApproval_Page_solrId');
-        if(vars.includes('approvalId'))
-          inputApprovalId = $response.querySelector('.RequestApproval_Page_approvalId');
-        if(vars.includes('approvedByUserId'))
-          inputApprovedByUserId = $response.querySelector('.RequestApproval_Page_approvedByUserId');
-        if(vars.includes('approvedByFullName'))
-          inputApprovedByFullName = $response.querySelector('.RequestApproval_Page_approvedByFullName');
-        if(vars.includes('approved'))
-          inputApproved = $response.querySelector('.RequestApproval_Page_approved');
         if(vars.includes('modelType'))
           inputModelType = $response.querySelector('.RequestApproval_Page_modelType');
         if(vars.includes('modelResource'))
           inputModelResource = $response.querySelector('.RequestApproval_Page_modelResource');
+        if(vars.includes('approvalName'))
+          inputApprovalName = $response.querySelector('.RequestApproval_Page_approvalName');
+        if(vars.includes('approvalId'))
+          inputApprovalId = $response.querySelector('.RequestApproval_Page_approvalId');
         if(vars.includes('approvalTitle'))
           inputApprovalTitle = $response.querySelector('.RequestApproval_Page_approvalTitle');
 
@@ -239,18 +239,46 @@ async function websocketRequestApprovalInner(apiRequest) {
           addGlow(document.querySelector('.RequestApproval_Page_approvedByEmail'));
         }
 
-        if(inputApprovalName) {
-          document.querySelectorAll('.RequestApproval_Page_approvalName').forEach((item, index) => {
+        if(inputApprovedByUserId) {
+          document.querySelectorAll('.RequestApproval_Page_approvedByUserId').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
             }
             if(typeof item.value !== 'undefined')
-              item.value = inputApprovalName.getAttribute('value');
+              item.value = inputApprovedByUserId.getAttribute('value');
             else
-              item.textContent = inputApprovalName.textContent;
+              item.textContent = inputApprovedByUserId.textContent;
           });
-          addGlow(document.querySelector('.RequestApproval_Page_approvalName'));
+          addGlow(document.querySelector('.RequestApproval_Page_approvedByUserId'));
+        }
+
+        if(inputApprovedByFullName) {
+          document.querySelectorAll('.RequestApproval_Page_approvedByFullName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputApprovedByFullName.getAttribute('value');
+            else
+              item.textContent = inputApprovedByFullName.textContent;
+          });
+          addGlow(document.querySelector('.RequestApproval_Page_approvedByFullName'));
+        }
+
+        if(inputApproved) {
+          document.querySelectorAll('.RequestApproval_Page_approved').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputApproved.getAttribute('value');
+            else
+              item.textContent = inputApproved.textContent;
+          });
+          addGlow(document.querySelector('.RequestApproval_Page_approved'));
         }
 
         if(inputApprovalNote) {
@@ -463,62 +491,6 @@ async function websocketRequestApprovalInner(apiRequest) {
           addGlow(document.querySelector('.RequestApproval_Page_solrId'));
         }
 
-        if(inputApprovalId) {
-          document.querySelectorAll('.RequestApproval_Page_approvalId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputApprovalId.getAttribute('value');
-            else
-              item.textContent = inputApprovalId.textContent;
-          });
-          addGlow(document.querySelector('.RequestApproval_Page_approvalId'));
-        }
-
-        if(inputApprovedByUserId) {
-          document.querySelectorAll('.RequestApproval_Page_approvedByUserId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputApprovedByUserId.getAttribute('value');
-            else
-              item.textContent = inputApprovedByUserId.textContent;
-          });
-          addGlow(document.querySelector('.RequestApproval_Page_approvedByUserId'));
-        }
-
-        if(inputApprovedByFullName) {
-          document.querySelectorAll('.RequestApproval_Page_approvedByFullName').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputApprovedByFullName.getAttribute('value');
-            else
-              item.textContent = inputApprovedByFullName.textContent;
-          });
-          addGlow(document.querySelector('.RequestApproval_Page_approvedByFullName'));
-        }
-
-        if(inputApproved) {
-          document.querySelectorAll('.RequestApproval_Page_approved').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputApproved.getAttribute('value');
-            else
-              item.textContent = inputApproved.textContent;
-          });
-          addGlow(document.querySelector('.RequestApproval_Page_approved'));
-        }
-
         if(inputModelType) {
           document.querySelectorAll('.RequestApproval_Page_modelType').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
@@ -545,6 +517,34 @@ async function websocketRequestApprovalInner(apiRequest) {
               item.textContent = inputModelResource.textContent;
           });
           addGlow(document.querySelector('.RequestApproval_Page_modelResource'));
+        }
+
+        if(inputApprovalName) {
+          document.querySelectorAll('.RequestApproval_Page_approvalName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputApprovalName.getAttribute('value');
+            else
+              item.textContent = inputApprovalName.textContent;
+          });
+          addGlow(document.querySelector('.RequestApproval_Page_approvalName'));
+        }
+
+        if(inputApprovalId) {
+          document.querySelectorAll('.RequestApproval_Page_approvalId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputApprovalId.getAttribute('value');
+            else
+              item.textContent = inputApprovalId.textContent;
+          });
+          addGlow(document.querySelector('.RequestApproval_Page_approvalId'));
         }
 
         if(inputApprovalTitle) {
@@ -732,9 +732,23 @@ function searchRequestApprovalFilters($formFilters) {
     if(filterApprovedByEmail != null && filterApprovedByEmail !== '')
       filters.push({ name: 'fq', value: 'approvedByEmail:' + filterApprovedByEmail });
 
-    var filterApprovalName = $formFilters.querySelector('.valueApprovalName')?.value;
-    if(filterApprovalName != null && filterApprovalName !== '')
-      filters.push({ name: 'fq', value: 'approvalName:' + filterApprovalName });
+    var filterApprovedByUserId = $formFilters.querySelector('.valueApprovedByUserId')?.value;
+    if(filterApprovedByUserId != null && filterApprovedByUserId !== '')
+      filters.push({ name: 'fq', value: 'approvedByUserId:' + filterApprovedByUserId });
+
+    var filterApprovedByFullName = $formFilters.querySelector('.valueApprovedByFullName')?.value;
+    if(filterApprovedByFullName != null && filterApprovedByFullName !== '')
+      filters.push({ name: 'fq', value: 'approvedByFullName:' + filterApprovedByFullName });
+
+    var $filterApprovedCheckbox = $formFilters.querySelector('input.valueApproved[type = "checkbox"]');
+    var $filterApprovedSelect = $formFilters.querySelector('select.valueApproved');
+    var filterApproved = $filterApprovedSelect.length ? $filterApprovedSelect.value : $filterApprovedCheckbox.checked;
+    var filterApprovedSelectVal = $formFilters.querySelector('select.filterApproved')?.value;
+    var filterApproved = null;
+    if(filterApprovedSelectVal !== '')
+      filterApproved = filterApprovedSelectVal == 'true';
+    if(filterApproved != null && filterApproved === true)
+      filters.push({ name: 'fq', value: 'approved:' + filterApproved });
 
     var filterApprovalNote = $formFilters.querySelector('.valueApprovalNote')?.value;
     if(filterApprovalNote != null && filterApprovalNote !== '')
@@ -796,28 +810,6 @@ function searchRequestApprovalFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
-    var filterApprovalId = $formFilters.querySelector('.valueApprovalId')?.value;
-    if(filterApprovalId != null && filterApprovalId !== '')
-      filters.push({ name: 'fq', value: 'approvalId:' + filterApprovalId });
-
-    var filterApprovedByUserId = $formFilters.querySelector('.valueApprovedByUserId')?.value;
-    if(filterApprovedByUserId != null && filterApprovedByUserId !== '')
-      filters.push({ name: 'fq', value: 'approvedByUserId:' + filterApprovedByUserId });
-
-    var filterApprovedByFullName = $formFilters.querySelector('.valueApprovedByFullName')?.value;
-    if(filterApprovedByFullName != null && filterApprovedByFullName !== '')
-      filters.push({ name: 'fq', value: 'approvedByFullName:' + filterApprovedByFullName });
-
-    var $filterApprovedCheckbox = $formFilters.querySelector('input.valueApproved[type = "checkbox"]');
-    var $filterApprovedSelect = $formFilters.querySelector('select.valueApproved');
-    var filterApproved = $filterApprovedSelect.length ? $filterApprovedSelect.value : $filterApprovedCheckbox.checked;
-    var filterApprovedSelectVal = $formFilters.querySelector('select.filterApproved')?.value;
-    var filterApproved = null;
-    if(filterApprovedSelectVal !== '')
-      filterApproved = filterApprovedSelectVal == 'true';
-    if(filterApproved != null && filterApproved === true)
-      filters.push({ name: 'fq', value: 'approved:' + filterApproved });
-
     var filterModelType = $formFilters.querySelector('.valueModelType')?.value;
     if(filterModelType != null && filterModelType !== '')
       filters.push({ name: 'fq', value: 'modelType:' + filterModelType });
@@ -825,6 +817,14 @@ function searchRequestApprovalFilters($formFilters) {
     var filterModelResource = $formFilters.querySelector('.valueModelResource')?.value;
     if(filterModelResource != null && filterModelResource !== '')
       filters.push({ name: 'fq', value: 'modelResource:' + filterModelResource });
+
+    var filterApprovalName = $formFilters.querySelector('.valueApprovalName')?.value;
+    if(filterApprovalName != null && filterApprovalName !== '')
+      filters.push({ name: 'fq', value: 'approvalName:' + filterApprovalName });
+
+    var filterApprovalId = $formFilters.querySelector('.valueApprovalId')?.value;
+    if(filterApprovalId != null && filterApprovalId !== '')
+      filters.push({ name: 'fq', value: 'approvalId:' + filterApprovalId });
 
     var filterApprovalTitle = $formFilters.querySelector('.valueApprovalTitle')?.value;
     if(filterApprovalTitle != null && filterApprovalTitle !== '')
@@ -966,17 +966,48 @@ async function patchRequestApproval($formFilters, $formValues, target, approvalI
   if(removeApprovedByEmail != null && removeApprovedByEmail !== '')
     vals['removeApprovedByEmail'] = removeApprovedByEmail;
 
-  var valueApprovalName = $formValues.querySelector('.valueApprovalName')?.value;
-  var removeApprovalName = $formValues.querySelector('.removeApprovalName')?.value === 'true';
-  var setApprovalName = removeApprovalName ? null : $formValues.querySelector('.setApprovalName')?.value;
-  var addApprovalName = $formValues.querySelector('.addApprovalName')?.value;
-  if(removeApprovalName || setApprovalName != null && setApprovalName !== '')
-    vals['setApprovalName'] = setApprovalName;
-  if(addApprovalName != null && addApprovalName !== '')
-    vals['addApprovalName'] = addApprovalName;
-  var removeApprovalName = $formValues.querySelector('.removeApprovalName')?.value;
-  if(removeApprovalName != null && removeApprovalName !== '')
-    vals['removeApprovalName'] = removeApprovalName;
+  var valueApprovedByUserId = $formValues.querySelector('.valueApprovedByUserId')?.value;
+  var removeApprovedByUserId = $formValues.querySelector('.removeApprovedByUserId')?.value === 'true';
+  var setApprovedByUserId = removeApprovedByUserId ? null : $formValues.querySelector('.setApprovedByUserId')?.value;
+  var addApprovedByUserId = $formValues.querySelector('.addApprovedByUserId')?.value;
+  if(removeApprovedByUserId || setApprovedByUserId != null && setApprovedByUserId !== '')
+    vals['setApprovedByUserId'] = setApprovedByUserId;
+  if(addApprovedByUserId != null && addApprovedByUserId !== '')
+    vals['addApprovedByUserId'] = addApprovedByUserId;
+  var removeApprovedByUserId = $formValues.querySelector('.removeApprovedByUserId')?.value;
+  if(removeApprovedByUserId != null && removeApprovedByUserId !== '')
+    vals['removeApprovedByUserId'] = removeApprovedByUserId;
+
+  var valueApprovedByFullName = $formValues.querySelector('.valueApprovedByFullName')?.value;
+  var removeApprovedByFullName = $formValues.querySelector('.removeApprovedByFullName')?.value === 'true';
+  var setApprovedByFullName = removeApprovedByFullName ? null : $formValues.querySelector('.setApprovedByFullName')?.value;
+  var addApprovedByFullName = $formValues.querySelector('.addApprovedByFullName')?.value;
+  if(removeApprovedByFullName || setApprovedByFullName != null && setApprovedByFullName !== '')
+    vals['setApprovedByFullName'] = setApprovedByFullName;
+  if(addApprovedByFullName != null && addApprovedByFullName !== '')
+    vals['addApprovedByFullName'] = addApprovedByFullName;
+  var removeApprovedByFullName = $formValues.querySelector('.removeApprovedByFullName')?.value;
+  if(removeApprovedByFullName != null && removeApprovedByFullName !== '')
+    vals['removeApprovedByFullName'] = removeApprovedByFullName;
+
+  var valueApproved = $formValues.querySelector('.valueApproved')?.value;
+  var removeApproved = $formValues.querySelector('.removeApproved')?.value === 'true';
+  if(valueApproved != null)
+    valueApproved = valueApproved === 'true';
+  var valueApprovedSelectVal = $formValues.querySelector('select.setApproved')?.value;
+  if(valueApprovedSelectVal != null)
+    valueApprovedSelectVal = valueApprovedSelectVal === 'true';
+  if(valueApprovedSelectVal != null && valueApprovedSelectVal !== '')
+    valueApproved = valueApprovedSelectVal == 'true';
+  var setApproved = removeApproved ? null : valueApproved;
+  var addApproved = $formValues.querySelector('.addApproved')?.checked;
+  if(removeApproved || setApproved != null && setApproved !== '')
+    vals['setApproved'] = setApproved;
+  if(addApproved != null && addApproved !== '')
+    vals['addApproved'] = addApproved;
+  var removeApproved = $formValues.querySelector('.removeApproved')?.checked;
+  if(removeApproved != null && removeApproved !== '')
+    vals['removeApproved'] = removeApproved;
 
   var valueApprovalNote = $formValues.querySelector('.valueApprovalNote')?.value;
   var removeApprovalNote = $formValues.querySelector('.removeApprovalNote')?.value === 'true';
@@ -1074,61 +1105,6 @@ async function patchRequestApproval($formFilters, $formValues, target, approvalI
   if(removeDownload != null && removeDownload !== '')
     vals['removeDownload'] = removeDownload;
 
-  var valueApprovalId = $formValues.querySelector('.valueApprovalId')?.value;
-  var removeApprovalId = $formValues.querySelector('.removeApprovalId')?.value === 'true';
-  var setApprovalId = removeApprovalId ? null : $formValues.querySelector('.setApprovalId')?.value;
-  var addApprovalId = $formValues.querySelector('.addApprovalId')?.value;
-  if(removeApprovalId || setApprovalId != null && setApprovalId !== '')
-    vals['setApprovalId'] = setApprovalId;
-  if(addApprovalId != null && addApprovalId !== '')
-    vals['addApprovalId'] = addApprovalId;
-  var removeApprovalId = $formValues.querySelector('.removeApprovalId')?.value;
-  if(removeApprovalId != null && removeApprovalId !== '')
-    vals['removeApprovalId'] = removeApprovalId;
-
-  var valueApprovedByUserId = $formValues.querySelector('.valueApprovedByUserId')?.value;
-  var removeApprovedByUserId = $formValues.querySelector('.removeApprovedByUserId')?.value === 'true';
-  var setApprovedByUserId = removeApprovedByUserId ? null : $formValues.querySelector('.setApprovedByUserId')?.value;
-  var addApprovedByUserId = $formValues.querySelector('.addApprovedByUserId')?.value;
-  if(removeApprovedByUserId || setApprovedByUserId != null && setApprovedByUserId !== '')
-    vals['setApprovedByUserId'] = setApprovedByUserId;
-  if(addApprovedByUserId != null && addApprovedByUserId !== '')
-    vals['addApprovedByUserId'] = addApprovedByUserId;
-  var removeApprovedByUserId = $formValues.querySelector('.removeApprovedByUserId')?.value;
-  if(removeApprovedByUserId != null && removeApprovedByUserId !== '')
-    vals['removeApprovedByUserId'] = removeApprovedByUserId;
-
-  var valueApprovedByFullName = $formValues.querySelector('.valueApprovedByFullName')?.value;
-  var removeApprovedByFullName = $formValues.querySelector('.removeApprovedByFullName')?.value === 'true';
-  var setApprovedByFullName = removeApprovedByFullName ? null : $formValues.querySelector('.setApprovedByFullName')?.value;
-  var addApprovedByFullName = $formValues.querySelector('.addApprovedByFullName')?.value;
-  if(removeApprovedByFullName || setApprovedByFullName != null && setApprovedByFullName !== '')
-    vals['setApprovedByFullName'] = setApprovedByFullName;
-  if(addApprovedByFullName != null && addApprovedByFullName !== '')
-    vals['addApprovedByFullName'] = addApprovedByFullName;
-  var removeApprovedByFullName = $formValues.querySelector('.removeApprovedByFullName')?.value;
-  if(removeApprovedByFullName != null && removeApprovedByFullName !== '')
-    vals['removeApprovedByFullName'] = removeApprovedByFullName;
-
-  var valueApproved = $formValues.querySelector('.valueApproved')?.value;
-  var removeApproved = $formValues.querySelector('.removeApproved')?.value === 'true';
-  if(valueApproved != null)
-    valueApproved = valueApproved === 'true';
-  var valueApprovedSelectVal = $formValues.querySelector('select.setApproved')?.value;
-  if(valueApprovedSelectVal != null)
-    valueApprovedSelectVal = valueApprovedSelectVal === 'true';
-  if(valueApprovedSelectVal != null && valueApprovedSelectVal !== '')
-    valueApproved = valueApprovedSelectVal == 'true';
-  var setApproved = removeApproved ? null : valueApproved;
-  var addApproved = $formValues.querySelector('.addApproved')?.checked;
-  if(removeApproved || setApproved != null && setApproved !== '')
-    vals['setApproved'] = setApproved;
-  if(addApproved != null && addApproved !== '')
-    vals['addApproved'] = addApproved;
-  var removeApproved = $formValues.querySelector('.removeApproved')?.checked;
-  if(removeApproved != null && removeApproved !== '')
-    vals['removeApproved'] = removeApproved;
-
   var valueModelType = $formValues.querySelector('.valueModelType')?.value;
   var removeModelType = $formValues.querySelector('.removeModelType')?.value === 'true';
   var setModelType = removeModelType ? null : $formValues.querySelector('.setModelType')?.value;
@@ -1152,6 +1128,30 @@ async function patchRequestApproval($formFilters, $formValues, target, approvalI
   var removeModelResource = $formValues.querySelector('.removeModelResource')?.value;
   if(removeModelResource != null && removeModelResource !== '')
     vals['removeModelResource'] = removeModelResource;
+
+  var valueApprovalName = $formValues.querySelector('.valueApprovalName')?.value;
+  var removeApprovalName = $formValues.querySelector('.removeApprovalName')?.value === 'true';
+  var setApprovalName = removeApprovalName ? null : $formValues.querySelector('.setApprovalName')?.value;
+  var addApprovalName = $formValues.querySelector('.addApprovalName')?.value;
+  if(removeApprovalName || setApprovalName != null && setApprovalName !== '')
+    vals['setApprovalName'] = setApprovalName;
+  if(addApprovalName != null && addApprovalName !== '')
+    vals['addApprovalName'] = addApprovalName;
+  var removeApprovalName = $formValues.querySelector('.removeApprovalName')?.value;
+  if(removeApprovalName != null && removeApprovalName !== '')
+    vals['removeApprovalName'] = removeApprovalName;
+
+  var valueApprovalId = $formValues.querySelector('.valueApprovalId')?.value;
+  var removeApprovalId = $formValues.querySelector('.removeApprovalId')?.value === 'true';
+  var setApprovalId = removeApprovalId ? null : $formValues.querySelector('.setApprovalId')?.value;
+  var addApprovalId = $formValues.querySelector('.addApprovalId')?.value;
+  if(removeApprovalId || setApprovalId != null && setApprovalId !== '')
+    vals['setApprovalId'] = setApprovalId;
+  if(addApprovalId != null && addApprovalId !== '')
+    vals['addApprovalId'] = addApprovalId;
+  var removeApprovalId = $formValues.querySelector('.removeApprovalId')?.value;
+  if(removeApprovalId != null && removeApprovalId !== '')
+    vals['removeApprovalId'] = removeApprovalId;
 
   var valueApprovalTitle = $formValues.querySelector('.valueApprovalTitle')?.value;
   var removeApprovalTitle = $formValues.querySelector('.removeApprovalTitle')?.value === 'true';
@@ -1199,9 +1199,23 @@ function patchRequestApprovalFilters($formFilters) {
     if(filterApprovedByEmail != null && filterApprovedByEmail !== '')
       filters.push({ name: 'fq', value: 'approvedByEmail:' + filterApprovedByEmail });
 
-    var filterApprovalName = $formFilters.querySelector('.valueApprovalName')?.value;
-    if(filterApprovalName != null && filterApprovalName !== '')
-      filters.push({ name: 'fq', value: 'approvalName:' + filterApprovalName });
+    var filterApprovedByUserId = $formFilters.querySelector('.valueApprovedByUserId')?.value;
+    if(filterApprovedByUserId != null && filterApprovedByUserId !== '')
+      filters.push({ name: 'fq', value: 'approvedByUserId:' + filterApprovedByUserId });
+
+    var filterApprovedByFullName = $formFilters.querySelector('.valueApprovedByFullName')?.value;
+    if(filterApprovedByFullName != null && filterApprovedByFullName !== '')
+      filters.push({ name: 'fq', value: 'approvedByFullName:' + filterApprovedByFullName });
+
+    var $filterApprovedCheckbox = $formFilters.querySelector('input.valueApproved[type = "checkbox"]');
+    var $filterApprovedSelect = $formFilters.querySelector('select.valueApproved');
+    var filterApproved = $filterApprovedSelect.length ? $filterApprovedSelect.value : $filterApprovedCheckbox.checked;
+    var filterApprovedSelectVal = $formFilters.querySelector('select.filterApproved')?.value;
+    var filterApproved = null;
+    if(filterApprovedSelectVal !== '')
+      filterApproved = filterApprovedSelectVal == 'true';
+    if(filterApproved != null && filterApproved === true)
+      filters.push({ name: 'fq', value: 'approved:' + filterApproved });
 
     var filterApprovalNote = $formFilters.querySelector('.valueApprovalNote')?.value;
     if(filterApprovalNote != null && filterApprovalNote !== '')
@@ -1263,28 +1277,6 @@ function patchRequestApprovalFilters($formFilters) {
     if(filterSolrId != null && filterSolrId !== '')
       filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
 
-    var filterApprovalId = $formFilters.querySelector('.valueApprovalId')?.value;
-    if(filterApprovalId != null && filterApprovalId !== '')
-      filters.push({ name: 'fq', value: 'approvalId:' + filterApprovalId });
-
-    var filterApprovedByUserId = $formFilters.querySelector('.valueApprovedByUserId')?.value;
-    if(filterApprovedByUserId != null && filterApprovedByUserId !== '')
-      filters.push({ name: 'fq', value: 'approvedByUserId:' + filterApprovedByUserId });
-
-    var filterApprovedByFullName = $formFilters.querySelector('.valueApprovedByFullName')?.value;
-    if(filterApprovedByFullName != null && filterApprovedByFullName !== '')
-      filters.push({ name: 'fq', value: 'approvedByFullName:' + filterApprovedByFullName });
-
-    var $filterApprovedCheckbox = $formFilters.querySelector('input.valueApproved[type = "checkbox"]');
-    var $filterApprovedSelect = $formFilters.querySelector('select.valueApproved');
-    var filterApproved = $filterApprovedSelect.length ? $filterApprovedSelect.value : $filterApprovedCheckbox.checked;
-    var filterApprovedSelectVal = $formFilters.querySelector('select.filterApproved')?.value;
-    var filterApproved = null;
-    if(filterApprovedSelectVal !== '')
-      filterApproved = filterApprovedSelectVal == 'true';
-    if(filterApproved != null && filterApproved === true)
-      filters.push({ name: 'fq', value: 'approved:' + filterApproved });
-
     var filterModelType = $formFilters.querySelector('.valueModelType')?.value;
     if(filterModelType != null && filterModelType !== '')
       filters.push({ name: 'fq', value: 'modelType:' + filterModelType });
@@ -1292,6 +1284,14 @@ function patchRequestApprovalFilters($formFilters) {
     var filterModelResource = $formFilters.querySelector('.valueModelResource')?.value;
     if(filterModelResource != null && filterModelResource !== '')
       filters.push({ name: 'fq', value: 'modelResource:' + filterModelResource });
+
+    var filterApprovalName = $formFilters.querySelector('.valueApprovalName')?.value;
+    if(filterApprovalName != null && filterApprovalName !== '')
+      filters.push({ name: 'fq', value: 'approvalName:' + filterApprovalName });
+
+    var filterApprovalId = $formFilters.querySelector('.valueApprovalId')?.value;
+    if(filterApprovalId != null && filterApprovalId !== '')
+      filters.push({ name: 'fq', value: 'approvalId:' + filterApprovalId });
 
     var filterApprovalTitle = $formFilters.querySelector('.valueApprovalTitle')?.value;
     if(filterApprovalTitle != null && filterApprovalTitle !== '')
@@ -1379,9 +1379,17 @@ async function postRequestApproval($formValues, target, success, error) {
   if(valueApprovedByEmail != null && valueApprovedByEmail !== '')
     vals['approvedByEmail'] = valueApprovedByEmail;
 
-  var valueApprovalName = $formValues.querySelector('.valueApprovalName')?.value;
-  if(valueApprovalName != null && valueApprovalName !== '')
-    vals['approvalName'] = valueApprovalName;
+  var valueApprovedByUserId = $formValues.querySelector('.valueApprovedByUserId')?.value;
+  if(valueApprovedByUserId != null && valueApprovedByUserId !== '')
+    vals['approvedByUserId'] = valueApprovedByUserId;
+
+  var valueApprovedByFullName = $formValues.querySelector('.valueApprovedByFullName')?.value;
+  if(valueApprovedByFullName != null && valueApprovedByFullName !== '')
+    vals['approvedByFullName'] = valueApprovedByFullName;
+
+  var valueApproved = $formValues.querySelector('.valueApproved')?.value;
+  if(valueApproved != null && valueApproved !== '')
+    vals['approved'] = valueApproved == 'true';
 
   var valueApprovalNote = $formValues.querySelector('.valueApprovalNote')?.value;
   if(valueApprovalNote != null && valueApprovalNote !== '')
@@ -1415,22 +1423,6 @@ async function postRequestApproval($formValues, target, success, error) {
   if(valueDownload != null && valueDownload !== '')
     vals['download'] = valueDownload;
 
-  var valueApprovalId = $formValues.querySelector('.valueApprovalId')?.value;
-  if(valueApprovalId != null && valueApprovalId !== '')
-    vals['approvalId'] = valueApprovalId;
-
-  var valueApprovedByUserId = $formValues.querySelector('.valueApprovedByUserId')?.value;
-  if(valueApprovedByUserId != null && valueApprovedByUserId !== '')
-    vals['approvedByUserId'] = valueApprovedByUserId;
-
-  var valueApprovedByFullName = $formValues.querySelector('.valueApprovedByFullName')?.value;
-  if(valueApprovedByFullName != null && valueApprovedByFullName !== '')
-    vals['approvedByFullName'] = valueApprovedByFullName;
-
-  var valueApproved = $formValues.querySelector('.valueApproved')?.value;
-  if(valueApproved != null && valueApproved !== '')
-    vals['approved'] = valueApproved == 'true';
-
   var valueModelType = $formValues.querySelector('.valueModelType')?.value;
   if(valueModelType != null && valueModelType !== '')
     vals['modelType'] = valueModelType;
@@ -1438,6 +1430,14 @@ async function postRequestApproval($formValues, target, success, error) {
   var valueModelResource = $formValues.querySelector('.valueModelResource')?.value;
   if(valueModelResource != null && valueModelResource !== '')
     vals['modelResource'] = valueModelResource;
+
+  var valueApprovalName = $formValues.querySelector('.valueApprovalName')?.value;
+  if(valueApprovalName != null && valueApprovalName !== '')
+    vals['approvalName'] = valueApprovalName;
+
+  var valueApprovalId = $formValues.querySelector('.valueApprovalId')?.value;
+  if(valueApprovalId != null && valueApprovalId !== '')
+    vals['approvalId'] = valueApprovalId;
 
   var valueApprovalTitle = $formValues.querySelector('.valueApprovalTitle')?.value;
   if(valueApprovalTitle != null && valueApprovalTitle !== '')
@@ -1557,7 +1557,9 @@ function putimportRequestApprovalVals(json, target, success, error) {
 
 // DELETEFilter //
 
-async function deletefilterRequestApproval(target, success, error) {
+async function deletefilterRequestApproval($formFilterstarget, success, error) {
+  var filters = deletefilterRequestApprovalFilters($formFilters);
+
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -1589,7 +1591,7 @@ async function deletefilterRequestApproval(target, success, error) {
   }
 
   fetch(
-    '/en-us/api/approval'
+    '/en-us/api/approval?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -1601,4 +1603,135 @@ async function deletefilterRequestApproval(target, success, error) {
       }
     })
     .catch(response => error(response, target));
+}
+
+function deletefilterRequestApprovalFilters($formFilters) {
+  var filters = [];
+  if($formFilters) {
+
+    var filterPk = $formFilters.querySelector('.valuePk')?.value;
+    if(filterPk != null && filterPk !== '')
+      filters.push({ name: 'fq', value: 'pk:' + filterPk });
+
+    var filterCreated = $formFilters.querySelector('.valueCreated')?.value;
+    if(filterCreated != null && filterCreated !== '')
+      filters.push({ name: 'fq', value: 'created:' + filterCreated });
+
+    var filterModified = $formFilters.querySelector('.valueModified')?.value;
+    if(filterModified != null && filterModified !== '')
+      filters.push({ name: 'fq', value: 'modified:' + filterModified });
+
+    var $filterArchivedCheckbox = $formFilters.querySelector('input.valueArchived[type = "checkbox"]');
+    var $filterArchivedSelect = $formFilters.querySelector('select.valueArchived');
+    var filterArchived = $filterArchivedSelect.length ? $filterArchivedSelect.value : $filterArchivedCheckbox.checked;
+    var filterArchivedSelectVal = $formFilters.querySelector('select.filterArchived')?.value;
+    var filterArchived = null;
+    if(filterArchivedSelectVal !== '')
+      filterArchived = filterArchivedSelectVal == 'true';
+    if(filterArchived != null && filterArchived === true)
+      filters.push({ name: 'fq', value: 'archived:' + filterArchived });
+
+    var filterApprovedByEmail = $formFilters.querySelector('.valueApprovedByEmail')?.value;
+    if(filterApprovedByEmail != null && filterApprovedByEmail !== '')
+      filters.push({ name: 'fq', value: 'approvedByEmail:' + filterApprovedByEmail });
+
+    var filterApprovedByUserId = $formFilters.querySelector('.valueApprovedByUserId')?.value;
+    if(filterApprovedByUserId != null && filterApprovedByUserId !== '')
+      filters.push({ name: 'fq', value: 'approvedByUserId:' + filterApprovedByUserId });
+
+    var filterApprovedByFullName = $formFilters.querySelector('.valueApprovedByFullName')?.value;
+    if(filterApprovedByFullName != null && filterApprovedByFullName !== '')
+      filters.push({ name: 'fq', value: 'approvedByFullName:' + filterApprovedByFullName });
+
+    var $filterApprovedCheckbox = $formFilters.querySelector('input.valueApproved[type = "checkbox"]');
+    var $filterApprovedSelect = $formFilters.querySelector('select.valueApproved');
+    var filterApproved = $filterApprovedSelect.length ? $filterApprovedSelect.value : $filterApprovedCheckbox.checked;
+    var filterApprovedSelectVal = $formFilters.querySelector('select.filterApproved')?.value;
+    var filterApproved = null;
+    if(filterApprovedSelectVal !== '')
+      filterApproved = filterApprovedSelectVal == 'true';
+    if(filterApproved != null && filterApproved === true)
+      filters.push({ name: 'fq', value: 'approved:' + filterApproved });
+
+    var filterApprovalNote = $formFilters.querySelector('.valueApprovalNote')?.value;
+    if(filterApprovalNote != null && filterApprovalNote !== '')
+      filters.push({ name: 'fq', value: 'approvalNote:' + filterApprovalNote });
+
+    var filterClassCanonicalName = $formFilters.querySelector('.valueClassCanonicalName')?.value;
+    if(filterClassCanonicalName != null && filterClassCanonicalName !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalName:' + filterClassCanonicalName });
+
+    var filterClassSimpleName = $formFilters.querySelector('.valueClassSimpleName')?.value;
+    if(filterClassSimpleName != null && filterClassSimpleName !== '')
+      filters.push({ name: 'fq', value: 'classSimpleName:' + filterClassSimpleName });
+
+    var filterClassCanonicalNames = $formFilters.querySelector('.valueClassCanonicalNames')?.value;
+    if(filterClassCanonicalNames != null && filterClassCanonicalNames !== '')
+      filters.push({ name: 'fq', value: 'classCanonicalNames:' + filterClassCanonicalNames });
+
+    var filterSessionId = $formFilters.querySelector('.valueSessionId')?.value;
+    if(filterSessionId != null && filterSessionId !== '')
+      filters.push({ name: 'fq', value: 'sessionId:' + filterSessionId });
+
+    var filterUserKey = $formFilters.querySelector('.valueUserKey')?.value;
+    if(filterUserKey != null && filterUserKey !== '')
+      filters.push({ name: 'fq', value: 'userKey:' + filterUserKey });
+
+    var filterSaves = $formFilters.querySelector('.valueSaves')?.value;
+    if(filterSaves != null && filterSaves !== '')
+      filters.push({ name: 'fq', value: 'saves:' + filterSaves });
+
+    var filterObjectTitle = $formFilters.querySelector('.valueObjectTitle')?.value;
+    if(filterObjectTitle != null && filterObjectTitle !== '')
+      filters.push({ name: 'fq', value: 'objectTitle:' + filterObjectTitle });
+
+    var filterDisplayPage = $formFilters.querySelector('.valueDisplayPage')?.value;
+    if(filterDisplayPage != null && filterDisplayPage !== '')
+      filters.push({ name: 'fq', value: 'displayPage:' + filterDisplayPage });
+
+    var filterEditPage = $formFilters.querySelector('.valueEditPage')?.value;
+    if(filterEditPage != null && filterEditPage !== '')
+      filters.push({ name: 'fq', value: 'editPage:' + filterEditPage });
+
+    var filterUserPage = $formFilters.querySelector('.valueUserPage')?.value;
+    if(filterUserPage != null && filterUserPage !== '')
+      filters.push({ name: 'fq', value: 'userPage:' + filterUserPage });
+
+    var filterDownload = $formFilters.querySelector('.valueDownload')?.value;
+    if(filterDownload != null && filterDownload !== '')
+      filters.push({ name: 'fq', value: 'download:' + filterDownload });
+
+    var filterObjectSuggest = $formFilters.querySelector('.valueObjectSuggest')?.value;
+    if(filterObjectSuggest != null && filterObjectSuggest !== '')
+      filters.push({ name: 'q', value: 'objectSuggest:' + filterObjectSuggest });
+
+    var filterObjectText = $formFilters.querySelector('.valueObjectText')?.value;
+    if(filterObjectText != null && filterObjectText !== '')
+      filters.push({ name: 'fq', value: 'objectText:' + filterObjectText });
+
+    var filterSolrId = $formFilters.querySelector('.valueSolrId')?.value;
+    if(filterSolrId != null && filterSolrId !== '')
+      filters.push({ name: 'fq', value: 'solrId:' + filterSolrId });
+
+    var filterModelType = $formFilters.querySelector('.valueModelType')?.value;
+    if(filterModelType != null && filterModelType !== '')
+      filters.push({ name: 'fq', value: 'modelType:' + filterModelType });
+
+    var filterModelResource = $formFilters.querySelector('.valueModelResource')?.value;
+    if(filterModelResource != null && filterModelResource !== '')
+      filters.push({ name: 'fq', value: 'modelResource:' + filterModelResource });
+
+    var filterApprovalName = $formFilters.querySelector('.valueApprovalName')?.value;
+    if(filterApprovalName != null && filterApprovalName !== '')
+      filters.push({ name: 'fq', value: 'approvalName:' + filterApprovalName });
+
+    var filterApprovalId = $formFilters.querySelector('.valueApprovalId')?.value;
+    if(filterApprovalId != null && filterApprovalId !== '')
+      filters.push({ name: 'fq', value: 'approvalId:' + filterApprovalId });
+
+    var filterApprovalTitle = $formFilters.querySelector('.valueApprovalTitle')?.value;
+    if(filterApprovalTitle != null && filterApprovalTitle !== '')
+      filters.push({ name: 'fq', value: 'approvalTitle:' + filterApprovalTitle });
+  }
+  return filters;
 }

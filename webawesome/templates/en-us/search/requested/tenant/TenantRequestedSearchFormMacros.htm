@@ -227,9 +227,9 @@
   {%- endif %}
                   <wa-input
                       type="text"
-                      placeholder="Request approvals"
-                      label="Request approvals"
-                      hint="A list of request approvals for this request. "
+                      placeholder="tenant approvals"
+                      label="tenant approvals"
+                      hint="A list of Tenant approvals for this request. "
                       class="label-on-left TenantRequested_{{classApiMethodMethod}}_requestApprovals valueObjectSuggest suggestRequestApprovals "
                       name="setRequestApprovals"
                       id="{{ idPrefix }}TenantRequested_{{classApiMethodMethod}}_requestApprovals{{ idSuffix }}"
@@ -258,11 +258,11 @@
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postRequestApproval(idSuffix='_TenantRequested_POST_requestApprovals') }}
+                  {{ htmForm_postTenantApproval(idSuffix='_TenantRequested_POST_requestApprovals') }}
                   <wa-button
                        id="TenantRequested_{{classApiMethodMethod}}_requestApprovals_add"
-                       data-dialog="open postRequestApprovalDialog"
-                      >add a request approval</wa-button>
+                       data-dialog="open postTenantApprovalDialog"
+                      >add a tenant approval</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}

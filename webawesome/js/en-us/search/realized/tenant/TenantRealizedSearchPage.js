@@ -384,6 +384,28 @@ Promise.all([
   document.querySelector('#pageStatsTenantRealized_tenantRealizedId')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('TenantRealized', 'tenantRealizedId', false);
   });
+
+  document.querySelector('#pageSelectSortTenantRealized_createdByUserId')?.addEventListener('change', (event) => {
+    sort('TenantRealized', 'createdByUserId', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantRealized_createdByUserId')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantRealized', 'createdByUserId', true);
+  });
+  document.querySelector('#pageStatsTenantRealized_createdByUserId')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantRealized', 'createdByUserId', false);
+  });
+
+  document.querySelector('#pageSelectSortTenantRealized_createdByFullName')?.addEventListener('change', (event) => {
+    sort('TenantRealized', 'createdByFullName', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantRealized_createdByFullName')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantRealized', 'createdByFullName', true);
+  });
+  document.querySelector('#pageStatsTenantRealized_createdByFullName')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantRealized', 'createdByFullName', false);
+  });
           document.querySelector('#fqTenantRealized_created')?.addEventListener('change', (event) => {
             fqChange('TenantRealized', event.currentTarget, facetChangeTenantRealizedSuccess, facetChangeTenantRealizedError);
           });
@@ -637,7 +659,8 @@ Promise.all([
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
       deletefilterTenantRealized(
-          event.currentTarget
+          [{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantRealizedId:' + event.currentTarget.getAttribute('data-tenantRealizedId') }]
+          , event.currentTarget
           , function(response, target) { addGlow(target); }
           , function(response, target) { addError(target); }
           );

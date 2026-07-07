@@ -30,7 +30,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/approval/RequestApproval.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/approval/tenant/TenantApproval.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/realized/tenant/TenantRealized.js"></script>
 {%- endblock htmScriptsTenantRequestedPage %}
 {%- endblock htmScriptsPageLayout %}
@@ -520,10 +520,10 @@
           });
         });
 
-        document.querySelector('#htmForm_postRequestApproval')?.addEventListener('submit', event => {
+        document.querySelector('#htmForm_postTenantApproval')?.addEventListener('submit', event => {
           event.preventDefault();
-          postRequestApproval(document.querySelector('#htmForm_postRequestApproval')
-              , document.querySelector('#htmFormButton_postRequestApproval')
+          postTenantApproval(document.querySelector('#htmForm_postTenantApproval')
+              , document.querySelector('#htmFormButton_postTenantApproval')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])
@@ -672,29 +672,29 @@
 {% include en-us/search/requested/tenant/TenantRequestedPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
-                    <wa-dropdown id="htmDropdown-tenantResource">
-                      <wa-button variant="brand" slot="trigger" caret>tenant auth resource</wa-button>
+                    <wa-dropdown id="htmDropdown-tenantRequestedId">
+                      <wa-button variant="brand" slot="trigger" caret>tenant requested ID</wa-button>
                       <wa-menu>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRequested_tenantResource'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantResource-asc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRequested_tenantRequestedId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantRequestedId-asc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                          sort by tenant auth resource ascending
+                          sort by tenant requested ID ascending
                         </wa-menu-item>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRequested_tenantResource'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantResource-desc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRequested_tenantRequestedId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantRequestedId-desc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                          sort by tenant auth resource descending
+                          sort by tenant requested ID descending
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
-                    <wa-dropdown id="htmDropdown-tenantName">
-                      <wa-button variant="brand" slot="trigger" caret>tenant name</wa-button>
+                    <wa-dropdown id="htmDropdown-tenantRequestedName">
+                      <wa-button variant="brand" slot="trigger" caret>tenant requested name</wa-button>
                       <wa-menu>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRequested_tenantName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantName-asc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRequested_tenantRequestedName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantRequestedName-asc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
-                          sort by tenant name ascending
+                          sort by tenant requested name ascending
                         </wa-menu-item>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRequested_tenantName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantName-desc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRequested_tenantRequestedName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantRequestedName-desc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
-                          sort by tenant name descending
+                          sort by tenant requested name descending
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
@@ -716,21 +716,21 @@
                   <div>
                     <a href="{{ item.displayPage }}">
                       <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
-                      <span>{{ item.tenantResource | e }}</span>
+                      <span>{{ item.tenantRequestedId | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
-                      <span>{{ item.tenantName | e }}</span>
+                      <span>{{ item.tenantRequestedName | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
                       <span class="white-space-pre-wrap ">{{ item.tenantDescription | e }}</span>
                     </a>
                   </div>
                   {% endfor %}
-              {% if getColumnTenantResource is defined %}
+              {% if getColumnTenantRequestedId is defined %}
                 <div>
                 </div>
               {% endif %}
-              {% if getColumnTenantName is defined %}
+              {% if getColumnTenantRequestedName is defined %}
                 <div>
                 </div>
               {% endif %}

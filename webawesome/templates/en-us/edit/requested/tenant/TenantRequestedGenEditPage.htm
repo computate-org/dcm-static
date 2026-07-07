@@ -30,7 +30,7 @@
     <script src="{{staticBaseUrl}}/js/en-us/search/host-inventory/HostInventory.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/ansible-project/AnsibleProject.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/intent/tenant/TenantIntent.js"></script>
-    <script src="{{staticBaseUrl}}/js/en-us/search/approval/RequestApproval.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/approval/tenant/TenantApproval.js"></script>
     <script src="{{staticBaseUrl}}/js/en-us/search/realized/tenant/TenantRealized.js"></script>
 {%- endblock htmScriptsTenantRequestedPage %}
 {%- endblock htmScriptsPageLayout %}
@@ -260,8 +260,8 @@
           document.querySelector('#TenantRequested_PATCH_requestApprovals')?.addEventListener('focus', relate_requestApprovals);
           document.querySelector('#TenantRequested_Page_requestApprovals')?.addEventListener('input', relate_requestApprovals);
           document.querySelector('#TenantRequested_Page_requestApprovals')?.addEventListener('focus', relate_requestApprovals);
-          document.querySelector('#RequestApproval_POST_tenantRequestedId')?.addEventListener('input', relate_requestApprovals);
-          document.querySelector('#RequestApproval_POST_tenantRequestedId')?.addEventListener('focus', relate_requestApprovals);
+          document.querySelector('#TenantApproval_POST_tenantRequestedId')?.addEventListener('input', relate_requestApprovals);
+          document.querySelector('#TenantApproval_POST_tenantRequestedId')?.addEventListener('focus', relate_requestApprovals);
           if(window.result.requestApprovals) {
           {% if "PATCH" in scopes -%}
             {{'  '}}suggestTenantRequestedRequestApprovals([{'name':'fq','value':'approvalId:' + window.result.requestApprovals}], document.querySelector('#listTenantRequestedRequestApprovals_Page'), window.result.tenantRequestedId, window.result.requestApprovals, true, document.getElementById('TenantRequested_Page_requestApprovals'));
@@ -273,6 +273,20 @@
           {% endif -%}
           {% endif -%}
           }
+          function TenantApproval_POST_tenantRequestedId_TenantRequested_POST_requestApprovals(event) {
+            suggestTenantApprovalTenantRequestedId(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantRequestedId,pk,editPage,approvalTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantRequestedId : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantRequestedId : null
+                , true
+                , document.querySelector('#TenantApproval_POST_tenantRequestedId_TenantRequested_POST_requestApprovals')
+                );
+          }
+          document.querySelector('#TenantApproval_POST_tenantRequestedId_TenantRequested_POST_requestApprovals')?.addEventListener('input', TenantApproval_POST_tenantRequestedId_TenantRequested_POST_requestApprovals);
+          document.querySelector('#TenantApproval_POST_tenantRequestedId_TenantRequested_POST_requestApprovals')?.addEventListener('focus', TenantApproval_POST_tenantRequestedId_TenantRequested_POST_requestApprovals);
           function relate_tenantRealized(event) {
             suggestTenantRequestedTenantRealized(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -763,10 +777,10 @@
           });
         });
 
-        document.querySelector('#htmForm_postRequestApproval')?.addEventListener('submit', event => {
+        document.querySelector('#htmForm_postTenantApproval')?.addEventListener('submit', event => {
           event.preventDefault();
-          postRequestApproval(document.querySelector('#htmForm_postRequestApproval')
-              , document.querySelector('#htmFormButton_postRequestApproval')
+          postTenantApproval(document.querySelector('#htmForm_postTenantApproval')
+              , document.querySelector('#htmFormButton_postTenantApproval')
               , (json, target) => {
                 addGlow(target);
                 if(json['editPage'])

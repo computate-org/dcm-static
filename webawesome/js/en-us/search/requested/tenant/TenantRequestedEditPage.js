@@ -543,4 +543,25 @@ Promise.all([
             const form = document.querySelector('#PageForm_tenantRequestedId');
             const valid = form.reportValidity();
           });
+
+          // PATCH tenantRequestedName
+          document.querySelector('#TenantRequested_Page_tenantRequestedName')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_tenantRequestedName');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantRequestedVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantRequestedId:' + event.currentTarget.getAttribute('data-tenantRequestedId') }]
+                  , 'setTenantRequestedName', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TenantRequested_Page_tenantRequestedName')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TenantRequested_Page_tenantRequestedName')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_tenantRequestedName');
+            const valid = form.reportValidity();
+          });
 });

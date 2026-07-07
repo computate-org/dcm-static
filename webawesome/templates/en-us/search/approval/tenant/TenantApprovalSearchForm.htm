@@ -1,0 +1,28 @@
+{% include en-us/search/approval/tenant/TenantApprovalSearchFormMacros.htm %}
+{% include en-us/search/requested/tenant/TenantRequestedSearchFormMacros.htm %}
+{% include en-us/search/intent/tenant/TenantIntentSearchFormMacros.htm %}
+{%- if 'DELETE' in scopes %}
+    {{ htmForm_patchTenantApproval() }}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_postTenantApproval() }}
+  {%- else %}
+    {{ htmForm_postTenantApproval() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_deleteTenantApproval() }}
+  {%- else %}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmForm_putimportTenantApproval() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_deletefilterTenantApproval() }}
+  {%- else %}
+  {%- endif %}
+{%- endif %}

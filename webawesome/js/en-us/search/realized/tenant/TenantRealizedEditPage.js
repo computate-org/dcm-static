@@ -480,4 +480,46 @@ Promise.all([
             const form = document.querySelector('#PageForm_tenantRealizedId');
             const valid = form.reportValidity();
           });
+
+          // PATCH createdByUserId
+          document.querySelector('#TenantRealized_Page_createdByUserId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_createdByUserId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantRealizedVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantRealizedId:' + event.currentTarget.getAttribute('data-tenantRealizedId') }]
+                  , 'setCreatedByUserId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TenantRealized_Page_createdByUserId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TenantRealized_Page_createdByUserId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_createdByUserId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH createdByFullName
+          document.querySelector('#TenantRealized_Page_createdByFullName')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_createdByFullName');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantRealizedVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantRealizedId:' + event.currentTarget.getAttribute('data-tenantRealizedId') }]
+                  , 'setCreatedByFullName', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TenantRealized_Page_createdByFullName')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TenantRealized_Page_createdByFullName')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_createdByFullName');
+            const valid = form.reportValidity();
+          });
 });
