@@ -28,7 +28,7 @@
                 stats
               </wa-button>
               {% endif %}
-              <wa-button class="SearchButtons_Api SearchButtons_Api_TenantRequested " variant="brand" href="{{ apiUri }}{% if result.tenantRequestedId is defined %}/{{ result.tenantRequestedId }}{% else %}{{ queryStr }}{% endif %}">
+              <wa-button class="SearchButtons_Api SearchButtons_Api_TenantRequested " variant="brand" href="{{ apiUri }}{% if result.requestedId is defined %}/{{ result.requestedId }}{% else %}{{ queryStr }}{% endif %}">
                 <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-brackets-curly hover-box-shadow "></i> 
                 API
               </wa-button>

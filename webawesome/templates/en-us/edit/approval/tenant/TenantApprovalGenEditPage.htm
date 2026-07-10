@@ -1,7 +1,7 @@
 {% extends "en-us/PageLayout.htm" %}
 {%- block htmTitlePageLayout %}
 {%- block htmTitleTenantApprovalPage %}
-    <title>{{ result.approvalTitle }}</title>
+    <title>{{ result.objectTitle }}</title>
 {%- endblock htmTitleTenantApprovalPage %}
 {%- endblock htmTitlePageLayout %}
 
@@ -46,7 +46,7 @@
 
       function htmTooltipTenantApproval(feature, layer) {
         return `{%- block htmTooltipTenantApprovalPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.approvalTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipTenantApprovalPage %}`;
       }
 
@@ -134,6 +134,14 @@
 
         var approvalId = {% if result.approvalId is defined %}{{ result.approvalId | tojson }}{% else %}null{% endif %};
 
+        document.querySelector('#postTenantRequestedDialog')?.addEventListener('wa-show', (event) => {
+          event.target.querySelectorAll('.searchRelated').forEach(child => {
+            if(child.value !== '') {
+              const focusEvent = new Event('focus', { bubbles: true });
+              child.dispatchEvent(focusEvent);
+            }
+          });
+        });
         if(approvalId == null) {
           document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
             document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
@@ -152,107 +160,121 @@
           if(o)
             window.result = JSON.parse(o);
         {% if result.approvalId is defined %}
-          function relate_tenantRequestedId(event) {
-            suggestTenantApprovalTenantRequestedId(
+          function relate_requestedId(event) {
+            suggestTenantApprovalRequestedId(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantRequestedId,tenantRequestedId,pk,editPage,objectTitle' } ]
+                , { 'name': 'fl', 'value': 'classCanonicalName,requestedId,requestedId,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , event.target.getAttribute('data-method') === 'Page' ? window.result.approvalId : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantRequestedId : null
+                , event.target.getAttribute('data-method') === 'Page' ? window.result.requestedId : null
                 , true
                 , event.target
                 );
           }
-          document.querySelector('#TenantApproval_POST_tenantRequestedId')?.addEventListener('input', relate_tenantRequestedId);
-          document.querySelector('#TenantApproval_POST_tenantRequestedId')?.addEventListener('focus', relate_tenantRequestedId);
-          document.querySelector('#TenantApproval_PATCH_tenantRequestedId')?.addEventListener('input', relate_tenantRequestedId);
-          document.querySelector('#TenantApproval_PATCH_tenantRequestedId')?.addEventListener('focus', relate_tenantRequestedId);
-          document.querySelector('#TenantApproval_Page_tenantRequestedId')?.addEventListener('input', relate_tenantRequestedId);
-          document.querySelector('#TenantApproval_Page_tenantRequestedId')?.addEventListener('focus', relate_tenantRequestedId);
-          document.querySelector('#TenantRequested_POST_approvalId')?.addEventListener('input', relate_tenantRequestedId);
-          document.querySelector('#TenantRequested_POST_approvalId')?.addEventListener('focus', relate_tenantRequestedId);
-          if(window.result.tenantRequestedId) {
+          document.querySelector('#TenantApproval_POST_requestedId')?.addEventListener('input', relate_requestedId);
+          document.querySelector('#TenantApproval_POST_requestedId')?.addEventListener('focus', relate_requestedId);
+          document.querySelector('#TenantApproval_PATCH_requestedId')?.addEventListener('input', relate_requestedId);
+          document.querySelector('#TenantApproval_PATCH_requestedId')?.addEventListener('focus', relate_requestedId);
+          document.querySelector('#TenantApproval_Page_requestedId')?.addEventListener('input', relate_requestedId);
+          document.querySelector('#TenantApproval_Page_requestedId')?.addEventListener('focus', relate_requestedId);
+          document.querySelector('#TenantRequested_POST_approvalId')?.addEventListener('input', relate_requestedId);
+          document.querySelector('#TenantRequested_POST_approvalId')?.addEventListener('focus', relate_requestedId);
+          if(window.result.requestedId) {
           {% if "PATCH" in scopes -%}
-            {{'  '}}suggestTenantApprovalTenantRequestedId([{'name':'fq','value':'tenantRequestedId:' + window.result.tenantRequestedId}], document.querySelector('#listTenantApprovalTenantRequestedId_Page'), window.result.approvalId, window.result.tenantRequestedId, true, document.getElementById('TenantApproval_Page_tenantRequestedId'));
+            {{'  '}}suggestTenantApprovalRequestedId([{'name':'fq','value':'requestedId:' + window.result.requestedId}], document.querySelector('#listTenantApprovalRequestedId_Page'), window.result.approvalId, window.result.requestedId, true, document.getElementById('TenantApproval_Page_requestedId'));
           {% else -%}
           {% if "GET" in scopes -%}
-            {{'  '}}suggestTenantApprovalTenantRequestedId([{'name':'fq','value':'tenantRequestedId:' + window.result.tenantRequestedId}], document.querySelector('#listTenantApprovalTenantRequestedId_Page'), window.result.approvalId, window.result.tenantRequestedId, true, document.getElementById('TenantApproval_Page_tenantRequestedId'));
+            {{'  '}}suggestTenantApprovalRequestedId([{'name':'fq','value':'requestedId:' + window.result.requestedId}], document.querySelector('#listTenantApprovalRequestedId_Page'), window.result.approvalId, window.result.requestedId, true, document.getElementById('TenantApproval_Page_requestedId'));
           {% else -%}
-            {{'  '}}suggestTenantApprovalTenantRequestedId([{'name':'fq','value':'tenantRequestedId:' + window.result.tenantRequestedId}], document.querySelector('#listTenantApprovalTenantRequestedId_Page'), window.result.approvalId, window.result.tenantRequestedId, false, document.getElementById('TenantApproval_Page_tenantRequestedId'));
+            {{'  '}}suggestTenantApprovalRequestedId([{'name':'fq','value':'requestedId:' + window.result.requestedId}], document.querySelector('#listTenantApprovalRequestedId_Page'), window.result.approvalId, window.result.requestedId, false, document.getElementById('TenantApproval_Page_requestedId'));
           {% endif -%}
           {% endif -%}
           }
-          function TenantRequested_POST_tenantResource_TenantApproval_POST_tenantRequestedId(event) {
+          function TenantRequested_POST_tenantResource_TenantApproval_POST_requestedId(event) {
             suggestTenantRequestedTenantResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.approvalId : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantResource : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.tenantResource : null
                 , true
-                , document.querySelector('#TenantRequested_POST_tenantResource_TenantApproval_POST_tenantRequestedId')
+                , document.querySelector('#TenantRequested_POST_tenantResource_TenantApproval_POST_requestedId')
                 );
           }
-          document.querySelector('#TenantRequested_POST_tenantResource_TenantApproval_POST_tenantRequestedId')?.addEventListener('input', TenantRequested_POST_tenantResource_TenantApproval_POST_tenantRequestedId);
-          document.querySelector('#TenantRequested_POST_tenantResource_TenantApproval_POST_tenantRequestedId')?.addEventListener('focus', TenantRequested_POST_tenantResource_TenantApproval_POST_tenantRequestedId);
-          function TenantRequested_POST_requestApprovals_TenantApproval_POST_tenantRequestedId(event) {
+          document.querySelector('#TenantRequested_POST_tenantResource_TenantApproval_POST_requestedId')?.addEventListener('input', TenantRequested_POST_tenantResource_TenantApproval_POST_requestedId);
+          document.querySelector('#TenantRequested_POST_tenantResource_TenantApproval_POST_requestedId')?.addEventListener('focus', TenantRequested_POST_tenantResource_TenantApproval_POST_requestedId);
+          function TenantRequested_POST_requestApprovals_TenantApproval_POST_requestedId(event) {
             suggestTenantRequestedRequestApprovals(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,approvalId,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.approvalId : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.requestApprovals : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.requestApprovals : null
                 , true
-                , document.querySelector('#TenantRequested_POST_requestApprovals_TenantApproval_POST_tenantRequestedId')
+                , document.querySelector('#TenantRequested_POST_requestApprovals_TenantApproval_POST_requestedId')
                 );
           }
-          document.querySelector('#TenantRequested_POST_requestApprovals_TenantApproval_POST_tenantRequestedId')?.addEventListener('input', TenantRequested_POST_requestApprovals_TenantApproval_POST_tenantRequestedId);
-          document.querySelector('#TenantRequested_POST_requestApprovals_TenantApproval_POST_tenantRequestedId')?.addEventListener('focus', TenantRequested_POST_requestApprovals_TenantApproval_POST_tenantRequestedId);
-          function TenantRequested_POST_tenantRealized_TenantApproval_POST_tenantRequestedId(event) {
+          document.querySelector('#TenantRequested_POST_requestApprovals_TenantApproval_POST_requestedId')?.addEventListener('input', TenantRequested_POST_requestApprovals_TenantApproval_POST_requestedId);
+          document.querySelector('#TenantRequested_POST_requestApprovals_TenantApproval_POST_requestedId')?.addEventListener('focus', TenantRequested_POST_requestApprovals_TenantApproval_POST_requestedId);
+          function TenantRequested_POST_tenantDiscovered_TenantApproval_POST_requestedId(event) {
+            suggestTenantRequestedTenantDiscovered(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.tenantDiscovered : null
+                , true
+                , document.querySelector('#TenantRequested_POST_tenantDiscovered_TenantApproval_POST_requestedId')
+                );
+          }
+          document.querySelector('#TenantRequested_POST_tenantDiscovered_TenantApproval_POST_requestedId')?.addEventListener('input', TenantRequested_POST_tenantDiscovered_TenantApproval_POST_requestedId);
+          document.querySelector('#TenantRequested_POST_tenantDiscovered_TenantApproval_POST_requestedId')?.addEventListener('focus', TenantRequested_POST_tenantDiscovered_TenantApproval_POST_requestedId);
+          function TenantRequested_POST_tenantRealized_TenantApproval_POST_requestedId(event) {
             suggestTenantRequestedTenantRealized(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantRealizedId,pk,editPage,objectTitle' } ]
+                , { 'name': 'fl', 'value': 'classCanonicalName,realizedId,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.approvalId : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantRealized : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.tenantRealized : null
                 , true
-                , document.querySelector('#TenantRequested_POST_tenantRealized_TenantApproval_POST_tenantRequestedId')
+                , document.querySelector('#TenantRequested_POST_tenantRealized_TenantApproval_POST_requestedId')
                 );
           }
-          document.querySelector('#TenantRequested_POST_tenantRealized_TenantApproval_POST_tenantRequestedId')?.addEventListener('input', TenantRequested_POST_tenantRealized_TenantApproval_POST_tenantRequestedId);
-          document.querySelector('#TenantRequested_POST_tenantRealized_TenantApproval_POST_tenantRequestedId')?.addEventListener('focus', TenantRequested_POST_tenantRealized_TenantApproval_POST_tenantRequestedId);
-          function TenantRequested_POST_hostInventoryIds_TenantApproval_POST_tenantRequestedId(event) {
+          document.querySelector('#TenantRequested_POST_tenantRealized_TenantApproval_POST_requestedId')?.addEventListener('input', TenantRequested_POST_tenantRealized_TenantApproval_POST_requestedId);
+          document.querySelector('#TenantRequested_POST_tenantRealized_TenantApproval_POST_requestedId')?.addEventListener('focus', TenantRequested_POST_tenantRealized_TenantApproval_POST_requestedId);
+          function TenantRequested_POST_hostInventoryIds_TenantApproval_POST_requestedId(event) {
             suggestTenantRequestedHostInventoryIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.approvalId : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.hostInventoryIds : null
                 , true
-                , document.querySelector('#TenantRequested_POST_hostInventoryIds_TenantApproval_POST_tenantRequestedId')
+                , document.querySelector('#TenantRequested_POST_hostInventoryIds_TenantApproval_POST_requestedId')
                 );
           }
-          document.querySelector('#TenantRequested_POST_hostInventoryIds_TenantApproval_POST_tenantRequestedId')?.addEventListener('input', TenantRequested_POST_hostInventoryIds_TenantApproval_POST_tenantRequestedId);
-          document.querySelector('#TenantRequested_POST_hostInventoryIds_TenantApproval_POST_tenantRequestedId')?.addEventListener('focus', TenantRequested_POST_hostInventoryIds_TenantApproval_POST_tenantRequestedId);
-          function TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_tenantRequestedId(event) {
+          document.querySelector('#TenantRequested_POST_hostInventoryIds_TenantApproval_POST_requestedId')?.addEventListener('input', TenantRequested_POST_hostInventoryIds_TenantApproval_POST_requestedId);
+          document.querySelector('#TenantRequested_POST_hostInventoryIds_TenantApproval_POST_requestedId')?.addEventListener('focus', TenantRequested_POST_hostInventoryIds_TenantApproval_POST_requestedId);
+          function TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_requestedId(event) {
             suggestTenantRequestedAnsibleProjectIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.approvalId : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.ansibleProjectIds : null
                 , true
-                , document.querySelector('#TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_tenantRequestedId')
+                , document.querySelector('#TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_requestedId')
                 );
           }
-          document.querySelector('#TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_tenantRequestedId')?.addEventListener('input', TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_tenantRequestedId);
-          document.querySelector('#TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_tenantRequestedId')?.addEventListener('focus', TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_tenantRequestedId);
+          document.querySelector('#TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_requestedId')?.addEventListener('input', TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_requestedId);
+          document.querySelector('#TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_requestedId')?.addEventListener('focus', TenantRequested_POST_ansibleProjectIds_TenantApproval_POST_requestedId);
           function relate_tenantResource(event) {
             suggestTenantApprovalTenantResource(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -284,28 +306,42 @@
           {% endif -%}
           {% endif -%}
           }
-          function TenantIntent_POST_tenantRequested_TenantApproval_POST_tenantResource(event) {
-            suggestTenantIntentTenantRequested(
+          function TenantIntent_POST_requested_TenantApproval_POST_tenantResource(event) {
+            suggestTenantIntentRequested(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantRequestedId,pk,editPage,objectTitle' } ]
+                , { 'name': 'fl', 'value': 'classCanonicalName,requestedId,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.approvalId : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantRequested : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.requested : null
                 , true
-                , document.querySelector('#TenantIntent_POST_tenantRequested_TenantApproval_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_requested_TenantApproval_POST_tenantResource')
                 );
           }
-          document.querySelector('#TenantIntent_POST_tenantRequested_TenantApproval_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_tenantRequested_TenantApproval_POST_tenantResource);
-          document.querySelector('#TenantIntent_POST_tenantRequested_TenantApproval_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_tenantRequested_TenantApproval_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_requested_TenantApproval_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_requested_TenantApproval_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_requested_TenantApproval_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_requested_TenantApproval_POST_tenantResource);
+          function TenantIntent_POST_tenantDiscovered_TenantApproval_POST_tenantResource(event) {
+            suggestTenantIntentTenantDiscovered(
+                [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.tenantDiscovered : null
+                , true
+                , document.querySelector('#TenantIntent_POST_tenantDiscovered_TenantApproval_POST_tenantResource')
+                );
+          }
+          document.querySelector('#TenantIntent_POST_tenantDiscovered_TenantApproval_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_tenantDiscovered_TenantApproval_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_tenantDiscovered_TenantApproval_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_tenantDiscovered_TenantApproval_POST_tenantResource);
           function TenantIntent_POST_tenantRealized_TenantApproval_POST_tenantResource(event) {
             suggestTenantIntentTenantRealized(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantRealizedId,pk,editPage,objectTitle' } ]
+                , { 'name': 'fl', 'value': 'classCanonicalName,realizedId,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.approvalId : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.tenantRealized : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.tenantRealized : null
                 , true
                 , document.querySelector('#TenantIntent_POST_tenantRealized_TenantApproval_POST_tenantResource')
                 );
@@ -318,8 +354,8 @@
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,inventoryResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.approvalId : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.hostInventoryIds : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.hostInventoryIds : null
                 , true
                 , document.querySelector('#TenantIntent_POST_hostInventoryIds_TenantApproval_POST_tenantResource')
                 );
@@ -332,8 +368,8 @@
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,ansibleProjectResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.approvalId : null
-                , event.target.getAttribute('data-method') === 'Page' ? window.result.ansibleProjectIds : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.approvalId : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.ansibleProjectIds : null
                 , true
                 , document.querySelector('#TenantIntent_POST_ansibleProjectIds_TenantApproval_POST_tenantResource')
                 );
@@ -641,7 +677,7 @@
 {%- block htmBodyStartTenantApprovalPage %}
 {% if resultCount > 0 %}
           <div class="wa-flank ">
-            <h1 class="Page_approvalTitle"><i class="{{ FONTAWESOME_STYLE }} fa-thumbs-up"></i> {{ result.approvalTitle | e }}</h1>
+            <h1 class="Page_objectTitle"><i class="{{ FONTAWESOME_STYLE }} fa-thumbs-up"></i> {{ result.objectTitle | e }}</h1>
           </div>
 {% endif %}
 {% include en-us/search/approval/tenant/TenantApprovalSearchForm.htm %}

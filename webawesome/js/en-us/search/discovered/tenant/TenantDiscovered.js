@@ -1,49 +1,49 @@
 
-async function websocketTenantRequested(success) {
+async function websocketTenantDiscovered(success) {
   window.eventBus.onopen = function () {
 
-    window.eventBus.registerHandler('websocketTenantRequested', function (error, message) {
+    window.eventBus.registerHandler('websocketTenantDiscovered', function (error, message) {
       var json = JSON.parse(message['body']);
-      var requestedId = json['id'];
+      var tenantResource = json['id'];
       var solrIds = json['solrIds'];
       var empty = json['empty'];
       var numFound = parseInt(json['numFound']);
       var numPATCH = parseInt(json['numPATCH']);
       var percent = Math.floor( numPATCH / numFound * 100 ) + '%';
       var $box = document.createElement('div');
-      $box.setAttribute('class', 'w3-quarter box-' + requestedId + ' ');
-      $box.setAttribute('id', 'box-' + requestedId);
+      $box.setAttribute('class', 'w3-quarter box-' + tenantResource + ' ');
+      $box.setAttribute('id', 'box-' + tenantResource);
       $box.setAttribute('data-numPATCH', numPATCH);
       var $margin = document.createElement('div');
       $margin.setAttribute('class', 'w3-margin ');
-      $margin.setAttribute('id', 'margin-' + requestedId);
+      $margin.setAttribute('id', 'margin-' + tenantResource);
       var $card = document.createElement('div');
       $card.setAttribute('class', 'w3-card w3-white ');
-      $card.setAttribute('id', 'card-' + requestedId);
+      $card.setAttribute('id', 'card-' + tenantResource);
       var $header = document.createElement('div');
       $header.setAttribute('class', 'w3-container fa- ');
-      $header.setAttribute('id', 'header-' + requestedId);
+      $header.setAttribute('id', 'header-' + tenantResource);
       var iTemplate = document.createElement('template');
       iTemplate.innerHTML = '<i class="' + window.FONTAWESOME_STYLE + ' fa-buildings"></i>';
       var $i = iTemplate.content;
       var $headerSpan = document.createElement('span');
       $headerSpan.setAttribute('class', '');
-      $headerSpan.innerText = 'modify requested tenants in ' + json.timeRemaining;
+      $headerSpan.innerText = 'modify discovered tenants in ' + json.timeRemaining;
       var $x = document.createElement('span');
       $x.setAttribute('class', 'w3-button w3-display-topright ');
-      $x.setAttribute('onclick', 'document.querySelector("#card-' + requestedId + '");');
+      $x.setAttribute('onclick', 'document.querySelector("#card-' + tenantResource + '");');
       $x.classList.add("display-none");
-      $x.setAttribute('id', 'x-' + requestedId);
+      $x.setAttribute('id', 'x-' + tenantResource);
       var $body = document.createElement('div');
       $body.setAttribute('class', 'w3-container w3-padding ');
-      $body.setAttribute('id', 'text-' + requestedId);
+      $body.setAttribute('id', 'text-' + tenantResource);
       var $bar = document.createElement('div');
       $bar.setAttribute('class', 'w3-light-gray ');
-      $bar.setAttribute('id', 'bar-' + requestedId);
+      $bar.setAttribute('id', 'bar-' + tenantResource);
       var $progress = document.createElement('div');
       $progress.setAttribute('class', 'w3- ');
       $progress.setAttribute('style', 'height: 24px; width: ' + percent + '; ');
-      $progress.setAttribute('id', 'progress-' + requestedId);
+      $progress.setAttribute('id', 'progress-' + tenantResource);
       $progress.innerText = numPATCH + '/' + numFound;
       $card.append($header);
       $header.append($i);
@@ -55,24 +55,24 @@ async function websocketTenantRequested(success) {
       $box.append($margin);
       $margin.append($card);
       if(numPATCH < numFound) {
-        var $old_box = document.querySelector('.box-' + requestedId);
+        var $old_box = document.querySelector('.box-' + tenantResource);
       } else {
-        document.querySelector('.box-' + requestedId)?.remove();
+        document.querySelector('.box-' + tenantResource)?.remove();
       }
-      if(requestedId) {
+      if(tenantResource) {
         if(success)
           success(json);
       }
     });
   }
 }
-async function websocketTenantRequestedInner(apiRequest) {
-  var requestedId = apiRequest['id'];
+async function websocketTenantDiscoveredInner(apiRequest) {
+  var tenantResource = apiRequest['id'];
   var classes = apiRequest['classes'];
   var vars = apiRequest['vars'];
   var empty = apiRequest['empty'];
 
-  if(requestedId != null && vars.length > 0) {
+  if(tenantResource != null && vars.length > 0) {
     var queryParams = "?" + Array.from(document.querySelectorAll(".pageSearchVal")).filter(elem => elem.innerText.length > 0).map(elem => elem.innerText).join("&");
     var uri = location.pathname + queryParams;
     fetch(uri).then(response => {
@@ -82,20 +82,18 @@ async function websocketTenantRequestedInner(apiRequest) {
         var inputCreated = null;
         var inputModified = null;
         var inputArchived = null;
-        var inputTenantResource = null;
-        var inputRequestApprovals = null;
+        var inputRequestedId = null;
+        var inputDiscoveredByEmail = null;
+        var inputDiscoveredByUserId = null;
+        var inputDiscoveredByFullName = null;
         var inputCreatedByEmail = null;
-        var inputCreatedByUserId = null;
-        var inputCreatedByFullName = null;
         var inputCreatedVia = null;
         var inputIntentState = null;
         var inputRequestedState = null;
         var inputRealizedState = null;
+        var inputDiscoveredState = null;
         var inputTenantName = null;
         var inputTenantDescription = null;
-        var inputTenantDiscovered = null;
-        var inputLocked = null;
-        var inputTenantRealized = null;
         var inputHostInventoryIds = null;
         var inputAnsibleProjectIds = null;
         var inputClassCanonicalName = null;
@@ -116,100 +114,99 @@ async function websocketTenantRequestedInner(apiRequest) {
         var inputClusterName = null;
         var inputAapOrganizationId = null;
         var inputTenantId = null;
-        var inputRequestedNumber = null;
-        var inputRequestedId = null;
-        var inputRequestedName = null;
+        var inputTenantResource = null;
+        var inputDiscoveredName = null;
+        var inputCreatedByUserId = null;
+        var inputCreatedByFullName = null;
 
         if(vars.includes('pk'))
-          inputPk = $response.querySelector('.TenantRequested_Page_pk');
+          inputPk = $response.querySelector('.TenantDiscovered_Page_pk');
         if(vars.includes('created'))
-          inputCreated = $response.querySelector('.TenantRequested_Page_created');
+          inputCreated = $response.querySelector('.TenantDiscovered_Page_created');
         if(vars.includes('modified'))
-          inputModified = $response.querySelector('.TenantRequested_Page_modified');
+          inputModified = $response.querySelector('.TenantDiscovered_Page_modified');
         if(vars.includes('archived'))
-          inputArchived = $response.querySelector('.TenantRequested_Page_archived');
-        if(vars.includes('tenantResource'))
-          inputTenantResource = $response.querySelector('.TenantRequested_Page_tenantResource');
-        if(vars.includes('requestApprovals'))
-          inputRequestApprovals = $response.querySelector('.TenantRequested_Page_requestApprovals');
-        if(vars.includes('createdByEmail'))
-          inputCreatedByEmail = $response.querySelector('.TenantRequested_Page_createdByEmail');
-        if(vars.includes('createdByUserId'))
-          inputCreatedByUserId = $response.querySelector('.TenantRequested_Page_createdByUserId');
-        if(vars.includes('createdByFullName'))
-          inputCreatedByFullName = $response.querySelector('.TenantRequested_Page_createdByFullName');
-        if(vars.includes('createdVia'))
-          inputCreatedVia = $response.querySelector('.TenantRequested_Page_createdVia');
-        if(vars.includes('intentState'))
-          inputIntentState = $response.querySelector('.TenantRequested_Page_intentState');
-        if(vars.includes('requestedState'))
-          inputRequestedState = $response.querySelector('.TenantRequested_Page_requestedState');
-        if(vars.includes('realizedState'))
-          inputRealizedState = $response.querySelector('.TenantRequested_Page_realizedState');
-        if(vars.includes('tenantName'))
-          inputTenantName = $response.querySelector('.TenantRequested_Page_tenantName');
-        if(vars.includes('tenantDescription'))
-          inputTenantDescription = $response.querySelector('.TenantRequested_Page_tenantDescription');
-        if(vars.includes('tenantDiscovered'))
-          inputTenantDiscovered = $response.querySelector('.TenantRequested_Page_tenantDiscovered');
-        if(vars.includes('locked'))
-          inputLocked = $response.querySelector('.TenantRequested_Page_locked');
-        if(vars.includes('tenantRealized'))
-          inputTenantRealized = $response.querySelector('.TenantRequested_Page_tenantRealized');
-        if(vars.includes('hostInventoryIds'))
-          inputHostInventoryIds = $response.querySelector('.TenantRequested_Page_hostInventoryIds');
-        if(vars.includes('ansibleProjectIds'))
-          inputAnsibleProjectIds = $response.querySelector('.TenantRequested_Page_ansibleProjectIds');
-        if(vars.includes('classCanonicalName'))
-          inputClassCanonicalName = $response.querySelector('.TenantRequested_Page_classCanonicalName');
-        if(vars.includes('classSimpleName'))
-          inputClassSimpleName = $response.querySelector('.TenantRequested_Page_classSimpleName');
-        if(vars.includes('classCanonicalNames'))
-          inputClassCanonicalNames = $response.querySelector('.TenantRequested_Page_classCanonicalNames');
-        if(vars.includes('sessionId'))
-          inputSessionId = $response.querySelector('.TenantRequested_Page_sessionId');
-        if(vars.includes('userKey'))
-          inputUserKey = $response.querySelector('.TenantRequested_Page_userKey');
-        if(vars.includes('saves'))
-          inputSaves = $response.querySelector('.TenantRequested_Page_saves');
-        if(vars.includes('objectTitle'))
-          inputObjectTitle = $response.querySelector('.TenantRequested_Page_objectTitle');
-        if(vars.includes('displayPage'))
-          inputDisplayPage = $response.querySelector('.TenantRequested_Page_displayPage');
-        if(vars.includes('editPage'))
-          inputEditPage = $response.querySelector('.TenantRequested_Page_editPage');
-        if(vars.includes('userPage'))
-          inputUserPage = $response.querySelector('.TenantRequested_Page_userPage');
-        if(vars.includes('download'))
-          inputDownload = $response.querySelector('.TenantRequested_Page_download');
-        if(vars.includes('objectSuggest'))
-          inputObjectSuggest = $response.querySelector('.TenantRequested_Page_objectSuggest');
-        if(vars.includes('objectText'))
-          inputObjectText = $response.querySelector('.TenantRequested_Page_objectText');
-        if(vars.includes('solrId'))
-          inputSolrId = $response.querySelector('.TenantRequested_Page_solrId');
-        if(vars.includes('hubId'))
-          inputHubId = $response.querySelector('.TenantRequested_Page_hubId');
-        if(vars.includes('clusterName'))
-          inputClusterName = $response.querySelector('.TenantRequested_Page_clusterName');
-        if(vars.includes('aapOrganizationId'))
-          inputAapOrganizationId = $response.querySelector('.TenantRequested_Page_aapOrganizationId');
-        if(vars.includes('tenantId'))
-          inputTenantId = $response.querySelector('.TenantRequested_Page_tenantId');
-        if(vars.includes('requestedNumber'))
-          inputRequestedNumber = $response.querySelector('.TenantRequested_Page_requestedNumber');
+          inputArchived = $response.querySelector('.TenantDiscovered_Page_archived');
         if(vars.includes('requestedId'))
-          inputRequestedId = $response.querySelector('.TenantRequested_Page_requestedId');
-        if(vars.includes('requestedName'))
-          inputRequestedName = $response.querySelector('.TenantRequested_Page_requestedName');
+          inputRequestedId = $response.querySelector('.TenantDiscovered_Page_requestedId');
+        if(vars.includes('discoveredByEmail'))
+          inputDiscoveredByEmail = $response.querySelector('.TenantDiscovered_Page_discoveredByEmail');
+        if(vars.includes('discoveredByUserId'))
+          inputDiscoveredByUserId = $response.querySelector('.TenantDiscovered_Page_discoveredByUserId');
+        if(vars.includes('discoveredByFullName'))
+          inputDiscoveredByFullName = $response.querySelector('.TenantDiscovered_Page_discoveredByFullName');
+        if(vars.includes('createdByEmail'))
+          inputCreatedByEmail = $response.querySelector('.TenantDiscovered_Page_createdByEmail');
+        if(vars.includes('createdVia'))
+          inputCreatedVia = $response.querySelector('.TenantDiscovered_Page_createdVia');
+        if(vars.includes('intentState'))
+          inputIntentState = $response.querySelector('.TenantDiscovered_Page_intentState');
+        if(vars.includes('requestedState'))
+          inputRequestedState = $response.querySelector('.TenantDiscovered_Page_requestedState');
+        if(vars.includes('realizedState'))
+          inputRealizedState = $response.querySelector('.TenantDiscovered_Page_realizedState');
+        if(vars.includes('discoveredState'))
+          inputDiscoveredState = $response.querySelector('.TenantDiscovered_Page_discoveredState');
+        if(vars.includes('tenantName'))
+          inputTenantName = $response.querySelector('.TenantDiscovered_Page_tenantName');
+        if(vars.includes('tenantDescription'))
+          inputTenantDescription = $response.querySelector('.TenantDiscovered_Page_tenantDescription');
+        if(vars.includes('hostInventoryIds'))
+          inputHostInventoryIds = $response.querySelector('.TenantDiscovered_Page_hostInventoryIds');
+        if(vars.includes('ansibleProjectIds'))
+          inputAnsibleProjectIds = $response.querySelector('.TenantDiscovered_Page_ansibleProjectIds');
+        if(vars.includes('classCanonicalName'))
+          inputClassCanonicalName = $response.querySelector('.TenantDiscovered_Page_classCanonicalName');
+        if(vars.includes('classSimpleName'))
+          inputClassSimpleName = $response.querySelector('.TenantDiscovered_Page_classSimpleName');
+        if(vars.includes('classCanonicalNames'))
+          inputClassCanonicalNames = $response.querySelector('.TenantDiscovered_Page_classCanonicalNames');
+        if(vars.includes('sessionId'))
+          inputSessionId = $response.querySelector('.TenantDiscovered_Page_sessionId');
+        if(vars.includes('userKey'))
+          inputUserKey = $response.querySelector('.TenantDiscovered_Page_userKey');
+        if(vars.includes('saves'))
+          inputSaves = $response.querySelector('.TenantDiscovered_Page_saves');
+        if(vars.includes('objectTitle'))
+          inputObjectTitle = $response.querySelector('.TenantDiscovered_Page_objectTitle');
+        if(vars.includes('displayPage'))
+          inputDisplayPage = $response.querySelector('.TenantDiscovered_Page_displayPage');
+        if(vars.includes('editPage'))
+          inputEditPage = $response.querySelector('.TenantDiscovered_Page_editPage');
+        if(vars.includes('userPage'))
+          inputUserPage = $response.querySelector('.TenantDiscovered_Page_userPage');
+        if(vars.includes('download'))
+          inputDownload = $response.querySelector('.TenantDiscovered_Page_download');
+        if(vars.includes('objectSuggest'))
+          inputObjectSuggest = $response.querySelector('.TenantDiscovered_Page_objectSuggest');
+        if(vars.includes('objectText'))
+          inputObjectText = $response.querySelector('.TenantDiscovered_Page_objectText');
+        if(vars.includes('solrId'))
+          inputSolrId = $response.querySelector('.TenantDiscovered_Page_solrId');
+        if(vars.includes('hubId'))
+          inputHubId = $response.querySelector('.TenantDiscovered_Page_hubId');
+        if(vars.includes('clusterName'))
+          inputClusterName = $response.querySelector('.TenantDiscovered_Page_clusterName');
+        if(vars.includes('aapOrganizationId'))
+          inputAapOrganizationId = $response.querySelector('.TenantDiscovered_Page_aapOrganizationId');
+        if(vars.includes('tenantId'))
+          inputTenantId = $response.querySelector('.TenantDiscovered_Page_tenantId');
+        if(vars.includes('tenantResource'))
+          inputTenantResource = $response.querySelector('.TenantDiscovered_Page_tenantResource');
+        if(vars.includes('discoveredName'))
+          inputDiscoveredName = $response.querySelector('.TenantDiscovered_Page_discoveredName');
+        if(vars.includes('createdByUserId'))
+          inputCreatedByUserId = $response.querySelector('.TenantDiscovered_Page_createdByUserId');
+        if(vars.includes('createdByFullName'))
+          inputCreatedByFullName = $response.querySelector('.TenantDiscovered_Page_createdByFullName');
 
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
-        window.listTenantRequested = JSON.parse($response.querySelector('.pageForm .listTenantRequested')?.value);
-        jsWebsocketTenantRequested(requestedId, vars, $response);
+        window.listTenantDiscovered = JSON.parse($response.querySelector('.pageForm .listTenantDiscovered')?.value);
+        jsWebsocketTenantDiscovered(tenantResource, vars, $response);
 
 
         if(inputPk) {
-          document.querySelectorAll('.TenantRequested_Page_pk').forEach((item, index) => {
+          document.querySelectorAll('.TenantDiscovered_Page_pk').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
@@ -219,11 +216,11 @@ async function websocketTenantRequestedInner(apiRequest) {
             else
               item.textContent = inputPk.textContent;
           });
-          addGlow(document.querySelector('.TenantRequested_Page_pk'));
+          addGlow(document.querySelector('.TenantDiscovered_Page_pk'));
         }
 
         if(inputCreated) {
-          document.querySelectorAll('.TenantRequested_Page_created').forEach((item, index) => {
+          document.querySelectorAll('.TenantDiscovered_Page_created').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
@@ -233,11 +230,11 @@ async function websocketTenantRequestedInner(apiRequest) {
             else
               item.textContent = inputCreated.textContent;
           });
-          addGlow(document.querySelector('.TenantRequested_Page_created'));
+          addGlow(document.querySelector('.TenantDiscovered_Page_created'));
         }
 
         if(inputModified) {
-          document.querySelectorAll('.TenantRequested_Page_modified').forEach((item, index) => {
+          document.querySelectorAll('.TenantDiscovered_Page_modified').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
@@ -247,11 +244,11 @@ async function websocketTenantRequestedInner(apiRequest) {
             else
               item.textContent = inputModified.textContent;
           });
-          addGlow(document.querySelector('.TenantRequested_Page_modified'));
+          addGlow(document.querySelector('.TenantDiscovered_Page_modified'));
         }
 
         if(inputArchived) {
-          document.querySelectorAll('.TenantRequested_Page_archived').forEach((item, index) => {
+          document.querySelectorAll('.TenantDiscovered_Page_archived').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
@@ -261,501 +258,11 @@ async function websocketTenantRequestedInner(apiRequest) {
             else
               item.textContent = inputArchived.textContent;
           });
-          addGlow(document.querySelector('.TenantRequested_Page_archived'));
-        }
-
-        if(inputTenantResource) {
-          document.querySelectorAll('.TenantRequested_Page_tenantResource').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantResource.getAttribute('value');
-            else
-              item.textContent = inputTenantResource.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_tenantResource'));
-        }
-
-        if(inputRequestApprovals) {
-          document.querySelectorAll('.TenantRequested_Page_requestApprovals').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputRequestApprovals.getAttribute('value');
-            else
-              item.textContent = inputRequestApprovals.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_requestApprovals'));
-        }
-
-        if(inputCreatedByEmail) {
-          document.querySelectorAll('.TenantRequested_Page_createdByEmail').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputCreatedByEmail.getAttribute('value');
-            else
-              item.textContent = inputCreatedByEmail.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_createdByEmail'));
-        }
-
-        if(inputCreatedByUserId) {
-          document.querySelectorAll('.TenantRequested_Page_createdByUserId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputCreatedByUserId.getAttribute('value');
-            else
-              item.textContent = inputCreatedByUserId.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_createdByUserId'));
-        }
-
-        if(inputCreatedByFullName) {
-          document.querySelectorAll('.TenantRequested_Page_createdByFullName').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputCreatedByFullName.getAttribute('value');
-            else
-              item.textContent = inputCreatedByFullName.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_createdByFullName'));
-        }
-
-        if(inputCreatedVia) {
-          document.querySelectorAll('.TenantRequested_Page_createdVia').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputCreatedVia.getAttribute('value');
-            else
-              item.textContent = inputCreatedVia.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_createdVia'));
-        }
-
-        if(inputIntentState) {
-          document.querySelectorAll('.TenantRequested_Page_intentState').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputIntentState.getAttribute('value');
-            else
-              item.textContent = inputIntentState.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_intentState'));
-        }
-
-        if(inputRequestedState) {
-          document.querySelectorAll('.TenantRequested_Page_requestedState').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputRequestedState.getAttribute('value');
-            else
-              item.textContent = inputRequestedState.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_requestedState'));
-        }
-
-        if(inputRealizedState) {
-          document.querySelectorAll('.TenantRequested_Page_realizedState').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputRealizedState.getAttribute('value');
-            else
-              item.textContent = inputRealizedState.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_realizedState'));
-        }
-
-        if(inputTenantName) {
-          document.querySelectorAll('.TenantRequested_Page_tenantName').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantName.getAttribute('value');
-            else
-              item.textContent = inputTenantName.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_tenantName'));
-        }
-
-        if(inputTenantDescription) {
-          document.querySelectorAll('.TenantRequested_Page_tenantDescription').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantDescription.getAttribute('value');
-            else
-              item.textContent = inputTenantDescription.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_tenantDescription'));
-        }
-
-        if(inputTenantDiscovered) {
-          document.querySelectorAll('.TenantRequested_Page_tenantDiscovered').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantDiscovered.getAttribute('value');
-            else
-              item.textContent = inputTenantDiscovered.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_tenantDiscovered'));
-        }
-
-        if(inputLocked) {
-          document.querySelectorAll('.TenantRequested_Page_locked').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputLocked.getAttribute('value');
-            else
-              item.textContent = inputLocked.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_locked'));
-        }
-
-        if(inputTenantRealized) {
-          document.querySelectorAll('.TenantRequested_Page_tenantRealized').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantRealized.getAttribute('value');
-            else
-              item.textContent = inputTenantRealized.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_tenantRealized'));
-        }
-
-        if(inputHostInventoryIds) {
-          document.querySelectorAll('.TenantRequested_Page_hostInventoryIds').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputHostInventoryIds.getAttribute('value');
-            else
-              item.textContent = inputHostInventoryIds.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_hostInventoryIds'));
-        }
-
-        if(inputAnsibleProjectIds) {
-          document.querySelectorAll('.TenantRequested_Page_ansibleProjectIds').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputAnsibleProjectIds.getAttribute('value');
-            else
-              item.textContent = inputAnsibleProjectIds.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_ansibleProjectIds'));
-        }
-
-        if(inputClassCanonicalName) {
-          document.querySelectorAll('.TenantRequested_Page_classCanonicalName').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassCanonicalName.getAttribute('value');
-            else
-              item.textContent = inputClassCanonicalName.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_classCanonicalName'));
-        }
-
-        if(inputClassSimpleName) {
-          document.querySelectorAll('.TenantRequested_Page_classSimpleName').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassSimpleName.getAttribute('value');
-            else
-              item.textContent = inputClassSimpleName.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_classSimpleName'));
-        }
-
-        if(inputClassCanonicalNames) {
-          document.querySelectorAll('.TenantRequested_Page_classCanonicalNames').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputClassCanonicalNames.getAttribute('value');
-            else
-              item.textContent = inputClassCanonicalNames.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_classCanonicalNames'));
-        }
-
-        if(inputSessionId) {
-          document.querySelectorAll('.TenantRequested_Page_sessionId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputSessionId.getAttribute('value');
-            else
-              item.textContent = inputSessionId.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_sessionId'));
-        }
-
-        if(inputUserKey) {
-          document.querySelectorAll('.TenantRequested_Page_userKey').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputUserKey.getAttribute('value');
-            else
-              item.textContent = inputUserKey.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_userKey'));
-        }
-
-        if(inputSaves) {
-          document.querySelectorAll('.TenantRequested_Page_saves').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputSaves.getAttribute('value');
-            else
-              item.textContent = inputSaves.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_saves'));
-        }
-
-        if(inputObjectTitle) {
-          document.querySelectorAll('.TenantRequested_Page_objectTitle').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectTitle.getAttribute('value');
-            else
-              item.textContent = inputObjectTitle.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_objectTitle'));
-        }
-
-        if(inputDisplayPage) {
-          document.querySelectorAll('.TenantRequested_Page_displayPage').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputDisplayPage.getAttribute('value');
-            else
-              item.textContent = inputDisplayPage.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_displayPage'));
-        }
-
-        if(inputEditPage) {
-          document.querySelectorAll('.TenantRequested_Page_editPage').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputEditPage.getAttribute('value');
-            else
-              item.textContent = inputEditPage.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_editPage'));
-        }
-
-        if(inputUserPage) {
-          document.querySelectorAll('.TenantRequested_Page_userPage').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputUserPage.getAttribute('value');
-            else
-              item.textContent = inputUserPage.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_userPage'));
-        }
-
-        if(inputDownload) {
-          document.querySelectorAll('.TenantRequested_Page_download').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputDownload.getAttribute('value');
-            else
-              item.textContent = inputDownload.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_download'));
-        }
-
-        if(inputObjectSuggest) {
-          document.querySelectorAll('.TenantRequested_Page_objectSuggest').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectSuggest.getAttribute('value');
-            else
-              item.textContent = inputObjectSuggest.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_objectSuggest'));
-        }
-
-        if(inputObjectText) {
-          document.querySelectorAll('.TenantRequested_Page_objectText').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputObjectText.getAttribute('value');
-            else
-              item.textContent = inputObjectText.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_objectText'));
-        }
-
-        if(inputSolrId) {
-          document.querySelectorAll('.TenantRequested_Page_solrId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputSolrId.getAttribute('value');
-            else
-              item.textContent = inputSolrId.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_solrId'));
-        }
-
-        if(inputHubId) {
-          document.querySelectorAll('.TenantRequested_Page_hubId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputHubId.getAttribute('value');
-            else
-              item.textContent = inputHubId.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_hubId'));
-        }
-
-        if(inputClusterName) {
-          document.querySelectorAll('.TenantRequested_Page_clusterName').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputClusterName.getAttribute('value');
-            else
-              item.textContent = inputClusterName.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_clusterName'));
-        }
-
-        if(inputAapOrganizationId) {
-          document.querySelectorAll('.TenantRequested_Page_aapOrganizationId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputAapOrganizationId.getAttribute('value');
-            else
-              item.textContent = inputAapOrganizationId.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_aapOrganizationId'));
-        }
-
-        if(inputTenantId) {
-          document.querySelectorAll('.TenantRequested_Page_tenantId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantId.getAttribute('value');
-            else
-              item.textContent = inputTenantId.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_tenantId'));
-        }
-
-        if(inputRequestedNumber) {
-          document.querySelectorAll('.TenantRequested_Page_requestedNumber').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputRequestedNumber.getAttribute('value');
-            else
-              item.textContent = inputRequestedNumber.textContent;
-          });
-          addGlow(document.querySelector('.TenantRequested_Page_requestedNumber'));
+          addGlow(document.querySelector('.TenantDiscovered_Page_archived'));
         }
 
         if(inputRequestedId) {
-          document.querySelectorAll('.TenantRequested_Page_requestedId').forEach((item, index) => {
+          document.querySelectorAll('.TenantDiscovered_Page_requestedId').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
@@ -765,30 +272,506 @@ async function websocketTenantRequestedInner(apiRequest) {
             else
               item.textContent = inputRequestedId.textContent;
           });
-          addGlow(document.querySelector('.TenantRequested_Page_requestedId'));
+          addGlow(document.querySelector('.TenantDiscovered_Page_requestedId'));
         }
 
-        if(inputRequestedName) {
-          document.querySelectorAll('.TenantRequested_Page_requestedName').forEach((item, index) => {
+        if(inputDiscoveredByEmail) {
+          document.querySelectorAll('.TenantDiscovered_Page_discoveredByEmail').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
             }
             if(typeof item.value !== 'undefined')
-              item.value = inputRequestedName.getAttribute('value');
+              item.value = inputDiscoveredByEmail.getAttribute('value');
             else
-              item.textContent = inputRequestedName.textContent;
+              item.textContent = inputDiscoveredByEmail.textContent;
           });
-          addGlow(document.querySelector('.TenantRequested_Page_requestedName'));
+          addGlow(document.querySelector('.TenantDiscovered_Page_discoveredByEmail'));
         }
 
-          pageGraphTenantRequested();
+        if(inputDiscoveredByUserId) {
+          document.querySelectorAll('.TenantDiscovered_Page_discoveredByUserId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputDiscoveredByUserId.getAttribute('value');
+            else
+              item.textContent = inputDiscoveredByUserId.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_discoveredByUserId'));
+        }
+
+        if(inputDiscoveredByFullName) {
+          document.querySelectorAll('.TenantDiscovered_Page_discoveredByFullName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputDiscoveredByFullName.getAttribute('value');
+            else
+              item.textContent = inputDiscoveredByFullName.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_discoveredByFullName'));
+        }
+
+        if(inputCreatedByEmail) {
+          document.querySelectorAll('.TenantDiscovered_Page_createdByEmail').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputCreatedByEmail.getAttribute('value');
+            else
+              item.textContent = inputCreatedByEmail.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_createdByEmail'));
+        }
+
+        if(inputCreatedVia) {
+          document.querySelectorAll('.TenantDiscovered_Page_createdVia').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputCreatedVia.getAttribute('value');
+            else
+              item.textContent = inputCreatedVia.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_createdVia'));
+        }
+
+        if(inputIntentState) {
+          document.querySelectorAll('.TenantDiscovered_Page_intentState').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputIntentState.getAttribute('value');
+            else
+              item.textContent = inputIntentState.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_intentState'));
+        }
+
+        if(inputRequestedState) {
+          document.querySelectorAll('.TenantDiscovered_Page_requestedState').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputRequestedState.getAttribute('value');
+            else
+              item.textContent = inputRequestedState.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_requestedState'));
+        }
+
+        if(inputRealizedState) {
+          document.querySelectorAll('.TenantDiscovered_Page_realizedState').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputRealizedState.getAttribute('value');
+            else
+              item.textContent = inputRealizedState.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_realizedState'));
+        }
+
+        if(inputDiscoveredState) {
+          document.querySelectorAll('.TenantDiscovered_Page_discoveredState').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputDiscoveredState.getAttribute('value');
+            else
+              item.textContent = inputDiscoveredState.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_discoveredState'));
+        }
+
+        if(inputTenantName) {
+          document.querySelectorAll('.TenantDiscovered_Page_tenantName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantName.getAttribute('value');
+            else
+              item.textContent = inputTenantName.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_tenantName'));
+        }
+
+        if(inputTenantDescription) {
+          document.querySelectorAll('.TenantDiscovered_Page_tenantDescription').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantDescription.getAttribute('value');
+            else
+              item.textContent = inputTenantDescription.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_tenantDescription'));
+        }
+
+        if(inputHostInventoryIds) {
+          document.querySelectorAll('.TenantDiscovered_Page_hostInventoryIds').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputHostInventoryIds.getAttribute('value');
+            else
+              item.textContent = inputHostInventoryIds.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_hostInventoryIds'));
+        }
+
+        if(inputAnsibleProjectIds) {
+          document.querySelectorAll('.TenantDiscovered_Page_ansibleProjectIds').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputAnsibleProjectIds.getAttribute('value');
+            else
+              item.textContent = inputAnsibleProjectIds.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_ansibleProjectIds'));
+        }
+
+        if(inputClassCanonicalName) {
+          document.querySelectorAll('.TenantDiscovered_Page_classCanonicalName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassCanonicalName.getAttribute('value');
+            else
+              item.textContent = inputClassCanonicalName.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_classCanonicalName'));
+        }
+
+        if(inputClassSimpleName) {
+          document.querySelectorAll('.TenantDiscovered_Page_classSimpleName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassSimpleName.getAttribute('value');
+            else
+              item.textContent = inputClassSimpleName.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_classSimpleName'));
+        }
+
+        if(inputClassCanonicalNames) {
+          document.querySelectorAll('.TenantDiscovered_Page_classCanonicalNames').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputClassCanonicalNames.getAttribute('value');
+            else
+              item.textContent = inputClassCanonicalNames.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_classCanonicalNames'));
+        }
+
+        if(inputSessionId) {
+          document.querySelectorAll('.TenantDiscovered_Page_sessionId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputSessionId.getAttribute('value');
+            else
+              item.textContent = inputSessionId.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_sessionId'));
+        }
+
+        if(inputUserKey) {
+          document.querySelectorAll('.TenantDiscovered_Page_userKey').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputUserKey.getAttribute('value');
+            else
+              item.textContent = inputUserKey.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_userKey'));
+        }
+
+        if(inputSaves) {
+          document.querySelectorAll('.TenantDiscovered_Page_saves').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputSaves.getAttribute('value');
+            else
+              item.textContent = inputSaves.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_saves'));
+        }
+
+        if(inputObjectTitle) {
+          document.querySelectorAll('.TenantDiscovered_Page_objectTitle').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectTitle.getAttribute('value');
+            else
+              item.textContent = inputObjectTitle.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_objectTitle'));
+        }
+
+        if(inputDisplayPage) {
+          document.querySelectorAll('.TenantDiscovered_Page_displayPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputDisplayPage.getAttribute('value');
+            else
+              item.textContent = inputDisplayPage.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_displayPage'));
+        }
+
+        if(inputEditPage) {
+          document.querySelectorAll('.TenantDiscovered_Page_editPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputEditPage.getAttribute('value');
+            else
+              item.textContent = inputEditPage.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_editPage'));
+        }
+
+        if(inputUserPage) {
+          document.querySelectorAll('.TenantDiscovered_Page_userPage').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputUserPage.getAttribute('value');
+            else
+              item.textContent = inputUserPage.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_userPage'));
+        }
+
+        if(inputDownload) {
+          document.querySelectorAll('.TenantDiscovered_Page_download').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputDownload.getAttribute('value');
+            else
+              item.textContent = inputDownload.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_download'));
+        }
+
+        if(inputObjectSuggest) {
+          document.querySelectorAll('.TenantDiscovered_Page_objectSuggest').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectSuggest.getAttribute('value');
+            else
+              item.textContent = inputObjectSuggest.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_objectSuggest'));
+        }
+
+        if(inputObjectText) {
+          document.querySelectorAll('.TenantDiscovered_Page_objectText').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputObjectText.getAttribute('value');
+            else
+              item.textContent = inputObjectText.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_objectText'));
+        }
+
+        if(inputSolrId) {
+          document.querySelectorAll('.TenantDiscovered_Page_solrId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputSolrId.getAttribute('value');
+            else
+              item.textContent = inputSolrId.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_solrId'));
+        }
+
+        if(inputHubId) {
+          document.querySelectorAll('.TenantDiscovered_Page_hubId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputHubId.getAttribute('value');
+            else
+              item.textContent = inputHubId.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_hubId'));
+        }
+
+        if(inputClusterName) {
+          document.querySelectorAll('.TenantDiscovered_Page_clusterName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputClusterName.getAttribute('value');
+            else
+              item.textContent = inputClusterName.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_clusterName'));
+        }
+
+        if(inputAapOrganizationId) {
+          document.querySelectorAll('.TenantDiscovered_Page_aapOrganizationId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputAapOrganizationId.getAttribute('value');
+            else
+              item.textContent = inputAapOrganizationId.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_aapOrganizationId'));
+        }
+
+        if(inputTenantId) {
+          document.querySelectorAll('.TenantDiscovered_Page_tenantId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantId.getAttribute('value');
+            else
+              item.textContent = inputTenantId.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_tenantId'));
+        }
+
+        if(inputTenantResource) {
+          document.querySelectorAll('.TenantDiscovered_Page_tenantResource').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantResource.getAttribute('value');
+            else
+              item.textContent = inputTenantResource.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_tenantResource'));
+        }
+
+        if(inputDiscoveredName) {
+          document.querySelectorAll('.TenantDiscovered_Page_discoveredName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputDiscoveredName.getAttribute('value');
+            else
+              item.textContent = inputDiscoveredName.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_discoveredName'));
+        }
+
+        if(inputCreatedByUserId) {
+          document.querySelectorAll('.TenantDiscovered_Page_createdByUserId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputCreatedByUserId.getAttribute('value');
+            else
+              item.textContent = inputCreatedByUserId.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_createdByUserId'));
+        }
+
+        if(inputCreatedByFullName) {
+          document.querySelectorAll('.TenantDiscovered_Page_createdByFullName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputCreatedByFullName.getAttribute('value');
+            else
+              item.textContent = inputCreatedByFullName.textContent;
+          });
+          addGlow(document.querySelector('.TenantDiscovered_Page_createdByFullName'));
+        }
+
+          pageGraphTenantDiscovered();
       });
     });
   }
 }
 
-function pageGraphTenantRequested(apiRequest) {
+function pageGraphTenantDiscovered(apiRequest) {
   var r = document.querySelector('.pageForm .pageResponse')?.value;
   if(r) {
     var json = JSON.parse(r);
@@ -820,7 +803,7 @@ function pageGraphTenantRequested(apiRequest) {
         var data = [];
         var layout = {};
         if(range) {
-          layout['title'] = 'requested tenants';
+          layout['title'] = 'discovered tenants';
           layout['xaxis'] = {
             title: rangeVarFq.displayName
           }
@@ -883,7 +866,7 @@ function pageGraphTenantRequested(apiRequest) {
               data.push(trace);
             });
           }
-          Plotly.react('htmBodyGraphTenantRequestedPage', data, layout);
+          Plotly.react('htmBodyGraphTenantDiscoveredPage', data, layout);
         }
       }
     }
@@ -891,8 +874,8 @@ function pageGraphTenantRequested(apiRequest) {
 }
 
 function animateStats() {
-  document.querySelector('#pageSearchVal-fqTenantRequested_time').innerText = '';
-  searchPage('TenantRequested', function() {
+  document.querySelector('#pageSearchVal-fqTenantDiscovered_time').innerText = '';
+  searchPage('TenantDiscovered', function() {
     let speedRate = parseFloat(document.querySelector('#animateStatsSpeed')?.value) * 1000;
     let xStep = parseFloat(document.querySelector('#animateStatsStep')?.value);
     let xMin = parseFloat(document.querySelector('#animateStatsMin')?.value);
@@ -904,26 +887,26 @@ function animateStats() {
       if (x > xMax || x < 0) {
         clearInterval(animateInterval);
       }
-      document.querySelector('#fqTenantRequested_time').value = x;
-      document.querySelector('#fqTenantRequested_time').onchange();
-      searchPage('TenantRequested');
+      document.querySelector('#fqTenantDiscovered_time').value = x;
+      document.querySelector('#fqTenantDiscovered_time').onchange();
+      searchPage('TenantDiscovered');
     }, speedRate);
   });
 }
 
 // Search //
 
-async function searchTenantRequested($formFilters, success, error) {
-  var filters = searchTenantRequestedFilters($formFilters);
+async function searchTenantDiscovered($formFilters, success, error) {
+  var filters = searchTenantDiscoveredFilters($formFilters);
   if(success == null)
     success = function( data, textStatus, jQxhr ) {};
   if(error == null)
     error = function( jqXhr, target2 ) {};
 
-  searchTenantRequestedVals(filters, target, success, error);
+  searchTenantDiscoveredVals(filters, target, success, error);
 }
 
-function searchTenantRequestedFilters($formFilters) {
+function searchTenantDiscoveredFilters($formFilters) {
   var filters = [];
   if($formFilters) {
 
@@ -949,25 +932,25 @@ function searchTenantRequestedFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+    var filterRequestedId = $formFilters.querySelector('.valueRequestedId')?.value;
+    if(filterRequestedId != null && filterRequestedId !== '')
+      filters.push({ name: 'fq', value: 'requestedId:' + filterRequestedId });
 
-    var filterRequestApprovals = $formFilters.querySelector('.valueRequestApprovals')?.value;
-    if(filterRequestApprovals != null && filterRequestApprovals !== '')
-      filters.push({ name: 'fq', value: 'requestApprovals:' + filterRequestApprovals });
+    var filterDiscoveredByEmail = $formFilters.querySelector('.valueDiscoveredByEmail')?.value;
+    if(filterDiscoveredByEmail != null && filterDiscoveredByEmail !== '')
+      filters.push({ name: 'fq', value: 'discoveredByEmail:' + filterDiscoveredByEmail });
+
+    var filterDiscoveredByUserId = $formFilters.querySelector('.valueDiscoveredByUserId')?.value;
+    if(filterDiscoveredByUserId != null && filterDiscoveredByUserId !== '')
+      filters.push({ name: 'fq', value: 'discoveredByUserId:' + filterDiscoveredByUserId });
+
+    var filterDiscoveredByFullName = $formFilters.querySelector('.valueDiscoveredByFullName')?.value;
+    if(filterDiscoveredByFullName != null && filterDiscoveredByFullName !== '')
+      filters.push({ name: 'fq', value: 'discoveredByFullName:' + filterDiscoveredByFullName });
 
     var filterCreatedByEmail = $formFilters.querySelector('.valueCreatedByEmail')?.value;
     if(filterCreatedByEmail != null && filterCreatedByEmail !== '')
       filters.push({ name: 'fq', value: 'createdByEmail:' + filterCreatedByEmail });
-
-    var filterCreatedByUserId = $formFilters.querySelector('.valueCreatedByUserId')?.value;
-    if(filterCreatedByUserId != null && filterCreatedByUserId !== '')
-      filters.push({ name: 'fq', value: 'createdByUserId:' + filterCreatedByUserId });
-
-    var filterCreatedByFullName = $formFilters.querySelector('.valueCreatedByFullName')?.value;
-    if(filterCreatedByFullName != null && filterCreatedByFullName !== '')
-      filters.push({ name: 'fq', value: 'createdByFullName:' + filterCreatedByFullName });
 
     var filterCreatedVia = $formFilters.querySelector('.valueCreatedVia')?.value;
     if(filterCreatedVia != null && filterCreatedVia !== '')
@@ -985,6 +968,10 @@ function searchTenantRequestedFilters($formFilters) {
     if(filterRealizedState != null && filterRealizedState !== '')
       filters.push({ name: 'fq', value: 'realizedState:' + filterRealizedState });
 
+    var filterDiscoveredState = $formFilters.querySelector('.valueDiscoveredState')?.value;
+    if(filterDiscoveredState != null && filterDiscoveredState !== '')
+      filters.push({ name: 'fq', value: 'discoveredState:' + filterDiscoveredState });
+
     var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
@@ -992,24 +979,6 @@ function searchTenantRequestedFilters($formFilters) {
     var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
     if(filterTenantDescription != null && filterTenantDescription !== '')
       filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
-
-    var filterTenantDiscovered = $formFilters.querySelector('.valueTenantDiscovered')?.value;
-    if(filterTenantDiscovered != null && filterTenantDiscovered !== '')
-      filters.push({ name: 'fq', value: 'tenantDiscovered:' + filterTenantDiscovered });
-
-    var $filterLockedCheckbox = $formFilters.querySelector('input.valueLocked[type = "checkbox"]');
-    var $filterLockedSelect = $formFilters.querySelector('select.valueLocked');
-    var filterLocked = $filterLockedSelect.length ? $filterLockedSelect.value : $filterLockedCheckbox.checked;
-    var filterLockedSelectVal = $formFilters.querySelector('select.filterLocked')?.value;
-    var filterLocked = null;
-    if(filterLockedSelectVal !== '')
-      filterLocked = filterLockedSelectVal == 'true';
-    if(filterLocked != null && filterLocked === true)
-      filters.push({ name: 'fq', value: 'locked:' + filterLocked });
-
-    var filterTenantRealized = $formFilters.querySelector('.valueTenantRealized')?.value;
-    if(filterTenantRealized != null && filterTenantRealized !== '')
-      filters.push({ name: 'fq', value: 'tenantRealized:' + filterTenantRealized });
 
     var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
     if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
@@ -1091,25 +1060,29 @@ function searchTenantRequestedFilters($formFilters) {
     if(filterTenantId != null && filterTenantId !== '')
       filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
-    var filterRequestedNumber = $formFilters.querySelector('.valueRequestedNumber')?.value;
-    if(filterRequestedNumber != null && filterRequestedNumber !== '')
-      filters.push({ name: 'fq', value: 'requestedNumber:' + filterRequestedNumber });
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
-    var filterRequestedId = $formFilters.querySelector('.valueRequestedId')?.value;
-    if(filterRequestedId != null && filterRequestedId !== '')
-      filters.push({ name: 'fq', value: 'requestedId:' + filterRequestedId });
+    var filterDiscoveredName = $formFilters.querySelector('.valueDiscoveredName')?.value;
+    if(filterDiscoveredName != null && filterDiscoveredName !== '')
+      filters.push({ name: 'fq', value: 'discoveredName:' + filterDiscoveredName });
 
-    var filterRequestedName = $formFilters.querySelector('.valueRequestedName')?.value;
-    if(filterRequestedName != null && filterRequestedName !== '')
-      filters.push({ name: 'fq', value: 'requestedName:' + filterRequestedName });
+    var filterCreatedByUserId = $formFilters.querySelector('.valueCreatedByUserId')?.value;
+    if(filterCreatedByUserId != null && filterCreatedByUserId !== '')
+      filters.push({ name: 'fq', value: 'createdByUserId:' + filterCreatedByUserId });
+
+    var filterCreatedByFullName = $formFilters.querySelector('.valueCreatedByFullName')?.value;
+    if(filterCreatedByFullName != null && filterCreatedByFullName !== '')
+      filters.push({ name: 'fq', value: 'createdByFullName:' + filterCreatedByFullName });
   }
   return filters;
 }
 
-function searchTenantRequestedVals(filters, target, success, error) {
+function searchTenantDiscoveredVals(filters, target, success, error) {
 
   fetch(
-    '/en-us/api/intent/requested?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    '/en-us/api/intent/discovered?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -1124,7 +1097,7 @@ function searchTenantRequestedVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestTenantRequestedHostInventoryIds(filters, $list, requestedIdTenantRequested = null, hostInventoryIds = null, relate=true, target) {
+function suggestTenantDiscoveredHostInventoryIds(filters, $list, tenantResourceTenantDiscovered = null, hostInventoryIds = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1145,18 +1118,18 @@ function suggestTenantRequestedHostInventoryIds(filters, $list, requestedIdTenan
         var val = o[inputVar];
         var checked = val == null ? false : (hostInventoryIds != null && val === hostInventoryIds.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hostInventoryIds_' + requestedIdTenantRequested + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_hostInventoryIds_' + tenantResourceTenantDiscovered + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
         $input.setAttribute('class', 'valueHostInventoryIds ');
-        if(requestedIdTenantRequested != null) {
+        if(tenantResourceTenantDiscovered != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantRequestedVals([{ name: 'fq', value: 'requestedId:' + requestedIdTenantRequested }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o[inputVar] }
+            patchTenantDiscoveredVals([{ name: 'fq', value: 'tenantResource:' + tenantResourceTenantDiscovered }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantRequestedHostInventoryIds(filters, $list, requestedIdTenantRequested, o[inputVar], relate, target);
+                  suggestTenantDiscoveredHostInventoryIds(filters, $list, tenantResourceTenantDiscovered, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1187,7 +1160,7 @@ function suggestTenantRequestedHostInventoryIds(filters, $list, requestedIdTenan
   }
 }
 
-function suggestTenantRequestedAnsibleProjectIds(filters, $list, requestedIdTenantRequested = null, ansibleProjectIds = null, relate=true, target) {
+function suggestTenantDiscoveredAnsibleProjectIds(filters, $list, tenantResourceTenantDiscovered = null, ansibleProjectIds = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1208,18 +1181,18 @@ function suggestTenantRequestedAnsibleProjectIds(filters, $list, requestedIdTena
         var val = o[inputVar];
         var checked = val == null ? false : (ansibleProjectIds != null && val === ansibleProjectIds.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_ansibleProjectIds_' + requestedIdTenantRequested + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_ansibleProjectIds_' + tenantResourceTenantDiscovered + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
         $input.setAttribute('class', 'valueAnsibleProjectIds ');
-        if(requestedIdTenantRequested != null) {
+        if(tenantResourceTenantDiscovered != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantRequestedVals([{ name: 'fq', value: 'requestedId:' + requestedIdTenantRequested }], { [(event.target.checked ? 'add' : 'remove') + 'AnsibleProjectIds']: o[inputVar] }
+            patchTenantDiscoveredVals([{ name: 'fq', value: 'tenantResource:' + tenantResourceTenantDiscovered }], { [(event.target.checked ? 'add' : 'remove') + 'AnsibleProjectIds']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantRequestedAnsibleProjectIds(filters, $list, requestedIdTenantRequested, o[inputVar], relate, target);
+                  suggestTenantDiscoveredAnsibleProjectIds(filters, $list, tenantResourceTenantDiscovered, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1250,7 +1223,71 @@ function suggestTenantRequestedAnsibleProjectIds(filters, $list, requestedIdTena
   }
 }
 
-function suggestTenantRequestedTenantResource(filters, $list, requestedIdTenantRequested = null, tenantResource = null, relate=true, target) {
+function suggestTenantDiscoveredRequestedId(filters, $list, tenantResourceTenantDiscovered = null, requestedId = null, relate=true, target) {
+  success = function( data, textStatus, jQxhr ) {
+    if($list) {
+      $list.innerHTML = '';
+      data['list'].forEach((o, i) => {
+        var iTemplate = document.createElement('template');
+        iTemplate.innerHTML = '<i class="' + window.FONTAWESOME_STYLE + ' fa-buildings"></i>';
+        var $i = iTemplate.content;
+        var $span = document.createElement('span');
+        $span.setAttribute('class', '');
+        $span.innerText = o['objectTitle'];
+        var $a = document.createElement('a');
+        $a.setAttribute('class', 'wa-flank wa-gap-xs ');
+        $a.setAttribute('target', '_blank');
+        $a.setAttribute('href', o['editPage']);
+        $a.append($i);
+        $a.append($span);
+        var inputVar = 'requestedId';
+        var val = o[inputVar];
+        var checked = val == null ? false : (requestedId != null && val === requestedId.toString());
+        var $input = document.createElement('wa-checkbox');
+        $input.setAttribute('id', 'GET_requestedId_' + tenantResourceTenantDiscovered + '_requestedId_' + o[inputVar]);
+        $input.setAttribute('name', inputVar);
+        $input.setAttribute('data-target', target.getAttribute('id'));
+        $input.value = o[inputVar];
+        $input.setAttribute('class', 'valueRequestedId ');
+        if(tenantResourceTenantDiscovered != null) {
+          $input.addEventListener('change', function(event) {
+            document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
+            patchTenantDiscoveredVals([{ name: 'fq', value: 'tenantResource:' + tenantResourceTenantDiscovered }], { [(event.target.checked ? 'set' : 'remove') + 'RequestedId']: o[inputVar] }
+                , target
+                , function(response, target) {
+                  addGlow(target);
+                  suggestTenantDiscoveredRequestedId(filters, $list, tenantResourceTenantDiscovered, o[inputVar], relate, target);
+                }
+                , function(response, target) { addError(target); }
+            );
+          });
+        } else {
+          $input.addEventListener('change', function(event) {
+            if(event.target.checked) {
+              target.value = event.target.value;
+            } else {
+              target.value = null;
+            }
+          });
+        }
+        if(checked)
+          $input.setAttribute('checked', 'checked');
+        var $li = document.createElement('li');
+        $li.setAttribute('class', 'wa-flank wa-gap-0 ');
+        if(relate)
+          $li.append($input);
+        $li.append($a);
+        $list.append($li);
+      });
+    }
+  };
+  error = function( jqXhr, target2 ) {};
+  if (typeof searchTenantRequestedVals === 'function') {
+    searchTenantRequestedVals(filters, target, success, error);
+  }
+}
+
+function suggestTenantDiscoveredTenantResource(filters, $list, tenantResourceTenantDiscovered = null, tenantResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1271,19 +1308,19 @@ function suggestTenantRequestedTenantResource(filters, $list, requestedIdTenantR
         var val = o[inputVar];
         var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + requestedIdTenantRequested + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_tenantResource_' + tenantResourceTenantDiscovered + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
         $input.setAttribute('class', 'valueTenantResource ');
-        if(requestedIdTenantRequested != null) {
+        if(tenantResourceTenantDiscovered != null) {
           $input.addEventListener('change', function(event) {
             document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
-            patchTenantRequestedVals([{ name: 'fq', value: 'requestedId:' + requestedIdTenantRequested }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o[inputVar] }
+            patchTenantDiscoveredVals([{ name: 'fq', value: 'tenantResource:' + tenantResourceTenantDiscovered }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantRequestedTenantResource(filters, $list, requestedIdTenantRequested, o[inputVar], relate, target);
+                  suggestTenantDiscoveredTenantResource(filters, $list, tenantResourceTenantDiscovered, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1314,70 +1351,7 @@ function suggestTenantRequestedTenantResource(filters, $list, requestedIdTenantR
   }
 }
 
-function suggestTenantRequestedRequestApprovals(filters, $list, requestedIdTenantRequested = null, requestApprovals = null, relate=true, target) {
-  success = function( data, textStatus, jQxhr ) {
-    if($list) {
-      $list.innerHTML = '';
-      data['list'].forEach((o, i) => {
-        var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="' + window.FONTAWESOME_STYLE + ' fa-thumbs-up"></i>';
-        var $i = iTemplate.content;
-        var $span = document.createElement('span');
-        $span.setAttribute('class', '');
-        $span.innerText = o['objectTitle'];
-        var $a = document.createElement('a');
-        $a.setAttribute('class', 'wa-flank wa-gap-xs ');
-        $a.setAttribute('target', '_blank');
-        $a.setAttribute('href', o['editPage']);
-        $a.append($i);
-        $a.append($span);
-        var inputVar = 'approvalId';
-        var val = o[inputVar];
-        var checked = val == null ? false : (requestApprovals != null && val === requestApprovals.toString());
-        var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_requestApprovals_' + requestedIdTenantRequested + '_approvalId_' + o[inputVar]);
-        $input.setAttribute('name', inputVar);
-        $input.setAttribute('data-target', target.getAttribute('id'));
-        $input.value = o[inputVar];
-        $input.setAttribute('class', 'valueRequestApprovals ');
-        if(requestedIdTenantRequested != null) {
-          $input.addEventListener('change', function(event) {
-            patchTenantRequestedVals([{ name: 'fq', value: 'requestedId:' + requestedIdTenantRequested }], { [(event.target.checked ? 'add' : 'remove') + 'RequestApprovals']: o[inputVar] }
-                , target
-                , function(response, target) {
-                  addGlow(target);
-                  suggestTenantRequestedRequestApprovals(filters, $list, requestedIdTenantRequested, o[inputVar], relate, target);
-                }
-                , function(response, target) { addError(target); }
-            );
-          });
-        } else {
-          $input.addEventListener('change', function(event) {
-            if(event.target.checked) {
-              target.value = event.target.value;
-            } else {
-              target.value = null;
-            }
-          });
-        }
-        if(checked)
-          $input.setAttribute('checked', 'checked');
-        var $li = document.createElement('li');
-        $li.setAttribute('class', 'wa-flank wa-gap-0 ');
-        if(relate)
-          $li.append($input);
-        $li.append($a);
-        $list.append($li);
-      });
-    }
-  };
-  error = function( jqXhr, target2 ) {};
-  if (typeof searchTenantApprovalVals === 'function') {
-    searchTenantApprovalVals(filters, target, success, error);
-  }
-}
-
-function suggestTenantRequestedObjectSuggest($formFilters, $list, target) {
+function suggestTenantDiscoveredObjectSuggest($formFilters, $list, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1396,140 +1370,14 @@ function suggestTenantRequestedObjectSuggest($formFilters, $list, target) {
     }
   };
   error = function( jqXhr, target2 ) {};
-  searchTenantRequestedVals($formFilters, target, success, error);
-}
-
-function suggestTenantRequestedTenantDiscovered(filters, $list, requestedIdTenantRequested = null, tenantDiscovered = null, relate=true, target) {
-  success = function( data, textStatus, jQxhr ) {
-    if($list) {
-      $list.innerHTML = '';
-      data['list'].forEach((o, i) => {
-        var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="' + window.FONTAWESOME_STYLE + ' fa-buildings"></i>';
-        var $i = iTemplate.content;
-        var $span = document.createElement('span');
-        $span.setAttribute('class', '');
-        $span.innerText = o['objectTitle'];
-        var $a = document.createElement('a');
-        $a.setAttribute('class', 'wa-flank wa-gap-xs ');
-        $a.setAttribute('target', '_blank');
-        $a.setAttribute('href', o['editPage']);
-        $a.append($i);
-        $a.append($span);
-        var inputVar = 'tenantResource';
-        var val = o[inputVar];
-        var checked = val == null ? false : (tenantDiscovered != null && val === tenantDiscovered.toString());
-        var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantDiscovered_' + requestedIdTenantRequested + '_tenantResource_' + o[inputVar]);
-        $input.setAttribute('name', inputVar);
-        $input.setAttribute('data-target', target.getAttribute('id'));
-        $input.value = o[inputVar];
-        $input.setAttribute('class', 'valueTenantDiscovered ');
-        if(requestedIdTenantRequested != null) {
-          $input.addEventListener('change', function(event) {
-            patchTenantRequestedVals([{ name: 'fq', value: 'requestedId:' + requestedIdTenantRequested }], { [(event.target.checked ? 'add' : 'remove') + 'TenantDiscovered']: o[inputVar] }
-                , target
-                , function(response, target) {
-                  addGlow(target);
-                  suggestTenantRequestedTenantDiscovered(filters, $list, requestedIdTenantRequested, o[inputVar], relate, target);
-                }
-                , function(response, target) { addError(target); }
-            );
-          });
-        } else {
-          $input.addEventListener('change', function(event) {
-            if(event.target.checked) {
-              target.value = event.target.value;
-            } else {
-              target.value = null;
-            }
-          });
-        }
-        if(checked)
-          $input.setAttribute('checked', 'checked');
-        var $li = document.createElement('li');
-        $li.setAttribute('class', 'wa-flank wa-gap-0 ');
-        if(relate)
-          $li.append($input);
-        $li.append($a);
-        $list.append($li);
-      });
-    }
-  };
-  error = function( jqXhr, target2 ) {};
-  if (typeof searchTenantDiscoveredVals === 'function') {
-    searchTenantDiscoveredVals(filters, target, success, error);
-  }
-}
-
-function suggestTenantRequestedTenantRealized(filters, $list, requestedIdTenantRequested = null, tenantRealized = null, relate=true, target) {
-  success = function( data, textStatus, jQxhr ) {
-    if($list) {
-      $list.innerHTML = '';
-      data['list'].forEach((o, i) => {
-        var iTemplate = document.createElement('template');
-        iTemplate.innerHTML = '<i class="' + window.FONTAWESOME_STYLE + ' fa-buildings"></i>';
-        var $i = iTemplate.content;
-        var $span = document.createElement('span');
-        $span.setAttribute('class', '');
-        $span.innerText = o['objectTitle'];
-        var $a = document.createElement('a');
-        $a.setAttribute('class', 'wa-flank wa-gap-xs ');
-        $a.setAttribute('target', '_blank');
-        $a.setAttribute('href', o['editPage']);
-        $a.append($i);
-        $a.append($span);
-        var inputVar = 'tenantResource';
-        var val = o[inputVar];
-        var checked = val == null ? false : (tenantRealized != null && val === tenantRealized.toString());
-        var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantRealized_' + requestedIdTenantRequested + '_tenantResource_' + o[inputVar]);
-        $input.setAttribute('name', inputVar);
-        $input.setAttribute('data-target', target.getAttribute('id'));
-        $input.value = o[inputVar];
-        $input.setAttribute('class', 'valueTenantRealized ');
-        if(requestedIdTenantRequested != null) {
-          $input.addEventListener('change', function(event) {
-            patchTenantRequestedVals([{ name: 'fq', value: 'requestedId:' + requestedIdTenantRequested }], { [(event.target.checked ? 'add' : 'remove') + 'TenantRealized']: o[inputVar] }
-                , target
-                , function(response, target) {
-                  addGlow(target);
-                  suggestTenantRequestedTenantRealized(filters, $list, requestedIdTenantRequested, o[inputVar], relate, target);
-                }
-                , function(response, target) { addError(target); }
-            );
-          });
-        } else {
-          $input.addEventListener('change', function(event) {
-            if(event.target.checked) {
-              target.value = event.target.value;
-            } else {
-              target.value = null;
-            }
-          });
-        }
-        if(checked)
-          $input.setAttribute('checked', 'checked');
-        var $li = document.createElement('li');
-        $li.setAttribute('class', 'wa-flank wa-gap-0 ');
-        if(relate)
-          $li.append($input);
-        $li.append($a);
-        $list.append($li);
-      });
-    }
-  };
-  error = function( jqXhr, target2 ) {};
-  if (typeof searchTenantRealizedVals === 'function') {
-    searchTenantRealizedVals(filters, target, success, error);
-  }
+  searchTenantDiscoveredVals($formFilters, target, success, error);
 }
 
 // GET //
 
-async function getTenantRequested(pk) {
+async function getTenantDiscovered(pk) {
   fetch(
-    '/en-us/api/intent/requested/' + requestedId
+    '/en-us/api/intent/discovered/' + tenantResource
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
     }).then(response => {
@@ -1546,8 +1394,8 @@ async function getTenantRequested(pk) {
 
 // PATCH //
 
-async function patchTenantRequested($formFilters, $formValues, target, requestedId, success, error) {
-  var filters = patchTenantRequestedFilters($formFilters);
+async function patchTenantDiscovered($formFilters, $formValues, target, tenantResource, success, error) {
+  var filters = patchTenantDiscoveredFilters($formFilters);
 
   var vals = {};
 
@@ -1606,13 +1454,45 @@ async function patchTenantRequested($formFilters, $formValues, target, requested
   if(removeArchived != null && removeArchived !== '')
     vals['removeArchived'] = removeArchived;
 
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['setTenantResource'] = valueTenantResource;
+  var valueRequestedId = (Array.from($formValues.querySelectorAll('.valueRequestedId')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueRequestedId != null && valueRequestedId !== '')
+    vals['setRequestedId'] = valueRequestedId;
 
-  var valueRequestApprovals = (Array.from($formValues.querySelectorAll('.valueRequestApprovals')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueRequestApprovals != null && valueRequestApprovals !== '')
-    vals['addRequestApprovals'] = valueRequestApprovals;
+  var valueDiscoveredByEmail = $formValues.querySelector('.valueDiscoveredByEmail')?.value;
+  var removeDiscoveredByEmail = $formValues.querySelector('.removeDiscoveredByEmail')?.value === 'true';
+  var setDiscoveredByEmail = removeDiscoveredByEmail ? null : $formValues.querySelector('.setDiscoveredByEmail')?.value;
+  var addDiscoveredByEmail = $formValues.querySelector('.addDiscoveredByEmail')?.value;
+  if(removeDiscoveredByEmail || setDiscoveredByEmail != null && setDiscoveredByEmail !== '')
+    vals['setDiscoveredByEmail'] = setDiscoveredByEmail;
+  if(addDiscoveredByEmail != null && addDiscoveredByEmail !== '')
+    vals['addDiscoveredByEmail'] = addDiscoveredByEmail;
+  var removeDiscoveredByEmail = $formValues.querySelector('.removeDiscoveredByEmail')?.value;
+  if(removeDiscoveredByEmail != null && removeDiscoveredByEmail !== '')
+    vals['removeDiscoveredByEmail'] = removeDiscoveredByEmail;
+
+  var valueDiscoveredByUserId = $formValues.querySelector('.valueDiscoveredByUserId')?.value;
+  var removeDiscoveredByUserId = $formValues.querySelector('.removeDiscoveredByUserId')?.value === 'true';
+  var setDiscoveredByUserId = removeDiscoveredByUserId ? null : $formValues.querySelector('.setDiscoveredByUserId')?.value;
+  var addDiscoveredByUserId = $formValues.querySelector('.addDiscoveredByUserId')?.value;
+  if(removeDiscoveredByUserId || setDiscoveredByUserId != null && setDiscoveredByUserId !== '')
+    vals['setDiscoveredByUserId'] = setDiscoveredByUserId;
+  if(addDiscoveredByUserId != null && addDiscoveredByUserId !== '')
+    vals['addDiscoveredByUserId'] = addDiscoveredByUserId;
+  var removeDiscoveredByUserId = $formValues.querySelector('.removeDiscoveredByUserId')?.value;
+  if(removeDiscoveredByUserId != null && removeDiscoveredByUserId !== '')
+    vals['removeDiscoveredByUserId'] = removeDiscoveredByUserId;
+
+  var valueDiscoveredByFullName = $formValues.querySelector('.valueDiscoveredByFullName')?.value;
+  var removeDiscoveredByFullName = $formValues.querySelector('.removeDiscoveredByFullName')?.value === 'true';
+  var setDiscoveredByFullName = removeDiscoveredByFullName ? null : $formValues.querySelector('.setDiscoveredByFullName')?.value;
+  var addDiscoveredByFullName = $formValues.querySelector('.addDiscoveredByFullName')?.value;
+  if(removeDiscoveredByFullName || setDiscoveredByFullName != null && setDiscoveredByFullName !== '')
+    vals['setDiscoveredByFullName'] = setDiscoveredByFullName;
+  if(addDiscoveredByFullName != null && addDiscoveredByFullName !== '')
+    vals['addDiscoveredByFullName'] = addDiscoveredByFullName;
+  var removeDiscoveredByFullName = $formValues.querySelector('.removeDiscoveredByFullName')?.value;
+  if(removeDiscoveredByFullName != null && removeDiscoveredByFullName !== '')
+    vals['removeDiscoveredByFullName'] = removeDiscoveredByFullName;
 
   var valueCreatedByEmail = $formValues.querySelector('.valueCreatedByEmail')?.value;
   var removeCreatedByEmail = $formValues.querySelector('.removeCreatedByEmail')?.value === 'true';
@@ -1625,30 +1505,6 @@ async function patchTenantRequested($formFilters, $formValues, target, requested
   var removeCreatedByEmail = $formValues.querySelector('.removeCreatedByEmail')?.value;
   if(removeCreatedByEmail != null && removeCreatedByEmail !== '')
     vals['removeCreatedByEmail'] = removeCreatedByEmail;
-
-  var valueCreatedByUserId = $formValues.querySelector('.valueCreatedByUserId')?.value;
-  var removeCreatedByUserId = $formValues.querySelector('.removeCreatedByUserId')?.value === 'true';
-  var setCreatedByUserId = removeCreatedByUserId ? null : $formValues.querySelector('.setCreatedByUserId')?.value;
-  var addCreatedByUserId = $formValues.querySelector('.addCreatedByUserId')?.value;
-  if(removeCreatedByUserId || setCreatedByUserId != null && setCreatedByUserId !== '')
-    vals['setCreatedByUserId'] = setCreatedByUserId;
-  if(addCreatedByUserId != null && addCreatedByUserId !== '')
-    vals['addCreatedByUserId'] = addCreatedByUserId;
-  var removeCreatedByUserId = $formValues.querySelector('.removeCreatedByUserId')?.value;
-  if(removeCreatedByUserId != null && removeCreatedByUserId !== '')
-    vals['removeCreatedByUserId'] = removeCreatedByUserId;
-
-  var valueCreatedByFullName = $formValues.querySelector('.valueCreatedByFullName')?.value;
-  var removeCreatedByFullName = $formValues.querySelector('.removeCreatedByFullName')?.value === 'true';
-  var setCreatedByFullName = removeCreatedByFullName ? null : $formValues.querySelector('.setCreatedByFullName')?.value;
-  var addCreatedByFullName = $formValues.querySelector('.addCreatedByFullName')?.value;
-  if(removeCreatedByFullName || setCreatedByFullName != null && setCreatedByFullName !== '')
-    vals['setCreatedByFullName'] = setCreatedByFullName;
-  if(addCreatedByFullName != null && addCreatedByFullName !== '')
-    vals['addCreatedByFullName'] = addCreatedByFullName;
-  var removeCreatedByFullName = $formValues.querySelector('.removeCreatedByFullName')?.value;
-  if(removeCreatedByFullName != null && removeCreatedByFullName !== '')
-    vals['removeCreatedByFullName'] = removeCreatedByFullName;
 
   var valueCreatedVia = $formValues.querySelector('.valueCreatedVia')?.value;
   var removeCreatedVia = $formValues.querySelector('.removeCreatedVia')?.value === 'true';
@@ -1698,6 +1554,18 @@ async function patchTenantRequested($formFilters, $formValues, target, requested
   if(removeRealizedState != null && removeRealizedState !== '')
     vals['removeRealizedState'] = removeRealizedState;
 
+  var valueDiscoveredState = $formValues.querySelector('.valueDiscoveredState')?.value;
+  var removeDiscoveredState = $formValues.querySelector('.removeDiscoveredState')?.value === 'true';
+  var setDiscoveredState = removeDiscoveredState ? null : $formValues.querySelector('.setDiscoveredState')?.value;
+  var addDiscoveredState = $formValues.querySelector('.addDiscoveredState')?.value;
+  if(removeDiscoveredState || setDiscoveredState != null && setDiscoveredState !== '')
+    vals['setDiscoveredState'] = setDiscoveredState;
+  if(addDiscoveredState != null && addDiscoveredState !== '')
+    vals['addDiscoveredState'] = addDiscoveredState;
+  var removeDiscoveredState = $formValues.querySelector('.removeDiscoveredState')?.value;
+  if(removeDiscoveredState != null && removeDiscoveredState !== '')
+    vals['removeDiscoveredState'] = removeDiscoveredState;
+
   var valueTenantName = $formValues.querySelector('.valueTenantName')?.value;
   var removeTenantName = $formValues.querySelector('.removeTenantName')?.value === 'true';
   var setTenantName = removeTenantName ? null : $formValues.querySelector('.setTenantName')?.value;
@@ -1721,33 +1589,6 @@ async function patchTenantRequested($formFilters, $formValues, target, requested
   var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value;
   if(removeTenantDescription != null && removeTenantDescription !== '')
     vals['removeTenantDescription'] = removeTenantDescription;
-
-  var valueTenantDiscovered = (Array.from($formValues.querySelectorAll('.valueTenantDiscovered')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantDiscovered != null && valueTenantDiscovered !== '')
-    vals['addTenantDiscovered'] = valueTenantDiscovered;
-
-  var valueLocked = $formValues.querySelector('.valueLocked')?.value;
-  var removeLocked = $formValues.querySelector('.removeLocked')?.value === 'true';
-  if(valueLocked != null)
-    valueLocked = valueLocked === 'true';
-  var valueLockedSelectVal = $formValues.querySelector('select.setLocked')?.value;
-  if(valueLockedSelectVal != null)
-    valueLockedSelectVal = valueLockedSelectVal === 'true';
-  if(valueLockedSelectVal != null && valueLockedSelectVal !== '')
-    valueLocked = valueLockedSelectVal == 'true';
-  var setLocked = removeLocked ? null : valueLocked;
-  var addLocked = $formValues.querySelector('.addLocked')?.checked;
-  if(removeLocked || setLocked != null && setLocked !== '')
-    vals['setLocked'] = setLocked;
-  if(addLocked != null && addLocked !== '')
-    vals['addLocked'] = addLocked;
-  var removeLocked = $formValues.querySelector('.removeLocked')?.checked;
-  if(removeLocked != null && removeLocked !== '')
-    vals['removeLocked'] = removeLocked;
-
-  var valueTenantRealized = (Array.from($formValues.querySelectorAll('.valueTenantRealized')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantRealized != null && valueTenantRealized !== '')
-    vals['addTenantRealized'] = valueTenantRealized;
 
   var valueHostInventoryIds = (Array.from($formValues.querySelectorAll('.valueHostInventoryIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHostInventoryIds != null && valueHostInventoryIds !== '')
@@ -1889,46 +1730,50 @@ async function patchTenantRequested($formFilters, $formValues, target, requested
   if(removeTenantId != null && removeTenantId !== '')
     vals['removeTenantId'] = removeTenantId;
 
-  var valueRequestedNumber = $formValues.querySelector('.valueRequestedNumber')?.value;
-  var removeRequestedNumber = $formValues.querySelector('.removeRequestedNumber')?.value === 'true';
-  var setRequestedNumber = removeRequestedNumber ? null : $formValues.querySelector('.setRequestedNumber')?.value;
-  var addRequestedNumber = $formValues.querySelector('.addRequestedNumber')?.value;
-  if(removeRequestedNumber || setRequestedNumber != null && setRequestedNumber !== '')
-    vals['setRequestedNumber'] = setRequestedNumber;
-  if(addRequestedNumber != null && addRequestedNumber !== '')
-    vals['addRequestedNumber'] = addRequestedNumber;
-  var removeRequestedNumber = $formValues.querySelector('.removeRequestedNumber')?.value;
-  if(removeRequestedNumber != null && removeRequestedNumber !== '')
-    vals['removeRequestedNumber'] = removeRequestedNumber;
+  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueTenantResource != null && valueTenantResource !== '')
+    vals['setTenantResource'] = valueTenantResource;
 
-  var valueRequestedId = $formValues.querySelector('.valueRequestedId')?.value;
-  var removeRequestedId = $formValues.querySelector('.removeRequestedId')?.value === 'true';
-  var setRequestedId = removeRequestedId ? null : $formValues.querySelector('.setRequestedId')?.value;
-  var addRequestedId = $formValues.querySelector('.addRequestedId')?.value;
-  if(removeRequestedId || setRequestedId != null && setRequestedId !== '')
-    vals['setRequestedId'] = setRequestedId;
-  if(addRequestedId != null && addRequestedId !== '')
-    vals['addRequestedId'] = addRequestedId;
-  var removeRequestedId = $formValues.querySelector('.removeRequestedId')?.value;
-  if(removeRequestedId != null && removeRequestedId !== '')
-    vals['removeRequestedId'] = removeRequestedId;
+  var valueDiscoveredName = $formValues.querySelector('.valueDiscoveredName')?.value;
+  var removeDiscoveredName = $formValues.querySelector('.removeDiscoveredName')?.value === 'true';
+  var setDiscoveredName = removeDiscoveredName ? null : $formValues.querySelector('.setDiscoveredName')?.value;
+  var addDiscoveredName = $formValues.querySelector('.addDiscoveredName')?.value;
+  if(removeDiscoveredName || setDiscoveredName != null && setDiscoveredName !== '')
+    vals['setDiscoveredName'] = setDiscoveredName;
+  if(addDiscoveredName != null && addDiscoveredName !== '')
+    vals['addDiscoveredName'] = addDiscoveredName;
+  var removeDiscoveredName = $formValues.querySelector('.removeDiscoveredName')?.value;
+  if(removeDiscoveredName != null && removeDiscoveredName !== '')
+    vals['removeDiscoveredName'] = removeDiscoveredName;
 
-  var valueRequestedName = $formValues.querySelector('.valueRequestedName')?.value;
-  var removeRequestedName = $formValues.querySelector('.removeRequestedName')?.value === 'true';
-  var setRequestedName = removeRequestedName ? null : $formValues.querySelector('.setRequestedName')?.value;
-  var addRequestedName = $formValues.querySelector('.addRequestedName')?.value;
-  if(removeRequestedName || setRequestedName != null && setRequestedName !== '')
-    vals['setRequestedName'] = setRequestedName;
-  if(addRequestedName != null && addRequestedName !== '')
-    vals['addRequestedName'] = addRequestedName;
-  var removeRequestedName = $formValues.querySelector('.removeRequestedName')?.value;
-  if(removeRequestedName != null && removeRequestedName !== '')
-    vals['removeRequestedName'] = removeRequestedName;
+  var valueCreatedByUserId = $formValues.querySelector('.valueCreatedByUserId')?.value;
+  var removeCreatedByUserId = $formValues.querySelector('.removeCreatedByUserId')?.value === 'true';
+  var setCreatedByUserId = removeCreatedByUserId ? null : $formValues.querySelector('.setCreatedByUserId')?.value;
+  var addCreatedByUserId = $formValues.querySelector('.addCreatedByUserId')?.value;
+  if(removeCreatedByUserId || setCreatedByUserId != null && setCreatedByUserId !== '')
+    vals['setCreatedByUserId'] = setCreatedByUserId;
+  if(addCreatedByUserId != null && addCreatedByUserId !== '')
+    vals['addCreatedByUserId'] = addCreatedByUserId;
+  var removeCreatedByUserId = $formValues.querySelector('.removeCreatedByUserId')?.value;
+  if(removeCreatedByUserId != null && removeCreatedByUserId !== '')
+    vals['removeCreatedByUserId'] = removeCreatedByUserId;
 
-  patchTenantRequestedVals(requestedId == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'requestedId:' + requestedId}], vals, target, success, error);
+  var valueCreatedByFullName = $formValues.querySelector('.valueCreatedByFullName')?.value;
+  var removeCreatedByFullName = $formValues.querySelector('.removeCreatedByFullName')?.value === 'true';
+  var setCreatedByFullName = removeCreatedByFullName ? null : $formValues.querySelector('.setCreatedByFullName')?.value;
+  var addCreatedByFullName = $formValues.querySelector('.addCreatedByFullName')?.value;
+  if(removeCreatedByFullName || setCreatedByFullName != null && setCreatedByFullName !== '')
+    vals['setCreatedByFullName'] = setCreatedByFullName;
+  if(addCreatedByFullName != null && addCreatedByFullName !== '')
+    vals['addCreatedByFullName'] = addCreatedByFullName;
+  var removeCreatedByFullName = $formValues.querySelector('.removeCreatedByFullName')?.value;
+  if(removeCreatedByFullName != null && removeCreatedByFullName !== '')
+    vals['removeCreatedByFullName'] = removeCreatedByFullName;
+
+  patchTenantDiscoveredVals(tenantResource == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'tenantResource:' + tenantResource}], vals, target, success, error);
 }
 
-function patchTenantRequestedFilters($formFilters) {
+function patchTenantDiscoveredFilters($formFilters) {
   var filters = [];
   if($formFilters) {
     filters.push({ name: 'softCommit', value: 'true' });
@@ -1955,25 +1800,25 @@ function patchTenantRequestedFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+    var filterRequestedId = $formFilters.querySelector('.valueRequestedId')?.value;
+    if(filterRequestedId != null && filterRequestedId !== '')
+      filters.push({ name: 'fq', value: 'requestedId:' + filterRequestedId });
 
-    var filterRequestApprovals = $formFilters.querySelector('.valueRequestApprovals')?.value;
-    if(filterRequestApprovals != null && filterRequestApprovals !== '')
-      filters.push({ name: 'fq', value: 'requestApprovals:' + filterRequestApprovals });
+    var filterDiscoveredByEmail = $formFilters.querySelector('.valueDiscoveredByEmail')?.value;
+    if(filterDiscoveredByEmail != null && filterDiscoveredByEmail !== '')
+      filters.push({ name: 'fq', value: 'discoveredByEmail:' + filterDiscoveredByEmail });
+
+    var filterDiscoveredByUserId = $formFilters.querySelector('.valueDiscoveredByUserId')?.value;
+    if(filterDiscoveredByUserId != null && filterDiscoveredByUserId !== '')
+      filters.push({ name: 'fq', value: 'discoveredByUserId:' + filterDiscoveredByUserId });
+
+    var filterDiscoveredByFullName = $formFilters.querySelector('.valueDiscoveredByFullName')?.value;
+    if(filterDiscoveredByFullName != null && filterDiscoveredByFullName !== '')
+      filters.push({ name: 'fq', value: 'discoveredByFullName:' + filterDiscoveredByFullName });
 
     var filterCreatedByEmail = $formFilters.querySelector('.valueCreatedByEmail')?.value;
     if(filterCreatedByEmail != null && filterCreatedByEmail !== '')
       filters.push({ name: 'fq', value: 'createdByEmail:' + filterCreatedByEmail });
-
-    var filterCreatedByUserId = $formFilters.querySelector('.valueCreatedByUserId')?.value;
-    if(filterCreatedByUserId != null && filterCreatedByUserId !== '')
-      filters.push({ name: 'fq', value: 'createdByUserId:' + filterCreatedByUserId });
-
-    var filterCreatedByFullName = $formFilters.querySelector('.valueCreatedByFullName')?.value;
-    if(filterCreatedByFullName != null && filterCreatedByFullName !== '')
-      filters.push({ name: 'fq', value: 'createdByFullName:' + filterCreatedByFullName });
 
     var filterCreatedVia = $formFilters.querySelector('.valueCreatedVia')?.value;
     if(filterCreatedVia != null && filterCreatedVia !== '')
@@ -1991,6 +1836,10 @@ function patchTenantRequestedFilters($formFilters) {
     if(filterRealizedState != null && filterRealizedState !== '')
       filters.push({ name: 'fq', value: 'realizedState:' + filterRealizedState });
 
+    var filterDiscoveredState = $formFilters.querySelector('.valueDiscoveredState')?.value;
+    if(filterDiscoveredState != null && filterDiscoveredState !== '')
+      filters.push({ name: 'fq', value: 'discoveredState:' + filterDiscoveredState });
+
     var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
@@ -1998,24 +1847,6 @@ function patchTenantRequestedFilters($formFilters) {
     var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
     if(filterTenantDescription != null && filterTenantDescription !== '')
       filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
-
-    var filterTenantDiscovered = $formFilters.querySelector('.valueTenantDiscovered')?.value;
-    if(filterTenantDiscovered != null && filterTenantDiscovered !== '')
-      filters.push({ name: 'fq', value: 'tenantDiscovered:' + filterTenantDiscovered });
-
-    var $filterLockedCheckbox = $formFilters.querySelector('input.valueLocked[type = "checkbox"]');
-    var $filterLockedSelect = $formFilters.querySelector('select.valueLocked');
-    var filterLocked = $filterLockedSelect.length ? $filterLockedSelect.value : $filterLockedCheckbox.checked;
-    var filterLockedSelectVal = $formFilters.querySelector('select.filterLocked')?.value;
-    var filterLocked = null;
-    if(filterLockedSelectVal !== '')
-      filterLocked = filterLockedSelectVal == 'true';
-    if(filterLocked != null && filterLocked === true)
-      filters.push({ name: 'fq', value: 'locked:' + filterLocked });
-
-    var filterTenantRealized = $formFilters.querySelector('.valueTenantRealized')?.value;
-    if(filterTenantRealized != null && filterTenantRealized !== '')
-      filters.push({ name: 'fq', value: 'tenantRealized:' + filterTenantRealized });
 
     var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
     if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
@@ -2097,30 +1928,34 @@ function patchTenantRequestedFilters($formFilters) {
     if(filterTenantId != null && filterTenantId !== '')
       filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
-    var filterRequestedNumber = $formFilters.querySelector('.valueRequestedNumber')?.value;
-    if(filterRequestedNumber != null && filterRequestedNumber !== '')
-      filters.push({ name: 'fq', value: 'requestedNumber:' + filterRequestedNumber });
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
-    var filterRequestedId = $formFilters.querySelector('.valueRequestedId')?.value;
-    if(filterRequestedId != null && filterRequestedId !== '')
-      filters.push({ name: 'fq', value: 'requestedId:' + filterRequestedId });
+    var filterDiscoveredName = $formFilters.querySelector('.valueDiscoveredName')?.value;
+    if(filterDiscoveredName != null && filterDiscoveredName !== '')
+      filters.push({ name: 'fq', value: 'discoveredName:' + filterDiscoveredName });
 
-    var filterRequestedName = $formFilters.querySelector('.valueRequestedName')?.value;
-    if(filterRequestedName != null && filterRequestedName !== '')
-      filters.push({ name: 'fq', value: 'requestedName:' + filterRequestedName });
+    var filterCreatedByUserId = $formFilters.querySelector('.valueCreatedByUserId')?.value;
+    if(filterCreatedByUserId != null && filterCreatedByUserId !== '')
+      filters.push({ name: 'fq', value: 'createdByUserId:' + filterCreatedByUserId });
+
+    var filterCreatedByFullName = $formFilters.querySelector('.valueCreatedByFullName')?.value;
+    if(filterCreatedByFullName != null && filterCreatedByFullName !== '')
+      filters.push({ name: 'fq', value: 'createdByFullName:' + filterCreatedByFullName });
   }
   return filters;
 }
 
-function patchTenantRequestedVal(filters, v, val, target, success, error) {
+function patchTenantDiscoveredVal(filters, v, val, target, success, error) {
   var vals = {};
   vals[v] = val;
-  patchTenantRequestedVals(filters, vals, target, success, error);
+  patchTenantDiscoveredVals(filters, vals, target, success, error);
 }
 
-function patchTenantRequestedVals(filters, vals, target, success, error) {
+function patchTenantDiscoveredVals(filters, vals, target, success, error) {
   fetch(
-    '/en-us/api/intent/requested?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    '/en-us/api/intent/discovered?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'PATCH'
@@ -2139,7 +1974,7 @@ function patchTenantRequestedVals(filters, vals, target, success, error) {
 
 // POST //
 
-async function postTenantRequested($formValues, target, success, error) {
+async function postTenantDiscovered($formValues, target, success, error) {
   var vals = {};
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
@@ -2187,28 +2022,25 @@ async function postTenantRequested($formValues, target, success, error) {
   if(valueArchived != null && valueArchived !== '')
     vals['archived'] = valueArchived == 'true';
 
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['tenantResource'] = valueTenantResource;
+  var valueRequestedId = (Array.from($formValues.querySelectorAll('.valueRequestedId')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueRequestedId != null && valueRequestedId !== '')
+    vals['requestedId'] = valueRequestedId;
 
-  var valueRequestApprovals = [];
-  $formValues.querySelectorAll('input.valueRequestApprovals:checked').forEach(function(index) {
-    valueRequestApprovals.push(this.value);
-  });
-  if(valueRequestApprovals.length > 0)
-    vals['requestApprovals'] = valueRequestApprovals;
+  var valueDiscoveredByEmail = $formValues.querySelector('.valueDiscoveredByEmail')?.value;
+  if(valueDiscoveredByEmail != null && valueDiscoveredByEmail !== '')
+    vals['discoveredByEmail'] = valueDiscoveredByEmail;
+
+  var valueDiscoveredByUserId = $formValues.querySelector('.valueDiscoveredByUserId')?.value;
+  if(valueDiscoveredByUserId != null && valueDiscoveredByUserId !== '')
+    vals['discoveredByUserId'] = valueDiscoveredByUserId;
+
+  var valueDiscoveredByFullName = $formValues.querySelector('.valueDiscoveredByFullName')?.value;
+  if(valueDiscoveredByFullName != null && valueDiscoveredByFullName !== '')
+    vals['discoveredByFullName'] = valueDiscoveredByFullName;
 
   var valueCreatedByEmail = $formValues.querySelector('.valueCreatedByEmail')?.value;
   if(valueCreatedByEmail != null && valueCreatedByEmail !== '')
     vals['createdByEmail'] = valueCreatedByEmail;
-
-  var valueCreatedByUserId = $formValues.querySelector('.valueCreatedByUserId')?.value;
-  if(valueCreatedByUserId != null && valueCreatedByUserId !== '')
-    vals['createdByUserId'] = valueCreatedByUserId;
-
-  var valueCreatedByFullName = $formValues.querySelector('.valueCreatedByFullName')?.value;
-  if(valueCreatedByFullName != null && valueCreatedByFullName !== '')
-    vals['createdByFullName'] = valueCreatedByFullName;
 
   var valueCreatedVia = $formValues.querySelector('.valueCreatedVia')?.value;
   if(valueCreatedVia != null && valueCreatedVia !== '')
@@ -2226,6 +2058,10 @@ async function postTenantRequested($formValues, target, success, error) {
   if(valueRealizedState != null && valueRealizedState !== '')
     vals['realizedState'] = valueRealizedState;
 
+  var valueDiscoveredState = $formValues.querySelector('.valueDiscoveredState')?.value;
+  if(valueDiscoveredState != null && valueDiscoveredState !== '')
+    vals['discoveredState'] = valueDiscoveredState;
+
   var valueTenantName = $formValues.querySelector('.valueTenantName')?.value;
   if(valueTenantName != null && valueTenantName !== '')
     vals['tenantName'] = valueTenantName;
@@ -2233,24 +2069,6 @@ async function postTenantRequested($formValues, target, success, error) {
   var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
   if(valueTenantDescription != null && valueTenantDescription !== '')
     vals['tenantDescription'] = valueTenantDescription;
-
-  var valueTenantDiscovered = [];
-  $formValues.querySelectorAll('input.valueTenantDiscovered:checked').forEach(function(index) {
-    valueTenantDiscovered.push(this.value);
-  });
-  if(valueTenantDiscovered.length > 0)
-    vals['tenantDiscovered'] = valueTenantDiscovered;
-
-  var valueLocked = $formValues.querySelector('.valueLocked')?.value;
-  if(valueLocked != null && valueLocked !== '')
-    vals['locked'] = valueLocked == 'true';
-
-  var valueTenantRealized = [];
-  $formValues.querySelectorAll('input.valueTenantRealized:checked').forEach(function(index) {
-    valueTenantRealized.push(this.value);
-  });
-  if(valueTenantRealized.length > 0)
-    vals['tenantRealized'] = valueTenantRealized;
 
   var valueHostInventoryIds = [];
   $formValues.querySelectorAll('input.valueHostInventoryIds:checked').forEach(function(index) {
@@ -2310,20 +2128,24 @@ async function postTenantRequested($formValues, target, success, error) {
   if(valueTenantId != null && valueTenantId !== '')
     vals['tenantId'] = valueTenantId;
 
-  var valueRequestedNumber = $formValues.querySelector('.valueRequestedNumber')?.value;
-  if(valueRequestedNumber != null && valueRequestedNumber !== '')
-    vals['requestedNumber'] = valueRequestedNumber;
+  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueTenantResource != null && valueTenantResource !== '')
+    vals['tenantResource'] = valueTenantResource;
 
-  var valueRequestedId = $formValues.querySelector('.valueRequestedId')?.value;
-  if(valueRequestedId != null && valueRequestedId !== '')
-    vals['requestedId'] = valueRequestedId;
+  var valueDiscoveredName = $formValues.querySelector('.valueDiscoveredName')?.value;
+  if(valueDiscoveredName != null && valueDiscoveredName !== '')
+    vals['discoveredName'] = valueDiscoveredName;
 
-  var valueRequestedName = $formValues.querySelector('.valueRequestedName')?.value;
-  if(valueRequestedName != null && valueRequestedName !== '')
-    vals['requestedName'] = valueRequestedName;
+  var valueCreatedByUserId = $formValues.querySelector('.valueCreatedByUserId')?.value;
+  if(valueCreatedByUserId != null && valueCreatedByUserId !== '')
+    vals['createdByUserId'] = valueCreatedByUserId;
+
+  var valueCreatedByFullName = $formValues.querySelector('.valueCreatedByFullName')?.value;
+  if(valueCreatedByFullName != null && valueCreatedByFullName !== '')
+    vals['createdByFullName'] = valueCreatedByFullName;
 
   fetch(
-    '/en-us/api/intent/requested'
+    '/en-us/api/intent/discovered'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'POST'
@@ -2340,9 +2162,9 @@ async function postTenantRequested($formValues, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function postTenantRequestedVals(vals, target, success, error) {
+function postTenantDiscoveredVals(vals, target, success, error) {
   fetch(
-    '/en-us/api/intent/requested'
+    '/en-us/api/intent/discovered'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'POST'
@@ -2361,7 +2183,7 @@ function postTenantRequestedVals(vals, target, success, error) {
 
 // DELETE //
 
-async function deleteTenantRequested(target, requestedId, success, error) {
+async function deleteTenantDiscovered(target, tenantResource, success, error) {
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
       addGlow(target, jqXhr);
@@ -2393,7 +2215,7 @@ async function deleteTenantRequested(target, requestedId, success, error) {
   }
 
   fetch(
-    '/en-us/api/intent/requested/' + encodeURIComponent(requestedId)
+    '/en-us/api/intent/discovered/' + encodeURIComponent(tenantResource)
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -2409,15 +2231,15 @@ async function deleteTenantRequested(target, requestedId, success, error) {
 
 // PUTImport //
 
-async function putimportTenantRequested($formValues, target, requestedId, success, error) {
+async function putimportTenantDiscovered($formValues, target, tenantResource, success, error) {
   var json = $formValues.querySelector('.PUTImport_searchList')?.value;
   if(json != null && json !== '')
-    putimportTenantRequestedVals(JSON.parse(json), target, success, error);
+    putimportTenantDiscoveredVals(JSON.parse(json), target, success, error);
 }
 
-function putimportTenantRequestedVals(json, target, success, error) {
+function putimportTenantDiscoveredVals(json, target, success, error) {
   fetch(
-    '/en-us/api/intent/requested-import'
+    '/en-us/api/intent/discovered-import'
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'PUT'
@@ -2436,8 +2258,8 @@ function putimportTenantRequestedVals(json, target, success, error) {
 
 // DELETEFilter //
 
-async function deletefilterTenantRequested($formFilterstarget, success, error) {
-  var filters = deletefilterTenantRequestedFilters($formFilters);
+async function deletefilterTenantDiscovered($formFilterstarget, success, error) {
+  var filters = deletefilterTenantDiscoveredFilters($formFilters);
 
   if(success == null) {
     success = function( data, textStatus, jQxhr ) {
@@ -2470,7 +2292,7 @@ async function deletefilterTenantRequested($formFilterstarget, success, error) {
   }
 
   fetch(
-    '/en-us/api/intent/requested?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
+    '/en-us/api/intent/discovered?' + filters.map(function(m) { return m.name + '=' + encodeURIComponent(m.value) }).join('&')
     , {
       headers: {'Content-Type':'application/json; charset=utf-8'}
       , method: 'DELETE'
@@ -2484,7 +2306,7 @@ async function deletefilterTenantRequested($formFilterstarget, success, error) {
     .catch(response => error(response, target));
 }
 
-function deletefilterTenantRequestedFilters($formFilters) {
+function deletefilterTenantDiscoveredFilters($formFilters) {
   var filters = [];
   if($formFilters) {
 
@@ -2510,25 +2332,25 @@ function deletefilterTenantRequestedFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
-    if(filterTenantResource != null && filterTenantResource !== '')
-      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
+    var filterRequestedId = $formFilters.querySelector('.valueRequestedId')?.value;
+    if(filterRequestedId != null && filterRequestedId !== '')
+      filters.push({ name: 'fq', value: 'requestedId:' + filterRequestedId });
 
-    var filterRequestApprovals = $formFilters.querySelector('.valueRequestApprovals')?.value;
-    if(filterRequestApprovals != null && filterRequestApprovals !== '')
-      filters.push({ name: 'fq', value: 'requestApprovals:' + filterRequestApprovals });
+    var filterDiscoveredByEmail = $formFilters.querySelector('.valueDiscoveredByEmail')?.value;
+    if(filterDiscoveredByEmail != null && filterDiscoveredByEmail !== '')
+      filters.push({ name: 'fq', value: 'discoveredByEmail:' + filterDiscoveredByEmail });
+
+    var filterDiscoveredByUserId = $formFilters.querySelector('.valueDiscoveredByUserId')?.value;
+    if(filterDiscoveredByUserId != null && filterDiscoveredByUserId !== '')
+      filters.push({ name: 'fq', value: 'discoveredByUserId:' + filterDiscoveredByUserId });
+
+    var filterDiscoveredByFullName = $formFilters.querySelector('.valueDiscoveredByFullName')?.value;
+    if(filterDiscoveredByFullName != null && filterDiscoveredByFullName !== '')
+      filters.push({ name: 'fq', value: 'discoveredByFullName:' + filterDiscoveredByFullName });
 
     var filterCreatedByEmail = $formFilters.querySelector('.valueCreatedByEmail')?.value;
     if(filterCreatedByEmail != null && filterCreatedByEmail !== '')
       filters.push({ name: 'fq', value: 'createdByEmail:' + filterCreatedByEmail });
-
-    var filterCreatedByUserId = $formFilters.querySelector('.valueCreatedByUserId')?.value;
-    if(filterCreatedByUserId != null && filterCreatedByUserId !== '')
-      filters.push({ name: 'fq', value: 'createdByUserId:' + filterCreatedByUserId });
-
-    var filterCreatedByFullName = $formFilters.querySelector('.valueCreatedByFullName')?.value;
-    if(filterCreatedByFullName != null && filterCreatedByFullName !== '')
-      filters.push({ name: 'fq', value: 'createdByFullName:' + filterCreatedByFullName });
 
     var filterCreatedVia = $formFilters.querySelector('.valueCreatedVia')?.value;
     if(filterCreatedVia != null && filterCreatedVia !== '')
@@ -2546,6 +2368,10 @@ function deletefilterTenantRequestedFilters($formFilters) {
     if(filterRealizedState != null && filterRealizedState !== '')
       filters.push({ name: 'fq', value: 'realizedState:' + filterRealizedState });
 
+    var filterDiscoveredState = $formFilters.querySelector('.valueDiscoveredState')?.value;
+    if(filterDiscoveredState != null && filterDiscoveredState !== '')
+      filters.push({ name: 'fq', value: 'discoveredState:' + filterDiscoveredState });
+
     var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
@@ -2553,24 +2379,6 @@ function deletefilterTenantRequestedFilters($formFilters) {
     var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
     if(filterTenantDescription != null && filterTenantDescription !== '')
       filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
-
-    var filterTenantDiscovered = $formFilters.querySelector('.valueTenantDiscovered')?.value;
-    if(filterTenantDiscovered != null && filterTenantDiscovered !== '')
-      filters.push({ name: 'fq', value: 'tenantDiscovered:' + filterTenantDiscovered });
-
-    var $filterLockedCheckbox = $formFilters.querySelector('input.valueLocked[type = "checkbox"]');
-    var $filterLockedSelect = $formFilters.querySelector('select.valueLocked');
-    var filterLocked = $filterLockedSelect.length ? $filterLockedSelect.value : $filterLockedCheckbox.checked;
-    var filterLockedSelectVal = $formFilters.querySelector('select.filterLocked')?.value;
-    var filterLocked = null;
-    if(filterLockedSelectVal !== '')
-      filterLocked = filterLockedSelectVal == 'true';
-    if(filterLocked != null && filterLocked === true)
-      filters.push({ name: 'fq', value: 'locked:' + filterLocked });
-
-    var filterTenantRealized = $formFilters.querySelector('.valueTenantRealized')?.value;
-    if(filterTenantRealized != null && filterTenantRealized !== '')
-      filters.push({ name: 'fq', value: 'tenantRealized:' + filterTenantRealized });
 
     var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
     if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
@@ -2652,17 +2460,21 @@ function deletefilterTenantRequestedFilters($formFilters) {
     if(filterTenantId != null && filterTenantId !== '')
       filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
-    var filterRequestedNumber = $formFilters.querySelector('.valueRequestedNumber')?.value;
-    if(filterRequestedNumber != null && filterRequestedNumber !== '')
-      filters.push({ name: 'fq', value: 'requestedNumber:' + filterRequestedNumber });
+    var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
+    if(filterTenantResource != null && filterTenantResource !== '')
+      filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
-    var filterRequestedId = $formFilters.querySelector('.valueRequestedId')?.value;
-    if(filterRequestedId != null && filterRequestedId !== '')
-      filters.push({ name: 'fq', value: 'requestedId:' + filterRequestedId });
+    var filterDiscoveredName = $formFilters.querySelector('.valueDiscoveredName')?.value;
+    if(filterDiscoveredName != null && filterDiscoveredName !== '')
+      filters.push({ name: 'fq', value: 'discoveredName:' + filterDiscoveredName });
 
-    var filterRequestedName = $formFilters.querySelector('.valueRequestedName')?.value;
-    if(filterRequestedName != null && filterRequestedName !== '')
-      filters.push({ name: 'fq', value: 'requestedName:' + filterRequestedName });
+    var filterCreatedByUserId = $formFilters.querySelector('.valueCreatedByUserId')?.value;
+    if(filterCreatedByUserId != null && filterCreatedByUserId !== '')
+      filters.push({ name: 'fq', value: 'createdByUserId:' + filterCreatedByUserId });
+
+    var filterCreatedByFullName = $formFilters.querySelector('.valueCreatedByFullName')?.value;
+    if(filterCreatedByFullName != null && filterCreatedByFullName !== '')
+      filters.push({ name: 'fq', value: 'createdByFullName:' + filterCreatedByFullName });
   }
   return filters;
 }

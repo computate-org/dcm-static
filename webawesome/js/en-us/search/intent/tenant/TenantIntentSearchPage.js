@@ -154,15 +154,15 @@ Promise.all([
     facetStatsChange('TenantIntent', 'tenantDescription', false);
   });
 
-  document.querySelector('#pageSelectSortTenantIntent_tenantRequested')?.addEventListener('change', (event) => {
-    sort('TenantIntent', 'tenantRequested', event.currentTarget.value);
+  document.querySelector('#pageSelectSortTenantIntent_requested')?.addEventListener('change', (event) => {
+    sort('TenantIntent', 'requested', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsTenantIntent_tenantRequested')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('TenantIntent', 'tenantRequested', true);
+  document.querySelector('#pageStatsTenantIntent_requested')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantIntent', 'requested', true);
   });
-  document.querySelector('#pageStatsTenantIntent_tenantRequested')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('TenantIntent', 'tenantRequested', false);
+  document.querySelector('#pageStatsTenantIntent_requested')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantIntent', 'requested', false);
   });
 
   document.querySelector('#pageSelectSortTenantIntent_locked')?.addEventListener('change', (event) => {
@@ -174,6 +174,17 @@ Promise.all([
   });
   document.querySelector('#pageStatsTenantIntent_locked')?.addEventListener('wa-hide', (event) => {
     facetStatsChange('TenantIntent', 'locked', false);
+  });
+
+  document.querySelector('#pageSelectSortTenantIntent_tenantDiscovered')?.addEventListener('change', (event) => {
+    sort('TenantIntent', 'tenantDiscovered', event.currentTarget.value);
+  });
+
+  document.querySelector('#pageStatsTenantIntent_tenantDiscovered')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantIntent', 'tenantDiscovered', true);
+  });
+  document.querySelector('#pageStatsTenantIntent_tenantDiscovered')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantIntent', 'tenantDiscovered', false);
   });
 
   document.querySelector('#pageSelectSortTenantIntent_tenantRealized')?.addEventListener('change', (event) => {
@@ -670,7 +681,8 @@ Promise.all([
     var confirmResponse = confirm('Are you sure you want to delete that?'); 
     if(confirmResponse) { 
       deletefilterTenantIntent(
-          event.currentTarget
+          [{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'tenantResource:' + event.currentTarget.getAttribute('data-tenantResource') }]
+          , event.currentTarget
           , function(response, target) { addGlow(target); }
           , function(response, target) { addError(target); }
           );

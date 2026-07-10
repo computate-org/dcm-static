@@ -1,0 +1,1402 @@
+{%- macro inputPkTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_pk">
+  {%- endif %}
+                  <wa-input
+                      readonly
+                      placeholder="[Long] primary key"
+                      label="primary key"
+                      type="number"
+                      hint="The primary key of this object in the database"
+                      id="TenantDiscovered_{{classApiMethodMethod}}_pk"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_pk setPk classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Pk "
+                      name="setPk"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_pk setPk classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Pk "
+                      name="setPk"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_pk valuePk classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Pk "
+                      name="pk"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.pk | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPkTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPkTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_created">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A created timestamp for this record in the database"
+                      label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_created datetimepicker setCreated classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Created "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="TenantDiscovered_{{classApiMethodMethod}}_created"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputModifiedTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_modified">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A modified timestamp for this record in the database"
+                      label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_modified datetimepicker setModified classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Modified "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="TenantDiscovered_{{classApiMethodMethod}}_modified"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmModifiedTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputModifiedTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputArchivedTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_archived">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-button variant="brand"
+                      id="TenantDiscovered_{{classApiMethodMethod}}_archived"
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_archived classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Archived "
+                      name="setArchived"
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      data-val="{{ result.archived | e }}"
+                      >archive</wa-button>
+  {%- else %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="TenantDiscovered_{{classApiMethodMethod}}_archived"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="TenantDiscovered_{{classApiMethodMethod}}_archived"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_archived classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Archived "
+                      name="setArchived"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_archived classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Archived "
+                      name="setArchived"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_archived setArchived valueArchived classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Archived "
+                      name="setArchived"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.archived == true %}
+                      checked
+    {%- endif %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      >archive</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmArchivedTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputArchivedTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputRequestedIdTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_requestedId">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}TenantDiscovered_{{classApiMethodMethod}}_requestedId{{ idSuffix }}_clear"
+                        class="label-on-left TenantDiscovered_classApiMethodMethod}}_requestedId_clear requestedId_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="tenant requested"
+                      label="tenant requested"
+                      hint="The tenant requested being approved. "
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_requestedId valueObjectSuggest suggestRequestedId{% if searchRelated %} searchRelated{% endif %} "
+                      name="setRequestedId"
+                      id="{{ idPrefix }}TenantDiscovered_{{classApiMethodMethod}}_requestedId{{ idSuffix }}"
+                      data-list="listTenantDiscoveredRequestedId_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.requestedId | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRequestedIdTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputRequestedIdTenantDiscoveredPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate a requested tenant to this discovered tenant
+                </div>
+                <ul class="label-on-left-ul " id="listTenantDiscoveredRequestedId_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postTenantRequested(idSuffix='_TenantDiscovered_POST_requestedId') }}
+                  <wa-button
+                       id="TenantDiscovered_{{classApiMethodMethod}}_requestedId_add"
+                       data-dialog="open postTenantRequestedDialog"
+                      >add a requested tenant</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+{%- macro inputDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_discoveredByEmail">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] discovered by user email"
+                      label="discovered by user email"
+                      hint="The email address for the user who discovered the change request. "
+                      id="TenantDiscovered_{{classApiMethodMethod}}_discoveredByEmail"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredByEmail setDiscoveredByEmail classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredByEmail "
+                      name="setDiscoveredByEmail"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredByEmail setDiscoveredByEmail classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredByEmail "
+                      name="setDiscoveredByEmail"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredByEmail valueDiscoveredByEmail classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredByEmail "
+                      name="discoveredByEmail"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.discoveredByEmail | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_discoveredByUserId">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] discovered by user ID"
+                      label="discovered by user ID"
+                      hint="The IdP UUID record for the user who discovered the change request. "
+                      id="TenantDiscovered_{{classApiMethodMethod}}_discoveredByUserId"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredByUserId setDiscoveredByUserId classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredByUserId "
+                      name="setDiscoveredByUserId"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredByUserId setDiscoveredByUserId classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredByUserId "
+                      name="setDiscoveredByUserId"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredByUserId valueDiscoveredByUserId classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredByUserId "
+                      name="discoveredByUserId"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.discoveredByUserId | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_discoveredByFullName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] discovered by user full name"
+                      label="discovered by user full name"
+                      hint="The first and last name for the user who discovered the change request. "
+                      id="TenantDiscovered_{{classApiMethodMethod}}_discoveredByFullName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredByFullName setDiscoveredByFullName classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredByFullName "
+                      name="setDiscoveredByFullName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredByFullName setDiscoveredByFullName classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredByFullName "
+                      name="setDiscoveredByFullName"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredByFullName valueDiscoveredByFullName classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredByFullName "
+                      name="discoveredByFullName"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.discoveredByFullName | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedByEmailTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_createdByEmail">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] created by user email"
+                      label="created by user email"
+                      hint="The email address for the user who created the change request. "
+                      id="TenantDiscovered_{{classApiMethodMethod}}_createdByEmail"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_createdByEmail setCreatedByEmail classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}CreatedByEmail "
+                      name="setCreatedByEmail"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_createdByEmail setCreatedByEmail classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}CreatedByEmail "
+                      name="setCreatedByEmail"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_createdByEmail valueCreatedByEmail classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}CreatedByEmail "
+                      name="createdByEmail"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.createdByEmail | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedByEmailTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedByEmailTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedViaTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_createdVia">
+  {%- endif %}
+                  <wa-radio-group
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] created via"
+                      label="created via"
+                      hint="Declares the ingestion path that makes audit quality transparent. "
+                      id="TenantDiscovered_{{classApiMethodMethod}}_createdVia"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_createdVia setCreatedVia classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}CreatedVia "
+                      name="setCreatedVia"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_createdVia setCreatedVia classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}CreatedVia "
+                      name="setCreatedVia"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_createdVia valueCreatedVia classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}CreatedVia "
+                      name="createdVia"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.createdVia | e }}"
+  {% endif -%}
+                      >
+                    <wa-radio value="pr">pull request</wa-radio>
+                    <wa-radio value="api">API</wa-radio>
+                    <wa-radio value="migration">migration</wa-radio>
+                    <wa-radio value="system">system</wa-radio>
+                  </wa-radio-group>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedViaTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedViaTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputIntentStateTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_intentState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] intent state"
+                      label="intent state"
+                      hint="Captures the consumer's raw intent &mdash; what they asked for in their own terms. "
+                      id="TenantDiscovered_{{classApiMethodMethod}}_intentState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_intentState setIntentState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}IntentState "
+                      name="setIntentState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_intentState setIntentState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}IntentState "
+                      name="setIntentState"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_intentState valueIntentState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}IntentState "
+                      name="intentState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.intentState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmIntentStateTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputIntentStateTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputRequestedStateTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_requestedState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] requested state"
+                      label="requested state"
+                      hint="Represents a complete, validated, provider-ready declaration of desired state. "
+                      id="TenantDiscovered_{{classApiMethodMethod}}_requestedState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_requestedState setRequestedState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}RequestedState "
+                      name="setRequestedState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_requestedState setRequestedState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}RequestedState "
+                      name="setRequestedState"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_requestedState valueRequestedState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}RequestedState "
+                      name="requestedState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.requestedState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRequestedStateTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputRequestedStateTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputRealizedStateTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_realizedState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] realized state"
+                      label="realized state"
+                      hint="Must be a complete representation of the provisioned resource in DCM unified format &mdash; not a status code, but a full state description. "
+                      id="TenantDiscovered_{{classApiMethodMethod}}_realizedState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_realizedState setRealizedState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}RealizedState "
+                      name="setRealizedState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_realizedState setRealizedState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}RealizedState "
+                      name="setRealizedState"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_realizedState valueRealizedState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}RealizedState "
+                      name="realizedState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.realizedState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRealizedStateTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputRealizedStateTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputDiscoveredStateTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_discoveredState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] discovered state"
+                      label="discovered state"
+                      hint="Must be a complete representation of the provisioned resource in DCM unified format &mdash; not a status code, but a full state description. "
+                      id="TenantDiscovered_{{classApiMethodMethod}}_discoveredState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredState setDiscoveredState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredState "
+                      name="setDiscoveredState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredState setDiscoveredState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredState "
+                      name="setDiscoveredState"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_discoveredState valueDiscoveredState classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}DiscoveredState "
+                      name="discoveredState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.discoveredState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmDiscoveredStateTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDiscoveredStateTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputTenantNameTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_tenantName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] tenant name"
+                      label="tenant name"
+                      hint="The name of this tenant"
+                      id="TenantDiscovered_{{classApiMethodMethod}}_tenantName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_tenantName setTenantName classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}TenantName "
+                      name="setTenantName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_tenantName setTenantName classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}TenantName "
+                      name="setTenantName"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_tenantName valueTenantName classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}TenantName "
+                      name="tenantName"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.tenantName | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmTenantNameTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputTenantNameTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputTenantDescriptionTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_tenantDescription">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] description"
+                      label="description"
+                      hint="A description of this tenant"
+                      id="TenantDiscovered_{{classApiMethodMethod}}_tenantDescription"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-tenantResource={{ result.tenantResource | tojson }}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}TenantDescription "
+                      name="setTenantDescription"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}TenantDescription "
+                      name="setTenantDescription"
+    {%- else %}
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_tenantDescription valueTenantDescription classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}TenantDescription "
+                      name="tenantDescription"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.tenantDescription | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputTenantDescriptionTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_hostInventoryIds">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}TenantDiscovered_{{classApiMethodMethod}}_hostInventoryIds{{ idSuffix }}_clear"
+                        class="label-on-left TenantDiscovered_classApiMethodMethod}}_hostInventoryIds_clear hostInventoryIds_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="host inventories"
+                      label="host inventories"
+                      hint="The related host inventories for this tenant. "
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_hostInventoryIds valueObjectSuggest suggestHostInventoryIds{% if searchRelated %} searchRelated{% endif %} "
+                      name="setHostInventoryIds"
+                      id="{{ idPrefix }}TenantDiscovered_{{classApiMethodMethod}}_hostInventoryIds{{ idSuffix }}"
+                      data-list="listTenantDiscoveredHostInventoryIds_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.hostInventoryIds | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputHostInventoryIdsTenantDiscoveredPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate  to this discovered tenant
+                </div>
+                <ul class="label-on-left-ul " id="listTenantDiscoveredHostInventoryIds_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postHostInventory(idSuffix='_TenantDiscovered_POST_hostInventoryIds') }}
+                  <wa-button
+                       id="TenantDiscovered_{{classApiMethodMethod}}_hostInventoryIds_add"
+                       data-dialog="open postHostInventoryDialog"
+                      >add a host inventory</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+{%- macro inputAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_ansibleProjectIds">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}TenantDiscovered_{{classApiMethodMethod}}_ansibleProjectIds{{ idSuffix }}_clear"
+                        class="label-on-left TenantDiscovered_classApiMethodMethod}}_ansibleProjectIds_clear ansibleProjectIds_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="Ansible projects"
+                      label="Ansible projects"
+                      hint="The related Ansible projects for this tenant. "
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_ansibleProjectIds valueObjectSuggest suggestAnsibleProjectIds{% if searchRelated %} searchRelated{% endif %} "
+                      name="setAnsibleProjectIds"
+                      id="{{ idPrefix }}TenantDiscovered_{{classApiMethodMethod}}_ansibleProjectIds{{ idSuffix }}"
+                      data-list="listTenantDiscoveredAnsibleProjectIds_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.ansibleProjectIds | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputAnsibleProjectIdsTenantDiscoveredPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate  to this discovered tenant
+                </div>
+                <ul class="label-on-left-ul " id="listTenantDiscoveredAnsibleProjectIds_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postAnsibleProject(idSuffix='_TenantDiscovered_POST_ansibleProjectIds') }}
+                  <wa-button
+                       id="TenantDiscovered_{{classApiMethodMethod}}_ansibleProjectIds_add"
+                       data-dialog="open postAnsibleProjectDialog"
+                      >add a ansible project</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+
+{%- macro htmFormButton_patchTenantDiscovered() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_patchTenantDiscovered" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_patchTenantDiscovered"
+                >Modify discovered tenant</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_patchTenantDiscovered"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_patchTenantDiscovered(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchTenantDiscoveredDialog" label="Modify discovered tenant">
+          <form id="htmForm_patchTenantDiscovered" class="wa-stack round-row primary-smart-border-radius ">
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedIdTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedIdTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedIdTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="discovered-by">
+              <div slot="summary">
+                <span>discovered by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedByEmailTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByEmailTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByEmailTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedViaTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedViaTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedViaTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="intent">
+              <div slot="summary">
+                <span>intent</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmIntentStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIntentStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmIntentStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRealizedStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmDiscoveredStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredStateTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantNameTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantNameTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantNameTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="relationships">
+              <div slot="summary">
+                <span>relationships</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+            {{ htmFormButton_patchTenantDiscovered() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_postTenantDiscovered() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_postTenantDiscovered" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_postTenantDiscovered"
+                >Create a discovered tenant</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_postTenantDiscovered"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_postTenantDiscovered(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postTenantDiscoveredDialog" label="Create a discovered tenant">
+          <form id="htmForm_postTenantDiscovered" class="wa-stack round-row primary-smart-border-radius ">
+            <div>You can override any default values below: </div>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmRequestedIdTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedIdTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedIdTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="discovered-by">
+              <div slot="summary">
+                <span>discovered by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCreatedByEmailTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByEmailTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByEmailTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCreatedViaTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedViaTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedViaTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="intent">
+              <div slot="summary">
+                <span>intent</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmIntentStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIntentStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmIntentStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmRequestedStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmRealizedStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmDiscoveredStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredStateTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmTenantNameTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantNameTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantNameTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="relationships">
+              <div slot="summary">
+                <span>relationships</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+            {{ htmFormButton_postTenantDiscovered() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_deleteTenantDiscovered() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deleteTenantDiscovered" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deleteTenantDiscovered"
+                >Delete discovered tenant</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deleteTenantDiscovered"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deleteTenantDiscovered(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteTenantDiscoveredDialog" label="Delete discovered tenant">
+          <form id="htmForm_deleteTenantDiscovered" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteTenantDiscovered() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_putimportTenantDiscovered() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_putimportTenantDiscovered" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_putimportTenantDiscovered"
+                >Import discovered tenants</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_putimportTenantDiscovered"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_putimportTenantDiscovered(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportTenantDiscoveredDialog" label="Import discovered tenants">
+          <form id="htmForm_putimportTenantDiscovered" class="wa-stack round-row primary-smart-border-radius ">
+            <div>
+              <wa-textarea
+                  class="PUTImport_searchList "
+                  style="height: 300px; "
+                  placeholder="{ 'searchList': [ { 'tenantResource': ... , 'saves': [ ... ] }, ... ] }"
+                  >
+              </wa-textarea>
+            </div>
+            {{ htmFormButton_putimportTenantDiscovered() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmForm_searchpageTenantDiscovered(idSuffix='', searchRelated=false) %}
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageTenantDiscoveredDialog" label="Search discovered tenants">
+          <div id="htmForm_searchpageTenantDiscovered" class="wa-stack round-row primary-smart-border-radius ">
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
+              <div slot="summary">
+                <span>primary key, ID, created, modified, archive details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmPkTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmPkTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmModifiedTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmModifiedTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmArchivedTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmArchivedTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedIdTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedIdTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedIdTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="discovered-by">
+              <div slot="summary">
+                <span>discovered by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredByEmailTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredByUserIdTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredByFullNameTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedByEmailTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByEmailTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByEmailTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedViaTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedViaTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedViaTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="intent">
+              <div slot="summary">
+                <span>intent</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmIntentStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIntentStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmIntentStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRealizedStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmDiscoveredStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDiscoveredStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDiscoveredStateTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-details">
+              <div slot="summary">
+                <span>tenant details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantNameTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantNameTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantNameTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="relationships">
+              <div slot="summary">
+                <span>relationships</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmAnsibleProjectIdsTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </div>
+        </div>
+{%- endmacro %}
+
+{%- macro htmFormButton_deletefilterTenantDiscovered() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterTenantDiscovered" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deletefilterTenantDiscovered"
+                >Delete discovered tenant</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deletefilterTenantDiscovered"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deletefilterTenantDiscovered(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterTenantDiscoveredDialog" label="Delete discovered tenant">
+          <form id="htmForm_deletefilterTenantDiscovered" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterTenantDiscovered() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}

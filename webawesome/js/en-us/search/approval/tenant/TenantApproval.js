@@ -82,7 +82,7 @@ async function websocketTenantApprovalInner(apiRequest) {
         var inputCreated = null;
         var inputModified = null;
         var inputArchived = null;
-        var inputTenantRequestedId = null;
+        var inputRequestedId = null;
         var inputApprovedByEmail = null;
         var inputApprovedByUserId = null;
         var inputApprovedByFullName = null;
@@ -105,10 +105,8 @@ async function websocketTenantApprovalInner(apiRequest) {
         var inputTenantName = null;
         var inputTenantId = null;
         var inputTenantResource = null;
-        var inputTenantRealizedNumber = null;
         var inputApprovalName = null;
         var inputApprovalId = null;
-        var inputApprovalTitle = null;
 
         if(vars.includes('pk'))
           inputPk = $response.querySelector('.TenantApproval_Page_pk');
@@ -118,8 +116,8 @@ async function websocketTenantApprovalInner(apiRequest) {
           inputModified = $response.querySelector('.TenantApproval_Page_modified');
         if(vars.includes('archived'))
           inputArchived = $response.querySelector('.TenantApproval_Page_archived');
-        if(vars.includes('tenantRequestedId'))
-          inputTenantRequestedId = $response.querySelector('.TenantApproval_Page_tenantRequestedId');
+        if(vars.includes('requestedId'))
+          inputRequestedId = $response.querySelector('.TenantApproval_Page_requestedId');
         if(vars.includes('approvedByEmail'))
           inputApprovedByEmail = $response.querySelector('.TenantApproval_Page_approvedByEmail');
         if(vars.includes('approvedByUserId'))
@@ -164,14 +162,10 @@ async function websocketTenantApprovalInner(apiRequest) {
           inputTenantId = $response.querySelector('.TenantApproval_Page_tenantId');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.TenantApproval_Page_tenantResource');
-        if(vars.includes('tenantRealizedNumber'))
-          inputTenantRealizedNumber = $response.querySelector('.TenantApproval_Page_tenantRealizedNumber');
         if(vars.includes('approvalName'))
           inputApprovalName = $response.querySelector('.TenantApproval_Page_approvalName');
         if(vars.includes('approvalId'))
           inputApprovalId = $response.querySelector('.TenantApproval_Page_approvalId');
-        if(vars.includes('approvalTitle'))
-          inputApprovalTitle = $response.querySelector('.TenantApproval_Page_approvalTitle');
 
         window.result = JSON.parse($response.querySelector('.pageForm .result')?.value);
         window.listTenantApproval = JSON.parse($response.querySelector('.pageForm .listTenantApproval')?.value);
@@ -234,18 +228,18 @@ async function websocketTenantApprovalInner(apiRequest) {
           addGlow(document.querySelector('.TenantApproval_Page_archived'));
         }
 
-        if(inputTenantRequestedId) {
-          document.querySelectorAll('.TenantApproval_Page_tenantRequestedId').forEach((item, index) => {
+        if(inputRequestedId) {
+          document.querySelectorAll('.TenantApproval_Page_requestedId').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
             }
             if(typeof item.value !== 'undefined')
-              item.value = inputTenantRequestedId.getAttribute('value');
+              item.value = inputRequestedId.getAttribute('value');
             else
-              item.textContent = inputTenantRequestedId.textContent;
+              item.textContent = inputRequestedId.textContent;
           });
-          addGlow(document.querySelector('.TenantApproval_Page_tenantRequestedId'));
+          addGlow(document.querySelector('.TenantApproval_Page_requestedId'));
         }
 
         if(inputApprovedByEmail) {
@@ -556,20 +550,6 @@ async function websocketTenantApprovalInner(apiRequest) {
           addGlow(document.querySelector('.TenantApproval_Page_tenantResource'));
         }
 
-        if(inputTenantRealizedNumber) {
-          document.querySelectorAll('.TenantApproval_Page_tenantRealizedNumber').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantRealizedNumber.getAttribute('value');
-            else
-              item.textContent = inputTenantRealizedNumber.textContent;
-          });
-          addGlow(document.querySelector('.TenantApproval_Page_tenantRealizedNumber'));
-        }
-
         if(inputApprovalName) {
           document.querySelectorAll('.TenantApproval_Page_approvalName').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
@@ -596,20 +576,6 @@ async function websocketTenantApprovalInner(apiRequest) {
               item.textContent = inputApprovalId.textContent;
           });
           addGlow(document.querySelector('.TenantApproval_Page_approvalId'));
-        }
-
-        if(inputApprovalTitle) {
-          document.querySelectorAll('.TenantApproval_Page_approvalTitle').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputApprovalTitle.getAttribute('value');
-            else
-              item.textContent = inputApprovalTitle.textContent;
-          });
-          addGlow(document.querySelector('.TenantApproval_Page_approvalTitle'));
         }
 
           pageGraphTenantApproval();
@@ -779,9 +745,9 @@ function searchTenantApprovalFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantRequestedId = $formFilters.querySelector('.valueTenantRequestedId')?.value;
-    if(filterTenantRequestedId != null && filterTenantRequestedId !== '')
-      filters.push({ name: 'fq', value: 'tenantRequestedId:' + filterTenantRequestedId });
+    var filterRequestedId = $formFilters.querySelector('.valueRequestedId')?.value;
+    if(filterRequestedId != null && filterRequestedId !== '')
+      filters.push({ name: 'fq', value: 'requestedId:' + filterRequestedId });
 
     var filterApprovedByEmail = $formFilters.querySelector('.valueApprovedByEmail')?.value;
     if(filterApprovedByEmail != null && filterApprovedByEmail !== '')
@@ -877,10 +843,6 @@ function searchTenantApprovalFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
-    var filterTenantRealizedNumber = $formFilters.querySelector('.valueTenantRealizedNumber')?.value;
-    if(filterTenantRealizedNumber != null && filterTenantRealizedNumber !== '')
-      filters.push({ name: 'fq', value: 'tenantRealizedNumber:' + filterTenantRealizedNumber });
-
     var filterApprovalName = $formFilters.querySelector('.valueApprovalName')?.value;
     if(filterApprovalName != null && filterApprovalName !== '')
       filters.push({ name: 'fq', value: 'approvalName:' + filterApprovalName });
@@ -888,10 +850,6 @@ function searchTenantApprovalFilters($formFilters) {
     var filterApprovalId = $formFilters.querySelector('.valueApprovalId')?.value;
     if(filterApprovalId != null && filterApprovalId !== '')
       filters.push({ name: 'fq', value: 'approvalId:' + filterApprovalId });
-
-    var filterApprovalTitle = $formFilters.querySelector('.valueApprovalTitle')?.value;
-    if(filterApprovalTitle != null && filterApprovalTitle !== '')
-      filters.push({ name: 'fq', value: 'approvalTitle:' + filterApprovalTitle });
   }
   return filters;
 }
@@ -914,7 +872,7 @@ function searchTenantApprovalVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestTenantApprovalTenantRequestedId(filters, $list, approvalId = null, tenantRequestedId = null, relate=true, target) {
+function suggestTenantApprovalRequestedId(filters, $list, approvalId = null, requestedId = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -931,23 +889,23 @@ function suggestTenantApprovalTenantRequestedId(filters, $list, approvalId = nul
         $a.setAttribute('href', o['editPage']);
         $a.append($i);
         $a.append($span);
-        var inputVar = 'tenantRequestedId';
+        var inputVar = 'requestedId';
         var val = o[inputVar];
-        var checked = val == null ? false : (tenantRequestedId != null && val === tenantRequestedId.toString());
+        var checked = val == null ? false : (requestedId != null && val === requestedId.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantRequestedId_' + approvalId + '_tenantRequestedId_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_requestedId_' + approvalId + '_requestedId_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
-        $input.setAttribute('class', 'valueTenantRequestedId ');
+        $input.setAttribute('class', 'valueRequestedId ');
         if(approvalId != null) {
           $input.addEventListener('change', function(event) {
             document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
-            patchTenantApprovalVals([{ name: 'fq', value: 'approvalId:' + approvalId }], { [(event.target.checked ? 'set' : 'remove') + 'TenantRequestedId']: o[inputVar] }
+            patchTenantApprovalVals([{ name: 'fq', value: 'approvalId:' + approvalId }], { [(event.target.checked ? 'set' : 'remove') + 'RequestedId']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantApprovalTenantRequestedId(filters, $list, approvalId, o[inputVar], relate, target);
+                  suggestTenantApprovalRequestedId(filters, $list, approvalId, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1050,7 +1008,7 @@ function suggestTenantApprovalObjectSuggest($formFilters, $list, target) {
         var $i = document.querySelector('<i class="{{ FONTAWESOME_STYLE }} fa-thumbs-up"></i>');
         var $span = document.createElement('span');
         $span.setAttribute('class', '');
-        $span.innerText = o['approvalTitle'];
+        $span.innerText = o['objectTitle'];
         var $li = document.createElement('li');
         var $a = document.createElement('a').setAttribute('href', o['editPage']);
         $a.append($i);
@@ -1145,9 +1103,9 @@ async function patchTenantApproval($formFilters, $formValues, target, approvalId
   if(removeArchived != null && removeArchived !== '')
     vals['removeArchived'] = removeArchived;
 
-  var valueTenantRequestedId = (Array.from($formValues.querySelectorAll('.valueTenantRequestedId')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantRequestedId != null && valueTenantRequestedId !== '')
-    vals['setTenantRequestedId'] = valueTenantRequestedId;
+  var valueRequestedId = (Array.from($formValues.querySelectorAll('.valueRequestedId')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueRequestedId != null && valueRequestedId !== '')
+    vals['setRequestedId'] = valueRequestedId;
 
   var valueApprovedByEmail = $formValues.querySelector('.valueApprovedByEmail')?.value;
   var removeApprovedByEmail = $formValues.querySelector('.removeApprovedByEmail')?.value === 'true';
@@ -1328,18 +1286,6 @@ async function patchTenantApproval($formFilters, $formValues, target, approvalId
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['setTenantResource'] = valueTenantResource;
 
-  var valueTenantRealizedNumber = $formValues.querySelector('.valueTenantRealizedNumber')?.value;
-  var removeTenantRealizedNumber = $formValues.querySelector('.removeTenantRealizedNumber')?.value === 'true';
-  var setTenantRealizedNumber = removeTenantRealizedNumber ? null : $formValues.querySelector('.setTenantRealizedNumber')?.value;
-  var addTenantRealizedNumber = $formValues.querySelector('.addTenantRealizedNumber')?.value;
-  if(removeTenantRealizedNumber || setTenantRealizedNumber != null && setTenantRealizedNumber !== '')
-    vals['setTenantRealizedNumber'] = setTenantRealizedNumber;
-  if(addTenantRealizedNumber != null && addTenantRealizedNumber !== '')
-    vals['addTenantRealizedNumber'] = addTenantRealizedNumber;
-  var removeTenantRealizedNumber = $formValues.querySelector('.removeTenantRealizedNumber')?.value;
-  if(removeTenantRealizedNumber != null && removeTenantRealizedNumber !== '')
-    vals['removeTenantRealizedNumber'] = removeTenantRealizedNumber;
-
   var valueApprovalName = $formValues.querySelector('.valueApprovalName')?.value;
   var removeApprovalName = $formValues.querySelector('.removeApprovalName')?.value === 'true';
   var setApprovalName = removeApprovalName ? null : $formValues.querySelector('.setApprovalName')?.value;
@@ -1363,18 +1309,6 @@ async function patchTenantApproval($formFilters, $formValues, target, approvalId
   var removeApprovalId = $formValues.querySelector('.removeApprovalId')?.value;
   if(removeApprovalId != null && removeApprovalId !== '')
     vals['removeApprovalId'] = removeApprovalId;
-
-  var valueApprovalTitle = $formValues.querySelector('.valueApprovalTitle')?.value;
-  var removeApprovalTitle = $formValues.querySelector('.removeApprovalTitle')?.value === 'true';
-  var setApprovalTitle = removeApprovalTitle ? null : $formValues.querySelector('.setApprovalTitle')?.value;
-  var addApprovalTitle = $formValues.querySelector('.addApprovalTitle')?.value;
-  if(removeApprovalTitle || setApprovalTitle != null && setApprovalTitle !== '')
-    vals['setApprovalTitle'] = setApprovalTitle;
-  if(addApprovalTitle != null && addApprovalTitle !== '')
-    vals['addApprovalTitle'] = addApprovalTitle;
-  var removeApprovalTitle = $formValues.querySelector('.removeApprovalTitle')?.value;
-  if(removeApprovalTitle != null && removeApprovalTitle !== '')
-    vals['removeApprovalTitle'] = removeApprovalTitle;
 
   patchTenantApprovalVals(approvalId == null ? deparam(window.location.search ? window.location.search.substring(1) : window.location.search) : [{name:'fq', value:'approvalId:' + approvalId}], vals, target, success, error);
 }
@@ -1406,9 +1340,9 @@ function patchTenantApprovalFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantRequestedId = $formFilters.querySelector('.valueTenantRequestedId')?.value;
-    if(filterTenantRequestedId != null && filterTenantRequestedId !== '')
-      filters.push({ name: 'fq', value: 'tenantRequestedId:' + filterTenantRequestedId });
+    var filterRequestedId = $formFilters.querySelector('.valueRequestedId')?.value;
+    if(filterRequestedId != null && filterRequestedId !== '')
+      filters.push({ name: 'fq', value: 'requestedId:' + filterRequestedId });
 
     var filterApprovedByEmail = $formFilters.querySelector('.valueApprovedByEmail')?.value;
     if(filterApprovedByEmail != null && filterApprovedByEmail !== '')
@@ -1504,10 +1438,6 @@ function patchTenantApprovalFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
-    var filterTenantRealizedNumber = $formFilters.querySelector('.valueTenantRealizedNumber')?.value;
-    if(filterTenantRealizedNumber != null && filterTenantRealizedNumber !== '')
-      filters.push({ name: 'fq', value: 'tenantRealizedNumber:' + filterTenantRealizedNumber });
-
     var filterApprovalName = $formFilters.querySelector('.valueApprovalName')?.value;
     if(filterApprovalName != null && filterApprovalName !== '')
       filters.push({ name: 'fq', value: 'approvalName:' + filterApprovalName });
@@ -1515,10 +1445,6 @@ function patchTenantApprovalFilters($formFilters) {
     var filterApprovalId = $formFilters.querySelector('.valueApprovalId')?.value;
     if(filterApprovalId != null && filterApprovalId !== '')
       filters.push({ name: 'fq', value: 'approvalId:' + filterApprovalId });
-
-    var filterApprovalTitle = $formFilters.querySelector('.valueApprovalTitle')?.value;
-    if(filterApprovalTitle != null && filterApprovalTitle !== '')
-      filters.push({ name: 'fq', value: 'approvalTitle:' + filterApprovalTitle });
   }
   return filters;
 }
@@ -1598,9 +1524,9 @@ async function postTenantApproval($formValues, target, success, error) {
   if(valueArchived != null && valueArchived !== '')
     vals['archived'] = valueArchived == 'true';
 
-  var valueTenantRequestedId = (Array.from($formValues.querySelectorAll('.valueTenantRequestedId')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantRequestedId != null && valueTenantRequestedId !== '')
-    vals['tenantRequestedId'] = valueTenantRequestedId;
+  var valueRequestedId = (Array.from($formValues.querySelectorAll('.valueRequestedId')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueRequestedId != null && valueRequestedId !== '')
+    vals['requestedId'] = valueRequestedId;
 
   var valueApprovedByEmail = $formValues.querySelector('.valueApprovedByEmail')?.value;
   if(valueApprovedByEmail != null && valueApprovedByEmail !== '')
@@ -1662,10 +1588,6 @@ async function postTenantApproval($formValues, target, success, error) {
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['tenantResource'] = valueTenantResource;
 
-  var valueTenantRealizedNumber = $formValues.querySelector('.valueTenantRealizedNumber')?.value;
-  if(valueTenantRealizedNumber != null && valueTenantRealizedNumber !== '')
-    vals['tenantRealizedNumber'] = valueTenantRealizedNumber;
-
   var valueApprovalName = $formValues.querySelector('.valueApprovalName')?.value;
   if(valueApprovalName != null && valueApprovalName !== '')
     vals['approvalName'] = valueApprovalName;
@@ -1673,10 +1595,6 @@ async function postTenantApproval($formValues, target, success, error) {
   var valueApprovalId = $formValues.querySelector('.valueApprovalId')?.value;
   if(valueApprovalId != null && valueApprovalId !== '')
     vals['approvalId'] = valueApprovalId;
-
-  var valueApprovalTitle = $formValues.querySelector('.valueApprovalTitle')?.value;
-  if(valueApprovalTitle != null && valueApprovalTitle !== '')
-    vals['approvalTitle'] = valueApprovalTitle;
 
   fetch(
     '/en-us/api/approval/tenant'
@@ -1866,9 +1784,9 @@ function deletefilterTenantApprovalFilters($formFilters) {
     if(filterArchived != null && filterArchived === true)
       filters.push({ name: 'fq', value: 'archived:' + filterArchived });
 
-    var filterTenantRequestedId = $formFilters.querySelector('.valueTenantRequestedId')?.value;
-    if(filterTenantRequestedId != null && filterTenantRequestedId !== '')
-      filters.push({ name: 'fq', value: 'tenantRequestedId:' + filterTenantRequestedId });
+    var filterRequestedId = $formFilters.querySelector('.valueRequestedId')?.value;
+    if(filterRequestedId != null && filterRequestedId !== '')
+      filters.push({ name: 'fq', value: 'requestedId:' + filterRequestedId });
 
     var filterApprovedByEmail = $formFilters.querySelector('.valueApprovedByEmail')?.value;
     if(filterApprovedByEmail != null && filterApprovedByEmail !== '')
@@ -1964,10 +1882,6 @@ function deletefilterTenantApprovalFilters($formFilters) {
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
 
-    var filterTenantRealizedNumber = $formFilters.querySelector('.valueTenantRealizedNumber')?.value;
-    if(filterTenantRealizedNumber != null && filterTenantRealizedNumber !== '')
-      filters.push({ name: 'fq', value: 'tenantRealizedNumber:' + filterTenantRealizedNumber });
-
     var filterApprovalName = $formFilters.querySelector('.valueApprovalName')?.value;
     if(filterApprovalName != null && filterApprovalName !== '')
       filters.push({ name: 'fq', value: 'approvalName:' + filterApprovalName });
@@ -1975,10 +1889,6 @@ function deletefilterTenantApprovalFilters($formFilters) {
     var filterApprovalId = $formFilters.querySelector('.valueApprovalId')?.value;
     if(filterApprovalId != null && filterApprovalId !== '')
       filters.push({ name: 'fq', value: 'approvalId:' + filterApprovalId });
-
-    var filterApprovalTitle = $formFilters.querySelector('.valueApprovalTitle')?.value;
-    if(filterApprovalTitle != null && filterApprovalTitle !== '')
-      filters.push({ name: 'fq', value: 'approvalTitle:' + filterApprovalTitle });
   }
   return filters;
 }

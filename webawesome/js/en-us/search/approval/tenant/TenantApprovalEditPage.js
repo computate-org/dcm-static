@@ -355,27 +355,6 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH tenantRealizedNumber
-          document.querySelector('#TenantApproval_Page_tenantRealizedNumber')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_tenantRealizedNumber');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchTenantApprovalVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'approvalId:' + event.currentTarget.getAttribute('data-approvalId') }]
-                  , 'setTenantRealizedNumber', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#TenantApproval_Page_tenantRealizedNumber')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#TenantApproval_Page_tenantRealizedNumber')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_tenantRealizedNumber');
-            const valid = form.reportValidity();
-          });
-
           // PATCH approvalName
           document.querySelector('#TenantApproval_Page_approvalName')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_approvalName');
@@ -415,27 +394,6 @@ Promise.all([
           });
           document.querySelector('#TenantApproval_Page_approvalId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_approvalId');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH approvalTitle
-          document.querySelector('#TenantApproval_Page_approvalTitle')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_approvalTitle');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchTenantApprovalVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'approvalId:' + event.currentTarget.getAttribute('data-approvalId') }]
-                  , 'setApprovalTitle', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#TenantApproval_Page_approvalTitle')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#TenantApproval_Page_approvalTitle')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_approvalTitle');
             const valid = form.reportValidity();
           });
 });

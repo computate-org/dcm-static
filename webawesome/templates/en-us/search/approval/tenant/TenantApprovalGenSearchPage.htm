@@ -46,7 +46,7 @@
 
       function htmTooltipTenantApproval(feature, layer) {
         return `{%- block htmTooltipTenantApprovalPage %}
-<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.approvalTitle}</a></h3>
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
 {%- endblock htmTooltipTenantApprovalPage %}`;
       }
 
@@ -134,11 +134,11 @@
 
         var approvalId = {% if result.approvalId is defined %}{{ result.approvalId | tojson }}{% else %}null{% endif %};
 
-          function relate_tenantRequestedId(event) {
-            suggestTenantApprovalTenantRequestedId(
+          function relate_requestedId(event) {
+            suggestTenantApprovalRequestedId(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantRequestedId,tenantRequestedId,pk,editPage,objectTitle' } ] : [{%- if result.tenantRequestedId is defined %}{'name':'fq','value':'tenantRequestedId:{{ result.tenantRequestedId }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,requestedId,requestedId,pk,editPage,objectTitle' } ] : [{%- if result.requestedId is defined %}{'name':'fq','value':'requestedId:{{ result.requestedId }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -146,10 +146,10 @@
                 , this
                 );
           }
-          document.querySelector('#TenantApproval_POST_tenantRequestedId')?.addEventListener('input', relate_tenantRequestedId);
-          document.querySelector('#TenantApproval_POST_tenantRequestedId')?.addEventListener('focus', relate_tenantRequestedId);
-          document.querySelector('#TenantApproval_PATCH_tenantRequestedId')?.addEventListener('input', relate_tenantRequestedId);
-          document.querySelector('#TenantApproval_PATCH_tenantRequestedId')?.addEventListener('focus', relate_tenantRequestedId);
+          document.querySelector('#TenantApproval_POST_requestedId')?.addEventListener('input', relate_requestedId);
+          document.querySelector('#TenantApproval_POST_requestedId')?.addEventListener('focus', relate_requestedId);
+          document.querySelector('#TenantApproval_PATCH_requestedId')?.addEventListener('input', relate_requestedId);
+          document.querySelector('#TenantApproval_PATCH_requestedId')?.addEventListener('focus', relate_requestedId);
           function relate_tenantResource(event) {
             suggestTenantApprovalTenantResource(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -528,14 +528,14 @@
 {% include en-us/search/approval/tenant/TenantApprovalPaginationButtons.htm %}
                 <div class="card-like-thing background-color-surface-border" id="site-results-grid">
                   <div>
-                    <wa-dropdown id="htmDropdown-tenantRequestedId">
+                    <wa-dropdown id="htmDropdown-requestedId">
                       <wa-button variant="brand" slot="trigger" caret>tenant requested</wa-button>
                       <wa-menu>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantApproval_tenantRequestedId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantApproval').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantRequestedId-asc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantApproval_requestedId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantApproval').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-requestedId-asc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                           sort by tenant requested ascending
                         </wa-menu-item>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantApproval_tenantRequestedId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantApproval').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantRequestedId-desc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantApproval_requestedId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantApproval').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-requestedId-desc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                           sort by tenant requested descending
                         </wa-menu-item>
@@ -572,7 +572,7 @@
                   <div>
                     <a href="{{ item.displayPage }}">
                       <i class="{{ FONTAWESOME_STYLE }} fa-thumbs-up"></i>
-                      <span>{{ item.tenantRequestedId | e }}</span>
+                      <span>{{ item.requestedId | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
                       <span>{{ item.approvalName | e }}</span>
@@ -582,7 +582,7 @@
                     </a>
                   </div>
                   {% endfor %}
-              {% if getColumnTenantRequestedId is defined %}
+              {% if getColumnRequestedId is defined %}
                 <div>
                 </div>
               {% endif %}

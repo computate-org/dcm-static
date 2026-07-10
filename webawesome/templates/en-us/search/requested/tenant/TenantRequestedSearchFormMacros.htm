@@ -1,4 +1,4 @@
-{%- macro inputPkTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputPkTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_pk">
   {%- endif %}
@@ -10,15 +10,15 @@
                       hint="The primary key of this object in the database"
                       id="TenantRequested_{{classApiMethodMethod}}_pk"
   {%- if "Page" == classApiMethodMethod %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_pk setPk classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Pk "
+                      data-requestedId={{ result.requestedId | tojson }}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_pk setPk classTenantRequested inputTenantRequested{{ result.requestedId }}Pk "
                       name="setPk"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_pk setPk classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Pk "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_pk setPk classTenantRequested inputTenantRequested{{ result.requestedId }}Pk "
                       name="setPk"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_pk valuePk classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Pk "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_pk valuePk classTenantRequested inputTenantRequested{{ result.requestedId }}Pk "
                       name="pk"
     {%- endif %}
   {%- endif %}
@@ -35,7 +35,7 @@
 {%- macro htmPkTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputPkTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputCreatedTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_created">
   {%- endif %}
@@ -44,14 +44,14 @@
                       readonly
                       hint="A created timestamp for this record in the database"
                       label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_created datetimepicker setCreated classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Created "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_created datetimepicker setCreated classTenantRequested inputTenantRequested{{ result.requestedId }}Created "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="TenantRequested_{{classApiMethodMethod}}_created"
   {% if 'Page' == classApiMethodMethod -%}
                       value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
   {% endif -%}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
+                      data-requestedId={{ result.requestedId | tojson }}
                       data-zone="{{ defaultZoneId }}"
                       >
                   </wa-input>
@@ -63,7 +63,7 @@
 {%- macro htmCreatedTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputModifiedTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputModifiedTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_modified">
   {%- endif %}
@@ -72,14 +72,14 @@
                       readonly
                       hint="A modified timestamp for this record in the database"
                       label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_modified datetimepicker setModified classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Modified "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_modified datetimepicker setModified classTenantRequested inputTenantRequested{{ result.requestedId }}Modified "
                       placeholder="MM/dd/yyyy h:mm a '['VV']'"
                       data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
                       id="TenantRequested_{{classApiMethodMethod}}_modified"
   {% if 'Page' == classApiMethodMethod -%}
                       value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
   {% endif -%}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
+                      data-requestedId={{ result.requestedId | tojson }}
                       data-zone="{{ defaultZoneId }}"
                       >
                   </wa-input>
@@ -91,7 +91,7 @@
 {%- macro htmModifiedTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputModifiedTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputArchivedTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputArchivedTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_archived">
   {%- endif %}
@@ -101,9 +101,9 @@
                       placeholder="archive"
                       label="archive"
                       hint="For archiving this record"
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_archived classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Archived "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_archived classTenantRequested inputTenantRequested{{ result.requestedId }}Archived "
                       name="setArchived"
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
+                      data-requestedId={{ result.requestedId | tojson }}
                       data-val="{{ result.archived | e }}"
                       >archive</wa-button>
   {%- else %}
@@ -120,14 +120,14 @@
                       label="archive"
                       hint="For archiving this record"
   {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_archived classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Archived "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_archived classTenantRequested inputTenantRequested{{ result.requestedId }}Archived "
                       name="setArchived"
   {%- else %}
     {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_archived classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Archived "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_archived classTenantRequested inputTenantRequested{{ result.requestedId }}Archived "
                       name="setArchived"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_archived setArchived valueArchived classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Archived "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_archived setArchived valueArchived classTenantRequested inputTenantRequested{{ result.requestedId }}Archived "
                       name="setArchived"
     {%- endif %}
   {%- endif %}
@@ -135,7 +135,7 @@
     {%- if result.archived == true %}
                       checked
     {%- endif %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
+                      data-requestedId={{ result.requestedId | tojson }}
                       >archive</wa-checkbox>
   {%- else %}
                       >
@@ -153,7 +153,7 @@
 {%- macro htmArchivedTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputArchivedTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputTenantResourceTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputTenantResourceTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_tenantResource">
   {%- endif %}
@@ -173,7 +173,7 @@
                       placeholder="tenant auth resource"
                       label="tenant auth resource"
                       hint="The unique authorization resource for the tenant for multi-tenancy"
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantResource valueObjectSuggest suggestTenantResource "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantResource valueObjectSuggest suggestTenantResource{% if searchRelated %} searchRelated{% endif %} "
                       name="setTenantResource"
                       id="{{ idPrefix }}TenantRequested_{{classApiMethodMethod}}_tenantResource{{ idSuffix }}"
                       data-list="listTenantRequestedTenantResource_{{classApiMethodMethod}}"
@@ -191,7 +191,7 @@
 {%- endmacro %}
 
 {%- macro htmTenantResourceTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputTenantResourceTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                {{ inputTenantResourceTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate a tenant intent to this requested tenant
@@ -210,7 +210,7 @@
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputRequestApprovalsTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputRequestApprovalsTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_requestApprovals">
   {%- endif %}
@@ -230,7 +230,7 @@
                       placeholder="tenant approvals"
                       label="tenant approvals"
                       hint="A list of Tenant approvals for this request. "
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_requestApprovals valueObjectSuggest suggestRequestApprovals "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_requestApprovals valueObjectSuggest suggestRequestApprovals{% if searchRelated %} searchRelated{% endif %} "
                       name="setRequestApprovals"
                       id="{{ idPrefix }}TenantRequested_{{classApiMethodMethod}}_requestApprovals{{ idSuffix }}"
                       data-list="listTenantRequestedRequestApprovals_{{classApiMethodMethod}}"
@@ -248,7 +248,7 @@
 {%- endmacro %}
 
 {%- macro htmRequestApprovalsTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputRequestApprovalsTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                {{ inputRequestApprovalsTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate  to this requested tenant
@@ -267,7 +267,7 @@
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputCreatedByEmailTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputCreatedByEmailTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_createdByEmail">
   {%- endif %}
@@ -278,15 +278,15 @@
                       hint="The email address for the user who created the change request. "
                       id="TenantRequested_{{classApiMethodMethod}}_createdByEmail"
   {%- if "Page" == classApiMethodMethod %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByEmail setCreatedByEmail classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedByEmail "
+                      data-requestedId={{ result.requestedId | tojson }}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByEmail setCreatedByEmail classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedByEmail "
                       name="setCreatedByEmail"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByEmail setCreatedByEmail classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedByEmail "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByEmail setCreatedByEmail classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedByEmail "
                       name="setCreatedByEmail"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByEmail valueCreatedByEmail classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedByEmail "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByEmail valueCreatedByEmail classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedByEmail "
                       name="createdByEmail"
     {%- endif %}
   {%- endif %}
@@ -303,7 +303,7 @@
 {%- macro htmCreatedByEmailTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedByEmailTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedByUserIdTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputCreatedByUserIdTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_createdByUserId">
   {%- endif %}
@@ -314,15 +314,15 @@
                       hint="The IdP UUID record for the user who created the change request. "
                       id="TenantRequested_{{classApiMethodMethod}}_createdByUserId"
   {%- if "Page" == classApiMethodMethod %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByUserId setCreatedByUserId classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedByUserId "
+                      data-requestedId={{ result.requestedId | tojson }}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByUserId setCreatedByUserId classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedByUserId "
                       name="setCreatedByUserId"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByUserId setCreatedByUserId classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedByUserId "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByUserId setCreatedByUserId classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedByUserId "
                       name="setCreatedByUserId"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByUserId valueCreatedByUserId classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedByUserId "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByUserId valueCreatedByUserId classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedByUserId "
                       name="createdByUserId"
     {%- endif %}
   {%- endif %}
@@ -339,7 +339,7 @@
 {%- macro htmCreatedByUserIdTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedByUserIdTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedByFullNameTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputCreatedByFullNameTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_createdByFullName">
   {%- endif %}
@@ -350,15 +350,15 @@
                       hint="The first and last name for the user who created the change request. "
                       id="TenantRequested_{{classApiMethodMethod}}_createdByFullName"
   {%- if "Page" == classApiMethodMethod %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByFullName setCreatedByFullName classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedByFullName "
+                      data-requestedId={{ result.requestedId | tojson }}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByFullName setCreatedByFullName classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedByFullName "
                       name="setCreatedByFullName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByFullName setCreatedByFullName classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedByFullName "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByFullName setCreatedByFullName classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedByFullName "
                       name="setCreatedByFullName"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByFullName valueCreatedByFullName classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedByFullName "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdByFullName valueCreatedByFullName classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedByFullName "
                       name="createdByFullName"
     {%- endif %}
   {%- endif %}
@@ -375,7 +375,7 @@
 {%- macro htmCreatedByFullNameTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedByFullNameTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputCreatedViaTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputCreatedViaTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_createdVia">
   {%- endif %}
@@ -386,15 +386,15 @@
                       hint="Declares the ingestion path that makes audit quality transparent. "
                       id="TenantRequested_{{classApiMethodMethod}}_createdVia"
   {%- if "Page" == classApiMethodMethod %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdVia setCreatedVia classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedVia "
+                      data-requestedId={{ result.requestedId | tojson }}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdVia setCreatedVia classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedVia "
                       name="setCreatedVia"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdVia setCreatedVia classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedVia "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdVia setCreatedVia classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedVia "
                       name="setCreatedVia"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdVia valueCreatedVia classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}CreatedVia "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_createdVia valueCreatedVia classTenantRequested inputTenantRequested{{ result.requestedId }}CreatedVia "
                       name="createdVia"
     {%- endif %}
   {%- endif %}
@@ -416,7 +416,7 @@
 {%- macro htmCreatedViaTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedViaTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputIntentStateTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputIntentStateTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_intentState">
   {%- endif %}
@@ -427,15 +427,15 @@
                       hint="Captures the consumer's raw intent &mdash; what they asked for in their own terms. "
                       id="TenantRequested_{{classApiMethodMethod}}_intentState"
   {%- if "Page" == classApiMethodMethod %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_intentState setIntentState classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}IntentState "
+                      data-requestedId={{ result.requestedId | tojson }}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_intentState setIntentState classTenantRequested inputTenantRequested{{ result.requestedId }}IntentState "
                       name="setIntentState"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_intentState setIntentState classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}IntentState "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_intentState setIntentState classTenantRequested inputTenantRequested{{ result.requestedId }}IntentState "
                       name="setIntentState"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_intentState valueIntentState classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}IntentState "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_intentState valueIntentState classTenantRequested inputTenantRequested{{ result.requestedId }}IntentState "
                       name="intentState"
     {%- endif %}
   {%- endif %}
@@ -452,7 +452,7 @@
 {%- macro htmIntentStateTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputIntentStateTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputRequestedStateTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputRequestedStateTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_requestedState">
   {%- endif %}
@@ -463,15 +463,15 @@
                       hint="Represents a complete, validated, provider-ready declaration of desired state. "
                       id="TenantRequested_{{classApiMethodMethod}}_requestedState"
   {%- if "Page" == classApiMethodMethod %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_requestedState setRequestedState classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}RequestedState "
+                      data-requestedId={{ result.requestedId | tojson }}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_requestedState setRequestedState classTenantRequested inputTenantRequested{{ result.requestedId }}RequestedState "
                       name="setRequestedState"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_requestedState setRequestedState classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}RequestedState "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_requestedState setRequestedState classTenantRequested inputTenantRequested{{ result.requestedId }}RequestedState "
                       name="setRequestedState"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_requestedState valueRequestedState classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}RequestedState "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_requestedState valueRequestedState classTenantRequested inputTenantRequested{{ result.requestedId }}RequestedState "
                       name="requestedState"
     {%- endif %}
   {%- endif %}
@@ -488,7 +488,7 @@
 {%- macro htmRequestedStateTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputRequestedStateTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputRealizedStateTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputRealizedStateTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_realizedState">
   {%- endif %}
@@ -499,15 +499,15 @@
                       hint="Must be a complete representation of the provisioned resource in DCM unified format &mdash; not a status code, but a full state description. "
                       id="TenantRequested_{{classApiMethodMethod}}_realizedState"
   {%- if "Page" == classApiMethodMethod %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_realizedState setRealizedState classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}RealizedState "
+                      data-requestedId={{ result.requestedId | tojson }}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_realizedState setRealizedState classTenantRequested inputTenantRequested{{ result.requestedId }}RealizedState "
                       name="setRealizedState"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_realizedState setRealizedState classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}RealizedState "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_realizedState setRealizedState classTenantRequested inputTenantRequested{{ result.requestedId }}RealizedState "
                       name="setRealizedState"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_realizedState valueRealizedState classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}RealizedState "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_realizedState valueRealizedState classTenantRequested inputTenantRequested{{ result.requestedId }}RealizedState "
                       name="realizedState"
     {%- endif %}
   {%- endif %}
@@ -524,7 +524,7 @@
 {%- macro htmRealizedStateTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputRealizedStateTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputTenantNameTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputTenantNameTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_tenantName">
   {%- endif %}
@@ -535,15 +535,15 @@
                       hint="The name of this tenant"
                       id="TenantRequested_{{classApiMethodMethod}}_tenantName"
   {%- if "Page" == classApiMethodMethod %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantName setTenantName classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}TenantName "
+                      data-requestedId={{ result.requestedId | tojson }}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantName setTenantName classTenantRequested inputTenantRequested{{ result.requestedId }}TenantName "
                       name="setTenantName"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantName setTenantName classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}TenantName "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantName setTenantName classTenantRequested inputTenantRequested{{ result.requestedId }}TenantName "
                       name="setTenantName"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantName valueTenantName classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}TenantName "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantName valueTenantName classTenantRequested inputTenantRequested{{ result.requestedId }}TenantName "
                       name="tenantName"
     {%- endif %}
   {%- endif %}
@@ -560,7 +560,7 @@
 {%- macro htmTenantNameTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputTenantNameTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputTenantDescriptionTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputTenantDescriptionTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_tenantDescription">
   {%- endif %}
@@ -571,15 +571,15 @@
                       hint="A description of this tenant"
                       id="TenantRequested_{{classApiMethodMethod}}_tenantDescription"
   {%- if "Page" == classApiMethodMethod %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}TenantDescription "
+                      data-requestedId={{ result.requestedId | tojson }}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantRequested inputTenantRequested{{ result.requestedId }}TenantDescription "
                       name="setTenantDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}TenantDescription "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantRequested inputTenantRequested{{ result.requestedId }}TenantDescription "
                       name="setTenantDescription"
     {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantDescription valueTenantDescription classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}TenantDescription "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantDescription valueTenantDescription classTenantRequested inputTenantRequested{{ result.requestedId }}TenantDescription "
                       name="tenantDescription"
     {%- endif %}
   {%- endif %}
@@ -596,7 +596,113 @@
 {%- macro htmTenantDescriptionTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputTenantDescriptionTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputTenantRealizedTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputTenantDiscoveredTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_tenantDiscovered">
+  {%- endif %}
+  {%- if 'PUTCopy' == classApiMethodMethod %}
+                  <div>
+                    <wa-checkbox 
+                        id="{{ idPrefix }}TenantRequested_{{classApiMethodMethod}}_tenantDiscovered{{ idSuffix }}_clear"
+                        class="label-on-left TenantRequested_classApiMethodMethod}}_tenantDiscovered_clear tenantDiscovered_clear "
+                        hint="clear"
+                        >
+                      clear
+                    </wa-checkbox>
+                  </div>
+  {%- endif %}
+                  <wa-input
+                      type="text"
+                      placeholder="tenant discovered"
+                      label="tenant discovered"
+                      hint="Each time the tenant was discovered for this tenant intent. "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantDiscovered valueObjectSuggest suggestTenantDiscovered{% if searchRelated %} searchRelated{% endif %} "
+                      name="setTenantDiscovered"
+                      id="{{ idPrefix }}TenantRequested_{{classApiMethodMethod}}_tenantDiscovered{{ idSuffix }}"
+                      data-list="listTenantRequestedTenantDiscovered_{{classApiMethodMethod}}"
+                      data-method="{{classApiMethodMethod}}"
+                      autocomplete="off"
+  {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
+                      value="{{result.tenantDiscovered | e }}"
+  {% endif -%}
+                  >
+              </wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmTenantDiscoveredTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputTenantDiscoveredTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
+                <div class="label-on-left-ul-label ">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
+                  relate  to this requested tenant
+                </div>
+                <ul class="label-on-left-ul " id="listTenantRequestedTenantDiscovered_{{classApiMethodMethod}}">
+                </ul>
+                {%- if authForReadBool == true %}
+                {% if 'Page' == classApiMethodMethod %}
+                <div>
+                  {{ htmForm_postTenantDiscovered(idSuffix='_TenantRequested_POST_tenantDiscovered') }}
+                  <wa-button
+                       id="TenantRequested_{{classApiMethodMethod}}_tenantDiscovered_add"
+                       data-dialog="open postTenantDiscoveredDialog"
+                      >add a discovered tenant</wa-button>
+                  </div>
+                {%- endif %}
+                {%- endif %}
+{%- endmacro %}
+{%- macro inputLockedTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_locked">
+  {%- endif %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="TenantRequested_{{classApiMethodMethod}}_locked"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="TenantRequested_{{classApiMethodMethod}}_locked"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="locked"
+                      label="locked"
+                      hint="A tenant intent gets locked after creating the first tenant request. "
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_locked classTenantRequested inputTenantRequested{{ result.requestedId }}Locked "
+                      name="setLocked"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_locked classTenantRequested inputTenantRequested{{ result.requestedId }}Locked "
+                      name="setLocked"
+    {%- else %}
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_locked setLocked valueLocked classTenantRequested inputTenantRequested{{ result.requestedId }}Locked "
+                      name="setLocked"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.locked == true %}
+                      checked
+    {%- endif %}
+                      data-requestedId={{ result.requestedId | tojson }}
+                      >locked</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmLockedTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputLockedTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputTenantRealizedTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_tenantRealized">
   {%- endif %}
@@ -616,7 +722,7 @@
                       placeholder="tenant realized"
                       label="tenant realized"
                       hint="Each time the tenant was realized for this tenant intent. "
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantRealized valueObjectSuggest suggestTenantRealized "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_tenantRealized valueObjectSuggest suggestTenantRealized{% if searchRelated %} searchRelated{% endif %} "
                       name="setTenantRealized"
                       id="{{ idPrefix }}TenantRequested_{{classApiMethodMethod}}_tenantRealized{{ idSuffix }}"
                       data-list="listTenantRequestedTenantRealized_{{classApiMethodMethod}}"
@@ -634,7 +740,7 @@
 {%- endmacro %}
 
 {%- macro htmTenantRealizedTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputTenantRealizedTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                {{ inputTenantRealizedTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate  to this requested tenant
@@ -653,56 +759,7 @@
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputLockedTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
-  {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_locked">
-  {%- endif %}
-  {% if 'Page' == classApiMethodMethod -%}
-                  <wa-checkbox
-                      id="TenantRequested_{{classApiMethodMethod}}_locked"
-                      value="true"
-  {%- else %}
-                  <wa-select
-                      id="TenantRequested_{{classApiMethodMethod}}_locked"
-  {% endif -%}
-                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="locked"
-                      label="locked"
-                      hint="A tenant intent gets locked after creating the first tenant request. "
-  {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_locked classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Locked "
-                      name="setLocked"
-  {%- else %}
-    {%- if 'Page' == classApiMethodMethod %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_locked classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Locked "
-                      name="setLocked"
-    {%- else %}
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_locked setLocked valueLocked classTenantRequested inputTenantRequested{{ result.tenantRequestedId }}Locked "
-                      name="setLocked"
-    {%- endif %}
-  {%- endif %}
-  {%- if 'Page' == classApiMethodMethod %}
-    {%- if result.locked == true %}
-                      checked
-    {%- endif %}
-                      data-tenantRequestedId={{ result.tenantRequestedId | tojson }}
-                      >locked</wa-checkbox>
-  {%- else %}
-                      >
-                    <wa-option value=""></wa-option>
-                    <wa-option value="true">true</wa-option>
-                    <wa-option value="false">false</wa-option>
-                  </wa-select>
-  {%- endif %}
-  {%- if 'Page' == classApiMethodMethod %}
-                </form>
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro htmLockedTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputLockedTenantRequestedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
-{%- endmacro %}
-{%- macro inputHostInventoryIdsTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputHostInventoryIdsTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_hostInventoryIds">
   {%- endif %}
@@ -722,7 +779,7 @@
                       placeholder="host inventories"
                       label="host inventories"
                       hint="The related host inventories for this tenant. "
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_hostInventoryIds valueObjectSuggest suggestHostInventoryIds "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_hostInventoryIds valueObjectSuggest suggestHostInventoryIds{% if searchRelated %} searchRelated{% endif %} "
                       name="setHostInventoryIds"
                       id="{{ idPrefix }}TenantRequested_{{classApiMethodMethod}}_hostInventoryIds{{ idSuffix }}"
                       data-list="listTenantRequestedHostInventoryIds_{{classApiMethodMethod}}"
@@ -740,7 +797,7 @@
 {%- endmacro %}
 
 {%- macro htmHostInventoryIdsTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputHostInventoryIdsTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                {{ inputHostInventoryIdsTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate  to this requested tenant
@@ -759,7 +816,7 @@
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputAnsibleProjectIdsTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='') %}
+{%- macro inputAnsibleProjectIdsTenantRequestedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_ansibleProjectIds">
   {%- endif %}
@@ -779,7 +836,7 @@
                       placeholder="Ansible projects"
                       label="Ansible projects"
                       hint="The related Ansible projects for this tenant. "
-                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_ansibleProjectIds valueObjectSuggest suggestAnsibleProjectIds "
+                      class="label-on-left TenantRequested_{{classApiMethodMethod}}_ansibleProjectIds valueObjectSuggest suggestAnsibleProjectIds{% if searchRelated %} searchRelated{% endif %} "
                       name="setAnsibleProjectIds"
                       id="{{ idPrefix }}TenantRequested_{{classApiMethodMethod}}_ansibleProjectIds{{ idSuffix }}"
                       data-list="listTenantRequestedAnsibleProjectIds_{{classApiMethodMethod}}"
@@ -797,7 +854,7 @@
 {%- endmacro %}
 
 {%- macro htmAnsibleProjectIdsTenantRequestedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputAnsibleProjectIdsTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix) }}
+                {{ inputAnsibleProjectIdsTenantRequestedPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate  to this requested tenant
@@ -826,7 +883,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_patchTenantRequested(idSuffix='') %}
+{%- macro htmForm_patchTenantRequested(idSuffix='', searchRelated=false) %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchTenantRequestedDialog" label="Modify requested tenant">
           <form id="htmForm_patchTenantRequested" class="wa-stack round-row primary-smart-border-radius ">
 
@@ -970,6 +1027,33 @@
               </div>
             </wa-details>
 
+            <wa-details open class="pdf-page-break-after HtmRow" id="discovered">
+              <div slot="summary">
+                <span>discovered</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantDiscoveredTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantDiscoveredTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantDiscoveredTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmLockedTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmLockedTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmLockedTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
             <wa-details open class="pdf-page-break-after HtmRow" id="realizations">
               <div slot="summary">
                 <span>realizations</span>
@@ -982,16 +1066,6 @@
                 {{ htmTenantRealizedTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmTenantRealizedTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
-                {% if "PATCH" in scopes -%}
-                {{ htmLockedTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmLockedTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmLockedTenantRequestedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1037,7 +1111,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_postTenantRequested(idSuffix='') %}
+{%- macro htmForm_postTenantRequested(idSuffix='', searchRelated=false) %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postTenantRequestedDialog" label="Create a requested tenant">
           <form id="htmForm_postTenantRequested" class="wa-stack round-row primary-smart-border-radius ">
             <div>You can override any default values below: </div>
@@ -1182,6 +1256,33 @@
               </div>
             </wa-details>
 
+            <wa-details open class="pdf-page-break-after HtmRow" id="discovered">
+              <div slot="summary">
+                <span>discovered</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmTenantDiscoveredTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantDiscoveredTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantDiscoveredTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmLockedTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmLockedTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmLockedTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
             <wa-details open class="pdf-page-break-after HtmRow" id="realizations">
               <div slot="summary">
                 <span>realizations</span>
@@ -1194,16 +1295,6 @@
                 {{ htmTenantRealizedTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmTenantRealizedTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
-                {% if "POST" in scopes -%}
-                {{ htmLockedTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmLockedTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmLockedTenantRequestedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1249,7 +1340,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deleteTenantRequested(idSuffix='') %}
+{%- macro htmForm_deleteTenantRequested(idSuffix='', searchRelated=false) %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteTenantRequestedDialog" label="Delete requested tenant">
           <form id="htmForm_deleteTenantRequested" class="wa-stack round-row primary-smart-border-radius ">
             {{ htmFormButton_deleteTenantRequested() }}
@@ -1266,14 +1357,14 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_putimportTenantRequested(idSuffix='') %}
+{%- macro htmForm_putimportTenantRequested(idSuffix='', searchRelated=false) %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportTenantRequestedDialog" label="Import requested tenants">
           <form id="htmForm_putimportTenantRequested" class="wa-stack round-row primary-smart-border-radius ">
             <div>
               <wa-textarea
                   class="PUTImport_searchList "
                   style="height: 300px; "
-                  placeholder="{ 'searchList': [ { 'tenantRequestedId': ... , 'saves': [ ... ] }, ... ] }"
+                  placeholder="{ 'searchList': [ { 'requestedId': ... , 'saves': [ ... ] }, ... ] }"
                   >
               </wa-textarea>
             </div>
@@ -1282,7 +1373,7 @@
         </wa-dialog>
 {%- endmacro %}
 
-{%- macro htmForm_searchpageTenantRequested(idSuffix='') %}
+{%- macro htmForm_searchpageTenantRequested(idSuffix='', searchRelated=false) %}
         <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageTenantRequestedDialog" label="Search requested tenants">
           <div id="htmForm_searchpageTenantRequested" class="wa-stack round-row primary-smart-border-radius ">
 
@@ -1475,6 +1566,33 @@
               </div>
             </wa-details>
 
+            <wa-details open class="pdf-page-break-after HtmRow" id="discovered">
+              <div slot="summary">
+                <span>discovered</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmTenantDiscoveredTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmTenantDiscoveredTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmTenantDiscoveredTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmLockedTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmLockedTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmLockedTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
             <wa-details open class="pdf-page-break-after HtmRow" id="realizations">
               <div slot="summary">
                 <span>realizations</span>
@@ -1487,16 +1605,6 @@
                 {{ htmTenantRealizedTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmTenantRealizedTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
-
-                {% if "PATCH" in scopes -%}
-                {{ htmLockedTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmLockedTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmLockedTenantRequestedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1541,7 +1649,7 @@
           </wa-popup>
 {%- endmacro %}
 
-{%- macro htmForm_deletefilterTenantRequested(idSuffix='') %}
+{%- macro htmForm_deletefilterTenantRequested(idSuffix='', searchRelated=false) %}
         <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterTenantRequestedDialog" label="Delete requested tenant">
           <form id="htmForm_deletefilterTenantRequested" class="wa-stack round-row primary-smart-border-radius ">
             {{ htmFormButton_deletefilterTenantRequested() }}

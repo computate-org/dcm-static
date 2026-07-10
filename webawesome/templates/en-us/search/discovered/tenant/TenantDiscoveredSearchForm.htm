@@ -1,32 +1,30 @@
-{% include en-us/search/requested/tenant/TenantRequestedSearchFormMacros.htm %}
+{% include en-us/search/discovered/tenant/TenantDiscoveredSearchFormMacros.htm %}
 {% include en-us/search/host-inventory/HostInventorySearchFormMacros.htm %}
 {% include en-us/search/ansible-project/AnsibleProjectSearchFormMacros.htm %}
+{% include en-us/search/requested/tenant/TenantRequestedSearchFormMacros.htm %}
 {% include en-us/search/intent/tenant/TenantIntentSearchFormMacros.htm %}
-{% include en-us/search/approval/tenant/TenantApprovalSearchFormMacros.htm %}
-{% include en-us/search/discovered/tenant/TenantDiscoveredSearchFormMacros.htm %}
-{% include en-us/search/realized/tenant/TenantRealizedSearchFormMacros.htm %}
 {%- if 'DELETE' in scopes %}
-    {{ htmForm_patchTenantRequested() }}
+    {{ htmForm_patchTenantDiscovered() }}
 {%- endif %}
 {%- if 'POST' in scopes %}
   {%- if resultCount >= 1 %}
-    {{ htmForm_postTenantRequested() }}
+    {{ htmForm_postTenantDiscovered() }}
   {%- else %}
-    {{ htmForm_postTenantRequested() }}
+    {{ htmForm_postTenantDiscovered() }}
   {%- endif %}
 {%- endif %}
 {%- if 'DELETE' in scopes %}
   {%- if resultCount >= 1 %}
-    {{ htmForm_deleteTenantRequested() }}
+    {{ htmForm_deleteTenantDiscovered() }}
   {%- else %}
   {%- endif %}
 {%- endif %}
 {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
-  {{ htmForm_putimportTenantRequested() }}
+  {{ htmForm_putimportTenantDiscovered() }}
 {%- endif %}
 {%- if 'DELETE' in scopes %}
   {%- if resultCount >= 1 %}
-    {{ htmForm_deletefilterTenantRequested() }}
+    {{ htmForm_deletefilterTenantDiscovered() }}
   {%- else %}
   {%- endif %}
 {%- endif %}
