@@ -88,10 +88,10 @@ async function websocketTenantRealizedInner(apiRequest) {
         var inputRealizedByFullName = null;
         var inputCreatedByEmail = null;
         var inputCreatedVia = null;
+        var inputRealizedState = null;
         var inputIntentState = null;
         var inputRequestedState = null;
-        var inputRealizedState = null;
-        var inputTenantDescription = null;
+        var inputDescription = null;
         var inputLocked = null;
         var inputHostInventoryIds = null;
         var inputAnsibleProjectIds = null;
@@ -112,10 +112,10 @@ async function websocketTenantRealizedInner(apiRequest) {
         var inputHubId = null;
         var inputClusterName = null;
         var inputAapOrganizationId = null;
-        var inputTenantName = null;
-        var inputTenantId = null;
         var inputTenantResource = null;
         var inputRealizedNumber = null;
+        var inputTenantName = null;
+        var inputTenantId = null;
         var inputRealizedId = null;
         var inputRealizedName = null;
         var inputCreatedByUserId = null;
@@ -141,14 +141,14 @@ async function websocketTenantRealizedInner(apiRequest) {
           inputCreatedByEmail = $response.querySelector('.TenantRealized_Page_createdByEmail');
         if(vars.includes('createdVia'))
           inputCreatedVia = $response.querySelector('.TenantRealized_Page_createdVia');
+        if(vars.includes('realizedState'))
+          inputRealizedState = $response.querySelector('.TenantRealized_Page_realizedState');
         if(vars.includes('intentState'))
           inputIntentState = $response.querySelector('.TenantRealized_Page_intentState');
         if(vars.includes('requestedState'))
           inputRequestedState = $response.querySelector('.TenantRealized_Page_requestedState');
-        if(vars.includes('realizedState'))
-          inputRealizedState = $response.querySelector('.TenantRealized_Page_realizedState');
-        if(vars.includes('tenantDescription'))
-          inputTenantDescription = $response.querySelector('.TenantRealized_Page_tenantDescription');
+        if(vars.includes('description'))
+          inputDescription = $response.querySelector('.TenantRealized_Page_description');
         if(vars.includes('locked'))
           inputLocked = $response.querySelector('.TenantRealized_Page_locked');
         if(vars.includes('hostInventoryIds'))
@@ -189,14 +189,14 @@ async function websocketTenantRealizedInner(apiRequest) {
           inputClusterName = $response.querySelector('.TenantRealized_Page_clusterName');
         if(vars.includes('aapOrganizationId'))
           inputAapOrganizationId = $response.querySelector('.TenantRealized_Page_aapOrganizationId');
-        if(vars.includes('tenantName'))
-          inputTenantName = $response.querySelector('.TenantRealized_Page_tenantName');
-        if(vars.includes('tenantId'))
-          inputTenantId = $response.querySelector('.TenantRealized_Page_tenantId');
         if(vars.includes('tenantResource'))
           inputTenantResource = $response.querySelector('.TenantRealized_Page_tenantResource');
         if(vars.includes('realizedNumber'))
           inputRealizedNumber = $response.querySelector('.TenantRealized_Page_realizedNumber');
+        if(vars.includes('tenantName'))
+          inputTenantName = $response.querySelector('.TenantRealized_Page_tenantName');
+        if(vars.includes('tenantId'))
+          inputTenantId = $response.querySelector('.TenantRealized_Page_tenantId');
         if(vars.includes('realizedId'))
           inputRealizedId = $response.querySelector('.TenantRealized_Page_realizedId');
         if(vars.includes('realizedName'))
@@ -351,6 +351,20 @@ async function websocketTenantRealizedInner(apiRequest) {
           addGlow(document.querySelector('.TenantRealized_Page_createdVia'));
         }
 
+        if(inputRealizedState) {
+          document.querySelectorAll('.TenantRealized_Page_realizedState').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputRealizedState.getAttribute('value');
+            else
+              item.textContent = inputRealizedState.textContent;
+          });
+          addGlow(document.querySelector('.TenantRealized_Page_realizedState'));
+        }
+
         if(inputIntentState) {
           document.querySelectorAll('.TenantRealized_Page_intentState').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
@@ -379,32 +393,18 @@ async function websocketTenantRealizedInner(apiRequest) {
           addGlow(document.querySelector('.TenantRealized_Page_requestedState'));
         }
 
-        if(inputRealizedState) {
-          document.querySelectorAll('.TenantRealized_Page_realizedState').forEach((item, index) => {
+        if(inputDescription) {
+          document.querySelectorAll('.TenantRealized_Page_description').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
             }
             if(typeof item.value !== 'undefined')
-              item.value = inputRealizedState.getAttribute('value');
+              item.value = inputDescription.getAttribute('value');
             else
-              item.textContent = inputRealizedState.textContent;
+              item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.TenantRealized_Page_realizedState'));
-        }
-
-        if(inputTenantDescription) {
-          document.querySelectorAll('.TenantRealized_Page_tenantDescription').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantDescription.getAttribute('value');
-            else
-              item.textContent = inputTenantDescription.textContent;
-          });
-          addGlow(document.querySelector('.TenantRealized_Page_tenantDescription'));
+          addGlow(document.querySelector('.TenantRealized_Page_description'));
         }
 
         if(inputLocked) {
@@ -687,34 +687,6 @@ async function websocketTenantRealizedInner(apiRequest) {
           addGlow(document.querySelector('.TenantRealized_Page_aapOrganizationId'));
         }
 
-        if(inputTenantName) {
-          document.querySelectorAll('.TenantRealized_Page_tenantName').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantName.getAttribute('value');
-            else
-              item.textContent = inputTenantName.textContent;
-          });
-          addGlow(document.querySelector('.TenantRealized_Page_tenantName'));
-        }
-
-        if(inputTenantId) {
-          document.querySelectorAll('.TenantRealized_Page_tenantId').forEach((item, index) => {
-            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
-              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
-              item.removeAttribute('readonly');
-            }
-            if(typeof item.value !== 'undefined')
-              item.value = inputTenantId.getAttribute('value');
-            else
-              item.textContent = inputTenantId.textContent;
-          });
-          addGlow(document.querySelector('.TenantRealized_Page_tenantId'));
-        }
-
         if(inputTenantResource) {
           document.querySelectorAll('.TenantRealized_Page_tenantResource').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
@@ -741,6 +713,34 @@ async function websocketTenantRealizedInner(apiRequest) {
               item.textContent = inputRealizedNumber.textContent;
           });
           addGlow(document.querySelector('.TenantRealized_Page_realizedNumber'));
+        }
+
+        if(inputTenantName) {
+          document.querySelectorAll('.TenantRealized_Page_tenantName').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantName.getAttribute('value');
+            else
+              item.textContent = inputTenantName.textContent;
+          });
+          addGlow(document.querySelector('.TenantRealized_Page_tenantName'));
+        }
+
+        if(inputTenantId) {
+          document.querySelectorAll('.TenantRealized_Page_tenantId').forEach((item, index) => {
+            if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
+              item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
+              item.removeAttribute('readonly');
+            }
+            if(typeof item.value !== 'undefined')
+              item.value = inputTenantId.getAttribute('value');
+            else
+              item.textContent = inputTenantId.textContent;
+          });
+          addGlow(document.querySelector('.TenantRealized_Page_tenantId'));
         }
 
         if(inputRealizedId) {
@@ -990,6 +990,10 @@ function searchTenantRealizedFilters($formFilters) {
     if(filterCreatedVia != null && filterCreatedVia !== '')
       filters.push({ name: 'fq', value: 'createdVia:' + filterCreatedVia });
 
+    var filterRealizedState = $formFilters.querySelector('.valueRealizedState')?.value;
+    if(filterRealizedState != null && filterRealizedState !== '')
+      filters.push({ name: 'fq', value: 'realizedState:' + filterRealizedState });
+
     var filterIntentState = $formFilters.querySelector('.valueIntentState')?.value;
     if(filterIntentState != null && filterIntentState !== '')
       filters.push({ name: 'fq', value: 'intentState:' + filterIntentState });
@@ -998,13 +1002,9 @@ function searchTenantRealizedFilters($formFilters) {
     if(filterRequestedState != null && filterRequestedState !== '')
       filters.push({ name: 'fq', value: 'requestedState:' + filterRequestedState });
 
-    var filterRealizedState = $formFilters.querySelector('.valueRealizedState')?.value;
-    if(filterRealizedState != null && filterRealizedState !== '')
-      filters.push({ name: 'fq', value: 'realizedState:' + filterRealizedState });
-
-    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
-    if(filterTenantDescription != null && filterTenantDescription !== '')
-      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
     var $filterLockedCheckbox = $formFilters.querySelector('input.valueLocked[type = "checkbox"]');
     var $filterLockedSelect = $formFilters.querySelector('select.valueLocked');
@@ -1092,14 +1092,6 @@ function searchTenantRealizedFilters($formFilters) {
     if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
       filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
 
-    var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
-    if(filterTenantName != null && filterTenantName !== '')
-      filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
-
-    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
-    if(filterTenantId != null && filterTenantId !== '')
-      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
-
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
@@ -1107,6 +1099,14 @@ function searchTenantRealizedFilters($formFilters) {
     var filterRealizedNumber = $formFilters.querySelector('.valueRealizedNumber')?.value;
     if(filterRealizedNumber != null && filterRealizedNumber !== '')
       filters.push({ name: 'fq', value: 'realizedNumber:' + filterRealizedNumber });
+
+    var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
+    if(filterTenantName != null && filterTenantName !== '')
+      filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
+
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
     var filterRealizedId = $formFilters.querySelector('.valueRealizedId')?.value;
     if(filterRealizedId != null && filterRealizedId !== '')
@@ -1145,7 +1145,7 @@ function searchTenantRealizedVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestTenantRealizedHostInventoryIds(filters, $list, realizedId = null, hostInventoryIds = null, relate=true, target) {
+function suggestTenantRealizedHostInventoryIds(filters, $list, realizedIdTenantRealized = null, hostInventoryIds = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1166,18 +1166,18 @@ function suggestTenantRealizedHostInventoryIds(filters, $list, realizedId = null
         var val = o[inputVar];
         var checked = val == null ? false : (hostInventoryIds != null && val === hostInventoryIds.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hostInventoryIds_' + realizedId + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_hostInventoryIds_' + realizedIdTenantRealized + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
         $input.setAttribute('class', 'valueHostInventoryIds ');
-        if(realizedId != null) {
+        if(realizedIdTenantRealized != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantRealizedVals([{ name: 'fq', value: 'realizedId:' + realizedId }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o[inputVar] }
+            patchTenantRealizedVals([{ name: 'fq', value: 'realizedId:' + realizedIdTenantRealized }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantRealizedHostInventoryIds(filters, $list, realizedId, o[inputVar], relate, target);
+                  suggestTenantRealizedHostInventoryIds(filters, $list, realizedIdTenantRealized, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1208,7 +1208,7 @@ function suggestTenantRealizedHostInventoryIds(filters, $list, realizedId = null
   }
 }
 
-function suggestTenantRealizedAnsibleProjectIds(filters, $list, realizedId = null, ansibleProjectIds = null, relate=true, target) {
+function suggestTenantRealizedAnsibleProjectIds(filters, $list, realizedIdTenantRealized = null, ansibleProjectIds = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1229,18 +1229,18 @@ function suggestTenantRealizedAnsibleProjectIds(filters, $list, realizedId = nul
         var val = o[inputVar];
         var checked = val == null ? false : (ansibleProjectIds != null && val === ansibleProjectIds.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_ansibleProjectIds_' + realizedId + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_ansibleProjectIds_' + realizedIdTenantRealized + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
         $input.setAttribute('class', 'valueAnsibleProjectIds ');
-        if(realizedId != null) {
+        if(realizedIdTenantRealized != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantRealizedVals([{ name: 'fq', value: 'realizedId:' + realizedId }], { [(event.target.checked ? 'add' : 'remove') + 'AnsibleProjectIds']: o[inputVar] }
+            patchTenantRealizedVals([{ name: 'fq', value: 'realizedId:' + realizedIdTenantRealized }], { [(event.target.checked ? 'add' : 'remove') + 'AnsibleProjectIds']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantRealizedAnsibleProjectIds(filters, $list, realizedId, o[inputVar], relate, target);
+                  suggestTenantRealizedAnsibleProjectIds(filters, $list, realizedIdTenantRealized, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1271,7 +1271,7 @@ function suggestTenantRealizedAnsibleProjectIds(filters, $list, realizedId = nul
   }
 }
 
-function suggestTenantRealizedRequestedId(filters, $list, realizedId = null, requestedId = null, relate=true, target) {
+function suggestTenantRealizedRequestedId(filters, $list, realizedIdTenantRealized = null, requestedId = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1292,19 +1292,19 @@ function suggestTenantRealizedRequestedId(filters, $list, realizedId = null, req
         var val = o[inputVar];
         var checked = val == null ? false : (requestedId != null && val === requestedId.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_requestedId_' + realizedId + '_requestedId_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_requestedId_' + realizedIdTenantRealized + '_requestedId_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
         $input.setAttribute('class', 'valueRequestedId ');
-        if(realizedId != null) {
+        if(realizedIdTenantRealized != null) {
           $input.addEventListener('change', function(event) {
             document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
-            patchTenantRealizedVals([{ name: 'fq', value: 'realizedId:' + realizedId }], { [(event.target.checked ? 'set' : 'remove') + 'RequestedId']: o[inputVar] }
+            patchTenantRealizedVals([{ name: 'fq', value: 'realizedId:' + realizedIdTenantRealized }], { [(event.target.checked ? 'set' : 'remove') + 'RequestedId']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantRealizedRequestedId(filters, $list, realizedId, o[inputVar], relate, target);
+                  suggestTenantRealizedRequestedId(filters, $list, realizedIdTenantRealized, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1335,7 +1335,7 @@ function suggestTenantRealizedRequestedId(filters, $list, realizedId = null, req
   }
 }
 
-function suggestTenantRealizedTenantResource(filters, $list, realizedId = null, tenantResource = null, relate=true, target) {
+function suggestTenantRealizedTenantResource(filters, $list, realizedIdTenantRealized = null, tenantResource = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1356,19 +1356,19 @@ function suggestTenantRealizedTenantResource(filters, $list, realizedId = null, 
         var val = o[inputVar];
         var checked = val == null ? false : (tenantResource != null && val === tenantResource.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantResource_' + realizedId + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_tenantResource_' + realizedIdTenantRealized + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
         $input.setAttribute('class', 'valueTenantResource ');
-        if(realizedId != null) {
+        if(realizedIdTenantRealized != null) {
           $input.addEventListener('change', function(event) {
             document.getElementById(event.target.getAttribute('data-target')).value = o[inputVar];
-            patchTenantRealizedVals([{ name: 'fq', value: 'realizedId:' + realizedId }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o[inputVar] }
+            patchTenantRealizedVals([{ name: 'fq', value: 'realizedId:' + realizedIdTenantRealized }], { [(event.target.checked ? 'set' : 'remove') + 'TenantResource']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantRealizedTenantResource(filters, $list, realizedId, o[inputVar], relate, target);
+                  suggestTenantRealizedTenantResource(filters, $list, realizedIdTenantRealized, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1566,6 +1566,18 @@ async function patchTenantRealized($formFilters, $formValues, target, realizedId
   if(removeCreatedVia != null && removeCreatedVia !== '')
     vals['removeCreatedVia'] = removeCreatedVia;
 
+  var valueRealizedState = $formValues.querySelector('.valueRealizedState')?.value;
+  var removeRealizedState = $formValues.querySelector('.removeRealizedState')?.value === 'true';
+  var setRealizedState = removeRealizedState ? null : $formValues.querySelector('.setRealizedState')?.value;
+  var addRealizedState = $formValues.querySelector('.addRealizedState')?.value;
+  if(removeRealizedState || setRealizedState != null && setRealizedState !== '')
+    vals['setRealizedState'] = setRealizedState;
+  if(addRealizedState != null && addRealizedState !== '')
+    vals['addRealizedState'] = addRealizedState;
+  var removeRealizedState = $formValues.querySelector('.removeRealizedState')?.value;
+  if(removeRealizedState != null && removeRealizedState !== '')
+    vals['removeRealizedState'] = removeRealizedState;
+
   var valueIntentState = $formValues.querySelector('.valueIntentState')?.value;
   var removeIntentState = $formValues.querySelector('.removeIntentState')?.value === 'true';
   var setIntentState = removeIntentState ? null : $formValues.querySelector('.setIntentState')?.value;
@@ -1590,29 +1602,17 @@ async function patchTenantRealized($formFilters, $formValues, target, realizedId
   if(removeRequestedState != null && removeRequestedState !== '')
     vals['removeRequestedState'] = removeRequestedState;
 
-  var valueRealizedState = $formValues.querySelector('.valueRealizedState')?.value;
-  var removeRealizedState = $formValues.querySelector('.removeRealizedState')?.value === 'true';
-  var setRealizedState = removeRealizedState ? null : $formValues.querySelector('.setRealizedState')?.value;
-  var addRealizedState = $formValues.querySelector('.addRealizedState')?.value;
-  if(removeRealizedState || setRealizedState != null && setRealizedState !== '')
-    vals['setRealizedState'] = setRealizedState;
-  if(addRealizedState != null && addRealizedState !== '')
-    vals['addRealizedState'] = addRealizedState;
-  var removeRealizedState = $formValues.querySelector('.removeRealizedState')?.value;
-  if(removeRealizedState != null && removeRealizedState !== '')
-    vals['removeRealizedState'] = removeRealizedState;
-
-  var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
-  var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value === 'true';
-  var setTenantDescription = removeTenantDescription ? null : $formValues.querySelector('.setTenantDescription')?.value;
-  var addTenantDescription = $formValues.querySelector('.addTenantDescription')?.value;
-  if(removeTenantDescription || setTenantDescription != null && setTenantDescription !== '')
-    vals['setTenantDescription'] = setTenantDescription;
-  if(addTenantDescription != null && addTenantDescription !== '')
-    vals['addTenantDescription'] = addTenantDescription;
-  var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value;
-  if(removeTenantDescription != null && removeTenantDescription !== '')
-    vals['removeTenantDescription'] = removeTenantDescription;
+  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
+  var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
+  var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
+  var addDescription = $formValues.querySelector('.addDescription')?.value;
+  if(removeDescription || setDescription != null && setDescription !== '')
+    vals['setDescription'] = setDescription;
+  if(addDescription != null && addDescription !== '')
+    vals['addDescription'] = addDescription;
+  var removeDescription = $formValues.querySelector('.removeDescription')?.value;
+  if(removeDescription != null && removeDescription !== '')
+    vals['removeDescription'] = removeDescription;
 
   var valueLocked = $formValues.querySelector('.valueLocked')?.value;
   var removeLocked = $formValues.querySelector('.removeLocked')?.value === 'true';
@@ -1761,6 +1761,22 @@ async function patchTenantRealized($formFilters, $formValues, target, realizedId
   if(removeAapOrganizationId != null && removeAapOrganizationId !== '')
     vals['removeAapOrganizationId'] = removeAapOrganizationId;
 
+  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueTenantResource != null && valueTenantResource !== '')
+    vals['setTenantResource'] = valueTenantResource;
+
+  var valueRealizedNumber = $formValues.querySelector('.valueRealizedNumber')?.value;
+  var removeRealizedNumber = $formValues.querySelector('.removeRealizedNumber')?.value === 'true';
+  var setRealizedNumber = removeRealizedNumber ? null : $formValues.querySelector('.setRealizedNumber')?.value;
+  var addRealizedNumber = $formValues.querySelector('.addRealizedNumber')?.value;
+  if(removeRealizedNumber || setRealizedNumber != null && setRealizedNumber !== '')
+    vals['setRealizedNumber'] = setRealizedNumber;
+  if(addRealizedNumber != null && addRealizedNumber !== '')
+    vals['addRealizedNumber'] = addRealizedNumber;
+  var removeRealizedNumber = $formValues.querySelector('.removeRealizedNumber')?.value;
+  if(removeRealizedNumber != null && removeRealizedNumber !== '')
+    vals['removeRealizedNumber'] = removeRealizedNumber;
+
   var valueTenantName = $formValues.querySelector('.valueTenantName')?.value;
   var removeTenantName = $formValues.querySelector('.removeTenantName')?.value === 'true';
   var setTenantName = removeTenantName ? null : $formValues.querySelector('.setTenantName')?.value;
@@ -1784,22 +1800,6 @@ async function patchTenantRealized($formFilters, $formValues, target, realizedId
   var removeTenantId = $formValues.querySelector('.removeTenantId')?.value;
   if(removeTenantId != null && removeTenantId !== '')
     vals['removeTenantId'] = removeTenantId;
-
-  var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantResource != null && valueTenantResource !== '')
-    vals['setTenantResource'] = valueTenantResource;
-
-  var valueRealizedNumber = $formValues.querySelector('.valueRealizedNumber')?.value;
-  var removeRealizedNumber = $formValues.querySelector('.removeRealizedNumber')?.value === 'true';
-  var setRealizedNumber = removeRealizedNumber ? null : $formValues.querySelector('.setRealizedNumber')?.value;
-  var addRealizedNumber = $formValues.querySelector('.addRealizedNumber')?.value;
-  if(removeRealizedNumber || setRealizedNumber != null && setRealizedNumber !== '')
-    vals['setRealizedNumber'] = setRealizedNumber;
-  if(addRealizedNumber != null && addRealizedNumber !== '')
-    vals['addRealizedNumber'] = addRealizedNumber;
-  var removeRealizedNumber = $formValues.querySelector('.removeRealizedNumber')?.value;
-  if(removeRealizedNumber != null && removeRealizedNumber !== '')
-    vals['removeRealizedNumber'] = removeRealizedNumber;
 
   var valueRealizedId = $formValues.querySelector('.valueRealizedId')?.value;
   var removeRealizedId = $formValues.querySelector('.removeRealizedId')?.value === 'true';
@@ -1903,6 +1903,10 @@ function patchTenantRealizedFilters($formFilters) {
     if(filterCreatedVia != null && filterCreatedVia !== '')
       filters.push({ name: 'fq', value: 'createdVia:' + filterCreatedVia });
 
+    var filterRealizedState = $formFilters.querySelector('.valueRealizedState')?.value;
+    if(filterRealizedState != null && filterRealizedState !== '')
+      filters.push({ name: 'fq', value: 'realizedState:' + filterRealizedState });
+
     var filterIntentState = $formFilters.querySelector('.valueIntentState')?.value;
     if(filterIntentState != null && filterIntentState !== '')
       filters.push({ name: 'fq', value: 'intentState:' + filterIntentState });
@@ -1911,13 +1915,9 @@ function patchTenantRealizedFilters($formFilters) {
     if(filterRequestedState != null && filterRequestedState !== '')
       filters.push({ name: 'fq', value: 'requestedState:' + filterRequestedState });
 
-    var filterRealizedState = $formFilters.querySelector('.valueRealizedState')?.value;
-    if(filterRealizedState != null && filterRealizedState !== '')
-      filters.push({ name: 'fq', value: 'realizedState:' + filterRealizedState });
-
-    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
-    if(filterTenantDescription != null && filterTenantDescription !== '')
-      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
     var $filterLockedCheckbox = $formFilters.querySelector('input.valueLocked[type = "checkbox"]');
     var $filterLockedSelect = $formFilters.querySelector('select.valueLocked');
@@ -2005,14 +2005,6 @@ function patchTenantRealizedFilters($formFilters) {
     if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
       filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
 
-    var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
-    if(filterTenantName != null && filterTenantName !== '')
-      filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
-
-    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
-    if(filterTenantId != null && filterTenantId !== '')
-      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
-
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
@@ -2020,6 +2012,14 @@ function patchTenantRealizedFilters($formFilters) {
     var filterRealizedNumber = $formFilters.querySelector('.valueRealizedNumber')?.value;
     if(filterRealizedNumber != null && filterRealizedNumber !== '')
       filters.push({ name: 'fq', value: 'realizedNumber:' + filterRealizedNumber });
+
+    var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
+    if(filterTenantName != null && filterTenantName !== '')
+      filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
+
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
     var filterRealizedId = $formFilters.querySelector('.valueRealizedId')?.value;
     if(filterRealizedId != null && filterRealizedId !== '')
@@ -2139,6 +2139,10 @@ async function postTenantRealized($formValues, target, success, error) {
   if(valueCreatedVia != null && valueCreatedVia !== '')
     vals['createdVia'] = valueCreatedVia;
 
+  var valueRealizedState = $formValues.querySelector('.valueRealizedState')?.value;
+  if(valueRealizedState != null && valueRealizedState !== '')
+    vals['realizedState'] = valueRealizedState;
+
   var valueIntentState = $formValues.querySelector('.valueIntentState')?.value;
   if(valueIntentState != null && valueIntentState !== '')
     vals['intentState'] = valueIntentState;
@@ -2147,13 +2151,9 @@ async function postTenantRealized($formValues, target, success, error) {
   if(valueRequestedState != null && valueRequestedState !== '')
     vals['requestedState'] = valueRequestedState;
 
-  var valueRealizedState = $formValues.querySelector('.valueRealizedState')?.value;
-  if(valueRealizedState != null && valueRealizedState !== '')
-    vals['realizedState'] = valueRealizedState;
-
-  var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
-  if(valueTenantDescription != null && valueTenantDescription !== '')
-    vals['tenantDescription'] = valueTenantDescription;
+  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
+  if(valueDescription != null && valueDescription !== '')
+    vals['description'] = valueDescription;
 
   var valueLocked = $formValues.querySelector('.valueLocked')?.value;
   if(valueLocked != null && valueLocked !== '')
@@ -2213,14 +2213,6 @@ async function postTenantRealized($formValues, target, success, error) {
   if(valueAapOrganizationId != null && valueAapOrganizationId !== '')
     vals['aapOrganizationId'] = valueAapOrganizationId;
 
-  var valueTenantName = $formValues.querySelector('.valueTenantName')?.value;
-  if(valueTenantName != null && valueTenantName !== '')
-    vals['tenantName'] = valueTenantName;
-
-  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
-  if(valueTenantId != null && valueTenantId !== '')
-    vals['tenantId'] = valueTenantId;
-
   var valueTenantResource = (Array.from($formValues.querySelectorAll('.valueTenantResource')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueTenantResource != null && valueTenantResource !== '')
     vals['tenantResource'] = valueTenantResource;
@@ -2228,6 +2220,14 @@ async function postTenantRealized($formValues, target, success, error) {
   var valueRealizedNumber = $formValues.querySelector('.valueRealizedNumber')?.value;
   if(valueRealizedNumber != null && valueRealizedNumber !== '')
     vals['realizedNumber'] = valueRealizedNumber;
+
+  var valueTenantName = $formValues.querySelector('.valueTenantName')?.value;
+  if(valueTenantName != null && valueTenantName !== '')
+    vals['tenantName'] = valueTenantName;
+
+  var valueTenantId = $formValues.querySelector('.valueTenantId')?.value;
+  if(valueTenantId != null && valueTenantId !== '')
+    vals['tenantId'] = valueTenantId;
 
   var valueRealizedId = $formValues.querySelector('.valueRealizedId')?.value;
   if(valueRealizedId != null && valueRealizedId !== '')
@@ -2457,6 +2457,10 @@ function deletefilterTenantRealizedFilters($formFilters) {
     if(filterCreatedVia != null && filterCreatedVia !== '')
       filters.push({ name: 'fq', value: 'createdVia:' + filterCreatedVia });
 
+    var filterRealizedState = $formFilters.querySelector('.valueRealizedState')?.value;
+    if(filterRealizedState != null && filterRealizedState !== '')
+      filters.push({ name: 'fq', value: 'realizedState:' + filterRealizedState });
+
     var filterIntentState = $formFilters.querySelector('.valueIntentState')?.value;
     if(filterIntentState != null && filterIntentState !== '')
       filters.push({ name: 'fq', value: 'intentState:' + filterIntentState });
@@ -2465,13 +2469,9 @@ function deletefilterTenantRealizedFilters($formFilters) {
     if(filterRequestedState != null && filterRequestedState !== '')
       filters.push({ name: 'fq', value: 'requestedState:' + filterRequestedState });
 
-    var filterRealizedState = $formFilters.querySelector('.valueRealizedState')?.value;
-    if(filterRealizedState != null && filterRealizedState !== '')
-      filters.push({ name: 'fq', value: 'realizedState:' + filterRealizedState });
-
-    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
-    if(filterTenantDescription != null && filterTenantDescription !== '')
-      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
     var $filterLockedCheckbox = $formFilters.querySelector('input.valueLocked[type = "checkbox"]');
     var $filterLockedSelect = $formFilters.querySelector('select.valueLocked');
@@ -2559,14 +2559,6 @@ function deletefilterTenantRealizedFilters($formFilters) {
     if(filterAapOrganizationId != null && filterAapOrganizationId !== '')
       filters.push({ name: 'fq', value: 'aapOrganizationId:' + filterAapOrganizationId });
 
-    var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
-    if(filterTenantName != null && filterTenantName !== '')
-      filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
-
-    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
-    if(filterTenantId != null && filterTenantId !== '')
-      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
-
     var filterTenantResource = $formFilters.querySelector('.valueTenantResource')?.value;
     if(filterTenantResource != null && filterTenantResource !== '')
       filters.push({ name: 'fq', value: 'tenantResource:' + filterTenantResource });
@@ -2574,6 +2566,14 @@ function deletefilterTenantRealizedFilters($formFilters) {
     var filterRealizedNumber = $formFilters.querySelector('.valueRealizedNumber')?.value;
     if(filterRealizedNumber != null && filterRealizedNumber !== '')
       filters.push({ name: 'fq', value: 'realizedNumber:' + filterRealizedNumber });
+
+    var filterTenantName = $formFilters.querySelector('.valueTenantName')?.value;
+    if(filterTenantName != null && filterTenantName !== '')
+      filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
+
+    var filterTenantId = $formFilters.querySelector('.valueTenantId')?.value;
+    if(filterTenantId != null && filterTenantId !== '')
+      filters.push({ name: 'fq', value: 'tenantId:' + filterTenantId });
 
     var filterRealizedId = $formFilters.querySelector('.valueRealizedId')?.value;
     if(filterRealizedId != null && filterRealizedId !== '')

@@ -229,24 +229,24 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH tenantDescription
-          document.querySelector('#TenantRequested_Page_tenantDescription')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_tenantDescription');
+          // PATCH description
+          document.querySelector('#TenantRequested_Page_description')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_description');
             const valid = form.checkValidity();
             if(valid) {
               patchTenantRequestedVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'requestedId:' + event.currentTarget.getAttribute('data-requestedId') }]
-                  , 'setTenantDescription', event.currentTarget.value
+                  , 'setDescription', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#TenantRequested_Page_tenantDescription')?.addEventListener('focus', (event) => {
+          document.querySelector('#TenantRequested_Page_description')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#TenantRequested_Page_tenantDescription')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_tenantDescription');
+          document.querySelector('#TenantRequested_Page_description')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_description');
             const valid = form.reportValidity();
           });
 

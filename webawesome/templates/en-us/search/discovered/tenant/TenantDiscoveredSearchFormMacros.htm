@@ -575,31 +575,31 @@
 {%- macro htmTenantNameTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputTenantNameTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputTenantDescriptionTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+{%- macro inputDescriptionTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_tenantDescription">
+                <form class="subgrid-2col " id="PageForm_description">
   {%- endif %}
                   <wa-textarea resize="auto"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] description"
                       label="description"
                       hint="A description of this tenant"
-                      id="TenantDiscovered_{{classApiMethodMethod}}_tenantDescription"
+                      id="TenantDiscovered_{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-tenantResource={{ result.tenantResource | tojson }}
-                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}TenantDescription "
-                      name="setTenantDescription"
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_description setDescription classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Description "
+                      name="setDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}TenantDescription "
-                      name="setTenantDescription"
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_description setDescription classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Description "
+                      name="setDescription"
     {%- else %}
-                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_tenantDescription valueTenantDescription classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}TenantDescription "
-                      name="tenantDescription"
+                      class="label-on-left TenantDiscovered_{{classApiMethodMethod}}_description valueDescription classTenantDiscovered inputTenantDiscovered{{ result.tenantResource }}Description "
+                      name="description"
     {%- endif %}
   {%- endif %}
 {% if "Page" == classApiMethodMethod -%}
-                      value="{{result.tenantDescription | e }}"
+                      value="{{result.description | e }}"
 {% endif -%}
                       >
 </wa-textarea>
@@ -608,8 +608,8 @@
   {%- endif %}
 {%- endmacro %}
 
-{%- macro htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputTenantDescriptionTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- macro htmDescriptionTenantDiscoveredPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDescriptionTenantDiscoveredPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputHostInventoryIdsTenantDiscoveredPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -876,12 +876,12 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDescriptionTenantDiscoveredPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1069,12 +1069,12 @@
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDescriptionTenantDiscoveredPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1343,12 +1343,12 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDescriptionTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDescriptionTenantDiscoveredPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>

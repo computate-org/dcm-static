@@ -395,6 +395,42 @@
 {%- macro htmCreatedViaTenantRealizedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputCreatedViaTenantRealizedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputRealizedStateTenantRealizedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_realizedState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] realized state"
+                      label="realized state"
+                      hint="Must be a complete representation of the provisioned resource in DCM unified format &mdash; not a status code, but a full state description. "
+                      id="TenantRealized_{{classApiMethodMethod}}_realizedState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-realizedId={{ result.realizedId | tojson }}
+                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_realizedState setRealizedState classTenantRealized inputTenantRealized{{ result.realizedId }}RealizedState "
+                      name="setRealizedState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_realizedState setRealizedState classTenantRealized inputTenantRealized{{ result.realizedId }}RealizedState "
+                      name="setRealizedState"
+    {%- else %}
+                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_realizedState valueRealizedState classTenantRealized inputTenantRealized{{ result.realizedId }}RealizedState "
+                      name="realizedState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.realizedState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRealizedStateTenantRealizedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputRealizedStateTenantRealizedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 {%- macro inputIntentStateTenantRealizedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_intentState">
@@ -467,67 +503,31 @@
 {%- macro htmRequestedStateTenantRealizedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputRequestedStateTenantRealizedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputRealizedStateTenantRealizedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+{%- macro inputDescriptionTenantRealizedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_realizedState">
-  {%- endif %}
-                  <wa-textarea resize="auto"
-                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
-                      placeholder="[String] realized state"
-                      label="realized state"
-                      hint="Must be a complete representation of the provisioned resource in DCM unified format &mdash; not a status code, but a full state description. "
-                      id="TenantRealized_{{classApiMethodMethod}}_realizedState"
-  {%- if "Page" == classApiMethodMethod %}
-                      data-realizedId={{ result.realizedId | tojson }}
-                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_realizedState setRealizedState classTenantRealized inputTenantRealized{{ result.realizedId }}RealizedState "
-                      name="setRealizedState"
-  {%- else %}
-    {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_realizedState setRealizedState classTenantRealized inputTenantRealized{{ result.realizedId }}RealizedState "
-                      name="setRealizedState"
-    {%- else %}
-                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_realizedState valueRealizedState classTenantRealized inputTenantRealized{{ result.realizedId }}RealizedState "
-                      name="realizedState"
-    {%- endif %}
-  {%- endif %}
-{% if "Page" == classApiMethodMethod -%}
-                      value="{{result.realizedState | e }}"
-{% endif -%}
-                      >
-</wa-textarea>
-  {%- if 'Page' == classApiMethodMethod %}
-                </form>
-  {%- endif %}
-{%- endmacro %}
-
-{%- macro htmRealizedStateTenantRealizedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputRealizedStateTenantRealizedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
-{%- endmacro %}
-{%- macro inputTenantDescriptionTenantRealizedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
-  {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_tenantDescription">
+                <form class="subgrid-2col " id="PageForm_description">
   {%- endif %}
                   <wa-textarea resize="auto"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] description"
                       label="description"
                       hint="A description of this tenant"
-                      id="TenantRealized_{{classApiMethodMethod}}_tenantDescription"
+                      id="TenantRealized_{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-realizedId={{ result.realizedId | tojson }}
-                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantRealized inputTenantRealized{{ result.realizedId }}TenantDescription "
-                      name="setTenantDescription"
+                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_description setDescription classTenantRealized inputTenantRealized{{ result.realizedId }}Description "
+                      name="setDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantRealized inputTenantRealized{{ result.realizedId }}TenantDescription "
-                      name="setTenantDescription"
+                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_description setDescription classTenantRealized inputTenantRealized{{ result.realizedId }}Description "
+                      name="setDescription"
     {%- else %}
-                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_tenantDescription valueTenantDescription classTenantRealized inputTenantRealized{{ result.realizedId }}TenantDescription "
-                      name="tenantDescription"
+                      class="label-on-left TenantRealized_{{classApiMethodMethod}}_description valueDescription classTenantRealized inputTenantRealized{{ result.realizedId }}Description "
+                      name="description"
     {%- endif %}
   {%- endif %}
 {% if "Page" == classApiMethodMethod -%}
-                      value="{{result.tenantDescription | e }}"
+                      value="{{result.description | e }}"
 {% endif -%}
                       >
 </wa-textarea>
@@ -536,8 +536,8 @@
   {%- endif %}
 {%- endmacro %}
 
-{%- macro htmTenantDescriptionTenantRealizedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputTenantDescriptionTenantRealizedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- macro htmDescriptionTenantRealizedPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDescriptionTenantRealizedPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputLockedTenantRealizedPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -788,13 +788,18 @@
                 {%- endif %}
                 {%- endif %}
               </div>
-            </wa-details>
 
-            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="intent">
-              <div slot="summary">
-                <span>intent</span>
-              </div>
               <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
                 {% if "PATCH" in scopes -%}
                 {{ htmIntentStateTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
@@ -814,26 +819,16 @@
                 {{ htmRequestedStateTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
-
-                {% if "PATCH" in scopes -%}
-                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantDescriptionTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDescriptionTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDescriptionTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDescriptionTenantRealizedPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -968,13 +963,18 @@
                 {%- endif %}
                 {%- endif %}
               </div>
-            </wa-details>
 
-            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="intent">
-              <div slot="summary">
-                <span>intent</span>
-              </div>
               <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
                 {% if "POST" in scopes -%}
                 {{ htmIntentStateTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
@@ -994,26 +994,16 @@
                 {{ htmRequestedStateTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
-
-                {% if "POST" in scopes -%}
-                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmTenantDescriptionTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDescriptionTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDescriptionTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDescriptionTenantRealizedPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1229,13 +1219,18 @@
                 {%- endif %}
                 {%- endif %}
               </div>
-            </wa-details>
 
-            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="intent">
-              <div slot="summary">
-                <span>intent</span>
-              </div>
               <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
                 {% if "PATCH" in scopes -%}
                 {{ htmIntentStateTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
@@ -1255,26 +1250,16 @@
                 {{ htmRequestedStateTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
-
-                {% if "PATCH" in scopes -%}
-                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {% if "GET" in scopes -%}
-                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
-                {% else -%}
-                {{ htmRealizedStateTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
-                {%- endif %}
-                {%- endif %}
               </div>
 
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantDescriptionTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDescriptionTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDescriptionTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDescriptionTenantRealizedPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>

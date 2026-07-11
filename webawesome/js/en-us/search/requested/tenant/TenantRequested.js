@@ -92,7 +92,7 @@ async function websocketTenantRequestedInner(apiRequest) {
         var inputRequestedState = null;
         var inputRealizedState = null;
         var inputTenantName = null;
-        var inputTenantDescription = null;
+        var inputDescription = null;
         var inputTenantDiscovered = null;
         var inputLocked = null;
         var inputTenantRealized = null;
@@ -148,8 +148,8 @@ async function websocketTenantRequestedInner(apiRequest) {
           inputRealizedState = $response.querySelector('.TenantRequested_Page_realizedState');
         if(vars.includes('tenantName'))
           inputTenantName = $response.querySelector('.TenantRequested_Page_tenantName');
-        if(vars.includes('tenantDescription'))
-          inputTenantDescription = $response.querySelector('.TenantRequested_Page_tenantDescription');
+        if(vars.includes('description'))
+          inputDescription = $response.querySelector('.TenantRequested_Page_description');
         if(vars.includes('tenantDiscovered'))
           inputTenantDiscovered = $response.querySelector('.TenantRequested_Page_tenantDiscovered');
         if(vars.includes('locked'))
@@ -404,18 +404,18 @@ async function websocketTenantRequestedInner(apiRequest) {
           addGlow(document.querySelector('.TenantRequested_Page_tenantName'));
         }
 
-        if(inputTenantDescription) {
-          document.querySelectorAll('.TenantRequested_Page_tenantDescription').forEach((item, index) => {
+        if(inputDescription) {
+          document.querySelectorAll('.TenantRequested_Page_description').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
             }
             if(typeof item.value !== 'undefined')
-              item.value = inputTenantDescription.getAttribute('value');
+              item.value = inputDescription.getAttribute('value');
             else
-              item.textContent = inputTenantDescription.textContent;
+              item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.TenantRequested_Page_tenantDescription'));
+          addGlow(document.querySelector('.TenantRequested_Page_description'));
         }
 
         if(inputTenantDiscovered) {
@@ -989,9 +989,9 @@ function searchTenantRequestedFilters($formFilters) {
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
 
-    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
-    if(filterTenantDescription != null && filterTenantDescription !== '')
-      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
     var filterTenantDiscovered = $formFilters.querySelector('.valueTenantDiscovered')?.value;
     if(filterTenantDiscovered != null && filterTenantDiscovered !== '')
@@ -1710,17 +1710,17 @@ async function patchTenantRequested($formFilters, $formValues, target, requested
   if(removeTenantName != null && removeTenantName !== '')
     vals['removeTenantName'] = removeTenantName;
 
-  var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
-  var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value === 'true';
-  var setTenantDescription = removeTenantDescription ? null : $formValues.querySelector('.setTenantDescription')?.value;
-  var addTenantDescription = $formValues.querySelector('.addTenantDescription')?.value;
-  if(removeTenantDescription || setTenantDescription != null && setTenantDescription !== '')
-    vals['setTenantDescription'] = setTenantDescription;
-  if(addTenantDescription != null && addTenantDescription !== '')
-    vals['addTenantDescription'] = addTenantDescription;
-  var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value;
-  if(removeTenantDescription != null && removeTenantDescription !== '')
-    vals['removeTenantDescription'] = removeTenantDescription;
+  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
+  var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
+  var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
+  var addDescription = $formValues.querySelector('.addDescription')?.value;
+  if(removeDescription || setDescription != null && setDescription !== '')
+    vals['setDescription'] = setDescription;
+  if(addDescription != null && addDescription !== '')
+    vals['addDescription'] = addDescription;
+  var removeDescription = $formValues.querySelector('.removeDescription')?.value;
+  if(removeDescription != null && removeDescription !== '')
+    vals['removeDescription'] = removeDescription;
 
   var valueTenantDiscovered = (Array.from($formValues.querySelectorAll('.valueTenantDiscovered')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueTenantDiscovered != null && valueTenantDiscovered !== '')
@@ -1995,9 +1995,9 @@ function patchTenantRequestedFilters($formFilters) {
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
 
-    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
-    if(filterTenantDescription != null && filterTenantDescription !== '')
-      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
     var filterTenantDiscovered = $formFilters.querySelector('.valueTenantDiscovered')?.value;
     if(filterTenantDiscovered != null && filterTenantDiscovered !== '')
@@ -2230,9 +2230,9 @@ async function postTenantRequested($formValues, target, success, error) {
   if(valueTenantName != null && valueTenantName !== '')
     vals['tenantName'] = valueTenantName;
 
-  var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
-  if(valueTenantDescription != null && valueTenantDescription !== '')
-    vals['tenantDescription'] = valueTenantDescription;
+  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
+  if(valueDescription != null && valueDescription !== '')
+    vals['description'] = valueDescription;
 
   var valueTenantDiscovered = [];
   $formValues.querySelectorAll('input.valueTenantDiscovered:checked').forEach(function(index) {
@@ -2550,9 +2550,9 @@ function deletefilterTenantRequestedFilters($formFilters) {
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
 
-    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
-    if(filterTenantDescription != null && filterTenantDescription !== '')
-      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
     var filterTenantDiscovered = $formFilters.querySelector('.valueTenantDiscovered')?.value;
     if(filterTenantDiscovered != null && filterTenantDiscovered !== '')

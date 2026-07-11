@@ -373,13 +373,6 @@
           return false;
         });
 
-        var submitForm_searchpageTenantRealized = document.querySelector('#htmForm_searchpageTenantRealized')?.addEventListener('submit', event => {
-          event.preventDefault();
-          event.target.setAttribute('loading', true);
-          searchpageTenantRealized();
-          return false;
-        });
-
         var submitForm_deletefilterTenantRealized = document.querySelector('#htmForm_deletefilterTenantRealized')?.addEventListener('submit', event => {
           event.preventDefault();
           event.target.setAttribute('loading', true);
@@ -650,14 +643,14 @@
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
-                    <wa-dropdown id="htmDropdown-tenantDescription">
+                    <wa-dropdown id="htmDropdown-description">
                       <wa-button variant="brand" slot="trigger" caret>description</wa-button>
                       <wa-menu>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRealized_tenantDescription'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRealized').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantDescription-asc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRealized_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRealized').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                           sort by description ascending
                         </wa-menu-item>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRealized_tenantDescription'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRealized').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantDescription-desc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantRealized_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantRealized').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                           sort by description descending
                         </wa-menu-item>
@@ -674,7 +667,7 @@
                       <span>{{ item.realizedName | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
-                      <span class="white-space-pre-wrap ">{{ item.tenantDescription | e }}</span>
+                      <span class="white-space-pre-wrap ">{{ item.description | e }}</span>
                     </a>
                   </div>
                   {% endfor %}
@@ -686,7 +679,7 @@
                 <div>
                 </div>
               {% endif %}
-              {% if getColumnTenantDescription is defined %}
+              {% if getColumnDescription is defined %}
                 <div>
                 </div>
               {% endif %}

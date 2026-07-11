@@ -90,11 +90,11 @@ async function websocketTenantIntentInner(apiRequest) {
         var inputRequestedState = null;
         var inputRealizedState = null;
         var inputTenantName = null;
-        var inputTenantDescription = null;
+        var inputDescription = null;
         var inputRequested = null;
         var inputLocked = null;
-        var inputTenantDiscovered = null;
-        var inputTenantRealized = null;
+        var inputDcmDiscovered = null;
+        var inputDcmRealized = null;
         var inputHostInventoryIds = null;
         var inputAnsibleProjectIds = null;
         var inputClassCanonicalName = null;
@@ -141,16 +141,16 @@ async function websocketTenantIntentInner(apiRequest) {
           inputRealizedState = $response.querySelector('.TenantIntent_Page_realizedState');
         if(vars.includes('tenantName'))
           inputTenantName = $response.querySelector('.TenantIntent_Page_tenantName');
-        if(vars.includes('tenantDescription'))
-          inputTenantDescription = $response.querySelector('.TenantIntent_Page_tenantDescription');
+        if(vars.includes('description'))
+          inputDescription = $response.querySelector('.TenantIntent_Page_description');
         if(vars.includes('requested'))
           inputRequested = $response.querySelector('.TenantIntent_Page_requested');
         if(vars.includes('locked'))
           inputLocked = $response.querySelector('.TenantIntent_Page_locked');
-        if(vars.includes('tenantDiscovered'))
-          inputTenantDiscovered = $response.querySelector('.TenantIntent_Page_tenantDiscovered');
-        if(vars.includes('tenantRealized'))
-          inputTenantRealized = $response.querySelector('.TenantIntent_Page_tenantRealized');
+        if(vars.includes('dcmDiscovered'))
+          inputDcmDiscovered = $response.querySelector('.TenantIntent_Page_dcmDiscovered');
+        if(vars.includes('dcmRealized'))
+          inputDcmRealized = $response.querySelector('.TenantIntent_Page_dcmRealized');
         if(vars.includes('hostInventoryIds'))
           inputHostInventoryIds = $response.querySelector('.TenantIntent_Page_hostInventoryIds');
         if(vars.includes('ansibleProjectIds'))
@@ -367,18 +367,18 @@ async function websocketTenantIntentInner(apiRequest) {
           addGlow(document.querySelector('.TenantIntent_Page_tenantName'));
         }
 
-        if(inputTenantDescription) {
-          document.querySelectorAll('.TenantIntent_Page_tenantDescription').forEach((item, index) => {
+        if(inputDescription) {
+          document.querySelectorAll('.TenantIntent_Page_description').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
             }
             if(typeof item.value !== 'undefined')
-              item.value = inputTenantDescription.getAttribute('value');
+              item.value = inputDescription.getAttribute('value');
             else
-              item.textContent = inputTenantDescription.textContent;
+              item.textContent = inputDescription.textContent;
           });
-          addGlow(document.querySelector('.TenantIntent_Page_tenantDescription'));
+          addGlow(document.querySelector('.TenantIntent_Page_description'));
         }
 
         if(inputRequested) {
@@ -409,32 +409,32 @@ async function websocketTenantIntentInner(apiRequest) {
           addGlow(document.querySelector('.TenantIntent_Page_locked'));
         }
 
-        if(inputTenantDiscovered) {
-          document.querySelectorAll('.TenantIntent_Page_tenantDiscovered').forEach((item, index) => {
+        if(inputDcmDiscovered) {
+          document.querySelectorAll('.TenantIntent_Page_dcmDiscovered').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
             }
             if(typeof item.value !== 'undefined')
-              item.value = inputTenantDiscovered.getAttribute('value');
+              item.value = inputDcmDiscovered.getAttribute('value');
             else
-              item.textContent = inputTenantDiscovered.textContent;
+              item.textContent = inputDcmDiscovered.textContent;
           });
-          addGlow(document.querySelector('.TenantIntent_Page_tenantDiscovered'));
+          addGlow(document.querySelector('.TenantIntent_Page_dcmDiscovered'));
         }
 
-        if(inputTenantRealized) {
-          document.querySelectorAll('.TenantIntent_Page_tenantRealized').forEach((item, index) => {
+        if(inputDcmRealized) {
+          document.querySelectorAll('.TenantIntent_Page_dcmRealized').forEach((item, index) => {
             if(item.shadowRoot.querySelector('div.site-message-response-overlay')) {
               item.shadowRoot.querySelector('div.site-message-response-overlay')?.remove();
               item.removeAttribute('readonly');
             }
             if(typeof item.value !== 'undefined')
-              item.value = inputTenantRealized.getAttribute('value');
+              item.value = inputDcmRealized.getAttribute('value');
             else
-              item.textContent = inputTenantRealized.textContent;
+              item.textContent = inputDcmRealized.textContent;
           });
-          addGlow(document.querySelector('.TenantIntent_Page_tenantRealized'));
+          addGlow(document.querySelector('.TenantIntent_Page_dcmRealized'));
         }
 
         if(inputHostInventoryIds) {
@@ -930,9 +930,9 @@ function searchTenantIntentFilters($formFilters) {
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
 
-    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
-    if(filterTenantDescription != null && filterTenantDescription !== '')
-      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
     var filterRequested = $formFilters.querySelector('.valueRequested')?.value;
     if(filterRequested != null && filterRequested !== '')
@@ -948,13 +948,13 @@ function searchTenantIntentFilters($formFilters) {
     if(filterLocked != null && filterLocked === true)
       filters.push({ name: 'fq', value: 'locked:' + filterLocked });
 
-    var filterTenantDiscovered = $formFilters.querySelector('.valueTenantDiscovered')?.value;
-    if(filterTenantDiscovered != null && filterTenantDiscovered !== '')
-      filters.push({ name: 'fq', value: 'tenantDiscovered:' + filterTenantDiscovered });
+    var filterDcmDiscovered = $formFilters.querySelector('.valueDcmDiscovered')?.value;
+    if(filterDcmDiscovered != null && filterDcmDiscovered !== '')
+      filters.push({ name: 'fq', value: 'dcmDiscovered:' + filterDcmDiscovered });
 
-    var filterTenantRealized = $formFilters.querySelector('.valueTenantRealized')?.value;
-    if(filterTenantRealized != null && filterTenantRealized !== '')
-      filters.push({ name: 'fq', value: 'tenantRealized:' + filterTenantRealized });
+    var filterDcmRealized = $formFilters.querySelector('.valueDcmRealized')?.value;
+    if(filterDcmRealized != null && filterDcmRealized !== '')
+      filters.push({ name: 'fq', value: 'dcmRealized:' + filterDcmRealized });
 
     var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
     if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
@@ -1061,7 +1061,7 @@ function searchTenantIntentVals(filters, target, success, error) {
     .catch(response => error(response, target));
 }
 
-function suggestTenantIntentHostInventoryIds(filters, $list, tenantResource = null, hostInventoryIds = null, relate=true, target) {
+function suggestTenantIntentHostInventoryIds(filters, $list, tenantResourceTenantIntent = null, hostInventoryIds = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1082,18 +1082,18 @@ function suggestTenantIntentHostInventoryIds(filters, $list, tenantResource = nu
         var val = o[inputVar];
         var checked = val == null ? false : (hostInventoryIds != null && val === hostInventoryIds.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_hostInventoryIds_' + tenantResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_hostInventoryIds_' + tenantResourceTenantIntent + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
         $input.setAttribute('class', 'valueHostInventoryIds ');
-        if(tenantResource != null) {
+        if(tenantResourceTenantIntent != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantIntentVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o[inputVar] }
+            patchTenantIntentVals([{ name: 'fq', value: 'tenantResource:' + tenantResourceTenantIntent }], { [(event.target.checked ? 'add' : 'remove') + 'HostInventoryIds']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantIntentHostInventoryIds(filters, $list, tenantResource, o[inputVar], relate, target);
+                  suggestTenantIntentHostInventoryIds(filters, $list, tenantResourceTenantIntent, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1124,7 +1124,7 @@ function suggestTenantIntentHostInventoryIds(filters, $list, tenantResource = nu
   }
 }
 
-function suggestTenantIntentAnsibleProjectIds(filters, $list, tenantResource = null, ansibleProjectIds = null, relate=true, target) {
+function suggestTenantIntentAnsibleProjectIds(filters, $list, tenantResourceTenantIntent = null, ansibleProjectIds = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1145,18 +1145,18 @@ function suggestTenantIntentAnsibleProjectIds(filters, $list, tenantResource = n
         var val = o[inputVar];
         var checked = val == null ? false : (ansibleProjectIds != null && val === ansibleProjectIds.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_ansibleProjectIds_' + tenantResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_ansibleProjectIds_' + tenantResourceTenantIntent + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
         $input.setAttribute('class', 'valueAnsibleProjectIds ');
-        if(tenantResource != null) {
+        if(tenantResourceTenantIntent != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantIntentVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'AnsibleProjectIds']: o[inputVar] }
+            patchTenantIntentVals([{ name: 'fq', value: 'tenantResource:' + tenantResourceTenantIntent }], { [(event.target.checked ? 'add' : 'remove') + 'AnsibleProjectIds']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantIntentAnsibleProjectIds(filters, $list, tenantResource, o[inputVar], relate, target);
+                  suggestTenantIntentAnsibleProjectIds(filters, $list, tenantResourceTenantIntent, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1187,7 +1187,7 @@ function suggestTenantIntentAnsibleProjectIds(filters, $list, tenantResource = n
   }
 }
 
-function suggestTenantIntentRequested(filters, $list, tenantResource = null, requested = null, relate=true, target) {
+function suggestTenantIntentRequested(filters, $list, tenantResourceTenantIntent = null, requested = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1208,18 +1208,18 @@ function suggestTenantIntentRequested(filters, $list, tenantResource = null, req
         var val = o[inputVar];
         var checked = val == null ? false : (requested != null && val === requested.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_requested_' + tenantResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_requested_' + tenantResourceTenantIntent + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
         $input.setAttribute('class', 'valueRequested ');
-        if(tenantResource != null) {
+        if(tenantResourceTenantIntent != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantIntentVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'Requested']: o[inputVar] }
+            patchTenantIntentVals([{ name: 'fq', value: 'tenantResource:' + tenantResourceTenantIntent }], { [(event.target.checked ? 'add' : 'remove') + 'Requested']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantIntentRequested(filters, $list, tenantResource, o[inputVar], relate, target);
+                  suggestTenantIntentRequested(filters, $list, tenantResourceTenantIntent, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1250,7 +1250,7 @@ function suggestTenantIntentRequested(filters, $list, tenantResource = null, req
   }
 }
 
-function suggestTenantIntentTenantDiscovered(filters, $list, tenantResource = null, tenantDiscovered = null, relate=true, target) {
+function suggestTenantIntentDcmDiscovered(filters, $list, tenantResourceTenantIntent = null, dcmDiscovered = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1269,20 +1269,20 @@ function suggestTenantIntentTenantDiscovered(filters, $list, tenantResource = nu
         $a.append($span);
         var inputVar = 'tenantResource';
         var val = o[inputVar];
-        var checked = val == null ? false : (tenantDiscovered != null && val === tenantDiscovered.toString());
+        var checked = val == null ? false : (dcmDiscovered != null && val === dcmDiscovered.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantDiscovered_' + tenantResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_dcmDiscovered_' + tenantResourceTenantIntent + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
-        $input.setAttribute('class', 'valueTenantDiscovered ');
-        if(tenantResource != null) {
+        $input.setAttribute('class', 'valueDcmDiscovered ');
+        if(tenantResourceTenantIntent != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantIntentVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'TenantDiscovered']: o[inputVar] }
+            patchTenantIntentVals([{ name: 'fq', value: 'tenantResource:' + tenantResourceTenantIntent }], { [(event.target.checked ? 'add' : 'remove') + 'DcmDiscovered']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantIntentTenantDiscovered(filters, $list, tenantResource, o[inputVar], relate, target);
+                  suggestTenantIntentDcmDiscovered(filters, $list, tenantResourceTenantIntent, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1313,7 +1313,7 @@ function suggestTenantIntentTenantDiscovered(filters, $list, tenantResource = nu
   }
 }
 
-function suggestTenantIntentTenantRealized(filters, $list, tenantResource = null, tenantRealized = null, relate=true, target) {
+function suggestTenantIntentDcmRealized(filters, $list, tenantResourceTenantIntent = null, dcmRealized = null, relate=true, target) {
   success = function( data, textStatus, jQxhr ) {
     if($list) {
       $list.innerHTML = '';
@@ -1332,20 +1332,20 @@ function suggestTenantIntentTenantRealized(filters, $list, tenantResource = null
         $a.append($span);
         var inputVar = 'tenantResource';
         var val = o[inputVar];
-        var checked = val == null ? false : (tenantRealized != null && val === tenantRealized.toString());
+        var checked = val == null ? false : (dcmRealized != null && val === dcmRealized.toString());
         var $input = document.createElement('wa-checkbox');
-        $input.setAttribute('id', 'GET_tenantRealized_' + tenantResource + '_tenantResource_' + o[inputVar]);
+        $input.setAttribute('id', 'GET_dcmRealized_' + tenantResourceTenantIntent + '_tenantResource_' + o[inputVar]);
         $input.setAttribute('name', inputVar);
         $input.setAttribute('data-target', target.getAttribute('id'));
         $input.value = o[inputVar];
-        $input.setAttribute('class', 'valueTenantRealized ');
-        if(tenantResource != null) {
+        $input.setAttribute('class', 'valueDcmRealized ');
+        if(tenantResourceTenantIntent != null) {
           $input.addEventListener('change', function(event) {
-            patchTenantIntentVals([{ name: 'fq', value: 'tenantResource:' + tenantResource }], { [(event.target.checked ? 'add' : 'remove') + 'TenantRealized']: o[inputVar] }
+            patchTenantIntentVals([{ name: 'fq', value: 'tenantResource:' + tenantResourceTenantIntent }], { [(event.target.checked ? 'add' : 'remove') + 'DcmRealized']: o[inputVar] }
                 , target
                 , function(response, target) {
                   addGlow(target);
-                  suggestTenantIntentTenantRealized(filters, $list, tenantResource, o[inputVar], relate, target);
+                  suggestTenantIntentDcmRealized(filters, $list, tenantResourceTenantIntent, o[inputVar], relate, target);
                 }
                 , function(response, target) { addError(target); }
             );
@@ -1575,17 +1575,17 @@ async function patchTenantIntent($formFilters, $formValues, target, tenantResour
   if(removeTenantName != null && removeTenantName !== '')
     vals['removeTenantName'] = removeTenantName;
 
-  var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
-  var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value === 'true';
-  var setTenantDescription = removeTenantDescription ? null : $formValues.querySelector('.setTenantDescription')?.value;
-  var addTenantDescription = $formValues.querySelector('.addTenantDescription')?.value;
-  if(removeTenantDescription || setTenantDescription != null && setTenantDescription !== '')
-    vals['setTenantDescription'] = setTenantDescription;
-  if(addTenantDescription != null && addTenantDescription !== '')
-    vals['addTenantDescription'] = addTenantDescription;
-  var removeTenantDescription = $formValues.querySelector('.removeTenantDescription')?.value;
-  if(removeTenantDescription != null && removeTenantDescription !== '')
-    vals['removeTenantDescription'] = removeTenantDescription;
+  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
+  var removeDescription = $formValues.querySelector('.removeDescription')?.value === 'true';
+  var setDescription = removeDescription ? null : $formValues.querySelector('.setDescription')?.value;
+  var addDescription = $formValues.querySelector('.addDescription')?.value;
+  if(removeDescription || setDescription != null && setDescription !== '')
+    vals['setDescription'] = setDescription;
+  if(addDescription != null && addDescription !== '')
+    vals['addDescription'] = addDescription;
+  var removeDescription = $formValues.querySelector('.removeDescription')?.value;
+  if(removeDescription != null && removeDescription !== '')
+    vals['removeDescription'] = removeDescription;
 
   var valueRequested = (Array.from($formValues.querySelectorAll('.valueRequested')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueRequested != null && valueRequested !== '')
@@ -1610,13 +1610,13 @@ async function patchTenantIntent($formFilters, $formValues, target, tenantResour
   if(removeLocked != null && removeLocked !== '')
     vals['removeLocked'] = removeLocked;
 
-  var valueTenantDiscovered = (Array.from($formValues.querySelectorAll('.valueTenantDiscovered')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantDiscovered != null && valueTenantDiscovered !== '')
-    vals['addTenantDiscovered'] = valueTenantDiscovered;
+  var valueDcmDiscovered = (Array.from($formValues.querySelectorAll('.valueDcmDiscovered')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueDcmDiscovered != null && valueDcmDiscovered !== '')
+    vals['addDcmDiscovered'] = valueDcmDiscovered;
 
-  var valueTenantRealized = (Array.from($formValues.querySelectorAll('.valueTenantRealized')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
-  if(valueTenantRealized != null && valueTenantRealized !== '')
-    vals['addTenantRealized'] = valueTenantRealized;
+  var valueDcmRealized = (Array.from($formValues.querySelectorAll('.valueDcmRealized')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
+  if(valueDcmRealized != null && valueDcmRealized !== '')
+    vals['addDcmRealized'] = valueDcmRealized;
 
   var valueHostInventoryIds = (Array.from($formValues.querySelectorAll('.valueHostInventoryIds')).filter(e => e.checked == true).find(() => true) ?? null)?.value;
   if(valueHostInventoryIds != null && valueHostInventoryIds !== '')
@@ -1832,9 +1832,9 @@ function patchTenantIntentFilters($formFilters) {
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
 
-    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
-    if(filterTenantDescription != null && filterTenantDescription !== '')
-      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
     var filterRequested = $formFilters.querySelector('.valueRequested')?.value;
     if(filterRequested != null && filterRequested !== '')
@@ -1850,13 +1850,13 @@ function patchTenantIntentFilters($formFilters) {
     if(filterLocked != null && filterLocked === true)
       filters.push({ name: 'fq', value: 'locked:' + filterLocked });
 
-    var filterTenantDiscovered = $formFilters.querySelector('.valueTenantDiscovered')?.value;
-    if(filterTenantDiscovered != null && filterTenantDiscovered !== '')
-      filters.push({ name: 'fq', value: 'tenantDiscovered:' + filterTenantDiscovered });
+    var filterDcmDiscovered = $formFilters.querySelector('.valueDcmDiscovered')?.value;
+    if(filterDcmDiscovered != null && filterDcmDiscovered !== '')
+      filters.push({ name: 'fq', value: 'dcmDiscovered:' + filterDcmDiscovered });
 
-    var filterTenantRealized = $formFilters.querySelector('.valueTenantRealized')?.value;
-    if(filterTenantRealized != null && filterTenantRealized !== '')
-      filters.push({ name: 'fq', value: 'tenantRealized:' + filterTenantRealized });
+    var filterDcmRealized = $formFilters.querySelector('.valueDcmRealized')?.value;
+    if(filterDcmRealized != null && filterDcmRealized !== '')
+      filters.push({ name: 'fq', value: 'dcmRealized:' + filterDcmRealized });
 
     var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
     if(filterHostInventoryIds != null && filterHostInventoryIds !== '')
@@ -2052,9 +2052,9 @@ async function postTenantIntent($formValues, target, success, error) {
   if(valueTenantName != null && valueTenantName !== '')
     vals['tenantName'] = valueTenantName;
 
-  var valueTenantDescription = $formValues.querySelector('.valueTenantDescription')?.value;
-  if(valueTenantDescription != null && valueTenantDescription !== '')
-    vals['tenantDescription'] = valueTenantDescription;
+  var valueDescription = $formValues.querySelector('.valueDescription')?.value;
+  if(valueDescription != null && valueDescription !== '')
+    vals['description'] = valueDescription;
 
   var valueRequested = [];
   $formValues.querySelectorAll('input.valueRequested:checked').forEach(function(index) {
@@ -2067,19 +2067,19 @@ async function postTenantIntent($formValues, target, success, error) {
   if(valueLocked != null && valueLocked !== '')
     vals['locked'] = valueLocked == 'true';
 
-  var valueTenantDiscovered = [];
-  $formValues.querySelectorAll('input.valueTenantDiscovered:checked').forEach(function(index) {
-    valueTenantDiscovered.push(this.value);
+  var valueDcmDiscovered = [];
+  $formValues.querySelectorAll('input.valueDcmDiscovered:checked').forEach(function(index) {
+    valueDcmDiscovered.push(this.value);
   });
-  if(valueTenantDiscovered.length > 0)
-    vals['tenantDiscovered'] = valueTenantDiscovered;
+  if(valueDcmDiscovered.length > 0)
+    vals['dcmDiscovered'] = valueDcmDiscovered;
 
-  var valueTenantRealized = [];
-  $formValues.querySelectorAll('input.valueTenantRealized:checked').forEach(function(index) {
-    valueTenantRealized.push(this.value);
+  var valueDcmRealized = [];
+  $formValues.querySelectorAll('input.valueDcmRealized:checked').forEach(function(index) {
+    valueDcmRealized.push(this.value);
   });
-  if(valueTenantRealized.length > 0)
-    vals['tenantRealized'] = valueTenantRealized;
+  if(valueDcmRealized.length > 0)
+    vals['dcmRealized'] = valueDcmRealized;
 
   var valueHostInventoryIds = [];
   $formValues.querySelectorAll('input.valueHostInventoryIds:checked').forEach(function(index) {
@@ -2363,9 +2363,9 @@ function deletefilterTenantIntentFilters($formFilters) {
     if(filterTenantName != null && filterTenantName !== '')
       filters.push({ name: 'fq', value: 'tenantName:' + filterTenantName });
 
-    var filterTenantDescription = $formFilters.querySelector('.valueTenantDescription')?.value;
-    if(filterTenantDescription != null && filterTenantDescription !== '')
-      filters.push({ name: 'fq', value: 'tenantDescription:' + filterTenantDescription });
+    var filterDescription = $formFilters.querySelector('.valueDescription')?.value;
+    if(filterDescription != null && filterDescription !== '')
+      filters.push({ name: 'fq', value: 'description:' + filterDescription });
 
     var filterRequested = $formFilters.querySelector('.valueRequested')?.value;
     if(filterRequested != null && filterRequested !== '')
@@ -2381,13 +2381,13 @@ function deletefilterTenantIntentFilters($formFilters) {
     if(filterLocked != null && filterLocked === true)
       filters.push({ name: 'fq', value: 'locked:' + filterLocked });
 
-    var filterTenantDiscovered = $formFilters.querySelector('.valueTenantDiscovered')?.value;
-    if(filterTenantDiscovered != null && filterTenantDiscovered !== '')
-      filters.push({ name: 'fq', value: 'tenantDiscovered:' + filterTenantDiscovered });
+    var filterDcmDiscovered = $formFilters.querySelector('.valueDcmDiscovered')?.value;
+    if(filterDcmDiscovered != null && filterDcmDiscovered !== '')
+      filters.push({ name: 'fq', value: 'dcmDiscovered:' + filterDcmDiscovered });
 
-    var filterTenantRealized = $formFilters.querySelector('.valueTenantRealized')?.value;
-    if(filterTenantRealized != null && filterTenantRealized !== '')
-      filters.push({ name: 'fq', value: 'tenantRealized:' + filterTenantRealized });
+    var filterDcmRealized = $formFilters.querySelector('.valueDcmRealized')?.value;
+    if(filterDcmRealized != null && filterDcmRealized !== '')
+      filters.push({ name: 'fq', value: 'dcmRealized:' + filterDcmRealized });
 
     var filterHostInventoryIds = $formFilters.querySelector('.valueHostInventoryIds')?.value;
     if(filterHostInventoryIds != null && filterHostInventoryIds !== '')

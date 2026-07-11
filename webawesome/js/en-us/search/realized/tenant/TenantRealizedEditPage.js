@@ -166,6 +166,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH realizedState
+          document.querySelector('#TenantRealized_Page_realizedState')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_realizedState');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantRealizedVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'realizedId:' + event.currentTarget.getAttribute('data-realizedId') }]
+                  , 'setRealizedState', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TenantRealized_Page_realizedState')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TenantRealized_Page_realizedState')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_realizedState');
+            const valid = form.reportValidity();
+          });
+
           // PATCH intentState
           document.querySelector('#TenantRealized_Page_intentState')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_intentState');
@@ -208,45 +229,24 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
-          // PATCH realizedState
-          document.querySelector('#TenantRealized_Page_realizedState')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_realizedState');
+          // PATCH description
+          document.querySelector('#TenantRealized_Page_description')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_description');
             const valid = form.checkValidity();
             if(valid) {
               patchTenantRealizedVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'realizedId:' + event.currentTarget.getAttribute('data-realizedId') }]
-                  , 'setRealizedState', event.currentTarget.value
+                  , 'setDescription', event.currentTarget.value
                   , event.currentTarget
                 , function(response, target) { addGlow(target); }
                   , function(response, target) { addError(target); }
                   );
             }
           });
-          document.querySelector('#TenantRealized_Page_realizedState')?.addEventListener('focus', (event) => {
+          document.querySelector('#TenantRealized_Page_description')?.addEventListener('focus', (event) => {
             removeGlow(event.currentTarget);
           });
-          document.querySelector('#TenantRealized_Page_realizedState')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_realizedState');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH tenantDescription
-          document.querySelector('#TenantRealized_Page_tenantDescription')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_tenantDescription');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchTenantRealizedVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'realizedId:' + event.currentTarget.getAttribute('data-realizedId') }]
-                  , 'setTenantDescription', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#TenantRealized_Page_tenantDescription')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#TenantRealized_Page_tenantDescription')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_tenantDescription');
+          document.querySelector('#TenantRealized_Page_description')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_description');
             const valid = form.reportValidity();
           });
 
@@ -481,6 +481,27 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH realizedNumber
+          document.querySelector('#TenantRealized_Page_realizedNumber')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_realizedNumber');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchTenantRealizedVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'realizedId:' + event.currentTarget.getAttribute('data-realizedId') }]
+                  , 'setRealizedNumber', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#TenantRealized_Page_realizedNumber')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#TenantRealized_Page_realizedNumber')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_realizedNumber');
+            const valid = form.reportValidity();
+          });
+
           // PATCH tenantName
           document.querySelector('#TenantRealized_Page_tenantName')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_tenantName');
@@ -520,27 +541,6 @@ Promise.all([
           });
           document.querySelector('#TenantRealized_Page_tenantId')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_tenantId');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH realizedNumber
-          document.querySelector('#TenantRealized_Page_realizedNumber')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_realizedNumber');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchTenantRealizedVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'realizedId:' + event.currentTarget.getAttribute('data-realizedId') }]
-                  , 'setRealizedNumber', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#TenantRealized_Page_realizedNumber')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#TenantRealized_Page_realizedNumber')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_realizedNumber');
             const valid = form.reportValidity();
           });
 

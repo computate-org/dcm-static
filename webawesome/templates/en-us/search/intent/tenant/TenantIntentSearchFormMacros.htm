@@ -450,31 +450,31 @@
 {%- macro htmTenantNameTenantIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputTenantNameTenantIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputTenantDescriptionTenantIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+{%- macro inputDescriptionTenantIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_tenantDescription">
+                <form class="subgrid-2col " id="PageForm_description">
   {%- endif %}
                   <wa-textarea resize="auto"
                       {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
                       placeholder="[String] description"
                       label="description"
                       hint="A description of this tenant"
-                      id="TenantIntent_{{classApiMethodMethod}}_tenantDescription"
+                      id="TenantIntent_{{classApiMethodMethod}}_description"
   {%- if "Page" == classApiMethodMethod %}
                       data-tenantResource={{ result.tenantResource | tojson }}
-                      class="label-on-left TenantIntent_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantIntent inputTenantIntent{{ result.tenantResource }}TenantDescription "
-                      name="setTenantDescription"
+                      class="label-on-left TenantIntent_{{classApiMethodMethod}}_description setDescription classTenantIntent inputTenantIntent{{ result.tenantResource }}Description "
+                      name="setDescription"
   {%- else %}
     {%- if "PATCH" == classApiMethodMethod %}
-                      class="label-on-left TenantIntent_{{classApiMethodMethod}}_tenantDescription setTenantDescription classTenantIntent inputTenantIntent{{ result.tenantResource }}TenantDescription "
-                      name="setTenantDescription"
+                      class="label-on-left TenantIntent_{{classApiMethodMethod}}_description setDescription classTenantIntent inputTenantIntent{{ result.tenantResource }}Description "
+                      name="setDescription"
     {%- else %}
-                      class="label-on-left TenantIntent_{{classApiMethodMethod}}_tenantDescription valueTenantDescription classTenantIntent inputTenantIntent{{ result.tenantResource }}TenantDescription "
-                      name="tenantDescription"
+                      class="label-on-left TenantIntent_{{classApiMethodMethod}}_description valueDescription classTenantIntent inputTenantIntent{{ result.tenantResource }}Description "
+                      name="description"
     {%- endif %}
   {%- endif %}
 {% if "Page" == classApiMethodMethod -%}
-                      value="{{result.tenantDescription | e }}"
+                      value="{{result.description | e }}"
 {% endif -%}
                       >
 </wa-textarea>
@@ -483,8 +483,8 @@
   {%- endif %}
 {%- endmacro %}
 
-{%- macro htmTenantDescriptionTenantIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                            {{ inputTenantDescriptionTenantIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- macro htmDescriptionTenantIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDescriptionTenantIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
 {%- macro inputRequestedTenantIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
@@ -592,15 +592,15 @@
 {%- macro htmLockedTenantIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputLockedTenantIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
-{%- macro inputTenantDiscoveredTenantIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+{%- macro inputDcmDiscoveredTenantIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_tenantDiscovered">
+                <form class="subgrid-2col " id="PageForm_dcmDiscovered">
   {%- endif %}
   {%- if 'PUTCopy' == classApiMethodMethod %}
                   <div>
                     <wa-checkbox 
-                        id="{{ idPrefix }}TenantIntent_{{classApiMethodMethod}}_tenantDiscovered{{ idSuffix }}_clear"
-                        class="label-on-left TenantIntent_classApiMethodMethod}}_tenantDiscovered_clear tenantDiscovered_clear "
+                        id="{{ idPrefix }}TenantIntent_{{classApiMethodMethod}}_dcmDiscovered{{ idSuffix }}_clear"
+                        class="label-on-left TenantIntent_classApiMethodMethod}}_dcmDiscovered_clear dcmDiscovered_clear "
                         hint="clear"
                         >
                       clear
@@ -612,14 +612,14 @@
                       placeholder="tenant discovered"
                       label="tenant discovered"
                       hint="Each time the tenant was discovered for this tenant intent. "
-                      class="label-on-left TenantIntent_{{classApiMethodMethod}}_tenantDiscovered valueObjectSuggest suggestTenantDiscovered{% if searchRelated %} searchRelated{% endif %} "
-                      name="setTenantDiscovered"
-                      id="{{ idPrefix }}TenantIntent_{{classApiMethodMethod}}_tenantDiscovered{{ idSuffix }}"
-                      data-list="listTenantIntentTenantDiscovered_{{classApiMethodMethod}}"
+                      class="label-on-left TenantIntent_{{classApiMethodMethod}}_dcmDiscovered valueObjectSuggest suggestDcmDiscovered{% if searchRelated %} searchRelated{% endif %} "
+                      name="setDcmDiscovered"
+                      id="{{ idPrefix }}TenantIntent_{{classApiMethodMethod}}_dcmDiscovered{{ idSuffix }}"
+                      data-list="listTenantIntentDcmDiscovered_{{classApiMethodMethod}}"
                       data-method="{{classApiMethodMethod}}"
                       autocomplete="off"
   {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
-                      value="{{result.tenantDiscovered | e }}"
+                      value="{{result.dcmDiscovered | e }}"
   {% endif -%}
                   >
               </wa-input>
@@ -629,35 +629,35 @@
   {%- endif %}
 {%- endmacro %}
 
-{%- macro htmTenantDiscoveredTenantIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputTenantDiscoveredTenantIntentPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
+{%- macro htmDcmDiscoveredTenantIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputDcmDiscoveredTenantIntentPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate  to this tenant intent
                 </div>
-                <ul class="label-on-left-ul " id="listTenantIntentTenantDiscovered_{{classApiMethodMethod}}">
+                <ul class="label-on-left-ul " id="listTenantIntentDcmDiscovered_{{classApiMethodMethod}}">
                 </ul>
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postTenantDiscovered(idSuffix='_TenantIntent_POST_tenantDiscovered') }}
+                  {{ htmForm_postTenantDiscovered(idSuffix='_TenantIntent_POST_dcmDiscovered') }}
                   <wa-button
-                       id="TenantIntent_{{classApiMethodMethod}}_tenantDiscovered_add"
+                       id="TenantIntent_{{classApiMethodMethod}}_dcmDiscovered_add"
                        data-dialog="open postTenantDiscoveredDialog"
                       >add a discovered tenant</wa-button>
                   </div>
                 {%- endif %}
                 {%- endif %}
 {%- endmacro %}
-{%- macro inputTenantRealizedTenantIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+{%- macro inputDcmRealizedTenantIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
-                <form class="subgrid-2col " id="PageForm_tenantRealized">
+                <form class="subgrid-2col " id="PageForm_dcmRealized">
   {%- endif %}
   {%- if 'PUTCopy' == classApiMethodMethod %}
                   <div>
                     <wa-checkbox 
-                        id="{{ idPrefix }}TenantIntent_{{classApiMethodMethod}}_tenantRealized{{ idSuffix }}_clear"
-                        class="label-on-left TenantIntent_classApiMethodMethod}}_tenantRealized_clear tenantRealized_clear "
+                        id="{{ idPrefix }}TenantIntent_{{classApiMethodMethod}}_dcmRealized{{ idSuffix }}_clear"
+                        class="label-on-left TenantIntent_classApiMethodMethod}}_dcmRealized_clear dcmRealized_clear "
                         hint="clear"
                         >
                       clear
@@ -669,14 +669,14 @@
                       placeholder="tenant realized"
                       label="tenant realized"
                       hint="Each time the tenant was realized for this tenant intent. "
-                      class="label-on-left TenantIntent_{{classApiMethodMethod}}_tenantRealized valueObjectSuggest suggestTenantRealized{% if searchRelated %} searchRelated{% endif %} "
-                      name="setTenantRealized"
-                      id="{{ idPrefix }}TenantIntent_{{classApiMethodMethod}}_tenantRealized{{ idSuffix }}"
-                      data-list="listTenantIntentTenantRealized_{{classApiMethodMethod}}"
+                      class="label-on-left TenantIntent_{{classApiMethodMethod}}_dcmRealized valueObjectSuggest suggestDcmRealized{% if searchRelated %} searchRelated{% endif %} "
+                      name="setDcmRealized"
+                      id="{{ idPrefix }}TenantIntent_{{classApiMethodMethod}}_dcmRealized{{ idSuffix }}"
+                      data-list="listTenantIntentDcmRealized_{{classApiMethodMethod}}"
                       data-method="{{classApiMethodMethod}}"
                       autocomplete="off"
   {% if 'Page' == classApiMethodMethod or 'POST' == classApiMethodMethod -%}
-                      value="{{result.tenantRealized | e }}"
+                      value="{{result.dcmRealized | e }}"
   {% endif -%}
                   >
               </wa-input>
@@ -686,20 +686,20 @@
   {%- endif %}
 {%- endmacro %}
 
-{%- macro htmTenantRealizedTenantIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
-                {{ inputTenantRealizedTenantIntentPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
+{%- macro htmDcmRealizedTenantIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                {{ inputDcmRealizedTenantIntentPage(authForWrite=authForWrite, authForRead=authForRead, idSuffix=idSuffix, searchRelated=(classApiMethodMethod == 'POST')) }}
                 <div class="label-on-left-ul-label ">
                   <i class="{{ FONTAWESOME_STYLE }} fa-search "></i>
                   relate  to this tenant intent
                 </div>
-                <ul class="label-on-left-ul " id="listTenantIntentTenantRealized_{{classApiMethodMethod}}">
+                <ul class="label-on-left-ul " id="listTenantIntentDcmRealized_{{classApiMethodMethod}}">
                 </ul>
                 {%- if authForReadBool == true %}
                 {% if 'Page' == classApiMethodMethod %}
                 <div>
-                  {{ htmForm_postTenantRealized(idSuffix='_TenantIntent_POST_tenantRealized') }}
+                  {{ htmForm_postTenantRealized(idSuffix='_TenantIntent_POST_dcmRealized') }}
                   <wa-button
-                       id="TenantIntent_{{classApiMethodMethod}}_tenantRealized_add"
+                       id="TenantIntent_{{classApiMethodMethod}}_dcmRealized_add"
                        data-dialog="open postTenantRealizedDialog"
                       >add a realized tenant</wa-button>
                   </div>
@@ -934,12 +934,12 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantDescriptionTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDescriptionTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDescriptionTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDescriptionTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -978,12 +978,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantDiscoveredTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmDiscoveredTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDiscoveredTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmDiscoveredTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDiscoveredTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDcmDiscoveredTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -995,12 +995,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantRealizedTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmRealizedTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantRealizedTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmRealizedTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantRealizedTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDcmRealizedTenantIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1151,12 +1151,12 @@
                 {%- endif %}
 
                 {% if "POST" in scopes -%}
-                {{ htmTenantDescriptionTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDescriptionTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDescriptionTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDescriptionTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1195,12 +1195,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmTenantDiscoveredTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmDiscoveredTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDiscoveredTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmDiscoveredTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDiscoveredTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDcmDiscoveredTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1212,12 +1212,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "POST" in scopes -%}
-                {{ htmTenantRealizedTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmRealizedTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantRealizedTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmRealizedTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantRealizedTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDcmRealizedTenantIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1449,12 +1449,12 @@
                 {%- endif %}
 
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantDescriptionTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDescriptionTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDescriptionTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDescriptionTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDescriptionTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1493,12 +1493,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantDiscoveredTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmDiscoveredTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantDiscoveredTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmDiscoveredTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantDiscoveredTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDcmDiscoveredTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1510,12 +1510,12 @@
               </div>
               <div class="grid-with-subgrid-2col ">
                 {% if "PATCH" in scopes -%}
-                {{ htmTenantRealizedTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmRealizedTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {% if "GET" in scopes -%}
-                {{ htmTenantRealizedTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {{ htmDcmRealizedTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
-                {{ htmTenantRealizedTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {{ htmDcmRealizedTenantIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>

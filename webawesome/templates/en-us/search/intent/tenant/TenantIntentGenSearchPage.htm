@@ -153,11 +153,11 @@
           document.querySelector('#TenantIntent_POST_requested')?.addEventListener('focus', relate_requested);
           document.querySelector('#TenantIntent_PATCH_requested')?.addEventListener('input', relate_requested);
           document.querySelector('#TenantIntent_PATCH_requested')?.addEventListener('focus', relate_requested);
-          function relate_tenantDiscovered(event) {
-            suggestTenantIntentTenantDiscovered(
+          function relate_dcmDiscovered(event) {
+            suggestTenantIntentDcmDiscovered(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantDiscovered is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantDiscovered }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.dcmDiscovered is defined %}{'name':'fq','value':'tenantResource:{{ result.dcmDiscovered }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -165,15 +165,15 @@
                 , this
                 );
           }
-          document.querySelector('#TenantIntent_POST_tenantDiscovered')?.addEventListener('input', relate_tenantDiscovered);
-          document.querySelector('#TenantIntent_POST_tenantDiscovered')?.addEventListener('focus', relate_tenantDiscovered);
-          document.querySelector('#TenantIntent_PATCH_tenantDiscovered')?.addEventListener('input', relate_tenantDiscovered);
-          document.querySelector('#TenantIntent_PATCH_tenantDiscovered')?.addEventListener('focus', relate_tenantDiscovered);
-          function relate_tenantRealized(event) {
-            suggestTenantIntentTenantRealized(
+          document.querySelector('#TenantIntent_POST_dcmDiscovered')?.addEventListener('input', relate_dcmDiscovered);
+          document.querySelector('#TenantIntent_POST_dcmDiscovered')?.addEventListener('focus', relate_dcmDiscovered);
+          document.querySelector('#TenantIntent_PATCH_dcmDiscovered')?.addEventListener('input', relate_dcmDiscovered);
+          document.querySelector('#TenantIntent_PATCH_dcmDiscovered')?.addEventListener('focus', relate_dcmDiscovered);
+          function relate_dcmRealized(event) {
+            suggestTenantIntentDcmRealized(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
-                , { 'name': 'fl', 'value': 'classCanonicalName,realizedId,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.tenantRealized is defined %}{'name':'fq','value':'tenantResource:{{ result.tenantRealized }}'}{%- else %}{%- endif %}]
+                , { 'name': 'fl', 'value': 'classCanonicalName,realizedId,tenantResource,pk,editPage,objectTitle' } ] : [{%- if result.dcmRealized is defined %}{'name':'fq','value':'tenantResource:{{ result.dcmRealized }}'}{%- else %}{%- endif %}]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , null
                 , null
@@ -181,10 +181,10 @@
                 , this
                 );
           }
-          document.querySelector('#TenantIntent_POST_tenantRealized')?.addEventListener('input', relate_tenantRealized);
-          document.querySelector('#TenantIntent_POST_tenantRealized')?.addEventListener('focus', relate_tenantRealized);
-          document.querySelector('#TenantIntent_PATCH_tenantRealized')?.addEventListener('input', relate_tenantRealized);
-          document.querySelector('#TenantIntent_PATCH_tenantRealized')?.addEventListener('focus', relate_tenantRealized);
+          document.querySelector('#TenantIntent_POST_dcmRealized')?.addEventListener('input', relate_dcmRealized);
+          document.querySelector('#TenantIntent_POST_dcmRealized')?.addEventListener('focus', relate_dcmRealized);
+          document.querySelector('#TenantIntent_PATCH_dcmRealized')?.addEventListener('input', relate_dcmRealized);
+          document.querySelector('#TenantIntent_PATCH_dcmRealized')?.addEventListener('focus', relate_dcmRealized);
           function relate_hostInventoryIds(event) {
             suggestTenantIntentHostInventoryIds(
                 event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
@@ -387,13 +387,6 @@
               }
             }
           });
-          return false;
-        });
-
-        var submitForm_searchpageTenantIntent = document.querySelector('#htmForm_searchpageTenantIntent')?.addEventListener('submit', event => {
-          event.preventDefault();
-          event.target.setAttribute('loading', true);
-          searchpageTenantIntent();
           return false;
         });
 
@@ -685,14 +678,14 @@
                         </wa-menu-item>
                       </wa-menu>
                     </wa-dropdown>
-                    <wa-dropdown id="htmDropdown-tenantDescription">
+                    <wa-dropdown id="htmDropdown-description">
                       <wa-button variant="brand" slot="trigger" caret>description</wa-button>
                       <wa-menu>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantIntent_tenantDescription'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantIntent').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-tenantDescription-asc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantIntent_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantIntent').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
                           sort by description ascending
                         </wa-menu-item>
-                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantIntent_tenantDescription'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantIntent').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-tenantDescription-desc">
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortTenantIntent_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-TenantIntent').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
                           <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
                           sort by description descending
                         </wa-menu-item>
@@ -706,7 +699,7 @@
                       <span>{{ item.tenantName | e }}</span>
                     </a>
                     <a href="{{ item.displayPage }}">
-                      <span class="white-space-pre-wrap ">{{ item.tenantDescription | e }}</span>
+                      <span class="white-space-pre-wrap ">{{ item.description | e }}</span>
                     </a>
                   </div>
                   {% endfor %}
@@ -714,7 +707,7 @@
                 <div>
                 </div>
               {% endif %}
-              {% if getColumnTenantDescription is defined %}
+              {% if getColumnDescription is defined %}
                 <div>
                 </div>
               {% endif %}

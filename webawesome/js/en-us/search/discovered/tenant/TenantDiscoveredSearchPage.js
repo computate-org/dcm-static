@@ -176,15 +176,15 @@ Promise.all([
     facetStatsChange('TenantDiscovered', 'tenantName', false);
   });
 
-  document.querySelector('#pageSelectSortTenantDiscovered_tenantDescription')?.addEventListener('change', (event) => {
-    sort('TenantDiscovered', 'tenantDescription', event.currentTarget.value);
+  document.querySelector('#pageSelectSortTenantDiscovered_description')?.addEventListener('change', (event) => {
+    sort('TenantDiscovered', 'description', event.currentTarget.value);
   });
 
-  document.querySelector('#pageStatsTenantDiscovered_tenantDescription')?.addEventListener('wa-show', (event) => {
-    facetStatsChange('TenantDiscovered', 'tenantDescription', true);
+  document.querySelector('#pageStatsTenantDiscovered_description')?.addEventListener('wa-show', (event) => {
+    facetStatsChange('TenantDiscovered', 'description', true);
   });
-  document.querySelector('#pageStatsTenantDiscovered_tenantDescription')?.addEventListener('wa-hide', (event) => {
-    facetStatsChange('TenantDiscovered', 'tenantDescription', false);
+  document.querySelector('#pageStatsTenantDiscovered_description')?.addEventListener('wa-hide', (event) => {
+    facetStatsChange('TenantDiscovered', 'description', false);
   });
 
   document.querySelector('#pageSelectSortTenantDiscovered_hostInventoryIds')?.addEventListener('change', (event) => {
@@ -504,22 +504,22 @@ Promise.all([
           document.querySelector('#pageFacetRangeEndTenantDiscovered_tenantName')?.addEventListener('change', (event) => {
             facetRangeEndChange('TenantDiscovered', event.currentTarget);
           });
-          document.querySelector('#fqTenantDiscovered_tenantDescription')?.addEventListener('change', (event) => {
+          document.querySelector('#fqTenantDiscovered_description')?.addEventListener('change', (event) => {
             fqChange('TenantDiscovered', event.currentTarget, facetChangeTenantDiscoveredSuccess, facetChangeTenantDiscoveredError);
           });
-          document.querySelector('#buttonFacetTenantDiscovered_tenantDescription')?.addEventListener('click', (event) => {
+          document.querySelector('#buttonFacetTenantDiscovered_description')?.addEventListener('click', (event) => {
             facetFieldChange('TenantDiscovered', event.currentTarget);
           });
-          document.querySelector('#pageFacetPivotTenantDiscovered_tenantDescription')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetPivotTenantDiscovered_description')?.addEventListener('change', (event) => {
             facetPivotChange('TenantDiscovered', event.currentTarget);
           });
-          document.querySelector('#pageFacetRangeGapTenantDiscovered_tenantDescription')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetRangeGapTenantDiscovered_description')?.addEventListener('change', (event) => {
             facetRangeGapChange('TenantDiscovered', event.currentTarget);
           });
-          document.querySelector('#pageFacetRangeStartTenantDiscovered_tenantDescription')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetRangeStartTenantDiscovered_description')?.addEventListener('change', (event) => {
             facetRangeStartChange('TenantDiscovered', event.currentTarget);
           });
-          document.querySelector('#pageFacetRangeEndTenantDiscovered_tenantDescription')?.addEventListener('change', (event) => {
+          document.querySelector('#pageFacetRangeEndTenantDiscovered_description')?.addEventListener('change', (event) => {
             facetRangeEndChange('TenantDiscovered', event.currentTarget);
           });
           document.querySelector('#fqTenantDiscovered_displayPage')?.addEventListener('change', (event) => {

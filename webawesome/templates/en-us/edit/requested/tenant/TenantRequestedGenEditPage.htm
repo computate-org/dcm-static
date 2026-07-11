@@ -249,34 +249,34 @@
           }
           document.querySelector('#TenantIntent_POST_requested_TenantRequested_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_requested_TenantRequested_POST_tenantResource);
           document.querySelector('#TenantIntent_POST_requested_TenantRequested_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_requested_TenantRequested_POST_tenantResource);
-          function TenantIntent_POST_tenantDiscovered_TenantRequested_POST_tenantResource(event) {
-            suggestTenantIntentTenantDiscovered(
+          function TenantIntent_POST_dcmDiscovered_TenantRequested_POST_tenantResource(event) {
+            suggestTenantIntentDcmDiscovered(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,tenantResource,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.requestedId : null
-                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.tenantDiscovered : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.dcmDiscovered : null
                 , true
-                , document.querySelector('#TenantIntent_POST_tenantDiscovered_TenantRequested_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_dcmDiscovered_TenantRequested_POST_tenantResource')
                 );
           }
-          document.querySelector('#TenantIntent_POST_tenantDiscovered_TenantRequested_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_tenantDiscovered_TenantRequested_POST_tenantResource);
-          document.querySelector('#TenantIntent_POST_tenantDiscovered_TenantRequested_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_tenantDiscovered_TenantRequested_POST_tenantResource);
-          function TenantIntent_POST_tenantRealized_TenantRequested_POST_tenantResource(event) {
-            suggestTenantIntentTenantRealized(
+          document.querySelector('#TenantIntent_POST_dcmDiscovered_TenantRequested_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_dcmDiscovered_TenantRequested_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_dcmDiscovered_TenantRequested_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_dcmDiscovered_TenantRequested_POST_tenantResource);
+          function TenantIntent_POST_dcmRealized_TenantRequested_POST_tenantResource(event) {
+            suggestTenantIntentDcmRealized(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
                 , { 'name': 'rows', 'value': '10' }
                 , { 'name': 'fl', 'value': 'classCanonicalName,realizedId,pk,editPage,objectTitle' } ]
                 , document.querySelector('#' + event.target.getAttribute('data-list'))
                 , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.requestedId : null
-                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.tenantRealized : null
+                , (event.target.getAttribute('data-method') === 'Page' || event.target.getAttribute('data-method') === 'POST') ? window.result.dcmRealized : null
                 , true
-                , document.querySelector('#TenantIntent_POST_tenantRealized_TenantRequested_POST_tenantResource')
+                , document.querySelector('#TenantIntent_POST_dcmRealized_TenantRequested_POST_tenantResource')
                 );
           }
-          document.querySelector('#TenantIntent_POST_tenantRealized_TenantRequested_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_tenantRealized_TenantRequested_POST_tenantResource);
-          document.querySelector('#TenantIntent_POST_tenantRealized_TenantRequested_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_tenantRealized_TenantRequested_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_dcmRealized_TenantRequested_POST_tenantResource')?.addEventListener('input', TenantIntent_POST_dcmRealized_TenantRequested_POST_tenantResource);
+          document.querySelector('#TenantIntent_POST_dcmRealized_TenantRequested_POST_tenantResource')?.addEventListener('focus', TenantIntent_POST_dcmRealized_TenantRequested_POST_tenantResource);
           function TenantIntent_POST_hostInventoryIds_TenantRequested_POST_tenantResource(event) {
             suggestTenantIntentHostInventoryIds(
                 [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
