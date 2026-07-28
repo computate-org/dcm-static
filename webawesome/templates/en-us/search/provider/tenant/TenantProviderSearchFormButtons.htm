@@ -1,0 +1,65 @@
+
+{%- macro htmButton_patchTenantProvider() %}<wa-button variant="brand" id="htmButton_patchTenantProvider"  data-dialog="open patchTenantProviderDialog" data-providerId={{ result.providerId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+
+{%- macro htmButton_postTenantProvider() %}<wa-button variant="brand" id="htmButton_postTenantProvider"  data-dialog="open postTenantProviderDialog" data-providerId={{ result.providerId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deleteTenantProvider() %}<wa-button variant="brand" id="htmButton_deleteTenantProvider" data-providerId={{ result.providerId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+
+{%- macro htmButton_putimportTenantProvider() %}<wa-button variant="brand" id="htmButton_putimportTenantProvider"  data-dialog="open putimportTenantProviderDialog" data-providerId={{ result.providerId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deletefilterTenantProvider() %}<wa-button variant="brand" id="htmButton_deletefilterTenantProvider" data-providerId={{ result.providerId | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+          <div id="htmSearchForm">
+            <wa-scroller>
+              <wa-button-group>
+{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {% if "PATCH" in scopes %}
+    {% if resultCount >= 1 %}
+                <wa-button variant="brand" id="refreshThisTenantProviderGenPage"
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'providerId:{{ result.providerId }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisTenantProviderGenPage')); }, function() { addError(document.querySelector('#refreshThisTenantProviderGenPage')); }); return false; ">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  refresh
+                </wa-button>
+    {% endif %}
+    {% if resultCount > 0 %}
+                <wa-button variant="brand" id="refreshAllTenantProviderGenPage{{ result.providerId | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllTenantProviderGenPage{{ result.providerId | e }}')); }, function() { addError(document.querySelector('#refreshAllTenantProviderGenPage{{ result.providerId | e }}')); }); "
+                    >
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  refresh all 
+                </wa-button>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{%- if 'PATCH' in scopes %}
+  {%- if resultCount > 0 %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_patchTenantProvider() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmButton_postTenantProvider() }}
+  {%- else %}
+    {{ htmButton_postTenantProvider() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is defined %}
+    {{ htmButton_deleteTenantProvider() }}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmButton_putimportTenantProvider() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is not defined %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_deletefilterTenantProvider() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+
+              </wa-button-group>
+            </wa-scroller>
+          </div>

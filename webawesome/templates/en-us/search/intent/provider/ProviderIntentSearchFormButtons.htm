@@ -1,0 +1,65 @@
+
+{%- macro htmButton_patchProviderIntent() %}<wa-button variant="brand" id="htmButton_patchProviderIntent"  data-dialog="open patchProviderIntentDialog" data-providerResource={{ result.providerResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-edit "></i>Modify</wa-button>{%- endmacro %}
+
+{%- macro htmButton_postProviderIntent() %}<wa-button variant="brand" id="htmButton_postProviderIntent"  data-dialog="open postProviderIntentDialog" data-providerResource={{ result.providerResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-plus "></i>Create</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deleteProviderIntent() %}<wa-button variant="brand" id="htmButton_deleteProviderIntent" data-providerResource={{ result.providerResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+
+{%- macro htmButton_putimportProviderIntent() %}<wa-button variant="brand" id="htmButton_putimportProviderIntent"  data-dialog="open putimportProviderIntentDialog" data-providerResource={{ result.providerResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-file-import "></i>Import</wa-button>{%- endmacro %}
+
+{%- macro htmButton_deletefilterProviderIntent() %}<wa-button variant="brand" id="htmButton_deletefilterProviderIntent" data-providerResource={{ result.providerResource | tojson }}><i slot="start" class="{{ FONTAWESOME_STYLE }} fa-trash "></i>Delete</wa-button>{%- endmacro %}
+          <div id="htmSearchForm">
+            <wa-scroller>
+              <wa-button-group>
+{% if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {% if "PATCH" in scopes %}
+    {% if resultCount >= 1 %}
+                <wa-button variant="brand" id="refreshThisProviderIntentGenPage"
+                     onclick="patch{{classSimpleName}}Vals( [ {name: 'fq', value: 'providerResource:{{ result.providerResource }}' } ], {}, this, function() { addGlow(document.querySelector('#refreshThisProviderIntentGenPage')); }, function() { addError(document.querySelector('#refreshThisProviderIntentGenPage')); }); return false; ">
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-sync-alt "></i>
+                  refresh
+                </wa-button>
+    {% endif %}
+    {% if resultCount > 0 %}
+                <wa-button variant="brand" id="refreshAllProviderIntentGenPage{{ result.providerResource | e }}"
+                     onclick="patch{{classSimpleName}}Vals([], {}, this, function() { addGlow(document.querySelector('#refreshAllProviderIntentGenPage{{ result.providerResource | e }}')); }, function() { addError(document.querySelector('#refreshAllProviderIntentGenPage{{ result.providerResource | e }}')); }); "
+                    >
+                  <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrows-rotate"></i>
+                  refresh all 
+                </wa-button>
+    {% endif %}
+  {% endif %}
+{% endif %}
+{%- if 'PATCH' in scopes %}
+  {%- if resultCount > 0 %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_patchProviderIntent() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmButton_postProviderIntent() }}
+  {%- else %}
+    {{ htmButton_postProviderIntent() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is defined %}
+    {{ htmButton_deleteProviderIntent() }}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmButton_putimportProviderIntent() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if result is not defined %}
+    {%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+    {{ htmButton_deletefilterProviderIntent() }}
+    {%- endif %}
+  {%- endif %}
+{%- endif %}
+
+              </wa-button-group>
+            </wa-scroller>
+          </div>

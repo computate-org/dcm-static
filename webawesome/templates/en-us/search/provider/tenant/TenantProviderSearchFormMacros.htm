@@ -1,0 +1,393 @@
+{%- macro inputPkTenantProviderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_pk">
+  {%- endif %}
+                  <wa-input
+                      readonly
+                      placeholder="[Long] primary key"
+                      label="primary key"
+                      type="number"
+                      hint="The primary key of this object in the database"
+                      id="TenantProvider_{{classApiMethodMethod}}_pk"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerId={{ result.providerId | tojson }}
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_pk setPk classTenantProvider inputTenantProvider{{ result.providerId }}Pk "
+                      name="setPk"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_pk setPk classTenantProvider inputTenantProvider{{ result.providerId }}Pk "
+                      name="setPk"
+    {%- else %}
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_pk valuePk classTenantProvider inputTenantProvider{{ result.providerId }}Pk "
+                      name="pk"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.pk | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPkTenantProviderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPkTenantProviderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedTenantProviderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_created">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A created timestamp for this record in the database"
+                      label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_created datetimepicker setCreated classTenantProvider inputTenantProvider{{ result.providerId }}Created "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="TenantProvider_{{classApiMethodMethod}}_created"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-providerId={{ result.providerId | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedTenantProviderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedTenantProviderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputModifiedTenantProviderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_modified">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A modified timestamp for this record in the database"
+                      label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_modified datetimepicker setModified classTenantProvider inputTenantProvider{{ result.providerId }}Modified "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="TenantProvider_{{classApiMethodMethod}}_modified"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-providerId={{ result.providerId | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmModifiedTenantProviderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputModifiedTenantProviderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputArchivedTenantProviderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_archived">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-button variant="brand"
+                      id="TenantProvider_{{classApiMethodMethod}}_archived"
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_archived classTenantProvider inputTenantProvider{{ result.providerId }}Archived "
+                      name="setArchived"
+                      data-providerId={{ result.providerId | tojson }}
+                      data-val="{{ result.archived | e }}"
+                      >archive</wa-button>
+  {%- else %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="TenantProvider_{{classApiMethodMethod}}_archived"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="TenantProvider_{{classApiMethodMethod}}_archived"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_archived classTenantProvider inputTenantProvider{{ result.providerId }}Archived "
+                      name="setArchived"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_archived classTenantProvider inputTenantProvider{{ result.providerId }}Archived "
+                      name="setArchived"
+    {%- else %}
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_archived setArchived valueArchived classTenantProvider inputTenantProvider{{ result.providerId }}Archived "
+                      name="setArchived"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.archived == true %}
+                      checked
+    {%- endif %}
+                      data-providerId={{ result.providerId | tojson }}
+                      >archive</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmArchivedTenantProviderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputArchivedTenantProviderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputProviderNameTenantProviderPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_providerName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] tenant provider name"
+                      label="tenant provider name"
+                      hint="The name of this tenant provider"
+                      required
+                      id="TenantProvider_{{classApiMethodMethod}}_providerName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerId={{ result.providerId | tojson }}
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_providerName setProviderName classTenantProvider inputTenantProvider{{ result.providerId }}ProviderName "
+                      name="setProviderName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_providerName setProviderName classTenantProvider inputTenantProvider{{ result.providerId }}ProviderName "
+                      name="setProviderName"
+    {%- else %}
+                      class="label-on-left TenantProvider_{{classApiMethodMethod}}_providerName valueProviderName classTenantProvider inputTenantProvider{{ result.providerId }}ProviderName "
+                      name="providerName"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.providerName | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmProviderNameTenantProviderPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputProviderNameTenantProviderPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+
+{%- macro htmFormButton_patchTenantProvider() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_patchTenantProvider" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_patchTenantProvider"
+                >Modify tenant intent</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_patchTenantProvider"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_patchTenantProvider(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchTenantProviderDialog" label="Modify tenant intent">
+          <form id="htmForm_patchTenantProvider" class="wa-stack round-row primary-smart-border-radius ">
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-provider-details">
+              <div slot="summary">
+                <span>tenant provider details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmProviderNameTenantProviderPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderNameTenantProviderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderNameTenantProviderPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+            {{ htmFormButton_patchTenantProvider() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_postTenantProvider() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_postTenantProvider" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_postTenantProvider"
+                >Create a tenant intent</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_postTenantProvider"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_postTenantProvider(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postTenantProviderDialog" label="Create a tenant intent">
+          <form id="htmForm_postTenantProvider" class="wa-stack round-row primary-smart-border-radius ">
+            <div>You can override any default values below: </div>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-provider-details">
+              <div slot="summary">
+                <span>tenant provider details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmProviderNameTenantProviderPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderNameTenantProviderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderNameTenantProviderPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+            {{ htmFormButton_postTenantProvider() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_deleteTenantProvider() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deleteTenantProvider" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deleteTenantProvider"
+                >Delete tenant intent</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deleteTenantProvider"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deleteTenantProvider(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteTenantProviderDialog" label="Delete tenant intent">
+          <form id="htmForm_deleteTenantProvider" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteTenantProvider() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_putimportTenantProvider() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_putimportTenantProvider" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_putimportTenantProvider"
+                >Import tenant intents</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_putimportTenantProvider"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_putimportTenantProvider(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportTenantProviderDialog" label="Import tenant intents">
+          <form id="htmForm_putimportTenantProvider" class="wa-stack round-row primary-smart-border-radius ">
+            <div>
+              <wa-textarea
+                  class="PUTImport_searchList "
+                  style="height: 300px; "
+                  placeholder="{ 'searchList': [ { 'providerId': ... , 'saves': [ ... ] }, ... ] }"
+                  >
+              </wa-textarea>
+            </div>
+            {{ htmFormButton_putimportTenantProvider() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmForm_searchpageTenantProvider(idSuffix='', searchRelated=false) %}
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageTenantProviderDialog" label="Search tenant intents">
+          <div id="htmForm_searchpageTenantProvider" class="wa-stack round-row primary-smart-border-radius ">
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
+              <div slot="summary">
+                <span>primary key, ID, created, modified, archive details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmPkTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmPkTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmModifiedTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmModifiedTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmArchivedTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmArchivedTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="tenant-provider-details">
+              <div slot="summary">
+                <span>tenant provider details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmProviderNameTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderNameTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderNameTenantProviderPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </div>
+        </div>
+{%- endmacro %}
+
+{%- macro htmFormButton_deletefilterTenantProvider() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterTenantProvider" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deletefilterTenantProvider"
+                >Delete tenant intent</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deletefilterTenantProvider"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deletefilterTenantProvider(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterTenantProviderDialog" label="Delete tenant intent">
+          <form id="htmForm_deletefilterTenantProvider" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterTenantProvider() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}

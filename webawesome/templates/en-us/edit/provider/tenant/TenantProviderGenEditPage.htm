@@ -1,0 +1,443 @@
+{% extends "en-us/PageLayout.htm" %}
+{%- block htmTitlePageLayout %}
+{%- block htmTitleTenantProviderPage %}
+    <title>{{ result.objectTitle }}</title>
+{%- endblock htmTitleTenantProviderPage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/provider/tenant/TenantProvider.css"/>
+{%- block htmStylesTenantProviderPage %}
+{%- endblock htmStylesTenantProviderPage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 1;
+      }
+{{ super() }}
+{%- block htmStyleTenantProviderPage %}
+{%- endblock htmStyleTenantProviderPage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsTenantProviderPage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/provider/tenant/TenantProvider.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/provider/tenant/TenantProviderSearchPage.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/provider/tenant/TenantProviderEditPage.js"></script>
+{%- endblock htmScriptsTenantProviderPage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptTenantProviderPage %}
+    <script>
+
+      function jsWebsocketTenantProvider(providerId, vars, $response) {
+{%- block jsWebsocketTenantProviderPage %}{%- endblock %}
+      }
+
+      function jsTooltipTenantProvider(e, feature) {
+{%- block jsTooltipTenantProviderPage %}{%- endblock %}
+      }
+
+      function htmTooltipTenantProvider(feature, layer) {
+        return `{%- block htmTooltipTenantProviderPage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipTenantProviderPage %}`;
+      }
+
+      function facetChangeTenantProviderSuccess(e) {
+        var l = e.querySelector('.pageForm .listTenantProvider')?.value;
+        if(l)
+          window.listTenantProvider = JSON.parse(l);
+{% block facetChangeTenantProviderSuccess %}{%- endblock facetTenantProviderSuccess %}
+      }
+      function facetChangeTenantProviderError(e) {
+{% block facetChangeTenantProviderError %}{%- endblock facetTenantProviderError %}
+      }
+
+      function facetSimpleRangeTenantProviderSuccess(e) {
+{% block facetSimpleRangeTenantProviderSuccess %}      facetChangeTenantProviderSuccess(e);{% endblock facetSimpleRangeTenantProviderSuccess %}
+      }
+      function facetSimpleRangeTenantProviderError(e) {
+{% block facetSimpleRangeTenantProviderError %}      facetChangeTenantProviderError(e);{% endblock facetSimpleRangeTenantProviderError %}
+      }
+      function facetSimpleRangeTenantProvider(e) {
+        facetSimpleRange(e, facetSimpleRangeTenantProviderSuccess, facetSimpleRangeTenantProviderError);
+      }
+
+      function facetRangeTimeZoneTenantProviderSuccess(e) {
+{% block facetRangeTimeZoneTenantProviderSuccess %}      facetChangeTenantProviderSuccess(e);{% endblock facetRangeTimeZoneTenantProviderSuccess %}
+      }
+      function facetRangeTimeZoneTenantProviderError(e) {
+{% block facetRangeTimeZoneTenantProviderError %}      facetChangeTenantProviderError(e);{%- endblock facetRangeTimeZoneTenantProviderError %}
+      }
+      function facetRangeTimeZoneTenantProvider(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneTenantProviderSuccess, facetRangeTimeZoneTenantProviderError);
+      }
+
+      function facetRangeGapChangeTenantProviderSuccess(e) {
+{% block facetRangeGapChangeTenantProviderSuccess %}      facetChangeTenantProviderSuccess(e);{% endblock facetRangeGapChangeTenantProviderSuccess %}
+      }
+      function facetRangeGapChangeTenantProviderError(e) {
+{% block facetRangeGapChangeTenantProviderError %}      facetChangeTenantProviderError(e);{%- endblock facetRangeGapChangeTenantProviderError %}
+      }
+      function facetRangeGapChangeTenantProvider(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeTenantProviderSuccess, facetRangeGapChangeTenantProviderError);
+      }
+
+      function facetRangeStartChangeTenantProviderSuccess(e) {
+{% block facetRangeStartChangeTenantProviderSuccess %}      facetChangeTenantProviderSuccess(e);{% endblock facetRangeStartChangeTenantProviderSuccess %}
+      }
+      function facetRangeStartChangeTenantProviderError(e) {
+{% block facetRangeStartChangeTenantProviderError %}      facetChangeTenantProviderError(e);{%- endblock facetRangeStartChangeTenantProviderError %}
+      }
+      function facetRangeStartChangeTenantProvider(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeTenantProviderSuccess, facetRangeStartChangeTenantProviderError);
+      }
+
+      function facetRangeEndChangeTenantProviderSuccess(e) {
+{% block facetRangeEndChangeTenantProviderSuccess %}      facetChangeTenantProviderSuccess(e);{% endblock facetRangeEndChangeTenantProviderSuccess %}
+      }
+      function facetRangeEndChangeTenantProviderError(e) {
+{% block facetRangeEndChangeTenantProviderError %}      facetChangeTenantProviderError(e);{%- endblock facetRangeEndChangeTenantProviderError %}
+      }
+      function facetRangeEndChangeTenantProvider(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeTenantProviderSuccess, facetRangeEndChangeTenantProviderError);
+      }
+    </script>
+    <script type="module">
+{% if location is defined %}
+      window.mapLocation = { type: 'Point', coordinates: [ {{ location.coordinates[0] }}, {{ location.coordinates[1] }} ]};
+{% endif %}
+{% if zoom is defined %}
+      window.mapZoom = {{ zoom }};
+{% endif %}
+{% if pitch is defined %}
+      window.mapPitch = {{ toDegree(pitch) }};
+{% endif %}
+      window.STATIC_BASE_URL = '{{ STATIC_BASE_URL }}';
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
+
+        var providerId = {% if result.providerId is defined %}{{ result.providerId | tojson }}{% else %}null{% endif %};
+
+        if(providerId == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.providerId is defined %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listTenantProvider')?.value;
+        if(l)
+          window.listTenantProvider = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTenantProvider);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneTenantProvider);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneTenantProvider);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeTenantProvider);
+        pageGraphTenantProvider();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qTenantProvider_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('TenantProvider', event.target, document.querySelector('#qTenantProviderDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qTenantProvider_rows')?.addEventListener('change', event => {
+          paramChange('TenantProvider', event.target, document.querySelector('#qTenantProviderDiv_rows'));
+        });
+
+        document.querySelector('#qTenantProvider_start')?.addEventListener('change', event => {
+          paramChange('TenantProvider', event.target, document.querySelector('#qTenantProviderDiv_start'));
+        });
+
+
+        var submitForm_patchTenantProvider = document.querySelector('#htmForm_patchTenantProvider')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          patchTenantProvider(null, document.querySelector('#htmForm_patchTenantProvider')
+              , document.querySelector('#htmFormButton_patchTenantProvider')
+              , event.target.getAttribute('data-providerId')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_postTenantProvider = document.querySelector('#htmForm_postTenantProvider')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          postTenantProvider(document.querySelector('#htmForm_postTenantProvider')
+              , document.querySelector('#htmFormButton_postTenantProvider')
+              , (json, target) => {
+            window.location.href = json.editPage;
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_deleteTenantProvider = document.querySelector('#htmForm_deleteTenantProvider')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          deleteTenantProvider(event.target, event.target.getAttribute('data-providerId')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_putimportTenantProvider = document.querySelector('#htmForm_putimportTenantProvider')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          putimportTenantProvider(document.querySelector('#htmForm_putimportTenantProvider')
+              , document.querySelector('#htmFormButton_putimportTenantProvider')
+              , event.target.getAttribute('data-providerId')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_deletefilterTenantProvider = document.querySelector('#htmForm_deletefilterTenantProvider')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          deletefilterTenantProvider(event.target
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+{%- block htmScriptInitTenantProviderPage %}{%- endblock htmScriptInitTenantProviderPage %}
+      });
+    </script>
+{%- endblock htmScriptTenantProviderPage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketTenantProviderPage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketTenantProvider(websocketTenantProviderInner);
+{% endif %}
+{%- endblock websocketTenantProviderPage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlTenantProviderPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlTenantProviderPage %}
+
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/provider/tenant/TenantProviderSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/provider/tenant/TenantProviderSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-TenantProvider">back to all tenant intents</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-TenantProvider" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+                  all tenant intents
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  a tenant intent
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+    {{ super() }}
+{%- block htmBodyStartTenantProviderPage %}
+{% if resultCount > 0 %}
+          <div class="wa-flank ">
+            <h1 class="Page_objectTitle"><i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i> {{ result.objectTitle | e }}</h1>
+          </div>
+{% endif %}
+{% include en-us/search/provider/tenant/TenantProviderSearchForm.htm %}
+{%- endblock htmBodyStartTenantProviderPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleTenantProviderPage %}
+{%- include en-us/search/provider/tenant/TenantProviderSidebar.htm %}
+        <div class="pageContent ">
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-TenantProvider">back to all tenant intents</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-TenantProvider" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+              all tenant intents
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no tenant intent found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class="{{ FONTAWESOME_STYLE }} fa-buildings"></i>
+            </div>
+            <span class="wa-heading-m ">no tenant intent found</span>
+            <p class="wa-caption-l ">A provider for requesting a TenantIntent to be realized. </p>
+          </div>
+        </div>
+{% else %}
+{%- include en-us/search/provider/tenant/TenantProviderSuggestedSearch.htm %}
+{% endif %}
+{%- block htmFormTenantProviderPage %}
+          <form action="/en-us/api/provider/tenant" id="TenantProviderForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
+{% if result.providerId is defined %}
+            <input name="providerId" class="valueProviderId" type="hidden" value="{{ result.providerId }}"/>
+            {% endif %}
+            <input name="focusId" type="hidden"/>
+            <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+            <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
+            <input name="listTenantProvider" id="listTenantProvider" class="listTenantProvider"  value='{{ toJsonArrayStringInApostrophes(listTenantProvider) }}' type="hidden"/>
+          </form>
+{%- if resultCount >= 1 %}
+          {{ htmForm_searchpageTenantProvider() }}
+{% endif -%}
+{%- endblock htmFormTenantProviderPage %}
+        </div>
+{%- endblock htmBodyMiddleTenantProviderPage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndTenantProviderPage %}
+{%- include en-us/search/provider/tenant/TenantProviderLocation.htm %}
+{%- endblock htmBodyEndTenantProviderPage %}
+      {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

@@ -1,0 +1,443 @@
+{% extends "en-us/PageLayout.htm" %}
+{%- block htmTitlePageLayout %}
+{%- block htmTitleProviderIntentPage %}
+    <title>{{ result.objectTitle }}</title>
+{%- endblock htmTitleProviderIntentPage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/intent/provider/ProviderIntent.css"/>
+{%- block htmStylesProviderIntentPage %}
+{%- endblock htmStylesProviderIntentPage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 2;
+      }
+{{ super() }}
+{%- block htmStyleProviderIntentPage %}
+{%- endblock htmStyleProviderIntentPage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsProviderIntentPage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/intent/provider/ProviderIntent.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/intent/provider/ProviderIntentSearchPage.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/intent/provider/ProviderIntentEditPage.js"></script>
+{%- endblock htmScriptsProviderIntentPage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptProviderIntentPage %}
+    <script>
+
+      function jsWebsocketProviderIntent(providerResource, vars, $response) {
+{%- block jsWebsocketProviderIntentPage %}{%- endblock %}
+      }
+
+      function jsTooltipProviderIntent(e, feature) {
+{%- block jsTooltipProviderIntentPage %}{%- endblock %}
+      }
+
+      function htmTooltipProviderIntent(feature, layer) {
+        return `{%- block htmTooltipProviderIntentPage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipProviderIntentPage %}`;
+      }
+
+      function facetChangeProviderIntentSuccess(e) {
+        var l = e.querySelector('.pageForm .listProviderIntent')?.value;
+        if(l)
+          window.listProviderIntent = JSON.parse(l);
+{% block facetChangeProviderIntentSuccess %}{%- endblock facetProviderIntentSuccess %}
+      }
+      function facetChangeProviderIntentError(e) {
+{% block facetChangeProviderIntentError %}{%- endblock facetProviderIntentError %}
+      }
+
+      function facetSimpleRangeProviderIntentSuccess(e) {
+{% block facetSimpleRangeProviderIntentSuccess %}      facetChangeProviderIntentSuccess(e);{% endblock facetSimpleRangeProviderIntentSuccess %}
+      }
+      function facetSimpleRangeProviderIntentError(e) {
+{% block facetSimpleRangeProviderIntentError %}      facetChangeProviderIntentError(e);{% endblock facetSimpleRangeProviderIntentError %}
+      }
+      function facetSimpleRangeProviderIntent(e) {
+        facetSimpleRange(e, facetSimpleRangeProviderIntentSuccess, facetSimpleRangeProviderIntentError);
+      }
+
+      function facetRangeTimeZoneProviderIntentSuccess(e) {
+{% block facetRangeTimeZoneProviderIntentSuccess %}      facetChangeProviderIntentSuccess(e);{% endblock facetRangeTimeZoneProviderIntentSuccess %}
+      }
+      function facetRangeTimeZoneProviderIntentError(e) {
+{% block facetRangeTimeZoneProviderIntentError %}      facetChangeProviderIntentError(e);{%- endblock facetRangeTimeZoneProviderIntentError %}
+      }
+      function facetRangeTimeZoneProviderIntent(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneProviderIntentSuccess, facetRangeTimeZoneProviderIntentError);
+      }
+
+      function facetRangeGapChangeProviderIntentSuccess(e) {
+{% block facetRangeGapChangeProviderIntentSuccess %}      facetChangeProviderIntentSuccess(e);{% endblock facetRangeGapChangeProviderIntentSuccess %}
+      }
+      function facetRangeGapChangeProviderIntentError(e) {
+{% block facetRangeGapChangeProviderIntentError %}      facetChangeProviderIntentError(e);{%- endblock facetRangeGapChangeProviderIntentError %}
+      }
+      function facetRangeGapChangeProviderIntent(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeProviderIntentSuccess, facetRangeGapChangeProviderIntentError);
+      }
+
+      function facetRangeStartChangeProviderIntentSuccess(e) {
+{% block facetRangeStartChangeProviderIntentSuccess %}      facetChangeProviderIntentSuccess(e);{% endblock facetRangeStartChangeProviderIntentSuccess %}
+      }
+      function facetRangeStartChangeProviderIntentError(e) {
+{% block facetRangeStartChangeProviderIntentError %}      facetChangeProviderIntentError(e);{%- endblock facetRangeStartChangeProviderIntentError %}
+      }
+      function facetRangeStartChangeProviderIntent(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeProviderIntentSuccess, facetRangeStartChangeProviderIntentError);
+      }
+
+      function facetRangeEndChangeProviderIntentSuccess(e) {
+{% block facetRangeEndChangeProviderIntentSuccess %}      facetChangeProviderIntentSuccess(e);{% endblock facetRangeEndChangeProviderIntentSuccess %}
+      }
+      function facetRangeEndChangeProviderIntentError(e) {
+{% block facetRangeEndChangeProviderIntentError %}      facetChangeProviderIntentError(e);{%- endblock facetRangeEndChangeProviderIntentError %}
+      }
+      function facetRangeEndChangeProviderIntent(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeProviderIntentSuccess, facetRangeEndChangeProviderIntentError);
+      }
+    </script>
+    <script type="module">
+{% if location is defined %}
+      window.mapLocation = { type: 'Point', coordinates: [ {{ location.coordinates[0] }}, {{ location.coordinates[1] }} ]};
+{% endif %}
+{% if zoom is defined %}
+      window.mapZoom = {{ zoom }};
+{% endif %}
+{% if pitch is defined %}
+      window.mapPitch = {{ toDegree(pitch) }};
+{% endif %}
+      window.STATIC_BASE_URL = '{{ STATIC_BASE_URL }}';
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
+
+        var providerResource = {% if result.providerResource is defined %}{{ result.providerResource | tojson }}{% else %}null{% endif %};
+
+        if(providerResource == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.providerResource is defined %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listProviderIntent')?.value;
+        if(l)
+          window.listProviderIntent = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneProviderIntent);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneProviderIntent);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneProviderIntent);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeProviderIntent);
+        pageGraphProviderIntent();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qProviderIntent_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('ProviderIntent', event.target, document.querySelector('#qProviderIntentDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qProviderIntent_rows')?.addEventListener('change', event => {
+          paramChange('ProviderIntent', event.target, document.querySelector('#qProviderIntentDiv_rows'));
+        });
+
+        document.querySelector('#qProviderIntent_start')?.addEventListener('change', event => {
+          paramChange('ProviderIntent', event.target, document.querySelector('#qProviderIntentDiv_start'));
+        });
+
+
+        var submitForm_patchProviderIntent = document.querySelector('#htmForm_patchProviderIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          patchProviderIntent(null, document.querySelector('#htmForm_patchProviderIntent')
+              , document.querySelector('#htmFormButton_patchProviderIntent')
+              , event.target.getAttribute('data-providerResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_postProviderIntent = document.querySelector('#htmForm_postProviderIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          postProviderIntent(document.querySelector('#htmForm_postProviderIntent')
+              , document.querySelector('#htmFormButton_postProviderIntent')
+              , (json, target) => {
+            window.location.href = json.editPage;
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_deleteProviderIntent = document.querySelector('#htmForm_deleteProviderIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          deleteProviderIntent(event.target, event.target.getAttribute('data-providerResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_putimportProviderIntent = document.querySelector('#htmForm_putimportProviderIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          putimportProviderIntent(document.querySelector('#htmForm_putimportProviderIntent')
+              , document.querySelector('#htmFormButton_putimportProviderIntent')
+              , event.target.getAttribute('data-providerResource')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_deletefilterProviderIntent = document.querySelector('#htmForm_deletefilterProviderIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          deletefilterProviderIntent(event.target
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+{%- block htmScriptInitProviderIntentPage %}{%- endblock htmScriptInitProviderIntentPage %}
+      });
+    </script>
+{%- endblock htmScriptProviderIntentPage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketProviderIntentPage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketProviderIntent(websocketProviderIntentInner);
+{% endif %}
+{%- endblock websocketProviderIntentPage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlProviderIntentPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlProviderIntentPage %}
+
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/intent/provider/ProviderIntentSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/intent/provider/ProviderIntentSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-ProviderIntent">back to all provider intents</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-ProviderIntent" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class=" fa-person-dolly"></i>
+                  all provider intents
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  a provider intent
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+    {{ super() }}
+{%- block htmBodyStartProviderIntentPage %}
+{% if resultCount > 0 %}
+          <div class="wa-flank ">
+            <h1 class="Page_objectTitle"><i class=" fa-person-dolly"></i> {{ result.objectTitle | e }}</h1>
+          </div>
+{% endif %}
+{% include en-us/search/intent/provider/ProviderIntentSearchForm.htm %}
+{%- endblock htmBodyStartProviderIntentPage %}
+{%- endblock htmBodyStartPageLayout %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleProviderIntentPage %}
+{%- include en-us/search/intent/provider/ProviderIntentSidebar.htm %}
+        <div class="pageContent ">
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-ProviderIntent">back to all provider intents</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-ProviderIntent" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class=" fa-person-dolly"></i>
+              all provider intents
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no provider intent found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class=" fa-person-dolly"></i>
+            </div>
+            <span class="wa-heading-m ">no provider intent found</span>
+            <p class="wa-caption-l ">A provider for requesting other DCM models. </p>
+          </div>
+        </div>
+{% else %}
+{%- include en-us/search/intent/provider/ProviderIntentSuggestedSearch.htm %}
+{% endif %}
+{%- block htmFormProviderIntentPage %}
+          <form action="/en-us/api/intent/provider" id="ProviderIntentForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+            <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
+{% if result.providerResource is defined %}
+            <input name="providerResource" class="valueProviderResource" type="hidden" value="{{ result.providerResource }}"/>
+            {% endif %}
+            <input name="focusId" type="hidden"/>
+            <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+            <input name="result" id="result" class="result"  value='{{ toJsonObjectStringInApostrophes(result) }}' type="hidden"/>
+            <input name="listProviderIntent" id="listProviderIntent" class="listProviderIntent"  value='{{ toJsonArrayStringInApostrophes(listProviderIntent) }}' type="hidden"/>
+          </form>
+{%- if resultCount >= 1 %}
+          {{ htmForm_searchpageProviderIntent() }}
+{% endif -%}
+{%- endblock htmFormProviderIntentPage %}
+        </div>
+{%- endblock htmBodyMiddleProviderIntentPage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndProviderIntentPage %}
+{%- include en-us/search/intent/provider/ProviderIntentLocation.htm %}
+{%- endblock htmBodyEndProviderIntentPage %}
+      {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

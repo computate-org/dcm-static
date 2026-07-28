@@ -1,0 +1,1311 @@
+{%- macro inputPkProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_pk">
+  {%- endif %}
+                  <wa-input
+                      readonly
+                      placeholder="[Long] primary key"
+                      label="primary key"
+                      type="number"
+                      hint="The primary key of this object in the database"
+                      id="ProviderIntent_{{classApiMethodMethod}}_pk"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_pk setPk classProviderIntent inputProviderIntent{{ result.providerResource }}Pk "
+                      name="setPk"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_pk setPk classProviderIntent inputProviderIntent{{ result.providerResource }}Pk "
+                      name="setPk"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_pk valuePk classProviderIntent inputProviderIntent{{ result.providerResource }}Pk "
+                      name="pk"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.pk | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmPkProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputPkProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_created">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A created timestamp for this record in the database"
+                      label="created {{ formatZonedDateTime(result.created, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_created datetimepicker setCreated classProviderIntent inputProviderIntent{{ result.providerResource }}Created "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="ProviderIntent_{{classApiMethodMethod}}_created"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.created is defined %}{{ formatZonedDateTime(result.created, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputModifiedProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_modified">
+  {%- endif %}
+                  <wa-input
+                      type="datetime-local"
+                      readonly
+                      hint="A modified timestamp for this record in the database"
+                      label="modified {{ formatZonedDateTime(result.modified, "'['VV']'", defaultLocaleId, defaultZoneId) | e }}"
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_modified datetimepicker setModified classProviderIntent inputProviderIntent{{ result.providerResource }}Modified "
+                      placeholder="MM/dd/yyyy h:mm a '['VV']'"
+                      data-timeformat="MM/dd/yyyy h:mm a '['VV']'"
+                      id="ProviderIntent_{{classApiMethodMethod}}_modified"
+  {% if 'Page' == classApiMethodMethod -%}
+                      value="{%- if "Page" == classApiMethodMethod and result.modified is defined %}{{ formatZonedDateTime(result.modified, "yyyy-MM-dd'T'HH:mm", defaultLocaleId, defaultZoneId) | e }}{%- endif %}"
+  {% endif -%}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      data-zone="{{ defaultZoneId }}"
+                      >
+                  </wa-input>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmModifiedProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputModifiedProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputArchivedProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_archived">
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                  <wa-button variant="brand"
+                      id="ProviderIntent_{{classApiMethodMethod}}_archived"
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_archived classProviderIntent inputProviderIntent{{ result.providerResource }}Archived "
+                      name="setArchived"
+                      data-providerResource={{ result.providerResource | tojson }}
+                      data-val="{{ result.archived | e }}"
+                      >archive</wa-button>
+  {%- else %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="ProviderIntent_{{classApiMethodMethod}}_archived"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="ProviderIntent_{{classApiMethodMethod}}_archived"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="archive"
+                      label="archive"
+                      hint="For archiving this record"
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_archived classProviderIntent inputProviderIntent{{ result.providerResource }}Archived "
+                      name="setArchived"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_archived classProviderIntent inputProviderIntent{{ result.providerResource }}Archived "
+                      name="setArchived"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_archived setArchived valueArchived classProviderIntent inputProviderIntent{{ result.providerResource }}Archived "
+                      name="setArchived"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.archived == true %}
+                      checked
+    {%- endif %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      >archive</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmArchivedProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputArchivedProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedByEmailProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_createdByEmail">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] created by user email"
+                      label="created by user email"
+                      hint="The email address for the user who created the change request. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_createdByEmail"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdByEmail setCreatedByEmail classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedByEmail "
+                      name="setCreatedByEmail"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdByEmail setCreatedByEmail classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedByEmail "
+                      name="setCreatedByEmail"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdByEmail valueCreatedByEmail classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedByEmail "
+                      name="createdByEmail"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.createdByEmail | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedByEmailProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedByEmailProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedByUserIdProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_createdByUserId">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] created by user ID"
+                      label="created by user ID"
+                      hint="The IdP UUID record for the user who created the change request. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_createdByUserId"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdByUserId setCreatedByUserId classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedByUserId "
+                      name="setCreatedByUserId"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdByUserId setCreatedByUserId classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedByUserId "
+                      name="setCreatedByUserId"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdByUserId valueCreatedByUserId classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedByUserId "
+                      name="createdByUserId"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.createdByUserId | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedByUserIdProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedByUserIdProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedByFullNameProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_createdByFullName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] created by user full name"
+                      label="created by user full name"
+                      hint="The first and last name for the user who created the change request. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_createdByFullName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdByFullName setCreatedByFullName classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedByFullName "
+                      name="setCreatedByFullName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdByFullName setCreatedByFullName classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedByFullName "
+                      name="setCreatedByFullName"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdByFullName valueCreatedByFullName classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedByFullName "
+                      name="createdByFullName"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.createdByFullName | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedByFullNameProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedByFullNameProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputCreatedViaProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_createdVia">
+  {%- endif %}
+                  <wa-radio-group
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] created via"
+                      label="created via"
+                      hint="Declares the ingestion path that makes audit quality transparent. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_createdVia"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdVia setCreatedVia classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedVia "
+                      name="setCreatedVia"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdVia setCreatedVia classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedVia "
+                      name="setCreatedVia"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_createdVia valueCreatedVia classProviderIntent inputProviderIntent{{ result.providerResource }}CreatedVia "
+                      name="createdVia"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.createdVia | e }}"
+  {% endif -%}
+                      >
+                    <wa-radio value="pr">pull request</wa-radio>
+                    <wa-radio value="api">API</wa-radio>
+                    <wa-radio value="migration">migration</wa-radio>
+                    <wa-radio value="system">system</wa-radio>
+                  </wa-radio-group>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmCreatedViaProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputCreatedViaProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputIntentStateProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_intentState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] intent state"
+                      label="intent state"
+                      hint="Captures the consumer's raw intent &mdash; what they asked for in their own terms. "
+                      required
+                      id="ProviderIntent_{{classApiMethodMethod}}_intentState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_intentState setIntentState classProviderIntent inputProviderIntent{{ result.providerResource }}IntentState "
+                      name="setIntentState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_intentState setIntentState classProviderIntent inputProviderIntent{{ result.providerResource }}IntentState "
+                      name="setIntentState"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_intentState valueIntentState classProviderIntent inputProviderIntent{{ result.providerResource }}IntentState "
+                      name="intentState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.intentState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmIntentStateProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputIntentStateProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputRequestedStateProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_requestedState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] requested state"
+                      label="requested state"
+                      hint="Represents a complete, validated, provider-ready declaration of desired state. "
+                      required
+                      id="ProviderIntent_{{classApiMethodMethod}}_requestedState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requestedState setRequestedState classProviderIntent inputProviderIntent{{ result.providerResource }}RequestedState "
+                      name="setRequestedState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requestedState setRequestedState classProviderIntent inputProviderIntent{{ result.providerResource }}RequestedState "
+                      name="setRequestedState"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requestedState valueRequestedState classProviderIntent inputProviderIntent{{ result.providerResource }}RequestedState "
+                      name="requestedState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.requestedState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRequestedStateProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputRequestedStateProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputRealizedStateProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_realizedState">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] realized state"
+                      label="realized state"
+                      hint="Must be a complete representation of the provisioned resource in DCM unified format &mdash; not a status code, but a full state description. "
+                      required
+                      id="ProviderIntent_{{classApiMethodMethod}}_realizedState"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_realizedState setRealizedState classProviderIntent inputProviderIntent{{ result.providerResource }}RealizedState "
+                      name="setRealizedState"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_realizedState setRealizedState classProviderIntent inputProviderIntent{{ result.providerResource }}RealizedState "
+                      name="setRealizedState"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_realizedState valueRealizedState classProviderIntent inputProviderIntent{{ result.providerResource }}RealizedState "
+                      name="realizedState"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.realizedState | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRealizedStateProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputRealizedStateProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputProviderNameProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_providerName">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] provider name"
+                      label="provider name"
+                      hint="The name of this provider"
+                      required
+                      id="ProviderIntent_{{classApiMethodMethod}}_providerName"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_providerName setProviderName classProviderIntent inputProviderIntent{{ result.providerResource }}ProviderName "
+                      name="setProviderName"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_providerName setProviderName classProviderIntent inputProviderIntent{{ result.providerResource }}ProviderName "
+                      name="setProviderName"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_providerName valueProviderName classProviderIntent inputProviderIntent{{ result.providerResource }}ProviderName "
+                      name="providerName"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.providerName | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmProviderNameProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputProviderNameProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputDescriptionProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_description">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] description"
+                      label="description"
+                      hint="A description of this provider"
+                      id="ProviderIntent_{{classApiMethodMethod}}_description"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_description setDescription classProviderIntent inputProviderIntent{{ result.providerResource }}Description "
+                      name="setDescription"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_description setDescription classProviderIntent inputProviderIntent{{ result.providerResource }}Description "
+                      name="setDescription"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_description valueDescription classProviderIntent inputProviderIntent{{ result.providerResource }}Description "
+                      name="description"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.description | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmDescriptionProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDescriptionProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputRequestedProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_requested">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] provider requested"
+                      label="provider requested"
+                      hint="The related provider requests for this provider intent. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_requested"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requested setRequested classProviderIntent inputProviderIntent{{ result.providerResource }}Requested "
+                      name="setRequested"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requested setRequested classProviderIntent inputProviderIntent{{ result.providerResource }}Requested "
+                      name="setRequested"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requested valueRequested classProviderIntent inputProviderIntent{{ result.providerResource }}Requested "
+                      name="requested"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.requested) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRequestedProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputRequestedProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputLockedProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_locked">
+  {%- endif %}
+  {% if 'Page' == classApiMethodMethod -%}
+                  <wa-checkbox
+                      id="ProviderIntent_{{classApiMethodMethod}}_locked"
+                      value="true"
+  {%- else %}
+                  <wa-select
+                      id="ProviderIntent_{{classApiMethodMethod}}_locked"
+  {% endif -%}
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="locked"
+                      label="locked"
+                      hint="A provider intent gets locked after creating the first provider request. "
+  {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_locked classProviderIntent inputProviderIntent{{ result.providerResource }}Locked "
+                      name="setLocked"
+  {%- else %}
+    {%- if 'Page' == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_locked classProviderIntent inputProviderIntent{{ result.providerResource }}Locked "
+                      name="setLocked"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_locked setLocked valueLocked classProviderIntent inputProviderIntent{{ result.providerResource }}Locked "
+                      name="setLocked"
+    {%- endif %}
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+    {%- if result.locked == true %}
+                      checked
+    {%- endif %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      >locked</wa-checkbox>
+  {%- else %}
+                      >
+                    <wa-option value=""></wa-option>
+                    <wa-option value="true">true</wa-option>
+                    <wa-option value="false">false</wa-option>
+                  </wa-select>
+  {%- endif %}
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmLockedProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputLockedProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputDcmDiscoveredProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_dcmDiscovered">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] provider discovered"
+                      label="provider discovered"
+                      hint="Each time the provider was discovered for this provider intent. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_dcmDiscovered"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_dcmDiscovered setDcmDiscovered classProviderIntent inputProviderIntent{{ result.providerResource }}DcmDiscovered "
+                      name="setDcmDiscovered"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_dcmDiscovered setDcmDiscovered classProviderIntent inputProviderIntent{{ result.providerResource }}DcmDiscovered "
+                      name="setDcmDiscovered"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_dcmDiscovered valueDcmDiscovered classProviderIntent inputProviderIntent{{ result.providerResource }}DcmDiscovered "
+                      name="dcmDiscovered"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.dcmDiscovered) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmDcmDiscoveredProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDcmDiscoveredProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputDcmRealizedProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_dcmRealized">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[List] provider realized"
+                      label="provider realized"
+                      hint="Each time the provider was realized for this provider intent. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_dcmRealized"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_dcmRealized setDcmRealized classProviderIntent inputProviderIntent{{ result.providerResource }}DcmRealized "
+                      name="setDcmRealized"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_dcmRealized setDcmRealized classProviderIntent inputProviderIntent{{ result.providerResource }}DcmRealized "
+                      name="setDcmRealized"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_dcmRealized valueDcmRealized classProviderIntent inputProviderIntent{{ result.providerResource }}DcmRealized "
+                      name="dcmRealized"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{ toJsonArrayString(result.dcmRealized) | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmDcmRealizedProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputDcmRealizedProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+
+{%- macro htmFormButton_patchProviderIntent() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_patchProviderIntent" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_patchProviderIntent"
+                >Modify provider intent</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_patchProviderIntent"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_patchProviderIntent(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="patchProviderIntentDialog" label="Modify provider intent">
+          <form id="htmForm_patchProviderIntent" class="wa-stack round-row primary-smart-border-radius ">
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="created-by">
+              <div slot="summary">
+                <span>created by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedByEmailProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByEmailProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByEmailProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedByUserIdProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByUserIdProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByUserIdProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedByFullNameProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByFullNameProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByFullNameProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedViaProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedViaProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedViaProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="intent">
+              <div slot="summary">
+                <span>intent</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmIntentStateProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIntentStateProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmIntentStateProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedStateProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedStateProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedStateProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRealizedStateProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="provider-details">
+              <div slot="summary">
+                <span>provider details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmProviderNameProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderNameProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderNameProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmDescriptionProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDescriptionProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDescriptionProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="requests">
+              <div slot="summary">
+                <span>requests</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmLockedProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmLockedProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmLockedProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="discovered">
+              <div slot="summary">
+                <span>discovered</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmDcmDiscoveredProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDcmDiscoveredProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDcmDiscoveredProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="realizations">
+              <div slot="summary">
+                <span>realizations</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmDcmRealizedProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDcmRealizedProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDcmRealizedProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+            {{ htmFormButton_patchProviderIntent() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_postProviderIntent() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_postProviderIntent" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_postProviderIntent"
+                >Create a provider intent</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_postProviderIntent"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_postProviderIntent(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="postProviderIntentDialog" label="Create a provider intent">
+          <form id="htmForm_postProviderIntent" class="wa-stack round-row primary-smart-border-radius ">
+            <div>You can override any default values below: </div>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="created-by">
+              <div slot="summary">
+                <span>created by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmCreatedByEmailProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByEmailProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByEmailProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCreatedByUserIdProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByUserIdProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByUserIdProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCreatedByFullNameProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByFullNameProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByFullNameProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmCreatedViaProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedViaProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedViaProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="intent">
+              <div slot="summary">
+                <span>intent</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmIntentStateProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIntentStateProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmIntentStateProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmRequestedStateProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedStateProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedStateProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmRealizedStateProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="provider-details">
+              <div slot="summary">
+                <span>provider details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmProviderNameProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderNameProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderNameProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmDescriptionProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDescriptionProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDescriptionProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="requests">
+              <div slot="summary">
+                <span>requests</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmRequestedProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmLockedProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmLockedProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmLockedProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="discovered">
+              <div slot="summary">
+                <span>discovered</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmDcmDiscoveredProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDcmDiscoveredProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDcmDiscoveredProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="realizations">
+              <div slot="summary">
+                <span>realizations</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmDcmRealizedProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDcmRealizedProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDcmRealizedProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+            {{ htmFormButton_postProviderIntent() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_deleteProviderIntent() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deleteProviderIntent" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deleteProviderIntent"
+                >Delete provider intent</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deleteProviderIntent"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deleteProviderIntent(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deleteProviderIntentDialog" label="Delete provider intent">
+          <form id="htmForm_deleteProviderIntent" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deleteProviderIntent() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmFormButton_putimportProviderIntent() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_putimportProviderIntent" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_putimportProviderIntent"
+                >Import provider intents</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_putimportProviderIntent"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_putimportProviderIntent(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="putimportProviderIntentDialog" label="Import provider intents">
+          <form id="htmForm_putimportProviderIntent" class="wa-stack round-row primary-smart-border-radius ">
+            <div>
+              <wa-textarea
+                  class="PUTImport_searchList "
+                  style="height: 300px; "
+                  placeholder="{ 'searchList': [ { 'providerResource': ... , 'saves': [ ... ] }, ... ] }"
+                  >
+              </wa-textarea>
+            </div>
+            {{ htmFormButton_putimportProviderIntent() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
+
+{%- macro htmForm_searchpageProviderIntent(idSuffix='', searchRelated=false) %}
+        <div with-header with-footer style="--width: min(64rem, 100vw); " id="searchpageProviderIntentDialog" label="Search provider intents">
+          <div id="htmForm_searchpageProviderIntent" class="wa-stack round-row primary-smart-border-radius ">
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="primary-key-id-created-modified-archive-details">
+              <div slot="summary">
+                <span>primary key, ID, created, modified, archive details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmPkProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmPkProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmPkProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmModifiedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmModifiedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmModifiedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmArchivedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmArchivedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmArchivedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details class="{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}{% if CONTENT_TYPE_PDF is defined and CONTENT_TYPE_PDF %}display-none {% endif %}HtmRow" id="created-by">
+              <div slot="summary">
+                <span>created by</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedByEmailProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByEmailProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByEmailProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedByUserIdProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByUserIdProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByUserIdProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedByFullNameProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedByFullNameProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedByFullNameProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmCreatedViaProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmCreatedViaProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmCreatedViaProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="intent">
+              <div slot="summary">
+                <span>intent</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmIntentStateProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmIntentStateProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmIntentStateProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedStateProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedStateProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedStateProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRealizedStateProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRealizedStateProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRealizedStateProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="provider-details">
+              <div slot="summary">
+                <span>provider details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmProviderNameProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderNameProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderNameProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmDescriptionProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDescriptionProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDescriptionProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="requests">
+              <div slot="summary">
+                <span>requests</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmLockedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmLockedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmLockedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="discovered">
+              <div slot="summary">
+                <span>discovered</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmDcmDiscoveredProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDcmDiscoveredProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDcmDiscoveredProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="realizations">
+              <div slot="summary">
+                <span>realizations</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmDcmRealizedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmDcmRealizedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmDcmRealizedProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+          </div>
+        </div>
+{%- endmacro %}
+
+{%- macro htmFormButton_deletefilterProviderIntent() %}
+          <wa-popup  auto-size="both" placement="top" id="alertButton_deletefilterProviderIntent" duration="5000" closable class="wa-header-l ">
+            <wa-button slot="anchor" variant="brand" slot="footer" type="submit"
+                 id="htmFormButton_deletefilterProviderIntent"
+                >Delete provider intent</wa-button>
+            <wa-badge class="alertPopup" id="alertPopupButton_deletefilterProviderIntent"></wa-badge>
+          </wa-popup>
+{%- endmacro %}
+
+{%- macro htmForm_deletefilterProviderIntent(idSuffix='', searchRelated=false) %}
+        <wa-dialog with-header with-footer style="--width: min(64rem, 100vw); " id="deletefilterProviderIntentDialog" label="Delete provider intent">
+          <form id="htmForm_deletefilterProviderIntent" class="wa-stack round-row primary-smart-border-radius ">
+            {{ htmFormButton_deletefilterProviderIntent() }}
+          </form>
+        </wa-dialog>
+{%- endmacro %}
