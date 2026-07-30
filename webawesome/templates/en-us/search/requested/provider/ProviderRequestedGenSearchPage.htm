@@ -1,0 +1,576 @@
+{% extends "en-us/PageLayout.htm" %}
+
+{%- block htmTitlePageLayout %}
+{%- block htmTitleProviderRequestedPage %}
+    <title>{% if resultCount == 0 %}no provider requested found{% else %}provider requesteds{% endif %}</title>
+{%- endblock htmTitleProviderRequestedPage %}
+{%- endblock htmTitlePageLayout %}
+
+{%- block htmStylesPageLayout %}
+{{ super() }}
+    <link rel="stylesheet" href="{{ staticBaseUrl }}/css/en-us/search/requested/provider/ProviderRequested.css"/>
+{%- block htmStylesProviderRequestedPage %}
+{%- endblock htmStylesProviderRequestedPage %}
+{%- endblock htmStylesPageLayout %}
+
+{%- block htmStylePageLayout %}
+      :root {
+        --site-results-number-of-columns: 4;
+      }
+{{ super() }}
+{%- block htmStyleProviderRequestedPage %}
+{%- endblock htmStyleProviderRequestedPage %}
+{%- endblock htmStylePageLayout %}
+
+{%- block htmScriptsPageLayout %}
+{{ super() }}
+{%- block htmScriptsProviderRequestedPage %}
+    <script src="{{staticBaseUrl}}/js/en-us/search/requested/provider/ProviderRequested.js"></script>
+    <script type="module" src="{{staticBaseUrl}}/js/en-us/search/requested/provider/ProviderRequestedSearchPage.js"></script>
+    <script src="{{staticBaseUrl}}/js/en-us/search/intent/provider/ProviderIntent.js"></script>
+{%- endblock htmScriptsProviderRequestedPage %}
+{%- endblock htmScriptsPageLayout %}
+
+{%- block htmScriptPageLayout %}
+{%- block htmScriptProviderRequestedPage %}
+    <script>
+
+      function jsWebsocketProviderRequested(requestedId, vars, $response) {
+{%- block jsWebsocketProviderRequestedPage %}{%- endblock %}
+      }
+
+      function jsTooltipProviderRequested(e, feature) {
+{%- block jsTooltipProviderRequestedPage %}{%- endblock %}
+      }
+
+      function htmTooltipProviderRequested(feature, layer) {
+        return `{%- block htmTooltipProviderRequestedPage %}
+<h3><i class="{{ classIconCssClasses }}  "></i><a href="${quoteattr(feature.properties.editPage)}">${feature.properties.objectTitle}</a></h3>
+{%- endblock htmTooltipProviderRequestedPage %}`;
+      }
+
+      function facetChangeProviderRequestedSuccess(e) {
+        var l = e.querySelector('.pageForm .listProviderRequested')?.value;
+        if(l)
+          window.listProviderRequested = JSON.parse(l);
+{% block facetChangeProviderRequestedSuccess %}{%- endblock facetProviderRequestedSuccess %}
+      }
+      function facetChangeProviderRequestedError(e) {
+{% block facetChangeProviderRequestedError %}{%- endblock facetProviderRequestedError %}
+      }
+
+      function facetSimpleRangeProviderRequestedSuccess(e) {
+{% block facetSimpleRangeProviderRequestedSuccess %}      facetChangeProviderRequestedSuccess(e);{% endblock facetSimpleRangeProviderRequestedSuccess %}
+      }
+      function facetSimpleRangeProviderRequestedError(e) {
+{% block facetSimpleRangeProviderRequestedError %}      facetChangeProviderRequestedError(e);{% endblock facetSimpleRangeProviderRequestedError %}
+      }
+      function facetSimpleRangeProviderRequested(e) {
+        facetSimpleRange(e, facetSimpleRangeProviderRequestedSuccess, facetSimpleRangeProviderRequestedError);
+      }
+
+      function facetRangeTimeZoneProviderRequestedSuccess(e) {
+{% block facetRangeTimeZoneProviderRequestedSuccess %}      facetChangeProviderRequestedSuccess(e);{% endblock facetRangeTimeZoneProviderRequestedSuccess %}
+      }
+      function facetRangeTimeZoneProviderRequestedError(e) {
+{% block facetRangeTimeZoneProviderRequestedError %}      facetChangeProviderRequestedError(e);{%- endblock facetRangeTimeZoneProviderRequestedError %}
+      }
+      function facetRangeTimeZoneProviderRequested(e) {
+        facetRangeTimeZone(e, facetRangeTimeZoneProviderRequestedSuccess, facetRangeTimeZoneProviderRequestedError);
+      }
+
+      function facetRangeGapChangeProviderRequestedSuccess(e) {
+{% block facetRangeGapChangeProviderRequestedSuccess %}      facetChangeProviderRequestedSuccess(e);{% endblock facetRangeGapChangeProviderRequestedSuccess %}
+      }
+      function facetRangeGapChangeProviderRequestedError(e) {
+{% block facetRangeGapChangeProviderRequestedError %}      facetChangeProviderRequestedError(e);{%- endblock facetRangeGapChangeProviderRequestedError %}
+      }
+      function facetRangeGapChangeProviderRequested(classSimpleName, event) {
+        facetRangeGapChange(classSimpleName, event, facetRangeGapChangeProviderRequestedSuccess, facetRangeGapChangeProviderRequestedError);
+      }
+
+      function facetRangeStartChangeProviderRequestedSuccess(e) {
+{% block facetRangeStartChangeProviderRequestedSuccess %}      facetChangeProviderRequestedSuccess(e);{% endblock facetRangeStartChangeProviderRequestedSuccess %}
+      }
+      function facetRangeStartChangeProviderRequestedError(e) {
+{% block facetRangeStartChangeProviderRequestedError %}      facetChangeProviderRequestedError(e);{%- endblock facetRangeStartChangeProviderRequestedError %}
+      }
+      function facetRangeStartChangeProviderRequested(classSimpleName, event) {
+        facetRangeStartChange(classSimpleName, event, facetRangeStartChangeProviderRequestedSuccess, facetRangeStartChangeProviderRequestedError);
+      }
+
+      function facetRangeEndChangeProviderRequestedSuccess(e) {
+{% block facetRangeEndChangeProviderRequestedSuccess %}      facetChangeProviderRequestedSuccess(e);{% endblock facetRangeEndChangeProviderRequestedSuccess %}
+      }
+      function facetRangeEndChangeProviderRequestedError(e) {
+{% block facetRangeEndChangeProviderRequestedError %}      facetChangeProviderRequestedError(e);{%- endblock facetRangeEndChangeProviderRequestedError %}
+      }
+      function facetRangeEndChangeProviderRequested(classSimpleName, event) {
+        facetRangeEndChange(classSimpleName, event, facetRangeEndChangeProviderRequestedSuccess, facetRangeEndChangeProviderRequestedError);
+      }
+    </script>
+    <script type="module">
+{% if location is defined %}
+      window.mapLocation = { type: 'Point', coordinates: [ {{ location.coordinates[0] }}, {{ location.coordinates[1] }} ]};
+{% endif %}
+{% if zoom is defined %}
+      window.mapZoom = {{ zoom }};
+{% endif %}
+{% if pitch is defined %}
+      window.mapPitch = {{ toDegree(pitch) }};
+{% endif %}
+      window.STATIC_BASE_URL = '{{ STATIC_BASE_URL }}';
+      window.DEFAULT_ZONE_ID = '{{ defaultZoneId }}';
+      Promise.all([
+        customElements.whenDefined('wa-button')
+        , customElements.whenDefined('wa-input')
+        , customElements.whenDefined('wa-select')
+        , customElements.whenDefined('wa-radio')
+        , customElements.whenDefined('wa-checkbox')
+        , customElements.whenDefined('wa-dropdown')
+      ]).then(() => {
+        window.FONTAWESOME_STYLE = document.querySelector('.pageForm .FONTAWESOME_STYLE')?.value;
+
+        var requestedId = {% if result.requestedId is defined %}{{ result.requestedId | tojson }}{% else %}null{% endif %};
+
+          function relate_providerResource(event) {
+            suggestProviderRequestedProviderResource(
+                event.target.value ? [ { 'name': 'q', 'value': 'objectSuggest:' + (event.target.value ? event.target.value : '') }
+                , { 'name': 'rows', 'value': '10' }
+                , { 'name': 'fl', 'value': 'classCanonicalName,providerResource,providerResource,pk,editPage,objectTitle' } ] : [{%- if result.providerResource is defined %}{'name':'fq','value':'providerResource:{{ result.providerResource }}'}{%- else %}{%- endif %}]
+                , document.querySelector('#' + event.target.getAttribute('data-list'))
+                , null
+                , null
+                , true
+                , this
+                );
+          }
+          document.querySelector('#ProviderRequested_POST_providerResource')?.addEventListener('input', relate_providerResource);
+          document.querySelector('#ProviderRequested_POST_providerResource')?.addEventListener('focus', relate_providerResource);
+          document.querySelector('#ProviderRequested_PATCH_providerResource')?.addEventListener('input', relate_providerResource);
+          document.querySelector('#ProviderRequested_PATCH_providerResource')?.addEventListener('focus', relate_providerResource);
+        if(requestedId == null) {
+          document.querySelector('#grid-toggle-details')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-list', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-details');
+          });
+          document.querySelector('#grid-toggle-list')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-card');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-list');
+          });
+          document.querySelector('#grid-toggle-card')?.addEventListener('click', () => {
+            document.querySelector('#site-results-grid').classList.remove('grid-mode-details', 'grid-mode-list');
+            document.querySelector('#site-results-grid').classList.add('grid-mode-card');
+          });
+        } else {
+          var o = document.querySelector('.pageForm .result')?.value;
+          if(o)
+            window.result = JSON.parse(o);
+        {% if result.requestedId is defined %}
+        {% endif %}
+        }
+        var l = document.querySelector('.pageForm .listProviderRequested')?.value;
+        if(l)
+          window.listProviderRequested = JSON.parse(l);
+        window.varsFq = JSON.parse('{{ toJsonObjectStringInApostrophes(varsFq) }}');
+        window.varsRange = JSON.parse('{{ toJsonObjectStringInApostrophes(varsRange) }}');
+        window.defaultRangeVar = '{{ defaultRangeVar }}';
+        document.querySelector('#siteSidebarToggleRange')?.addEventListener('wa-after-hide', function(e) { document.querySelector('#pageFacetRangeTimeZonePopup').active = false; });
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneProviderRequested);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('input', facetRangeTimeZoneProviderRequested);
+        document.querySelector('#pageFacetRangeTimeZoneInput')?.addEventListener('focus', facetRangeTimeZoneProviderRequested);
+        document.querySelector('#pageFacetSimpleRangeDropdown')?.addEventListener('wa-select', facetSimpleRangeProviderRequested);
+        pageGraphProviderRequested();
+        {% for key, value in varsQ.items() %}
+
+        document.querySelector('#qProviderRequested_{{ key }}')?.addEventListener('wa-{% if var == 'objectSuggest' %}keyup{% else %}change{% endif %}', event => {
+          qChange('ProviderRequested', event.target, document.querySelector('#qProviderRequestedDiv_{{ key }}'));
+        });
+        {% endfor %}
+
+        document.querySelector('#qProviderRequested_rows')?.addEventListener('change', event => {
+          paramChange('ProviderRequested', event.target, document.querySelector('#qProviderRequestedDiv_rows'));
+        });
+
+        document.querySelector('#qProviderRequested_start')?.addEventListener('change', event => {
+          paramChange('ProviderRequested', event.target, document.querySelector('#qProviderRequestedDiv_start'));
+        });
+
+
+        var submitForm_patchProviderRequested = document.querySelector('#htmForm_patchProviderRequested')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          patchProviderRequested(null, document.querySelector('#htmForm_patchProviderRequested')
+              , document.querySelector('#htmFormButton_patchProviderRequested')
+              , event.target.getAttribute('data-requestedId')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_postProviderRequested = document.querySelector('#htmForm_postProviderRequested')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          postProviderRequested(document.querySelector('#htmForm_postProviderRequested')
+              , document.querySelector('#htmFormButton_postProviderRequested')
+              , (json, target) => {
+            window.location.href = json.editPage;
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_deleteProviderRequested = document.querySelector('#htmForm_deleteProviderRequested')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          deleteProviderRequested(event.target, event.target.getAttribute('data-requestedId')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_putimportProviderRequested = document.querySelector('#htmForm_putimportProviderRequested')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          putimportProviderRequested(document.querySelector('#htmForm_putimportProviderRequested')
+              , document.querySelector('#htmFormButton_putimportProviderRequested')
+              , event.target.getAttribute('data-requestedId')
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        var submitForm_deletefilterProviderRequested = document.querySelector('#htmForm_deletefilterProviderRequested')?.addEventListener('submit', event => {
+          event.preventDefault();
+          event.target.setAttribute('loading', true);
+          deletefilterProviderRequested(event.target
+              , (json, target) => {
+            
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+          return false;
+        });
+
+        document.querySelector('#htmForm_postProviderIntent')?.addEventListener('submit', event => {
+          event.preventDefault();
+          postProviderIntent(document.querySelector('#htmForm_postProviderIntent')
+              , document.querySelector('#htmFormButton_postProviderIntent')
+              , (json, target) => {
+                addGlow(target);
+                if(json['editPage'])
+                  window.location.href = json['editPage'];
+          }, (response, target) => {
+            event.target.removeAttribute('loading');
+            addErrorJson(event.target);
+            if(response.ok) {
+              response.json().then(json => {
+                document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+              });
+            } else {
+              if(response.status === 405 || response.status === 401) {
+                document.querySelector('wa-page > wa-toast').create('You are no longer signed in, please refresh the page and sign in again. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else if(response.status === 403) {
+                document.querySelector('wa-page > wa-toast').create('You are not authorized to access this resource. ', {size: 'danger', icon: 'triangle-exclamation'});
+              } else {
+                response.json().then(json => {
+                  document.querySelector('wa-page > wa-toast').create(json?.error?.message, {size: 'danger', icon: 'triangle-exclamation'});
+                }).catch(error => {
+                  document.querySelector('wa-page > wa-toast').create('An unknown error occured. ', {size: 'danger', icon: 'triangle-exclamation'});
+                });
+              }
+            }
+          });
+        });
+{%- block htmScriptInitProviderRequestedPage %}{%- endblock htmScriptInitProviderRequestedPage %}
+      });
+    </script>
+{%- endblock htmScriptProviderRequestedPage %}
+{%- endblock htmScriptPageLayout %}
+
+{%- block websocketPageLayout %}
+{%- block websocketProviderRequestedPage %}
+{% if resultCount > 0 %}
+        window.eventBus = new EventBus('/eventbus');
+        window.eventBus.enableReconnect(true);
+        websocketProviderRequested(websocketProviderRequestedInner);
+{% endif %}
+{%- endblock websocketProviderRequestedPage %}
+{%- endblock websocketPageLayout %}
+
+{%- block htmUrlProviderRequestedPage %}{{pageUri}}?q={{query.q}}&amp;rows={% if rows is defined %}{{rows}}{% else %}{{pagination.rows}}{% endif %}&amp;rows={% if start is defined %}{{start}}{% else %}{{pagination.start}}{% endif %}{% for item query.fq %}{% if fq == item %}{% else %}&fq={{fq}}:{{val}}{% endif %}{% endfor %}{% for item in query.sort %}{% if sort == item %}{% else %}&sort={{var}} {{order}}{% endif %}{% endfor %}{%- endblock htmUrlProviderRequestedPage %}
+{%- if pageBreadcrumb is not defined %}
+{%- set pageBreadcrumb %}
+              <wa-tooltip for="return-to-ProviderRequested">back to all provider requesteds</wa-tooltip>
+              <wa-breadcrumb>
+                <wa-breadcrumb-item id="return-to-ProviderRequested" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+                  <i class=" fa-person-dolly"></i>
+                  all provider requesteds
+                </wa-breadcrumb-item>
+                <wa-breadcrumb-item>
+                  search provider requesteds
+                </wa-breadcrumb-item>
+              </wa-breadcrumb>
+{%- endset pageBreadcrumb %}
+{%- endif  %}
+
+{%- block htmBodyStartPageLayout %}
+{{ super() }}
+{%- block htmBodyStartProviderRequestedPage %}
+{% include en-us/search/requested/provider/ProviderRequestedSidebar.htm %}
+{% if resultCount == 0 %}
+        <div class="wa-stack ">
+          <wa-tooltip for="return-to-ProviderRequested">back to all provider requesteds</wa-tooltip></wa-tooltip>
+          <wa-breadcrumb>
+            <wa-breadcrumb-item id="return-to-ProviderRequested" variant="brand" href="{{ SITE_BASE_URL }}{{ pageUri }}">
+              <i class=" fa-person-dolly"></i>
+              all provider requesteds
+            </wa-breadcrumb-item>
+            <wa-breadcrumb-item>
+              no provider requested found
+            </wa-breadcrumb-item>
+          </wa-breadcrumb>
+          <div class="wa-stack wa-align-items-center ">
+            <div class="wa-heading-3xl ">
+              <i class=" fa-person-dolly"></i>
+            </div>
+            <span class="wa-heading-m ">no provider requested found</span>
+            <p class="wa-caption-l ">A provider for requesting other DCM models. </p>
+          </div>
+        </div>
+{% else %}
+{% include en-us/search/requested/provider/ProviderRequestedSuggestedSearch.htm %}
+          <div class="pageContent ">
+            <form action="/en-us/api/requested/provider" id="ProviderRequestedForm" class="pageForm " onsubmit="event.preventDefault(); return false; ">
+              <input name="FONTAWESOME_STYLE" class="FONTAWESOME_STYLE" type="hidden" value="{{ FONTAWESOME_STYLE }}"/>
+              <input name="focusId" type="hidden"/>
+              <input name="pageResponse" id="pageResponse" class="pageResponse"  value='{{ toJsonObjectStringInApostrophes(pageResponse) }}' type="hidden"/>
+              <input name="listProviderRequested" id="listProviderRequested" class="listProviderRequested"  value='{{ toJsonArrayStringInApostrophes(listProviderRequested) }}' type="hidden"/>
+            </form>
+            <div id="site-calendar-box">
+              <div id="site-calendar"><!-- // --></div>
+            </div>
+            <div class="wa-stack wa-gap-m ">
+{% endif %}
+{% include en-us/search/requested/provider/ProviderRequestedSearchForm.htm %}
+{%- endblock htmBodyStartProviderRequestedPage %}
+{%- endblock htmBodyStartPageLayout %}
+{%- if pageSearchButtons is not defined %}
+{%- set pageSearchButtons %}
+{% include en-us/search/requested/provider/ProviderRequestedSearchButtons.htm %}
+{%- endset pageSearchButtons %}
+{%- endif %}
+{%- if pageSearchFormButtons is not defined %}
+{%- set pageSearchFormButtons %}
+{% include en-us/search/requested/provider/ProviderRequestedSearchFormButtons.htm %}
+{%- endset pageSearchFormButtons %}
+{%- endif %}
+
+{%- block htmBodyMiddlePageLayout %}
+{%- block htmBodyMiddleProviderRequestedPage %}
+{% if resultCount > 0 %}
+              <div class="wa-stack wa-gap-0 ">
+{% include en-us/search/requested/provider/ProviderRequestedPaginationButtons.htm %}
+                <div class="card-like-thing background-color-surface-border" id="site-results-grid">
+                  <div>
+                    <wa-dropdown id="htmDropdown-requestedId">
+                      <wa-button variant="brand" slot="trigger" caret>provider requested ID</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortProviderRequested_requestedId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ProviderRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-requestedId-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by provider requested ID ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortProviderRequested_requestedId'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ProviderRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-requestedId-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by provider requested ID descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-providerName">
+                      <wa-button variant="brand" slot="trigger" caret>provider name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortProviderRequested_providerName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ProviderRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-providerName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by provider name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortProviderRequested_providerName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ProviderRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-providerName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by provider name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-requestedName">
+                      <wa-button variant="brand" slot="trigger" caret>provider requested name</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortProviderRequested_requestedName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ProviderRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-requestedName-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by provider requested name ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortProviderRequested_requestedName'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ProviderRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-requestedName-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by provider requested name descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                    <wa-dropdown id="htmDropdown-description">
+                      <wa-button variant="brand" slot="trigger" caret>description</wa-button>
+                      <wa-menu>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortProviderRequested_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ProviderRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="asc" id="htmDropdown-description-asc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-a-z"></i>
+                          sort by description ascending
+                        </wa-menu-item>
+                        <wa-menu-item onclick="var e = document.querySelector('#pageFacetSortProviderRequested_description'); e.value = this.getAttribute('data-order'); document.querySelectorAll('.pageSearchVal-pageSort-ProviderRequested').forEach(e => e.remove()); e.dispatchEvent(new Event('change', {})); " data-action="sort" data-order="desc" id="htmDropdown-description-desc">
+                          <i slot="start" class="{{ FONTAWESOME_STYLE }} fa-arrow-down-z-a"></i>
+                          sort by description descending
+                        </wa-menu-item>
+                      </wa-menu>
+                    </wa-dropdown>
+                  </div>
+                  {% for item in listProviderRequested%}
+                  <div>
+                    <a href="{{ item.displayPage }}">
+                      <i class=" fa-person-dolly"></i>
+                      <span>{{ item.requestedId | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.providerName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span>{{ item.requestedName | e }}</span>
+                    </a>
+                    <a href="{{ item.displayPage }}">
+                      <span class="white-space-pre-wrap ">{{ item.description | e }}</span>
+                    </a>
+                  </div>
+                  {% endfor %}
+              {% if getColumnRequestedId is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnProviderName is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnRequestedName is defined %}
+                <div>
+                </div>
+              {% endif %}
+              {% if getColumnDescription is defined %}
+                <div>
+                </div>
+              {% endif %}
+                </div>
+{% include en-us/search/requested/provider/ProviderRequestedPaginationButtons.htm %}
+              </div>
+{% endif %}
+{%- endblock htmBodyMiddleProviderRequestedPage %}
+{%- endblock htmBodyMiddlePageLayout %}
+
+{%- block htmBodyEndPageLayout %}
+{%- block htmBodyEndProviderRequestedPage %}
+{%- include en-us/search/requested/provider/ProviderRequestedLocation.htm %}
+            </div>
+          </div>
+{%- endblock htmBodyEndProviderRequestedPage %}
+  {{ super() }}
+{%- endblock htmBodyEndPageLayout %}

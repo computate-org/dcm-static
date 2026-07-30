@@ -1,0 +1,27 @@
+{% include en-us/search/requested/provider/ProviderRequestedSearchFormMacros.htm %}
+{% include en-us/search/intent/provider/ProviderIntentSearchFormMacros.htm %}
+{%- if 'DELETE' in scopes %}
+    {{ htmForm_patchProviderRequested() }}
+{%- endif %}
+{%- if 'POST' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_postProviderRequested() }}
+  {%- else %}
+    {{ htmForm_postProviderRequested() }}
+  {%- endif %}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_deleteProviderRequested() }}
+  {%- else %}
+  {%- endif %}
+{%- endif %}
+{%- if AUTH_SCOPE_SUPER_ADMIN in scopes %}
+  {{ htmForm_putimportProviderRequested() }}
+{%- endif %}
+{%- if 'DELETE' in scopes %}
+  {%- if resultCount >= 1 %}
+    {{ htmForm_deletefilterProviderRequested() }}
+  {%- else %}
+  {%- endif %}
+{%- endif %}

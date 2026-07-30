@@ -250,6 +250,90 @@ Promise.all([
             const valid = form.reportValidity();
           });
 
+          // PATCH requestedClientId
+          document.querySelector('#ProviderIntent_Page_requestedClientId')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_requestedClientId');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProviderIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'providerResource:' + event.currentTarget.getAttribute('data-providerResource') }]
+                  , 'setRequestedClientId', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#ProviderIntent_Page_requestedClientId')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#ProviderIntent_Page_requestedClientId')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_requestedClientId');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH requestedEnvironmentVariable
+          document.querySelector('#ProviderIntent_Page_requestedEnvironmentVariable')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_requestedEnvironmentVariable');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProviderIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'providerResource:' + event.currentTarget.getAttribute('data-providerResource') }]
+                  , 'setRequestedEnvironmentVariable', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#ProviderIntent_Page_requestedEnvironmentVariable')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#ProviderIntent_Page_requestedEnvironmentVariable')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_requestedEnvironmentVariable');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH providerRequestInstructions
+          document.querySelector('#ProviderIntent_Page_providerRequestInstructions')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_providerRequestInstructions');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProviderIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'providerResource:' + event.currentTarget.getAttribute('data-providerResource') }]
+                  , 'setProviderRequestInstructions', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#ProviderIntent_Page_providerRequestInstructions')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#ProviderIntent_Page_providerRequestInstructions')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_providerRequestInstructions');
+            const valid = form.reportValidity();
+          });
+
+          // PATCH providerUrl
+          document.querySelector('#ProviderIntent_Page_providerUrl')?.addEventListener('change', (event) => {
+            const form = document.querySelector('#PageForm_providerUrl');
+            const valid = form.checkValidity();
+            if(valid) {
+              patchProviderIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'providerResource:' + event.currentTarget.getAttribute('data-providerResource') }]
+                  , 'setProviderUrl', event.currentTarget.value
+                  , event.currentTarget
+                , function(response, target) { addGlow(target); }
+                  , function(response, target) { addError(target); }
+                  );
+            }
+          });
+          document.querySelector('#ProviderIntent_Page_providerUrl')?.addEventListener('focus', (event) => {
+            removeGlow(event.currentTarget);
+          });
+          document.querySelector('#ProviderIntent_Page_providerUrl')?.addEventListener('blur', (event) => {
+            const form = document.querySelector('#PageForm_providerUrl');
+            const valid = form.reportValidity();
+          });
+
           // PATCH locked
           document.querySelector('#ProviderIntent_Page_locked')?.addEventListener('change', (event) => {
             const form = document.querySelector('#PageForm_locked');
@@ -415,27 +499,6 @@ Promise.all([
           });
           document.querySelector('#ProviderIntent_Page_download')?.addEventListener('blur', (event) => {
             const form = document.querySelector('#PageForm_download');
-            const valid = form.reportValidity();
-          });
-
-          // PATCH providerUrl
-          document.querySelector('#ProviderIntent_Page_providerUrl')?.addEventListener('change', (event) => {
-            const form = document.querySelector('#PageForm_providerUrl');
-            const valid = form.checkValidity();
-            if(valid) {
-              patchProviderIntentVal([{ name: 'softCommit', value: 'true' }, { name: 'fq', value: 'providerResource:' + event.currentTarget.getAttribute('data-providerResource') }]
-                  , 'setProviderUrl', event.currentTarget.value
-                  , event.currentTarget
-                , function(response, target) { addGlow(target); }
-                  , function(response, target) { addError(target); }
-                  );
-            }
-          });
-          document.querySelector('#ProviderIntent_Page_providerUrl')?.addEventListener('focus', (event) => {
-            removeGlow(event.currentTarget);
-          });
-          document.querySelector('#ProviderIntent_Page_providerUrl')?.addEventListener('blur', (event) => {
-            const form = document.querySelector('#PageForm_providerUrl');
             const valid = form.reportValidity();
           });
 

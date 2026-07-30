@@ -486,6 +486,150 @@
 {%- macro htmDescriptionProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
                             {{ inputDescriptionProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
 {%- endmacro %}
+{%- macro inputRequestedClientIdProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_requestedClientId">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] requested client ID"
+                      label="requested client ID"
+                      hint="The client ID you would like to request from the provider Keycloak service. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_requestedClientId"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requestedClientId setRequestedClientId classProviderIntent inputProviderIntent{{ result.providerResource }}RequestedClientId "
+                      name="setRequestedClientId"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requestedClientId setRequestedClientId classProviderIntent inputProviderIntent{{ result.providerResource }}RequestedClientId "
+                      name="setRequestedClientId"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requestedClientId valueRequestedClientId classProviderIntent inputProviderIntent{{ result.providerResource }}RequestedClientId "
+                      name="requestedClientId"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.requestedClientId | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRequestedClientIdProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputRequestedClientIdProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_requestedEnvironmentVariable">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] client secret environment variable"
+                      label="client secret environment variable"
+                      hint="The name of the environment variable that should contain the client secret for this provider. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_requestedEnvironmentVariable"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requestedEnvironmentVariable setRequestedEnvironmentVariable classProviderIntent inputProviderIntent{{ result.providerResource }}RequestedEnvironmentVariable "
+                      name="setRequestedEnvironmentVariable"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requestedEnvironmentVariable setRequestedEnvironmentVariable classProviderIntent inputProviderIntent{{ result.providerResource }}RequestedEnvironmentVariable "
+                      name="setRequestedEnvironmentVariable"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_requestedEnvironmentVariable valueRequestedEnvironmentVariable classProviderIntent inputProviderIntent{{ result.providerResource }}RequestedEnvironmentVariable "
+                      name="requestedEnvironmentVariable"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.requestedEnvironmentVariable | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputProviderRequestInstructionsProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_providerRequestInstructions">
+  {%- endif %}
+                  <wa-textarea resize="auto"
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] provider request instructions"
+                      label="provider request instructions"
+                      hint="Required steps that must be done before requesting this provider. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_providerRequestInstructions"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_providerRequestInstructions setProviderRequestInstructions classProviderIntent inputProviderIntent{{ result.providerResource }}ProviderRequestInstructions "
+                      name="setProviderRequestInstructions"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_providerRequestInstructions setProviderRequestInstructions classProviderIntent inputProviderIntent{{ result.providerResource }}ProviderRequestInstructions "
+                      name="setProviderRequestInstructions"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_providerRequestInstructions valueProviderRequestInstructions classProviderIntent inputProviderIntent{{ result.providerResource }}ProviderRequestInstructions "
+                      name="providerRequestInstructions"
+    {%- endif %}
+  {%- endif %}
+{% if "Page" == classApiMethodMethod -%}
+                      value="{{result.providerRequestInstructions | e }}"
+{% endif -%}
+                      >
+</wa-textarea>
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmProviderRequestInstructionsProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputProviderRequestInstructionsProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
+{%- macro inputProviderUrlProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
+  {%- if 'Page' == classApiMethodMethod %}
+                <form class="subgrid-2col " id="PageForm_providerUrl">
+  {%- endif %}
+                  <wa-input
+                      {% if authForWriteBool == true %}clearable{% else %}readonly{% endif %}
+                      placeholder="[String] provider URL"
+                      label="provider URL"
+                      hint="The URL to the remote DCM provider application. "
+                      id="ProviderIntent_{{classApiMethodMethod}}_providerUrl"
+  {%- if "Page" == classApiMethodMethod %}
+                      data-providerResource={{ result.providerResource | tojson }}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_providerUrl setProviderUrl classProviderIntent inputProviderIntent{{ result.providerResource }}ProviderUrl "
+                      name="setProviderUrl"
+  {%- else %}
+    {%- if "PATCH" == classApiMethodMethod %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_providerUrl setProviderUrl classProviderIntent inputProviderIntent{{ result.providerResource }}ProviderUrl "
+                      name="setProviderUrl"
+    {%- else %}
+                      class="label-on-left ProviderIntent_{{classApiMethodMethod}}_providerUrl valueProviderUrl classProviderIntent inputProviderIntent{{ result.providerResource }}ProviderUrl "
+                      name="providerUrl"
+    {%- endif %}
+  {%- endif %}
+  {% if "Page" == classApiMethodMethod -%}
+                      value="{{result.providerUrl | e }}"
+  {% endif -%}
+                      ></wa-input>
+
+  {%- if 'Page' == classApiMethodMethod %}
+                </form>
+  {%- endif %}
+{%- endmacro %}
+
+{%- macro htmProviderUrlProviderIntentPage(classApiMethodMethod, authForWriteBool=false, authForReadBool=false) %}
+                            {{ inputProviderUrlProviderIntentPage(classApiMethodMethod=classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead) }}
+{%- endmacro %}
 {%- macro inputRequestedProviderIntentPage(classApiMethodMethod, authForWrite=authForWrite, authForRead=authForRead, idPrefix='', idSuffix='', searchRelated=false) %}
   {%- if 'Page' == classApiMethodMethod %}
                 <form class="subgrid-2col " id="PageForm_requested">
@@ -768,6 +912,53 @@
               </div>
             </wa-details>
 
+            <wa-details open class="pdf-page-break-after HtmRow" id="remote-provider-details">
+              <div slot="summary">
+                <span>remote provider details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedClientIdProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedClientIdProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedClientIdProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmProviderRequestInstructionsProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderRequestInstructionsProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderRequestInstructionsProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmProviderUrlProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderUrlProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderUrlProviderIntentPage(classApiMethodMethod='PATCH', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
             <wa-details open class="pdf-page-break-after HtmRow" id="requests">
               <div slot="summary">
                 <span>requests</span>
@@ -953,6 +1144,53 @@
                 {{ htmDescriptionProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmDescriptionProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="remote-provider-details">
+              <div slot="summary">
+                <span>remote provider details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "POST" in scopes -%}
+                {{ htmRequestedClientIdProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedClientIdProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedClientIdProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmProviderRequestInstructionsProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderRequestInstructionsProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderRequestInstructionsProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "POST" in scopes -%}
+                {{ htmProviderUrlProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderUrlProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderUrlProviderIntentPage(classApiMethodMethod='POST', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
@@ -1224,6 +1462,53 @@
                 {{ htmDescriptionProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
                 {% else -%}
                 {{ htmDescriptionProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+              </div>
+            </wa-details>
+
+            <wa-details open class="pdf-page-break-after HtmRow" id="remote-provider-details">
+              <div slot="summary">
+                <span>remote provider details</span>
+              </div>
+              <div class="grid-with-subgrid-2col ">
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedClientIdProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedClientIdProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedClientIdProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmRequestedEnvironmentVariableProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmProviderRequestInstructionsProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderRequestInstructionsProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderRequestInstructionsProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
+                {%- endif %}
+                {%- endif %}
+
+                {% if "PATCH" in scopes -%}
+                {{ htmProviderUrlProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=true, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {% if "GET" in scopes -%}
+                {{ htmProviderUrlProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=true, idSuffix=idSuffix) }}
+                {% else -%}
+                {{ htmProviderUrlProviderIntentPage(classApiMethodMethod='Page', authForWriteBool=false, authForReadBool=false, idSuffix=idSuffix }}
                 {%- endif %}
                 {%- endif %}
               </div>
